@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack",
+    "build": "webpack -p --env=prod --progress",
     "start": "webpack-dev-server"
   },
   "license": "ISC",
