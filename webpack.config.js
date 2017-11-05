@@ -1,32 +1,52 @@
 var path = require('path');
 var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     devServer: {
         inline: true,
+        historyApiFallback: true,
         contentBase: './src',
         port: 8080
     },
-    devtool: 'cheap-module-eval-source-map',
-    entry: './dev/js/index.js',
+    entry: './dev/js/index.jsx',
+    output: {
+        path: path.resolve(__dirname, 'src'),
+        filename: 'js/bundle.min.js'
+    },
     module: {
         loaders: [
             {
                 test: /\.js$/,
-                loaders: ['babel'],
+                loader: 'babel-loader',
                 exclude: /node_modules/
             },
             {
-                test: /\.scss/,
-                loader: 'style-loader!css-loader!sass-loader'
+                test: /\.jsx$/,
+                loader: 'babel-loader',
+                exclude: /node_modules/,
+                // query: {
+                //     presets: ['react', 'es2015', 'stage-3']
+                // }
+            },
+            {
+                test: /\.scss$/,
+                use: [{
+                    loader: "style-loader"
+                }, {
+                    loader: "css-loader"
+                }, {
+                    loader: "sass-loader"
+                }]
             }
         ]
     },
-    output: {
-        path: 'src',
-        filename: 'js/bundle.min.js'
+    resolve: {
+        extensions: ['.js', '.jsx']
     },
-    plugins: [
-        new webpack.optimize.OccurrenceOrderPlugin()
-    ]
+    plugins: [new HtmlWebpackPlugin({
+        template: './src/index.html',
+        filename: 'index.html',
+        inject: 'body'
+    })],
 };

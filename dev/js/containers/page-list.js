@@ -13,7 +13,7 @@ class PageList extends Component {
                     key={page.id}
                     onClick={() => this.props.selectPage(page)}
                 >
-                    {page.title} {page.body}
+                    {page.title}
                 </li>
             );
         });
