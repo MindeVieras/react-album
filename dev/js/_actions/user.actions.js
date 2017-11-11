@@ -6,7 +6,7 @@ import { history } from '../_helpers';
 export const userActions = {
     login,
     logout,
-    register,
+    create,
     getAll,
     delete: _delete
 };
@@ -16,16 +16,16 @@ function login(username, password) {
         dispatch(request({ username }));
 
         userService.login(username, password)
-            .then(
-                user => { 
-                    dispatch(success(user));
+            .then(function(res) {
+                // console.log(res);
+                if (res.ack == 'ok') {
+                    dispatch(success(res));
                     history.push('/');
-                },
-                error => {
-                    dispatch(failure(error));
-                    dispatch(alertActions.error(error));
+                } else {
+                    dispatch(failure(res.msg));
+                    dispatch(alertActions.error(res.msg));
                 }
-            );
+            });
     };
 
     function request(user) { return { type: userConstants.LOGIN_REQUEST, user } }
@@ -38,27 +38,28 @@ function logout() {
     return { type: userConstants.LOGOUT };
 }
 
-function register(user) {
+function create(user) {
     return dispatch => {
         dispatch(request(user));
 
-        userService.register(user)
-            .then(
-                user => { 
+        userService.create(user)
+            .then(function(res){
+                if (res.ack == 'ok') {
+                    console.log(res);
                     dispatch(success());
-                    history.push('/login');
+                    // history.push('/login');
                     dispatch(alertActions.success('Registration successful'));
-                },
-                error => {
-                    dispatch(failure(error));
-                    dispatch(alertActions.error(error));
+                } else {
+                    console.log(res);
+                    dispatch(failure(res.msg));
+                    dispatch(alertActions.error(res.msg));
                 }
-            );
+            });
     };
 
-    function request(user) { return { type: userConstants.REGISTER_REQUEST, user } }
-    function success(user) { return { type: userConstants.REGISTER_SUCCESS, user } }
-    function failure(error) { return { type: userConstants.REGISTER_FAILURE, error } }
+    function request(user) { return { type: userConstants.CREATE_REQUEST, user } }
+    function success(user) { return { type: userConstants.CREATE_SUCCESS, user } }
+    function failure(error) { return { type: userConstants.CREATE_FAILURE, error } }
 }
 
 function getAll() {

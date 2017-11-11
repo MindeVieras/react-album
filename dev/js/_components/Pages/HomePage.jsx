@@ -5,18 +5,20 @@ import { connect } from 'react-redux';
 import { userActions } from '../../_actions';
 
 class HomePage extends React.Component {
-    componentDidMount() {
-        this.props.dispatch(userActions.getAll());
-    }
+    // componentDidMount() {
+    //     this.props.dispatch(userActions.getAll());
+    // }
 
-    handleDeleteUser(id) {
-        return (e) => this.props.dispatch(userActions.delete(id));
-    }
+    // handleDeleteUser(id) {
+    //     return (e) => this.props.dispatch(userActions.delete(id));
+    // }
 
     render() {
         const { user, users } = this.props;
         return (
             <div className="col-md-6 col-md-offset-3">
+                homepage
+                {/*}
                 <h1>Hi {user.firstName}!</h1>
                 <p>You're logged in with React!!</p>
                 <h3>All registered users:</h3>
@@ -38,7 +40,7 @@ class HomePage extends React.Component {
                 }
                 <p>
                     <Link to="/login">Logout</Link>
-                </p>
+                </p>*/}
             </div>
         );
     }

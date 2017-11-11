@@ -1,5 +1,5 @@
 
-#app-footer {
+#app_footer {
   background-color: $grey;
   position: fixed;
   bottom: 0;
@@ -15,7 +15,7 @@
       line-height: 45px;
     }
   }
-  #recycle-bin {
+  #recycle_bin {
     float: left;
     line-height: 35px;
     font-size: 20px;
@@ -26,7 +26,7 @@
   }
 }
 
-#footer-buttons {
+#footer_buttons {
   float: right;
   margin-top: 2px;
 }

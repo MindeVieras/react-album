@@ -3,19 +3,26 @@
 @import '../variables/mixins';
 @import '../variables/colors';
 
-body {
+
+#login_wrapper {
   background-color: $green;
   font-family: Arial, sans-serif;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; 
+  -moz-osx-font-smoothing: grayscale;
 }
+
 
 .login-container {
   max-width: 360px;
   padding: 8% 10px 0;
   margin: auto;
 }
-form {
+#login_form {
   position: relative;
   z-index: 1;
   background: $white;

@@ -18,26 +18,6 @@
 @import 'partials/messages';
 @import 'partials/footer';
 
-html {
-  height: 100%;
-  width: 100%;
-}
-
-body {
-  background-image: url('https://s3-eu-west-1.amazonaws.com/app.mindelis.com/images/bg.jpg');
-  background-color: $black;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-  color: $white;
-  font-family: 'Ubuntu', sans-serif;
-  font-size: 16px;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 a {
   text-decoration: none;
   color: $blue;
@@ -54,15 +34,29 @@ video {
   height: 100%;
 }
 
-#app-container {
-  // position: fixed;
-  // top: 0;
-  // left: 0;
-  // right: 0;
-  // bottom: 0;
+#app_wrapper {
+  background-image: url('https://s3-eu-west-1.amazonaws.com/app.mindelis.com/images/bg.jpg');
+  background-color: $black;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  color: $white;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 16px;
+  line-height: 1;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-#app-content {
+#app_content {
   padding: 60px 10px 35px 10px;
   overflow: hidden;
 }
