@@ -3,11 +3,11 @@ import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { UsersCreatePage } from '../../_components';
-import { userActions } from '../../_actions';
+import { userActions, headerActions } from '../../_actions';
 
 class UsersPage extends React.Component {
     componentDidMount() {
-        this.props.dispatch(userActions.getAll());
+        this.props.dispatch(headerActions.titleChange('Users'));
     }
 
     render() {
@@ -24,12 +24,7 @@ class UsersPage extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { users } = state;
-    const { creating } = state.userCreation;
-    return {
-        creating,
-        users
-    };
+    return state;
 }
 
 const connectedUserCreatePage = connect(mapStateToProps)(UsersPage);

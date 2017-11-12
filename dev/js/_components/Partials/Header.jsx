@@ -9,12 +9,12 @@ import { connect } from 'react-redux';
 class Header extends React.Component {
 
     render() {
-        // const { user, users } = this.props;
+        const { header } = this.props;
         return (
             <div className="header" id="app_header">
 
               <div className="app-name">
-                <h1><Link to="/">title</Link></h1>
+                <h1><Link to="/">{header.title}</Link></h1>
               </div>
 
               <div className="pull-right">
@@ -30,7 +30,10 @@ class Header extends React.Component {
 }
 
 function mapStateToProps(state) {
-    return state;
+    const { header } = state;
+    return {
+        header
+    };
 }
 
 const connectedHeader = connect(mapStateToProps)(Header);

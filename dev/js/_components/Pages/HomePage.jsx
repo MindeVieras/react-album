@@ -2,19 +2,19 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { userActions } from '../../_actions';
+import { userActions, headerActions } from '../../_actions';
 
 class HomePage extends React.Component {
-    // componentDidMount() {
-    //     this.props.dispatch(userActions.getAll());
-    // }
+    componentDidMount() {
+        this.props.dispatch(headerActions.titleChange('Dashboard'));
+    }
 
     // handleDeleteUser(id) {
     //     return (e) => this.props.dispatch(userActions.delete(id));
     // }
 
     render() {
-        const { user, users } = this.props;
+        const { user } = this.props;
         return (
             <div className="col-md-6 col-md-offset-3">
                 homepage
@@ -47,11 +47,11 @@ class HomePage extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { users, authentication } = state;
+    console.log(state);
+    const { authentication } = state;
     const { user } = authentication;
     return {
-        user,
-        users
+        user
     };
 }
 

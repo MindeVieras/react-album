@@ -67,10 +67,15 @@ function getAll() {
         dispatch(request());
 
         userService.getAll()
-            .then(
-                users => dispatch(success(users)),
-                error => dispatch(failure(error))
-            );
+            .then(function(res) {
+                console.log(res);
+                if (res.ack == 'ok') {
+                    dispatch(success(users));
+                } else {
+                    dispatch(failure(res.msg));
+                    dispatch(alertActions.error(res.msg));
+                }
+            });
     };
 
     function request() { return { type: userConstants.GETALL_REQUEST } }

@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 import { PrivateRoute, Header, HomePage, UsersPage, UserCreatePage, Footer } from '../_components';
 
+import { headerActions } from '../_actions';
+
 require('../../scss/app/main.scss');
 
 class BaseLayout extends React.Component {
