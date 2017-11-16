@@ -2,10 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-// import { Header, HomePage, UsersPage } from '../_components';
-
-// require('../../scss/app/main.scss');
-
 class Header extends React.Component {
 
     render() {

@@ -1,15 +1,16 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-
-// import { Header, HomePage, UsersPage } from '../_components';
-
-// require('../../scss/app/main.scss');
 
 class Footer extends React.Component {
 
     render() {
-        // const { user, users } = this.props;
+        const { footer } = this.props;
+        if (footer.links) {
+          var links = footer.links.map((link) => {
+            return <Link className="btn btn-sm btn-success" to={link.url} key={link.id}>{link.name}</Link>
+          })
+        }
         return (
             <div className="footer" id="app_footer">
               <div id="recycle_bin">
@@ -21,7 +22,7 @@ class Footer extends React.Component {
               </div>
 
               <div id="footer_buttons">
-                footer_buttons
+                {links}
               </div>
             </div>
         );

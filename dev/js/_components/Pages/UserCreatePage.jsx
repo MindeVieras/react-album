@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { userActions } from '../../_actions';
+import { userActions, headerActions, footerActions } from '../../_actions';
 
 class UserCreatePage extends React.Component {
     constructor(props) {
@@ -21,6 +21,12 @@ class UserCreatePage extends React.Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    componentDidMount() {
+        this.props.dispatch(headerActions.titleChange('Create user'));
+        this.props.dispatch(footerActions.linksClear());
+        this.props.dispatch(footerActions.linkAdd('Save', '/user-save', 'save_user_footer_link'));
     }
 
     handleChange(event) {

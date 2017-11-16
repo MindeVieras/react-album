@@ -3,15 +3,16 @@ import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { UsersCreatePage } from '../../_components';
-import { userActions, headerActions } from '../../_actions';
+import { userActions, headerActions, footerActions } from '../../_actions';
 
 class UsersPage extends React.Component {
     componentDidMount() {
         this.props.dispatch(headerActions.titleChange('Users'));
+        this.props.dispatch(footerActions.linksClear());
+        this.props.dispatch(footerActions.linkAdd('New user', '/user-create', 'create_user_footer_link'));
     }
 
     render() {
-        console.log(this.props);
         return (
             <div className="">
                 <h2>Users list</h2>
