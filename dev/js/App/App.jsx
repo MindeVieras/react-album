@@ -18,6 +18,9 @@ class App extends React.Component {
     }
 
     render() {
+        // Load sass files
+        history.location.pathname == '/login' ? require('../../scss/login/login.scss') : require('../../scss/app/main.scss');
+        
         const { alert } = this.props;
         return (
             <div>

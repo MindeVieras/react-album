@@ -45,12 +45,12 @@ function create(user) {
         userService.create(user)
             .then(function(res){
                 if (res.ack == 'ok') {
-                    console.log(res);
+                    // console.log(res);
                     dispatch(success());
                     // history.push('/login');
                     dispatch(alertActions.success('Registration successful'));
                 } else {
-                    console.log(res);
+                    // console.log(res);
                     dispatch(failure(res.msg));
                     dispatch(alertActions.error(res.msg));
                 }
@@ -68,7 +68,7 @@ function getAll() {
 
         userService.getAll()
             .then(function(res) {
-                console.log(res);
+                // console.log(res);
                 if (res.ack == 'ok') {
                     dispatch(success(users));
                 } else {

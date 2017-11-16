@@ -2,6 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import { IoPersonStalker } from 'react-icons/lib/io';
+import { MdFace } from 'react-icons/lib/md';
+import { GoSignOut } from 'react-icons/lib/go';
+
 class Header extends React.Component {
 
     render() {
@@ -15,9 +19,9 @@ class Header extends React.Component {
 
               <div className="pull-right">
                 <ul className="main-menu">
-                  {/*<li><a href="/faces"><i className="fa fa-smile-o"></i></a></li>*/}
-                  <li><Link to="/users"><i className="fa fa-users"></i></Link></li>
-                  <li><Link to="/login"><i className="fa fa-sign-out"></i></Link></li>
+                  {<li><a href="/faces"><MdFace /></a></li>}
+                  <li><Link to="/users"><IoPersonStalker /></Link></li>
+                  <li><Link to="/login"><GoSignOut /></Link></li>
                 </ul>
               </div>
             </div>

@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import { IoTrashA, IoAndroidUpload } from 'react-icons/lib/io';
+
 class Footer extends React.Component {
 
     render() {
@@ -14,11 +16,11 @@ class Footer extends React.Component {
         return (
             <div className="footer" id="app_footer">
               <div id="recycle_bin">
-                <a href="/trash" className="tip-default" title="Recycle bin"><i className="fa fa-trash"></i></a>
+                <a href="/trash" className="tip-default" title="Recycle bin"><IoTrashA /></a>
               </div>
 
               <div id="recycle_bin">
-                <a href="/unattached-media" className="tip-default" title="Unattached media"><i className="fa fa-cloud-download"></i></a>
+                <a href="/unattached-media" className="tip-default" title="Unattached media"><IoAndroidUpload /></a>
               </div>
 
               <div id="footer_buttons">

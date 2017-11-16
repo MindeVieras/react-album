@@ -6,8 +6,6 @@ import { PrivateRoute, Header, HomePage, UsersPage, UserCreatePage, Footer } fro
 
 import { headerActions } from '../_actions';
 
-require('../../scss/app/main.scss');
-
 class BaseLayout extends React.Component {
 
     render() {

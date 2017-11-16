@@ -60,7 +60,7 @@ function getById(id) {
 }
 
 function create(user) {
-    console.log(user);
+    // console.log(user);
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

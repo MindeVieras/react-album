@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 
 import { userActions } from '../../_actions';
 
-require('../../../scss/login/login.scss');
-
 class LoginPage extends React.Component {
     constructor(props) {
         super(props);
