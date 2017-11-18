@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { userActions } from '../../../_actions';
+import { userActions } from '../../../../_actions';
 
 class UsersList extends React.Component {
 
@@ -15,8 +15,9 @@ class UsersList extends React.Component {
   }
 
   componentDidMount(){
-    this.props.dispatch(userActions.getList());
-    this.props.dispatch(userActions.getOne(this.props.auth.user.id));
+    const { dispatch, auth } = this.props;
+    dispatch(userActions.getList());
+    dispatch(userActions.getOne(auth.user.id));
   }
 
   onUserSelect(id) {
@@ -27,7 +28,7 @@ class UsersList extends React.Component {
   }
 
   render() {
-      const { auth, users } = this.props;
+      const { users } = this.props;
       return (
         <div className="user-list">
             {users && users.loading &&

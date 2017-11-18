@@ -7,8 +7,8 @@ import { userActions, headerActions, footerActions } from '../../_actions';
 class HomePage extends React.Component {
 
     componentDidMount() {
-        this.props.dispatch(headerActions.titleChange('Dashboard'));
-        this.props.dispatch(footerActions.linksClear());
+        this.props.dispatch(headerActions.setTitle('Dashboard'));
+        this.props.dispatch(footerActions.buttonsClear());
     }
 
     render() {

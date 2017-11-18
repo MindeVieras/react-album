@@ -1,4 +1,4 @@
 
 export const headerConstants = {
-    TITLE_CHANGE: 'TITLE_CHANGE'
+    SET_TITLE: 'HEADER_SET_TITLE'
 };

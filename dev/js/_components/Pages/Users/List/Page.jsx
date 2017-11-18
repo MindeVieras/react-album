@@ -4,14 +4,15 @@ import { connect } from 'react-redux';
 import { UsersList } from './List';
 import { UserInfo } from './Info';
 
-import { userActions, headerActions, footerActions } from '../../../_actions';
+import { headerActions, footerActions } from '../../../../_actions';
 
 class UsersPage extends React.Component {
 
   componentDidMount() {
-    this.props.dispatch(headerActions.titleChange('Users'));
-    this.props.dispatch(footerActions.linksClear());
-    this.props.dispatch(footerActions.linkAdd('New user', '/user-create', 'create_user_footer_link'));
+    this.props.dispatch(headerActions.setTitle('Users'));
+    this.props.dispatch(footerActions.buttonsClear());
+    this.props.dispatch(footerActions.buttonSet('Go back', 'goBack', 'info'));
+    this.props.dispatch(footerActions.buttonSet('New user', '/user-create', 'success'));
   }
 
   render() {
@@ -29,11 +30,10 @@ class UsersPage extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { authentication } = state;
+  const { dispatch } = state;
   return {
-    auth: authentication
+    dispatch
   };
-  return state;
 }
 
 const connectedUsersPage = connect(mapStateToProps)(UsersPage);

@@ -1,14 +1,14 @@
 
 import { footerConstants } from '../_constants';
 
-export function footer(state = {}, action) {
+export function footer(state = [], action) {
   switch (action.type) {
-    case footerConstants.LINK_ADD:
+    case footerConstants.BUTTON_SET:
       return {
-        links: action.links
+        buttons: [...state.buttons, action.button]
       };
-    case footerConstants.LINKS_CLEAR:
-      return {links:[]};
+    case footerConstants.BUTTONS_CLEAR:
+      return {buttons:[]};
     default:
       return state
   }

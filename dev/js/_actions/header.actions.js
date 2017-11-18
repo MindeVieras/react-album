@@ -2,9 +2,9 @@
 import { headerConstants } from '../_constants';
 
 export const headerActions = {
-    titleChange
+    setTitle
 };
 
-function titleChange(title) {
-    return { type: headerConstants.TITLE_CHANGE, title };
+function setTitle(title) {
+    return { type: headerConstants.SET_TITLE, title };
 }

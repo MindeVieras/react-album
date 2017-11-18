@@ -1,8 +1,9 @@
+
 import { headerConstants } from '../_constants';
 
 export function header(state = {}, action) {
   switch (action.type) {
-    case headerConstants.TITLE_CHANGE:
+    case headerConstants.SET_TITLE:
       return {
         title: action.title
       };

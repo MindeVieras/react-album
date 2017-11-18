@@ -2,12 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { userActions } from '../../../_actions';
+import { userActions } from '../../../../_actions';
 
 class UserInfo extends React.Component {
 
   onUserDelete(id) {
-    console.log(this.props);
     this.props.dispatch(userActions.delete(id));
     this.props.dispatch(userActions.getOne(this.props.auth.user.id));
   }

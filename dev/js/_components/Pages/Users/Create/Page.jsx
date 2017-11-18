@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { userActions, headerActions, footerActions } from '../../_actions';
+import { userActions, headerActions, footerActions } from '../../../../_actions';
 
 class UserCreatePage extends React.Component {
     constructor(props) {
@@ -24,9 +24,10 @@ class UserCreatePage extends React.Component {
     }
 
     componentDidMount() {
-        this.props.dispatch(headerActions.titleChange('Create user'));
-        this.props.dispatch(footerActions.linksClear());
-        this.props.dispatch(footerActions.linkAdd('Save', '/user-save', 'save_user_footer_link'));
+        this.props.dispatch(headerActions.setTitle('Create user'));
+        this.props.dispatch(footerActions.buttonsClear());
+        this.props.dispatch(footerActions.buttonSet('Go back', 'goBack', 'info'));
+        this.props.dispatch(footerActions.buttonSet('Save', '/user-save', 'success'));
     }
 
     handleChange(event) {
@@ -119,10 +120,7 @@ class UserCreatePage extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { creating } = state.userCreation;
-    return {
-        creating
-    };
+    return state;
 }
 
 const connectedUserCreatePage = connect(mapStateToProps)(UserCreatePage);
