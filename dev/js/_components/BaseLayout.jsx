@@ -2,12 +2,22 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import WebFont from 'webfontloader';
+import { history } from '../_helpers';
 
 import { PrivateRoute, Header, HomePage, UsersPage, UserCreatePage, Footer } from '../_components';
 
-import { headerActions } from '../_actions';
+import { alertActions, headerActions } from '../_actions';
 
 class BaseLayout extends React.Component {
+  constructor(props) {
+    super(props);
+
+    const { dispatch } = this.props;
+    history.listen((location, action) => {
+      // clear alert on location change
+      dispatch(alertActions.clear());
+    });
+  }
   componentDidMount() {
     WebFont.load({
       google: {
@@ -47,11 +57,9 @@ const NoMatch = ({ location }) => (
 
 
 function mapStateToProps(state) {
-    const { alert } = state;
-    return {
-        alert
-    };
+    // const { alert } = state;
+    return state;
 }
 
-const connectedHomePage = connect(mapStateToProps)(BaseLayout);
-export { connectedHomePage as BaseLayout };
+const connectedBaseLayout = connect(mapStateToProps)(BaseLayout);
+export { connectedBaseLayout as BaseLayout };

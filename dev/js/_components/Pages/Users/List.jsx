@@ -14,6 +14,11 @@ class UsersList extends React.Component {
     };
   }
 
+  componentDidMount(){
+    this.props.dispatch(userActions.getList());
+    this.props.dispatch(userActions.getOne(this.props.auth.user.id));
+  }
+
   onUserSelect(id) {
     this.props.dispatch(userActions.getOne(id));
     this.setState({
@@ -66,7 +71,6 @@ function mapStateToProps(state) {
     auth: authentication,
     users
   };
-  return state;
 }
 
 const connectedUsersList = connect(mapStateToProps)(UsersList);

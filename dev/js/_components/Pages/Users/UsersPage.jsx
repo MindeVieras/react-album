@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { UsersList } from './List';
@@ -13,12 +12,9 @@ class UsersPage extends React.Component {
     this.props.dispatch(headerActions.titleChange('Users'));
     this.props.dispatch(footerActions.linksClear());
     this.props.dispatch(footerActions.linkAdd('New user', '/user-create', 'create_user_footer_link'));
-    this.props.dispatch(userActions.getList());
-    this.props.dispatch(userActions.getOne(this.props.auth.user.id));
   }
 
   render() {
-      const { auth, users, userGetOne } = this.props;
       return (
         <div id="users_page">
           <div className="pull-left users-wrapper">
@@ -32,18 +28,10 @@ class UsersPage extends React.Component {
   }
 }
 
-UsersPage.propTypes = {
-  auth: PropTypes.object,
-  users: PropTypes.object,
-  userGetOne: PropTypes.object
-}
-
 function mapStateToProps(state) {
-  const { authentication, userGetOne, users } = state;
+  const { authentication } = state;
   return {
-    auth: authentication,
-    userGetOne,
-    users
+    auth: authentication
   };
   return state;
 }

@@ -70,7 +70,6 @@ function mapStateToProps(state) {
     auth: authentication,
     userGetOne
   };
-  return state;
 }
 
 const connectedUserInfo = connect(mapStateToProps)(UserInfo);
