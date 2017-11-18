@@ -54,7 +54,7 @@ class UserCreatePage extends React.Component {
         const { creating  } = this.props;
         const { user, submitted } = this.state;
         return (
-            <div className="form-wrapper">
+            <div id="user_create_page">
                 <form name="form" id="add_user" onSubmit={this.handleSubmit}>
 
                     <div className={'form-group' + (submitted && !user.username ? ' has-error' : '')}>

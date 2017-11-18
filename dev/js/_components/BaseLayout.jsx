@@ -1,36 +1,42 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
+import WebFont from 'webfontloader';
 
 import { PrivateRoute, Header, HomePage, UsersPage, UserCreatePage, Footer } from '../_components';
 
 import { headerActions } from '../_actions';
 
 class BaseLayout extends React.Component {
+  componentDidMount() {
+    WebFont.load({
+      google: {
+        families: ['Roboto:100,300,400,500,700,900', 'sans-serif']
+      }
+    });
+  }
 
-    render() {
-        const { alert } = this.props;
-        return (
-            <div className="app-wrapper" id="app_wrapper">
-            <div>
-                <Header />
-                <div id="app_content">
+  render() {
+      const { alert } = this.props;
+      return (
+          <div id="app_wrapper">
+            <Header />
+            <div id="app_content">
 
-                    {alert.message &&
-                        <div className={`alert ${alert.type}`}>{alert.message}</div>
-                    }
-                    <Switch>
-                        <PrivateRoute exact path="/" component={HomePage} />
-                        <PrivateRoute path="/users" component={UsersPage} />
-                        <PrivateRoute path="/user-create" component={UserCreatePage} />
-                        <PrivateRoute component={NoMatch} />
-                    </Switch>
-                </div>
-                <Footer />
+              {alert.message &&
+                <div className={`alert ${alert.type}`}>{alert.message}</div>
+              }
+              <Switch>
+                <PrivateRoute exact path="/" component={HomePage} />
+                <PrivateRoute path="/users" component={UsersPage} />
+                <PrivateRoute path="/user-create" component={UserCreatePage} />
+                <PrivateRoute component={NoMatch} />
+              </Switch>
             </div>
-            </div>
-        );
-    }
+            <Footer />
+          </div>
+      );
+  }
 }
 
 const NoMatch = ({ location }) => (

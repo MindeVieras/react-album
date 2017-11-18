@@ -3,8 +3,8 @@ import { authHeader, baseServerUrl } from '../_helpers';
 export const userService = {
     login,
     logout,
-    getAll,
-    getById,
+    getList,
+    getOne,
     create,
     update,
     delete: _delete
@@ -41,22 +41,22 @@ function logout() {
     localStorage.removeItem('user');
 }
 
-function getAll() {
+function getList() {
     const requestOptions = {
         method: 'GET',
         headers: authHeader()
     };
 
-    return fetch(baseServerUrl+'/api/users/get-all', requestOptions).then(handleResponse);
+    return fetch(baseServerUrl+'/api/users/get-list', requestOptions).then(handleResponse);
 }
 
-function getById(id) {
+function getOne(id) {
     const requestOptions = {
         method: 'GET',
         headers: authHeader()
     };
 
-    return fetch('/users/' + _id, requestOptions).then(handleResponse);
+    return fetch(baseServerUrl+'/api/users/get-one/'+id, requestOptions).then(handleResponse);
 }
 
 function create(user) {
@@ -87,7 +87,7 @@ function _delete(id) {
         headers: authHeader()
     };
 
-    return fetch('/users/' + id, requestOptions).then(handleResponse);
+    return fetch(baseServerUrl+'/api/users/delete/'+id, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {

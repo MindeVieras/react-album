@@ -8,18 +8,20 @@ import { PrivateRoute, LoginPage, BaseLayout } from '../_components';
 
 class App extends React.Component {
     constructor(props) {
-        super(props);
+      super(props);
 
-        const { dispatch } = this.props;
-        history.listen((location, action) => {
-            // clear alert on location change
-            dispatch(alertActions.clear());
-        });
+      // Load sass files
+      history.location.pathname == '/login' ? require('../../scss/login/login.scss') : require('../../scss/app/main.scss');
+
+      const { dispatch } = this.props;
+      history.listen((location, action) => {
+        // clear alert on location change
+        dispatch(alertActions.clear());
+      });
     }
 
     render() {
-        // Load sass files
-        history.location.pathname == '/login' ? require('../../scss/login/login.scss') : require('../../scss/app/main.scss');
+        
         
         const { alert } = this.props;
         return (

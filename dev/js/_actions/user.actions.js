@@ -7,7 +7,8 @@ export const userActions = {
     login,
     logout,
     create,
-    getAll,
+    getList,
+    getOne,
     delete: _delete
 };
 
@@ -19,7 +20,7 @@ function login(username, password) {
             .then(function(res) {
                 // console.log(res);
                 if (res.ack == 'ok') {
-                    dispatch(success(res));
+                    dispatch(success(res.data));
                     history.push('/');
                 } else {
                     dispatch(failure(res.msg));
@@ -62,44 +63,62 @@ function create(user) {
     function failure(error) { return { type: userConstants.CREATE_FAILURE, error } }
 }
 
-function getAll() {
+function getList() {
     return dispatch => {
         dispatch(request());
 
-        userService.getAll()
+        userService.getList()
             .then(function(res) {
-                // console.log(res);
                 if (res.ack == 'ok') {
-                    dispatch(success(users));
+                    dispatch(success(res.data));
                 } else {
                     dispatch(failure(res.msg));
-                    dispatch(alertActions.error(res.msg));
                 }
             });
     };
 
-    function request() { return { type: userConstants.GETALL_REQUEST } }
-    function success(users) { return { type: userConstants.GETALL_SUCCESS, users } }
-    function failure(error) { return { type: userConstants.GETALL_FAILURE, error } }
+    function request() { return { type: userConstants.GETLIST_REQUEST } }
+    function success(users) { return { type: userConstants.GETLIST_SUCCESS, users } }
+    function failure(err) { return { type: userConstants.GETLIST_FAILURE, err } }
+}
+
+function getOne(id) {
+    return dispatch => {
+        dispatch(request());
+
+        userService.getOne(id)
+            .then(function(res) {
+                if (res.ack == 'ok') {
+                    dispatch(success(res.data));
+                } else {
+                    dispatch(failure(res.msg));
+                }
+            });
+    };
+
+    function request() { return { type: userConstants.GETONE_REQUEST } }
+    function success(user) { return { type: userConstants.GETONE_SUCCESS, user } }
+    function failure(err) { return { type: userConstants.GETONE_FAILURE, err } }
 }
 
 // prefixed function name with underscore because delete is a reserved word in javascript
 function _delete(id) {
-    return dispatch => {
-        dispatch(request(id));
+  return dispatch => {
+    dispatch(request(id));
 
-        userService.delete(id)
-            .then(
-                user => { 
-                    dispatch(success(id));
-                },
-                error => {
-                    dispatch(failure(id, error));
-                }
-            );
-    };
+    userService.delete(id)
+      .then(function(res) {
+        if (res.ack == 'ok') {
+          // dispatch(success(res.data));
+          dispatch(success(id));
+        } else {
+          // dispatch(failure(res.msg));
+          dispatch(failure(id, res.msg));
+        }
+      });
+  };
 
-    function request(id) { return { type: userConstants.DELETE_REQUEST, id } }
-    function success(id) { return { type: userConstants.DELETE_SUCCESS, id } }
-    function failure(id, error) { return { type: userConstants.DELETE_FAILURE, id, error } }
+  function request(id) { return { type: userConstants.DELETE_REQUEST, id } }
+  function success(id) { return { type: userConstants.DELETE_SUCCESS, id } }
+  function failure(id, err) { return { type: userConstants.DELETE_FAILURE, id, err } }
 }

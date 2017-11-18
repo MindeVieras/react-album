@@ -9,6 +9,7 @@ module.exports = {
         contentBase: './src',
         port: 8080
     },
+    devtool: '#eval',
     entry: './dev/js/index.jsx',
     output: {
         path: path.resolve(__dirname, 'src'),
