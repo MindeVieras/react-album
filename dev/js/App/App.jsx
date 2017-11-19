@@ -4,7 +4,7 @@ import { Router, Switch, Route } from 'react-router-dom';
 import { PrivateRoute, LoginPage, BaseLayout } from '../_components';
 import { history } from '../_helpers';
 
-require('../../scss/app/main.scss');
+import '../../scss/app/main.scss';
 
 export class App extends React.Component {
 

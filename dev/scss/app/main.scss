@@ -1,5 +1,4 @@
 @import '../base/normalize';
-@import '../base/form_reset';
 @import '../variables/mixins';
 @import '../variables/colors';
 
@@ -22,6 +21,8 @@
 @import 'pages/user-create';
 
 * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 

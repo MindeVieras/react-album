@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { submit } from 'redux-form';
 import { history } from '../../_helpers';
 
 import { IoTrashA, IoAndroidUpload } from 'react-icons/lib/io';
@@ -15,7 +16,10 @@ class Footer extends React.Component {
       buttons = footer.buttons.map((link, i) => {
         if (link.action === 'goBack')
           return <div key={i} className={`btn btn-sm btn-${link.type}`} onClick={()=>history.goBack()}>{link.name}</div>
-
+        
+        if (link.action === 'userCreate')
+          return <div key={i} onClick={() => this.props.dispatch(submit('user_create'))} className={`btn btn-sm btn-${link.type}`}>{link.name}</div>
+        
         return <Link key={i} to={link.action} className={`btn btn-sm btn-${link.type}`}>{link.name}</Link>
       })
     }
@@ -35,7 +39,10 @@ class Footer extends React.Component {
 }
 
 function mapStateToProps(state) {
-    return state;
+  const { footer } = state;
+  return {
+    footer
+  };
 }
 
 const connectedFooter = connect(mapStateToProps)(Footer);

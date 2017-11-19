@@ -60,10 +60,9 @@ function getOne(id) {
 }
 
 function create(user) {
-    // console.log(user);
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { ...authHeader(), 'Content-Type': 'application/json' },
         body: JSON.stringify(user)
     };
 
