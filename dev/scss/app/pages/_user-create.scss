@@ -1,7 +1,7 @@
 
 #user_create_page { 
   .form-wrapper {
-    width: 60%;
+    width: 45%;
     padding: 25px;
   }
   #user_create_form {
@@ -9,8 +9,21 @@
     margin: 0 auto;
   }
   .avatar-wrapper {
-    background-color: $grey;
-    width: 40%;
-    padding-bottom: 35%;
+    position: relative;
+    width: 55%;
+    padding: 25px;
+    padding-top: 47px;
+    .inner {
+      max-width: 425px;
+      margin: 0 auto;
+    }
+    .preview {
+      background-color: $grey;
+      .file-preview-item {
+        img {
+          width: 100%;
+        }
+      }
+    }
   }
 }
