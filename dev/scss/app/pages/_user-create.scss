@@ -1,8 +1,16 @@
 
 #user_create_page { 
+  .form-wrapper {
+    width: 60%;
+    padding: 25px;
+  }
   #user_create_form {
     max-width: 400px;
     margin: 0 auto;
-    padding: 25px;
+  }
+  .avatar-wrapper {
+    background-color: $grey;
+    width: 40%;
+    padding-bottom: 35%;
   }
 }

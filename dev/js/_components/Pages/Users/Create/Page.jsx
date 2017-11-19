@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { UserCreateForm } from './Form';
+import { UserCreateAvatar } from './Avatar';
 
 import { headerActions, footerActions } from '../../../../_actions';
 
@@ -17,7 +18,12 @@ class UserCreatePage extends React.Component {
   render() {
     return (
       <div id="user_create_page">
-        <UserCreateForm userid={this.props.auth.user.id} />
+        <div className="pull-left form-wrapper">
+          <UserCreateForm userid={this.props.auth.user.id} />
+        </div>
+        <div className="pull-left avatar-wrapper">
+          <UserCreateAvatar />
+        </div>
       </div>
     );
   }
