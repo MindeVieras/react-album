@@ -11,7 +11,7 @@ import { alert } from './alert.reducer';
 const rootReducer = combineReducers({
   authentication,
   users,
-  userGetOne,
+  selected_user: userGetOne,
   header,
   footer,
   alert,
