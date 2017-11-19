@@ -58,7 +58,7 @@ const NoMatch = ({ location }) => (
 
 function mapStateToProps(state) {
     // const { alert } = state;
-    console.log(state);
+    // console.log(state);
     return state;
 }
 
