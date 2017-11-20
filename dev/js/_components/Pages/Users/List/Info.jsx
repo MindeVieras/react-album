@@ -17,7 +17,7 @@ class UserInfo extends React.Component {
 
   render() {
       const { auth, selected_user } = this.props;
-      console.log(this.props);
+      // console.log(this.props);
       return (
         <div className="user-info">
           {selected_user && selected_user.loading &&
@@ -69,11 +69,11 @@ UserInfo.propTypes = {
 }
 
 function mapStateToProps(state) {
-  const { authentication, selected_user } = state;
-  console.log(state);
+  const { authentication, users } = state;
+  // console.log(state);
   return {
     auth: authentication,
-    selected_user
+    selected_user: users.selected_user
   };
 }
 
