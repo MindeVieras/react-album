@@ -17,7 +17,6 @@ class UsersList extends React.Component {
   componentDidMount(){
     const { dispatch } = this.props;
     dispatch(userActions.getList());
-    dispatch(userActions.getOne(this.state.currentSelectedId));
   }
 
   onUserSelect(id) {

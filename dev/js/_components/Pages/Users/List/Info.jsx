@@ -6,6 +6,10 @@ import { userActions } from '../../../../_actions';
 
 class UserInfo extends React.Component {
 
+  componentDidMount() {
+    this.props.dispatch(userActions.getOne(this.props.auth.user.id));
+  }
+
   onUserDelete(id) {
     this.props.dispatch(userActions.delete(id));
     this.props.dispatch(userActions.getOne(this.props.auth.user.id));
