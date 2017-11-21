@@ -36,7 +36,11 @@
         float: right;
         width: calc(100% - 50px);
         padding: 0 20px;
+        padding-right: 10px;
         line-height: 50px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
       }
       &:nth-child(2n+1) {
         margin-right: 5%;
