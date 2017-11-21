@@ -67,9 +67,9 @@ UsersList.propTypes = {
 }
 
 function mapStateToProps(state) {
-  const { authentication, users } = state;
+  const { auth, users } = state;
   return {
-    auth: authentication,
+    auth,
     users: users.list
   };
 }
