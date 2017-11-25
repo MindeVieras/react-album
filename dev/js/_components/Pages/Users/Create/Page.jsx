@@ -16,10 +16,11 @@ class UserCreatePage extends React.Component {
   }
 
   render() {
+    const { auth, avatar } = this.props;
     return (
       <div id="user_create_page">
         <div className="pull-left form-wrapper">
-          <UserCreateForm userid={this.props.auth.user.id} />
+          <UserCreateForm userid={auth.user.id} avatar={avatar} />
         </div>
         <div className="pull-left avatar-wrapper">
           <UserCreateAvatar />
@@ -30,9 +31,10 @@ class UserCreatePage extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { authentication } = state;
+  const { auth, upload } = state;
   return {
-    auth: authentication
+    auth,
+    avatar: upload.avatar.media_file
   };
 }
 

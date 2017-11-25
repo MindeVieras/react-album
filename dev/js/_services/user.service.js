@@ -60,13 +60,13 @@ function getOne(id) {
 }
 
 function create(user) {
-    const requestOptions = {
-        method: 'POST',
-        headers: { ...authHeader(), 'Content-Type': 'application/json' },
-        body: JSON.stringify(user)
-    };
+  const requestOptions = {
+    method: 'POST',
+    headers: { ...authHeader(), 'Content-Type': 'application/json' },
+    body: JSON.stringify(user)
+  };
 
-    return fetch(baseServerUrl+'/api/users/create', requestOptions).then(handleResponse);
+  return fetch(baseServerUrl+'/api/users/create', requestOptions).then(handleResponse);
 }
 
 function update(user) {

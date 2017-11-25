@@ -40,27 +40,27 @@ function logout() {
 }
 
 function create(user) {
-    return dispatch => {
-        dispatch(request(user));
+  return dispatch => {
+    dispatch(request(user));
 
-        userService.create(user)
-            .then(function(res){
-                if (res.ack == 'ok') {
-                    // console.log(res);
-                    dispatch(success());
-                    // history.push('/login');
-                    dispatch(alertActions.success('Registration successful'));
-                } else {
-                    // console.log(res);
-                    dispatch(failure(res.msg));
-                    dispatch(alertActions.error(res.msg));
-                }
-            });
-    };
+    userService.create(user)
+      .then(function(res){
+        if (res.ack == 'ok') {
+          // console.log(res);
+          dispatch(success());
+          // history.push('/login');
+          dispatch(alertActions.success('Registration successful'));
+        } else {
+          // console.log(res);
+          dispatch(failure(res.msg));
+          dispatch(alertActions.error(res.msg));
+        }
+      });
+  };
 
-    function request(user) { return { type: userConstants.CREATE_REQUEST, user } }
-    function success(user) { return { type: userConstants.CREATE_SUCCESS, user } }
-    function failure(error) { return { type: userConstants.CREATE_FAILURE, error } }
+  function request(user) { return { type: userConstants.CREATE_REQUEST, user } }
+  function success(user) { return { type: userConstants.CREATE_SUCCESS, user } }
+  function failure(error) { return { type: userConstants.CREATE_FAILURE, error } }
 }
 
 function getList() {

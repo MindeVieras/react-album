@@ -14,6 +14,7 @@ class UserCreateForm extends React.Component {
   render() {
     
     const { handleSubmit } = this.props;
+    // console.log(this.props);
     return (
       <form id="user_create_form" onSubmit={handleSubmit}>
         <Field
@@ -104,8 +105,8 @@ const toggleField = ({ input, label }) => (
 );
 
 function submit(values, dispatch, form) {
-
-  userService.create({...values, author: form.userid})
+  // console.log(values);
+  userService.create({...values, author: form.userid, avatar: form.avatar})
     .then(function(res){
       if (res.ack == 'ok') {
         dispatch(alertActions.success('Registration successful'));

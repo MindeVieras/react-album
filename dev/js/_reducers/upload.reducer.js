@@ -1,6 +1,13 @@
 import { uploadConstants } from '../_constants';
 
-const initialState = {}
+const initialState = {
+  avatar: {
+    uploading: false,
+    err: false,
+    success: false,
+    media_file: {}
+  }
+}
 
 export function upload(state = initialState, action) {
   switch (action.type) {
@@ -12,7 +19,10 @@ export function upload(state = initialState, action) {
       };
     case uploadConstants.AVATAR_SUCCESS:
       return {
-        avatar: action.file
+        avatar: {
+          success: true,
+          media_file: action.file
+        }
       };
     case uploadConstants.AVATAR_FAILURE:
       return {

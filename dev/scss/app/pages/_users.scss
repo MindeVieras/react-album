@@ -30,6 +30,17 @@
         color: $grey;
         text-align: center;
         @include border-radius(50%);
+        .image {
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: cover;
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          @include border-radius(50%);
+        }
       }
       .name {
         display: inline-block;
