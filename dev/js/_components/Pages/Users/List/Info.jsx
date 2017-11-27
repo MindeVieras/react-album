@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import Blur from 'react-blur';
+
 import { userActions } from '../../../../_actions';
 
 class UserInfo extends React.Component {
@@ -16,7 +18,7 @@ class UserInfo extends React.Component {
 
   render() {
       const { auth, selected_user } = this.props;
-      // console.log(this.props);
+      console.log(this.props);
       return (
         <div className="user-info">
           {selected_user.loading &&
@@ -28,6 +30,11 @@ class UserInfo extends React.Component {
           {selected_user.user &&
             <div className="selected-user">
               <div className="image-wrapper">
+                {selected_user.user.avatar &&
+                <Blur img={selected_user.user.avatar} blurRadius={15}>
+                  The content.
+                </Blur>
+                }
                 <div className="inner">{selected_user.user.initials}</div>
               </div>
               <div className="toolbar">

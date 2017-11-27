@@ -4,7 +4,13 @@ import { connect } from 'react-redux';
 import WebFont from 'webfontloader';
 import { history } from '../_helpers';
 
-import { PrivateRoute, Header, HomePage, UsersPage, UserCreatePage, Footer } from '../_components';
+import {
+  PrivateRoute,
+  Header,
+  AlbumsPage,
+  UsersPage,
+  UserCreatePage,
+  Footer } from '../_components';
 
 import { alertActions, headerActions } from '../_actions';
 
@@ -37,7 +43,7 @@ class BaseLayout extends React.Component {
                 <div className={`alert ${alert.type}`}>{alert.message}</div>
               }
               <Switch>
-                <PrivateRoute exact path="/" component={HomePage} />
+                <PrivateRoute exact path="/" component={AlbumsPage} />
                 <PrivateRoute path="/users" component={UsersPage} />
                 <PrivateRoute path="/user-create" component={UserCreatePage} />
                 <PrivateRoute component={NoMatch} />

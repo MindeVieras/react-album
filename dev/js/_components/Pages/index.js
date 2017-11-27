@@ -1,4 +1,4 @@
 
 export * from './LoginPage';
-export * from './HomePage';
+export * from './Albums';
 export * from './Users';
