@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { submit } from 'redux-form';
@@ -6,7 +6,7 @@ import { history } from '../../_helpers';
 
 import { IoTrashA, IoAndroidUpload } from 'react-icons/lib/io';
 
-class Footer extends React.Component {
+class Footer extends Component {
 
   render() {
     const { footer } = this.props;
@@ -19,6 +19,9 @@ class Footer extends React.Component {
         
         if (link.action === 'userCreate')
           return <div key={i} onClick={() => this.props.dispatch(submit('user_create'))} className={`btn btn-sm btn-${link.type}`}>{link.name}</div>
+        
+        if (link.action === 'albumCreate')
+          return <div key={i} onClick={() => this.props.dispatch(submit('album_create'))} className={`btn btn-sm btn-${link.type}`}>{link.name}</div>
         
         return <Link key={i} to={link.action} className={`btn btn-sm btn-${link.type}`}>{link.name}</Link>
       })
@@ -45,5 +48,4 @@ function mapStateToProps(state) {
   };
 }
 
-const connectedFooter = connect(mapStateToProps)(Footer);
-export { connectedFooter as Footer };
+export default connect(mapStateToProps)(Footer);

@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-// import { AlbumsList } from './List';
+import { AlbumsList } from './List';
 // import { UserInfo } from './Info';
 
 import { headerActions, footerActions } from '../../../../_actions';
@@ -17,10 +17,9 @@ class AlbumsPage extends React.Component {
 
   render() {
       return (
-        <div id="users_page">
-          <div className="pull-left users-wrapper">
-            {/*<AlbumsList />*/}
-            list here
+        <div id="albums_page">
+          <div className="pull-left albums-wrapper">
+            <AlbumsList />
           </div>
           <div className="pull-right info-wrapper">
             {/*<UserInfo />*/}

@@ -1,20 +1,21 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import WebFont from 'webfontloader';
 import { history } from '../_helpers';
 
+import Header from '../_components/Partials/Header';
+import Footer from '../_components/Partials/Footer';
 import {
   PrivateRoute,
-  Header,
   AlbumsPage,
+  AlbumCreatePage,
   UsersPage,
-  UserCreatePage,
-  Footer } from '../_components';
+  UserCreatePage} from '../_components';
 
-import { alertActions, headerActions } from '../_actions';
+import { alertActions } from '../_actions';
 
-class BaseLayout extends React.Component {
+class BaseLayout extends Component {
   constructor(props) {
     super(props);
 
@@ -24,19 +25,27 @@ class BaseLayout extends React.Component {
       dispatch(alertActions.clear());
     });
   }
+
   componentDidMount() {
     WebFont.load({
       google: {
-        families: ['Roboto:100,300,400,500,700,900', 'sans-serif']
+        families: [
+          // 'Roboto:100,300,400,500,700,900',
+          'Dosis:300,400,500,600,700,800',
+          // 'Oxygen:300,400,700',
+          // 'Ruda:400,700,900',
+          'sans-serif'
+        ]
       }
     });
   }
 
   render() {
-      const { alert } = this.props;
+      const { alert, header } = this.props;
+      // console.log(this.props);
       return (
           <div id="app_wrapper">
-            <Header />
+            <Header title={header.title} />
             <div id="app_content">
 
               {alert.message &&
@@ -44,6 +53,7 @@ class BaseLayout extends React.Component {
               }
               <Switch>
                 <PrivateRoute exact path="/" component={AlbumsPage} />
+                <PrivateRoute exact path="/album-create" component={AlbumCreatePage} />
                 <PrivateRoute path="/users" component={UsersPage} />
                 <PrivateRoute path="/user-create" component={UserCreatePage} />
                 <PrivateRoute component={NoMatch} />
@@ -63,10 +73,9 @@ const NoMatch = ({ location }) => (
 
 
 function mapStateToProps(state) {
-    // const { alert } = state;
+    const { alert, header } = state;
     // console.log(state);
-    return state;
+    return { alert, header };
 }
 
-const connectedBaseLayout = connect(mapStateToProps)(BaseLayout);
-export { connectedBaseLayout as BaseLayout };
+export default connect(mapStateToProps)(BaseLayout);

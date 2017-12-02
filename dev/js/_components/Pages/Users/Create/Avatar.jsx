@@ -27,17 +27,7 @@ class UserCreateAvatar extends React.Component {
     const status = mediaConstants.STATUS_ENABLED;
 
     dispatch(uploadActions.avatar(file, author, ct, status));
-    // uploadService.avatar(accepted[0])
-    //   .then(function(res) {
-    //     // console.log(res);
-    //     // if (res.ack == 'ok') {
-    //     //     dispatch(success(res.data));
-    //     //     history.push('/');
-    //     // } else {
-    //     //     dispatch(failure(res.msg));
-    //     //     dispatch(alertActions.error(res.msg));
-    //     // }
-    // });
+
   }
 
   render() {

@@ -2,6 +2,10 @@
 import { uploadConstants } from '../_constants';
 
 const initialState = {
+  album_media: {
+    uploading: false,
+    media: []
+  },
   avatar: {
     uploading: false,
     err: false,
@@ -28,6 +32,29 @@ export function upload(state = initialState, action) {
     case uploadConstants.AVATAR_FAILURE:
       return {
         avatar: {
+          err: action.err
+        }
+      };
+    case uploadConstants.ALBUM_MEDIA_REQUEST:
+      return {
+        ...state,
+        album_media: {
+          uploading: true
+        }
+      };
+    case uploadConstants.ALBUM_MEDIA_SUCCESS:
+    console.log(action.file);
+      return {
+        ...state,
+        album_media: {
+          success: true,
+          media: [state.album_media.media, action.file]
+        }
+      };
+    case uploadConstants.ALBUM_MEDIA_FAILURE:
+      return {
+        ...state,
+        album_media: {
           err: action.err
         }
       };

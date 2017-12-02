@@ -4,7 +4,7 @@
 
 //@import 'partials/grid';
 @import 'partials/header';
-// @import 'partials/datetimepicker';
+@import 'partials/datetimepicker';
 // @import 'partials/modal';
 // @import 'partials/dropzone';
 // @import 'partials/forms';
@@ -19,6 +19,8 @@
 @import 'pages/login';
 @import 'pages/users';
 @import 'pages/user-create';
+
+@import 'pages/album-create';
 
 * {
   -webkit-box-sizing: border-box;
@@ -50,7 +52,10 @@ video {
   background-size: cover;
   background-attachment: fixed;
   color: $white;
-  font-family: 'Roboto';
+  // font-family: 'Roboto';
+  font-family: 'Dosis';
+  // font-family: 'Oxygen';
+  // font-family: 'Ruda';
   font-size: 16px;
   line-height: 1;
   width: 100%;
