@@ -2,9 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { AlbumCreateForm } from './Form';
-import { AlbumCreateMedia } from './Media';
+import Uploader from '../../../Uploader';
 
 import { headerActions, footerActions } from '../../../../_actions';
+import { contentConstants } from '../../../../_constants';
 
 class AlbumCreatePage extends React.Component {
 
@@ -22,8 +23,8 @@ class AlbumCreatePage extends React.Component {
         <div className="pull-left form-wrapper">
           <AlbumCreateForm userid={auth.user.id} albummedia={album_media} />
         </div>
-        <div className="pull-left avatar-wrapper">
-          <AlbumCreateMedia />
+        <div className="pull-left uploader-wrapper">
+          <Uploader author={auth.user.id} entity={contentConstants.TYPE_ALBUM} />
         </div>
       </div>
     );
