@@ -1,11 +1,11 @@
 
-import React, { Component } from 'react';
-import { Router, Switch, Route } from 'react-router-dom';
-import { PrivateRoute, LoginPage } from './_components';
-import BaseLayout from './_components/BaseLayout';
-import { history } from './_helpers';
+import React, { Component } from 'react'
+import { Router, Switch, Route } from 'react-router-dom'
+import { PrivateRoute, LoginPage } from './_components'
+import BaseLayout from './_components/BaseLayout'
+import { history } from './_helpers'
 
-import '../scss/app/main.scss';
+import '../scss/app/main.scss'
 
 export default class App extends Component {
   render() {
@@ -18,6 +18,6 @@ export default class App extends Component {
           </Switch>
         </Router>
       </div>
-    );
+    )
   }
 }

@@ -1,33 +1,34 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
-import { userActions } from '../../../../_actions';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+
+import { userActions } from '../../../../_actions'
 
 class UsersList extends React.Component {
 
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       currentSelectedId: props.auth.user.id
-    };
+    }
   }
 
   componentDidMount(){
-    const { dispatch } = this.props;
-    dispatch(userActions.getList());
+    const { dispatch } = this.props
+    dispatch(userActions.getList())
   }
 
   onUserSelect(id) {
-    this.props.dispatch(userActions.getOne(id));
+    this.props.dispatch(userActions.getOne(id))
     this.setState({
       currentSelectedId: id
-    });
+    })
   }
 
   render() {
-    const { users } = this.props;
+    const { users } = this.props
     return (
       <div className="user-list">
         {users.loading &&
@@ -59,7 +60,7 @@ class UsersList extends React.Component {
           </ul>
         }
       </div>
-    );
+    )
   }
 }
 
@@ -70,13 +71,12 @@ UsersList.propTypes = {
 }
 
 function mapStateToProps(state) {
-  const { auth, users } = state;
+  const { auth, users } = state
   return {
     auth,
     users: users.list
-  };
+  }
 }
 
-const connectedUsersList = connect(mapStateToProps)(UsersList);
-export { connectedUsersList as UsersList };
-
+const connectedUsersList = connect(mapStateToProps)(UsersList)
+export { connectedUsersList as UsersList }

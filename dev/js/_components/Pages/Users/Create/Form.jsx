@@ -1,19 +1,20 @@
-import React from 'react';
-import { Field, reduxForm } from 'redux-form';
 
-import { IoIosCheckmark, IoCloseCircled } from 'react-icons/lib/io';
+import React from 'react'
+import { Field, reduxForm } from 'redux-form'
 
-import Select from 'react-select';
+import { IoIosCheckmark, IoCloseCircled } from 'react-icons/lib/io'
+
+import Select from 'react-select'
 import Toggle from 'react-toggle'
 
-import { userService } from '../../../../_services';
-import { alertActions, userActions } from '../../../../_actions';
-// import { history } from '../../../../_helpers';
+import { userService } from '../../../../_services'
+import { alertActions, userActions } from '../../../../_actions'
+// import { history } from '../../../../_helpers'
 
 class UserCreateForm extends React.Component {
   render() {
     
-    const { handleSubmit } = this.props;
+    const { handleSubmit } = this.props
     // console.log(this.props);
     return (
       <form id="user_create_form" onSubmit={handleSubmit}>
@@ -57,7 +58,7 @@ class UserCreateForm extends React.Component {
           label="Status"
         />
       </form>
-    );
+    )
   }
 }
 
@@ -66,12 +67,12 @@ const textField = ({ input, label, id, type }) => (
     <label htmlFor={id}>{label}</label>
     <input {...input} className="form-control" placeholder={label} type={type} id={id} autoComplete="new-password" />
   </div>
-);
+)
 
 const accessLevelOptions = [
   { value: '100', label: 'Administrator' },
   { value: '50', label: 'Simple user' }
-];
+]
 
 const selectField = ({ input, label}) => (
   <div className="form-group">
@@ -84,7 +85,7 @@ const selectField = ({ input, label}) => (
       onBlur={() => input.onBlur(input.value)}
     />
   </div>
-);
+)
 
 const toggleField = ({ input, label }) => (
   <div className="form-group">
@@ -102,19 +103,19 @@ const toggleField = ({ input, label }) => (
       />
     </label>
   </div>
-);
+)
 
 function submit(values, dispatch, form) {
   // console.log(values);
   userService.create({...values, author: form.userid, avatar: form.avatar})
     .then(function(res){
       if (res.ack == 'ok') {
-        dispatch(alertActions.success('Registration successful'));
-        form.reset();
+        dispatch(alertActions.success('Registration successful'))
+        form.reset()
       } else {
-        dispatch(alertActions.error(res.msg));
+        dispatch(alertActions.error(res.msg))
       }
-    });
+    })
 }
 
 const connectedUserCreateForm = reduxForm({
@@ -127,6 +128,5 @@ const connectedUserCreateForm = reduxForm({
     status: true
   },
   onSubmit: submit
-})(UserCreateForm);
-export { connectedUserCreateForm as UserCreateForm };
-
+})(UserCreateForm)
+export { connectedUserCreateForm as UserCreateForm }

@@ -1,57 +1,58 @@
+
 import objectAssign from 'object-assign'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 class Status extends Component {
 
-    constructor(props) {
-        super(props)
+  constructor(props) {
+    super(props)
 
-        this.state = {
-            status: '',
-            text: objectAssign({}, Status.defaultProps.text, props.text || {})
-        }
-
-        this._onStatusChange = (id, oldStatus, newStatus) => {
-            if (id === this.props.id && !this._unmounted) {
-                const newStatusToDisplay = getStatusToDisplay({
-                    displayMap: this.state.text,
-                    status: newStatus
-                })
-
-                newStatusToDisplay && this.setState({ status: newStatusToDisplay })
-            }
-        }
+    this.state = {
+      status: '',
+      text: objectAssign({}, Status.defaultProps.text, props.text || {})
     }
 
-    componentDidMount() {
-        this.props.uploader.on('statusChange', this._onStatusChange)
-    }
+    this._onStatusChange = (id, oldStatus, newStatus) => {
+      if (id === this.props.id && !this._unmounted) {
+        const newStatusToDisplay = getStatusToDisplay({
+          displayMap: this.state.text,
+          status: newStatus
+        })
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.text) {
-            this.setState({
-                text: objectAssign({}, this.state.text, nextProps.text)
-            })
-        }
+        newStatusToDisplay && this.setState({ status: newStatusToDisplay })
+      }
     }
+  }
 
-    componentWillUnmount() {
-        this._unmounted = true
-        this._unregisterStatusChangeHandler()
-    }
+  componentDidMount() {
+    this.props.uploader.on('statusChange', this._onStatusChange)
+  }
 
-    render() {
-        return (
-            <span className={ `react-fine-uploader-status ${this.props.className}` }>
-                { this.state.status }
-            </span>
-        )
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.text) {
+      this.setState({
+        text: objectAssign({}, this.state.text, nextProps.text)
+      })
     }
+  }
 
-    _unregisterStatusChangeHandler() {
-        this.props.uploader.off('statusChange', this._onStatusChange)
-    }
+  componentWillUnmount() {
+    this._unmounted = true
+    this._unregisterStatusChangeHandler()
+  }
+
+  render() {
+    return (
+      <span className={ `react-fine-uploader-status ${this.props.className}` }>
+        { this.state.status }
+      </span>
+    )
+  }
+
+  _unregisterStatusChangeHandler() {
+    this.props.uploader.off('statusChange', this._onStatusChange)
+  }
 }
 
 Status.propTypes = {
@@ -89,18 +90,18 @@ Status.defaultProps = {
 }
 
 const getStatusToDisplay = ({ displayMap, status }) => {
-    let key
+  let key
 
-    if (status.indexOf(' ') > 0) {
-        const statusParts = status.split(' ')
+  if (status.indexOf(' ') > 0) {
+    const statusParts = status.split(' ')
 
-        key = `${statusParts[0]}_${statusParts[1]}`
-    }
-    else {
-        key = status
-    }
+    key = `${statusParts[0]}_${statusParts[1]}`
+  }
+  else {
+    key = status
+  }
 
-    return displayMap[key]
+  return displayMap[key]
 }
 
 export default Status

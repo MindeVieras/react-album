@@ -1,29 +1,30 @@
-import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
-import { connect } from 'react-redux';
-import WebFont from 'webfontloader';
-import { history } from '../_helpers';
 
-import Header from '../_components/Partials/Header';
-import Footer from '../_components/Partials/Footer';
+import React, { Component } from 'react'
+import { Switch, Route } from 'react-router-dom'
+import { connect } from 'react-redux'
+import WebFont from 'webfontloader'
+import { history } from '../_helpers'
+
+import Header from '../_components/Partials/Header'
+import Footer from '../_components/Partials/Footer'
 import {
   PrivateRoute,
   AlbumsPage,
   AlbumCreatePage,
   UsersPage,
-  UserCreatePage} from '../_components';
+  UserCreatePage} from '../_components'
 
-import { alertActions } from '../_actions';
+import { alertActions } from '../_actions'
 
 class BaseLayout extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
-    const { dispatch } = this.props;
+    const { dispatch } = this.props
     history.listen((location, action) => {
       // clear alert on location change
-      dispatch(alertActions.clear());
-    });
+      dispatch(alertActions.clear())
+    })
   }
 
   componentDidMount() {
@@ -37,31 +38,31 @@ class BaseLayout extends Component {
           'sans-serif'
         ]
       }
-    });
+    })
   }
 
   render() {
-      const { alert, header } = this.props;
-      // console.log(this.props);
-      return (
-          <div id="app_wrapper">
-            <Header title={header.title} />
-            <div id="app_content">
+    const { alert, header } = this.props
+    // console.log(this.props);
+    return (
+      <div id="app_wrapper">
+        <Header title={header.title} />
+        <div id="app_content">
 
-              {alert.message &&
-                <div className={`alert ${alert.type}`}>{alert.message}</div>
-              }
-              <Switch>
-                <PrivateRoute exact path="/" component={AlbumsPage} />
-                <PrivateRoute exact path="/album-create" component={AlbumCreatePage} />
-                <PrivateRoute path="/users" component={UsersPage} />
-                <PrivateRoute path="/user-create" component={UserCreatePage} />
-                <PrivateRoute component={NoMatch} />
-              </Switch>
-            </div>
-            <Footer />
-          </div>
-      );
+          {alert.message &&
+            <div className={`alert ${alert.type}`}>{alert.message}</div>
+          }
+          <Switch>
+            <PrivateRoute exact path="/" component={AlbumsPage} />
+            <PrivateRoute exact path="/album-create" component={AlbumCreatePage} />
+            <PrivateRoute path="/users" component={UsersPage} />
+            <PrivateRoute path="/user-create" component={UserCreatePage} />
+            <PrivateRoute component={NoMatch} />
+          </Switch>
+        </div>
+        <Footer />
+      </div>
+    )
   }
 }
 
@@ -73,9 +74,9 @@ const NoMatch = ({ location }) => (
 
 
 function mapStateToProps(state) {
-    const { alert, header } = state;
-    // console.log(state);
-    return { alert, header };
+  const { alert, header } = state
+  // console.log(state);
+  return { alert, header }
 }
 
-export default connect(mapStateToProps)(BaseLayout);
+export default connect(mapStateToProps)(BaseLayout)

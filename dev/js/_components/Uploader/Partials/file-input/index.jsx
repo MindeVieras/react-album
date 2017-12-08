@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
@@ -6,34 +7,35 @@ import StyleableElement from './styleable-element'
 class FileInput extends Component {
 
   constructor() {
-    super();
+    super()
 
     this.state = {
       key: newKey()
     }
 
-    this._onFilesSelected = onFilesSelected.bind(this);
+    this._onFilesSelected = onFilesSelected.bind(this)
   }
 
   render() {
-    const { text, uploader, ...elementProps } = this.props;
+    const { text, uploader, ...elementProps } = this.props
 
     return (
-      <StyleableElement { ...elementProps }
-                        key={ this.state.key }
-                        onChange={ this._onFilesSelected }
+      <StyleableElement
+        { ...elementProps }
+        key={ this.state.key }
+        onChange={ this._onFilesSelected }
       >
         {
-            this.props.children
-                ? this.props.children
-                : <span>{ elementProps.multiple ? text.selectFiles : text.selectFile }</span>
+          this.props.children
+            ? this.props.children
+            : <span>{ elementProps.multiple ? text.selectFiles : text.selectFile }</span>
         }
       </StyleableElement>
     )
   }
 
   _resetInput() {
-    this.setState({ key: newKey() });
+    this.setState({ key: newKey() })
   }
 }
 
@@ -56,10 +58,10 @@ FileInput.defaultProps = {
 
 
 const onFilesSelected = function(onChangeEvent) {
-  const { author, entity } = this.props;
+  const { author, entity } = this.props
   const params = { author, entity }
-  this.props.uploader.methods.addFiles(onChangeEvent.target, params);
-  this._resetInput();
+  this.props.uploader.methods.addFiles(onChangeEvent.target, params)
+  this._resetInput()
 }
 
 const newKey = () => Date.now()

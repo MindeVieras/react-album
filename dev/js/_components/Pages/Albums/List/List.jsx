@@ -1,34 +1,35 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
-import { albumsActions } from '../../../../_actions';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+
+import { albumsActions } from '../../../../_actions'
 
 class AlbumsList extends React.Component {
 
   constructor(props) {
-    super(props);
+    super(props)
 
     // this.state = {
     //   currentSelectedId: props.auth.user.id
-    // };
+    // }
   }
 
   componentDidMount(){
-    const { dispatch } = this.props;
-    dispatch(albumsActions.getList());
+    const { dispatch } = this.props
+    dispatch(albumsActions.getList())
   }
 
   onUserSelect(id) {
-    // this.props.dispatch(userActions.getOne(id));
+    // this.props.dispatch(userActions.getOne(id))
     // this.setState({
     //   currentSelectedId: id
-    // });
+    // })
   }
 
   render() {
-    const { albums } = this.props;
-    // console.log(this.props);
+    const { albums } = this.props
+    // console.log(this.props)
     return (
       <div className="albums-list">
         {albums.loading &&
@@ -50,7 +51,7 @@ class AlbumsList extends React.Component {
           </ul>
         }
       </div>
-    );
+    )
   }
 }
 
@@ -61,13 +62,12 @@ class AlbumsList extends React.Component {
 // }
 
 function mapStateToProps(state) {
-  const { auth, albums } = state;
+  const { auth, albums } = state
   return {
     auth,
     albums: albums.list
-  };
+  }
 }
 
-const connectedAlbumsList = connect(mapStateToProps)(AlbumsList);
-export { connectedAlbumsList as AlbumsList };
-
+const connectedAlbumsList = connect(mapStateToProps)(AlbumsList)
+export { connectedAlbumsList as AlbumsList }

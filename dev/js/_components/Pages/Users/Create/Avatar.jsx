@@ -1,12 +1,12 @@
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import Dropzone from 'react-dropzone';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import Dropzone from 'react-dropzone'
 
-// import { uploadService } from '../../../../_services';
-import { uploadActions } from '../../../../_actions';
-import { mediaConstants, contentConstants } from '../../../../_constants';
+// import { uploadService } from '../../../../_services'
+import { uploadActions } from '../../../../_actions'
+import { mediaConstants, contentConstants } from '../../../../_constants'
 
 class UserCreateAvatar extends React.Component {
   constructor() {
@@ -19,29 +19,29 @@ class UserCreateAvatar extends React.Component {
   onDropAccepted(accepted) {
     this.setState({
       file: accepted[0]
-    });
-    const { auth, dispatch } = this.props;
-    const file = accepted[0];
-    const author = auth.user.id;
-    const ct = contentConstants.TYPE_USER;
-    const status = mediaConstants.STATUS_ENABLED;
+    })
+    const { auth, dispatch } = this.props
+    const file = accepted[0]
+    const author = auth.user.id
+    const ct = contentConstants.TYPE_USER
+    const status = mediaConstants.STATUS_ENABLED
 
-    dispatch(uploadActions.avatar(file, author, ct, status));
+    dispatch(uploadActions.avatar(file, author, ct, status))
 
   }
 
   render() {
-    // console.log(this.state);
-    let dropzoneRef;
+    // console.log(this.state)
+    let dropzoneRef
     // console.log(this.props);
-    const { file } = this.state;
-    const { avatar } = this.props;
+    const { file } = this.state
+    const { avatar } = this.props
     return (
       <div className="inner">
         <div className="preview">
           <div className="file-preview-item">
-              <div className="image-wrapper"><img src={file.preview} /></div>
-            </div>
+            <div className="image-wrapper"><img src={file.preview} /></div>
+          </div>
         </div>
 
         {avatar.uploading &&
@@ -56,7 +56,7 @@ class UserCreateAvatar extends React.Component {
         <Dropzone
           accept="image/jpeg, image/png"
           className="drop-area"
-          ref={(node) => { dropzoneRef = node; }}
+          ref={(node) => { dropzoneRef = node }}
           onDropAccepted={this.onDropAccepted.bind(this)}
           multiple={false}
         >
@@ -66,7 +66,7 @@ class UserCreateAvatar extends React.Component {
         </div>
         
       </div>
-    );
+    )
   }
 }
 
@@ -78,13 +78,12 @@ class UserCreateAvatar extends React.Component {
 // }
 
 function mapStateToProps(state) {
-  const { auth, upload } = state;
+  const { auth, upload } = state
   return {
     auth,
     avatar: upload.avatar
-  };
+  }
 }
 
-const connectedUserCreateAvatar = connect(mapStateToProps)(UserCreateAvatar);
-export { connectedUserCreateAvatar as UserCreateAvatar };
-
+const connectedUserCreateAvatar = connect(mapStateToProps)(UserCreateAvatar)
+export { connectedUserCreateAvatar as UserCreateAvatar }

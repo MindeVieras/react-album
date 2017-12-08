@@ -1,28 +1,28 @@
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import Dropzone from 'react-dropzone';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import Dropzone from 'react-dropzone'
 
-import { uploadActions } from '../../../../_actions';
-import { mediaConstants, contentConstants } from '../../../../_constants';
+import { uploadActions } from '../../../../_actions'
+import { mediaConstants, contentConstants } from '../../../../_constants'
 
 class AlbumCreateMedia extends React.Component {
 
   onDropAccepted(accepted) {
 
-    const { auth, dispatch } = this.props;
-    const files = accepted;
-    const author = auth.user.id;
-    const ct = contentConstants.TYPE_ALBUM;
-    const status = mediaConstants.STATUS_ENABLED;
+    const { auth, dispatch } = this.props
+    const files = accepted
+    const author = auth.user.id
+    const ct = contentConstants.TYPE_ALBUM
+    const status = mediaConstants.STATUS_ENABLED
 
-    dispatch(uploadActions.album_media(files, author, ct, status));
+    dispatch(uploadActions.album_media(files, author, ct, status))
   }
 
   render() {
-    // console.log(this.state);
-    let dropzoneRef;
+    // console.log(this.state)
+    let dropzoneRef
     // console.log(this.props);
     // const { file } = this.state;
     // const { avatar } = this.props;
@@ -68,13 +68,12 @@ class AlbumCreateMedia extends React.Component {
 // }
 
 function mapStateToProps(state) {
-  const { auth, upload } = state;
+  const { auth, upload } = state
   return {
     auth,
     albumMedia: upload
-  };
+  }
 }
 
-const connectedAlbumCreateMedia = connect(mapStateToProps)(AlbumCreateMedia);
-export { connectedAlbumCreateMedia as AlbumCreateMedia };
-
+const connectedAlbumCreateMedia = connect(mapStateToProps)(AlbumCreateMedia)
+export { connectedAlbumCreateMedia as AlbumCreateMedia }

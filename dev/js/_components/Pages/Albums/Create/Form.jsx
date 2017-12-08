@@ -1,19 +1,20 @@
-import React from 'react';
-import { Field, reduxForm } from 'redux-form';
-import moment from 'moment';
-import Datetime from 'react-datetime';
-import { IoIosCheckmark, IoCloseCircled } from 'react-icons/lib/io';
 
-// import Select from 'react-select';
+import React from 'react'
+import { Field, reduxForm } from 'redux-form'
+import moment from 'moment'
+import Datetime from 'react-datetime'
+import { IoIosCheckmark, IoCloseCircled } from 'react-icons/lib/io'
+
+// import Select from 'react-select'
 import Toggle from 'react-toggle'
 
-import { albumsService } from '../../../../_services';
-import { alertActions } from '../../../../_actions';
+import { albumsService } from '../../../../_services'
+import { alertActions } from '../../../../_actions'
 
 class AlbumCreateForm extends React.Component {
   
   render() {  
-    const { handleSubmit } = this.props;
+    const { handleSubmit } = this.props
     return (
       <form id="album_create_form" onSubmit={handleSubmit}>
         <Field
@@ -50,7 +51,7 @@ class AlbumCreateForm extends React.Component {
           id="status_field"
         />
       </form>
-    );
+    )
   }
 }
 
@@ -59,7 +60,7 @@ const textField = ({ input, label, id, type }) => (
     <label htmlFor={id}>{label}</label>
     <input {...input} className="form-control" placeholder={label} type={type} id={id} />
   </div>
-);
+)
 
 const dateField = ({ input, label }) => (
   <div className="form-group">
@@ -71,7 +72,7 @@ const dateField = ({ input, label }) => (
       timeFormat={'HH:mm:ss'}
     />
   </div>
-);
+)
 
 const toggleField = ({ input, label }) => (
   <div className="form-group">
@@ -89,21 +90,21 @@ const toggleField = ({ input, label }) => (
       />
     </label>
   </div>
-);
+)
 
 function submit(values, dispatch, form) {
-  console.log(values);
-  let start_date = moment(values.start_date).format('YYYY-MM-DD HH:mm:ss');
-  let end_date = moment(values.end_date).format('YYYY-MM-DD HH:mm:ss');
+  console.log(values)
+  let start_date = moment(values.start_date).format('YYYY-MM-DD HH:mm:ss')
+  let end_date = moment(values.end_date).format('YYYY-MM-DD HH:mm:ss')
   albumsService.create({...values, start_date, end_date, author: form.userid, media: form.albummedia})
     .then(function(res){
       if (res.ack == 'ok') {
-        dispatch(alertActions.success('Album created successful'));
-        form.reset();
+        dispatch(alertActions.success('Album created successful'))
+        form.reset()
       } else {
-        dispatch(alertActions.error(res.msg));
+        dispatch(alertActions.error(res.msg))
       }
-    });
+    })
 }
 
 const connectedAlbumCreateForm = reduxForm({
@@ -116,6 +117,5 @@ const connectedAlbumCreateForm = reduxForm({
     status: true
   },
   onSubmit: submit
-})(AlbumCreateForm);
-export { connectedAlbumCreateForm as AlbumCreateForm };
-
+})(AlbumCreateForm)
+export { connectedAlbumCreateForm as AlbumCreateForm }

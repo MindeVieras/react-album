@@ -1,28 +1,29 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import FineUploaderTraditional from 'fine-uploader-wrappers';
-import { CSSTransitionGroup as ReactCssTransitionGroup } from 'react-transition-group';
 
-import CancelButton from './Partials/cancel-button';
-import DeleteButton from './Partials/delete-button';
-import Dropzone from './Partials/dropzone';
-import FileInput from './Partials/file-input';
-import Filename from './Partials/filename';
-import Filesize from './Partials/filesize';
-import RetryButton from './Partials/retry-button';
-import PauseResumeButton from './Partials/pause-resume-button';
-import ProgressBar from './Partials/progress-bar';
-import Status from './Partials/status';
-import Thumbnail from './Partials/thumbnail';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import FineUploaderTraditional from 'fine-uploader-wrappers'
+import { CSSTransitionGroup as ReactCssTransitionGroup } from 'react-transition-group'
 
-import PauseIcon from './Icons/pause-icon';
-import PlayIcon from './Icons/play-icon';
-import UploadIcon from './Icons/upload-icon';
-import UploadFailedIcon from './Icons/upload-failed-icon';
-import UploadSuccessIcon from './Icons/upload-success-icon';
-import XIcon from './Icons/x-icon';
+import CancelButton from './Partials/cancel-button'
+import DeleteButton from './Partials/delete-button'
+import Dropzone from './Partials/dropzone'
+import FileInput from './Partials/file-input'
+import Filename from './Partials/filename'
+import Filesize from './Partials/filesize'
+import RetryButton from './Partials/retry-button'
+import PauseResumeButton from './Partials/pause-resume-button'
+import ProgressBar from './Partials/progress-bar'
+import Status from './Partials/status'
+import Thumbnail from './Partials/thumbnail'
 
-import { authHeader, baseServerUrl } from '../../_helpers';
+import PauseIcon from './Icons/pause-icon'
+import PlayIcon from './Icons/play-icon'
+import UploadIcon from './Icons/upload-icon'
+import UploadFailedIcon from './Icons/upload-failed-icon'
+import UploadSuccessIcon from './Icons/upload-success-icon'
+import XIcon from './Icons/x-icon'
+
+import { authHeader, baseServerUrl } from '../../_helpers'
 
 const uploader = new FineUploaderTraditional({
   options: {
@@ -34,34 +35,34 @@ const uploader = new FineUploaderTraditional({
       endpoint: baseServerUrl+'/api/upload'
     }
   }
-});
-console.log(uploader);
+})
+console.log(uploader)
 
 class Uploader extends Component {
 
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       visibleFiles: []
     }
-    const statusEnum = uploader.qq.status;
+    const statusEnum = uploader.qq.status
 
     this._onStatusChange = (id, oldStatus, status) => {
-      const visibleFiles = this.state.visibleFiles;
+      const visibleFiles = this.state.visibleFiles
 
       if (status === statusEnum.SUBMITTED) {
-        visibleFiles.push({ id });
-        this.setState({ visibleFiles });
+        visibleFiles.push({ id })
+        this.setState({ visibleFiles })
       }
       else if (isFileGone(status, statusEnum)) {
-        this._removeVisibleFile(id);
+        this._removeVisibleFile(id)
       }
       else if (status === statusEnum.UPLOAD_SUCCESSFUL || status === statusEnum.UPLOAD_FAILED) {
         if (status === statusEnum.UPLOAD_SUCCESSFUL) {
-          const visibleFileIndex = this._findFileIndex(id);
+          const visibleFileIndex = this._findFileIndex(id)
           if (visibleFileIndex < 0) {
-            visibleFiles.push({ id, fromServer: true });
+            visibleFiles.push({ id, fromServer: true })
           }
         }
         this._updateVisibleFileStatus(id, status)
@@ -69,13 +70,13 @@ class Uploader extends Component {
     }
 
     this._onComplete = (id, name, responseJSON, xhr) => {
-      console.log(responseJSON);
+      console.log(responseJSON)
     }
   }
 
   componentDidMount() {
     uploader.on('statusChange', this._onStatusChange)
-    console.log('dddddddddddddddddddddd');
+    console.log('dddddddddddddddddddddd')
     uploader.on('complete', this._onComplete)
   }
 
@@ -103,138 +104,151 @@ class Uploader extends Component {
     const pauseResumeButtonProps = chunkingEnabled && getComponentProps('pauseResumeButton', this.props)
     // console.log(author);
     return (
-      <MaybeDropzone content={ this.props.children }
-                     hasVisibleFiles={ this.state.visibleFiles.length > 0 }
-                     uploader={ uploader }
-                     { ...dropzoneProps }
+      <MaybeDropzone
+        content={ this.props.children }
+        hasVisibleFiles={ this.state.visibleFiles.length > 0 }
+        uploader={ uploader }
+        { ...dropzoneProps }
       >
-          {!fileInputProps.disabled &&
-            <FileInputComponent author={ author } entity={ entity } uploader={ uploader } { ...fileInputProps }/>
-          }
-          <ProgressBar className='react-fine-uploader-gallery-total-progress-bar'
-                       uploader={ uploader }
-                       { ...progressBarProps }
-          />
-          <ReactCssTransitionGroup className='react-fine-uploader-gallery-files'
-                                   component='ul'
-                                   transitionEnter={ !this.props.animationsDisabled }
-                                   transitionEnterTimeout={ 500 }
-                                   transitionLeave={ !this.props.animationsDisabled }
-                                   transitionLeaveTimeout={ 300 }
-                                   transitionName='react-fine-uploader-gallery-files'
-          >
+        {!fileInputProps.disabled &&
+          <FileInputComponent author={ author } entity={ entity } uploader={ uploader } { ...fileInputProps }/>
+        }
+        <ProgressBar
+          className='react-fine-uploader-gallery-total-progress-bar'
+          uploader={ uploader }
+          { ...progressBarProps }
+        />
+        <ReactCssTransitionGroup
+          className='react-fine-uploader-gallery-files'
+          component='ul'
+          transitionEnter={ !this.props.animationsDisabled }
+          transitionEnterTimeout={ 500 }
+          transitionLeave={ !this.props.animationsDisabled }
+          transitionLeaveTimeout={ 300 }
+          transitionName='react-fine-uploader-gallery-files'
+        >
           {
             this.state.visibleFiles.map(({ id, status, fromServer }) => {
               // console.log(uploader.methods.getName(id));
               return (
-
-              <li key={ id }
-                   className='react-fine-uploader-gallery-file'
-              >
-                <ProgressBar className='react-fine-uploader-gallery-progress-bar'
-                             id={ id }
-                             uploader={ uploader }
-                             { ...progressBarProps }
-                />
-                <Thumbnail className='react-fine-uploader-gallery-thumbnail'
-                           id={ id }
-                           fromServer={ fromServer }
-                           uploader={ uploader }
-                           { ...thumbnailProps }
-                />
-                {status === 'upload successful' &&
-                  <span>
-                    <UploadSuccessIcon className='react-fine-uploader-gallery-upload-success-icon' />
-                    <div className='react-fine-uploader-gallery-thumbnail-icon-backdrop' />
-                  </span>
-                }
-                {status === 'upload failed' &&
-                  <span>
-                    <UploadFailedIcon className='react-fine-uploader-gallery-upload-failed-icon' />
-                    <div className='react-fine-uploader-gallery-thumbnail-icon-backdrop' />
-                  </span>
-                }
-                <div className='react-fine-uploader-gallery-file-footer'>
-                  <Filename className='react-fine-uploader-gallery-filename'
-                            id={ id }
-                            uploader={ uploader }
-                            { ...filenameProps }
+                <li
+                  key={ id }
+                  className='react-fine-uploader-gallery-file'
+                >
+                  <ProgressBar
+                    className='react-fine-uploader-gallery-progress-bar'
+                    id={ id }
+                    uploader={ uploader }
+                    { ...progressBarProps }
                   />
-                  <Status className='react-fine-uploader-gallery-status'
-                          id={ id }
-                          uploader={ uploader }
-                          { ...statusProps }
+                  <Thumbnail
+                    className='react-fine-uploader-gallery-thumbnail'
+                    id={ id }
+                    fromServer={ fromServer }
+                    uploader={ uploader }
+                    { ...thumbnailProps }
                   />
-                  <Filesize className='react-fine-uploader-gallery-filesize'
-                            id={ id }
-                            uploader={ uploader }
-                            { ...filesizeProps }
+                  {status === 'upload successful' &&
+                    <span>
+                      <UploadSuccessIcon className='react-fine-uploader-gallery-upload-success-icon' />
+                      <div className='react-fine-uploader-gallery-thumbnail-icon-backdrop' />
+                    </span>
+                  }
+                  {status === 'upload failed' &&
+                    <span>
+                      <UploadFailedIcon className='react-fine-uploader-gallery-upload-failed-icon' />
+                      <div className='react-fine-uploader-gallery-thumbnail-icon-backdrop' />
+                    </span>
+                  }
+                  <div className='react-fine-uploader-gallery-file-footer'>
+                    <Filename
+                      className='react-fine-uploader-gallery-filename'
+                      id={ id }
+                      uploader={ uploader }
+                      { ...filenameProps }
+                    />
+                    <Status
+                      className='react-fine-uploader-gallery-status'
+                      id={ id }
+                      uploader={ uploader }
+                      { ...statusProps }
+                    />
+                    <Filesize
+                      className='react-fine-uploader-gallery-filesize'
+                      id={ id }
+                      uploader={ uploader }
+                      { ...filesizeProps }
+                    />
+                  </div>
+                  <CancelButton
+                    className='react-fine-uploader-gallery-cancel-button'
+                    id={ id }
+                    uploader={ uploader }
+                    { ...cancelButtonProps }
                   />
-                </div>
-                <CancelButton className='react-fine-uploader-gallery-cancel-button'
-                              id={ id }
-                              uploader={ uploader }
-                              { ...cancelButtonProps }
-                />
-                <RetryButton className='react-fine-uploader-gallery-retry-button'
-                             id={ id }
-                             uploader={ uploader }
-                             { ...retryButtonProps }
-                />
-                {deleteEnabled &&
-                  <DeleteButton className='react-fine-uploader-gallery-delete-button'
-                                id={ id }
-                                uploader={ uploader }
-                                { ...deleteButtonProps }
+                  <RetryButton
+                    className='react-fine-uploader-gallery-retry-button'
+                    id={ id }
+                    uploader={ uploader }
+                    { ...retryButtonProps }
                   />
-                }
-                {chunkingEnabled &&
-                  <PauseResumeButton className='react-fine-uploader-gallery-pause-resume-button'
-                                     id={ id }
-                                     uploader={ uploader }
-                                     { ...pauseResumeButtonProps }
-                  />
-                }
-              </li>
-            )})
+                  {deleteEnabled &&
+                    <DeleteButton
+                      className='react-fine-uploader-gallery-delete-button'
+                      id={ id }
+                      uploader={ uploader }
+                      { ...deleteButtonProps }
+                    />
+                  }
+                  {chunkingEnabled &&
+                    <PauseResumeButton
+                      className='react-fine-uploader-gallery-pause-resume-button'
+                      id={ id }
+                      uploader={ uploader }
+                      { ...pauseResumeButtonProps }
+                    />
+                  }
+                </li>
+              )
+            })
           }
-          </ReactCssTransitionGroup>
-        </MaybeDropzone>
+        </ReactCssTransitionGroup>
+      </MaybeDropzone>
     )
   }
 
   _removeVisibleFile(id) {
-    const visibleFileIndex = this._findFileIndex(id);
+    const visibleFileIndex = this._findFileIndex(id)
 
     if (visibleFileIndex >= 0) {
-      const visibleFiles = this.state.visibleFiles;
+      const visibleFiles = this.state.visibleFiles
 
-      visibleFiles.splice(visibleFileIndex, 1);
-      this.setState({ visibleFiles });
+      visibleFiles.splice(visibleFileIndex, 1)
+      this.setState({ visibleFiles })
     }
   }
 
   _updateVisibleFileStatus(id, status) {
     this.state.visibleFiles.some(file => {
       if (file.id === id) {
-        file.status = status;
-        this.setState({ visibleFiles: this.state.visibleFiles });
-        return true;
+        file.status = status
+        this.setState({ visibleFiles: this.state.visibleFiles })
+        return true
       }
-    });
+    })
   }
 
   _findFileIndex(id) {
-    let visibleFileIndex = -1;
+    let visibleFileIndex = -1
 
     this.state.visibleFiles.some((file, index) => {
       if (file.id === id) {
-        visibleFileIndex = index;
-        return true;
+        visibleFileIndex = index
+        return true
       }
     })
 
-    return visibleFileIndex;
+    return visibleFileIndex
   }
 }
 
@@ -283,9 +297,10 @@ const MaybeDropzone = ({ children, content, hasVisibleFiles, uploader, ...props 
   }
 
   return (
-    <Dropzone className='react-fine-uploader-gallery-dropzone'
-              uploader={ uploader }
-              { ...dropzoneProps }
+    <Dropzone
+      className='react-fine-uploader-gallery-dropzone'
+      uploader={ uploader }
+      { ...dropzoneProps }
     >
       { content }
       { children }
@@ -294,7 +309,7 @@ const MaybeDropzone = ({ children, content, hasVisibleFiles, uploader, ...props 
 }
 
 const FileInputComponent = ({ uploader, ...props }) => {
-  const { children, ...fileInputProps } = props;
+  const { children, ...fileInputProps } = props
   const content = children || (
     <span>
       <UploadIcon className='react-fine-uploader-gallery-file-input-upload-icon' />
@@ -303,9 +318,10 @@ const FileInputComponent = ({ uploader, ...props }) => {
   )
 
   return (
-    <FileInput className='react-fine-uploader-gallery-file-input-container'
-               uploader={ uploader }
-               { ...fileInputProps }
+    <FileInput
+      className='react-fine-uploader-gallery-file-input-container'
+      uploader={ uploader }
+      { ...fileInputProps }
     >
       <span className='react-fine-uploader-gallery-file-input-content'>
         { content }
@@ -315,16 +331,16 @@ const FileInputComponent = ({ uploader, ...props }) => {
 }
 
 const getComponentProps = (componentName, allProps) => {
-  const componentProps = {};
+  const componentProps = {}
 
   Object.keys(allProps).forEach(propName => {
     if (propName.indexOf(componentName + '-') === 0) {
-      const componentPropName = propName.substr(componentName.length + 1);
-      componentProps[componentPropName] = allProps[propName];
+      const componentPropName = propName.substr(componentName.length + 1)
+      componentProps[componentPropName] = allProps[propName]
     }
   })
 
-  return componentProps;
+  return componentProps
 }
 
 const getDefaultMaybeDropzoneContent = ({ content, disabled }) => {
