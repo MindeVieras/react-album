@@ -11,7 +11,10 @@ const Placeholder = ({ className, image, size, status }) => {
 
   return (
     <div
-      className={ `react-fine-uploader-thumbnail-placeholder react-fine-uploader-thumbnail-${status} ${className || ''}` }
+      className={
+        `react-fine-uploader-thumbnail-placeholder
+        react-fine-uploader-thumbnail-${status} ${className || ''}`
+      }
       style={ style }
     >
       { image }

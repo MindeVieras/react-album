@@ -33,7 +33,10 @@ class ProgressBar extends Component {
   }
 
   render() {
-    const className = this._isTotalProgress ? 'react-fine-uploader-total-progress-bar' : 'react-fine-uploader-file-progress-bar'
+    const className = this._isTotalProgress
+      ? 'react-fine-uploader-total-progress-bar'
+      : 'react-fine-uploader-file-progress-bar'
+      
     const customContainerClassName = this.props.className ? this.props.className + '-container' : ''
     const percentWidth = this.state.bytesUploaded / this.state.totalSize * 100 || 0
 

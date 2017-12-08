@@ -2,14 +2,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import { RingLoader } from 'react-spinners'
+import { IoDocument } from 'react-icons/lib/io'
+
 import Placeholder from './placeholder'
-
-import NotAvailablePlaceholder from './not-available-placeholder'
-import WaitingPlaceholder from './waiting-placeholder'
-
-export const defaultMaxSize = 120 
-export const notAvailableStatus = 'not-available'
-export const waitingStatus = 'waiting'
 
 class Thumbnail extends Component {
 
@@ -64,31 +60,22 @@ class Thumbnail extends Component {
   }
 
   get _maybePlaceholder() {
-    if (this._failure) {
-      const notAvailableImage = (
-        <NotAvailablePlaceholder maxSize={ this.props.maxSize } />
-      )
-      
+    if (this._failure) {      
       return (
         <Placeholder
           className={ `react-fine-uploader-thumbnail ${this.props.className || ''}` }
-          image={ this.props.notAvailablePlaceholder || notAvailableImage }
+          image={ <IoDocument /> }
           size={ this.props.maxSize }
-          status={ notAvailableStatus }
+          status={ 'not-available' }
         />
       )
-    }
-    else if (!this.state.drawComplete) {
-      const waitingImage = (
-        <WaitingPlaceholder maxSize={ this.props.maxSize } />
-      )
-
+    } else if (!this.state.drawComplete) {
       return (
         <Placeholder
           className={ `react-fine-uploader-thumbnail ${this.props.className || ''}` }
-          image={ this.props.waitingPlaceholder || waitingImage }
+          image={ <RingLoader /> }
           size={ this.props.maxSize }
-          status={ waitingStatus }
+          status={ 'waiting' }
         />
       )
     }
@@ -102,13 +89,12 @@ Thumbnail.propTypes = {
   fromServer: PropTypes.bool,
   id: PropTypes.number.isRequired,
   maxSize: PropTypes.number,
-  notAvailablePlaceholder: PropTypes.element,
   uploader: PropTypes.object.isRequired,
   waitingPlaceholder: PropTypes.element
 }
 
 Thumbnail.defaultProps = {
-  maxSize: defaultMaxSize
+  maxSize: 120
 }
 
 export default Thumbnail

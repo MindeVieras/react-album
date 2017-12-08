@@ -18,10 +18,9 @@ import Thumbnail from './Partials/thumbnail'
 
 import PauseIcon from './Icons/pause-icon'
 import PlayIcon from './Icons/play-icon'
-import UploadIcon from './Icons/upload-icon'
 import UploadFailedIcon from './Icons/upload-failed-icon'
-import UploadSuccessIcon from './Icons/upload-success-icon'
-import XIcon from './Icons/x-icon'
+
+import { IoCloseCircled, IoCheckmarkCircled, IoUpload } from 'react-icons/lib/io'
 
 import { authHeader, baseServerUrl } from '../../_helpers'
 
@@ -150,7 +149,9 @@ class Uploader extends Component {
                   />
                   {status === 'upload successful' &&
                     <span>
-                      <UploadSuccessIcon className='react-fine-uploader-gallery-upload-success-icon' />
+                      <div className='react-fine-uploader-gallery-upload-success-icon'>
+                        <IoCheckmarkCircled />
+                      </div>
                       <div className='react-fine-uploader-gallery-thumbnail-icon-backdrop' />
                     </span>
                   }
@@ -260,8 +261,8 @@ Uploader.propTypes = {
 
 Uploader.defaultProps = {
   className: '',
-  'cancelButton-children': <XIcon />,
-  'deleteButton-children': <XIcon />,
+  'cancelButton-children': <IoCloseCircled />,
+  'deleteButton-children': <IoCloseCircled />,
   'dropzone-disabled': false,
   'dropzone-dropActiveClassName': 'react-fine-uploader-gallery-dropzone-active',
   'dropzone-multiple': true,
@@ -312,7 +313,9 @@ const FileInputComponent = ({ uploader, ...props }) => {
   const { children, ...fileInputProps } = props
   const content = children || (
     <span>
-      <UploadIcon className='react-fine-uploader-gallery-file-input-upload-icon' />
+      <div className='react-fine-uploader-gallery-file-input-upload-icon'>
+        <IoUpload />
+      </div>
       Select Files
     </span>
   )
@@ -361,7 +364,9 @@ const getDefaultMaybeDropzoneContent = ({ content, disabled }) => {
   else if (!disabled) {
     return (
       <span className={ className }>
-        <UploadIcon className='react-fine-uploader-gallery-dropzone-upload-icon' />
+        <div className='react-fine-uploader-gallery-dropzone-upload-icon'>
+          <IoUpload />
+        </div>
         Drop files here
       </span>
     )

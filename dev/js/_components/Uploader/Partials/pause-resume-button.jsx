@@ -96,7 +96,10 @@ class PauseResumeButton extends Component {
       return (
         <button
           aria-label={ getButtonLabel(this.state) }
-          className={ `react-fine-uploader-pause-resume-button ${getButtonClassName(this.state)} ${this.props.className || ''}` }
+          className={
+            `react-fine-uploader-pause-resume-button
+            ${getButtonClassName(this.state)} ${this.props.className || ''}`
+          }
           disabled={ !this.state.pausable && !this.state.resumable }
           onClick={ this._onClick }
           type='button'

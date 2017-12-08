@@ -16,10 +16,12 @@
   border: 1px solid $grey;
 }
 .react-fine-uploader-gallery-dropzone-upload-icon {
+  svg {
     height: 36px;
     margin-bottom: -6px;
     margin-right: 10px;
     width: 36px;
+  }
 }
 
 .react-fine-uploader-gallery-nodrop-container {
@@ -68,11 +70,13 @@
     margin-top: -2px;
 }
 .react-fine-uploader-gallery-file-input-upload-icon {
+  svg {
     fill: white;
     height: 24px;
     margin-bottom: -6px;
     margin-right: 5px;
     width: 24px;
+  }
 }
 
 .react-fine-uploader-gallery-progress-bar,
@@ -169,12 +173,16 @@
 }
 .react-fine-uploader-gallery-upload-failed-icon,
 .react-fine-uploader-gallery-upload-success-icon {
+  svg {
     height: 60px;
     width: 60px;
     z-index: 1;
+  }
 }
 .react-fine-uploader-gallery-upload-success-icon {
+  svg {
     fill: green;
+  }
 }
 .react-fine-uploader-gallery-upload-failed-icon {
     fill: red;
