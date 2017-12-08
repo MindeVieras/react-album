@@ -1,4 +1,4 @@
 
-export * from './LoginPage';
-export * from './Albums';
-export * from './Users';
+export * from './LoginPage'
+export * from './Albums'
+export * from './Users'

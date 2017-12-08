@@ -1,5 +1,5 @@
 
-import { uploadConstants } from '../_constants';
+import { uploadConstants } from '../_constants'
 
 const initialState = {
   album_media: {
@@ -21,43 +21,43 @@ export function upload(state = initialState, action) {
       avatar: {
         uploading: true
       }
-    };
+    }
   case uploadConstants.AVATAR_SUCCESS:
     return {
       avatar: {
         success: true,
         media_file: action.file
       }
-    };
+    }
   case uploadConstants.AVATAR_FAILURE:
     return {
       avatar: {
         err: action.err
       }
-    };
+    }
   case uploadConstants.ALBUM_MEDIA_REQUEST:
     return {
       ...state,
       album_media: {
         uploading: true
       }
-    };
+    }
   case uploadConstants.ALBUM_MEDIA_SUCCESS:
-    console.log(action.file);
+    console.log(action.file)
     return {
       ...state,
       album_media: {
         success: true,
         media: [state.album_media.media, action.file]
       }
-    };
+    }
   case uploadConstants.ALBUM_MEDIA_FAILURE:
     return {
       ...state,
       album_media: {
         err: action.err
       }
-    };
+    }
   default:
     return state
   }

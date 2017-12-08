@@ -1,7 +1,8 @@
-import { userConstants } from '../_constants';
-import { userService } from '../_services';
-import { alertActions } from './';
-import { history } from '../_helpers';
+
+import { userConstants } from '../_constants'
+import { userService } from '../_services'
+import { alertActions } from './'
+import { history } from '../_helpers'
 
 export const userActions = {
   login,
@@ -10,24 +11,24 @@ export const userActions = {
   getList,
   getOne,
   delete: _delete
-};
+}
 
 function login(username, password) {
   return dispatch => {
-    dispatch(request({ username }));
+    dispatch(request({ username }))
 
     userService.login(username, password)
       .then(function(res) {
         // console.log(res);
         if (res.ack == 'ok') {
-          dispatch(success(res.data));
-          history.push('/');
+          dispatch(success(res.data))
+          history.push('/')
         } else {
-          dispatch(failure(res.msg));
-          dispatch(alertActions.error(res.msg));
+          dispatch(failure(res.msg))
+          dispatch(alertActions.error(res.msg))
         }
-      });
-  };
+      })
+  }
 
   function request(user) { return { type: userConstants.LOGIN_REQUEST, user } }
   function success(user) { return { type: userConstants.LOGIN_SUCCESS, user } }
@@ -35,28 +36,28 @@ function login(username, password) {
 }
 
 function logout() {
-  userService.logout();
-  return { type: userConstants.LOGOUT };
+  userService.logout()
+  return { type: userConstants.LOGOUT }
 }
 
 function create(user) {
   return dispatch => {
-    dispatch(request(user));
+    dispatch(request(user))
 
     userService.create(user)
       .then(function(res){
         if (res.ack == 'ok') {
-          // console.log(res);
-          dispatch(success());
-          // history.push('/login');
-          dispatch(alertActions.success('Registration successful'));
+          // console.log(res)
+          dispatch(success())
+          // history.push('/login')
+          dispatch(alertActions.success('Registration successful'))
         } else {
-          // console.log(res);
-          dispatch(failure(res.msg));
-          dispatch(alertActions.error(res.msg));
+          // console.log(res)
+          dispatch(failure(res.msg))
+          dispatch(alertActions.error(res.msg))
         }
-      });
-  };
+      })
+  }
 
   function request(user) { return { type: userConstants.CREATE_REQUEST, user } }
   function success(user) { return { type: userConstants.CREATE_SUCCESS, user } }
@@ -65,17 +66,17 @@ function create(user) {
 
 function getList() {
   return dispatch => {
-    dispatch(request());
+    dispatch(request())
 
     userService.getList()
       .then(function(res) {
         if (res.ack == 'ok') {
-          dispatch(success(res.data));
+          dispatch(success(res.data))
         } else {
-          dispatch(failure(res.msg));
+          dispatch(failure(res.msg))
         }
-      });
-  };
+      })
+  }
 
   function request() { return { type: userConstants.GETLIST_REQUEST } }
   function success(users) { return { type: userConstants.GETLIST_SUCCESS, users } }
@@ -84,17 +85,17 @@ function getList() {
 
 function getOne(id) {
   return dispatch => {
-    dispatch(request());
+    dispatch(request())
 
     userService.getOne(id)
       .then(function(res) {
         if (res.ack == 'ok') {
-          dispatch(success(res.data));
+          dispatch(success(res.data))
         } else {
-          dispatch(failure(res.msg));
+          dispatch(failure(res.msg))
         }
-      });
-  };
+      })
+  }
 
   function request() { return { type: userConstants.GETONE_REQUEST } }
   function success(user) { return { type: userConstants.GETONE_SUCCESS, user } }
@@ -104,19 +105,19 @@ function getOne(id) {
 // prefixed function name with underscore because delete is a reserved word in javascript
 function _delete(id) {
   return dispatch => {
-    dispatch(request(id));
+    dispatch(request(id))
 
     userService.delete(id)
       .then(function(res) {
         if (res.ack == 'ok') {
-          // dispatch(success(res.data));
-          dispatch(success(id));
+          // dispatch(success(res.data))
+          dispatch(success(id))
         } else {
-          // dispatch(failure(res.msg));
-          dispatch(failure(id, res.msg));
+          // dispatch(failure(res.msg))
+          dispatch(failure(id, res.msg))
         }
-      });
-  };
+      })
+  }
 
   function request(id) { return { type: userConstants.DELETE_REQUEST, id } }
   function success(id) { return { type: userConstants.DELETE_SUCCESS, id } }

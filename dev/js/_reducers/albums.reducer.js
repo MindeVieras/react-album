@@ -1,5 +1,5 @@
 
-import { albumsConstants } from '../_constants';
+import { albumsConstants } from '../_constants'
 
 const initialState = {
   // selected_album: {
@@ -42,20 +42,20 @@ export function albums(state = initialState, action) {
       list: {
         loading: true
       }
-    };
+    }
   case albumsConstants.GETLIST_SUCCESS:
     return {
       ...state,
       list: {
         items: action.albums
       }
-    };
+    }
   case albumsConstants.GETLIST_FAILURE:
     return {
       list: {
         err: action.err
       } 
-    };
+    }
   // case userConstants.DELETE_REQUEST:
   //   // add 'deleting:true' property to user being deleted
   //   return {

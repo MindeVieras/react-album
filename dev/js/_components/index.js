@@ -1,3 +1,3 @@
 
-export * from './PrivateRoute';
-export * from './Pages';
+export * from './PrivateRoute'
+export * from './Pages'
