@@ -75,6 +75,7 @@ class Uploader extends Component {
 
   componentDidMount() {
     uploader.on('statusChange', this._onStatusChange)
+    console.log('dddddddddddddddddddddd');
     uploader.on('complete', this._onComplete)
   }
 
