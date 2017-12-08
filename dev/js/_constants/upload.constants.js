@@ -1,3 +1,4 @@
+
 export const uploadConstants = {
   AVATAR_REQUEST: 'UPLOAD_AVATAR_REQUEST',
   AVATAR_SUCCESS: 'UPLOAD_AVATAR_SUCCESS',

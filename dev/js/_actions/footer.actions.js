@@ -2,8 +2,8 @@
 import { footerConstants } from '../_constants';
 
 export const footerActions = {
-    buttonSet,
-    buttonsClear
+  buttonSet,
+  buttonsClear
 };
 
 function buttonSet(name, action, type) {
@@ -12,5 +12,5 @@ function buttonSet(name, action, type) {
 }
 
 function buttonsClear() {
-    return { type: footerConstants.BUTTONS_CLEAR };
+  return { type: footerConstants.BUTTONS_CLEAR };
 }

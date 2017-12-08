@@ -18,7 +18,7 @@ function avatar(file, author, ct, status) {
         } else {
           dispatch(failure(res.msg));
         }
-    });
+      });
   };
 
   function request() { return { type: uploadConstants.AVATAR_REQUEST } }
@@ -44,7 +44,7 @@ function album_media(files, author, ct, status) {
           } else {
             // dispatch(failure(res.msg));
           }
-      });
+        });
       // console.log(file.name);
       // rows.push(file);
     }

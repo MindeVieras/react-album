@@ -1,3 +1,4 @@
+
 import { authHeader, baseServerUrl } from '../_helpers';
 
 export const albumsService = {
@@ -16,19 +17,19 @@ function create(album) {
 }
 
 function getList() {
-    const requestOptions = {
-        method: 'GET',
-        headers: authHeader()
-    };
+  const requestOptions = {
+    method: 'GET',
+    headers: authHeader()
+  };
 
-    return fetch(baseServerUrl+'/api/albums/get-list', requestOptions).then(handleResponse);
+  return fetch(baseServerUrl+'/api/albums/get-list', requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {
-    // console.log(response);
-    if (!response.ok) { 
-        return Promise.reject(response.statusText);
-    }
+  // console.log(response);
+  if (!response.ok) { 
+    return Promise.reject(response.statusText);
+  }
 
-    return response.json();
+  return response.json();
 }

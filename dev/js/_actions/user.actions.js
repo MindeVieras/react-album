@@ -4,39 +4,39 @@ import { alertActions } from './';
 import { history } from '../_helpers';
 
 export const userActions = {
-    login,
-    logout,
-    create,
-    getList,
-    getOne,
-    delete: _delete
+  login,
+  logout,
+  create,
+  getList,
+  getOne,
+  delete: _delete
 };
 
 function login(username, password) {
-    return dispatch => {
-        dispatch(request({ username }));
+  return dispatch => {
+    dispatch(request({ username }));
 
-        userService.login(username, password)
-            .then(function(res) {
-                // console.log(res);
-                if (res.ack == 'ok') {
-                    dispatch(success(res.data));
-                    history.push('/');
-                } else {
-                    dispatch(failure(res.msg));
-                    dispatch(alertActions.error(res.msg));
-                }
-            });
-    };
+    userService.login(username, password)
+      .then(function(res) {
+        // console.log(res);
+        if (res.ack == 'ok') {
+          dispatch(success(res.data));
+          history.push('/');
+        } else {
+          dispatch(failure(res.msg));
+          dispatch(alertActions.error(res.msg));
+        }
+      });
+  };
 
-    function request(user) { return { type: userConstants.LOGIN_REQUEST, user } }
-    function success(user) { return { type: userConstants.LOGIN_SUCCESS, user } }
-    function failure(error) { return { type: userConstants.LOGIN_FAILURE, error } }
+  function request(user) { return { type: userConstants.LOGIN_REQUEST, user } }
+  function success(user) { return { type: userConstants.LOGIN_SUCCESS, user } }
+  function failure(error) { return { type: userConstants.LOGIN_FAILURE, error } }
 }
 
 function logout() {
-    userService.logout();
-    return { type: userConstants.LOGOUT };
+  userService.logout();
+  return { type: userConstants.LOGOUT };
 }
 
 function create(user) {
@@ -64,41 +64,41 @@ function create(user) {
 }
 
 function getList() {
-    return dispatch => {
-        dispatch(request());
+  return dispatch => {
+    dispatch(request());
 
-        userService.getList()
-            .then(function(res) {
-                if (res.ack == 'ok') {
-                    dispatch(success(res.data));
-                } else {
-                    dispatch(failure(res.msg));
-                }
-            });
-    };
+    userService.getList()
+      .then(function(res) {
+        if (res.ack == 'ok') {
+          dispatch(success(res.data));
+        } else {
+          dispatch(failure(res.msg));
+        }
+      });
+  };
 
-    function request() { return { type: userConstants.GETLIST_REQUEST } }
-    function success(users) { return { type: userConstants.GETLIST_SUCCESS, users } }
-    function failure(err) { return { type: userConstants.GETLIST_FAILURE, err } }
+  function request() { return { type: userConstants.GETLIST_REQUEST } }
+  function success(users) { return { type: userConstants.GETLIST_SUCCESS, users } }
+  function failure(err) { return { type: userConstants.GETLIST_FAILURE, err } }
 }
 
 function getOne(id) {
-    return dispatch => {
-        dispatch(request());
+  return dispatch => {
+    dispatch(request());
 
-        userService.getOne(id)
-            .then(function(res) {
-                if (res.ack == 'ok') {
-                    dispatch(success(res.data));
-                } else {
-                    dispatch(failure(res.msg));
-                }
-            });
-    };
+    userService.getOne(id)
+      .then(function(res) {
+        if (res.ack == 'ok') {
+          dispatch(success(res.data));
+        } else {
+          dispatch(failure(res.msg));
+        }
+      });
+  };
 
-    function request() { return { type: userConstants.GETONE_REQUEST } }
-    function success(user) { return { type: userConstants.GETONE_SUCCESS, user } }
-    function failure(err) { return { type: userConstants.GETONE_FAILURE, err } }
+  function request() { return { type: userConstants.GETONE_REQUEST } }
+  function success(user) { return { type: userConstants.GETONE_SUCCESS, user } }
+  function failure(err) { return { type: userConstants.GETONE_FAILURE, err } }
 }
 
 // prefixed function name with underscore because delete is a reserved word in javascript
