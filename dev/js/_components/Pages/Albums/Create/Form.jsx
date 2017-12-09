@@ -93,11 +93,11 @@ const toggleField = ({ input, label }) => (
 )
 
 function submit(values, dispatch, form) {
-  console.log(values)
   let start_date = moment(values.start_date).format('YYYY-MM-DD HH:mm:ss')
   let end_date = moment(values.end_date).format('YYYY-MM-DD HH:mm:ss')
   albumsService.create({...values, start_date, end_date, author: form.userid, media: form.albummedia})
     .then(function(res){
+      console.log(res)
       if (res.ack == 'ok') {
         dispatch(alertActions.success('Album created successful'))
         form.reset()
