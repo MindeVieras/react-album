@@ -3,8 +3,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { AlbumCreateForm } from './Form'
-import Uploader from '../../../Uploader'
+import { Uploader } from '../../../Uploader'
 
+import { history } from '../../../../_helpers'
 import { headerActions, footerActions } from '../../../../_actions'
 import { contentConstants } from '../../../../_constants'
 
@@ -18,11 +19,11 @@ class AlbumCreatePage extends React.Component {
   }
 
   render() {
-    const { auth, album_media } = this.props
+    const { auth, uploader } = this.props
     return (
       <div id="album_create_page">
         <div className="pull-left form-wrapper">
-          <AlbumCreateForm userid={auth.user.id} albummedia={album_media} />
+          <AlbumCreateForm userid={auth.user.id} albummedia={uploader} />
         </div>
         <div className="pull-left uploader-wrapper">
           <Uploader author={auth.user.id} entity={contentConstants.TYPE_ALBUM} />
@@ -33,10 +34,10 @@ class AlbumCreatePage extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { auth, upload } = state
+  const { auth, uploader } = state
   return {
     auth,
-    album_media: upload.album_media
+    uploader
   }
 }
 

@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import FineUploaderTraditional from 'fine-uploader-wrappers'
 import { CSSTransitionGroup as ReactCssTransitionGroup } from 'react-transition-group'
 
@@ -16,13 +17,10 @@ import ProgressBar from './Partials/progress-bar'
 import Status from './Partials/status'
 import Thumbnail from './Partials/thumbnail'
 
-import PauseIcon from './Icons/pause-icon'
-import PlayIcon from './Icons/play-icon'
-import UploadFailedIcon from './Icons/upload-failed-icon'
-
-import { IoCloseCircled, IoCheckmarkCircled, IoUpload } from 'react-icons/lib/io'
+import { IoCloseCircled, IoCheckmarkCircled, IoUpload, IoPause, IoPlay, IoBug } from 'react-icons/lib/io'
 
 import { authHeader, baseServerUrl } from '../../_helpers'
+import { uploaderActions } from '../../_actions'
 
 const uploader = new FineUploaderTraditional({
   options: {
@@ -35,7 +33,7 @@ const uploader = new FineUploaderTraditional({
     }
   }
 })
-console.log(uploader)
+// console.log(uploader)
 
 class Uploader extends Component {
 
@@ -69,13 +67,14 @@ class Uploader extends Component {
     }
 
     this._onComplete = (id, name, responseJSON, xhr) => {
-      console.log(responseJSON)
+      const { dispatch } = this.props
+      const file = responseJSON.data
+      dispatch(uploaderActions.media(file))
     }
   }
 
   componentDidMount() {
     uploader.on('statusChange', this._onStatusChange)
-    console.log('dddddddddddddddddddddd')
     uploader.on('complete', this._onComplete)
   }
 
@@ -157,7 +156,9 @@ class Uploader extends Component {
                   }
                   {status === 'upload failed' &&
                     <span>
-                      <UploadFailedIcon className='react-fine-uploader-gallery-upload-failed-icon' />
+                      <div className='react-fine-uploader-gallery-upload-failed-icon'>
+                        <IoBug />
+                      </div>
                       <div className='react-fine-uploader-gallery-thumbnail-icon-backdrop' />
                     </span>
                   }
@@ -267,9 +268,9 @@ Uploader.defaultProps = {
   'dropzone-dropActiveClassName': 'react-fine-uploader-gallery-dropzone-active',
   'dropzone-multiple': true,
   'fileInput-multiple': true,
-  'pauseResumeButton-pauseChildren': <PauseIcon />,
-  'pauseResumeButton-resumeChildren': <PlayIcon />,
-  'retryButton-children': <PlayIcon />,
+  'pauseResumeButton-pauseChildren': <IoPause />,
+  'pauseResumeButton-resumeChildren': <IoPlay />,
+  'retryButton-children': <IoPlay />,
   'thumbnail-maxSize': 130
 }
 
@@ -380,4 +381,13 @@ const isFileGone = (statusToCheck, statusEnum) => {
   ].indexOf(statusToCheck) >= 0
 }
 
-export default Uploader
+// export default Uploader
+function mapStateToProps(state) {
+  const { auth, upload } = state
+  return {
+    auth
+  }
+}
+
+const connectedUploader = connect(mapStateToProps)(Uploader)
+export { connectedUploader as Uploader }

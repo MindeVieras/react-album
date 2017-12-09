@@ -14,7 +14,7 @@ import {
   UsersPage,
   UserCreatePage} from '../_components'
 
-import { alertActions } from '../_actions'
+import { alertActions, uploaderActions } from '../_actions'
 
 class BaseLayout extends Component {
   constructor(props) {
@@ -22,7 +22,8 @@ class BaseLayout extends Component {
 
     const { dispatch } = this.props
     history.listen((location, action) => {
-      // clear alert on location change
+      // clear alert and uoloader on location change
+      dispatch(uploaderActions.clear())
       dispatch(alertActions.clear())
     })
   }

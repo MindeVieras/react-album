@@ -5,7 +5,7 @@ import { reducer as formReducer } from 'redux-form'
 import { auth } from './auth.reducer'
 import { users } from './users.reducer'
 import { albums } from './albums.reducer'
-import { upload } from './upload.reducer'
+import { uploader } from './uploader.reducer'
 import { header } from './header.reducer'
 import { footer } from './footer.reducer'
 import { alert } from './alert.reducer'
@@ -18,7 +18,7 @@ const rootReducer = combineReducers({
   footer,
   alert,
   form: formReducer,
-  upload
+  uploader
 })
 
 export default rootReducer
