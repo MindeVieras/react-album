@@ -12,9 +12,9 @@ class AlbumsList extends React.Component {
   constructor(props) {
     super(props)
 
-    // this.state = {
-    //   currentSelectedId: props.auth.user.id
-    // }
+    this.state = {
+      selectedAlbum: 53
+    }
   }
 
   componentDidMount(){
@@ -22,11 +22,12 @@ class AlbumsList extends React.Component {
     dispatch(albumsActions.getList())
   }
 
-  onUserSelect(id) {
-    // this.props.dispatch(userActions.getOne(id))
-    // this.setState({
-    //   currentSelectedId: id
-    // })
+  onAlbumSelect(id) {
+    this.props.dispatch(albumsActions.getOne(id))
+    console.log(id)
+    this.setState({
+      selectedAlbum: id
+    })
   }
 
   render() {
@@ -46,6 +47,8 @@ class AlbumsList extends React.Component {
             {albums.items.map((album) =>
               <li
                 key={album.id}
+                className={`albums-item${ this.state.selectedAlbum === album.id ? ' active' : ''}`}
+                onClick={() => this.onAlbumSelect(album.id)}
               >
                 <div className="name">{album.name}</div>
               </li>

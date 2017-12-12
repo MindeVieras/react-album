@@ -97,7 +97,6 @@ function submit(values, dispatch, form) {
   let end_date = moment(values.end_date).format('YYYY-MM-DD HH:mm:ss')
   albumsService.create({...values, start_date, end_date, author: form.userid, media: form.albummedia})
     .then(function(res){
-      console.log(res)
       if (res.ack == 'ok') {
         dispatch(alertActions.success('Album created successful'))
         form.reset()

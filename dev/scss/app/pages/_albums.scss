@@ -1,0 +1,29 @@
+
+#albums_page {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  .info-wrapper {
+    width: 75%;
+  }
+}
+
+.albums-wrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 25%;
+  height: 100%;
+  border-right: 1px solid $grey;
+}
+
+.albums-list {
+  li {
+    padding: 5px 10px;
+    cursor: pointer;
+    &.active {
+      background-color: $red;
+    }
+  }
+}

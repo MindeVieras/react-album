@@ -3,7 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { AlbumsList } from './List'
-// import { UserInfo } from './Info'
+import { AlbumInfo } from './Info'
 
 import { headerActions, footerActions } from '../../../../_actions'
 
@@ -22,7 +22,7 @@ class AlbumsPage extends React.Component {
           <AlbumsList />
         </div>
         <div className="pull-right info-wrapper">
-          {/*<UserInfo />*/}
+          <AlbumInfo />
         </div>
       </div>
     )

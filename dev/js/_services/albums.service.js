@@ -3,7 +3,9 @@ import { authHeader, baseServerUrl } from '../_helpers'
 
 export const albumsService = {
   create,
-  getList
+  getList,
+  getOne,
+  delete: _delete
 }
 
 function create(album) {
@@ -23,6 +25,24 @@ function getList() {
   }
 
   return fetch(baseServerUrl+'/api/albums/get-list', requestOptions).then(handleResponse)
+}
+
+function getOne(id) {
+  const requestOptions = {
+    method: 'GET',
+    headers: authHeader()
+  }
+
+  return fetch(baseServerUrl+'/api/albums/get-one/'+id, requestOptions).then(handleResponse)
+}
+
+function _delete(id) {
+  const requestOptions = {
+    method: 'DELETE',
+    headers: authHeader()
+  }
+
+  return fetch(baseServerUrl+'/api/albums/delete/'+id, requestOptions).then(handleResponse)
 }
 
 function handleResponse(response) {
