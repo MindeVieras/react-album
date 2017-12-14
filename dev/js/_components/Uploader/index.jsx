@@ -93,10 +93,8 @@ class Uploader extends Component {
   }
 
   render() {
+    const { author, entity } = this.props
     const uploader = this.uploader
-    const initialFiles = this.props.initial_files
-    const author = this.props.author
-    const entity = this.props.entity
     const cancelButtonProps = getComponentProps('cancelButton', this.props)
     const dropzoneProps = getComponentProps('dropzone', this.props)
     const fileInputProps = getComponentProps('fileInput', this.props)
@@ -113,17 +111,25 @@ class Uploader extends Component {
     const pauseResumeButtonProps = chunkingEnabled && getComponentProps('pauseResumeButton', this.props)
     // console.log(initialFiles)
     
-    // Show dropzone text if any visableFiles
-    let dropzoneText = ''
+    // Remove/Add dropzone text and fileField if any visableFiles
+    let uploaderText = ''
+    let fileField = ''
     if (this.state.visibleFiles.length > 0) {
-      dropzoneText = <span/>
+      uploaderText = <span/>
+      fileField = <FileInput
+        uploader={ uploader }
+        author={ author }
+        entity={ entity }
+        multiple={ true }
+      />
     } else {
-      dropzoneText = <span className="react-fine-uploader-gallery-dropzone-content">
+      uploaderText = <span className="react-fine-uploader-gallery-dropzone-content">
         <div className="react-fine-uploader-gallery-dropzone-upload-icon">
           <IoUpload />
         </div>
-        Drop files here
+        Click or Drop files here
       </span>
+      fileField = <span/>
     }
 
     return (
@@ -131,15 +137,7 @@ class Uploader extends Component {
         uploader={ uploader }
         { ...dropzoneProps }
       >
-        { dropzoneText }
-        {!fileInputProps.disabled &&
-          <FileInputComponent
-            author={ author }
-            entity={ entity }
-            uploader={ uploader }
-            { ...fileInputProps }
-          />
-        }
+        { uploaderText }
         <ProgressBar
           className='react-fine-uploader-gallery-total-progress-bar'
           uploader={ uploader }
@@ -243,6 +241,7 @@ class Uploader extends Component {
               )
             })
           }
+          { fileField }
         </ReactCssTransitionGroup>
       </Dropzone>
     )
@@ -284,73 +283,20 @@ class Uploader extends Component {
 }
 
 Uploader.propTypes = {
-  className: PropTypes.string,
   author: PropTypes.number.isRequired,
   entity: PropTypes.number.isRequired,
   entity_id: PropTypes.number,
 }
 
 Uploader.defaultProps = {
-  className: '',
   'cancelButton-children': <IoCloseCircled />,
   'deleteButton-children': <IoCloseCircled />,
   'dropzone-dropActiveClassName': 'react-fine-uploader-gallery-dropzone-active',
   'dropzone-multiple': true,
-  'fileInput-multiple': true,
   'pauseResumeButton-pauseChildren': <IoPause />,
   'pauseResumeButton-resumeChildren': <IoPlay />,
   'retryButton-children': <IoPlay />,
-  'thumbnail-maxSize': 130
-}
-
-const MaybeDropzone = ({ children, hasVisibleFiles, uploader, ...props }) => {
-  const { ...dropzoneProps } = props
-  let content = ''
-  
-  if (hasVisibleFiles) {
-    content = <span/>
-  } else {
-    content = <span className="react-fine-uploader-gallery-dropzone-content">
-      <div className="react-fine-uploader-gallery-dropzone-upload-icon">
-        <IoUpload />
-      </div>
-      Drop files here
-    </span>
-  }
-
-  return (
-    <Dropzone
-      uploader={ uploader }
-      { ...dropzoneProps }
-    >
-      { content }
-      { children }
-    </Dropzone>
-  )
-}
-
-const FileInputComponent = ({ uploader, ...props }) => {
-  const { children, ...fileInputProps } = props
-  const content = children || (
-    <span>
-      <div className='react-fine-uploader-gallery-file-input-upload-icon'>
-        <IoUpload />
-      </div>
-      Select Files
-    </span>
-  )
-
-  return (
-    <FileInput
-      className='react-fine-uploader-gallery-file-input-container'
-      uploader={ uploader }
-      { ...fileInputProps }
-    >
-      <span className='react-fine-uploader-gallery-file-input-content'>
-        { content }
-      </span>
-    </FileInput>
-  )
+  'thumbnail-maxSize': 240
 }
 
 const getComponentProps = (componentName, allProps) => {

@@ -5,11 +5,30 @@
 }
 
 .uploader-dropzone-container {
-  border-radius: 4px;
-  min-height: 310px;
   padding: 15px;
-  position: relative;
-  border: 1px solid $grey;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 40px;
+}
+
+.uploader-file-input {
+    background: #00ABC7;
+    border: 1px solid #37B7CC;
+    border-radius: 3px;
+    color: #FFFFFF;
+    display: inline-block;
+    position: relative;
+    float: left;
+    padding: 7px 10px;
+    text-align: center;
+    width: 45px;
+    cursor: pointer;
+    .icon {
+      display: inline-block;
+    }
 }
 
 .react-fine-uploader-gallery-dropzone-upload-icon {
@@ -41,30 +60,11 @@
     width: 100%;
 }
 
-.react-fine-uploader-gallery-file-input-container {
-    background: #00ABC7;
-    border: 1px solid #37B7CC;
-    border-radius: 3px;
-    color: #FFFFFF;
-    display: inline;
-    float: left;
-    margin-left: 10px;
-    padding-bottom: 7px;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 7px;
-    text-align: center;
-    width: 140px;
-}
 .react-fine-uploader-gallery-file-input-container:hover {
     background: #33B6CC;
 }
 .react-fine-uploader-gallery-file-input-container:focus {
     outline: 1px dotted #000000;
-}
-.react-fine-uploader-gallery-file-input-content {
-    display: inline-block;
-    margin-top: -2px;
 }
 .react-fine-uploader-gallery-file-input-upload-icon {
   svg {
@@ -114,7 +114,6 @@
 .react-fine-uploader-gallery-files {
     clear: both;
     list-style: none;
-    max-height: 450px;
     overflow-y: auto;
     padding-left: 0;
     padding-top: 15px;
@@ -136,21 +135,20 @@
 
 .react-fine-uploader-gallery-file {
     background-color: rgba(0,0,0,0.2);
-    border-radius: 9px;
+    border-radius: 5px;
     box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.22);
     display: inline-block;
     font-size: 13px;
-    height: 165px;
     line-height: 16px;
     margin: 0 25px 25px 10px;
     position: relative;
     vertical-align: top;
-    width: 130px;
+    width: 240px;
 }
 
 .react-fine-uploader-gallery-thumbnail-container {
     display: block;
-    height: 130px;
+    height: 240px;
     text-align: center;
 }
 .react-fine-uploader-gallery-thumbnail {
