@@ -22,19 +22,6 @@ import { IoCloseCircled, IoCheckmarkCircled, IoUpload, IoPause, IoPlay, IoBug } 
 import { authHeader, baseServerUrl } from '../../_helpers'
 import { uploaderActions } from '../../_actions'
 
-const uploader = new FineUploaderTraditional({
-  options: {
-    chunking: {
-      enabled: false
-    },
-    request: {
-      customHeaders: authHeader(),
-      endpoint: baseServerUrl+'/api/upload'
-    }
-  }
-})
-// console.log(uploader)
-
 class Uploader extends Component {
 
   constructor(props) {
@@ -43,7 +30,29 @@ class Uploader extends Component {
     this.state = {
       visibleFiles: []
     }
-    const statusEnum = uploader.qq.status
+
+    this.uploader = new FineUploaderTraditional({
+      options: {
+        debug: false,
+        chunking: {
+          enabled: false
+        },
+        request: {
+          customHeaders: authHeader(),
+          endpoint: baseServerUrl+'/api/upload'
+        },
+        session: {
+          customHeaders: authHeader(),
+          endpoint: baseServerUrl+'/api/upload/get-initial-files/'+props.entity_id
+        },
+        // cors: {
+        //   expected: true,
+        //   // sendCredentials: true
+        // }
+      }
+    })
+    console.log(this.uploader)
+    const statusEnum = this.uploader.qq.status
 
     this._onStatusChange = (id, oldStatus, status) => {
       const visibleFiles = this.state.visibleFiles
@@ -74,16 +83,18 @@ class Uploader extends Component {
   }
 
   componentDidMount() {
-    uploader.on('statusChange', this._onStatusChange)
-    uploader.on('complete', this._onComplete)
+    this.uploader.on('statusChange', this._onStatusChange)
+    this.uploader.on('complete', this._onComplete)
   }
 
   componentWillUnmount() {
-    uploader.off('statusChange', this._onStatusChange)
-    uploader.off('complete', this._onComplete)
+    this.uploader.off('statusChange', this._onStatusChange)
+    this.uploader.off('complete', this._onComplete)
   }
 
   render() {
+    const uploader = this.uploader
+    const initialFiles = this.props.initial_files
     const author = this.props.author
     const entity = this.props.entity
     const cancelButtonProps = getComponentProps('cancelButton', this.props)
@@ -100,16 +111,34 @@ class Uploader extends Component {
     const deleteEnabled = uploader.options.deleteFile && uploader.options.deleteFile.enabled
     const deleteButtonProps = deleteEnabled && getComponentProps('deleteButton', this.props)
     const pauseResumeButtonProps = chunkingEnabled && getComponentProps('pauseResumeButton', this.props)
-    // console.log(author);
+    // console.log(initialFiles)
+    
+    // Show dropzone text if any visableFiles
+    let dropzoneText = ''
+    if (this.state.visibleFiles.length > 0) {
+      dropzoneText = <span/>
+    } else {
+      dropzoneText = <span className="react-fine-uploader-gallery-dropzone-content">
+        <div className="react-fine-uploader-gallery-dropzone-upload-icon">
+          <IoUpload />
+        </div>
+        Drop files here
+      </span>
+    }
+
     return (
-      <MaybeDropzone
-        content={ this.props.children }
-        hasVisibleFiles={ this.state.visibleFiles.length > 0 }
+      <Dropzone
         uploader={ uploader }
         { ...dropzoneProps }
       >
+        { dropzoneText }
         {!fileInputProps.disabled &&
-          <FileInputComponent author={ author } entity={ entity } uploader={ uploader } { ...fileInputProps }/>
+          <FileInputComponent
+            author={ author }
+            entity={ entity }
+            uploader={ uploader }
+            { ...fileInputProps }
+          />
         }
         <ProgressBar
           className='react-fine-uploader-gallery-total-progress-bar'
@@ -215,7 +244,7 @@ class Uploader extends Component {
             })
           }
         </ReactCssTransitionGroup>
-      </MaybeDropzone>
+      </Dropzone>
     )
   }
 
@@ -257,14 +286,14 @@ class Uploader extends Component {
 Uploader.propTypes = {
   className: PropTypes.string,
   author: PropTypes.number.isRequired,
-  entity: PropTypes.number.isRequired
+  entity: PropTypes.number.isRequired,
+  entity_id: PropTypes.number,
 }
 
 Uploader.defaultProps = {
   className: '',
   'cancelButton-children': <IoCloseCircled />,
   'deleteButton-children': <IoCloseCircled />,
-  'dropzone-disabled': false,
   'dropzone-dropActiveClassName': 'react-fine-uploader-gallery-dropzone-active',
   'dropzone-multiple': true,
   'fileInput-multiple': true,
@@ -274,33 +303,23 @@ Uploader.defaultProps = {
   'thumbnail-maxSize': 130
 }
 
-const MaybeDropzone = ({ children, content, hasVisibleFiles, uploader, ...props }) => {
-  const { disabled, ...dropzoneProps } = props
-
-  let dropzoneDisabled = disabled
-  if (!dropzoneDisabled) {
-    dropzoneDisabled = !uploader.qq.supportedFeatures.fileDrop
-  }
-
+const MaybeDropzone = ({ children, hasVisibleFiles, uploader, ...props }) => {
+  const { ...dropzoneProps } = props
+  let content = ''
+  
   if (hasVisibleFiles) {
     content = <span/>
-  }
-  else {
-    content = content || getDefaultMaybeDropzoneContent({ content, disabled: dropzoneDisabled })
-  }
-
-  if (dropzoneDisabled) {
-    return (
-      <div className='react-fine-uploader-gallery-nodrop-container'>
-        { content }
-        { children }
+  } else {
+    content = <span className="react-fine-uploader-gallery-dropzone-content">
+      <div className="react-fine-uploader-gallery-dropzone-upload-icon">
+        <IoUpload />
       </div>
-    )
+      Drop files here
+    </span>
   }
 
   return (
     <Dropzone
-      className='react-fine-uploader-gallery-dropzone'
       uploader={ uploader }
       { ...dropzoneProps }
     >
@@ -345,33 +364,6 @@ const getComponentProps = (componentName, allProps) => {
   })
 
   return componentProps
-}
-
-const getDefaultMaybeDropzoneContent = ({ content, disabled }) => {
-  const className = disabled
-    ? 'react-fine-uploader-gallery-nodrop-content'
-    : 'react-fine-uploader-gallery-dropzone-content'
-
-  if (disabled && !content) {
-    return (
-      <span className={ className }>
-        Upload files
-      </span>
-    )
-  }
-  else if (content) {
-    return <span className={ className }>{ content }</span>
-  }
-  else if (!disabled) {
-    return (
-      <span className={ className }>
-        <div className='react-fine-uploader-gallery-dropzone-upload-icon'>
-          <IoUpload />
-        </div>
-        Drop files here
-      </span>
-    )
-  }
 }
 
 const isFileGone = (statusToCheck, statusEnum) => {

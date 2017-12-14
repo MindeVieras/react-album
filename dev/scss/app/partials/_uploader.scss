@@ -4,17 +4,14 @@
     display: none !important;
 }
 
-.react-fine-uploader-gallery-nodrop-container,
-.react-fine-uploader-gallery-dropzone {
+.uploader-dropzone-container {
   border-radius: 4px;
   min-height: 310px;
   padding: 15px;
   position: relative;
-}
-
-.react-fine-uploader-gallery-dropzone {
   border: 1px solid $grey;
 }
+
 .react-fine-uploader-gallery-dropzone-upload-icon {
   svg {
     height: 36px;

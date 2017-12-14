@@ -18,10 +18,10 @@ class AlbumsPage extends React.Component {
   render() {
     return (
       <div id="albums_page">
-        <div className="pull-left albums-wrapper">
+        <div className="albums-wrapper">
           <AlbumsList />
         </div>
-        <div className="pull-right info-wrapper">
+        <div className="info-wrapper">
           <AlbumInfo />
         </div>
       </div>

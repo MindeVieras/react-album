@@ -5,7 +5,9 @@ import { connect } from 'react-redux'
 
 import { RingLoader } from 'react-spinners'
 
+import { Uploader } from '../../../Uploader'
 import { albumsActions } from '../../../../_actions'
+import { contentConstants } from '../../../../_constants'
 
 class AlbumInfo extends React.Component {
 
@@ -19,7 +21,6 @@ class AlbumInfo extends React.Component {
 
   render() {
     const { selected_album } = this.props
-    console.log(selected_album.album)
 
     return (
       <div className="album-info">
@@ -43,9 +44,13 @@ class AlbumInfo extends React.Component {
                 >Delete</div>
               </div>
             </div>
-            <div className="media-wrapper">
+            
+            <Uploader
+              author={selected_album.album.author || 0}
+              entity={contentConstants.TYPE_ALBUM}
+              entity_id={selected_album.album.id}
+            />
 
-            </div>
           </div>
         }
       </div>
