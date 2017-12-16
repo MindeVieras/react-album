@@ -17,13 +17,7 @@ class ProgressBar extends Component {
   }
 
   componentDidMount() {
-    if (this._isTotalProgress) {
-      this.props.uploader.on('totalProgress', this._trackProgressEventHandler)
-    }
-    else {
-      this.props.uploader.on('progress', this._trackProgressEventHandler)
-    }
-
+    this.props.uploader.on('progress', this._trackProgressEventHandler)
     this.props.uploader.on('statusChange', this._trackStatusEventHandler)
   }
 
@@ -33,24 +27,19 @@ class ProgressBar extends Component {
   }
 
   render() {
-    const className = this._isTotalProgress
-      ? 'react-fine-uploader-total-progress-bar'
-      : 'react-fine-uploader-file-progress-bar'
-      
-    const customContainerClassName = this.props.className ? this.props.className + '-container' : ''
     const percentWidth = this.state.bytesUploaded / this.state.totalSize * 100 || 0
 
     return (
       <div
-        className={ `${className}-container ${customContainerClassName}` }
+        className="uploader-progress-bar"
         hidden={ this.state.hidden }
       >
         <div
-          aria-valuemax='100'
-          aria-valuemin='0'
+          aria-valuemax="100"
+          aria-valuemin="0"
           aria-valuenow={ percentWidth }
-          className={ `${className} ${this.props.className || ''}` }
-          role='progressbar'
+          className="progress-bar"
+          role="progressbar"
           style={ { width: percentWidth + '%' } }
         />
       </div>

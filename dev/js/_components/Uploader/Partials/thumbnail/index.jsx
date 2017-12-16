@@ -41,12 +41,10 @@ class Thumbnail extends Component {
   }
 
   render() {
-    const customContainerClassName = this.props.className && this.props.className + '-container'
-
     return (
-      <span className={ `react-fine-uploader-thumbnail-container ${customContainerClassName || ''}` }>
+      <span className="uploader-thumbnail">
         <canvas
-          className={ `react-fine-uploader-thumbnail ${this.props.className || ''}` }
+          className="thumbnail"
           hidden={ !this.state.drawComplete || this._failure }
           ref={ component => this._canvas = component }
         />

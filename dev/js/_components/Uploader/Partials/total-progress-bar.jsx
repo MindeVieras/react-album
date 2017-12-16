@@ -33,7 +33,7 @@ class TotalProgressBar extends Component {
 
     return (
       <div
-        className="uploader-total-progress-bar-container"
+        className="uploader-total-progress-bar"
         hidden={ this.state.hidden }
       >
         <div

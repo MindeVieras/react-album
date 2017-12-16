@@ -100,7 +100,6 @@ class Uploader extends Component {
     const fileInputProps = getComponentProps('fileInput', this.props)
     const filenameProps = getComponentProps('filename', this.props)
     const filesizeProps = getComponentProps('filesize', this.props)
-    const progressBarProps = getComponentProps('progressBar', this.props)
     const retryButtonProps = getComponentProps('retryButton', this.props)
     const statusProps = getComponentProps('status', this.props)
     const thumbnailProps = getComponentProps('thumbnail', this.props)
@@ -146,34 +145,30 @@ class Uploader extends Component {
           multiple={ true }
         />
         <ReactCssTransitionGroup
-          className='react-fine-uploader-gallery-files'
-          component='ul'
+          className="uploader-files"
+          component="ul"
           transitionEnter={ !this.props.animationsDisabled }
           transitionEnterTimeout={ 500 }
           transitionLeave={ !this.props.animationsDisabled }
           transitionLeaveTimeout={ 300 }
-          transitionName='react-fine-uploader-gallery-files'
+          transitionName="uploader-files"
         >
           {
             this.state.visibleFiles.map(({ id, status, fromServer }) => {
-              // console.log(uploader.methods.getName(id));
               return (
                 <li
                   key={ id }
-                  className='react-fine-uploader-gallery-file'
+                  className="uploader-file"
                 >
-                  <ProgressBar
-                    className='react-fine-uploader-gallery-progress-bar'
-                    id={ id }
-                    uploader={ uploader }
-                    { ...progressBarProps }
-                  />
                   <Thumbnail
-                    className='react-fine-uploader-gallery-thumbnail'
                     id={ id }
                     fromServer={ fromServer }
                     uploader={ uploader }
                     { ...thumbnailProps }
+                  />
+                  <ProgressBar
+                    id={ id }
+                    uploader={ uploader }
                   />
                   {status === 'upload successful' &&
                     <span>
