@@ -16,24 +16,11 @@ const initialState = {
 
 export function albums(state = initialState, action) {
   switch (action.type) {
-  case albumsConstants.GETONE_REQUEST:
+  case albumsConstants.ADD_TO_LIST:
     return {
       ...state,
-      selected_album: {
-        loading: true
-      }
-    }
-  case albumsConstants.GETONE_SUCCESS:
-    return {
-      ...state,
-      selected_album: {
-        album: action.album
-      }
-    }
-  case albumsConstants.GETONE_FAILURE:
-    return {
-      selected_album: {
-        err: action.err
+      list: {
+        items: [action.album, ...state.list.items]
       }
     }
   case albumsConstants.GETLIST_REQUEST:
@@ -55,6 +42,26 @@ export function albums(state = initialState, action) {
       list: {
         err: action.err
       } 
+    }
+  case albumsConstants.GETONE_REQUEST:
+    return {
+      ...state,
+      selected_album: {
+        loading: true
+      }
+    }
+  case albumsConstants.GETONE_SUCCESS:
+    return {
+      ...state,
+      selected_album: {
+        album: action.album
+      }
+    }
+  case albumsConstants.GETONE_FAILURE:
+    return {
+      selected_album: {
+        err: action.err
+      }
     }
   case albumsConstants.DELETE_REQUEST:
     return {

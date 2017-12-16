@@ -9,7 +9,6 @@ import { IoIosCheckmark, IoCloseCircled } from 'react-icons/lib/io'
 import Toggle from 'react-toggle'
 
 import { albumsService } from '../../../../_services'
-import { alertActions } from '../../../../_actions'
 
 class AlbumCreateForm extends React.Component {
   
@@ -98,10 +97,10 @@ function submit(values, dispatch, form) {
   albumsService.create({...values, start_date, end_date, author: form.userid, media: form.albummedia})
     .then(function(res){
       if (res.ack == 'ok') {
-        dispatch(alertActions.success('Album created successful'))
+        // dispatch(alertActions.success('Album created successful'))
         form.reset()
       } else {
-        dispatch(alertActions.error(res.msg))
+        // dispatch(alertActions.error(res.msg))
       }
     })
 }

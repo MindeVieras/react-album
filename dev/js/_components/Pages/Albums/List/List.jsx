@@ -11,7 +11,6 @@ class AlbumsList extends React.Component {
 
   constructor(props) {
     super(props)
-
     this.state = {
       selectedAlbum: 53
     }
@@ -24,7 +23,6 @@ class AlbumsList extends React.Component {
 
   onAlbumSelect(id) {
     this.props.dispatch(albumsActions.getOne(id))
-    console.log(id)
     this.setState({
       selectedAlbum: id
     })

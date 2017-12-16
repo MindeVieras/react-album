@@ -1,13 +1,22 @@
 
+import {toastr} from 'react-redux-toastr'
+
 import { albumsConstants } from '../_constants'
 import { albumsService } from '../_services'
-import { alertActions } from './'
-// import { history } from '../_helpers'
 
 export const albumsActions = {
+  addToList,
   getList,
   getOne,
   delete: _delete
+}
+
+function addToList(album) {
+  return dispatch => {
+    dispatch(add(album))
+  }
+
+  function add(album) { return { type: albumsConstants.ADD_TO_LIST, album } }
 }
 
 function getList() {
@@ -57,10 +66,10 @@ function _delete(id) {
       .then(function(res) {
         if (res.ack == 'ok') {
           dispatch(success(id))
-          dispatch(alertActions.success(res.msg))
+          toastr.success('Success', res.msg)
         } else {
           dispatch(failure(id, res.msg))
-          dispatch(alertActions.error(res.msg))
+          toastr.error('Error', res.msg)
         }
       })
   }

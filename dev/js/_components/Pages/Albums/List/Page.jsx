@@ -12,7 +12,8 @@ class AlbumsPage extends React.Component {
   componentDidMount() {
     this.props.dispatch(headerActions.setTitle('Album'))
     this.props.dispatch(footerActions.buttonsClear())
-    this.props.dispatch(footerActions.buttonSet('New album', '/album-create', 'success'))
+    this.props.dispatch(footerActions.buttonSet('', 'newAlbum', 'success'))
+    // this.props.dispatch(footerActions.buttonSet('New album', '/album-create', 'success'))
   }
 
   render() {

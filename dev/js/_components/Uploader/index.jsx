@@ -51,7 +51,7 @@ class Uploader extends Component {
         // }
       }
     })
-    console.log(this.uploader)
+    // console.log(this.uploader)
     const statusEnum = this.uploader.qq.status
 
     this._onStatusChange = (id, oldStatus, status) => {

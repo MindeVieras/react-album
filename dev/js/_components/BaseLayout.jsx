@@ -14,7 +14,7 @@ import {
   UsersPage,
   UserCreatePage} from '../_components'
 
-import { alertActions, uploaderActions } from '../_actions'
+import { uploaderActions } from '../_actions'
 
 class BaseLayout extends Component {
   constructor(props) {
@@ -49,10 +49,6 @@ class BaseLayout extends Component {
       <div id="app_wrapper">
         <Header title={header.title} />
         <div id="app_content">
-
-          {alert.message &&
-            <div className={`alert ${alert.type}`}>{alert.message}</div>
-          }
           <Switch>
             <PrivateRoute exact path="/" component={AlbumsPage} />
             <PrivateRoute exact path="/album-create" component={AlbumCreatePage} />
@@ -75,9 +71,9 @@ const NoMatch = ({ location }) => (
 
 
 function mapStateToProps(state) {
-  const { alert, header } = state
+  const { header } = state
   // console.log(state);
-  return { alert, header }
+  return { header }
 }
 
 export default connect(mapStateToProps)(BaseLayout)

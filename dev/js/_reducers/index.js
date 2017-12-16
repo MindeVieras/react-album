@@ -1,6 +1,7 @@
 
 import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
+import { reducer as toastrReducer } from 'react-redux-toastr'
 
 import { auth } from './auth.reducer'
 import { users } from './users.reducer'
@@ -8,7 +9,6 @@ import { albums } from './albums.reducer'
 import { uploader } from './uploader.reducer'
 import { header } from './header.reducer'
 import { footer } from './footer.reducer'
-import { alert } from './alert.reducer'
 
 const rootReducer = combineReducers({
   auth,
@@ -16,9 +16,9 @@ const rootReducer = combineReducers({
   albums,
   header,
   footer,
-  alert,
+  uploader,
   form: formReducer,
-  uploader
+  toastr: toastrReducer
 })
 
 export default rootReducer

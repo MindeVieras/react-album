@@ -3,7 +3,9 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { submit } from 'redux-form'
+
 import { history } from '../../_helpers'
+import NewAlbum from '../Buttons/NewAlbum'
 
 import { IoTrashA, IoAndroidUpload } from 'react-icons/lib/io'
 
@@ -38,6 +40,14 @@ class Footer extends Component {
             >
               {link.name}
             </div>
+          )
+        
+        if (link.action === 'newAlbum')
+          return (
+            <NewAlbum
+              key={ i }
+              type={ link.type }
+            />
           )
 
         return <Link key={i} to={link.action} className={`btn btn-sm btn-${link.type}`}>{link.name}</Link>

@@ -8,7 +8,7 @@ import Select from 'react-select'
 import Toggle from 'react-toggle'
 
 import { userService } from '../../../../_services'
-import { alertActions, userActions } from '../../../../_actions'
+import { userActions } from '../../../../_actions'
 // import { history } from '../../../../_helpers'
 
 class UserCreateForm extends React.Component {
@@ -110,10 +110,10 @@ function submit(values, dispatch, form) {
   userService.create({...values, author: form.userid, avatar: form.avatar})
     .then(function(res){
       if (res.ack == 'ok') {
-        dispatch(alertActions.success('Registration successful'))
+        // dispatch(alertActions.success('Registration successful'))
         form.reset()
       } else {
-        dispatch(alertActions.error(res.msg))
+        // dispatch(alertActions.error(res.msg))
       }
     })
 }
