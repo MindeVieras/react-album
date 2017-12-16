@@ -23,6 +23,25 @@ export function albums(state = initialState, action) {
         items: [action.album, ...state.list.items]
       }
     }
+  case albumsConstants.RENAME:
+    return {
+      ...state,
+      selected_album: {
+        album: {
+          ...state.selected_album.album,
+          name: action.payload.name
+        }
+      },
+      list: {
+        items: state.list.items.map(album => {
+          if (album.id === action.payload.id) {
+            const { ...albumCopy } = album
+            return { ...albumCopy, name: action.payload.name }
+          }
+          return album
+        })
+      }
+    }
   case albumsConstants.GETLIST_REQUEST:
     return {
       ...state,

@@ -8,6 +8,7 @@ export const albumsActions = {
   addToList,
   getList,
   getOne,
+  rename,
   delete: _delete
 }
 
@@ -55,6 +56,21 @@ function getOne(id) {
   function request() { return { type: albumsConstants.GETONE_REQUEST } }
   function success(album) { return { type: albumsConstants.GETONE_SUCCESS, album } }
   function failure(err) { return { type: albumsConstants.GETONE_FAILURE, err } }
+}
+
+function rename(payload) {
+  return dispatch => {
+    albumsService.rename(payload.name, payload.id)
+      .then(function(res) {
+        if (res.ack == 'ok') {
+          dispatch(rename(payload))
+          toastr.success('Success', res.msg)
+        } else {
+          toastr.error('Error', res.msg)
+        }
+      })
+  }
+  function rename(payload) { return { type: albumsConstants.RENAME, payload } }
 }
 
 // prefixed function name with underscore because delete is a reserved word in javascript
