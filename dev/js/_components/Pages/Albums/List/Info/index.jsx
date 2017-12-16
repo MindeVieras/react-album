@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 
 import { RingLoader } from 'react-spinners'
 
+import Bar from './Bar'
+
 import { Uploader } from '../../../../Uploader'
 import { albumsActions } from '../../../../../_actions'
 import { contentConstants, mediaConstants } from '../../../../../_constants'
@@ -12,11 +14,6 @@ import { contentConstants, mediaConstants } from '../../../../../_constants'
 class AlbumInfo extends Component {
 
   componentDidMount() {
-    this.props.dispatch(albumsActions.getOne(53))
-  }
-
-  onAlbumDelete(id) {
-    this.props.dispatch(albumsActions.delete(id))
     this.props.dispatch(albumsActions.getOne(53))
   }
 
@@ -33,18 +30,12 @@ class AlbumInfo extends Component {
         }
         {selected_album.album &&
           <div className="selected-album">
-            <div className="album-bar">
-              <div className="name">
-                {selected_album.album.name}
-              </div>
-              <div className="buttons">
-                <div className="btn btn-xs btn-info">Edit</div>
-                <div
-                  className="btn btn-xs btn-danger"
-                  onClick={() => this.onAlbumDelete(selected_album.album.id)}
-                >Delete</div>
-              </div>
-            </div>
+            {selected_album.album.id && selected_album.album.name &&
+              <Bar
+                album_id={ selected_album.album.id }
+                name={ selected_album.album.name }
+              />
+            }
             
             {selected_album.album.id && selected_album.album.author &&
               <Uploader

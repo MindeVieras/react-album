@@ -24,19 +24,32 @@
   bottom: 0;
   right: 0;
   overflow: scroll;
-  .album-bar {
-    height: 40px;
-    line-height: 40px;
-    padding: 0 10px;
+}
+
+.album-bar {
+  height: 40px;
+  line-height: 40px;
+  padding: 0 10px;
+  .name-wrapper {
+    display: inline-block;
     .name {
       display: inline-block;
       float: left;
       font-size: 26px;
       font-weight: 500;
+      margin-right: 10px;
     }
-    .buttons {
-      float: right;
+    .btn {
+      display: none;
     }
+    &:hover {
+      .btn {
+        display: inline-block;
+      }
+    }
+  }
+  .buttons {
+    float: right;
   }
 }
 

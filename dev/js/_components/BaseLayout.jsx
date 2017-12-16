@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import ReduxToastr from 'react-redux-toastr'
+import Popup from 'react-popup'
 import WebFont from 'webfontloader'
 import { history } from '../_helpers'
 
@@ -58,11 +59,14 @@ class BaseLayout extends Component {
           </Switch>
         </div>
 
+        <Footer />
+
         <ReduxToastr
           timeOut={2000}
         />
 
-        <Footer />
+        <Popup />
+
       </div>
     )
   }
