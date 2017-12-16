@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -9,7 +9,7 @@ import { Uploader } from '../../../Uploader'
 import { albumsActions } from '../../../../_actions'
 import { contentConstants } from '../../../../_constants'
 
-class AlbumInfo extends React.Component {
+class AlbumInfo extends Component {
 
   componentDidMount() {
     this.props.dispatch(albumsActions.getOne(53))
@@ -17,6 +17,7 @@ class AlbumInfo extends React.Component {
 
   onAlbumDelete(id) {
     this.props.dispatch(albumsActions.delete(id))
+    this.props.dispatch(albumsActions.getOne(53))
   }
 
   render() {

@@ -17,7 +17,8 @@ class AlbumsList extends React.Component {
   }
 
   componentDidMount(){
-    const { dispatch } = this.props
+    const { albums, dispatch } = this.props
+    // console.log(albums)
     dispatch(albumsActions.getList())
   }
 
@@ -30,7 +31,6 @@ class AlbumsList extends React.Component {
 
   render() {
     const { albums } = this.props
-    // console.log(this.props)
     return (
       <div className="albums-list">
         {albums.loading &&

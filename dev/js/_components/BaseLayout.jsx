@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
+import ReduxToastr from 'react-redux-toastr'
 import WebFont from 'webfontloader'
 import { history } from '../_helpers'
 
@@ -43,11 +44,13 @@ class BaseLayout extends Component {
   }
 
   render() {
-    const { alert, header } = this.props
+    const { header } = this.props
     // console.log(this.props);
     return (
       <div id="app_wrapper">
+        
         <Header title={header.title} />
+        
         <div id="app_content">
           <Switch>
             <PrivateRoute exact path="/" component={AlbumsPage} />
@@ -57,6 +60,11 @@ class BaseLayout extends Component {
             <PrivateRoute component={NoMatch} />
           </Switch>
         </div>
+
+        <ReduxToastr
+          timeOut={2000}
+        />
+
         <Footer />
       </div>
     )

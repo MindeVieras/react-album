@@ -21,6 +21,7 @@ import { IoCloseCircled, IoCheckmarkCircled, IoUpload, IoPause, IoPlay, IoBug } 
 
 import { authHeader, baseServerUrl } from '../../_helpers'
 import { uploaderActions } from '../../_actions'
+import { mediaService } from '../../_services'
 
 class Uploader extends Component {
 
@@ -76,9 +77,9 @@ class Uploader extends Component {
     }
 
     this._onComplete = (id, name, responseJSON, xhr) => {
-      const { dispatch } = this.props
+      const { entity_id, dispatch } = this.props
       const file = responseJSON.data
-      dispatch(uploaderActions.media(file))
+      mediaService.attach(file.media_id, entity_id)
     }
   }
 
@@ -89,7 +90,6 @@ class Uploader extends Component {
 
   componentWillUnmount() {
     this.uploader.off('statusChange', this._onStatusChange)
-    this.uploader.off('complete', this._onComplete)
   }
 
   render() {
@@ -285,7 +285,7 @@ class Uploader extends Component {
 Uploader.propTypes = {
   author: PropTypes.number.isRequired,
   entity: PropTypes.number.isRequired,
-  entity_id: PropTypes.number,
+  entity_id: PropTypes.number
 }
 
 Uploader.defaultProps = {
