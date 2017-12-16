@@ -69,11 +69,6 @@ class LoginPage extends React.Component {
             {loggingIn &&
               <BeatLoader />
             }
-
-            {alert.message &&
-              <div className={`alert ${alert.type}`}>{alert.message}</div>
-            }
-
           </form>
 
         </div>
@@ -84,10 +79,8 @@ class LoginPage extends React.Component {
 
 function mapStateToProps(state) {
   const { loggingIn } = state.auth
-  const { alert } = state
   return {
-    loggingIn,
-    alert
+    loggingIn
   }
 }
 

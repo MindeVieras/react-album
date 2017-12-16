@@ -15,20 +15,34 @@
 }
 
 .uploader-file-input {
-    background: #00ABC7;
-    border: 1px solid #37B7CC;
-    border-radius: 3px;
-    color: #FFFFFF;
+  background: #00ABC7;
+  border: 1px solid #37B7CC;
+  border-radius: 3px;
+  color: #FFFFFF;
+  display: inline-block;
+  position: relative;
+  float: left;
+  padding: 7px 10px;
+  text-align: center;
+  width: 45px;
+  cursor: pointer;
+  .icon {
     display: inline-block;
-    position: relative;
-    float: left;
-    padding: 7px 10px;
-    text-align: center;
-    width: 45px;
-    cursor: pointer;
-    .icon {
-      display: inline-block;
-    }
+  }
+}
+
+.uploader-total-progress-bar-container {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: rgba(0,0,0,.25);
+  .progress-bar {
+    background: $blue;
+    height: inherit;
+  }
 }
 
 .react-fine-uploader-gallery-dropzone-upload-icon {
@@ -87,15 +101,7 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) inset;
     position: absolute;
 }
-.react-fine-uploader-gallery-total-progress-bar-container {
-    display: inline-block;
-    height: 25px;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 4px;
-    width: 70%;
-}
-.react-fine-uploader-gallery-progress-bar,
+
 .react-fine-uploader-gallery-total-progress-bar {
     background: #00ABC7;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) inset;

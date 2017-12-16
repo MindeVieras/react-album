@@ -14,6 +14,7 @@ import Filesize from './Partials/filesize'
 import RetryButton from './Partials/retry-button'
 import PauseResumeButton from './Partials/pause-resume-button'
 import ProgressBar from './Partials/progress-bar'
+import TotalProgressBar from './Partials/total-progress-bar'
 import Status from './Partials/status'
 import Thumbnail from './Partials/thumbnail'
 
@@ -133,6 +134,9 @@ class Uploader extends Component {
         multiple={ true }
         { ...dropzoneProps }
       >
+        <TotalProgressBar
+          uploader={ uploader }
+        />
         <FileInput
           uploader={ uploader }
           author={ author }
@@ -140,11 +144,6 @@ class Uploader extends Component {
           entity_id={ entity_id }
           status={ status }
           multiple={ true }
-        />
-        <ProgressBar
-          className='react-fine-uploader-gallery-total-progress-bar'
-          uploader={ uploader }
-          { ...progressBarProps }
         />
         <ReactCssTransitionGroup
           className='react-fine-uploader-gallery-files'
