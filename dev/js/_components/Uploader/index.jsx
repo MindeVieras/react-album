@@ -93,7 +93,7 @@ class Uploader extends Component {
   }
 
   render() {
-    const { author, entity } = this.props
+    const { author, entity, entity_id, status } = this.props
     const uploader = this.uploader
     const cancelButtonProps = getComponentProps('cancelButton', this.props)
     const dropzoneProps = getComponentProps('dropzone', this.props)
@@ -120,6 +120,8 @@ class Uploader extends Component {
         uploader={ uploader }
         author={ author }
         entity={ entity }
+        entity_id={ entity_id }
+        status={ status }
         multiple={ true }
       />
     } else {
@@ -131,10 +133,15 @@ class Uploader extends Component {
       </span>
       fileField = <span/>
     }
-
+    // console.log(this.props)
     return (
       <Dropzone
         uploader={ uploader }
+        author={ author }
+        entity={ entity }
+        entity_id={ entity_id }
+        status={ status }
+        multiple={ true }
         { ...dropzoneProps }
       >
         { uploaderText }
@@ -285,14 +292,13 @@ class Uploader extends Component {
 Uploader.propTypes = {
   author: PropTypes.number.isRequired,
   entity: PropTypes.number.isRequired,
-  entity_id: PropTypes.number
+  entity_id: PropTypes.number.isRequired
 }
 
 Uploader.defaultProps = {
   'cancelButton-children': <IoCloseCircled />,
   'deleteButton-children': <IoCloseCircled />,
   'dropzone-dropActiveClassName': 'react-fine-uploader-gallery-dropzone-active',
-  'dropzone-multiple': true,
   'pauseResumeButton-pauseChildren': <IoPause />,
   'pauseResumeButton-resumeChildren': <IoPlay />,
   'retryButton-children': <IoPlay />,

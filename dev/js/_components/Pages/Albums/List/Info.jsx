@@ -7,7 +7,7 @@ import { RingLoader } from 'react-spinners'
 
 import { Uploader } from '../../../Uploader'
 import { albumsActions } from '../../../../_actions'
-import { contentConstants } from '../../../../_constants'
+import { contentConstants, mediaConstants } from '../../../../_constants'
 
 class AlbumInfo extends Component {
 
@@ -46,11 +46,14 @@ class AlbumInfo extends Component {
               </div>
             </div>
             
-            <Uploader
-              author={selected_album.album.author || 0}
-              entity={contentConstants.TYPE_ALBUM}
-              entity_id={selected_album.album.id}
-            />
+            {selected_album.album.id && selected_album.album.author &&
+              <Uploader
+                author={selected_album.album.author}
+                entity={contentConstants.TYPE_ALBUM}
+                entity_id={selected_album.album.id}
+                status={mediaConstants.STATUS_ENABLED}
+              />
+            }
 
           </div>
         }

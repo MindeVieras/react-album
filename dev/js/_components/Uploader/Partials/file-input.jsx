@@ -52,12 +52,14 @@ class FileInput extends Component {
 FileInput.propTypes = {
   author: PropTypes.number.isRequired,
   entity: PropTypes.number.isRequired,
+  entity_id: PropTypes.number.isRequired,
+  status: PropTypes.number.isRequired,
   uploader: PropTypes.object.isRequired
 }
 
 const onFilesSelected = function(onChangeEvent) {
-  const { author, entity, uploader } = this.props
-  const params = { author, entity }
+  const { author, entity, entity_id, status, uploader } = this.props
+  const params = { author, entity, entity_id, status }
   uploader.methods.addFiles(onChangeEvent.target, params)
   this._resetInput()
 }
