@@ -3,7 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { AlbumsList } from './List'
-import { AlbumInfo } from './Info'
+import AlbumInfo from './Info'
 
 import { headerActions, footerActions } from '../../../../_actions'
 
@@ -13,7 +13,6 @@ class AlbumsPage extends React.Component {
     this.props.dispatch(headerActions.setTitle('Album'))
     this.props.dispatch(footerActions.buttonsClear())
     this.props.dispatch(footerActions.buttonSet('', 'newAlbum', 'success'))
-    // this.props.dispatch(footerActions.buttonSet('New album', '/album-create', 'success'))
   }
 
   render() {

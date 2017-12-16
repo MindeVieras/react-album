@@ -5,9 +5,9 @@ import { connect } from 'react-redux'
 
 import { RingLoader } from 'react-spinners'
 
-import { Uploader } from '../../../Uploader'
-import { albumsActions } from '../../../../_actions'
-import { contentConstants, mediaConstants } from '../../../../_constants'
+import { Uploader } from '../../../../Uploader'
+import { albumsActions } from '../../../../../_actions'
+import { contentConstants, mediaConstants } from '../../../../../_constants'
 
 class AlbumInfo extends Component {
 
@@ -74,5 +74,4 @@ function mapStateToProps(state) {
   }
 }
 
-const connectedAlbumInfo = connect(mapStateToProps)(AlbumInfo)
-export { connectedAlbumInfo as AlbumInfo }
+export default connect(mapStateToProps)(AlbumInfo)

@@ -79,7 +79,6 @@ class Uploader extends Component {
     this._onComplete = (id, name, responseJSON, xhr) => {
       const { entity_id, dispatch } = this.props
       const file = responseJSON.data
-      mediaService.attach(file.media_id, entity_id)
     }
   }
 
@@ -113,17 +112,8 @@ class Uploader extends Component {
     
     // Remove/Add dropzone text and fileField if any visableFiles
     let uploaderText = ''
-    let fileField = ''
     if (this.state.visibleFiles.length > 0) {
       uploaderText = <span/>
-      fileField = <FileInput
-        uploader={ uploader }
-        author={ author }
-        entity={ entity }
-        entity_id={ entity_id }
-        status={ status }
-        multiple={ true }
-      />
     } else {
       uploaderText = <span className="react-fine-uploader-gallery-dropzone-content">
         <div className="react-fine-uploader-gallery-dropzone-upload-icon">
@@ -131,7 +121,6 @@ class Uploader extends Component {
         </div>
         Click or Drop files here
       </span>
-      fileField = <span/>
     }
     // console.log(this.props)
     return (
@@ -144,7 +133,14 @@ class Uploader extends Component {
         multiple={ true }
         { ...dropzoneProps }
       >
-        { uploaderText }
+        <FileInput
+          uploader={ uploader }
+          author={ author }
+          entity={ entity }
+          entity_id={ entity_id }
+          status={ status }
+          multiple={ true }
+        />
         <ProgressBar
           className='react-fine-uploader-gallery-total-progress-bar'
           uploader={ uploader }
@@ -248,7 +244,7 @@ class Uploader extends Component {
               )
             })
           }
-          { fileField }
+          { uploaderText }
         </ReactCssTransitionGroup>
       </Dropzone>
     )

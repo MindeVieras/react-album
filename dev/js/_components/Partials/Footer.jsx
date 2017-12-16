@@ -31,17 +31,6 @@ class Footer extends Component {
             </div>
           )
         
-        if (link.action === 'albumCreate')
-          return (
-            <div
-              key={i}
-              onClick={() => this.props.dispatch(submit('album_create'))}
-              className={`btn btn-sm btn-${link.type}`}
-            >
-              {link.name}
-            </div>
-          )
-        
         if (link.action === 'newAlbum')
           return (
             <NewAlbum

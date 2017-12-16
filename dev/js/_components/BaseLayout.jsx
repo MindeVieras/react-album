@@ -11,7 +11,6 @@ import Footer from '../_components/Partials/Footer'
 import {
   PrivateRoute,
   AlbumsPage,
-  AlbumCreatePage,
   UsersPage,
   UserCreatePage} from '../_components'
 
@@ -25,7 +24,6 @@ class BaseLayout extends Component {
     history.listen((location, action) => {
       // clear alert and uoloader on location change
       dispatch(uploaderActions.clear())
-      dispatch(alertActions.clear())
     })
   }
 
@@ -54,7 +52,6 @@ class BaseLayout extends Component {
         <div id="app_content">
           <Switch>
             <PrivateRoute exact path="/" component={AlbumsPage} />
-            <PrivateRoute exact path="/album-create" component={AlbumCreatePage} />
             <PrivateRoute path="/users" component={UsersPage} />
             <PrivateRoute path="/user-create" component={UserCreatePage} />
             <PrivateRoute component={NoMatch} />
