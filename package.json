@@ -27,6 +27,7 @@
     "react-select": "^1.0.0-rc.10",
     "react-spinners": "^0.2.5",
     "react-toggle": "^4.0.2",
+    "react-tooltip": "^3.4.0",
     "react-transition-group": "^1.2.1",
     "redux": "^3.7.2",
     "redux-form": "^7.1.2",

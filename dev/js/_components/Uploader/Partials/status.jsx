@@ -39,25 +39,24 @@ class Status extends Component {
 
   componentWillUnmount() {
     this._unmounted = true
-    this._unregisterStatusChangeHandler()
+    this.props.uploader.off('statusChange', this._onStatusChange)
   }
 
   render() {
+
+    const status = this.props.fromServer ? 'Saved' : this.state.status
+
     return (
-      <span className={ `react-fine-uploader-status ${this.props.className}` }>
-        { this.state.status }
+      <span>
+        { status }
       </span>
     )
-  }
-
-  _unregisterStatusChangeHandler() {
-    this.props.uploader.off('statusChange', this._onStatusChange)
   }
 }
 
 Status.propTypes = {
+  fromServer: PropTypes.bool,
   id: PropTypes.number.isRequired,
-  className: PropTypes.string,
   text: PropTypes.shape({
     canceled: PropTypes.string,
     deleted: PropTypes.string,
@@ -74,7 +73,6 @@ Status.propTypes = {
 }
 
 Status.defaultProps = {
-  className: '',
   text: {
     canceled: 'Canceled',
     deleted: 'Deleted',

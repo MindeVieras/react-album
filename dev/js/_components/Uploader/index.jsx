@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import FineUploaderTraditional from 'fine-uploader-wrappers'
 import { CSSTransitionGroup as ReactCssTransitionGroup } from 'react-transition-group'
+import ReactTooltip from 'react-tooltip'
 
 import CancelButton from './Partials/cancel-button'
 import DeleteButton from './Partials/delete-button'
@@ -101,8 +102,6 @@ class Uploader extends Component {
     const filenameProps = getComponentProps('filename', this.props)
     const filesizeProps = getComponentProps('filesize', this.props)
     const retryButtonProps = getComponentProps('retryButton', this.props)
-    const statusProps = getComponentProps('status', this.props)
-    const thumbnailProps = getComponentProps('thumbnail', this.props)
 
     const chunkingEnabled = uploader.options.chunking && uploader.options.chunking.enabled
     const deleteEnabled = uploader.options.deleteFile && uploader.options.deleteFile.enabled
@@ -133,9 +132,11 @@ class Uploader extends Component {
         multiple={ true }
         { ...dropzoneProps }
       >
+        
         <TotalProgressBar
           uploader={ uploader }
         />
+        
         <FileInput
           uploader={ uploader }
           author={ author }
@@ -144,6 +145,7 @@ class Uploader extends Component {
           status={ status }
           multiple={ true }
         />
+
         <ReactCssTransitionGroup
           className="uploader-files"
           component="ul"
@@ -160,52 +162,65 @@ class Uploader extends Component {
                   key={ id }
                   className="uploader-file"
                 >
+                  
                   <Thumbnail
                     id={ id }
                     fromServer={ fromServer }
                     uploader={ uploader }
-                    { ...thumbnailProps }
+                    maxSize={ 240 }
                   />
+                  
                   <ProgressBar
                     id={ id }
                     uploader={ uploader }
                   />
-                  {status === 'upload successful' &&
-                    <span>
-                      <div className='react-fine-uploader-gallery-upload-success-icon'>
-                        <IoCheckmarkCircled />
+                  
+                  <div className="footer">
+                    <div className="status-bar">
+                      <div className="status">
+                        <Status
+                          id={ id }
+                          uploader={ uploader }
+                          fromServer={ fromServer }
+                        />
                       </div>
-                      <div className='react-fine-uploader-gallery-thumbnail-icon-backdrop' />
-                    </span>
-                  }
-                  {status === 'upload failed' &&
-                    <span>
-                      <div className='react-fine-uploader-gallery-upload-failed-icon'>
-                        <IoBug />
+                      <div className="icons">
+                        {status === 'upload successful' &&
+                          <div
+                            className="icon success"
+                            data-tip="Successfuly uploaded"
+                          >
+                            <IoCheckmarkCircled />
+                            <ReactTooltip />
+                          </div>
+                        }
+                        {status === 'upload failed' &&
+                          <div
+                            className="icon failed"
+                            data-tip="Error saving file"
+                          >
+                            <IoBug />
+                            <ReactTooltip />
+                          </div>
+                        }
                       </div>
-                      <div className='react-fine-uploader-gallery-thumbnail-icon-backdrop' />
-                    </span>
-                  }
-                  <div className='react-fine-uploader-gallery-file-footer'>
-                    <Filename
-                      className='react-fine-uploader-gallery-filename'
-                      id={ id }
-                      uploader={ uploader }
-                      { ...filenameProps }
-                    />
-                    <Status
-                      className='react-fine-uploader-gallery-status'
-                      id={ id }
-                      uploader={ uploader }
-                      { ...statusProps }
-                    />
-                    <Filesize
-                      className='react-fine-uploader-gallery-filesize'
-                      id={ id }
-                      uploader={ uploader }
-                      { ...filesizeProps }
-                    />
+                    </div>
+                    <div className="info">
+                      <Filename
+                        className='react-fine-uploader-gallery-filename'
+                        id={ id }
+                        uploader={ uploader }
+                        { ...filenameProps }
+                      />
+                      <Filesize
+                        className='react-fine-uploader-gallery-filesize'
+                        id={ id }
+                        uploader={ uploader }
+                        { ...filesizeProps }
+                      />
+                    </div>
                   </div>
+
                   <CancelButton
                     className='react-fine-uploader-gallery-cancel-button'
                     id={ id }
@@ -291,8 +306,7 @@ Uploader.defaultProps = {
   'dropzone-dropActiveClassName': 'react-fine-uploader-gallery-dropzone-active',
   'pauseResumeButton-pauseChildren': <IoPause />,
   'pauseResumeButton-resumeChildren': <IoPlay />,
-  'retryButton-children': <IoPlay />,
-  'thumbnail-maxSize': 240
+  'retryButton-children': <IoPlay />
 }
 
 const getComponentProps = (componentName, allProps) => {

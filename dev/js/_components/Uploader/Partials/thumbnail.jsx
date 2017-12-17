@@ -5,8 +5,6 @@ import PropTypes from 'prop-types'
 import { RingLoader } from 'react-spinners'
 import { IoDocument } from 'react-icons/lib/io'
 
-import Placeholder from './placeholder'
-
 class Thumbnail extends Component {
 
   constructor() {
@@ -22,8 +20,7 @@ class Thumbnail extends Component {
       this.props.id,
       this._canvas,
       this.props.maxSize,
-      this.props.fromServer,
-      this.props.customResizer
+      this.props.fromServer
     ).then(
       () => {
         this.setState({
@@ -42,7 +39,10 @@ class Thumbnail extends Component {
 
   render() {
     return (
-      <span className="uploader-thumbnail">
+      <span
+        className="uploader-thumbnail"
+        style={{height: this.props.maxSize, width: this.props.maxSize}}
+      >
         <canvas
           className="thumbnail"
           hidden={ !this.state.drawComplete || this._failure }
@@ -58,23 +58,27 @@ class Thumbnail extends Component {
   }
 
   get _maybePlaceholder() {
+    const style = {
+      height: this.props.maxSize,
+      width: this.props.maxSize
+    }
     if (this._failure) {      
       return (
-        <Placeholder
-          className={ `react-fine-uploader-thumbnail ${this.props.className || ''}` }
-          image={ <IoDocument /> }
-          size={ this.props.maxSize }
-          status={ 'not-available' }
-        />
+        <div
+          className="placeholder not-available"
+          style={ style }
+        >
+          <IoDocument />
+        </div>
       )
     } else if (!this.state.drawComplete) {
       return (
-        <Placeholder
-          className={ `react-fine-uploader-thumbnail ${this.props.className || ''}` }
-          image={ <RingLoader /> }
-          size={ this.props.maxSize }
-          status={ 'waiting' }
-        />
+        <div
+          className="placeholder waiting"
+          style={ style }
+        >
+          <RingLoader />
+        </div>
       )
     }
 
@@ -83,16 +87,10 @@ class Thumbnail extends Component {
 }
 
 Thumbnail.propTypes = {
-  customResizer: PropTypes.func,
   fromServer: PropTypes.bool,
   id: PropTypes.number.isRequired,
-  maxSize: PropTypes.number,
-  uploader: PropTypes.object.isRequired,
-  waitingPlaceholder: PropTypes.element
-}
-
-Thumbnail.defaultProps = {
-  maxSize: 120
+  maxSize: PropTypes.number.isRequired,
+  uploader: PropTypes.object.isRequired
 }
 
 export default Thumbnail
