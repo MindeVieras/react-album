@@ -37,9 +37,8 @@ class AlbumInfo extends Component {
               />
             }
             
-            {selected_album.album.id && selected_album.album.author &&
+            {selected_album.album.id &&
               <Uploader
-                author={selected_album.album.author}
                 entity={contentConstants.TYPE_ALBUM}
                 entity_id={selected_album.album.id}
                 status={mediaConstants.STATUS_ENABLED}

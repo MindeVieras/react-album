@@ -55,7 +55,6 @@ class Uploader extends Component {
     const statusEnum = uploader.qq.status
 
     this._onStatusChange = (id, oldStatus, status) => {
-      const visibleFiles = this.state.visibleFiles
       // Submitting files
       if (status === statusEnum.SUBMITTED) {
         this.props.dispatch(uploaderActions.submitFile(id, status, false))
@@ -125,7 +124,7 @@ class Uploader extends Component {
         Click or Drop files here
       </span>
     }
-    console.log(this.props.files)
+    console.log(this.props.author)
     return (
       <Dropzone
         uploader={ uploader }
@@ -268,40 +267,6 @@ class Uploader extends Component {
       </Dropzone>
     )
   }
-
-  _removeVisibleFile(id) {
-    const visibleFileIndex = this._findFileIndex(id)
-
-    if (visibleFileIndex >= 0) {
-      const visibleFiles = this.state.visibleFiles
-
-      visibleFiles.splice(visibleFileIndex, 1)
-      this.setState({ visibleFiles })
-    }
-  }
-
-  _updateVisibleFileStatus(id, status) {
-    this.state.visibleFiles.some(file => {
-      if (file.id === id) {
-        file.status = status
-        this.setState({ visibleFiles: this.state.visibleFiles })
-        return true
-      }
-    })
-  }
-
-  _findFileIndex(id) {
-    let visibleFileIndex = -1
-
-    this.state.visibleFiles.some((file, index) => {
-      if (file.id === id) {
-        visibleFileIndex = index
-        return true
-      }
-    })
-
-    return visibleFileIndex
-  }
 }
 
 Uploader.propTypes = {
@@ -341,8 +306,9 @@ const isFileGone = (statusToCheck, statusEnum) => {
 }
 
 function mapStateToProps(state) {
-  const { uploader } = state
+  const { auth, uploader } = state
   return {
+    author: auth.user.id,
     files: uploader.files
   }
 }
