@@ -4,40 +4,14 @@ import PropTypes from 'prop-types'
 
 class Filename extends Component {
 
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      filename: props.uploader.methods.getName(props.id)
-    }
-
-    this._interceptSetName()
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return nextState.filename !== this.state.filename
-  }
-
   render() {
+    const { id, uploader } = this.props
+    const filename = uploader.methods.getName(id)
     return (
-      <span className={ `react-fine-uploader-filename ${this.props.className || ''}` }>
-        { this.state.filename }
-      </span>
+      <div className="filename">
+        { filename }
+      </div>
     )
-  }
-
-  _interceptSetName() {
-    const oldSetName = this.props.uploader.methods.setName
-
-    this.props.uploader.methods.setName = (id, newName) => {
-      oldSetName.call(this.props.uploader.methods, id, newName)
-
-      if (id === this.props.id) {
-        this.setState({
-          filename: newName
-        })
-      }
-    }
   }
 }
 

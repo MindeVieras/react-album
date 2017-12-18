@@ -103,11 +103,27 @@
       .icons {
         float: right;
         .icon {
+          display: inline-block;
+          margin-left: 5px;
           font-size: 25px;
           height: 25px;
           &.success {color:$green}
           &.failed {color:$red}
         }
+      }
+    }
+    .info {
+      display: inline-block;
+      width: 100%;
+      height: 22px;
+      line-height: 22px;
+      .filename {
+        display: inline-block;
+        float: left;
+        font-weight: 700;
+        font-size: 15px;
+        width: 175px;
+        overflow: hidden;
       }
     }
   }

@@ -83,7 +83,9 @@ video {
   position: relative;
 }
 
-
+.ui-marquee {
+  text-overflow: ellipsis;
+}
 
 .pull-right {
   float: right !important;

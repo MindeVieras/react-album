@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 import { RingLoader } from 'react-spinners'
 
-import { albumsActions } from '../../../../_actions'
+import { albumsActions, uploaderActions } from '../../../../_actions'
 
 class AlbumsList extends React.Component {
 
@@ -24,6 +24,7 @@ class AlbumsList extends React.Component {
 
   onAlbumSelect(id) {
     this.props.dispatch(albumsActions.getOne(id))
+    this.props.dispatch(uploaderActions.clearFiles())
     this.setState({
       selectedAlbum: id
     })

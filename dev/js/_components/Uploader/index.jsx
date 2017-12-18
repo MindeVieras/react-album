@@ -19,7 +19,7 @@ import TotalProgressBar from './Partials/total-progress-bar'
 import Status from './Partials/status'
 import Thumbnail from './Partials/thumbnail'
 
-import { IoCloseCircled, IoCheckmarkCircled, IoUpload, IoPause, IoPlay, IoBug } from 'react-icons/lib/io'
+import { IoCloseCircled, IoCheckmarkCircled, IoClipboard, IoUpload, IoPause, IoPlay, IoBug } from 'react-icons/lib/io'
 
 import { authHeader, baseServerUrl } from '../../_helpers'
 import { uploaderActions } from '../../_actions'
@@ -29,10 +29,6 @@ class Uploader extends Component {
 
   constructor(props) {
     super(props)
-
-    this.state = {
-      visibleFiles: []
-    }
 
     this.uploader = new FineUploaderTraditional({
       options: {
@@ -55,32 +51,40 @@ class Uploader extends Component {
       }
     })
     // console.log(this.uploader)
-    const statusEnum = this.uploader.qq.status
+    const uploader = this.uploader
+    const statusEnum = uploader.qq.status
 
     this._onStatusChange = (id, oldStatus, status) => {
       const visibleFiles = this.state.visibleFiles
-
+      // Submitting files
       if (status === statusEnum.SUBMITTED) {
-        visibleFiles.push({ id })
-        this.setState({ visibleFiles })
+        this.props.dispatch(uploaderActions.submitFile(id, status, false))
       }
-      else if (isFileGone(status, statusEnum)) {
-        this._removeVisibleFile(id)
-      }
-      else if (status === statusEnum.UPLOAD_SUCCESSFUL || status === statusEnum.UPLOAD_FAILED) {
-        if (status === statusEnum.UPLOAD_SUCCESSFUL) {
-          const visibleFileIndex = this._findFileIndex(id)
-          if (visibleFileIndex < 0) {
-            visibleFiles.push({ id, fromServer: true })
-          }
+      // On server or Uploaded
+      else if (status === statusEnum.UPLOAD_SUCCESSFUL) {
+        if (oldStatus == null) {
+          this.props.dispatch(uploaderActions.submitFile(id, status, true))
         }
-        this._updateVisibleFileStatus(id, status)
+      }
+      // Remove file
+      else if (isFileGone(status, statusEnum)) {
+        this.props.dispatch(uploaderActions.removeFile(id))
       }
     }
 
     this._onComplete = (id, name, responseJSON, xhr) => {
-      const { entity_id, dispatch } = this.props
       const file = responseJSON.data
+      const mime = file.mime
+
+      // If IMAGE
+      if (mime.includes('image')) {
+        // console.log(file)
+
+      }
+      // If VIDEO
+      else if (mime.includes('video')) {
+        // console.log('video')
+      }
     }
   }
 
@@ -91,15 +95,15 @@ class Uploader extends Component {
 
   componentWillUnmount() {
     this.uploader.off('statusChange', this._onStatusChange)
+    this.uploader.off('complete', this._onComplete)
   }
 
   render() {
-    const { author, entity, entity_id, status } = this.props
+    const { author, entity, entity_id, status, files } = this.props
     const uploader = this.uploader
     const cancelButtonProps = getComponentProps('cancelButton', this.props)
     const dropzoneProps = getComponentProps('dropzone', this.props)
     const fileInputProps = getComponentProps('fileInput', this.props)
-    const filenameProps = getComponentProps('filename', this.props)
     const filesizeProps = getComponentProps('filesize', this.props)
     const retryButtonProps = getComponentProps('retryButton', this.props)
 
@@ -107,11 +111,11 @@ class Uploader extends Component {
     const deleteEnabled = uploader.options.deleteFile && uploader.options.deleteFile.enabled
     const deleteButtonProps = deleteEnabled && getComponentProps('deleteButton', this.props)
     const pauseResumeButtonProps = chunkingEnabled && getComponentProps('pauseResumeButton', this.props)
-    // console.log(initialFiles)
+    // console.log(this.state)
     
     // Remove/Add dropzone text and fileField if any visableFiles
     let uploaderText = ''
-    if (this.state.visibleFiles.length > 0) {
+    if (files.length > 0) {
       uploaderText = <span/>
     } else {
       uploaderText = <span className="react-fine-uploader-gallery-dropzone-content">
@@ -121,7 +125,7 @@ class Uploader extends Component {
         Click or Drop files here
       </span>
     }
-    // console.log(this.props)
+    console.log(this.props.files)
     return (
       <Dropzone
         uploader={ uploader }
@@ -156,7 +160,7 @@ class Uploader extends Component {
           transitionName="uploader-files"
         >
           {
-            this.state.visibleFiles.map(({ id, status, fromServer }) => {
+            files.map(({ id, status, fromServer }) => {
               return (
                 <li
                   key={ id }
@@ -185,6 +189,13 @@ class Uploader extends Component {
                         />
                       </div>
                       <div className="icons">
+                        <div
+                          className="icon success"
+                          data-tip="Metadata saved"
+                        >
+                          <IoClipboard />
+                          <ReactTooltip />
+                        </div>
                         {status === 'upload successful' &&
                           <div
                             className="icon success"
@@ -207,10 +218,9 @@ class Uploader extends Component {
                     </div>
                     <div className="info">
                       <Filename
-                        className='react-fine-uploader-gallery-filename'
+                        className="react-fine-uploader-gallery-filename"
                         id={ id }
                         uploader={ uploader }
-                        { ...filenameProps }
                       />
                       <Filesize
                         className='react-fine-uploader-gallery-filesize'
@@ -297,7 +307,8 @@ class Uploader extends Component {
 Uploader.propTypes = {
   author: PropTypes.number.isRequired,
   entity: PropTypes.number.isRequired,
-  entity_id: PropTypes.number.isRequired
+  entity_id: PropTypes.number.isRequired,
+  files: PropTypes.array.isRequired
 }
 
 Uploader.defaultProps = {
@@ -329,11 +340,10 @@ const isFileGone = (statusToCheck, statusEnum) => {
   ].indexOf(statusToCheck) >= 0
 }
 
-// export default Uploader
 function mapStateToProps(state) {
-  const { auth, upload } = state
+  const { uploader } = state
   return {
-    auth
+    files: uploader.files
   }
 }
 
