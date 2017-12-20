@@ -44,7 +44,7 @@ class Status extends Component {
 
   render() {
 
-    const status = this.props.fromServer ? 'Saved' : this.state.status
+    const status = this.props.fromServer ? 'On server' : this.state.status
 
     return (
       <span>

@@ -5,21 +5,20 @@ import { connect } from 'react-redux'
 import FineUploaderTraditional from 'fine-uploader-wrappers'
 import { CSSTransitionGroup as ReactCssTransitionGroup } from 'react-transition-group'
 import ReactTooltip from 'react-tooltip'
+import { toastr } from 'react-redux-toastr'
 
 import CancelButton from './Partials/cancel-button'
-import DeleteButton from './Partials/delete-button'
+import RemoveButton from './Partials/remove-button'
 import Dropzone from './Partials/dropzone'
 import FileInput from './Partials/file-input'
 import Filename from './Partials/filename'
 import Filesize from './Partials/filesize'
-import RetryButton from './Partials/retry-button'
-import PauseResumeButton from './Partials/pause-resume-button'
 import ProgressBar from './Partials/progress-bar'
 import TotalProgressBar from './Partials/total-progress-bar'
 import Status from './Partials/status'
 import Thumbnail from './Partials/thumbnail'
 
-import { IoCloseCircled, IoCheckmarkCircled, IoClipboard, IoUpload, IoPause, IoPlay, IoBug } from 'react-icons/lib/io'
+import { IoCloseCircled, IoCheckmarkCircled, IoClipboard, IoUpload, IoBug } from 'react-icons/lib/io'
 
 import { authHeader, baseServerUrl } from '../../_helpers'
 import { uploaderActions } from '../../_actions'
@@ -44,13 +43,18 @@ class Uploader extends Component {
           customHeaders: authHeader(),
           endpoint: baseServerUrl+'/api/upload/get-initial-files/'+props.entity_id
         },
-        // cors: {
-        //   expected: true,
-        //   // sendCredentials: true
-        // }
+        deleteFile: {
+          customHeaders: authHeader(),
+          enabled: true,
+          method: 'POST',
+          endpoint: baseServerUrl+'/api/media/put-to-trash',
+          params: {
+            mikas: 'dsdasa'
+          }
+        }
       }
     })
-    // console.log(this.uploader)
+
     const uploader = this.uploader
     const statusEnum = uploader.qq.status
 
@@ -85,31 +89,38 @@ class Uploader extends Component {
         // console.log('video')
       }
     }
+
+    this._onDeleteComplete = (id, xhr, isError) => {
+      const res = JSON.parse(xhr.responseText)
+      if (res.ack == 'ok') {
+        toastr.success('Success', res.msg)
+      } else {
+        toastr.error('Error', res.msg)
+      }
+    }
   }
 
   componentDidMount() {
     this.uploader.on('statusChange', this._onStatusChange)
     this.uploader.on('complete', this._onComplete)
+    this.uploader.on('deleteComplete', this._onDeleteComplete)
   }
 
   componentWillUnmount() {
     this.uploader.off('statusChange', this._onStatusChange)
     this.uploader.off('complete', this._onComplete)
+    this.uploader.off('deleteComplete', this._onDeleteComplete)
   }
 
   render() {
     const { author, entity, entity_id, status, files } = this.props
     const uploader = this.uploader
-    const cancelButtonProps = getComponentProps('cancelButton', this.props)
-    const dropzoneProps = getComponentProps('dropzone', this.props)
-    const fileInputProps = getComponentProps('fileInput', this.props)
-    const filesizeProps = getComponentProps('filesize', this.props)
-    const retryButtonProps = getComponentProps('retryButton', this.props)
 
-    const chunkingEnabled = uploader.options.chunking && uploader.options.chunking.enabled
+    const cancelButtonProps = getComponentProps('cancelButton', this.props)
+    const filesizeProps = getComponentProps('filesize', this.props)
+
     const deleteEnabled = uploader.options.deleteFile && uploader.options.deleteFile.enabled
-    const deleteButtonProps = deleteEnabled && getComponentProps('deleteButton', this.props)
-    const pauseResumeButtonProps = chunkingEnabled && getComponentProps('pauseResumeButton', this.props)
+    // console.log(deleteEnabled)
     // console.log(this.state)
     
     // Remove/Add dropzone text and fileField if any visableFiles
@@ -117,14 +128,14 @@ class Uploader extends Component {
     if (files.length > 0) {
       uploaderText = <span/>
     } else {
-      uploaderText = <span className="react-fine-uploader-gallery-dropzone-content">
-        <div className="react-fine-uploader-gallery-dropzone-upload-icon">
+      uploaderText = <span className="dropzone-text">
+        <div className="icon">
           <IoUpload />
         </div>
         Click or Drop files here
       </span>
     }
-    console.log(this.props.author)
+
     return (
       <Dropzone
         uploader={ uploader }
@@ -133,7 +144,7 @@ class Uploader extends Component {
         entity_id={ entity_id }
         status={ status }
         multiple={ true }
-        { ...dropzoneProps }
+        dropActiveClassName="active"
       >
         
         <TotalProgressBar
@@ -229,35 +240,11 @@ class Uploader extends Component {
                       />
                     </div>
                   </div>
-
-                  <CancelButton
-                    className='react-fine-uploader-gallery-cancel-button'
+                  <RemoveButton
                     id={ id }
                     uploader={ uploader }
-                    { ...cancelButtonProps }
+                    status={ status }
                   />
-                  <RetryButton
-                    className='react-fine-uploader-gallery-retry-button'
-                    id={ id }
-                    uploader={ uploader }
-                    { ...retryButtonProps }
-                  />
-                  {deleteEnabled &&
-                    <DeleteButton
-                      className='react-fine-uploader-gallery-delete-button'
-                      id={ id }
-                      uploader={ uploader }
-                      { ...deleteButtonProps }
-                    />
-                  }
-                  {chunkingEnabled &&
-                    <PauseResumeButton
-                      className='react-fine-uploader-gallery-pause-resume-button'
-                      id={ id }
-                      uploader={ uploader }
-                      { ...pauseResumeButtonProps }
-                    />
-                  }
                 </li>
               )
             })
@@ -277,12 +264,7 @@ Uploader.propTypes = {
 }
 
 Uploader.defaultProps = {
-  'cancelButton-children': <IoCloseCircled />,
-  'deleteButton-children': <IoCloseCircled />,
-  'dropzone-dropActiveClassName': 'react-fine-uploader-gallery-dropzone-active',
-  'pauseResumeButton-pauseChildren': <IoPause />,
-  'pauseResumeButton-resumeChildren': <IoPlay />,
-  'retryButton-children': <IoPlay />
+  'cancelButton-children': <IoCloseCircled />
 }
 
 const getComponentProps = (componentName, allProps) => {

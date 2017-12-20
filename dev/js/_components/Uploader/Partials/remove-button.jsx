@@ -2,7 +2,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-class DeleteButton extends Component {
+import { IoCloseCircled } from 'react-icons/lib/io'
+
+class RemoveButton extends Component {
 
   constructor(props) {
     super(props)
@@ -39,50 +41,41 @@ class DeleteButton extends Component {
   }
 
   componentDidMount() {
-    this.props.uploader.on('statusChange', this._onStatusChange)
+    // this.props.uploader.on('statusChange', this._onStatusChange)
   }
 
   componentWillUnmount() {
-    this._unmounted = true
-    this._unregisterStatusChangeHandler()
+    // this._unmounted = true
+    // this.props.uploader.off('statusChange', this._onStatusChange)
+  }
+
+  handleClick() {
+    const { id, uploader, status } = this.props
+    if (status === 'submitted') {
+      uploader.methods.cancel(id)
+    }
+    else if (status === 'upload successful') {
+      console.log(id)
+      uploader.methods.deleteFile(id)
+    }
   }
 
   render() {
-    const { children, onlyRenderIfDeletable, id, uploader, ...elementProps } = this.props // eslint-disable-line no-unused-vars
-    const content = children || 'Delete'
-
-    if (this.state.deletable || this.state.deleting || !onlyRenderIfDeletable) {
-      return (
-        <button
-          aria-label='delete'
-          className={ `react-fine-uploader-delete-button ${this.props.className || ''}` }
-          disabled={ !this.state.deletable || this.state.deleting }
-          onClick={ this.state.deletable && !this.state.deleting && this._onClick }
-          type='button'
-          { ...elementProps }
-        >
-          { content }
-        </button>
-      )
-    }
-
-    return null
-  }
-
-  _unregisterStatusChangeHandler() {
-    this.props.uploader.off('statusChange', this._onStatusChange)
+    return (
+      <div
+        className="remove-button"
+        onClick={ () => this.handleClick() }
+      >
+        <IoCloseCircled />
+      </div>
+    )
   }
 }
 
-DeleteButton.propTypes = {
-  children: PropTypes.node,
+RemoveButton.propTypes = {
   id: PropTypes.number.isRequired,
-  onlyRenderIfDeletable: PropTypes.bool,
-  uploader: PropTypes.object.isRequired
-}
-
-DeleteButton.defaultProps = {
-  onlyRenderIfDeletable: true
+  uploader: PropTypes.object.isRequired,
+  status: PropTypes.string.isRequired
 }
 
 const isDeletable = (statusToCheck, statusEnum) => {
@@ -92,4 +85,4 @@ const isDeletable = (statusToCheck, statusEnum) => {
   ].indexOf(statusToCheck) >= 0
 }
 
-export default DeleteButton
+export default RemoveButton

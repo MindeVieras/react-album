@@ -8,13 +8,17 @@ import { RingLoader } from 'react-spinners'
 import Bar from './Bar'
 
 import { Uploader } from '../../../../Uploader'
-import { albumsActions } from '../../../../../_actions'
+import { albumsActions, uploaderActions } from '../../../../../_actions'
 import { contentConstants, mediaConstants } from '../../../../../_constants'
 
 class AlbumInfo extends Component {
 
   componentDidMount() {
     this.props.dispatch(albumsActions.getOne(53))
+  }
+
+  componentWillUpdate() {
+    this.props.dispatch(uploaderActions.clearFiles())
   }
 
   render() {

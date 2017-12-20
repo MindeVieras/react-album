@@ -83,7 +83,7 @@ DropzoneElement.propTypes = {
 }
 
 DropzoneElement.defaultProps = {
-  dropActiveClassName: 'react-fine-uploader-dropzone-active'
+  dropActiveClassName: 'active'
 }
 
 const getElementProps = actualProps => {

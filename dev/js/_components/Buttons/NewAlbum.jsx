@@ -2,7 +2,7 @@
 import  React, { Component } from 'react'
 import { connect } from 'react-redux'
 import moment from 'moment'
-import {toastr} from 'react-redux-toastr'
+import { toastr } from 'react-redux-toastr'
 
 import { IoPlusRound } from 'react-icons/lib/io'
 

@@ -11,6 +11,22 @@
   right: 0;
   bottom: 0;
   top: 40px;
+  .dropzone-text {
+    font-size: 36px;
+    left: 0;
+    opacity: 0.25;
+    position: absolute;
+    text-align: center;
+    top: 38%;
+    width: 100%;
+    .icon {
+      display: inline-block;
+      font-size: 58px;
+    }
+  }
+  &.active {
+    background-color: rgba(0,0,0,0.5);
+  }
 }
 
 .uploader-file-input {
@@ -127,6 +143,17 @@
       }
     }
   }
+  .remove-button {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    font-size: 30px;
+    color: rgba(80,80,80,0.75);
+    cursor: pointer;
+    &:hover {
+      color: $grey;
+    }
+  }
 }
 
 .react-fine-uploader-gallery-files-enter {
@@ -144,34 +171,9 @@
     transition: opacity 300ms ease-in;
 }
 
-
-.react-fine-uploader-gallery-dropzone-upload-icon {
-  svg {
-    height: 36px;
-    margin-bottom: -6px;
-    margin-right: 10px;
-    width: 36px;
-  }
-}
-
-.react-fine-uploader-gallery-nodrop-container {
-    border: 2px solid #00ABC7;
-}
-
 .react-fine-uploader-gallery-dropzone-active  {
     background: #FDFDFD;
     border: 2px solid #00ABC7;
-}
-
-.react-fine-uploader-gallery-dropzone-content,
-.react-fine-uploader-gallery-nodrop-content {
-    font-size: 36px;
-    left: 0;
-    opacity: 0.25;
-    position: absolute;
-    text-align: center;
-    top: 38%;
-    width: 100%;
 }
 
 .react-fine-uploader-gallery-file-input-container:hover {
@@ -192,43 +194,4 @@
 .react-fine-uploader-gallery-filesize {
     display: block;
     float: right;
-}
-
-
-
-.react-fine-uploader-gallery-cancel-button:hover svg,
-.react-fine-uploader-gallery-delete-button:hover svg,
-.react-fine-uploader-gallery-pause-resume-button:hover svg,
-.react-fine-uploader-gallery-retry-button:hover svg {
-    fill: grey;
-}
-.react-fine-uploader-gallery-cancel-button:focus,
-.react-fine-uploader-gallery-delete-button:focus,
-.react-fine-uploader-gallery-pause-resume-button:focus,
-.react-fine-uploader-gallery-retry-button:focus {
-    outline: none;
-}
-.react-fine-uploader-gallery-cancel-button:focus svg,
-.react-fine-uploader-gallery-delete-button:focus svg,
-.react-fine-uploader-gallery-pause-resume-button:focus svg,
-.react-fine-uploader-gallery-retry-button:focus svg {
-    fill: grey;
-}
-.react-fine-uploader-gallery-cancel-button,
-.react-fine-uploader-gallery-delete-button,
-.react-fine-uploader-gallery-pause-resume-button,
-.react-fine-uploader-gallery-retry-button {
-    background: transparent;
-    border: 0;
-    position: absolute;
-}
-.react-fine-uploader-gallery-cancel-button,
-.react-fine-uploader-gallery-delete-button {
-    right: -18px;
-    top: -12px;
-}
-.react-fine-uploader-gallery-pause-resume-button,
-.react-fine-uploader-gallery-retry-button {
-    left: -18px;
-    top: -12px
 }
