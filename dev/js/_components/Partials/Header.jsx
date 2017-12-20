@@ -17,7 +17,7 @@ const Header = ({ title }) => {
 
       <div className="pull-right">
         <ul className="main-menu">
-          <li><a href="/faces"><MdFace /></a></li>
+          <li><Link to="/faces"><MdFace /></Link></li>
           <li><Link to="/users"><IoPersonStalker /></Link></li>
           <li><Link to="/login"><GoSignOut /></Link></li>
         </ul>

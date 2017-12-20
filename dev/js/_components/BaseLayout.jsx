@@ -7,6 +7,8 @@ import Popup from 'react-popup'
 import WebFont from 'webfontloader'
 import { history } from '../_helpers'
 
+import TrashPage from '../_components/Pages/Trash'
+import Error404 from '../_components/Pages/Errors/404'
 import Header from '../_components/Partials/Header'
 import Footer from '../_components/Partials/Footer'
 import {
@@ -15,16 +17,14 @@ import {
   UsersPage,
   UserCreatePage} from '../_components'
 
-import { uploaderActions } from '../_actions'
-
 class BaseLayout extends Component {
   constructor(props) {
     super(props)
 
-    const { dispatch } = this.props
+    // const { dispatch } = this.props
     history.listen((location, action) => {
-      // clear alert and uoloader on location change
-      dispatch(uploaderActions.clear())
+      // clear uoloader on location change
+      // dispatch(uploaderActions.clear())
     })
   }
 
@@ -55,7 +55,8 @@ class BaseLayout extends Component {
             <PrivateRoute exact path="/" component={AlbumsPage} />
             <PrivateRoute path="/users" component={UsersPage} />
             <PrivateRoute path="/user-create" component={UserCreatePage} />
-            <PrivateRoute component={NoMatch} />
+            <PrivateRoute path="/trash" component={TrashPage} />
+            <PrivateRoute component={Error404} />
           </Switch>
         </div>
 
@@ -71,13 +72,6 @@ class BaseLayout extends Component {
     )
   }
 }
-
-const NoMatch = ({ location }) => (
-  <div>
-    <h3>404 No match for <code>{location.pathname}</code></h3>
-  </div>
-)
-
 
 function mapStateToProps(state) {
   const { header } = state

@@ -7,7 +7,7 @@ import { submit } from 'redux-form'
 import { history } from '../../_helpers'
 import NewAlbum from '../Buttons/NewAlbum'
 
-import { IoTrashA, IoAndroidUpload } from 'react-icons/lib/io'
+import { IoTrashA } from 'react-icons/lib/io'
 
 class Footer extends Component {
 
@@ -47,7 +47,6 @@ class Footer extends Component {
       <div className="footer" id="app_footer">
         <div id="footer_link" className="pull-left">
           <Link to="/trash"><IoTrashA /></Link>
-          <Link to="/unattached-media"><IoAndroidUpload /></Link>
         </div>
 
         <div id="footer_buttons" className="pull-right">
