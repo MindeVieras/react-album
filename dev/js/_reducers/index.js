@@ -7,6 +7,7 @@ import { auth } from './auth.reducer'
 import { users } from './users.reducer'
 import { albums } from './albums.reducer'
 import { uploader } from './uploader.reducer'
+import { trash } from './trash.reducer'
 import { header } from './header.reducer'
 import { footer } from './footer.reducer'
 
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
   footer,
   form: formReducer,
   toastr: toastrReducer,
-  uploader
+  uploader,
+  trash
 })
 
 export default rootReducer

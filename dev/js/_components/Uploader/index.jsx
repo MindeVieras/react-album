@@ -81,8 +81,7 @@ class Uploader extends Component {
 
       // If IMAGE
       if (mime.includes('image')) {
-        // console.log(file)
-
+        console.log(file)
       }
       // If VIDEO
       else if (mime.includes('video')) {
