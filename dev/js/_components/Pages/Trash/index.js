@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { RingLoader } from 'react-spinners'
+import Spinner from '../../Partials/Spinner'
 
 import ListItem from './ListItem'
 
@@ -23,7 +23,7 @@ class TrashPage extends Component {
     return (
       <div id="trash_page">
         {media.loading &&
-          <RingLoader />
+          <Spinner type="primary" size={ 70 } />
         }
         {media.err &&
           <div>{media.err}</div>

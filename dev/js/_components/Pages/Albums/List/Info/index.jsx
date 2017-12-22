@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import { RingLoader } from 'react-spinners'
+import Spinner from '../../../../Partials/Spinner'
 
 import Bar from './Bar'
 
@@ -27,7 +27,7 @@ class AlbumInfo extends Component {
     return (
       <div className="album-info">
         {selected_album.loading &&
-          <RingLoader />
+          <Spinner type="primary" size={ 70 } />
         }
         {selected_album.err &&
           <div>{selected_album.err}</div>
