@@ -4,7 +4,8 @@ import { uploaderConstants } from '../_constants'
 export const uploaderActions = {
   submitFile,
   removeFile,
-  clearFiles
+  clearFiles,
+  setMetadata
 }
 
 function submitFile(id, status, fromServer) {
@@ -29,4 +30,12 @@ function clearFiles() {
   }
 
   function clear() { return { type: uploaderConstants.CLEAR_FILES } }
+}
+
+function setMetadata(id, metadata) {
+  return dispatch => {
+    dispatch(set(id, metadata))
+  }
+
+  function set(id, metadata) { return { type: uploaderConstants.SET_METADATA, id, metadata } }
 }

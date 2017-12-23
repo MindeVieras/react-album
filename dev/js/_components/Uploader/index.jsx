@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import FineUploaderTraditional from 'fine-uploader-wrappers'
-import { CSSTransitionGroup as ReactCssTransitionGroup } from 'react-transition-group'
 import ReactTooltip from 'react-tooltip'
 import { toastr } from 'react-redux-toastr'
 
@@ -18,7 +17,9 @@ import TotalProgressBar from './Partials/total-progress-bar'
 import Status from './Partials/status'
 import Thumbnail from './Partials/thumbnail'
 
-import { IoCloseCircled, IoCheckmarkCircled, IoClipboard, IoUpload, IoBug } from 'react-icons/lib/io'
+import StatusMetadataIcon from './Icons/StatusMetadata'
+
+import { IoCloseCircled, IoCheckmarkCircled, IoUpload, IoBug } from 'react-icons/lib/io'
 
 import { authHeader, baseServerUrl } from '../../_helpers'
 import { uploaderActions } from '../../_actions'
@@ -47,10 +48,7 @@ class Uploader extends Component {
           customHeaders: authHeader(),
           enabled: true,
           method: 'POST',
-          endpoint: baseServerUrl+'/api/media/put-to-trash',
-          params: {
-            mikas: 'dsdasa'
-          }
+          endpoint: baseServerUrl+'/api/media/put-to-trash'
         }
       }
     })
@@ -89,6 +87,15 @@ class Uploader extends Component {
       }
     }
 
+    this._sessionComplete = (response, success, xhr) => {
+      const { dispatch } = this.props
+      response.forEach(function(file, i){
+        const { metadata } = file
+        dispatch(uploaderActions.setMetadata(i, metadata))
+      })
+
+    }
+
     this._onDeleteComplete = (id, xhr, isError) => {
       const res = JSON.parse(xhr.responseText)
       if (res.ack == 'ok') {
@@ -102,12 +109,14 @@ class Uploader extends Component {
   componentDidMount() {
     this.uploader.on('statusChange', this._onStatusChange)
     this.uploader.on('complete', this._onComplete)
+    this.uploader.on('sessionRequestComplete', this._sessionComplete)
     this.uploader.on('deleteComplete', this._onDeleteComplete)
   }
 
   componentWillUnmount() {
     this.uploader.off('statusChange', this._onStatusChange)
     this.uploader.off('complete', this._onComplete)
+    this.uploader.off('sessionRequestComplete', this._sessionComplete)
     this.uploader.off('deleteComplete', this._onDeleteComplete)
   }
 
@@ -119,8 +128,6 @@ class Uploader extends Component {
     const filesizeProps = getComponentProps('filesize', this.props)
 
     const deleteEnabled = uploader.options.deleteFile && uploader.options.deleteFile.enabled
-    // console.log(deleteEnabled)
-    // console.log(this.state)
     
     // Remove/Add dropzone text and fileField if any visableFiles
     let uploaderText = ''
@@ -159,17 +166,11 @@ class Uploader extends Component {
           multiple={ true }
         />
 
-        <ReactCssTransitionGroup
+        <ul
           className="uploader-files"
-          component="ul"
-          transitionEnter={ !this.props.animationsDisabled }
-          transitionEnterTimeout={ 500 }
-          transitionLeave={ !this.props.animationsDisabled }
-          transitionLeaveTimeout={ 300 }
-          transitionName="uploader-files"
         >
           {
-            files.map(({ id, status, fromServer }) => {
+            files.map(({ id, status, fromServer, metadata }) => {
               return (
                 <li
                   key={ id }
@@ -198,13 +199,7 @@ class Uploader extends Component {
                         />
                       </div>
                       <div className="icons">
-                        <div
-                          className="icon success"
-                          data-tip="Metadata saved"
-                        >
-                          <IoClipboard />
-                          <ReactTooltip />
-                        </div>
+                        <StatusMetadataIcon metadata={ metadata } />
                         {status === 'upload successful' &&
                           <div
                             className="icon success"
@@ -249,7 +244,7 @@ class Uploader extends Component {
             })
           }
           { uploaderText }
-        </ReactCssTransitionGroup>
+        </ul>
       </Dropzone>
     )
   }

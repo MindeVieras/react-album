@@ -22,6 +22,17 @@ export function uploader(state = initialState, action) {
       ...state,
       files: []
     }
+  case uploaderConstants.SET_METADATA:
+    return {
+      ...state,
+      files: state.files.map(file => {
+        if (file.id === action.id) {
+          const { ...fileCopy } = file
+          return { ...fileCopy, metadata: action.metadata }
+        }
+        return file
+      })
+    }
   default:
     return state
   }
