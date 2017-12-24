@@ -4,4 +4,8 @@
 *.map
 *.log
 
+src/js/bundle.min.js
+
 node_modules
+
+aws-keys.json
