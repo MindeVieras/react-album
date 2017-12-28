@@ -75,11 +75,14 @@ class Uploader extends Component {
 
     this._onComplete = (id, name, responseJSON, xhr) => {
       const file = responseJSON.data
+      const media_id = file.media_id
+      const key = file.s3_key
       const mime = file.mime
 
       // If IMAGE
       if (mime.includes('image')) {
-        console.log(file)
+        const { dispatch } = this.props
+        dispatch(uploaderActions.metadata(id, media_id, key ))
       }
       // If VIDEO
       else if (mime.includes('video')) {
@@ -91,7 +94,7 @@ class Uploader extends Component {
       const { dispatch } = this.props
       response.forEach(function(file, i){
         const { metadata } = file
-        dispatch(uploaderActions.setMetadata(i, metadata))
+        dispatch(uploaderActions.getMetadata(i, metadata))
       })
 
     }
@@ -199,7 +202,9 @@ class Uploader extends Component {
                         />
                       </div>
                       <div className="icons">
-                        <StatusMetadataIcon metadata={ metadata } />
+                        {metadata &&
+                          <StatusMetadataIcon metadata={ metadata } />
+                        }
                         {status === 'upload successful' &&
                           <div
                             className="icon success"

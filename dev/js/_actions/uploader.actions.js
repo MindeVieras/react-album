@@ -1,11 +1,13 @@
 
 import { uploaderConstants } from '../_constants'
+import { mediaService } from '../_services'
 
 export const uploaderActions = {
   submitFile,
   removeFile,
   clearFiles,
-  setMetadata
+  getMetadata,
+  metadata
 }
 
 function submitFile(id, status, fromServer) {
@@ -32,10 +34,30 @@ function clearFiles() {
   function clear() { return { type: uploaderConstants.CLEAR_FILES } }
 }
 
-function setMetadata(id, metadata) {
+function getMetadata(id, metadata) {
   return dispatch => {
-    dispatch(set(id, metadata))
+    dispatch(get(id, metadata))
   }
 
-  function set(id, metadata) { return { type: uploaderConstants.SET_METADATA, id, metadata } }
+  function get(id, metadata) { return { type: uploaderConstants.GET_METADATA, id, metadata } }
+}
+
+function metadata(id, media_id, key) {
+  return dispatch => {
+    dispatch(request(id))
+
+    mediaService.saveImageMetadata(media_id, key)
+      .then(function(res) {
+        console.log(res)
+        if (res.ack == 'ok') {
+          dispatch(success(id, res.metadata))
+        } else {
+          // dispatch(failure(res.msg))
+        }
+      })
+  }
+
+  function request(id) { return { type: uploaderConstants.METADATA_REQUEST, id } }
+  function success(id, metadata) { return { type: uploaderConstants.METADATA_SUCCESS, id, metadata } }
+  // function failure(err) { return { type: albumsConstants.GETLIST_FAILURE, err } }
 }

@@ -10,7 +10,14 @@ export function uploader(state = initialState, action) {
   case uploaderConstants.SUBMIT_FILE:
     return {
       ...state,
-      files: [ ...state.files, { id: action.id, status: action.status, fromServer: action.fromServer } ]
+      files: [
+        ...state.files,
+        {
+          id: action.id,
+          status: action.status,
+          fromServer: action.fromServer
+        }
+      ]
     }
   case uploaderConstants.REMOVE_FILE:
     return {
@@ -22,13 +29,35 @@ export function uploader(state = initialState, action) {
       ...state,
       files: []
     }
-  case uploaderConstants.SET_METADATA:
+  case uploaderConstants.GET_METADATA:
     return {
       ...state,
       files: state.files.map(file => {
         if (file.id === action.id) {
           const { ...fileCopy } = file
           return { ...fileCopy, metadata: action.metadata }
+        }
+        return file
+      })
+    }
+  case uploaderConstants.METADATA_REQUEST:
+    return {
+      ...state,
+      files: state.files.map(file => {
+        if (file.id === action.id) {
+          const { ...fileCopy } = file
+          return { ...fileCopy, metadata: { ack: 'loading', msg: 'Metadata processing...' } }
+        }
+        return file
+      })
+    }
+  case uploaderConstants.METADATA_SUCCESS:
+    return {
+      ...state,
+      files: state.files.map(file => {
+        if (file.id === action.id) {
+          const { ...fileCopy } = file
+          return { ...fileCopy, metadata: { ack: 'ok', ...action.metadata } }
         }
         return file
       })
