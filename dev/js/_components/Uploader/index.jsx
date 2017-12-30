@@ -18,6 +18,7 @@ import Status from './Partials/status'
 import Thumbnail from './Partials/thumbnail'
 
 import StatusMetadataIcon from './Icons/StatusMetadata'
+import StatusRekognitionLabelsIcon from './Icons/StatusRekognitionLabels'
 
 import { IoCloseCircled, IoCheckmarkCircled, IoUpload, IoBug } from 'react-icons/lib/io'
 
@@ -66,6 +67,9 @@ class Uploader extends Component {
         if (oldStatus == null) {
           this.props.dispatch(uploaderActions.submitFile(id, status, true))
         }
+        else {
+          this.props.dispatch(uploaderActions.setStatus(id, status))
+        }
       }
       // Remove file
       else if (isFileGone(status, statusEnum)) {
@@ -83,6 +87,7 @@ class Uploader extends Component {
       if (mime.includes('image')) {
         const { dispatch } = this.props
         dispatch(uploaderActions.metadata(id, media_id, key ))
+        dispatch(uploaderActions.rekognitionLabels(id, media_id, key ))
       }
       // If VIDEO
       else if (mime.includes('video')) {
@@ -93,8 +98,9 @@ class Uploader extends Component {
     this._sessionComplete = (response, success, xhr) => {
       const { dispatch } = this.props
       response.forEach(function(file, i){
-        const { metadata } = file
+        const { metadata, rekognition_labels } = file
         dispatch(uploaderActions.getMetadata(i, metadata))
+        dispatch(uploaderActions.getRekognitionLabels(i, rekognition_labels))
       })
 
     }
@@ -173,7 +179,7 @@ class Uploader extends Component {
           className="uploader-files"
         >
           {
-            files.map(({ id, status, fromServer, metadata }) => {
+            files.map(({ id, status, fromServer, metadata, rekognition_labels }) => {
               return (
                 <li
                   key={ id }
@@ -202,6 +208,9 @@ class Uploader extends Component {
                         />
                       </div>
                       <div className="icons">
+                        {rekognition_labels &&
+                          <StatusRekognitionLabelsIcon rekognition_labels={ rekognition_labels } />
+                        }
                         {metadata &&
                           <StatusMetadataIcon metadata={ metadata } />
                         }

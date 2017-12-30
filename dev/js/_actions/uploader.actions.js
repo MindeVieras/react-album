@@ -4,10 +4,13 @@ import { mediaService } from '../_services'
 
 export const uploaderActions = {
   submitFile,
+  setStatus,
   removeFile,
   clearFiles,
   getMetadata,
-  metadata
+  metadata,
+  getRekognitionLabels,
+  rekognitionLabels
 }
 
 function submitFile(id, status, fromServer) {
@@ -16,6 +19,14 @@ function submitFile(id, status, fromServer) {
   }
 
   function submit(id, status, fromServer) { return { type: uploaderConstants.SUBMIT_FILE, id, status, fromServer } }
+}
+
+function setStatus(id, status) {
+  return dispatch => {
+    dispatch(set(id, status))
+  }
+
+  function set(id, status) { return { type: uploaderConstants.SET_FILE_STATUS, id, status } }
 }
 
 function removeFile(id) {
@@ -48,16 +59,56 @@ function metadata(id, media_id, key) {
 
     mediaService.saveImageMetadata(media_id, key)
       .then(function(res) {
-        console.log(res)
         if (res.ack == 'ok') {
           dispatch(success(id, res.metadata))
-        } else {
-          // dispatch(failure(res.msg))
+        } else if (res.ack == 'err') {
+          dispatch(failure(id, res.msg))
         }
       })
   }
 
   function request(id) { return { type: uploaderConstants.METADATA_REQUEST, id } }
   function success(id, metadata) { return { type: uploaderConstants.METADATA_SUCCESS, id, metadata } }
-  // function failure(err) { return { type: albumsConstants.GETLIST_FAILURE, err } }
+  function failure(id, error) { return { type: uploaderConstants.METADATA_FAILURE, id, error } }
+}
+
+function getRekognitionLabels(id, rekognition_labels) {
+  return dispatch => {
+    dispatch(get(id, rekognition_labels))
+  }
+
+  function get(id, rekognition_labels) {
+    return { type: uploaderConstants.GET_REKOGNITION_LABELS, id, rekognition_labels }
+  }
+}
+
+function rekognitionLabels(id, media_id, key) {
+  return dispatch => {
+    dispatch(request(id))
+
+    mediaService.saveRekognitionLabels(media_id, key)
+      .then(function(res) {
+        if (res.ack == 'ok') {
+          dispatch(success(id, res.rekognition_labels))
+        } else if (res.ack == 'err') {
+          dispatch(failure(id, res.msg))
+        }
+      })
+  }
+
+  function request(id) {
+    return {
+      type: uploaderConstants.REKOGNITION_LABELS_REQUEST, id
+    }
+  }
+  function success(id, rekognition_labels) {
+    return {
+      type: uploaderConstants.REKOGNITION_LABELS_SUCCESS, id, rekognition_labels
+    }
+  }
+  function failure(id, error) {
+    return {
+      type: uploaderConstants.REKOGNITION_LABELS_FAILURE, id, error
+    }
+  }
 }

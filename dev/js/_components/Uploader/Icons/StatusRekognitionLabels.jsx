@@ -3,13 +3,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ReactTooltip from 'react-tooltip'
 import uuidv4 from 'uuid/v4'
-import _ from 'lodash'
 
 import { ScaleLoader } from 'react-spinners'
-import { IoClipboard } from 'react-icons/lib/io'
+import { IoAperture } from 'react-icons/lib/io'
 
-const StatusMetadataIcon = ({ metadata }) => {
-  if (metadata.ack == 'ok') {
+const StatusRekognitionLabelsIcon = ({ rekognition_labels }) => {
+  if (rekognition_labels.ack == 'ok') {
     const tooltipId = uuidv4()
     return (    
       <div
@@ -17,15 +16,15 @@ const StatusMetadataIcon = ({ metadata }) => {
         data-tip
         data-for={ tooltipId }
       >
-        <IoClipboard />
+        <IoAperture />
         <ReactTooltip id={ tooltipId }>
           <ul>
             {
-              Object.keys(metadata).sort().map((key, i) => {
+              Object.keys(rekognition_labels).sort().map((key, i) => {
                 if (key != 'ack') {
-                  let value = metadata[key]
+                  let confidence = rekognition_labels[key]
                   return (
-                    <li key={ i }><strong>{ _.startCase(_.toLower(key)) }:</strong> { value }</li>
+                    <li key={ i }>{ key } { Math.trunc(confidence) }%</li>
                   )
                 }
               })
@@ -35,7 +34,7 @@ const StatusMetadataIcon = ({ metadata }) => {
       </div>
     )
   }
-  else if (metadata.ack == 'loading') {
+  else if (rekognition_labels.ack == 'loading') {
     return (
       <div
         className="icon loading"
@@ -49,25 +48,25 @@ const StatusMetadataIcon = ({ metadata }) => {
       </div>
     )
   }
-  else if (metadata.ack == 'err') {
+  else if (rekognition_labels.ack == 'err') {
     return (    
       <div
         className="icon failed"
-        data-tip={ metadata.msg }
+        data-tip={ rekognition_labels.msg }
       >
-        <IoClipboard />
+        <IoAperture />
         <ReactTooltip />
       </div>
     )
   }
 }
 
-StatusMetadataIcon.propTypes = {
-  metadata: PropTypes.object
+StatusRekognitionLabelsIcon.propTypes = {
+  rekognition_labels: PropTypes.object
 }
 
-StatusMetadataIcon.defaultProps = {
-  metadata: {}
+StatusRekognitionLabelsIcon.defaultProps = {
+  rekognition_labels: {}
 }
 
-export default StatusMetadataIcon
+export default StatusRekognitionLabelsIcon
