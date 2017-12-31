@@ -17,6 +17,7 @@ import TotalProgressBar from './Partials/total-progress-bar'
 import Status from './Partials/status'
 import Thumbnail from './Partials/thumbnail'
 
+import StatusGenerateImageThumbsIcon from './Icons/StatusGenerateImageThumbs'
 import StatusMetadataIcon from './Icons/StatusMetadata'
 import StatusRekognitionLabelsIcon from './Icons/StatusRekognitionLabels'
 
@@ -86,8 +87,9 @@ class Uploader extends Component {
       // If IMAGE
       if (mime.includes('image')) {
         const { dispatch } = this.props
-        dispatch(uploaderActions.metadata(id, media_id, key ))
-        dispatch(uploaderActions.rekognitionLabels(id, media_id, key ))
+        dispatch(uploaderActions.generateImageThumbs(id, key))
+        dispatch(uploaderActions.metadata(id, media_id, key))
+        dispatch(uploaderActions.rekognitionLabels(id, media_id, key))
       }
       // If VIDEO
       else if (mime.includes('video')) {
@@ -98,7 +100,8 @@ class Uploader extends Component {
     this._sessionComplete = (response, success, xhr) => {
       const { dispatch } = this.props
       response.forEach(function(file, i){
-        const { metadata, rekognition_labels } = file
+        const { metadata, rekognition_labels, thumbs } = file
+        dispatch(uploaderActions.getImageThumbs(i, thumbs))
         dispatch(uploaderActions.getMetadata(i, metadata))
         dispatch(uploaderActions.getRekognitionLabels(i, rekognition_labels))
       })
@@ -179,7 +182,7 @@ class Uploader extends Component {
           className="uploader-files"
         >
           {
-            files.map(({ id, status, fromServer, metadata, rekognition_labels }) => {
+            files.map(({ id, status, fromServer, metadata, rekognition_labels, thumbs }) => {
               return (
                 <li
                   key={ id }
@@ -213,6 +216,9 @@ class Uploader extends Component {
                         }
                         {metadata &&
                           <StatusMetadataIcon metadata={ metadata } />
+                        }
+                        {thumbs &&
+                          <StatusGenerateImageThumbsIcon thumbs={ thumbs } />
                         }
                         {status === 'upload successful' &&
                           <div

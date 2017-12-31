@@ -40,6 +40,50 @@ export function uploader(state = initialState, action) {
       ...state,
       files: []
     }
+  case uploaderConstants.GET_IMG_THUMBS:
+    return {
+      ...state,
+      files: state.files.map(file => {
+        if (file.id === action.id) {
+          const { ...fileCopy } = file
+          return { ...fileCopy, thumbs: action.thumbs }
+        }
+        return file
+      })
+    }
+  case uploaderConstants.GENERATE_IMG_THUMBS_REQUEST:
+    return {
+      ...state,
+      files: state.files.map(file => {
+        if (file.id === action.id) {
+          const { ...fileCopy } = file
+          return { ...fileCopy, thumbs: { ack: 'loading', msg: 'Generating images thumbnails...' } }
+        }
+        return file
+      })
+    }
+  case uploaderConstants.GENERATE_IMG_THUMBS_SUCCESS:
+    return {
+      ...state,
+      files: state.files.map(file => {
+        if (file.id === action.id) {
+          const { ...fileCopy } = file
+          return { ...fileCopy, thumbs: { ack: 'ok' } }
+        }
+        return file
+      })
+    }
+  case uploaderConstants.GENERATE_IMG_THUMBS_FAILURE:
+    return {
+      ...state,
+      files: state.files.map(file => {
+        if (file.id === action.id) {
+          const { ...fileCopy } = file
+          return { ...fileCopy, thumbs: { ack: 'err', msg: action.error } }
+        }
+        return file
+      })
+    }
   case uploaderConstants.GET_METADATA:
     return {
       ...state,
@@ -123,7 +167,7 @@ export function uploader(state = initialState, action) {
       files: state.files.map(file => {
         if (file.id === action.id) {
           const { ...fileCopy } = file
-          return { ...fileCopy, metadata: { ack: 'err', msg: action.error } }
+          return { ...fileCopy, rekognition_labels: { ack: 'err', msg: action.error } }
         }
         return file
       })

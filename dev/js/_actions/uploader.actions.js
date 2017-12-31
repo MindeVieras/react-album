@@ -7,6 +7,8 @@ export const uploaderActions = {
   setStatus,
   removeFile,
   clearFiles,
+  getImageThumbs,
+  generateImageThumbs,
   getMetadata,
   metadata,
   getRekognitionLabels,
@@ -43,6 +45,33 @@ function clearFiles() {
   }
 
   function clear() { return { type: uploaderConstants.CLEAR_FILES } }
+}
+
+function getImageThumbs(id, thumbs) {
+  return dispatch => {
+    dispatch(get(id, thumbs))
+  }
+
+  function get(id, thumbs) { return { type: uploaderConstants.GET_IMG_THUMBS, id, thumbs } }
+}
+
+function generateImageThumbs(id, key) {
+  return dispatch => {
+    dispatch(request(id))
+
+    mediaService.generateImageThumbs(key)
+      .then(function(res) {
+        if (res.ack == 'ok') {
+          dispatch(success(id, res.thumbs))
+        } else if (res.ack == 'err') {
+          dispatch(failure(id, res.msg))
+        }
+      })
+  }
+
+  function request(id) { return { type: uploaderConstants.GENERATE_IMG_THUMBS_REQUEST, id } }
+  function success(id, thumbs) { return { type: uploaderConstants.GENERATE_IMG_THUMBS_SUCCESS, id, thumbs } }
+  function failure(id, error) { return { type: uploaderConstants.GENERATE_IMG_THUMBS_FAILURE, id, error } }
 }
 
 function getMetadata(id, metadata) {

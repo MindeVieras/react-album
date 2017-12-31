@@ -3,6 +3,7 @@ import { authHeader, baseServerUrl } from '../_helpers'
 
 export const mediaService = {
   save,
+  generateImageThumbs,
   saveImageMetadata,
   saveRekognitionLabels
 }
@@ -15,6 +16,16 @@ function save(file, user_id, content_type) {
     body: JSON.stringify({ file, user_id, content_type })
   }
   return fetch(baseServerUrl+'/api/media/save', requestOptions).then(handleResponse)
+}
+
+// Generates image Thumbnails
+function generateImageThumbs(key) {
+  const requestOptions = {
+    method: 'POST',
+    headers: { ...authHeader(), 'Content-Type': 'application/json' },
+    body: JSON.stringify({ key })
+  }
+  return fetch(baseServerUrl+'/api/media/generate-image-thumbs', requestOptions).then(handleResponse)
 }
 
 // Saves image Exif metadata to DB
