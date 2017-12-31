@@ -14,7 +14,7 @@ import { contentConstants, mediaConstants } from '../../../../../_constants'
 class AlbumInfo extends Component {
 
   componentDidMount() {
-    this.props.dispatch(albumsActions.getOne(53))
+    this.props.dispatch(albumsActions.getOne(1))
   }
 
   componentWillUpdate() {

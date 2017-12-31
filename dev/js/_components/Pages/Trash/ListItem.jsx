@@ -11,11 +11,10 @@ class ListItem extends Component {
   
   render() {
     const { media } = this.props
-    console.log(media)
     return (
       <li className="trash-item">
         { media.org_filename }
-        <DeleteButton id={ media.id } deleting={ media.deleting } />
+        <DeleteButton id={ media.id } />
         <RestoreButton id={ media.id } restoring={ media.restoring } />
         {media.deleting &&
           <Spinner type="list-item" size={ 30 } />

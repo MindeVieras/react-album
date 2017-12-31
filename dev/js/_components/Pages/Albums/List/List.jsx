@@ -12,7 +12,7 @@ class AlbumsList extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedAlbum: 53
+      selectedAlbum: 1
     }
   }
 
