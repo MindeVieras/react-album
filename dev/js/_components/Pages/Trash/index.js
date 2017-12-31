@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Spinner from '../../Partials/Spinner'
 
+import { IoTrashA } from 'react-icons/lib/io'
 import ListItem from './ListItem'
 
 import { headerActions, footerActions, trashActions } from '../../../_actions'
@@ -20,6 +21,15 @@ class TrashPage extends Component {
 
   render() {
     const { media } = this.props
+    let emptyContent = ''
+    if (media.items && media.items.length === 0) {
+      emptyContent = <span className="trash-empty-text">
+        <div className="icon">
+          <IoTrashA />
+        </div>
+        Trash is empty
+      </span>
+    }
     return (
       <div id="trash_page">
         {media.loading &&
@@ -35,6 +45,7 @@ class TrashPage extends Component {
             )}
           </ul>
         }
+        { emptyContent }
       </div>
     )
   }
