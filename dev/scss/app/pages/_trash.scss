@@ -6,6 +6,7 @@
   padding: 15px;
   overflow: auto;
   .trash-item {
+    position: relative;
     background-color: $grey;
     margin-bottom: 5px;
     padding: 10px 5px;

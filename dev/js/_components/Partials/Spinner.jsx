@@ -2,24 +2,46 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { RingLoader } from 'react-spinners'
+import { RingLoader, ScaleLoader } from 'react-spinners'
 
-const Spinner = ({ type, size }) => {  
-  const centerSize = size / 2
-  const style = {
-    top: 'calc(50% - '+centerSize+'px)',
-    left: 'calc(50% - '+centerSize+'px)'
-  }
-  return (
-    <div className={`spinner ${type}`}>
-      <div className="loader" style={style}>
-        <RingLoader
-          color={'#f6f6f5'}
-          size={size}
-        />
+const Spinner = ({ type, size }) => {
+  if (type === 'primary') {
+
+    const centerSize = size / 2
+    const style = {
+      top: 'calc(50% - '+centerSize+'px)',
+      left: 'calc(50% - '+centerSize+'px)'
+    }
+    return (
+      <div className={`spinner ${type}`}>
+        <div className="loader" style={style}>
+          <RingLoader
+            color={'#f6f6f5'}
+            size={size}
+          />
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
+  else if (type === 'list-item') {
+
+    const centerSize = size / 2
+    const style = {
+      position: 'absolute',
+      top: 'calc(50% - '+centerSize+'px)',
+      left: 'calc(50% - '+centerSize+'px)'
+    }
+    return (
+      <div className={`spinner ${type}`}>
+        <div className="loader" style={style}>
+          <ScaleLoader
+            color={'#f6f6f5'}
+            height={size}
+          />
+        </div>
+      </div>
+    )
+  }
   
 }
 
