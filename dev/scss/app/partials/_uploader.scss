@@ -87,6 +87,16 @@
       margin: 0 auto;
       @include vertical-align(relative)
     }
+    .placeholder {
+      &.not-available {
+        font-size: 22px;
+        opacity: 0.2;
+        .icon {
+          padding-top: 50px;
+          font-size: 100px;
+        }
+      }
+    }
   }
   .uploader-progress-bar {
     display: inline-block;
@@ -139,7 +149,6 @@
         font-weight: 700;
         font-size: 15px;
         width: 175px;
-        overflow: hidden;
       }
     }
   }

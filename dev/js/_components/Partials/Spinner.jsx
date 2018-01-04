@@ -2,7 +2,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { RingLoader, ScaleLoader } from 'react-spinners'
+import { RingLoader, ScaleLoader, ClipLoader } from 'react-spinners'
 
 const Spinner = ({ type, size }) => {
   if (type === 'primary') {
@@ -37,6 +37,24 @@ const Spinner = ({ type, size }) => {
           <ScaleLoader
             color={'#f6f6f5'}
             height={size}
+          />
+        </div>
+      </div>
+    )
+  }
+  else if (type === 'thumbnail') {
+    const centerSize = size / 2
+    const style = {
+      position: 'absolute',
+      top: 'calc(50% - '+centerSize+'px)',
+      left: 'calc(50% - '+centerSize+'px)'
+    }
+    return (
+      <div className={`spinner ${type}`}>
+        <div className="loader" style={style}>
+          <ClipLoader
+            color={'#f6f6f5'}
+            size={size}
           />
         </div>
       </div>

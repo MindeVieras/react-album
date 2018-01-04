@@ -18,6 +18,7 @@ import Status from './Partials/status'
 import Thumbnail from './Partials/thumbnail'
 
 import StatusGenerateImageThumbsIcon from './Icons/StatusGenerateImageThumbs'
+import StatusGenerateVideosIcon from './Icons/StatusGenerateVideos'
 import StatusMetadataIcon from './Icons/StatusMetadata'
 import StatusRekognitionLabelsIcon from './Icons/StatusRekognitionLabels'
 
@@ -79,33 +80,41 @@ class Uploader extends Component {
     }
 
     this._onComplete = (id, name, responseJSON, xhr) => {
+      const { dispatch } = this.props
       const file = responseJSON.data
       const media_id = file.media_id
       const key = file.s3_key
       const mime = file.mime
-
       // If IMAGE
       if (mime.includes('image')) {
-        const { dispatch } = this.props
+        dispatch(uploaderActions.setMime(id, 'image'))
         dispatch(uploaderActions.generateImageThumbs(id, key))
-        dispatch(uploaderActions.metadata(id, media_id, key))
+        dispatch(uploaderActions.imageMetadata(id, media_id, key))
         dispatch(uploaderActions.rekognitionLabels(id, media_id, key))
       }
       // If VIDEO
       else if (mime.includes('video')) {
-        // console.log('video')
+        dispatch(uploaderActions.setMime(id, 'video'))
+        dispatch(uploaderActions.generateVideos(id, key))
+        dispatch(uploaderActions.videoMetadata(id, media_id))
       }
     }
 
     this._sessionComplete = (response, success, xhr) => {
       const { dispatch } = this.props
-      response.forEach(function(file, i){
-        const { metadata, rekognition_labels, thumbs } = file
-        dispatch(uploaderActions.getImageThumbs(i, thumbs))
-        dispatch(uploaderActions.getMetadata(i, metadata))
-        dispatch(uploaderActions.getRekognitionLabels(i, rekognition_labels))
+      response.forEach(function(file, id){
+        const { media_id, metadata, rekognition_labels, thumbs, mime, videos } = file
+        dispatch(uploaderActions.setMediaId(id, media_id))
+        dispatch(uploaderActions.setMime(id, mime))
+        dispatch(uploaderActions.getMetadata(id, metadata))
+        if (mime === 'image') {
+          dispatch(uploaderActions.getImageThumbs(id, thumbs))
+          dispatch(uploaderActions.getRekognitionLabels(id, rekognition_labels))
+        }
+        else if (mime === 'video') {
+          dispatch(uploaderActions.getVideos(id, videos))
+        }
       })
-
     }
 
     this._onDeleteComplete = (id, xhr, isError) => {
@@ -182,19 +191,22 @@ class Uploader extends Component {
           className="uploader-files"
         >
           {
-            files.map(({ id, status, fromServer, metadata, rekognition_labels, thumbs }) => {
+            files.map(({id, media_id, status, fromServer, mime, metadata, rekognition_labels, thumbs, videos }) => {
               return (
                 <li
                   key={ id }
                   className="uploader-file"
                 >
-                  
-                  <Thumbnail
-                    id={ id }
-                    fromServer={ fromServer }
-                    uploader={ uploader }
-                    maxSize={ 240 }
-                  />
+                  {mime &&
+                    <Thumbnail
+                      id={ id }
+                      fromServer={ fromServer }
+                      uploader={ uploader }
+                      maxSize={ 240 }
+                      mime={ mime }
+                      videos={ videos }
+                    />
+                  }
                   
                   <ProgressBar
                     id={ id }
@@ -215,10 +227,18 @@ class Uploader extends Component {
                           <StatusRekognitionLabelsIcon rekognition_labels={ rekognition_labels } />
                         }
                         {metadata &&
-                          <StatusMetadataIcon metadata={ metadata } />
+                          <StatusMetadataIcon
+                            metadata={ metadata }
+                            mime={ mime }
+                            id={ id }
+                            media_id={ media_id }
+                          />
                         }
                         {thumbs &&
                           <StatusGenerateImageThumbsIcon thumbs={ thumbs } />
+                        }
+                        {videos &&
+                          <StatusGenerateVideosIcon videos={ videos } />
                         }
                         {status === 'upload successful' &&
                           <div

@@ -1,9 +1,10 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Player } from 'video-react'
 
-import { RingLoader } from 'react-spinners'
-import { IoDocument } from 'react-icons/lib/io'
+import Spinner from '../../Partials/Spinner'
+import { IoAlertCircled } from 'react-icons/lib/io'
 
 class Thumbnail extends Component {
 
@@ -16,41 +17,72 @@ class Thumbnail extends Component {
   }
 
   componentDidMount() {
-    this.props.uploader.methods.drawThumbnail(
-      this.props.id,
-      this._canvas,
-      this.props.maxSize,
-      this.props.fromServer
-    ).then(
-      () => {
-        this.setState({
-          drawComplete: true,
-          success: true
-        })
-      },
-      () => {
-        this.setState({
-          drawComplete: true,
-          success: false
-        })
-      }
-    )
+    const { mime } = this.props
+    if (mime == 'image') {    
+      this.props.uploader.methods.drawThumbnail(
+        this.props.id,
+        this._canvas,
+        this.props.maxSize,
+        this.props.fromServer
+      ).then(
+        () => {
+          this.setState({
+            drawComplete: true,
+            success: true,
+            mime: 'image'
+          })
+        },
+        () => {
+          this.setState({
+            drawComplete: true,
+            success: false
+          })
+        }
+      )
+    }
+    else if (mime == 'video') {
+      this.setState({
+        drawComplete: true,
+        success: true,
+        mime: 'video'
+      })
+    }
   }
 
   render() {
-    return (
-      <span
-        className="uploader-thumbnail"
-        style={{height: this.props.maxSize, width: this.props.maxSize}}
-      >
-        <canvas
-          className="thumbnail"
-          hidden={ !this.state.drawComplete || this._failure }
-          ref={ component => this._canvas = component }
-        />
-        { this._maybePlaceholder }
-      </span>
-    )
+    const { maxSize, mime, videos } = this.props
+    if (mime === 'image') {    
+      return (
+        <span
+          className="uploader-thumbnail image"
+          style={{height: maxSize, width: maxSize}}
+        >
+          <canvas
+            className="thumbnail"
+            hidden={ !this.state.drawComplete || this._failure }
+            ref={ component => this._canvas = component }
+          />
+          { this._maybePlaceholder }
+        </span>
+      )
+    }
+    else if (mime === 'video') {    
+      return (
+        <span
+          className="uploader-thumbnail video"
+          style={{height: maxSize, width: maxSize}}
+        >
+          {videos &&
+            <Player
+              playsInline
+              // poster="/assets/poster.png"
+              src={ videos.video }
+            />
+          }
+          { this._maybePlaceholder }
+        </span>
+      )
+    }
   }
 
   get _failure() {
@@ -68,7 +100,8 @@ class Thumbnail extends Component {
           className="placeholder not-available"
           style={ style }
         >
-          <IoDocument />
+          <div className="icon"><IoAlertCircled /></div>
+          <div className="message">Can't show thumbnail</div>
         </div>
       )
     } else if (!this.state.drawComplete) {
@@ -77,7 +110,7 @@ class Thumbnail extends Component {
           className="placeholder waiting"
           style={ style }
         >
-          <RingLoader />
+          <Spinner type="thumbnail" size={ 50 } />
         </div>
       )
     }
@@ -90,6 +123,8 @@ Thumbnail.propTypes = {
   fromServer: PropTypes.bool,
   id: PropTypes.number.isRequired,
   maxSize: PropTypes.number.isRequired,
+  mime: PropTypes.string.isRequired,
+  videos: PropTypes.object,
   uploader: PropTypes.object.isRequired
 }
 

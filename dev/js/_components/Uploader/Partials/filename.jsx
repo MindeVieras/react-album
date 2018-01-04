@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import Marquee from 'react-text-marquee'
 
 class Filename extends Component {
 
@@ -9,7 +10,7 @@ class Filename extends Component {
     const filename = uploader.methods.getName(id)
     return (
       <div className="filename">
-        { filename }
+        <Marquee leading={ 500 } loop={ true } trailing={ 500 } text={ filename } />
       </div>
     )
   }

@@ -55,7 +55,6 @@ class RemoveButton extends Component {
       uploader.methods.cancel(id)
     }
     else if (status === 'upload successful') {
-      console.log(id)
       uploader.methods.deleteFile(id)
     }
   }

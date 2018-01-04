@@ -30,6 +30,28 @@ export function uploader(state = initialState, action) {
         return file
       })
     }
+  case uploaderConstants.SET_FILE_MEDIA_ID:
+    return {
+      ...state,
+      files: state.files.map(file => {
+        if (file.id === action.id) {
+          const { ...fileCopy } = file
+          return { ...fileCopy, media_id: action.media_id }
+        }
+        return file
+      })
+    }
+  case uploaderConstants.SET_FILE_MIME:
+    return {
+      ...state,
+      files: state.files.map(file => {
+        if (file.id === action.id) {
+          const { ...fileCopy } = file
+          return { ...fileCopy, mime: action.mime }
+        }
+        return file
+      })
+    }
   case uploaderConstants.REMOVE_FILE:
     return {
       ...state,
@@ -84,6 +106,50 @@ export function uploader(state = initialState, action) {
         return file
       })
     }
+  case uploaderConstants.GET_VIDEOS:
+    return {
+      ...state,
+      files: state.files.map(file => {
+        if (file.id === action.id) {
+          const { ...fileCopy } = file
+          return { ...fileCopy, videos: action.videos }
+        }
+        return file
+      })
+    }
+  case uploaderConstants.GENERATE_VIDEOS_REQUEST:
+    return {
+      ...state,
+      files: state.files.map(file => {
+        if (file.id === action.id) {
+          const { ...fileCopy } = file
+          return { ...fileCopy, videos: { ack: 'loading', msg: 'Generating videos...' } }
+        }
+        return file
+      })
+    }
+  case uploaderConstants.GENERATE_VIDEOS_SUCCESS:
+    return {
+      ...state,
+      files: state.files.map(file => {
+        if (file.id === action.id) {
+          const { ...fileCopy } = file
+          return { ...fileCopy, videos: { ack: 'ok' } }
+        }
+        return file
+      })
+    }
+  case uploaderConstants.GENERATE_VIDEOS_FAILURE:
+    return {
+      ...state,
+      files: state.files.map(file => {
+        if (file.id === action.id) {
+          const { ...fileCopy } = file
+          return { ...fileCopy, videos: { ack: 'err', msg: action.error } }
+        }
+        return file
+      })
+    }
   case uploaderConstants.GET_METADATA:
     return {
       ...state,
@@ -95,7 +161,7 @@ export function uploader(state = initialState, action) {
         return file
       })
     }
-  case uploaderConstants.METADATA_REQUEST:
+  case uploaderConstants.IMAGE_METADATA_REQUEST:
     return {
       ...state,
       files: state.files.map(file => {
@@ -106,7 +172,7 @@ export function uploader(state = initialState, action) {
         return file
       })
     }
-  case uploaderConstants.METADATA_SUCCESS:
+  case uploaderConstants.IMAGE_METADATA_SUCCESS:
     return {
       ...state,
       files: state.files.map(file => {
@@ -117,7 +183,40 @@ export function uploader(state = initialState, action) {
         return file
       })
     }
-  case uploaderConstants.METADATA_FAILURE:
+  case uploaderConstants.IMAGE_METADATA_FAILURE:
+    return {
+      ...state,
+      files: state.files.map(file => {
+        if (file.id === action.id) {
+          const { ...fileCopy } = file
+          return { ...fileCopy, metadata: { ack: 'err', msg: action.error } }
+        }
+        return file
+      })
+    }
+  case uploaderConstants.VIDEO_METADATA_REQUEST:
+    return {
+      ...state,
+      files: state.files.map(file => {
+        if (file.id === action.id) {
+          const { ...fileCopy } = file
+          return { ...fileCopy, metadata: { ack: 'loading', msg: 'Metadata processing...' } }
+        }
+        return file
+      })
+    }
+  case uploaderConstants.VIDEO_METADATA_SUCCESS:
+    return {
+      ...state,
+      files: state.files.map(file => {
+        if (file.id === action.id) {
+          const { ...fileCopy } = file
+          return { ...fileCopy, metadata: { ack: 'ok', ...action.metadata } }
+        }
+        return file
+      })
+    }
+  case uploaderConstants.VIDEO_METADATA_FAILURE:
     return {
       ...state,
       files: state.files.map(file => {
