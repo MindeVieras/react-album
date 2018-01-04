@@ -23,7 +23,7 @@ class AlbumInfo extends Component {
 
   render() {
     const { selected_album } = this.props
-
+    console.log(selected_album)
     return (
       <div className="album-info">
         {selected_album.loading &&

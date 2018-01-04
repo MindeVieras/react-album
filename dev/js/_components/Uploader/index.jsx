@@ -147,6 +147,8 @@ class Uploader extends Component {
     const { author, entity, entity_id, status, files } = this.props
     const uploader = this.uploader
 
+    let counter = files.length
+
     const cancelButtonProps = getComponentProps('cancelButton', this.props)
     const filesizeProps = getComponentProps('filesize', this.props)
 
@@ -188,7 +190,9 @@ class Uploader extends Component {
           status={ status }
           multiple={ true }
         />
-
+        <div className="counter">
+          { counter } files
+        </div>
         <ul
           className="uploader-files"
         >
