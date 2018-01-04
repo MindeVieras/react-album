@@ -85,18 +85,20 @@ class Uploader extends Component {
       const media_id = file.media_id
       const key = file.s3_key
       const mime = file.mime
+      
+      dispatch(uploaderActions.setMediaId(id, media_id))
+      dispatch(uploaderActions.saveMetadata(id, media_id))
+
       // If IMAGE
       if (mime.includes('image')) {
         dispatch(uploaderActions.setMime(id, 'image'))
         dispatch(uploaderActions.generateImageThumbs(id, key))
-        dispatch(uploaderActions.imageMetadata(id, media_id, key))
         dispatch(uploaderActions.rekognitionLabels(id, media_id, key))
       }
       // If VIDEO
       else if (mime.includes('video')) {
         dispatch(uploaderActions.setMime(id, 'video'))
         dispatch(uploaderActions.generateVideos(id, key))
-        dispatch(uploaderActions.videoMetadata(id, media_id))
       }
     }
 
@@ -226,7 +228,7 @@ class Uploader extends Component {
                         {rekognition_labels &&
                           <StatusRekognitionLabelsIcon rekognition_labels={ rekognition_labels } />
                         }
-                        {metadata &&
+                        {mime && metadata &&
                           <StatusMetadataIcon
                             metadata={ metadata }
                             mime={ mime }

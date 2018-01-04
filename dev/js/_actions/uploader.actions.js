@@ -14,8 +14,7 @@ export const uploaderActions = {
   generateImageThumbs,
   generateVideos,
   getMetadata,
-  imageMetadata,
-  videoMetadata,
+  saveMetadata,
   getRekognitionLabels,
   rekognitionLabels
 }
@@ -130,11 +129,11 @@ function getMetadata(id, metadata) {
   function get(id, metadata) { return { type: uploaderConstants.GET_METADATA, id, metadata } }
 }
 
-function imageMetadata(id, media_id, key) {
+function saveMetadata(id, media_id) {
   return dispatch => {
     dispatch(request(id))
 
-    mediaService.saveImageMetadata(media_id, key)
+    mediaService.saveMetadata(media_id)
       .then(function(res) {
         if (res.ack == 'ok') {
           dispatch(success(id, res.metadata))
@@ -144,28 +143,9 @@ function imageMetadata(id, media_id, key) {
       })
   }
 
-  function request(id) { return { type: uploaderConstants.IMAGE_METADATA_REQUEST, id } }
-  function success(id, metadata) { return { type: uploaderConstants.IMAGE_METADATA_SUCCESS, id, metadata } }
-  function failure(id, error) { return { type: uploaderConstants.IMAGE_METADATA_FAILURE, id, error } }
-}
-
-function videoMetadata(id, media_id) {
-  return dispatch => {
-    dispatch(request(id))
-
-    mediaService.saveVideoMetadata(media_id)
-      .then(function(res) {
-        if (res.ack == 'ok') {
-          dispatch(success(id, res.metadata))
-        } else if (res.ack == 'err') {
-          dispatch(failure(id, res.msg))
-        }
-      })
-  }
-
-  function request(id) { return { type: uploaderConstants.VIDEO_METADATA_REQUEST, id } }
-  function success(id, metadata) { return { type: uploaderConstants.VIDEO_METADATA_SUCCESS, id, metadata } }
-  function failure(id, error) { return { type: uploaderConstants.VIDEO_METADATA_FAILURE, id, error } }
+  function request(id) { return { type: uploaderConstants.METADATA_REQUEST, id } }
+  function success(id, metadata) { return { type: uploaderConstants.METADATA_SUCCESS, id, metadata } }
+  function failure(id, error) { return { type: uploaderConstants.METADATA_FAILURE, id, error } }
 }
 
 function getRekognitionLabels(id, rekognition_labels) {

@@ -5,8 +5,7 @@ export const mediaService = {
   save,
   generateImageThumbs,
   generateVideos,
-  saveImageMetadata,
-  saveVideoMetadata,
+  saveMetadata,
   saveRekognitionLabels
 }
 
@@ -40,24 +39,14 @@ function generateVideos(key) {
   return fetch(baseServerUrl+'/api/media/generate-videos', requestOptions).then(handleResponse)
 }
 
-// Saves image Exif metadata to DB
-function saveImageMetadata(media_id, key) {
-  const requestOptions = {
-    method: 'POST',
-    headers: { ...authHeader(), 'Content-Type': 'application/json' },
-    body: JSON.stringify({ media_id, key })
-  }
-  return fetch(baseServerUrl+'/api/media/save-image-metadata', requestOptions).then(handleResponse)
-}
-
-// Saves video metadata to DB
-function saveVideoMetadata(media_id) {
+// Saves media metadata to DB
+function saveMetadata(media_id) {
   const requestOptions = {
     method: 'POST',
     headers: { ...authHeader(), 'Content-Type': 'application/json' },
     body: JSON.stringify({ media_id })
   }
-  return fetch(baseServerUrl+'/api/media/save-video-metadata', requestOptions).then(handleResponse)
+  return fetch(baseServerUrl+'/api/media/save-metadata', requestOptions).then(handleResponse)
 }
 
 // Saves rekognition labels to DB

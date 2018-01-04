@@ -161,7 +161,7 @@ export function uploader(state = initialState, action) {
         return file
       })
     }
-  case uploaderConstants.IMAGE_METADATA_REQUEST:
+  case uploaderConstants.METADATA_REQUEST:
     return {
       ...state,
       files: state.files.map(file => {
@@ -172,7 +172,7 @@ export function uploader(state = initialState, action) {
         return file
       })
     }
-  case uploaderConstants.IMAGE_METADATA_SUCCESS:
+  case uploaderConstants.METADATA_SUCCESS:
     return {
       ...state,
       files: state.files.map(file => {
@@ -183,40 +183,7 @@ export function uploader(state = initialState, action) {
         return file
       })
     }
-  case uploaderConstants.IMAGE_METADATA_FAILURE:
-    return {
-      ...state,
-      files: state.files.map(file => {
-        if (file.id === action.id) {
-          const { ...fileCopy } = file
-          return { ...fileCopy, metadata: { ack: 'err', msg: action.error } }
-        }
-        return file
-      })
-    }
-  case uploaderConstants.VIDEO_METADATA_REQUEST:
-    return {
-      ...state,
-      files: state.files.map(file => {
-        if (file.id === action.id) {
-          const { ...fileCopy } = file
-          return { ...fileCopy, metadata: { ack: 'loading', msg: 'Metadata processing...' } }
-        }
-        return file
-      })
-    }
-  case uploaderConstants.VIDEO_METADATA_SUCCESS:
-    return {
-      ...state,
-      files: state.files.map(file => {
-        if (file.id === action.id) {
-          const { ...fileCopy } = file
-          return { ...fileCopy, metadata: { ack: 'ok', ...action.metadata } }
-        }
-        return file
-      })
-    }
-  case uploaderConstants.VIDEO_METADATA_FAILURE:
+  case uploaderConstants.METADATA_FAILURE:
     return {
       ...state,
       files: state.files.map(file => {

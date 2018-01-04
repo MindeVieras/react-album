@@ -24,13 +24,13 @@ class StatusMetadataIcon extends Component {
   handleResaveMetadata(e) {
     const { id, media_id, mime, metadata, dispatch } = this.props
     // console.log(metadata)
-    if (mime === 'image') {
-
-      console.log('imageeee')
-    }
-    else if (mime === 'video') {
-      dispatch(uploaderActions.videoMetadata(id, media_id))
-    }
+    dispatch(uploaderActions.saveMetadata(id, media_id))
+    // if (mime === 'image') {
+    //   dispatch(uploaderActions.imageMetadata(id, media_id))
+    // }
+    // else if (mime === 'video') {
+    //   dispatch(uploaderActions.videoMetadata(id, media_id))
+    // }
   }
 
   render() {
