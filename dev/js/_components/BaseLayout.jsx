@@ -7,6 +7,8 @@ import Popup from 'react-popup'
 import WebFont from 'webfontloader'
 import { history } from '../_helpers'
 
+import Front from '../_components/Front'
+// import AdminPage from '../_components/Pages/Admin'
 import TrashPage from '../_components/Pages/Trash'
 import Error404 from '../_components/Pages/Errors/404'
 import Header from '../_components/Partials/Header'
@@ -52,7 +54,8 @@ class BaseLayout extends Component {
         
         <div id="app_content">
           <Switch>
-            <PrivateRoute exact path="/" component={AlbumsPage} />
+            <PrivateRoute exact path="/" component={Front} />
+            <PrivateRoute exact path="/admin" component={AlbumsPage} />
             <PrivateRoute path="/users" component={UsersPage} />
             <PrivateRoute path="/user-create" component={UserCreatePage} />
             <PrivateRoute path="/trash" component={TrashPage} />

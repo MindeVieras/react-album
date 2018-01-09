@@ -1,0 +1,39 @@
+
+#user_create_page { 
+  .form-wrapper {
+    width: 45%;
+    padding: 25px;
+  }
+  #user_create_form {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  .avatar-wrapper {
+    position: relative;
+    width: 55%;
+    padding: 25px;
+    padding-top: 47px;
+    .inner {
+      background-color: rgba(0,0,0,0.2);
+      max-width: 425px;
+      min-height: 325px;
+      margin: 0 auto;
+      cursor: pointer;
+      border: 1px solid $black;
+      @include border-radius(4px);
+      @include box-shadow(0, 1px, 1px, rgba(0, 0, 0, 0.075), true);
+      @include transition(box-shadow ease-in-out .15s);
+      &:hover {
+        box-shadow: 0 2px 0 rgba(0, 0, 0, 0.06);
+      }
+    }
+    .preview {
+      background-color: $grey;
+      .file-preview-item {
+        img {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

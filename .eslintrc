@@ -4,7 +4,7 @@
     "react"
   ],
   "rules": {
-    "max-len": [1, 120, 2, {ignoreComments: true}],
+    "max-len": [1, 1200, 2, {ignoreComments: true}],
     "indent": ["error", 2],
     "semi": ["error", "never"],
     "eol-last": ["error", "always"]

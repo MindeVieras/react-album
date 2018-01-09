@@ -2,11 +2,15 @@
 import React, { Component } from 'react'
 import { Router, Switch, Route } from 'react-router-dom'
 
-import { PrivateRoute, LoginPage } from './_components'
-import BaseLayout from './_components/BaseLayout'
+import PrivateRoute from './_components/PrivateRoute'
+import Front from './_components/Front'
+import Admin from './_components/Admin'
+import Login from './_components/Login'
+import Error404 from './_components/Errors/404'
+
 import { history } from './_helpers'
 
-import '../scss/app/main.scss'
+import '../scss/base/normalize.scss'
 
 export default class App extends Component {
   render() {
@@ -15,8 +19,10 @@ export default class App extends Component {
         
         <Router history={history}>
           <Switch>
-            <Route exact path="/login" component={LoginPage} />
-            <PrivateRoute component={BaseLayout} />
+            <PrivateRoute exact path="/" component={Front} />
+            <PrivateRoute path="/admin" component={Admin} />
+            <Route exact path="/login" component={Login} />
+            <Route component={Error404} />
           </Switch>
         </Router>
 

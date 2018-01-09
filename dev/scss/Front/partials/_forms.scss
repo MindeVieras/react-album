@@ -1,0 +1,19 @@
+
+#add_album {
+  .dates-wrapper{
+    .form-group{
+      display: inline-block;
+      width: 100%;
+      label{
+        width: 75px;
+        float: left;
+        line-height: 34px;
+        margin: 0;
+      }
+      .form-control {
+        width: calc(100% - 77px);
+        float: right;
+      }
+    }
+  }
+}
