@@ -1,7 +1,8 @@
 
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Router, Switch, Route } from 'react-router-dom'
-
+import { detect } from 'detect-browser'
 import PrivateRoute from './_components/PrivateRoute'
 import Front from './_components/Front'
 import Admin from './_components/Admin'
@@ -9,10 +10,20 @@ import Login from './_components/Login'
 import Error404 from './_components/Errors/404'
 
 import { history } from './_helpers'
+import { clientActions } from './_actions'
 
 import '../scss/base/normalize.scss'
 
-export default class App extends Component {
+class App extends Component {
+
+  constructor(props) {
+    super(props)
+
+    // Set browser info into state
+    const browser = detect()
+    props.dispatch(clientActions.setBrowser(browser))
+  }
+
   render() {
     return (
       <div>
@@ -30,3 +41,5 @@ export default class App extends Component {
     )
   }
 }
+
+export default connect()(App)

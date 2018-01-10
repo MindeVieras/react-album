@@ -9,6 +9,7 @@
   },
   "license": "ISC",
   "dependencies": {
+    "detect-browser": "^2.0.0",
     "fine-uploader": "^5.15.4",
     "fine-uploader-wrappers": "^1.0.1",
     "history": "^4.7.2",
