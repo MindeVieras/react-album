@@ -2,7 +2,8 @@
 import { clientConstants } from '../_constants'
 
 export const clientActions = {
-  setBrowser
+  setBrowser,
+  setScreen
 }
 
 function setBrowser(browser) {
@@ -12,4 +13,13 @@ function setBrowser(browser) {
   }
 
   function set(browser) { return { type: clientConstants.SET_BROWSER, browser } }
+}
+
+function setScreen(screen) {
+
+  return dispatch => {
+    dispatch(set(screen))
+  }
+
+  function set(screen) { return { type: clientConstants.SET_SCREEN, screen } }
 }

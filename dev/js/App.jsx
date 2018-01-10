@@ -19,11 +19,38 @@ class App extends Component {
   constructor(props) {
     super(props)
 
+    this.state = {
+      width:  800,
+      height: 182
+    }
     // Set browser info into state
     const browser = detect()
     props.dispatch(clientActions.setBrowser(browser))
   }
 
+  componentDidMount() {
+    // Add resize event listener
+    this.updateDimensions()
+    window.addEventListener("resize", this.updateDimensions.bind(this))
+  }
+
+  componentWillUnmount() {
+    // Remove resize event listener
+    window.removeEventListener("resize", this.updateDimensions.bind(this))
+  }
+
+  // Calculate & Update state of new dimensions
+  updateDimensions() {
+    const { dispatch } = this.props
+    let width = window.innerWidth
+    let height = window.innerHeight
+    let orientation = 'landscape'
+    if (width < height) {
+      orientation = 'portrait'
+    }
+    dispatch(clientActions.setScreen({ width, height, orientation }))
+  }
+  
   render() {
     return (
       <div>

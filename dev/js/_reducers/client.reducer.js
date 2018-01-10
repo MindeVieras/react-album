@@ -10,6 +10,11 @@ export function client(state = initialState, action) {
       ...state,
       browser: action.browser
     }
+  case clientConstants.SET_SCREEN:
+    return {
+      ...state,
+      screen: action.screen
+    }
   default:
     return state
   }
