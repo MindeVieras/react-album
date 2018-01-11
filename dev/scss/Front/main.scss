@@ -1,9 +1,7 @@
 
-// @import '../base/normalize';
-// @import '../base/mixins';
-// @import '../variables/colors';
+@import '../base/mixins';
+@import './vars/colors';
 
-// //@import 'partials/grid';
 // @import 'partials/header';
 // @import 'partials/datetimepicker';
 // // @import 'partials/modal';
@@ -24,7 +22,7 @@
 
 // @import 'partials/toastr/index';
 
-// @import 'pages/login';
+@import 'pages/front';
 // @import 'pages/users';
 // @import 'pages/user-create';
 

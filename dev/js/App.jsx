@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Router, Switch, Route } from 'react-router-dom'
 import { detect } from 'detect-browser'
+import WebFont from 'webfontloader'
+
 import PrivateRoute from './_components/PrivateRoute'
 import Front from './_components/Front'
 import Admin from './_components/Admin'
@@ -19,16 +21,24 @@ class App extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      width:  800,
-      height: 182
-    }
     // Set browser info into state
     const browser = detect()
     props.dispatch(clientActions.setBrowser(browser))
   }
 
   componentDidMount() {
+    // Load all fonts
+    WebFont.load({
+      google: {
+        families: [
+          // 'Roboto:100,300,400,500,700,900',
+          'Dosis:300,400,500,600,700,800',
+          'Oxygen:300,400,700',
+          // 'Ruda:400,700,900',
+          'sans-serif'
+        ]
+      }
+    })
     // Add resize event listener
     this.updateDimensions()
     window.addEventListener("resize", this.updateDimensions.bind(this))
@@ -50,7 +60,7 @@ class App extends Component {
     }
     dispatch(clientActions.setScreen({ width, height, orientation }))
   }
-  
+
   render() {
     return (
       <div>

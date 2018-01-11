@@ -9,10 +9,17 @@ import '../../../scss/Front/main.scss'
 
 class Front extends Component {
 
+  constructor(props) {
+    super(props)
+    console.log(props)
+  }
+
   componentDidMount() {
+    console.log('front comp mounted')
     // const { dispatch } = this.props
     // dispatch(headerActions.setTitle('Album'))
     // dispatch(footerActions.buttonsClear())
+
   }
 
   render() {
@@ -20,6 +27,7 @@ class Front extends Component {
       <div id="front_page">
         Front page
         <Link to="/login">LOGOUT</Link>
+        <Link to="/admin">ADMIN</Link>
       </div>
     )
   }

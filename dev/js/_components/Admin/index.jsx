@@ -4,7 +4,6 @@ import { Switch, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import ReduxToastr from 'react-redux-toastr'
 import Popup from 'react-popup'
-import WebFont from 'webfontloader'
 // import { history } from '../../_helpers'
 
 import Header from './Partials/Header'
@@ -13,8 +12,6 @@ import Albums from './Albums'
 import TrashPage from './Trash'
 import Error404 from './Errors/404'
 // import {
-//   PrivateRoute,
-//   AlbumsPage,
 //   UsersPage,
 //   UserCreatePage} from '../_components'
 
@@ -34,17 +31,6 @@ class Admin extends Component {
   }
 
   componentDidMount() {
-    WebFont.load({
-      google: {
-        families: [
-          // 'Roboto:100,300,400,500,700,900',
-          'Dosis:300,400,500,600,700,800',
-          // 'Oxygen:300,400,700',
-          // 'Ruda:400,700,900',
-          'sans-serif'
-        ]
-      }
-    })
     this.props.dispatch(headerActions.setTitle('Admin'))
   }
 
