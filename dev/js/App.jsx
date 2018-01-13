@@ -6,10 +6,10 @@ import { detect } from 'detect-browser'
 import WebFont from 'webfontloader'
 
 import PrivateRoute from './_components/PrivateRoute'
+import Login from './_components/Login'
 import Front from './_components/Front'
 import Admin from './_components/Admin'
-import Login from './_components/Login'
-import Error404 from './_components/Errors/404'
+import Error404 from './_components/404'
 
 import { history } from './_helpers'
 import { clientActions } from './_actions'
@@ -54,10 +54,7 @@ class App extends Component {
     const { dispatch } = this.props
     let width = window.innerWidth
     let height = window.innerHeight
-    let orientation = 'landscape'
-    if (width < height) {
-      orientation = 'portrait'
-    }
+    let orientation = (width < height) ? 'portrait' : 'landscape'
     dispatch(clientActions.setScreen({ width, height, orientation }))
   }
 
@@ -69,8 +66,8 @@ class App extends Component {
           <Switch>
             <PrivateRoute exact path="/" component={Front} />
             <PrivateRoute path="/admin" component={Admin} />
-            <Route exact path="/login" component={Login} />
-            <Route component={Error404} />
+            <Route path="/login" component={Login} />
+            <PrivateRoute component={Error404} />
           </Switch>
         </Router>
 

@@ -33,7 +33,7 @@
 @import 'pages/trash';
 
 
-#app_wrapper {
+#admin_wrapper {
   background-image: url('https://s3-eu-west-1.amazonaws.com/app.mindelis.com/images/bg.jpg');
   background-color: $black;
   background-position: center;
@@ -59,7 +59,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-#app_content {
+#admin_content {
   padding-top: 50px;
   padding-bottom: 40px;
   // overflow: auto;

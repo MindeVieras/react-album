@@ -14,7 +14,7 @@ const initialState = {
   }
 }
 
-export function albums(state = initialState, action) {
+export function adminAlbums(state = initialState, action) {
   switch (action.type) {
   case albumsConstants.ADD_TO_LIST:
     return {

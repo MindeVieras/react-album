@@ -1,4 +1,20 @@
 
 #front_page { 
   font-family: 'Oxygen';
+  .albums-list {
+    .item {
+      overflow: hidden;
+      .name {
+        font-size: 20px;
+      }
+      .media {
+        .media-item {
+          display: inline-block;
+          img {
+            vertical-align: bottom;
+          }
+        }
+      }
+    }
+  }
 }

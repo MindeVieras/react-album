@@ -65,10 +65,10 @@ class AlbumsList extends Component {
 // }
 
 function mapStateToProps(state) {
-  const { auth, albums } = state
+  const { auth, admin_albums } = state
   return {
     auth,
-    albums: albums.list
+    albums: admin_albums.list
   }
 }
 

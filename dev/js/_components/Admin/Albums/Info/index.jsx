@@ -61,9 +61,9 @@ AlbumInfo.propTypes = {
 }
 
 function mapStateToProps(state) {
-  const { albums } = state
+  const { admin_albums } = state
   return {
-    selected_album: albums.selected_album
+    selected_album: admin_albums.selected_album
   }
 }
 
