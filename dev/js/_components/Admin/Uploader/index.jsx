@@ -89,11 +89,12 @@ class Uploader extends Component {
       
       dispatch(uploaderActions.setMediaId(id, media_id))
       dispatch(uploaderActions.saveMetadata(id, media_id))
+      dispatch(uploaderActions.rekognitionLabels(id, media_id))
       
       // If IMAGE
       if (mime.includes('image')) {
         dispatch(uploaderActions.setMime(id, 'image'))
-        dispatch(uploaderActions.generateImageThumbs(id, key))
+        dispatch(uploaderActions.generateImageThumbs(id, media_id))
       }
       // If VIDEO
       else if (mime.includes('video')) {
@@ -246,7 +247,11 @@ class Uploader extends Component {
                           />
                         }
                         {thumbs &&
-                          <StatusGenerateImageThumbsIcon thumbs={ thumbs } />
+                          <StatusGenerateImageThumbsIcon
+                            thumbs={ thumbs }
+                            id={ id }
+                            media_id={ media_id }
+                          />
                         }
                         {videos &&
                           <StatusGenerateVideosIcon videos={ videos } />

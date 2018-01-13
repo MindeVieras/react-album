@@ -20,11 +20,11 @@ function save(file, user_id, content_type) {
 }
 
 // Generates image Thumbnails
-function generateImageThumbs(key) {
+function generateImageThumbs(media_id) {
   const requestOptions = {
     method: 'POST',
     headers: { ...authHeader(), 'Content-Type': 'application/json' },
-    body: JSON.stringify({ key })
+    body: JSON.stringify({ media_id })
   }
   return fetch(baseServerUrl+'/api/media/generate-image-thumbs', requestOptions).then(handleResponse)
 }

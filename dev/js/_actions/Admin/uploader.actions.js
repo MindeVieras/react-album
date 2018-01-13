@@ -75,11 +75,11 @@ function getImageThumbs(id, thumbs) {
   function get(id, thumbs) { return { type: uploaderConstants.GET_IMG_THUMBS, id, thumbs } }
 }
 
-function generateImageThumbs(id, key) {
+function generateImageThumbs(id, media_id) {
   return dispatch => {
     dispatch(request(id))
 
-    mediaService.generateImageThumbs(key)
+    mediaService.generateImageThumbs(media_id)
       .then(function(res) {
         if (res.ack == 'ok') {
           dispatch(success(id, res.thumbs))
