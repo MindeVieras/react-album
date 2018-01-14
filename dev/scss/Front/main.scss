@@ -2,8 +2,9 @@
 @import '../base/mixins';
 @import './vars/colors';
 
+@import './libs/perfect-scrollbar';
+
 @import 'partials/circle-menu';
-@import 'partials/slick-carousel';
 
 @import 'pages/front';
 

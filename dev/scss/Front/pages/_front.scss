@@ -10,28 +10,18 @@
         font-weight: 100;
       }
       .media {
-        height: 200px;
-        overflow: hidden;
-        position: relative;
+        width: 100%;
+        overflow-y: hidden;
+        white-space: nowrap;
+        padding: 0 5px;
         .media-item {
           display: inline-block;
+          margin-right: 5px;
+          &:last-child {
+            margin-right: 0;
+          }
           img {
-            vertical-align: bottom;
             height: 200px;
-          }
-        }
-        .arrow {
-          position: absolute;
-          top: 100px;
-          z-index: 1;
-          color: darken($white, 10);
-          font-size: 22px;
-          cursor: pointer;
-          &.prev {
-            left: 10px;
-          }
-          &.next {
-            right: 10px;
           }
         }
       }
