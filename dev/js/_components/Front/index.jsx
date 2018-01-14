@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { RingLoader } from 'react-spinners'
 
-// import Header from './Partials/Header'
 import CircleMenu from './Partials/CircleMenu'
+import Media from './Album/Media'
 
 import { frontActions, frontUiActions } from '../../_actions'
 
@@ -39,8 +39,6 @@ class Front extends Component {
     return (
       <div>
         <div id="front_page" onClick={ this.closeMenu }>
-          
-          {/*<Header />*/}
 
           <div id="front_content">
             {albums.loading &&
@@ -60,13 +58,7 @@ class Front extends Component {
                   >
                     <div className="name">{album.name}</div>
                     {album.media &&
-                      <div className="media">
-                        {album.media.map((media, i) => 
-                          <div className="media-item" key={ i }>
-                            <img src={ media.key } />
-                          </div>
-                        )}
-                      </div>
+                      <Media media={ album.media } />
                     }
                   </div>
                 )}

@@ -164,7 +164,6 @@ function rekognitionLabels(id, media_id) {
 
     mediaService.saveRekognitionLabels(media_id)
       .then(function(res) {
-        console.log(res)
         if (res.ack == 'ok') {
           dispatch(success(id, res.rekognition_labels))
         } else if (res.ack == 'err') {

@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Motion, spring } from 'react-motion'
 
-import { IoNavicon, IoCube } from 'react-icons/lib/io'
+import { IoNavicon, IoCube, IoHome } from 'react-icons/lib/io'
 
 import { frontUiActions } from '../../../_actions'
 
@@ -16,7 +16,11 @@ const ELEMENTS = [
   {
     icon: <Link to="/admin"><IoCube /></Link>,
     onClick: () => {}
-  } 
+  },
+  {
+    icon: <Link to="/"><IoHome /></Link>,
+    onClick: () => {}
+  }
 ]
 
 // UTILITY FUNCTIONS
