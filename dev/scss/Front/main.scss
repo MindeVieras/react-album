@@ -2,34 +2,9 @@
 @import '../base/mixins';
 @import './vars/colors';
 
-// @import 'partials/header';
-// @import 'partials/datetimepicker';
-// // @import 'partials/modal';
-// // @import 'partials/dropzone';
-// // @import 'partials/forms';
-// @import 'partials/inputs';
-// @import 'partials/buttons';
-// @import 'partials/uploader';
-// @import 'partials/popup';
-// @import 'partials/spinners';
-// @import 'partials/context-menu';
-// // @import 'partials/tooltips';
-// // @import 'partials/lists';
-// // @import 'partials/maps';
-// // @import 'partials/messages';
-// @import 'partials/video';
-// @import 'partials/footer';
-
-// @import 'partials/toastr/index';
+@import 'partials/circle-menu';
 
 @import 'pages/front';
-// @import 'pages/users';
-// @import 'pages/user-create';
-
-// @import 'pages/albums';
-// @import 'pages/album-create';
-
-// @import 'pages/trash';
 
 video {
   width: 100%;
