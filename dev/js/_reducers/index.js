@@ -12,6 +12,7 @@ import { header } from './Admin/header.reducer'
 import { footer } from './Admin/footer.reducer'
 import { trash } from './Admin/trash.reducer'
 
+import { frontUi } from './Front/ui.reducer'
 import { frontAlbums } from './Front/albums.reducer'
 
 const rootReducer = combineReducers({
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   admin_footer: footer,
   // users,
   admin_albums: adminAlbums,
+  front_ui: frontUi,
   front_albums: frontAlbums,
   form: formReducer,
   toastr: toastrReducer,

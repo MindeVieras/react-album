@@ -1,40 +1,22 @@
 
 import React, { Component } from 'react'
-import {Motion, spring} from 'react-motion'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { Motion, spring } from 'react-motion'
+
+import { IoNavicon, IoCube } from 'react-icons/lib/io'
+
+import { frontUiActions } from '../../../_actions'
 
 // CONSTANTS
 // Value of 1 degree in radians
 const DEG_TO_RAD = 0.0174533
 const ELEMENTS = [
   {
-    icon: "home",
-    onClick: () => alert("clicked home")
-  },{
-    icon: "clock-o",
-    onClick: () => alert("clicked clock")
-  },{
-    icon: "lock",
-    onClick: () => alert("clicked lock")
-  },{
-    icon: "globe",
-    onClick: () => alert("clicked globe")
-  },{
-    icon: "asterisk",
-    onClick: () => alert("clicked asterisk")
-  },{
-    icon: "fighter-jet",
-    onClick: () => alert("clicked fighter-jet")
-  },{
-    icon: "clipboard",
-    onClick: () => alert("clicked clipboard")
-  },{
-    icon: "industry",
-    onClick: () => alert("clicked industry")
-  },{
-    icon: "eye",
-    onClick: () => alert("clicked eye")
-  }
-  
+    icon: <Link to="/admin"><IoCube /></Link>,
+    onClick: () => {}
+  } 
 ]
 
 // UTILITY FUNCTIONS
@@ -42,25 +24,17 @@ function toRadians(degrees) {
   return degrees * DEG_TO_RAD
 }
 
-// -------------------------------------------------------
-// ---------------   COMPONENT START   -------------------
-// -------------------------------------------------------
-class MenuButton extends Component {
+class CircleMenu extends Component {
   
   constructor(props){
     super(props)
     
-    this.state = {
-      isOpen: true
-    }
     this.toggleMenu = this.toggleMenu.bind(this)
   }
   
   toggleMenu(){
-    let { isOpen } = this.state
-    this.setState({
-      isOpen: !isOpen
-    })
+    const { menu_open, dispatch } = this.props
+    dispatch(frontUiActions.menuOpen(!menu_open))
   }
   
   getMainButtonStyle(){
@@ -112,90 +86,77 @@ class MenuButton extends Component {
   
   getCProps(){
     return {
-      mainButtonProps: () => ({
-        className: "button-menu",
-        style: this.getMainButtonStyle(),
-        onClick: this.toggleMenu
-      }),
       childButtonProps: (style, onClick) => ({
         className: "button-child",
         style,
         onClick
       }),
-      childButtonMotionProps: (index, isOpen) => ({
+      childButtonMotionProps: (index, menu_open) => ({
         key: index,
-        style: isOpen ? this.getFinalChildButtonStyle(index) : this.getInitalChildButtonStyle()
-      }),
-      // handle Icons
-      childButtonIconProps: (name) => ({
-        className: "child-button-icon fa fa-"+name+" fa-"+this.props.childButtonIconSize
-      }),
-      mainButtonIconProps: (name) => ({
-        className: "main-button-icon fa fa-"+name+" fa-"+this.props.mainButtonIconSize
+        style: menu_open ? this.getFinalChildButtonStyle(index) : this.getInitalChildButtonStyle()
       })
     }
   }
   
   renderChildButton(item, index){
-    let { isOpen } = this.state
+    let { menu_open } = this.props
     let cp = this.getCProps()
     
-    //return <div {...cp.childButtonProps(index, isOpen)}/>;
-    
-    return <Motion {...cp.childButtonMotionProps(index, isOpen)}>
+    return <Motion {...cp.childButtonMotionProps(index, menu_open)}>
       {
         (style) => <div {...cp.childButtonProps(style, item.onClick)}>
-          <i {...cp.childButtonIconProps(item.icon)}/>
+          { item.icon }
         </div>
       }
     </Motion>
   }
   
   render(){
-    let cp = this.getCProps()
-    let { elements, mainButtonIcon } = this.props
-    let { isOpen } = this.state
+    let { elements } = this.props
     
-    return <div className="button-container">
-      { elements.map((item, i) => this.renderChildButton(item, i)) }
-      <div {...cp.mainButtonProps()}>
-        <i {...cp.mainButtonIconProps(mainButtonIcon)}/>
-      </div>
-    </div>
-  }
-}
-// -------------------------------------------------------
-// ----------------   COMPONENT END   --------------------
-// -------------------------------------------------------
-
-
-// APP
-class CircleMenu extends Component {
-  constructor(props){
-    super(props)
-    
-    this.state = {
-      flyOutRadius: 120,
-      seperationAngle: 40,
-      mainButtonDiam: 90,
-      childButtonDiam: 50,
-      numElements: 4,
-      stiffness: 320,
-      damping: 17,
-      rotation: 0,
-      mainButtonIcon: "bars",
-      mainButtonIconSize: "2x",
-      childButtonIconSize: "lg"
-    }
-  }
-  
-  render(){
-    return  (
+    return (
       <div id="circle_menu">
-        <MenuButton {...this.state} elements={ELEMENTS.slice(0, this.state.numElements)}/>
+        <div className="button-container">
+          { elements.map((item, i) => this.renderChildButton(item, i)) }
+          <div
+            className="button-menu"
+            style={this.getMainButtonStyle()}
+            onClick={this.toggleMenu}
+          >
+            <IoNavicon />
+          </div>
+        </div>
       </div>
     )
   }
 }
 
-export default CircleMenu
+CircleMenu.propTypes = {
+  flyOutRadius: PropTypes.number,
+  seperationAngle: PropTypes.number,
+  mainButtonDiam: PropTypes.number,
+  childButtonDiam: PropTypes.number,
+  stiffness: PropTypes.number,
+  damping: PropTypes.number,
+  rotation: PropTypes.number
+}
+
+CircleMenu.defaultProps = {
+  mainButtonDiam: 55,
+  childButtonDiam: 45,
+  flyOutRadius: 75,
+  seperationAngle: 40,
+  stiffness: 320,
+  damping: 17,
+  rotation: 225,
+  elements: ELEMENTS
+}
+
+function mapStateToProps(state) {
+  const { front_ui } = state
+  return {
+    menu_open: front_ui.menu_open
+  }
+}
+
+export default connect(mapStateToProps)(CircleMenu)
