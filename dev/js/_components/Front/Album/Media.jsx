@@ -10,23 +10,49 @@ class Media extends Component {
   }
   
   render(){
-    const { media } = this.props
+    const { media, media_height } = this.props
+    const mediaList = media.map((media, i) => {
+      const { mime, width, height } = media
+
+      const calculatedWidth = media_height * (width / height)
+      const itemStyle = {
+        height: media_height,
+        width: calculatedWidth
+      }
+      if (mime === 'video') {
+        return (
+          <div className="media-item video" style={ itemStyle } key={ i }>
+            <video height={ media_height } width={ Math.ceil(calculatedWidth) } controls>
+              <source src={ media.key } type="video/mp4" />
+              Your browser does not support HTML5 video.
+            </video>
+          </div>
+        )
+      } else {      
+        return (
+          <div className="media-item image" style={ itemStyle } key={ i }>
+            <img src={ media.key } />
+          </div>
+        )
+      }
+    })
     return (
       <div
         className="media"
       >
-        {media.map((media, i) => 
-          <div className="media-item" key={ i }>
-            <img src={ media.key } />
-          </div>
-        )}
+        { mediaList }
       </div>
     )
   }
 }
 
 Media.propTypes = {
-  media: PropTypes.array.isRequired
+  media: PropTypes.array.isRequired,
+  media_height: PropTypes.number
+}
+
+Media.defaultProps = {
+  media_height: 200
 }
 
 export default Media

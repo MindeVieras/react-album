@@ -17,11 +17,12 @@
         .media-item {
           display: inline-block;
           margin-right: 5px;
+          height: 200px;
           &:last-child {
             margin-right: 0;
           }
           img {
-            height: 200px;
+            height: 100%;
           }
         }
       }

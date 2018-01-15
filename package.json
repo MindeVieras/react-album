@@ -13,6 +13,7 @@
     "fine-uploader": "^5.15.4",
     "fine-uploader-wrappers": "^1.0.1",
     "history": "^4.7.2",
+    "lightbox-react": "^0.1.5",
     "moment": "^2.19.2",
     "react": "^16.2.0",
     "react-blur": "^0.6.0",
