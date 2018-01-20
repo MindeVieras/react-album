@@ -12,7 +12,10 @@ class Media extends Component {
   render(){
     const { media, media_height } = this.props
     const mediaList = media.map((media, i) => {
-      const { mime, width, height } = media
+      const { mime } = media
+      // Width and Height if not available set to media_height
+      const width = media.width || media_height
+      const height = media.height || media_height
 
       const calculatedWidth = media_height * (width / height)
       const itemStyle = {
@@ -22,7 +25,7 @@ class Media extends Component {
       if (mime === 'video') {
         return (
           <div className="media-item video" style={ itemStyle } key={ i }>
-            <video height={ media_height } width={ Math.ceil(calculatedWidth) } controls>
+            <video height={ media_height } width={ calculatedWidth } controls>
               <source src={ media.key } type="video/mp4" />
               Your browser does not support HTML5 video.
             </video>
