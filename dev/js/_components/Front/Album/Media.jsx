@@ -14,7 +14,8 @@ class Media extends Component {
     const mediaList = media.map((media, i) => {
       const { mime } = media
       // Width and Height if not available set to media_height
-      const width = media.width || media_height
+      const widescreenRatio = 16 / 9
+      const width = media.width || media_height * widescreenRatio
       const height = media.height || media_height
 
       const calculatedWidth = media_height * (width / height)
