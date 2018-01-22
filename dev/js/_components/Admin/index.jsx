@@ -16,6 +16,7 @@ import Error404 from './Errors/404'
 
 // import { headerActions } from '../../_actions'
 
+import 'react-datetime/css/react-datetime.css'
 import '../../../scss/Admin/main.scss'
 
 class Admin extends Component {

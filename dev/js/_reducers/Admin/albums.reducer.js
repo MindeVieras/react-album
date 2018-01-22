@@ -42,6 +42,17 @@ export function adminAlbums(state = initialState, action) {
         })
       }
     }
+  case albumsConstants.CHANGE_DATE:
+    return {
+      ...state,
+      selected_album: {
+        album: {
+          ...state.selected_album.album,
+          start_date: action.payload.start_date,
+          end_date: action.payload.end_date
+        }
+      }
+    }
   case albumsConstants.GETLIST_REQUEST:
     return {
       ...state,

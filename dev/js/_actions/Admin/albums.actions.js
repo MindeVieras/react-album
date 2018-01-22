@@ -1,5 +1,6 @@
 
 import {toastr} from 'react-redux-toastr'
+import Popup from 'react-popup'
 
 import { albumsConstants } from '../../_constants'
 import { albumsService } from '../../_services'
@@ -9,6 +10,7 @@ export const albumsActions = {
   getList,
   getOne,
   rename,
+  changeDate,
   delete: _delete
 }
 
@@ -64,6 +66,7 @@ function rename(payload) {
       .then(function(res) {
         if (res.ack == 'ok') {
           dispatch(rename(payload))
+          Popup.close()
           toastr.success('Success', res.msg)
         } else {
           toastr.error('Error', res.msg)
@@ -71,6 +74,22 @@ function rename(payload) {
       })
   }
   function rename(payload) { return { type: albumsConstants.RENAME, payload } }
+}
+
+function changeDate(payload) {
+  return dispatch => {
+    albumsService.changeDate(payload)
+      .then(function(res) {
+        if (res.ack == 'ok') {
+          dispatch(change(payload))
+          Popup.close()
+          toastr.success('Success', res.msg)
+        } else {
+          toastr.error('Error', res.msg)
+        }
+      })
+  }
+  function change(payload) { return { type: albumsConstants.CHANGE_DATE, payload } }
 }
 
 // prefixed function name with underscore because delete is a reserved word in javascript

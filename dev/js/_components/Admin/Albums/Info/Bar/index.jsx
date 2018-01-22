@@ -3,15 +3,21 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import Name from './Name'
-import DeleteAlbum from '../../../Buttons/DeleteAlbum'
+import Dates from './Dates'
+import TimeAgo from './TimeAgo'
 
-const Bar = ({ album_id, name }) => {
+const Bar = ({ album_id, name, start_date, end_date }) => {
 
   return (
     <div className="album-bar">
       <Name name={ name } album_id={ album_id } />
-      <div className="buttons">
-        <DeleteAlbum id={ album_id } type="danger" />
+      <div className="left">
+        <Dates
+          album_id={ album_id }
+          start_date={ start_date }
+          end_date={ end_date }
+        />
+        <TimeAgo start_date={ start_date } />
       </div>
     </div>
   )
@@ -19,6 +25,8 @@ const Bar = ({ album_id, name }) => {
 
 Bar.propTypes = {
   album_id: PropTypes.number.isRequired,
+  start_date: PropTypes.string.isRequired,
+  end_date: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired
 }
 

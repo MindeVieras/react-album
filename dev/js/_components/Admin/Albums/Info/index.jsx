@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import Spinner from '../../Partials/Spinner'
 
 import Bar from './Bar'
+import Foot from './Foot'
 
 import { Uploader } from '../../Uploader'
 import { albumsActions, uploaderActions } from '../../../../_actions'
@@ -36,6 +37,8 @@ class AlbumInfo extends Component {
             {selected_album.album.id && selected_album.album.name &&
               <Bar
                 album_id={ selected_album.album.id }
+                start_date={ selected_album.album.start_date }
+                end_date={ selected_album.album.end_date }
                 name={ selected_album.album.name }
               />
             }
@@ -45,6 +48,12 @@ class AlbumInfo extends Component {
                 entity={contentConstants.TYPE_ALBUM}
                 entity_id={selected_album.album.id}
                 status={mediaConstants.STATUS_ENABLED}
+              />
+            }
+
+            {selected_album.album.id &&
+              <Foot
+                album_id={ selected_album.album.id }
               />
             }
 

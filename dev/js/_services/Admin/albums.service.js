@@ -6,6 +6,7 @@ export const albumsService = {
   getList,
   getOne,
   rename,
+  changeDate,
   delete: _delete
 }
 
@@ -45,6 +46,16 @@ function rename(name, id) {
   }
 
   return fetch(baseServerUrl+'/api/albums/rename', requestOptions).then(handleResponse)
+}
+
+function changeDate(payload) {
+  const requestOptions = {
+    method: 'POST',
+    headers: { ...authHeader(), 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }
+
+  return fetch(baseServerUrl+'/api/albums/change-date', requestOptions).then(handleResponse)
 }
 
 function _delete(id) {

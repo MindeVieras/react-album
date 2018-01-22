@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import Popup from 'react-popup'
 import { connect } from 'react-redux'
 
-import { albumsActions } from '../../../../../_actions'
+import { albumsActions } from '../../../../../../_actions'
 
 class EditForm extends Component {
   constructor(props) {
@@ -18,7 +18,6 @@ class EditForm extends Component {
   handleSubmit(e) {
     e.preventDefault()
     this.props.dispatch(albumsActions.rename({ name: this.state.value, id: this.props.id }))
-    Popup.close()
   }
   
   handleFocus(e) {
