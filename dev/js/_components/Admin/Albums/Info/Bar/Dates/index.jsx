@@ -22,25 +22,6 @@ class Dates extends Component {
   render() {
     const { start_date, end_date } = this.props
     const date = moment(start_date).format('YYYY-MM-DD HH:mm:ss')
-    // let start = this.state.startDate.format('YYYY-MM-DD HH:mm:ss')
-    // let end = this.state.endDate.format('YYYY-MM-DD HH:mm:ss')
-    // let label = start + ' - ' + end
-    // if (start === end) {
-    //   label = start
-    // }
-
-    // let locale = {
-    //   format: 'YYYY-MM-DD HH:mm:ss',
-    //   separator: ' - ',
-    //   applyLabel: 'Apply',
-    //   cancelLabel: 'Cancel',
-    //   weekLabel: 'W',
-    //   customRangeLabel: 'Custom Range',
-    //   daysOfWeek: moment.weekdaysMin(),
-    //   monthNames: moment.monthsShort(),
-    //   firstDay: moment.localeData().firstDayOfWeek(),
-    // }
-
     return (
       <div className="dates-wrapper">
         <div className="date">

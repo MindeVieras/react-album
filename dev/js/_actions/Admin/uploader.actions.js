@@ -7,6 +7,8 @@ export const uploaderActions = {
   setStatus,
   setMediaId,
   setMime,
+  setFilename,
+  setFilesize,
   removeFile,
   clearFiles,
   getImageThumbs,
@@ -49,6 +51,22 @@ function setMime(id, mime) {
   }
 
   function set(id, mime) { return { type: uploaderConstants.SET_FILE_MIME, id, mime } }
+}
+
+function setFilename(id, filename) {
+  return dispatch => {
+    dispatch(set(id, filename))
+  }
+
+  function set(id, filename) { return { type: uploaderConstants.SET_FILENAME, id, filename } }
+}
+
+function setFilesize(id, filesize) {
+  return dispatch => {
+    dispatch(set(id, filesize))
+  }
+
+  function set(id, filesize) { return { type: uploaderConstants.SET_FILESIZE, id, filesize } }
 }
 
 function removeFile(id) {

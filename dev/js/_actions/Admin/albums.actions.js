@@ -48,6 +48,7 @@ function getOne(id) {
     albumsService.getOne(id)
       .then(function(res) {
         if (res.ack == 'ok') {
+          console.log(res.data.media)
           dispatch(success(res.data))
         } else {
           dispatch(failure(res.msg))

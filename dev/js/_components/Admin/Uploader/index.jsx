@@ -6,23 +6,14 @@ import FineUploaderTraditional from 'fine-uploader-wrappers'
 import ReactTooltip from 'react-tooltip'
 import { toastr } from 'react-redux-toastr'
 
+import MediaItem from './MediaItem'
+
 import CancelButton from './Partials/cancel-button'
-import RemoveButton from './Partials/remove-button'
 import Dropzone from './Partials/dropzone'
 import FileInput from './Partials/file-input'
-import Filename from './Partials/filename'
-import Filesize from './Partials/filesize'
-import ProgressBar from './Partials/progress-bar'
 import TotalProgressBar from './Partials/total-progress-bar'
-import Status from './Partials/status'
-import Thumbnail from './Partials/thumbnail'
 
-import StatusGenerateImageThumbsIcon from './Icons/StatusGenerateImageThumbs'
-import StatusGenerateVideosIcon from './Icons/StatusGenerateVideos'
-import StatusMetadataIcon from './Icons/StatusMetadata'
-import StatusRekognitionLabelsIcon from './Icons/StatusRekognitionLabels'
-
-import { IoCloseCircled, IoCheckmarkCircled, IoUpload, IoBug } from 'react-icons/lib/io'
+import { IoCloseCircled, IoUpload } from 'react-icons/lib/io'
 
 import { authHeader, baseServerUrl } from '../../../_helpers'
 import { uploaderActions } from '../../../_actions'
@@ -43,11 +34,11 @@ class Uploader extends Component {
           customHeaders: authHeader(),
           endpoint: baseServerUrl+'/api/upload'
         },
-        session: {
-          customHeaders: authHeader(),
-          endpoint: baseServerUrl+'/api/upload/get-initial-files/'+props.entity_id,
-          refreshOnReset: false
-        },
+        // session: {
+        //   customHeaders: authHeader(),
+        //   endpoint: baseServerUrl+'/api/upload/get-initial-files/'+props.entity_id,
+        //   refreshOnReset: false
+        // },
         deleteFile: {
           customHeaders: authHeader(),
           enabled: true,
@@ -64,15 +55,19 @@ class Uploader extends Component {
       // Submitting files
       if (status === statusEnum.SUBMITTED) {
         this.props.dispatch(uploaderActions.submitFile(id, status, false))
+        let filename = uploader.methods.getName(id)
+        this.props.dispatch(uploaderActions.setFilename(id, filename))
+        let filesize = uploader.methods.getSize(id)
+        this.props.dispatch(uploaderActions.setFilesize(id, filesize))
       }
       // On server or Uploaded
       else if (status === statusEnum.UPLOAD_SUCCESSFUL) {
-        if (oldStatus == null) {
-          this.props.dispatch(uploaderActions.submitFile(id, status, true))
-        }
-        else {
+        // if (oldStatus == null) {
+          // this.props.dispatch(uploaderActions.submitFile(id, status, true))
+        // }
+        // else {
           this.props.dispatch(uploaderActions.setStatus(id, status))
-        }
+        // }
       }
       // Remove file
       else if (isFileGone(status, statusEnum)) {
@@ -103,23 +98,23 @@ class Uploader extends Component {
       }
     }
 
-    this._sessionComplete = (response, success, xhr) => {
-      const { dispatch } = this.props
-      response.forEach(function(file, id){
-        const { media_id, metadata, rekognition_labels, thumbs, mime, videos } = file
-        dispatch(uploaderActions.setMediaId(id, media_id))
-        dispatch(uploaderActions.setMime(id, mime))
-        dispatch(uploaderActions.getMetadata(id, metadata))
-        dispatch(uploaderActions.getRekognitionLabels(id, rekognition_labels))
+    // this._sessionComplete = (response, success, xhr) => {
+    //   const { dispatch } = this.props
+    //   response.forEach(function(file, id){
+    //     const { media_id, metadata, rekognition_labels, thumbs, mime, videos } = file
+    //     dispatch(uploaderActions.setMediaId(id, media_id))
+    //     dispatch(uploaderActions.setMime(id, mime))
+    //     dispatch(uploaderActions.getMetadata(id, metadata))
+    //     dispatch(uploaderActions.getRekognitionLabels(id, rekognition_labels))
 
-        if (mime === 'image') {
-          dispatch(uploaderActions.getImageThumbs(id, thumbs))
-        }
-        if (mime === 'video') {
-          dispatch(uploaderActions.getVideos(id, videos))
-        }
-      })
-    }
+    //     if (mime === 'image') {
+    //       dispatch(uploaderActions.getImageThumbs(id, thumbs))
+    //     }
+    //     if (mime === 'video') {
+    //       dispatch(uploaderActions.getVideos(id, videos))
+    //     }
+    //   })
+    // }
 
     this._onDeleteComplete = (id, xhr, isError) => {
       const res = JSON.parse(xhr.responseText)
@@ -132,33 +127,40 @@ class Uploader extends Component {
   }
 
   componentDidMount() {
+    this.props.initial_media.map((media, i) => {
+      const { media_id, filename, filesize } = media
+      let id = 100000 + i
+      this.props.dispatch(uploaderActions.submitFile(id, 'upload successful', true))
+      this.props.dispatch(uploaderActions.setMediaId(id, media_id))
+      this.props.dispatch(uploaderActions.setFilename(id, filename))
+      this.props.dispatch(uploaderActions.setFilesize(id, filesize))
+    })
     this.uploader.on('statusChange', this._onStatusChange)
     this.uploader.on('complete', this._onComplete)
-    this.uploader.on('sessionRequestComplete', this._sessionComplete)
+    // this.uploader.on('sessionRequestComplete', this._sessionComplete)
     this.uploader.on('deleteComplete', this._onDeleteComplete)
   }
 
   componentWillUnmount() {
     this.uploader.off('statusChange', this._onStatusChange)
     this.uploader.off('complete', this._onComplete)
-    this.uploader.off('sessionRequestComplete', this._sessionComplete)
+    // this.uploader.off('sessionRequestComplete', this._sessionComplete)
     this.uploader.off('deleteComplete', this._onDeleteComplete)
   }
 
   render() {
-    const { author, entity, entity_id, status, files } = this.props
+    const { author, entity, entity_id, status, files, initial_media, dispatch } = this.props
     const uploader = this.uploader
 
     let counter = files.length
 
     const cancelButtonProps = getComponentProps('cancelButton', this.props)
-    const filesizeProps = getComponentProps('filesize', this.props)
 
     const deleteEnabled = uploader.options.deleteFile && uploader.options.deleteFile.enabled
     
     // Remove/Add dropzone text and fileField if any visableFiles
     let uploaderText = ''
-    if (files.length > 0) {
+    if (files.length > 0 || initial_media.length > 0) {
       uploaderText = <span/>
     } else {
       uploaderText = <span className="dropzone-text">
@@ -198,104 +200,16 @@ class Uploader extends Component {
         <ul
           className="uploader-files"
         >
+          
+
           {
-            files.map(({id, media_id, status, fromServer, mime, metadata, rekognition_labels, thumbs, videos }) => {
+            files.map((props, i) => {
               return (
-                <li
-                  key={ id }
-                  className="uploader-file"
-                >
-                  {mime &&
-                    <Thumbnail
-                      id={ id }
-                      fromServer={ fromServer }
-                      uploader={ uploader }
-                      maxSize={ 240 }
-                      mime={ mime }
-                      videos={ videos }
-                    />
-                  }
-                  
-                  <ProgressBar
-                    id={ id }
-                    uploader={ uploader }
-                  />
-                  
-                  <div className="footer">
-                    <div className="status-bar">
-                      <div className="status">
-                        <Status
-                          id={ id }
-                          uploader={ uploader }
-                          fromServer={ fromServer }
-                        />
-                      </div>
-                      <div className="icons">
-                        {mime && rekognition_labels &&
-                          <StatusRekognitionLabelsIcon
-                            rekognition_labels={ rekognition_labels }
-                            mime={ mime }
-                            id={ id }
-                            media_id={ media_id }
-                          />
-                        }
-                        {metadata &&
-                          <StatusMetadataIcon
-                            metadata={ metadata }
-                            id={ id }
-                            media_id={ media_id }
-                          />
-                        }
-                        {thumbs &&
-                          <StatusGenerateImageThumbsIcon
-                            thumbs={ thumbs }
-                            id={ id }
-                            media_id={ media_id }
-                          />
-                        }
-                        {videos &&
-                          <StatusGenerateVideosIcon videos={ videos } />
-                        }
-                        {status === 'upload successful' &&
-                          <div
-                            className="icon success"
-                            data-tip="Successfuly uploaded"
-                          >
-                            <IoCheckmarkCircled />
-                            <ReactTooltip />
-                          </div>
-                        }
-                        {status === 'upload failed' &&
-                          <div
-                            className="icon failed"
-                            data-tip="Error saving file"
-                          >
-                            <IoBug />
-                            <ReactTooltip />
-                          </div>
-                        }
-                      </div>
-                    </div>
-                    <div className="info">
-                      <Filename
-                        className="react-fine-uploader-gallery-filename"
-                        id={ id }
-                        uploader={ uploader }
-                      />
-                      <Filesize
-                        className='react-fine-uploader-gallery-filesize'
-                        id={ id }
-                        uploader={ uploader }
-                        { ...filesizeProps }
-                      />
-                    </div>
-                  </div>
-                  <RemoveButton
-                    id={ id }
-                    uploader={ uploader }
-                    status={ status }
-                  />
-                </li>
+                <MediaItem
+                  key={ i }
+                  uploader={ uploader }
+                  { ...props }
+                />
               )
             })
           }
@@ -310,6 +224,7 @@ Uploader.propTypes = {
   author: PropTypes.number.isRequired,
   entity: PropTypes.number.isRequired,
   entity_id: PropTypes.number.isRequired,
+  initial_media: PropTypes.array.isRequired,
   files: PropTypes.array.isRequired
 }
 

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 import DeleteAlbum from '../../../Buttons/DeleteAlbum'
 
-const Foot = ({ album_id, name }) => {
+const Foot = ({ album_id }) => {
 
   return (
     <div className="album-foot">

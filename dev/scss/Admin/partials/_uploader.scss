@@ -147,6 +147,10 @@
         font-size: 15px;
         width: 175px;
       }
+      .filesize {
+        display: block;
+        float: right;
+      }
     }
   }
   .remove-button {
@@ -187,17 +191,4 @@
 }
 .react-fine-uploader-gallery-file-input-container:focus {
     outline: 1px dotted #000000;
-}
-
-.react-fine-uploader-gallery-filename {
-    display: block;
-    font-weight: bold;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.react-fine-uploader-gallery-filesize {
-    display: block;
-    float: right;
 }

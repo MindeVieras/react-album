@@ -41,6 +41,28 @@ export function uploader(state = initialState, action) {
         return file
       })
     }
+  case uploaderConstants.SET_FILENAME:
+    return {
+      ...state,
+      files: state.files.map(file => {
+        if (file.id === action.id) {
+          const { ...fileCopy } = file
+          return { ...fileCopy, filename: action.filename }
+        }
+        return file
+      })
+    }
+  case uploaderConstants.SET_FILESIZE:
+    return {
+      ...state,
+      files: state.files.map(file => {
+        if (file.id === action.id) {
+          const { ...fileCopy } = file
+          return { ...fileCopy, filesize: action.filesize }
+        }
+        return file
+      })
+    }
   case uploaderConstants.SET_FILE_MIME:
     return {
       ...state,
