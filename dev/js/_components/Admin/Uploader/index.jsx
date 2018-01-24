@@ -5,15 +5,13 @@ import { connect } from 'react-redux'
 import FineUploaderTraditional from 'fine-uploader-wrappers'
 import ReactTooltip from 'react-tooltip'
 import { toastr } from 'react-redux-toastr'
+import { IoCloseCircled, IoUpload } from 'react-icons/lib/io'
 
-import MediaItem from './MediaItem'
-
-import CancelButton from './Partials/cancel-button'
 import Dropzone from './Partials/dropzone'
 import FileInput from './Partials/file-input'
 import TotalProgressBar from './Partials/total-progress-bar'
 
-import { IoCloseCircled, IoUpload } from 'react-icons/lib/io'
+import MediaItem from './MediaItem'
 
 import { authHeader, baseServerUrl } from '../../../_helpers'
 import { uploaderActions } from '../../../_actions'
@@ -55,10 +53,11 @@ class Uploader extends Component {
       // Submitting files
       if (status === statusEnum.SUBMITTED) {
         this.props.dispatch(uploaderActions.submitFile(id, status, false))
-        let filename = uploader.methods.getName(id)
-        this.props.dispatch(uploaderActions.setFilename(id, filename))
-        let filesize = uploader.methods.getSize(id)
-        this.props.dispatch(uploaderActions.setFilesize(id, filesize))
+        // Set file data
+        const { name, size, type } = uploader.methods.getFile(id)
+        this.props.dispatch(uploaderActions.setMime(id, type))
+        this.props.dispatch(uploaderActions.setFilename(id, name))
+        this.props.dispatch(uploaderActions.setFilesize(id, size))
       }
       // On server or Uploaded
       else if (status === statusEnum.UPLOAD_SUCCESSFUL) {
@@ -83,17 +82,16 @@ class Uploader extends Component {
       const mime = file.mime
       
       dispatch(uploaderActions.setMediaId(id, media_id))
+      // dispatch(uploaderActions.setMime(id, mime))
       dispatch(uploaderActions.saveMetadata(id, media_id))
       dispatch(uploaderActions.rekognitionLabels(id, media_id))
       
       // If IMAGE
       if (mime.includes('image')) {
-        dispatch(uploaderActions.setMime(id, 'image'))
         dispatch(uploaderActions.generateImageThumbs(id, media_id))
       }
       // If VIDEO
       else if (mime.includes('video')) {
-        dispatch(uploaderActions.setMime(id, 'video'))
         dispatch(uploaderActions.generateVideos(id, key))
       }
     }
@@ -127,25 +125,28 @@ class Uploader extends Component {
   }
 
   componentDidMount() {
+    // Add initial media
     this.props.initial_media.map((media, i) => {
-      const { media_id, filename, filesize } = media
+      const { media_id, mime, name, size } = media
       let id = 100000 + i
       this.props.dispatch(uploaderActions.submitFile(id, 'upload successful', true))
       this.props.dispatch(uploaderActions.setMediaId(id, media_id))
-      this.props.dispatch(uploaderActions.setFilename(id, filename))
-      this.props.dispatch(uploaderActions.setFilesize(id, filesize))
+      this.props.dispatch(uploaderActions.setMime(id, mime))
+      this.props.dispatch(uploaderActions.setFilename(id, name))
+      this.props.dispatch(uploaderActions.setFilesize(id, size))
     })
+
     this.uploader.on('statusChange', this._onStatusChange)
     this.uploader.on('complete', this._onComplete)
     // this.uploader.on('sessionRequestComplete', this._sessionComplete)
-    this.uploader.on('deleteComplete', this._onDeleteComplete)
+    // this.uploader.on('deleteComplete', this._onDeleteComplete)
   }
 
   componentWillUnmount() {
     this.uploader.off('statusChange', this._onStatusChange)
     this.uploader.off('complete', this._onComplete)
     // this.uploader.off('sessionRequestComplete', this._sessionComplete)
-    this.uploader.off('deleteComplete', this._onDeleteComplete)
+    // this.uploader.off('deleteComplete', this._onDeleteComplete)
   }
 
   render() {
@@ -194,9 +195,11 @@ class Uploader extends Component {
           status={ status }
           multiple={ true }
         />
+
         <div className="counter">
           { counter } files
         </div>
+        
         <ul
           className="uploader-files"
         >

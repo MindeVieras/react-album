@@ -3,6 +3,7 @@ import { authHeader, baseServerUrl } from '../../_helpers'
 
 export const mediaService = {
   save,
+  putToTrash,
   generateImageThumbs,
   generateVideos,
   saveMetadata,
@@ -17,6 +18,16 @@ function save(file, user_id, content_type) {
     body: JSON.stringify({ file, user_id, content_type })
   }
   return fetch(baseServerUrl+'/api/media/save', requestOptions).then(handleResponse)
+}
+
+// Puts media file to trash
+function putToTrash(media_id) {
+  const requestOptions = {
+    method: 'POST',
+    headers: { ...authHeader(), 'Content-Type': 'application/json' },
+    body: JSON.stringify({ media_id })
+  }
+  return fetch(baseServerUrl+'/api/media/put-to-trash', requestOptions).then(handleResponse)
 }
 
 // Generates image Thumbnails

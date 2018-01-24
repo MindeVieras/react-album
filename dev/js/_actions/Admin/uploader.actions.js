@@ -1,4 +1,6 @@
 
+import { toastr } from 'react-redux-toastr'
+
 import { uploaderConstants } from '../../_constants'
 import { mediaService } from '../../_services'
 
@@ -69,12 +71,20 @@ function setFilesize(id, filesize) {
   function set(id, filesize) { return { type: uploaderConstants.SET_FILESIZE, id, filesize } }
 }
 
-function removeFile(id) {
+function removeFile(media_id) {
   return dispatch => {
-    dispatch(remove(id))
+    mediaService.putToTrash(media_id)
+      .then(function(res) {
+        if (res.ack == 'ok') {
+          dispatch(remove(media_id))
+          toastr.success('Success', res.msg)
+        } else if (res.ack == 'err') {
+          toastr.error('Error', res.msg)
+        }
+      })
   }
 
-  function remove(id) { return { type: uploaderConstants.REMOVE_FILE, id } }
+  function remove(media_id) { return { type: uploaderConstants.REMOVE_FILE, media_id } }
 }
 
 function clearFiles() {

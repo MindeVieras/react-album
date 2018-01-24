@@ -77,7 +77,7 @@ export function uploader(state = initialState, action) {
   case uploaderConstants.REMOVE_FILE:
     return {
       ...state,
-      files: state.files.filter(file => file.id !== action.id)
+      files: state.files.filter(file => file.media_id !== action.media_id)
     }
   case uploaderConstants.CLEAR_FILES:
     return {

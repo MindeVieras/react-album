@@ -3,12 +3,13 @@ import React from 'react'
 import ReactTooltip from 'react-tooltip'
 import { IoCheckmarkCircled, IoBug } from 'react-icons/lib/io'
 
-import Thumbnail from './thumbnail'
+import Thumbnail from './Thumbnail'
+import ThumbnailSrv from './ThumbnailSrv'
 import ProgressBar from './progress-bar'
 import Status from './Status'
 import Filename from './Filename'
 import Filesize from './Filesize'
-import RemoveButton from './remove-button'
+import RemoveButton from './RemoveButton'
 
 import StatusMetadataIcon from '../Icons/StatusMetadata'
 import StatusGenerateImageThumbsIcon from '../Icons/StatusGenerateImageThumbs'
@@ -17,18 +18,28 @@ import StatusRekognitionLabelsIcon from '../Icons/StatusRekognitionLabels'
 
 const MediaItem = ({id, media_id, status, fromServer, mime, metadata, filename, filesize, rekognition_labels, thumbs, videos, uploader }) => {
   // console.log(filesize)
+  let thumb
+  if (fromServer) {
+    thumb = <ThumbnailSrv
+      maxSize={ 240 }
+      mime={ mime }
+      videos={ videos }
+    />
+  } 
+  else {
+    thumb = <Thumbnail
+      id={ id }
+      fromServer={ fromServer }
+      uploader={ uploader }
+      maxSize={ 240 }
+      mime={ mime }
+      videos={ videos }
+    />
+  }
   return (
     <li className="uploader-file">
-      {mime &&
-        <Thumbnail
-          id={ id }
-          fromServer={ fromServer }
-          uploader={ uploader }
-          maxSize={ 240 }
-          mime={ mime }
-          videos={ videos }
-        />
-      }
+
+      { thumb }
       
       <ProgressBar
         id={ id }
@@ -99,11 +110,11 @@ const MediaItem = ({id, media_id, status, fromServer, mime, metadata, filename, 
           />
         </div>
       </div>
-      <RemoveButton
-        id={ id }
-        uploader={ uploader }
-        status={ status }
-      />
+      {media_id &&
+        <RemoveButton
+          media_id={ media_id }
+        />
+      }
     </li>
   )
 }

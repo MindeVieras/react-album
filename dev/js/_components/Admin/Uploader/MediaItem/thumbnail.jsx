@@ -18,7 +18,7 @@ class Thumbnail extends Component {
 
   componentDidMount() {
     const { mime } = this.props
-    if (mime == 'image') {    
+    if (mime.includes('image')) {    
       this.props.uploader.methods.drawThumbnail(
         this.props.id,
         this._canvas,
@@ -40,7 +40,7 @@ class Thumbnail extends Component {
         }
       )
     }
-    else if (mime == 'video') {
+    else if (mime.includes('video')) {
       this.setState({
         drawComplete: true,
         success: true,
@@ -51,7 +51,7 @@ class Thumbnail extends Component {
 
   render() {
     const { maxSize, mime, videos } = this.props
-    if (mime === 'image') {    
+    if (mime.includes('image')) {    
       return (
         <span
           className="uploader-thumbnail image"
@@ -66,7 +66,7 @@ class Thumbnail extends Component {
         </span>
       )
     }
-    else if (mime === 'video') {    
+    else if (mime.includes('video')) {    
       return (
         <span
           className="uploader-thumbnail video"
@@ -82,6 +82,9 @@ class Thumbnail extends Component {
           { this._maybePlaceholder }
         </span>
       )
+    }
+    else {
+      return <span />
     }
   }
 
@@ -123,9 +126,13 @@ Thumbnail.propTypes = {
   fromServer: PropTypes.bool,
   id: PropTypes.number.isRequired,
   maxSize: PropTypes.number.isRequired,
-  mime: PropTypes.string.isRequired,
   videos: PropTypes.object,
-  uploader: PropTypes.object.isRequired
+  uploader: PropTypes.object.isRequired,
+  mime: PropTypes.string
+}
+
+Thumbnail.defaultProps = {
+  mime: ''
 }
 
 export default Thumbnail
