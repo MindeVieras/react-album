@@ -24,6 +24,7 @@ const MediaItem = ({id, media_id, status, fromServer, mime, metadata, filename, 
       maxSize={ 240 }
       mime={ mime }
       videos={ videos }
+      thumbs={ thumbs }
     />
   } 
   else {

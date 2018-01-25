@@ -127,13 +127,20 @@ class Uploader extends Component {
   componentDidMount() {
     // Add initial media
     this.props.initial_media.map((media, i) => {
-      const { media_id, mime, name, size } = media
+      const { media_id, mime, name, size, thumbs, videos } = media
       let id = 100000 + i
       this.props.dispatch(uploaderActions.submitFile(id, 'upload successful', true))
       this.props.dispatch(uploaderActions.setMediaId(id, media_id))
       this.props.dispatch(uploaderActions.setMime(id, mime))
       this.props.dispatch(uploaderActions.setFilename(id, name))
       this.props.dispatch(uploaderActions.setFilesize(id, size))
+
+      if (mime.includes('image')) {
+        this.props.dispatch(uploaderActions.getImageThumbs(id, thumbs))
+      }
+      if (mime.includes('video')) {
+        this.props.dispatch(uploaderActions.getVideos(id, videos))
+      }
     })
 
     this.uploader.on('statusChange', this._onStatusChange)

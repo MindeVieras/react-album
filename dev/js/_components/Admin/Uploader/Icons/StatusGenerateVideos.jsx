@@ -48,6 +48,9 @@ const StatusGenerateVideosIcon = ({ videos }) => {
       </div>
     )
   }
+  else {
+    return <span />
+  }
 }
 
 StatusGenerateVideosIcon.propTypes = {

@@ -9,14 +9,22 @@ import { IoAlertCircled } from 'react-icons/lib/io'
 class ThumbnailSrv extends Component {
 
   render() {
-    const { maxSize, mime, videos } = this.props
-    if (mime.includes('image')) {    
+    const { maxSize, mime, thumbs, videos } = this.props
+
+    if (mime.includes('image')) {
+      const style = {
+        backgroundImage: `url(${thumbs.thumb})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        backgroundSize: 'contain',
+        height: maxSize,
+        width: maxSize
+      }
       return (
         <span
           className="uploader-thumbnail image"
-          style={{height: maxSize, width: maxSize}}
+          style={ style }
         >
-          image
         </span>
       )
     }
@@ -33,7 +41,6 @@ class ThumbnailSrv extends Component {
               src={ videos.video }
             />
           }
-          { this._maybePlaceholder }
         </span>
       )
     }
@@ -46,6 +53,7 @@ class ThumbnailSrv extends Component {
 
 ThumbnailSrv.propTypes = {
   maxSize: PropTypes.number.isRequired,
+  thumbs: PropTypes.object,
   videos: PropTypes.object,
   mime: PropTypes.string
 }
