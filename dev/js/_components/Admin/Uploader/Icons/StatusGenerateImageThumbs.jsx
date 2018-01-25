@@ -46,7 +46,7 @@ class StatusGenerateImageThumbsIcon extends Component {
       </MenuItem>
     </ContextMenu>
 
-    if (thumbs.ack == 'ok') {
+    if (thumbs.thumb || thumbs.ack == 'ok') {
       className = 'success'
       tooltipText = 'Thumbnails generated'
     }

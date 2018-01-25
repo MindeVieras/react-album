@@ -17,7 +17,7 @@ import StatusGenerateVideosIcon from '../Icons/StatusGenerateVideos'
 import StatusRekognitionLabelsIcon from '../Icons/StatusRekognitionLabels'
 
 const MediaItem = ({id, media_id, status, fromServer, mime, metadata, filename, filesize, rekognition_labels, thumbs, videos, uploader }) => {
-  // console.log(filesize)
+  // console.log(mime)
   let thumb
   if (fromServer) {
     thumb = <ThumbnailSrv
@@ -27,10 +27,9 @@ const MediaItem = ({id, media_id, status, fromServer, mime, metadata, filename, 
       thumbs={ thumbs }
     />
   } 
-  else {
+  else if (mime) {
     thumb = <Thumbnail
       id={ id }
-      fromServer={ fromServer }
       uploader={ uploader }
       maxSize={ 240 }
       mime={ mime }

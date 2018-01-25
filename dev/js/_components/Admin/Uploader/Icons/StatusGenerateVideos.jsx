@@ -8,7 +8,7 @@ import { ScaleLoader } from 'react-spinners'
 import { IoVideocamera } from 'react-icons/lib/io'
 
 const StatusGenerateVideosIcon = ({ videos }) => {
-  if (videos.ack == 'ok') {
+  if (videos.video || videos.ack == 'ok') {
     const tooltipId = uuidv4()
     return (    
       <div

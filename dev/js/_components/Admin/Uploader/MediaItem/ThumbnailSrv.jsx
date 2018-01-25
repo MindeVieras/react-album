@@ -10,15 +10,17 @@ class ThumbnailSrv extends Component {
 
   render() {
     const { maxSize, mime, thumbs, videos } = this.props
-
+    let sizeStyle = {
+      height: maxSize,
+      width: maxSize
+    }
     if (mime.includes('image')) {
       const style = {
+        ...sizeStyle,
         backgroundImage: `url(${thumbs.thumb})`,
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
-        backgroundSize: 'contain',
-        height: maxSize,
-        width: maxSize
+        backgroundSize: 'contain'
       }
       return (
         <span
@@ -32,7 +34,7 @@ class ThumbnailSrv extends Component {
       return (
         <span
           className="uploader-thumbnail video"
-          style={{height: maxSize, width: maxSize}}
+          style={ sizeStyle }
         >
           {videos &&
             <Player

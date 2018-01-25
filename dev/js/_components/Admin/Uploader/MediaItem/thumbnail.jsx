@@ -22,8 +22,7 @@ class Thumbnail extends Component {
       this.props.uploader.methods.drawThumbnail(
         this.props.id,
         this._canvas,
-        this.props.maxSize,
-        this.props.fromServer
+        this.props.maxSize
       ).then(
         () => {
           this.setState({
@@ -123,16 +122,11 @@ class Thumbnail extends Component {
 }
 
 Thumbnail.propTypes = {
-  fromServer: PropTypes.bool,
   id: PropTypes.number.isRequired,
   maxSize: PropTypes.number.isRequired,
   videos: PropTypes.object,
   uploader: PropTypes.object.isRequired,
-  mime: PropTypes.string
-}
-
-Thumbnail.defaultProps = {
-  mime: ''
+  mime: PropTypes.string.isRequired
 }
 
 export default Thumbnail
