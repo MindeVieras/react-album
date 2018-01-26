@@ -9,17 +9,13 @@ import Bar from './Bar'
 import Foot from './Foot'
 
 import { Uploader } from '../../Uploader'
-import { albumsActions, uploaderActions } from '../../../../_actions'
+import { albumsActions } from '../../../../_actions'
 import { contentConstants, mediaConstants } from '../../../../_constants'
 
 class AlbumInfo extends Component {
 
   componentDidMount() {
     this.props.dispatch(albumsActions.getOne(1))
-  }
-
-  componentWillUpdate() {
-    this.props.dispatch(uploaderActions.clearFiles())
   }
 
   render() {

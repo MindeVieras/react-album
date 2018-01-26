@@ -49,7 +49,7 @@ class StatusRekognitionLabelsIcon extends Component {
       className = 'success'
       tooltipText = <ul>
         {
-          Object.keys(rekognition_labels).sort().map((key, i) => {
+          Object.keys(rekognition_labels).map((key, i) => {
             if (key != 'ack') {
               let confidence = rekognition_labels[key]
               return (

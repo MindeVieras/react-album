@@ -32,11 +32,6 @@ class Uploader extends Component {
           customHeaders: authHeader(),
           endpoint: baseServerUrl+'/api/upload'
         },
-        // session: {
-        //   customHeaders: authHeader(),
-        //   endpoint: baseServerUrl+'/api/upload/get-initial-files/'+props.entity_id,
-        //   refreshOnReset: false
-        // },
         deleteFile: {
           customHeaders: authHeader(),
           enabled: true,
@@ -61,12 +56,7 @@ class Uploader extends Component {
       }
       // On server or Uploaded
       else if (status === statusEnum.UPLOAD_SUCCESSFUL) {
-        // if (oldStatus == null) {
-          // this.props.dispatch(uploaderActions.submitFile(id, status, true))
-        // }
-        // else {
-          this.props.dispatch(uploaderActions.setStatus(id, status))
-        // }
+        this.props.dispatch(uploaderActions.setStatus(id, status))
       }
       // Remove file
       else if (isFileGone(status, statusEnum)) {
@@ -82,7 +72,6 @@ class Uploader extends Component {
       const mime = file.mime
       
       dispatch(uploaderActions.setMediaId(id, media_id))
-      // dispatch(uploaderActions.setMime(id, mime))
       dispatch(uploaderActions.saveMetadata(id, media_id))
       dispatch(uploaderActions.rekognitionLabels(id, media_id))
       
@@ -95,24 +84,6 @@ class Uploader extends Component {
         dispatch(uploaderActions.generateVideos(id, key))
       }
     }
-
-    // this._sessionComplete = (response, success, xhr) => {
-    //   const { dispatch } = this.props
-    //   response.forEach(function(file, id){
-    //     const { media_id, metadata, rekognition_labels, thumbs, mime, videos } = file
-    //     dispatch(uploaderActions.setMediaId(id, media_id))
-    //     dispatch(uploaderActions.setMime(id, mime))
-    //     dispatch(uploaderActions.getMetadata(id, metadata))
-    //     dispatch(uploaderActions.getRekognitionLabels(id, rekognition_labels))
-
-    //     if (mime === 'image') {
-    //       dispatch(uploaderActions.getImageThumbs(id, thumbs))
-    //     }
-    //     if (mime === 'video') {
-    //       dispatch(uploaderActions.getVideos(id, videos))
-    //     }
-    //   })
-    // }
 
     this._onDeleteComplete = (id, xhr, isError) => {
       const res = JSON.parse(xhr.responseText)
@@ -147,15 +118,11 @@ class Uploader extends Component {
 
     this.uploader.on('statusChange', this._onStatusChange)
     this.uploader.on('complete', this._onComplete)
-    // this.uploader.on('sessionRequestComplete', this._sessionComplete)
-    // this.uploader.on('deleteComplete', this._onDeleteComplete)
   }
 
   componentWillUnmount() {
     this.uploader.off('statusChange', this._onStatusChange)
     this.uploader.off('complete', this._onComplete)
-    // this.uploader.off('sessionRequestComplete', this._sessionComplete)
-    // this.uploader.off('deleteComplete', this._onDeleteComplete)
   }
 
   render() {
@@ -163,10 +130,6 @@ class Uploader extends Component {
     const uploader = this.uploader
 
     let counter = files.length
-
-    const cancelButtonProps = getComponentProps('cancelButton', this.props)
-
-    const deleteEnabled = uploader.options.deleteFile && uploader.options.deleteFile.enabled
     
     // Remove/Add dropzone text and fileField if any visableFiles
     let uploaderText = ''
@@ -242,19 +205,6 @@ Uploader.propTypes = {
 
 Uploader.defaultProps = {
   'cancelButton-children': <IoCloseCircled />
-}
-
-const getComponentProps = (componentName, allProps) => {
-  const componentProps = {}
-
-  Object.keys(allProps).forEach(propName => {
-    if (propName.indexOf(componentName + '-') === 0) {
-      const componentPropName = propName.substr(componentName.length + 1)
-      componentProps[componentPropName] = allProps[propName]
-    }
-  })
-
-  return componentProps
 }
 
 const isFileGone = (statusToCheck, statusEnum) => {

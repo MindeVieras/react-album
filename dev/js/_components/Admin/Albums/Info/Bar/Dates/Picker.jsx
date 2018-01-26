@@ -5,6 +5,7 @@ import Popup from 'react-popup'
 import { connect } from 'react-redux'
 import moment from 'moment'
 import Datetime from 'react-datetime'
+import { IoRefresh } from 'react-icons/lib/io'
 
 import { albumsActions } from '../../../../../../_actions'
 
@@ -20,6 +21,7 @@ class Picker extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.startDateChange = this.startDateChange.bind(this)
     this.endDateChange = this.endDateChange.bind(this)
+    this.handleGetDates = this.handleGetDates.bind(this)
   }
 
   handleSubmit(e) {
@@ -27,6 +29,7 @@ class Picker extends Component {
     this.props.dispatch(albumsActions.changeDate({
       start_date: this.state.start_date,
       end_date: this.state.end_date,
+      sd: '',
       id: this.props.album_id
     }))
   }
@@ -39,6 +42,21 @@ class Picker extends Component {
   endDateChange(dt) {
     const end_date = dt.format('YYYY-MM-DD HH:mm:ss')
     this.setState({end_date})
+  }
+  
+  handleGetDates(e) {
+    const { media_dates } = this.props
+    
+    media_dates.sort(function(a,b){
+      return moment.utc(a).diff(moment.utc(b))
+    })
+
+    let sd = media_dates[0]
+    let ed = media_dates.slice(-1).pop()
+    this.setState({
+      start_date: sd,
+      end_date: ed
+    })
   }
 
   render() {
@@ -53,6 +71,7 @@ class Picker extends Component {
         <div className="start-date">
           <Datetime
             open={ true }
+            value={ start_date }
             defaultValue={ start_date }
             dateFormat={ 'YYYY-MM-DD' }
             timeFormat={ 'HH:mm:ss' }
@@ -63,6 +82,7 @@ class Picker extends Component {
         <div className="end-date">
           <Datetime
             open={ true }
+            value={ end_date }
             defaultValue={ end_date }
             dateFormat={ 'YYYY-MM-DD' }
             timeFormat={ 'HH:mm:ss' }
@@ -71,6 +91,9 @@ class Picker extends Component {
         </div>
         <div className="buttons">
           <input type="submit" value="Save" className="btn btn-success" />
+          <div className="btn btn-info pull-right" onClick={ this.handleGetDates }>
+            <IoRefresh />
+          </div>
         </div>
       </form>
     )
@@ -81,7 +104,15 @@ class Picker extends Component {
 Picker.propTypes = {
   start_date: PropTypes.string.isRequired,
   end_date: PropTypes.string.isRequired,
-  album_id: PropTypes.number.isRequired
+  album_id: PropTypes.number.isRequired,
+  media_dates: PropTypes.array.isRequired
 }
 
-export default connect()(Picker)
+function mapStateToProps(state) {
+  const { uploader } = state
+  return {
+    media_dates: uploader.files.map((f) => { return f.metadata.datetime }).filter(Boolean)
+  }
+}
+
+export default connect(mapStateToProps)(Picker)
