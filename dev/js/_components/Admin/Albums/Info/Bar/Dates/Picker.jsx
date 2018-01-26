@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Popup from 'react-popup'
+import _ from 'lodash'
 import { connect } from 'react-redux'
 import moment from 'moment'
 import Datetime from 'react-datetime'
@@ -61,10 +62,20 @@ class Picker extends Component {
 
   render() {
     const { start_date, end_date } = this.state
+    const { media_dates } = this.props
     // let yesterday = moment().subtract( 1, 'day' )
     // let valid = function( current ){
     //     return current.isAfter( yesterday )
     // }
+    let setDatesButton
+    if (_.isEmpty(media_dates)) {
+      setDatesButton = <span />
+    }
+    else {
+      setDatesButton = <div className="btn btn-info pull-right" onClick={ this.handleGetDates }>
+        <IoRefresh />
+      </div>
+    }
 
     return (
       <form id="album_change_datetime_picker_form" onSubmit={this.handleSubmit}>
@@ -91,9 +102,7 @@ class Picker extends Component {
         </div>
         <div className="buttons">
           <input type="submit" value="Save" className="btn btn-success" />
-          <div className="btn btn-info pull-right" onClick={ this.handleGetDates }>
-            <IoRefresh />
-          </div>
+          { setDatesButton }
         </div>
       </form>
     )

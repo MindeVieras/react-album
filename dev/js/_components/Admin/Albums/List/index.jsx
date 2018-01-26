@@ -32,38 +32,41 @@ class AlbumsList extends Component {
 
   render() {
     const { albums } = this.props
-    return (
-      <div className="albums-list">
-        {albums.loading &&
-          <RingLoader />
-        }
-        {albums.err &&
-          <div>{albums.err}</div>
-        }
+    if (albums) {      
+      return (
+        <div className="albums-list">
+          {albums.loading &&
+            <RingLoader />
+          }
+          {albums.err &&
+            <div>{albums.err}</div>
+          }
 
-        {albums.items && 
-          <ul>
-            {albums.items.map((album) =>
-              <li
-                key={album.id}
-                className={`albums-item${ this.state.selectedAlbum === album.id ? ' active' : ''}`}
-                onClick={() => this.onAlbumSelect(album.id)}
-              >
-                <div className="name">{album.name}</div>
-              </li>
-            )}
-          </ul>
-        }
-      </div>
-    )
+          {albums.items && 
+            <ul>
+              {albums.items.map((album) =>
+                <li
+                  key={album.id}
+                  className={`albums-item${ this.state.selectedAlbum === album.id ? ' active' : ''}`}
+                  onClick={() => this.onAlbumSelect(album.id)}
+                >
+                  <div className="name">{album.name}</div>
+                </li>
+              )}
+            </ul>
+          }
+        </div>
+      )
+    }
+    else {
+      return <span>Nothing to display</span>
+    }
   }
 }
 
-// UsersList.propTypes = {
-//   auth: PropTypes.object.isRequired,
-//   users: PropTypes.object.isRequired,
-//   dispatch: PropTypes.func
-// }
+AlbumsList.propTypes = {
+  albums: PropTypes.object.isRequired
+}
 
 function mapStateToProps(state) {
   const { auth, admin_albums } = state

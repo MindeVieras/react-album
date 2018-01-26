@@ -62,8 +62,7 @@ class AlbumInfo extends Component {
 }
 
 AlbumInfo.propTypes = {
-  selected_album: PropTypes.object.isRequired,
-  dispatch: PropTypes.func
+  selected_album: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state) {
