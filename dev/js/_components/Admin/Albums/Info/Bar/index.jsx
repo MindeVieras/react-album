@@ -3,6 +3,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import Name from './Name'
+import Locations from './Locations'
 import Dates from './Dates'
 import TimeAgo from './TimeAgo'
 
@@ -12,6 +13,7 @@ const Bar = ({ album_id, name, start_date, end_date }) => {
     <div className="album-bar">
       <Name name={ name } album_id={ album_id } />
       <div className="left">
+        <Locations />
         <Dates
           album_id={ album_id }
           start_date={ start_date }
