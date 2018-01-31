@@ -177,6 +177,10 @@
   .mm-popup__box--locations{
     width: 800px;
     margin-left: -400px;
+    top: 5%;
+    .mm-popup__box__body {
+      padding: 0;
+    }
   }
 
 }

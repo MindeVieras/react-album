@@ -13,7 +13,7 @@ const Bar = ({ album_id, name, start_date, end_date }) => {
     <div className="album-bar">
       <Name name={ name } album_id={ album_id } />
       <div className="left">
-        <Locations />
+        <Locations album_id={ album_id } />
         <Dates
           album_id={ album_id }
           start_date={ start_date }

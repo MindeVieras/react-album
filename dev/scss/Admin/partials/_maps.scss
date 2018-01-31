@@ -1,5 +1,26 @@
 
 // Album locations
 #album_map{
-
+  display: flex;
+  .map-container {
+    width: calc(100% - 60px);
+  }
+  .map-items-list {
+    background-color: $white;
+    display: inline-block;
+    float: right;
+    width: 60px;
+    .item {
+      display: inline-block;
+      width: 54px;
+      height: 54px;
+      border: 1px solid $grey;
+      margin-left: 3px;
+      margin-top: 3px;
+      cursor: default;
+      img {
+        width: 100%;
+      }
+    }
+  }
 }

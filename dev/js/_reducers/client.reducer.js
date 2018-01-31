@@ -15,6 +15,11 @@ export function client(state = initialState, action) {
       ...state,
       screen: action.screen
     }
+  case clientConstants.SET_CURRENT_LOCATION:
+    return {
+      ...state,
+      location: action.location
+    }
   default:
     return state
   }

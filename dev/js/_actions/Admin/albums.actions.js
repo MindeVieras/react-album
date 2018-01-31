@@ -9,6 +9,8 @@ export const albumsActions = {
   addToList,
   getList,
   getOne,
+  getLocations,
+  removeLocation,
   rename,
   changeDate,
   delete: _delete
@@ -58,6 +60,36 @@ function getOne(id) {
   function request() { return { type: albumsConstants.GETONE_REQUEST } }
   function success(album) { return { type: albumsConstants.GETONE_SUCCESS, album } }
   function failure(err) { return { type: albumsConstants.GETONE_FAILURE, err } }
+}
+
+function getLocations(id) {
+  return dispatch => {
+    dispatch(request())
+
+    albumsService.getLocations(id)
+      .then(function(res) {
+        if (res.ack == 'ok') {
+          dispatch(success(res.data))
+        } else {
+          dispatch(failure(res.msg))
+        }
+      })
+  }
+
+  function request() { return { type: albumsConstants.GETLOCATIONS_REQUEST } }
+  function success(locations) { return { type: albumsConstants.GETLOCATIONS_SUCCESS, locations } }
+  function failure(err) { return { type: albumsConstants.GETLOCATIONS_FAILURE, err } }
+}
+
+function removeLocation(id) {
+  return dispatch => {
+    albumsService.removeLocation(id)
+      .then(function(res) {
+        console.log(res)
+        dispatch(remove(id))
+      })
+  }
+  function remove(id) { return { type: albumsConstants.REMOVE_LOCATION, id } }
 }
 
 function rename(payload) {

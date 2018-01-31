@@ -1,9 +1,11 @@
 
 import { clientConstants } from '../_constants'
+import { locationService } from '../_services'
 
 export const clientActions = {
   setBrowser,
-  setScreen
+  setScreen,
+  setCurrentLocation
 }
 
 function setBrowser(browser) {
@@ -22,4 +24,16 @@ function setScreen(screen) {
   }
 
   function set(screen) { return { type: clientConstants.SET_SCREEN, screen } }
+}
+
+function setCurrentLocation() {
+
+  return dispatch => {
+
+    locationService.getCurrentLocation(function(err, pos){
+      dispatch(set(pos))
+    })
+  }
+
+  function set(location) { return { type: clientConstants.SET_CURRENT_LOCATION, location } }
 }

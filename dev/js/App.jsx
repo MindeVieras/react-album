@@ -24,6 +24,7 @@ class App extends Component {
     // Set browser info into state
     const browser = detect()
     props.dispatch(clientActions.setBrowser(browser))
+    props.dispatch(clientActions.setCurrentLocation())
   }
 
   componentDidMount() {

@@ -93,6 +93,47 @@ export function adminAlbums(state = initialState, action) {
         err: action.err
       }
     }
+  case albumsConstants.GETLOCATIONS_REQUEST:
+    return {
+      ...state,
+      selected_album: {
+        ...state.selected_album,
+        locations: {
+          loading: true
+        }
+      }
+    }
+  case albumsConstants.GETLOCATIONS_SUCCESS:
+    return {
+      ...state,
+      selected_album: {
+        ...state.selected_album,
+        locations: {
+          list: action.locations
+        }
+      }
+    }
+  case albumsConstants.GETLOCATIONS_FAILURE:
+    return {
+      ...state,
+      selected_album: {
+        ...state.selected_album,
+        locations: {
+          err: action.err
+        }
+      }
+    }
+  case albumsConstants.REMOVE_LOCATION:
+    return {
+      ...state,
+      selected_album: {
+        ...state.selected_album,
+        album: {
+          ...state.selected_album.album,
+          location: false
+        }
+      }
+    }
   case albumsConstants.DELETE_REQUEST:
     return {
       ...state,

@@ -5,12 +5,12 @@ import Popup from 'react-popup'
 
 import { IoEdit } from 'react-icons/lib/io'
 
-import AlbumLocations from './AlbumLocations'
+import AlbumMap from './AlbumMap'
 
 class Locations extends Component {
 
   handleClick() {
-    const content = <AlbumLocations />
+    const content = <AlbumMap album_id={ this.props.album_id } />
 
     Popup.create({
       title: 'Edit album locations',
@@ -33,6 +33,10 @@ class Locations extends Component {
       </div>
     )
   }
+}
+
+Locations.propTypes = {
+  album_id: PropTypes.number.isRequired
 }
 
 export default Locations
