@@ -5,6 +5,7 @@ import Popup from 'react-popup'
 
 import { IoEdit } from 'react-icons/lib/io'
 
+import Address from './Address'
 import AlbumMap from './AlbumMap'
 
 class Locations extends Component {
@@ -22,9 +23,7 @@ class Locations extends Component {
   render() {
     return (
       <div className="locations-wrapper">
-        <div className="address">
-          London City
-        </div>
+        <Address />
         <div className="buttons">
           <div className="btn btn-xs btn-info">
             <IoEdit onClick={ () => this.handleClick() } />

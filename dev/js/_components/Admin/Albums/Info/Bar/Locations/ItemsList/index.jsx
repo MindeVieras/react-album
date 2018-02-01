@@ -7,10 +7,16 @@ import { albumsActions } from '../../../../../../../_actions'
 
 class ItemsList extends Component {
 
+  constructor(props) {
+    super(props)
+
+    this.onAlbumDblClick = this.onAlbumDblClick.bind(this)
+  }
+
   onAlbumDblClick() {
-    const { album_id, dispatch } = this.props
+    const { album_id, current_location, dispatch } = this.props
     // console.log(albums)
-    dispatch(albumsActions.setLocation(album_id, location))
+    dispatch(albumsActions.setLocation(album_id, current_location))
   }
 
   render() {

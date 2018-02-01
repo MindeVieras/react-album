@@ -130,7 +130,18 @@ export function adminAlbums(state = initialState, action) {
         ...state.selected_album,
         album: {
           ...state.selected_album.album,
-          location: false
+          location: null
+        }
+      }
+    }
+  case albumsConstants.SET_LOCATION:
+    return {
+      ...state,
+      selected_album: {
+        ...state.selected_album,
+        album: {
+          ...state.selected_album.album,
+          location: action.location
         }
       }
     }

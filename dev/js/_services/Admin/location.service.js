@@ -23,3 +23,5 @@ function getCurrentLocation(cb) {
     cb('Your browser doesn\'t support Geolocation')
   }
 }
+
+

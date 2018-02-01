@@ -25,8 +25,6 @@ class AlbumMap extends Component {
         {current_location &&
           <div id="album_map">
             <Map
-              googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzi2J0bixOL-SIvephD_qZbuTuuzIaJsc&v=3.exp&libraries=places"
-              loadingElement={<div style={{ height: `100%` }} />}
               containerElement={<div className="map-container" style={ mapHeight } />}
               mapElement={<div style={{ height: `100%` }} />}
               album_location={ album_location }

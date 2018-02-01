@@ -11,6 +11,8 @@ export const albumsActions = {
   getOne,
   getLocations,
   removeLocation,
+  setLocation,
+  updateLocation,
   rename,
   changeDate,
   delete: _delete
@@ -85,11 +87,30 @@ function removeLocation(id) {
   return dispatch => {
     albumsService.removeLocation(id)
       .then(function(res) {
-        console.log(res)
         dispatch(remove(id))
       })
   }
   function remove(id) { return { type: albumsConstants.REMOVE_LOCATION, id } }
+}
+
+function setLocation(album_id, location) {
+  return dispatch => {
+    albumsService.setLocation(album_id, location)
+      .then(function(res) {
+        dispatch(set(location))
+      })
+  }
+  function set(location) { return { type: albumsConstants.SET_LOCATION, location } }
+}
+
+function updateLocation(album_id, location) {
+  return dispatch => {
+    albumsService.updateLocation(album_id, location)
+      .then(function(res) {
+        dispatch(set(location))
+      })
+  }
+  function set(location) { return { type: albumsConstants.SET_LOCATION, location } }
 }
 
 function rename(payload) {

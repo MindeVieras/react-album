@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps'
+import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps'
 
 import AlbumMarker from './AlbumMarker'
 
@@ -21,6 +21,15 @@ class Map extends Component {
     dispatch(albumsActions.removeLocation(album_id))
   }
 
+  updateAlbumLocation(loc) {
+    const { album_id, dispatch } = this.props
+    const album_loc = {
+      lat: loc.latLng.lat(),
+      lng: loc.latLng.lng()
+    }
+    dispatch(albumsActions.updateLocation(album_id, album_loc))
+  }
+
   render() {
     const { album_location, current_location } = this.props
     return (
@@ -35,6 +44,7 @@ class Map extends Component {
             icon={ albumMarkerIcon }
             draggable={ true }
             onDblClick={ () => this.removeAlbumLocation() }
+            onDragEnd={ (loc) => this.updateAlbumLocation(loc) }
           />
         }
       </GoogleMap>
@@ -50,4 +60,4 @@ Map.propTypes = {
   album_location: PropTypes.object
 }
 
-export default connect()(withScriptjs(withGoogleMap(Map)))
+export default connect()(withGoogleMap(Map))
