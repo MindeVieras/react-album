@@ -16,11 +16,22 @@ function getCurrentLocation(cb) {
 
       cb(null, pos)
     }, function() {
-      console.log('not supported')
+      let pos = {
+        lat: 0,
+        lng: 0
+      }
+
+      cb(null, pos)
     })
   } else {
     // Browser doesn't support Geolocation
-    cb('Your browser doesn\'t support Geolocation')
+    console.log('Your browser doesn\'t support Geolocation')
+    let pos = {
+      lat: 0,
+      lng: 0
+    }
+
+    cb(null, pos)
   }
 }
 
