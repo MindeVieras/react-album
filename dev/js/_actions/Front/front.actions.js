@@ -1,18 +1,17 @@
 
-import {toastr} from 'react-redux-toastr'
-
-import { albumsConstants } from '../../_constants'
+import { frontConstants } from '../../_constants'
 import { frontService } from '../../_services'
 
 export const frontActions = {
-  getList
+  getList,
+  getListMore
 }
 
-function getList() {
+function getList(page, limit, media_limit) {
   return dispatch => {
     dispatch(request())
 
-    frontService.getList()
+    frontService.getList(page, limit, media_limit)
       .then(function(res) {
         if (res.ack == 'ok') {
           dispatch(success(res.data))
@@ -22,7 +21,26 @@ function getList() {
       })
   }
 
-  function request() { return { type: albumsConstants.GET_FRONT_LIST_REQUEST } }
-  function success(albums) { return { type: albumsConstants.GET_FRONT_LIST_SUCCESS, albums } }
-  function failure(err) { return { type: albumsConstants.GET_FRONT_LIST_FAILURE, err } }
+  function request() { return { type: frontConstants.GETLIST_REQUEST } }
+  function success(albums) { return { type: frontConstants.GETLIST_SUCCESS, albums } }
+  function failure(err) { return { type: frontConstants.GETLIST_FAILURE, err } }
+}
+
+function getListMore(page, limit, media_limit) {
+  return dispatch => {
+    // dispatch(request())
+
+    frontService.getList(page, limit, media_limit)
+      .then(function(res) {
+        if (res.ack == 'ok') {
+          dispatch(loadMore(res.data))
+        } else {
+          // dispatch(failure(res.msg))
+        }
+      })
+  }
+
+  function request() { return { type: frontConstants.GETLIST_REQUEST } }
+  function loadMore(albums) { return { type: frontConstants.GETLIST_LOAD_MORE, albums } }
+  function failure(err) { return { type: frontConstants.GETLIST_FAILURE, err } }
 }

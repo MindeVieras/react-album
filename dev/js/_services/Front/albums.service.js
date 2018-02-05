@@ -5,10 +5,11 @@ export const frontService = {
   getList
 }
 
-function getList() {
+function getList(page, limit, media_limit) {
   const requestOptions = {
-    method: 'GET',
-    headers: authHeader()
+    method: 'POST',
+    headers: { ...authHeader(), 'Content-Type': 'application/json' },
+    body: JSON.stringify({ page, limit, media_limit })
   }
 
   return fetch(baseServerUrl+'/api/front/albums/get-list', requestOptions).then(handleResponse)

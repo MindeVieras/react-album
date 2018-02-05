@@ -1,5 +1,5 @@
 
-import { albumsConstants } from '../../_constants'
+import { frontConstants } from '../../_constants'
 
 const initialState = {
   list: {
@@ -11,21 +11,28 @@ const initialState = {
 
 export function frontAlbums(state = initialState, action) {
   switch (action.type) {
-  case albumsConstants.GET_FRONT_LIST_REQUEST:
+  case frontConstants.GETLIST_REQUEST:
     return {
       ...state,
       list: {
         loading: true
       }
     }
-  case albumsConstants.GET_FRONT_LIST_SUCCESS:
+  case frontConstants.GETLIST_SUCCESS:
     return {
       ...state,
       list: {
         items: action.albums
       }
     }
-  case albumsConstants.GET_FRONT_LIST_FAILURE:
+  case frontConstants.GETLIST_LOAD_MORE:
+    return {
+      ...state,
+      list: {
+        items: [ ...state.list.items, ...action.albums ]
+      }
+    }
+  case frontConstants.GETLIST_FAILURE:
     return {
       list: {
         err: action.err

@@ -12,18 +12,30 @@ import { frontActions, frontUiActions } from '../../_actions'
 
 import '../../../scss/Front/main.scss'
 
+
+const page = 0
+const limit = 5
+const media_limit = 6
+
 class Front extends Component {
 
   constructor(props) {
     super(props)
 
+    this.state = {
+      current_page: page,
+      current_limit: limit
+    }
+
     this.closeMenu = this.closeMenu.bind(this)
     this.onScrollDown = this.onScrollDown.bind(this)
+    this.loadMore = this.loadMore.bind(this)
   }
 
   componentDidMount() {
     const { dispatch } = this.props
-    dispatch(frontActions.getList())
+    dispatch(frontActions.getList(page, limit, media_limit))
+    // console.log('did mount')
   }
 
   componentWillUnmount() {
@@ -37,11 +49,30 @@ class Front extends Component {
   }
 
   onScrollDown(container) {
-    const { screen } = this.props
-    const { scrollTop } = container
-    if (screen.height < scrollTop) {
-      console.log('load more')
-    }
+    // const { screen } = this.props
+    // const { scrollTop } = container
+    // this.setState({
+    //   load_more: false
+    // })
+    // if (!this.state.load_more) {
+    //   const { dispatch } = this.props
+    //   dispatch(frontActions.getListMore(page, limit, media_limit))
+    //   this.setState({
+    //     load_more: true
+    //   })
+    // }
+    // console.log(scrollTop)
+  }
+
+  loadMore() {
+    const { dispatch } = this.props
+    const { current_page, current_limit } = this.state
+    let cp = current_page + current_limit
+    dispatch(frontActions.getListMore(cp, current_limit, media_limit))
+    // console.log('load ore')
+    this.setState({
+      current_page: cp
+    })
     
   }
 
@@ -51,27 +82,21 @@ class Front extends Component {
       wheelSpeed: 0.75,
       // useBothWheelAxes: true
     }
+    // console.log(this.state)
     return (
       <div>
         <div id="front_page" onClick={ this.closeMenu }>
 
           <div id="front_content">
-            {albums.loading &&
-              <RingLoader />
-            }
-            {albums.err &&
-              <div>{albums.err}</div>
-            }
-
             {albums.items &&
               <div className="albums-list">
                 <PerfectScrollbar
                   option={ scrollbarOptions }
-                  onScrollDown={ this.onScrollDown }
+                  onYReachEnd={ this.onScrollDown }
                 >              
-                  {albums.items.map((album) =>
+                  {albums.items.map((album, i) =>
                     <div
-                      key={album.id}
+                      key={ i }
                       className={`item`}
                       id={`item-${album.id}`}
                     >
@@ -81,9 +106,21 @@ class Front extends Component {
                       }
                     </div>
                   )}
+
+                  <div className="load-more" onClick={ this.loadMore }>load more</div>
+
                 </PerfectScrollbar>
               </div>
             }
+
+            {albums.loading &&
+              <RingLoader />
+            }
+
+            {albums.err &&
+              <div>{albums.err}</div>
+            }
+
           </div>
 
         </div>
