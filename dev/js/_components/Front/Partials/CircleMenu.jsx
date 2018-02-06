@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Motion, spring } from 'react-motion'
 
-import { IoNavicon, IoCube, IoHome } from 'react-icons/lib/io'
+import { IoNavicon, IoCube, IoHome, IoLogOut } from 'react-icons/lib/io'
 
 import { frontUiActions } from '../../../_actions'
 
@@ -14,11 +14,15 @@ import { frontUiActions } from '../../../_actions'
 const DEG_TO_RAD = 0.0174533
 const ELEMENTS = [
   {
-    icon: <Link to="/admin"><IoCube /></Link>,
+    icon: <Link to="/login"><IoLogOut /></Link>,
     onClick: () => {}
   },
   {
     icon: <Link to="/"><IoHome /></Link>,
+    onClick: () => {}
+  },
+  {
+    icon: <Link to="/admin"><IoCube /></Link>,
     onClick: () => {}
   }
 ]
