@@ -5,26 +5,27 @@ import { connect } from 'react-redux'
 
 import { RingLoader } from 'react-spinners'
 
-import { albumsActions, uploaderActions } from '../../../../_actions'
+import { albumsActions, uploaderActions, userActions } from '../../../../_actions'
 
 class AlbumsList extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      selectedAlbum: 1
+      selectedAlbum: props.selected_album_id
     }
   }
 
   componentDidMount(){
     const { albums, dispatch } = this.props
-    // console.log(albums)
     dispatch(albumsActions.getList())
   }
 
   onAlbumSelect(id) {
-    this.props.dispatch(uploaderActions.clearFiles())
-    this.props.dispatch(albumsActions.getOne(id))
+    const { user_id, dispatch } = this.props
+    dispatch(uploaderActions.clearFiles())
+    dispatch(albumsActions.getOne(id))
+    dispatch(userActions.setSetting('admin_selected_album', id, user_id))
     this.setState({
       selectedAlbum: id
     })
@@ -32,7 +33,7 @@ class AlbumsList extends Component {
 
   render() {
     const { albums } = this.props
-    if (albums) {      
+    if (albums) {
       return (
         <div className="albums-list">
           {albums.loading &&
@@ -65,13 +66,15 @@ class AlbumsList extends Component {
 }
 
 AlbumsList.propTypes = {
-  albums: PropTypes.object.isRequired
+  user_id: PropTypes.number.isRequired,
+  albums: PropTypes.object.isRequired,
+  selected_album_id: PropTypes.number.isRequired
 }
 
 function mapStateToProps(state) {
   const { auth, admin_albums } = state
   return {
-    auth,
+    user_id: auth.user.id,
     albums: admin_albums.list
   }
 }

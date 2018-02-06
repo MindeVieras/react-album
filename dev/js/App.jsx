@@ -61,18 +61,14 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        
-        <Router history={history}>
-          <Switch>
-            <PrivateRoute exact path="/" component={Front} />
-            <PrivateRoute path="/admin" component={Admin} />
-            <Route path="/login" component={Login} />
-            <PrivateRoute component={Error404} />
-          </Switch>
-        </Router>
-
-      </div>
+      <Router history={history}>
+        <Switch>
+          <PrivateRoute exact path="/" component={Front} />
+          <PrivateRoute path="/admin" component={Admin} />
+          <Route path="/login" component={Login} />
+          <PrivateRoute component={Error404} />
+        </Switch>
+      </Router>
     )
   }
 }

@@ -15,8 +15,9 @@ import { contentConstants, mediaConstants } from '../../../../_constants'
 class AlbumInfo extends Component {
 
   componentDidMount() {
-    this.props.dispatch(uploaderActions.clearFiles())
-    this.props.dispatch(albumsActions.getOne(1))
+    const { selected_album_id, dispatch } = this.props
+    dispatch(uploaderActions.clearFiles())
+    dispatch(albumsActions.getOne(selected_album_id))
   }
 
   render() {
@@ -63,7 +64,8 @@ class AlbumInfo extends Component {
 }
 
 AlbumInfo.propTypes = {
-  selected_album: PropTypes.object.isRequired
+  selected_album: PropTypes.object.isRequired,
+  selected_album_id: PropTypes.number.isRequired
 }
 
 function mapStateToProps(state) {

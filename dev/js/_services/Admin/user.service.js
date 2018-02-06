@@ -5,6 +5,7 @@ export const userService = {
   getList,
   getOne,
   create,
+  setSetting,
   update,
   delete: _delete
 }
@@ -35,6 +36,16 @@ function create(user) {
   }
 
   return fetch(baseServerUrl+'/api/users/create', requestOptions).then(handleResponse)
+}
+
+function setSetting(name, value, uid) {
+  const requestOptions = {
+    method: 'POST',
+    headers: { ...authHeader(), 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, value, uid })
+  }
+
+  return fetch(baseServerUrl+'/api/users/set-setting', requestOptions).then(handleResponse)
 }
 
 function update(user) {

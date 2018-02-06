@@ -7,6 +7,7 @@ export const userActions = {
   create,
   getList,
   getOne,
+  setSetting,
   delete: _delete
 }
 
@@ -70,6 +71,34 @@ function getOne(id) {
   function request() { return { type: userConstants.GETONE_REQUEST } }
   function success(user) { return { type: userConstants.GETONE_SUCCESS, user } }
   function failure(err) { return { type: userConstants.GETONE_FAILURE, err } }
+}
+
+function setSetting(name, value, uid) {
+  return dispatch => {
+    // dispatch(request())
+
+    userService.setSetting(name, value, uid)
+      .then(function(res) {
+        if (res.ack == 'ok') {
+          dispatch(set(name, value))
+          const { ...userCopy } = JSON.parse(localStorage.user) // User copy
+          const newUser = {
+            ...userCopy,
+            settings: {
+              ...userCopy.settings,
+              [name]: value
+            }
+          }
+          localStorage.setItem('user', JSON.stringify(newUser))
+        } else {
+          // dispatch(failure(res.msg))
+        }
+      })
+  }
+
+  // function request() { return { type: userConstants.SET_SETTING_REQUEST } }
+  function set(name, value) { return { type: userConstants.SET_SETTING_SUCCESS, name, value } }
+  // function failure(err) { return { type: userConstants.SET_SETTING_FAILURE, err } }
 }
 
 // prefixed function name with underscore because delete is a reserved word in javascript
