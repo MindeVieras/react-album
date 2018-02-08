@@ -20,30 +20,6 @@ export function auth(state = initialState, action) {
       error: true,
       msg: action.error
     }
-  // case userConstants.SET_SETTING_REQUEST:
-  //   return {
-  //     ...state,
-  //     selected_user: {
-  //       loading: true
-  //     }
-  //   }
-  case userConstants.SET_SETTING_SUCCESS:
-    return {
-      ...state,
-      user: {
-        ...state.user,
-        settings: {
-          ...state.user.settings,
-          [action.name]: action.value
-        }
-      }
-    }
-  // case userConstants.SET_SETTING_FAILURE:
-  //   return {
-  //     selected_user: {
-  //       err: action.err
-  //     }
-  //   }
   case userConstants.LOGOUT:
     return {}
   default:

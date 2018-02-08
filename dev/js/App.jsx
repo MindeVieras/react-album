@@ -12,7 +12,7 @@ import Admin from './_components/Admin'
 import Error404 from './_components/404'
 
 import { history } from './_helpers'
-import { clientActions } from './_actions'
+import { clientActions, utilsActions } from './_actions'
 
 import '../scss/base/normalize.scss'
 
@@ -40,11 +40,15 @@ class App extends Component {
         ]
       }
     })
+
+    // Get App settings
+    this.props.dispatch(utilsActions.getAppSettings())
+
     // Add resize event listener
     this.updateDimensions()
     window.addEventListener("resize", this.updateDimensions.bind(this))
   }
-
+  
   componentWillUnmount() {
     // Remove resize event listener
     window.removeEventListener("resize", this.updateDimensions.bind(this))
@@ -73,4 +77,11 @@ class App extends Component {
   }
 }
 
-export default connect()(App)
+function mapStateToProps(state) {
+  const { auth } = state
+  return {
+    user: auth.user
+  }
+}
+
+export default connect(mapStateToProps)(App)

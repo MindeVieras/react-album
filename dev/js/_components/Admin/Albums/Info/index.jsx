@@ -21,9 +21,9 @@ class AlbumInfo extends Component {
   }
 
   render() {
-    const { selected_album } = this.props
+    const { width, selected_album } = this.props
     return (
-      <div className="album-info">
+      <div className="album-info" style={{ width: `${width}px` }}>
         {selected_album.loading &&
           <Spinner type="primary" size={ 70 } />
         }
@@ -65,7 +65,12 @@ class AlbumInfo extends Component {
 
 AlbumInfo.propTypes = {
   selected_album: PropTypes.object.isRequired,
-  selected_album_id: PropTypes.number.isRequired
+  selected_album_id: PropTypes.number.isRequired,
+  width: PropTypes.number
+}
+
+AlbumInfo.defaultProps = {
+  width: 500
 }
 
 function mapStateToProps(state) {

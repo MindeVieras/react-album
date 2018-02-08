@@ -12,10 +12,19 @@ import Albums from './Albums'
 import TrashPage from './Trash'
 import Error404 from './Errors/404'
 
+import { utilsActions } from '../../_actions'
+
 import 'react-datetime/css/react-datetime.css'
 import '../../../scss/Admin/main.scss'
 
 class Admin extends Component {
+
+  componentDidMount() {
+
+    // Get Admin settings
+    this.props.dispatch(utilsActions.getAdminSettings(this.props.uid))
+
+  }
 
   render() {
     const { match, isScriptLoadSucceed } = this.props
@@ -52,6 +61,13 @@ class Admin extends Component {
   }
 }
 
-export default connect()(scriptLoader([
+function mapStateToProps(state) {
+  const { auth } = state
+  return {
+    uid: auth.user.id
+  }
+}
+
+export default connect(mapStateToProps)(scriptLoader([
   'https://maps.googleapis.com/maps/api/js?key=AIzaSyCzi2J0bixOL-SIvephD_qZbuTuuzIaJsc&v=3.exp&libraries=places'
 ])(Admin))

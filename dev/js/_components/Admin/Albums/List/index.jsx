@@ -5,16 +5,9 @@ import { connect } from 'react-redux'
 
 import { RingLoader } from 'react-spinners'
 
-import { albumsActions, uploaderActions, userActions } from '../../../../_actions'
+import { albumsActions, uploaderActions, utilsActions } from '../../../../_actions'
 
 class AlbumsList extends Component {
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      selectedAlbum: props.selected_album_id
-    }
-  }
 
   componentDidMount(){
     const { albums, dispatch } = this.props
@@ -25,14 +18,11 @@ class AlbumsList extends Component {
     const { user_id, dispatch } = this.props
     dispatch(uploaderActions.clearFiles())
     dispatch(albumsActions.getOne(id))
-    dispatch(userActions.setSetting('admin_selected_album', id, user_id))
-    this.setState({
-      selectedAlbum: id
-    })
+    dispatch(utilsActions.saveAdminSetting('selected_album', id, user_id))
   }
 
   render() {
-    const { albums } = this.props
+    const { selected_album_id, albums } = this.props
     if (albums) {
       return (
         <div className="albums-list">
@@ -48,7 +38,7 @@ class AlbumsList extends Component {
               {albums.items.map((album) =>
                 <li
                   key={album.id}
-                  className={`albums-item${ this.state.selectedAlbum === album.id ? ' active' : ''}`}
+                  className={`albums-item${ selected_album_id === album.id ? ' active' : ''}`}
                   onClick={() => this.onAlbumSelect(album.id)}
                 >
                   <div className="name">{album.name}</div>

@@ -4,6 +4,7 @@ import { reducer as formReducer } from 'redux-form'
 import { reducer as toastrReducer } from 'react-redux-toastr'
 
 import { client } from './client.reducer'
+import { settings } from './settings.reducer'
 import { auth } from './Login/auth.reducer'
 // import { users } from './users.reducer'
 import { adminAlbums } from './Admin/albums.reducer'
@@ -17,6 +18,7 @@ import { frontAlbums } from './Front/albums.reducer'
 
 const rootReducer = combineReducers({
   client,
+  settings,
   auth,
   admin_header: header,
   admin_footer: footer,
