@@ -93,7 +93,7 @@ class Front extends Component {
                 <PerfectScrollbar
                   option={ scrollbarOptions }
                   onYReachEnd={ this.onScrollDown }
-                >              
+                >           
                   {albums.items.map((album, i) =>
                     <div
                       key={ i }

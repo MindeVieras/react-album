@@ -60,9 +60,9 @@
 }
 
 #admin_content {
-  padding-top: 50px;
-  padding-bottom: 40px;
-  // overflow: auto;
-  height: 100%;
-  position: relative;
+  position: absolute;
+  top: 50px;
+  bottom: 40px;
+  left: 0;
+  right: 0;
 }

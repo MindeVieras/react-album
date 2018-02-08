@@ -42,10 +42,11 @@ class Albums extends React.Component {
     let info_width = client_width - sidebar_width
     return (
       <div id="albums_page">
-        <div>
+        <div className="albums-sidebar" style={{width: `${sidebar_width}px`}}>
           <Rnd
             default={{
-              width: sidebar_width
+              width: sidebar_width,
+              height: `100%`
             }}
             enableResizing={{
               top:false,
@@ -60,7 +61,6 @@ class Albums extends React.Component {
             minWidth={ 100 }
             maxWidth={ 300 }
             disableDragging={ true }
-            className="albums-sidebar"
             onResize={((e, direction, ref, delta, position) => this.onSidebarResize(e, direction, ref, delta, position))}
             onResizeStop={((e, direction, ref, delta, position) => this.onSidebarResizeEnd(e, direction, ref, delta, position))}
           >

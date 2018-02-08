@@ -20,9 +20,9 @@ import '../../../scss/Admin/main.scss'
 class Admin extends Component {
 
   componentDidMount() {
-
+    const { uid, dispatch } = this.props
     // Get Admin settings
-    this.props.dispatch(utilsActions.getAdminSettings(this.props.uid))
+    dispatch(utilsActions.getAdminSettings(uid))
 
   }
 
