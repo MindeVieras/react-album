@@ -15,7 +15,6 @@ export function settings(state = initialState, action) {
       ...state,
       admin: action.settings
     }
-
   // case userConstants.SET_SETTING_REQUEST:
   //   return {
   //     ...state,
@@ -28,6 +27,32 @@ export function settings(state = initialState, action) {
       ...state,
       admin: {
         ...state.admin,
+        [action.name]: action.value
+      }
+    }
+  // case userConstants.SET_SETTING_FAILURE:
+  //   return {
+  //     selected_user: {
+  //       err: action.err
+  //     }
+  //   }
+  case utilsConstants.GET_FRONT_SETTINGS:
+    return {
+      ...state,
+      front: action.settings
+    }
+  // case userConstants.SET_SETTING_REQUEST:
+  //   return {
+  //     ...state,
+  //     selected_user: {
+  //       loading: true
+  //     }
+  //   }
+  case utilsConstants.SET_FRONT_SETTING_SUCCESS:
+    return {
+      ...state,
+      front: {
+        ...state.front,
         [action.name]: action.value
       }
     }

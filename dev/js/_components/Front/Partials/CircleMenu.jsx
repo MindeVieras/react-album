@@ -4,10 +4,11 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Motion, spring } from 'react-motion'
+import Rnd from 'react-rnd'
 
 import { IoNavicon, IoCube, IoHome, IoLogOut } from 'react-icons/lib/io'
 
-import { frontUiActions } from '../../../_actions'
+import { frontUiActions, utilsActions } from '../../../_actions'
 
 // CONSTANTS
 // Value of 1 degree in radians
@@ -36,7 +37,7 @@ class CircleMenu extends Component {
   
   constructor(props){
     super(props)
-    
+
     this.toggleMenu = this.toggleMenu.bind(this)
   }
   
@@ -118,24 +119,62 @@ class CircleMenu extends Component {
       }
     </Motion>
   }
-  
+
+  onMenuDragStop(e, d) {
+    let { user_id, screen, dispatch } = this.props
+    let { width, height } = this.props.screen
+    let { x, y } = d
+    let xPercent = (x / (width - 55)) * 100
+    let yPercent = (y / (height - 55)) * 100
+    dispatch(utilsActions.saveFrontSetting('c_menu_x', xPercent, user_id))
+    dispatch(utilsActions.saveFrontSetting('c_menu_y', yPercent, user_id))
+  }
+
   render(){
-    let { elements } = this.props
-    
-    return (
-      <div id="circle_menu">
-        <div className="button-container">
-          { elements.map((item, i) => this.renderChildButton(item, i)) }
-          <div
-            className="button-menu"
-            style={this.getMainButtonStyle()}
-            onClick={this.toggleMenu}
+    let { screen, menu_x, menu_y, elements } = this.props
+    if (screen) {
+      let { width, height } = screen
+      let xPixel = ((width - 55) / 100) * menu_x
+      let yPixel = ((height - 55) / 100) * menu_y
+      return (
+        <div>
+          <Rnd
+            className="circle_menu"
+            default={{
+              x: xPixel,
+              y: yPixel,
+              width: 55,
+              height: 55
+            }}
+            enableResizing={{
+              top:false,
+              right:false,
+              bottom:false,
+              left:false,
+              topRight:false,
+              bottomRight:false,
+              bottomLeft:false,
+              topLeft:false
+            }}
+            onDragStop={(e, d) => { this.onMenuDragStop(e, d) }}
+            bounds={ '#front_page' }
           >
-            <IoNavicon />
-          </div>
+            <div className="button-container">
+              { elements.map((item, i) => this.renderChildButton(item, i)) }
+              <div
+                className="button-menu"
+                style={this.getMainButtonStyle()}
+                onClick={this.toggleMenu}
+              >
+                <IoNavicon />
+              </div>
+            </div>
+          </Rnd>
         </div>
-      </div>
-    )
+      )
+    } else {
+      return <span />
+    }
   }
 }
 
@@ -161,9 +200,14 @@ CircleMenu.defaultProps = {
 }
 
 function mapStateToProps(state) {
-  const { front_ui } = state
+  const { auth, client, settings, front_ui } = state
   return {
-    menu_open: front_ui.menu_open
+    user_id: auth.user.id,
+    menu_open: front_ui.menu_open,
+    menu_x: parseFloat(settings.front.c_menu_x),
+    menu_y: parseFloat(settings.front.c_menu_y),
+    screen: client.screen
+    // client_width: client.screen.width
   }
 }
 

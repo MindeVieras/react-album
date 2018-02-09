@@ -6,7 +6,10 @@ export const utilsActions = {
   getAppSettings,
   getAdminSettings,
   setAdminSetting,
-  saveAdminSetting
+  saveAdminSetting,
+  getFrontSettings,
+  setFrontSetting,
+  saveFrontSetting
 }
 
 function getAppSettings() {
@@ -53,5 +56,42 @@ function saveAdminSetting(name, value, uid) {
 
   // function request() { return { type: userConstants.SET_SETTING_REQUEST } }
   function save(name, value) { return { type: utilsConstants.SET_ADMIN_SETTING_SUCCESS, name, value } }
+  // function failure(err) { return { type: userConstants.SET_SETTING_FAILURE, err } }
+}
+
+function getFrontSettings(id) {
+  return dispatch => {
+    utilsService.getFrontSettings(id)
+      .then(function(res) {
+        dispatch(get(res.data))
+      })
+  }
+  function get(settings) { return { type: utilsConstants.GET_FRONT_SETTINGS, settings } }
+}
+
+function setFrontSetting(name, value) {
+  return dispatch => {
+    dispatch(set(name, value))
+  }
+
+  function set(name, value) { return { type: utilsConstants.SET_FRONT_SETTING_SUCCESS, name, value } }
+}
+
+function saveFrontSetting(name, value, uid) {
+  return dispatch => {
+    // dispatch(request())
+
+    utilsService.saveFrontSetting(name, value, uid)
+      .then(function(res) {
+        if (res.ack == 'ok') {
+          dispatch(save(name, value))
+        } else {
+          // dispatch(failure(res.msg))
+        }
+      })
+  }
+
+  // function request() { return { type: userConstants.SET_SETTING_REQUEST } }
+  function save(name, value) { return { type: utilsConstants.SET_FRONT_SETTING_SUCCESS, name, value } }
   // function failure(err) { return { type: userConstants.SET_SETTING_FAILURE, err } }
 }

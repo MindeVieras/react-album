@@ -8,14 +8,14 @@ import PerfectScrollbar from 'react-perfect-scrollbar'
 import CircleMenu from './Partials/CircleMenu'
 import Media from './Album/Media'
 
-import { frontActions, frontUiActions } from '../../_actions'
+import { frontActions, frontUiActions, utilsActions } from '../../_actions'
 
 import '../../../scss/Front/main.scss'
 
 
 const page = 0
-const limit = 5
-const media_limit = 6
+const limit = 1
+const media_limit = 2
 
 class Front extends Component {
 
@@ -33,9 +33,9 @@ class Front extends Component {
   }
 
   componentDidMount() {
-    const { dispatch } = this.props
+    const { uid, dispatch } = this.props
     dispatch(frontActions.getList(page, limit, media_limit))
-    // console.log('did mount')
+    dispatch(utilsActions.getFrontSettings(uid))
   }
 
   componentWillUnmount() {
@@ -77,7 +77,7 @@ class Front extends Component {
   }
 
   render() {
-    const { albums } = this.props
+    const { front_settings, albums } = this.props
     const scrollbarOptions = {
       wheelSpeed: 0.75,
       // useBothWheelAxes: true
@@ -85,47 +85,51 @@ class Front extends Component {
     // console.log(this.state)
     return (
       <div>
-        <div id="front_page" onClick={ this.closeMenu }>
+        {front_settings &&
+          <div>
+            <div id="front_page" onClick={ this.closeMenu }>
 
-          <div id="front_content">
-            {albums.items &&
-              <div className="albums-list">
-                <PerfectScrollbar
-                  option={ scrollbarOptions }
-                  onYReachEnd={ this.onScrollDown }
-                >           
-                  {albums.items.map((album, i) =>
-                    <div
-                      key={ i }
-                      className={`item`}
-                      id={`item-${album.id}`}
-                    >
-                      <div className="name">{album.name}</div>
-                      {album.media &&
-                        <Media media={ album.media } />
-                      }
-                    </div>
-                  )}
+              <div id="front_content">
+                {albums.items &&
+                  <div className="albums-list">
+                    <PerfectScrollbar
+                      option={ scrollbarOptions }
+                      onYReachEnd={ this.onScrollDown }
+                    >           
+                      {albums.items.map((album, i) =>
+                        <div
+                          key={ i }
+                          className={`item`}
+                          id={`item-${album.id}`}
+                        >
+                          <div className="name">{album.name}</div>
+                          {album.media &&
+                            <Media media={ album.media } />
+                          }
+                        </div>
+                      )}
 
-                  <div className="load-more" onClick={ this.loadMore }>load more</div>
+                      <div className="load-more" onClick={ this.loadMore }>load more</div>
 
-                </PerfectScrollbar>
+                    </PerfectScrollbar>
+                  </div>
+                }
+
+                {albums.loading &&
+                  <RingLoader />
+                }
+
+                {albums.err &&
+                  <div>{albums.err}</div>
+                }
+
               </div>
-            }
 
-            {albums.loading &&
-              <RingLoader />
-            }
+            </div>
 
-            {albums.err &&
-              <div>{albums.err}</div>
-            }
-
+            <CircleMenu />
           </div>
-
-        </div>
-
-        <CircleMenu />
+        }
 
       </div>
     )
@@ -133,10 +137,12 @@ class Front extends Component {
 }
 
 function mapStateToProps(state) {
-  const { client, front_albums } = state
+  const { auth, client, settings, front_albums } = state
   return {
+    uid: auth.user.id,
     screen: client.screen,
-    albums: front_albums.list
+    albums: front_albums.list,
+    front_settings: settings.front
   }
 }
 
