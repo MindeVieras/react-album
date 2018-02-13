@@ -63,7 +63,7 @@ class AlbumInfo extends Component {
 }
 
 AlbumInfo.propTypes = {
-  selected_album: PropTypes.object.isRequired,
+  selected_album: PropTypes.object,
   width: PropTypes.number
 }
 
