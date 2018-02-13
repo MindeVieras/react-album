@@ -83,7 +83,7 @@ function mapStateToProps(state) {
   const { auth, client, settings, admin_albums } = state
   return {
     user_id: auth.user.id,
-    selected_album: admin_albums.selected_album,
+    selected_album: admin_albums.selected_album || {},
     selected_album_id: parseInt(settings.admin.selected_album),
     sidebar_width: parseInt(settings.admin.sidebar_width),
     client_width: client.screen.width,
