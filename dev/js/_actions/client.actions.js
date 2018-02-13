@@ -30,7 +30,7 @@ function setCurrentLocation() {
 
   return dispatch => {
 
-    locationService.getCurrentLocation(function(err, pos){
+    locationService.getCurrentLocation(function(pos){
       dispatch(set(pos))
     })
   }

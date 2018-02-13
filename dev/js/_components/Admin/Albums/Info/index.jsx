@@ -9,15 +9,14 @@ import Bar from './Bar'
 import Foot from './Foot'
 
 import { Uploader } from '../../Uploader'
-import { albumsActions, uploaderActions } from '../../../../_actions'
+import { uploaderActions } from '../../../../_actions'
 import { contentConstants, mediaConstants } from '../../../../_constants'
 
 class AlbumInfo extends Component {
 
   componentDidMount() {
-    const { selected_album_id, dispatch } = this.props
+    const { dispatch } = this.props
     dispatch(uploaderActions.clearFiles())
-    dispatch(albumsActions.getOne(selected_album_id))
   }
 
   render() {
@@ -65,7 +64,6 @@ class AlbumInfo extends Component {
 
 AlbumInfo.propTypes = {
   selected_album: PropTypes.object.isRequired,
-  selected_album_id: PropTypes.number.isRequired,
   width: PropTypes.number
 }
 
@@ -73,11 +71,4 @@ AlbumInfo.defaultProps = {
   width: 500
 }
 
-function mapStateToProps(state) {
-  const { admin_albums } = state
-  return {
-    selected_album: admin_albums.selected_album
-  }
-}
-
-export default connect(mapStateToProps)(AlbumInfo)
+export default connect()(AlbumInfo)

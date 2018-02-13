@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack",
-    "build": "webpack -p --env=prod --progress",
+    "build": "webpack -p --env=production --progress",
     "start": "webpack-dev-server"
   },
   "license": "ISC",
@@ -24,6 +24,7 @@
     "react-dropzone": "^4.2.3",
     "react-google-maps": "^9.4.5",
     "react-icons": "^2.2.7",
+    "react-image-lightbox": "^4.5.0",
     "react-motion": "^0.5.2",
     "react-perfect-scrollbar": "^0.2.3",
     "react-popup": "^0.8.0",
@@ -39,6 +40,7 @@
     "redux": "^3.7.2",
     "redux-form": "^7.1.2",
     "redux-thunk": "^2.2.0",
+    "superagent": "^3.8.2",
     "uuid": "^3.1.0",
     "video-react": "^0.9.3",
     "webfontloader": "^1.6.28"

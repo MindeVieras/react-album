@@ -30,6 +30,7 @@ class Address extends Component {
       if (status === 'OK') {
         if (results[0]) {
           this.setState({
+            // address: getAddress(results[0].address_components)
             address: results[0].formatted_address
           })
         } else {
@@ -48,6 +49,20 @@ class Address extends Component {
       </div>
     )
   }
+}
+
+function getAddress(addrComponents) {
+  for (var i = 0; i < addrComponents.length; i++) {
+    if (addrComponents[i].types[0] == "country") {
+      return addrComponents[i].long_name
+    }
+    if (addrComponents[i].types.length == 2) {
+      if (addrComponents[i].types[0] == "political") {
+        return addrComponents[i].short_name
+      }
+    }
+  }
+  return false
 }
 
 Address.propTypes = {

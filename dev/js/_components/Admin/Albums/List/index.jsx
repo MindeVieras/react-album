@@ -6,6 +6,8 @@ import PerfectScrollbar from 'react-perfect-scrollbar'
 
 import { RingLoader } from 'react-spinners'
 
+import Bar from './Bar'
+
 import { albumsActions, uploaderActions, utilsActions } from '../../../../_actions'
 
 class AlbumsList extends Component {
@@ -31,13 +33,13 @@ class AlbumsList extends Component {
     if (albums) {
       return (
         <div className="albums-list">
+          <Bar />
           {albums.loading &&
             <RingLoader />
           }
           {albums.err &&
             <div>{albums.err}</div>
           }
-
           {albums.items &&
             <PerfectScrollbar
               option={ scrollbarOptions }

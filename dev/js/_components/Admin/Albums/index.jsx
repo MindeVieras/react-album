@@ -6,7 +6,7 @@ import Rnd from 'react-rnd'
 import AlbumsList from './List'
 import AlbumInfo from './Info'
 
-import { headerActions, footerActions, utilsActions } from '../../../_actions'
+import { headerActions, footerActions, utilsActions, albumsActions } from '../../../_actions'
 
 class Albums extends React.Component {
 
@@ -19,10 +19,12 @@ class Albums extends React.Component {
   }
 
   componentDidMount() {
-    const { dispatch } = this.props
+    const { selected_album_id, dispatch } = this.props
     dispatch(headerActions.setTitle('Album'))
     dispatch(footerActions.buttonsClear())
     dispatch(footerActions.buttonSet('', 'newAlbum', 'success'))
+    dispatch(albumsActions.getList())
+    dispatch(albumsActions.getOne(selected_album_id))
   }
 
   onSidebarResize(e, direction, ref, delta, position) {
@@ -38,7 +40,7 @@ class Albums extends React.Component {
   }
 
   render() {
-    const { client_width, sidebar_width, selected_album_id } = this.props
+    const { client_width, sidebar_width, albums, selected_album, selected_album_id } = this.props
     let info_width = client_width - sidebar_width
     return (
       <div id="albums_page">
@@ -64,11 +66,13 @@ class Albums extends React.Component {
             onResize={((e, direction, ref, delta, position) => this.onSidebarResize(e, direction, ref, delta, position))}
             onResizeStop={((e, direction, ref, delta, position) => this.onSidebarResizeEnd(e, direction, ref, delta, position))}
           >
-            <AlbumsList selected_album_id={ selected_album_id } />
+          {selected_album &&
+            <AlbumsList albums={ albums } selected_album_id={ selected_album_id } />
+          }
           </Rnd>
         </div>
         <div className="info-wrapper">
-          <AlbumInfo width={ info_width } selected_album_id={ selected_album_id } />
+          <AlbumInfo selected_album={ selected_album } width={ info_width } />
         </div>
       </div>
     )
@@ -76,12 +80,14 @@ class Albums extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { auth, client, settings } = state
+  const { auth, client, settings, admin_albums } = state
   return {
     user_id: auth.user.id,
+    selected_album: admin_albums.selected_album,
     selected_album_id: parseInt(settings.admin.selected_album),
     sidebar_width: parseInt(settings.admin.sidebar_width),
-    client_width: client.screen.width
+    client_width: client.screen.width,
+    albums: admin_albums.list
   }
 }
 

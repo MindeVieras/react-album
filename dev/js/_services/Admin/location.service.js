@@ -1,4 +1,6 @@
 
+import request from 'superagent'
+
 // import { authHeader, baseServerUrl } from '../../_helpers'
 
 export const locationService = {
@@ -9,30 +11,38 @@ function getCurrentLocation(cb) {
   // Try HTML5 geolocation.
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
-      let pos = {
+      let loc = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
       }
-
-      cb(null, pos)
+      cb(loc)
     }, function() {
-      let pos = {
-        lat: 0,
-        lng: 0
-      }
+      // If cant get current location
+      getLocationFromApi((loc) => {
+        cb(loc)
+      })
 
-      cb(null, pos)
     })
   } else {
     // Browser doesn't support Geolocation
-    console.log('Your browser doesn\'t support Geolocation')
-    let pos = {
-      lat: 0,
-      lng: 0
-    }
-
-    cb(null, pos)
+    getLocationFromApi((loc) => {
+      cb(loc)
+    })
   }
 }
 
-
+function getLocationFromApi(cb) {
+  let location = {
+    lat: 0,
+    lng: 0
+  }
+  request
+    .get('http://ip-api.com/json')
+    .end((err, res) => {
+      if (res.status === 200 && res.body.status == 'success') {
+        location.lat = res.body.lat
+        location.lng = res.body.lon
+      }
+      cb(location)
+    })
+}
