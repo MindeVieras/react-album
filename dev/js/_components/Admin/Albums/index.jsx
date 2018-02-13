@@ -23,8 +23,8 @@ class Albums extends React.Component {
     dispatch(headerActions.setTitle('Album'))
     dispatch(footerActions.buttonsClear())
     dispatch(footerActions.buttonSet('', 'newAlbum', 'success'))
-    dispatch(albumsActions.getList())
     dispatch(albumsActions.getOne(selected_album_id))
+    dispatch(albumsActions.getList())
   }
 
   onSidebarResize(e, direction, ref, delta, position) {
@@ -66,13 +66,13 @@ class Albums extends React.Component {
             onResize={((e, direction, ref, delta, position) => this.onSidebarResize(e, direction, ref, delta, position))}
             onResizeStop={((e, direction, ref, delta, position) => this.onSidebarResizeEnd(e, direction, ref, delta, position))}
           >
-          {selected_album &&
             <AlbumsList albums={ albums } selected_album_id={ selected_album_id } />
-          }
           </Rnd>
         </div>
         <div className="info-wrapper">
-          <AlbumInfo selected_album={ selected_album } width={ info_width } />
+          {selected_album &&
+            <AlbumInfo selected_album={ selected_album } width={ info_width } />
+          }
         </div>
       </div>
     )
@@ -83,7 +83,7 @@ function mapStateToProps(state) {
   const { auth, client, settings, admin_albums } = state
   return {
     user_id: auth.user.id,
-    selected_album: admin_albums.selected_album || {},
+    selected_album: admin_albums.selected_album,
     selected_album_id: parseInt(settings.admin.selected_album),
     sidebar_width: parseInt(settings.admin.sidebar_width),
     client_width: client.screen.width,

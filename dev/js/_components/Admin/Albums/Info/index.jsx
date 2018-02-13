@@ -21,53 +21,49 @@ class AlbumInfo extends Component {
 
   render() {
     const { width, selected_album } = this.props
-    if (selected_album) {    
-      return (
-        <div className="album-info" style={{ width: `${width}px` }}>
-          {selected_album.loading &&
-            <Spinner type="primary" size={ 70 } />
-          }
-          {selected_album.err &&
-            <div>{selected_album.err}</div>
-          }
-          {selected_album.album &&
-            <div className="selected-album">
-              {selected_album.album.id && selected_album.album.name &&
-                <Bar
-                  album_id={ selected_album.album.id }
-                  start_date={ selected_album.album.start_date }
-                  end_date={ selected_album.album.end_date }
-                  name={ selected_album.album.name }
-                />
-              }
-              
-              {selected_album.album.id &&
-                <Uploader
-                  entity={contentConstants.TYPE_ALBUM}
-                  entity_id={selected_album.album.id}
-                  status={mediaConstants.STATUS_ENABLED}
-                  initial_media={ selected_album.album.media }
-                />
-              }
+    return (
+      <div className="album-info" style={{ width: `${width}px` }}>
+        {selected_album.loading &&
+          <Spinner type="primary" size={ 70 } />
+        }
+        {selected_album.err &&
+          <div>{selected_album.err}</div>
+        }
+        {selected_album.album &&
+          <div className="selected-album">
+            {selected_album.album.id && selected_album.album.name &&
+              <Bar
+                album_id={ selected_album.album.id }
+                start_date={ selected_album.album.start_date }
+                end_date={ selected_album.album.end_date }
+                name={ selected_album.album.name }
+              />
+            }
+            
+            {selected_album.album.id &&
+              <Uploader
+                entity={contentConstants.TYPE_ALBUM}
+                entity_id={selected_album.album.id}
+                status={mediaConstants.STATUS_ENABLED}
+                initial_media={ selected_album.album.media }
+              />
+            }
 
-              {selected_album.album.id &&
-                <Foot
-                  album_id={ selected_album.album.id }
-                />
-              }
+            {selected_album.album.id &&
+              <Foot
+                album_id={ selected_album.album.id }
+              />
+            }
 
-            </div>
-          }
-        </div>
-      )
-    } else {
-      return <div>Please select album</div>
-    }
+          </div>
+        }
+      </div>
+    )
   }
 }
 
 AlbumInfo.propTypes = {
-  selected_album: PropTypes.object,
+  selected_album: PropTypes.object.isRequired,
   width: PropTypes.number
 }
 
