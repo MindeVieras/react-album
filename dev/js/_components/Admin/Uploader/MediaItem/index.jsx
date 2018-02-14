@@ -17,7 +17,7 @@ import StatusGenerateVideosIcon from '../Icons/StatusGenerateVideos'
 import StatusRekognitionLabelsIcon from '../Icons/StatusRekognitionLabels'
 
 const MediaItem = ({id, media_id, status, fromServer, mime, metadata, filename, filesize, rekognition_labels, thumbs, videos, uploader }) => {
-  // console.log(mime)
+  // console.log(id)
   let thumb
   if (fromServer) {
     thumb = <ThumbnailSrv
@@ -39,7 +39,12 @@ const MediaItem = ({id, media_id, status, fromServer, mime, metadata, filename, 
   return (
     <li className="uploader-file">
 
-      { thumb }
+      <div
+        style={{cursor: 'pointer'}}
+        onClick={() => console.log('open lightbox')}
+      >
+        { thumb }
+      </div>
       
       <ProgressBar
         id={ id }

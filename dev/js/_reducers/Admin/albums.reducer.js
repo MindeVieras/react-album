@@ -2,6 +2,11 @@
 import { albumsConstants } from '../../_constants'
 
 const initialState = {
+  lightbox: {
+    is_open: false,
+    index: 0,
+    items: []
+  },
   selected_album: {
     loading: false,
     err: false,
@@ -69,6 +74,7 @@ export function adminAlbums(state = initialState, action) {
     }
   case albumsConstants.GETLIST_FAILURE:
     return {
+      ...state,
       list: {
         err: action.err
       } 
@@ -89,6 +95,7 @@ export function adminAlbums(state = initialState, action) {
     }
   case albumsConstants.GETONE_FAILURE:
     return {
+      ...state,
       selected_album: {
         err: action.err
       }

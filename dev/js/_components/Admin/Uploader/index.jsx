@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import FineUploaderTraditional from 'fine-uploader-wrappers'
 import ReactTooltip from 'react-tooltip'
 import { toastr } from 'react-redux-toastr'
+import Lightbox from 'lightbox-react'
 import { IoCloseCircled, IoUpload } from 'react-icons/lib/io'
 
 import Dropzone from './Partials/dropzone'
@@ -17,10 +18,21 @@ import { authHeader, baseServerUrl } from '../../../_helpers'
 import { uploaderActions } from '../../../_actions'
 import { mediaService } from '../../../_services'
 
+// const images = [
+//   '//placekitten.com/1500/500',
+//   '//placekitten.com/4000/3000',
+//   '//placekitten.com/800/1200',
+//   '//placekitten.com/1500/1500'
+// ]
 class Uploader extends Component {
 
   constructor(props) {
     super(props)
+    
+    this.state = {
+      photoIndex: 0,
+      isOpen: false
+    }
 
     this.uploader = new FineUploaderTraditional({
       options: {
@@ -143,7 +155,12 @@ class Uploader extends Component {
         Click or Drop files here
       </span>
     }
-
+    
+    const images = initial_media.map((m) => {
+      return m.thumbs.thumb
+    })
+    const { photoIndex, isOpen } = this.state
+    
     return (
       <Dropzone
         uploader={ uploader }
@@ -154,6 +171,28 @@ class Uploader extends Component {
         multiple={ true }
         dropActiveClassName="active"
       >
+        <button
+          type="button"
+          className="btn btn-success"
+          onClick={() => this.setState({ isOpen: true })}
+        >
+          LB
+        </button>
+        
+        {isOpen &&
+          <Lightbox
+            mainSrc={images[photoIndex]}
+            nextSrc={images[(photoIndex + 1) % images.length]}
+            prevSrc={images[(photoIndex + images.length - 1) % images.length]}
+            onCloseRequest={() => this.setState({ isOpen: false })}
+            onMovePrevRequest={() => this.setState({
+              photoIndex: (photoIndex + images.length - 1) % images.length,
+            })}
+            onMoveNextRequest={() => this.setState({
+              photoIndex: (photoIndex + 1) % images.length,
+            })}
+          />
+        }
         
         <TotalProgressBar
           uploader={ uploader }
