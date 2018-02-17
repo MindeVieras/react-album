@@ -26,11 +26,11 @@ function getAdminSettings() {
   return fetch(baseServerUrl+'/api/utils/get-admin-settings', requestOptions).then(handleResponse)
 }
 
-function saveAdminSetting(name, value, uid) {
+function saveAdminSetting(name, value) {
   const requestOptions = {
     method: 'POST',
     headers: { ...authHeader(), 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name, value, uid })
+    body: JSON.stringify({ name, value })
   }
 
   return fetch(baseServerUrl+'/api/utils/save-admin-setting', requestOptions).then(handleResponse)

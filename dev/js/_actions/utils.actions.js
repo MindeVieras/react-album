@@ -40,11 +40,11 @@ function setAdminSetting(name, value) {
   function set(name, value) { return { type: utilsConstants.SET_ADMIN_SETTING_SUCCESS, name, value } }
 }
 
-function saveAdminSetting(name, value, uid) {
+function saveAdminSetting(name, value) {
   return dispatch => {
     // dispatch(request())
 
-    utilsService.saveAdminSetting(name, value, uid)
+    utilsService.saveAdminSetting(name, value)
       .then(function(res) {
         if (res.ack == 'ok') {
           dispatch(save(name, value))

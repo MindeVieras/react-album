@@ -66,7 +66,7 @@ class Albums extends React.Component {
             onResize={((e, direction, ref, delta, position) => this.onSidebarResize(e, direction, ref, delta, position))}
             onResizeStop={((e, direction, ref, delta, position) => this.onSidebarResizeEnd(e, direction, ref, delta, position))}
           >
-            {selected_album_id &&
+            {selected_album_id && albums &&
               <AlbumsList albums={ albums } selected_album_id={ selected_album_id } />
             }
           </Rnd>

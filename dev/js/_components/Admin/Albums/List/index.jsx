@@ -18,10 +18,10 @@ class AlbumsList extends Component {
   }
 
   onAlbumSelect(id) {
-    const { user_id, dispatch } = this.props
+    const { dispatch } = this.props
     dispatch(uploaderActions.clearFiles())
     dispatch(albumsActions.getOne(id))
-    dispatch(utilsActions.saveAdminSetting('selected_album', id, user_id))
+    dispatch(utilsActions.saveAdminSetting('selected_album', id))
   }
 
   render() {
@@ -68,17 +68,8 @@ class AlbumsList extends Component {
 }
 
 AlbumsList.propTypes = {
-  user_id: PropTypes.number.isRequired,
   albums: PropTypes.object.isRequired,
   selected_album_id: PropTypes.number.isRequired
 }
 
-function mapStateToProps(state) {
-  const { auth, admin_albums } = state
-  return {
-    user_id: auth.user.id,
-    albums: admin_albums.list
-  }
-}
-
-export default connect(mapStateToProps)(AlbumsList)
+export default connect()(AlbumsList)
