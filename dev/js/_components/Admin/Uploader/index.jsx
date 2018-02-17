@@ -12,7 +12,7 @@ import Dropzone from './Partials/dropzone'
 import FileInput from './Partials/file-input'
 import TotalProgressBar from './Partials/total-progress-bar'
 
-import MediaItem from './MediaItem'
+import MediaList from './MediaList'
 
 import { authHeader, baseServerUrl } from '../../../_helpers'
 import { uploaderActions } from '../../../_actions'
@@ -173,7 +173,7 @@ class Uploader extends Component {
       >
         <button
           type="button"
-          className="btn btn-success"
+          className="btn btn-success pull-left"
           onClick={() => this.setState({ isOpen: true })}
         >
           LB
@@ -211,24 +211,13 @@ class Uploader extends Component {
           { counter } files
         </div>
         
-        <ul
-          className="uploader-files"
-        >
-          
+        <MediaList
+          files={ files }
+          uploader={ uploader }
+        />
 
-          {
-            files.map((props, i) => {
-              return (
-                <MediaItem
-                  key={ i }
-                  uploader={ uploader }
-                  { ...props }
-                />
-              )
-            })
-          }
-          { uploaderText }
-        </ul>
+        { uploaderText }
+
       </Dropzone>
     )
   }

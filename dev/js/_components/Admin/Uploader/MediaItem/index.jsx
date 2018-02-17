@@ -2,6 +2,7 @@
 import React from 'react'
 import ReactTooltip from 'react-tooltip'
 import { IoCheckmarkCircled, IoBug } from 'react-icons/lib/io'
+import { SortableElement } from 'react-sortable-hoc'
 
 import Thumbnail from './Thumbnail'
 import ThumbnailSrv from './ThumbnailSrv'
@@ -16,7 +17,7 @@ import StatusGenerateImageThumbsIcon from '../Icons/StatusGenerateImageThumbs'
 import StatusGenerateVideosIcon from '../Icons/StatusGenerateVideos'
 import StatusRekognitionLabelsIcon from '../Icons/StatusRekognitionLabels'
 
-const MediaItem = ({id, media_id, status, fromServer, mime, metadata, filename, filesize, rekognition_labels, thumbs, videos, uploader }) => {
+const MediaItem = SortableElement(({id, media_id, status, fromServer, mime, metadata, filename, filesize, rekognition_labels, thumbs, videos, uploader }) => {
   // console.log(id)
   let thumb
   if (fromServer) {
@@ -36,6 +37,7 @@ const MediaItem = ({id, media_id, status, fromServer, mime, metadata, filename, 
       videos={ videos }
     />
   }
+
   return (
     <li className="uploader-file">
 
@@ -122,6 +124,6 @@ const MediaItem = ({id, media_id, status, fromServer, mime, metadata, filename, 
       }
     </li>
   )
-}
+})
 
 export default MediaItem

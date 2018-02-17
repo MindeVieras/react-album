@@ -27,8 +27,8 @@ class Admin extends Component {
   }
 
   render() {
-    const { match, isScriptLoadSucceed } = this.props
-    if (isScriptLoadSucceed) {    
+    const { match, isScriptLoadSucceed, settings } = this.props
+    if (isScriptLoadSucceed && settings) {    
       return (
         <div id="admin_wrapper">
           
@@ -62,9 +62,10 @@ class Admin extends Component {
 }
 
 function mapStateToProps(state) {
-  const { auth } = state
+  const { auth, settings } = state
   return {
-    uid: auth.user.id
+    uid: auth.user.id,
+    settings: settings.admin
   }
 }
 
