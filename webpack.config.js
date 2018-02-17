@@ -9,7 +9,7 @@ module.exports = {
         contentBase: './src',
         port: 8080
     },
-    devtool: '#eval',
+    devtool: 'eval',
     entry: './dev/js/index.jsx',
     output: {
         path: path.resolve(__dirname, 'src'),
@@ -65,9 +65,11 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.jsx']
     },
-    plugins: [new HtmlWebpackPlugin({
+    plugins: [
+      new HtmlWebpackPlugin({
         template: './src/index.html',
         filename: 'index.html',
         inject: false
-    })],
+      })
+    ],
 };

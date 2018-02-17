@@ -17,13 +17,13 @@ function getAppSettings() {
   return fetch(baseServerUrl+'/api/utils/get-app-settings', requestOptions).then(handleResponse)
 }
 
-function getAdminSettings(id) {
+function getAdminSettings() {
   const requestOptions = {
     method: 'GET',
     headers: authHeader()
   }
 
-  return fetch(baseServerUrl+'/api/utils/get-admin-settings/'+id, requestOptions).then(handleResponse)
+  return fetch(baseServerUrl+'/api/utils/get-admin-settings', requestOptions).then(handleResponse)
 }
 
 function saveAdminSetting(name, value, uid) {

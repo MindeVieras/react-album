@@ -12,6 +12,7 @@ import Albums from './Albums'
 import TrashPage from './Trash'
 import Error404 from './Errors/404'
 
+import { googleKey } from '../../_helpers/config'
 import { utilsActions } from '../../_actions'
 
 import 'react-datetime/css/react-datetime.css'
@@ -20,10 +21,9 @@ import '../../../scss/Admin/main.scss'
 class Admin extends Component {
 
   componentDidMount() {
-    const { uid, dispatch } = this.props
+    const { dispatch } = this.props
     // Get Admin settings
-    dispatch(utilsActions.getAdminSettings(uid))
-
+    dispatch(utilsActions.getAdminSettings())
   }
 
   render() {
@@ -56,19 +56,18 @@ class Admin extends Component {
       )
     }
     else {
-      return <div>Scripts are loading...</div>
+      return <div>APP loading...</div>
     }
   }
 }
 
 function mapStateToProps(state) {
-  const { auth, settings } = state
+  const { settings } = state
   return {
-    uid: auth.user.id,
     settings: settings.admin
   }
 }
 
 export default connect(mapStateToProps)(scriptLoader([
-  'https://maps.googleapis.com/maps/api/js?key=AIzaSyCzi2J0bixOL-SIvephD_qZbuTuuzIaJsc&v=3.exp&libraries=places'
+  'https://maps.googleapis.com/maps/api/js?key='+googleKey+'&v=3.exp&libraries=places'
 ])(Admin))

@@ -22,9 +22,9 @@ function getAppSettings() {
   function get(settings) { return { type: utilsConstants.GET_APP_SETTINGS, settings } }
 }
 
-function getAdminSettings(id) {
+function getAdminSettings() {
   return dispatch => {
-    utilsService.getAdminSettings(id)
+    utilsService.getAdminSettings()
       .then(function(res) {
         dispatch(get(res.data))
       })
