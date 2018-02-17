@@ -156,8 +156,9 @@ class Uploader extends Component {
       </span>
     }
     
-    const images = initial_media.map((m) => {
-      return m.thumbs.thumb
+    const images = initial_media.map((m, i) => {
+      // return m.thumbs.thumb
+      return <div style={{color:'white'}}>{ `image ${i}` }</div>
     })
     const { photoIndex, isOpen } = this.state
     
