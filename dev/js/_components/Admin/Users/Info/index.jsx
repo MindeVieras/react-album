@@ -86,5 +86,4 @@ function mapStateToProps(state) {
   }
 }
 
-const connectedUserInfo = connect(mapStateToProps)(UserInfo)
-export { connectedUserInfo as UserInfo }
+export default connect(mapStateToProps)(UserInfo)

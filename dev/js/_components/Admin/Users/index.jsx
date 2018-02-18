@@ -1,18 +1,17 @@
 
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { UsersList } from './List'
-import { UserInfo } from './Info'
+import UsersList from './List'
+import UserInfo from './Info'
 
-import { headerActions, footerActions } from '../../../../_actions'
+import { headerActions, footerActions } from '../../../_actions'
 
-class UsersPage extends React.Component {
+class UsersPage extends Component {
 
   componentDidMount() {
     this.props.dispatch(headerActions.setTitle('Users'))
     this.props.dispatch(footerActions.buttonsClear())
-    this.props.dispatch(footerActions.buttonSet('Go back', 'goBack', 'info'))
     this.props.dispatch(footerActions.buttonSet('New user', '/user-create', 'success'))
   }
 
@@ -30,12 +29,4 @@ class UsersPage extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  const { dispatch } = state
-  return {
-    dispatch
-  }
-}
-
-const connectedUsersPage = connect(mapStateToProps)(UsersPage)
-export { connectedUsersPage as UsersPage }
+export default connect()(UsersPage)

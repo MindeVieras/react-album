@@ -33,7 +33,7 @@ function getList() {
     albumsService.getList()
       .then(function(res) {
         if (res.ack == 'ok') {
-          dispatch(success(res.data))
+          dispatch(success(res.list))
         } else {
           dispatch(failure(res.msg))
         }

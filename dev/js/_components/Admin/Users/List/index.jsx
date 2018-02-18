@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -7,7 +7,7 @@ import { RingLoader } from 'react-spinners'
 
 import { userActions } from '../../../../_actions'
 
-class UsersList extends React.Component {
+class UsersList extends Component {
 
   constructor(props) {
     super(props)
@@ -80,5 +80,4 @@ function mapStateToProps(state) {
   }
 }
 
-const connectedUsersList = connect(mapStateToProps)(UsersList)
-export { connectedUsersList as UsersList }
+export default connect(mapStateToProps)(UsersList)

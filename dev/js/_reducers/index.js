@@ -6,7 +6,7 @@ import { reducer as toastrReducer } from 'react-redux-toastr'
 import { client } from './client.reducer'
 import { settings } from './settings.reducer'
 import { auth } from './Login/auth.reducer'
-// import { users } from './users.reducer'
+import { users } from './Admin/users.reducer'
 import { adminAlbums } from './Admin/albums.reducer'
 import { uploader } from './Admin/uploader.reducer'
 import { header } from './Admin/header.reducer'
@@ -22,7 +22,7 @@ const rootReducer = combineReducers({
   auth,
   admin_header: header,
   admin_footer: footer,
-  // users,
+  users,
   admin_albums: adminAlbums,
   front_ui: frontUi,
   front_albums: frontAlbums,

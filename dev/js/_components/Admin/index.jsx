@@ -9,6 +9,7 @@ import scriptLoader from 'react-async-script-loader'
 import Header from './Partials/Header'
 import Footer from './Partials/Footer'
 import Albums from './Albums'
+import UsersPage from './Users'
 import TrashPage from './Trash'
 import Error404 from './Errors/404'
 
@@ -39,7 +40,7 @@ class Admin extends Component {
           <div id="admin_content">
             <Switch>
               <Route exact path={ match.url } component={Albums} />
-              {/*<PrivateRoute path="/users" component={UsersPage} />*/}
+              <Route exact path={`${match.url}/users`} component={UsersPage} />
               {/*<PrivateRoute path="/user-create" component={UserCreatePage} />*/}
               <Route exact path={`${match.url}/trash`} component={TrashPage} />
               <Route component={Error404} />

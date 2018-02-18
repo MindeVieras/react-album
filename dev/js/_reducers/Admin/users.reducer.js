@@ -1,5 +1,5 @@
 
-import { userConstants } from '../_constants'
+import { userConstants } from '../../_constants'
 
 const initialState = {
   selected_user: {
