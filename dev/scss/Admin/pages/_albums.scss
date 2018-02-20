@@ -9,7 +9,7 @@
     border-right: 1px solid $grey;
     .admin-albums-list-scrollbar {
       position: relative;
-      height: 100%;
+      height: calc(100% - 15px);
       .ps__scrollbar-y-rail {
         left: 0;
         .ps__scrollbar-y {
@@ -28,6 +28,15 @@
     .filter-bar {
       padding: 0 15px;
       border-bottom: 1px solid $grey;
+      .dates {
+        display: inline-block;
+        width: 100%;
+        margin: 5px 0;
+        font-size: 13px;
+        .end {
+          float: right;
+        }
+      }
     }
   }
 

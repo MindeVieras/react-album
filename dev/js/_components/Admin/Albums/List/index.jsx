@@ -62,7 +62,7 @@ class AlbumsList extends Component {
       )
     }
     else {
-      return <span>Nothing to display</span>
+      return <span>No albums</span>
     }
   }
 }
