@@ -13,8 +13,8 @@ import { albumsActions, uploaderActions, utilsActions } from '../../../../_actio
 class AlbumsList extends Component {
 
   componentDidMount(){
-    const { albums, dispatch } = this.props
-    dispatch(albumsActions.getList())
+    const { start_date, end_date, dispatch } = this.props
+    dispatch(albumsActions.getList(start_date, end_date))
   }
 
   onAlbumSelect(id) {
@@ -68,8 +68,18 @@ class AlbumsList extends Component {
 }
 
 AlbumsList.propTypes = {
-  albums: PropTypes.object.isRequired,
+  albums: PropTypes.object,
   selected_album_id: PropTypes.number.isRequired
 }
 
-export default connect()(AlbumsList)
+function mapStateToProps(state) {
+  const { settings, admin_albums } = state
+  return {
+    albums: admin_albums.list,
+    selected_album_id: parseInt(settings.admin.selected_album),
+    start_date: settings.admin.list_filter_start_date,
+    end_date: settings.admin.list_filter_end_date
+  }
+}
+
+export default connect(mapStateToProps)(AlbumsList)

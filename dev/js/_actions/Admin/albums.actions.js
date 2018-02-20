@@ -8,6 +8,7 @@ import { albumsService } from '../../_services'
 export const albumsActions = {
   addToList,
   getList,
+  getListDates,
   getOne,
   getLocations,
   removeLocation,
@@ -26,11 +27,11 @@ function addToList(album) {
   function add(album) { return { type: albumsConstants.ADD_TO_LIST, album } }
 }
 
-function getList() {
+function getList(start_date, end_date) {
   return dispatch => {
     dispatch(request())
 
-    albumsService.getList()
+    albumsService.getList(start_date, end_date)
       .then(function(res) {
         if (res.ack == 'ok') {
           dispatch(success(res.list))
@@ -43,6 +44,25 @@ function getList() {
   function request() { return { type: albumsConstants.GETLIST_REQUEST } }
   function success(albums) { return { type: albumsConstants.GETLIST_SUCCESS, albums } }
   function failure(err) { return { type: albumsConstants.GETLIST_FAILURE, err } }
+}
+
+function getListDates() {
+  return dispatch => {
+    dispatch(request())
+
+    albumsService.getListDates()
+      .then(function(res) {
+        if (res.ack == 'ok') {
+          dispatch(success(res.dates))
+        } else {
+          dispatch(failure(res.msg))
+        }
+      })
+  }
+
+  function request() { return { type: albumsConstants.GETLISTDATES_REQUEST } }
+  function success(dates) { return { type: albumsConstants.GETLISTDATES_SUCCESS, dates } }
+  function failure(err) { return { type: albumsConstants.GETLISTDATES_FAILURE, err } }
 }
 
 function getOne(id) {

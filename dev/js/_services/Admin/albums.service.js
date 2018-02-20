@@ -4,6 +4,7 @@ import { authHeader, baseServerUrl } from '../../_helpers'
 export const albumsService = {
   create,
   getList,
+  getListDates,
   getOne,
   getLocations,
   removeLocation,
@@ -24,13 +25,23 @@ function create(album) {
   return fetch(baseServerUrl+'/api/albums/create', requestOptions).then(handleResponse)
 }
 
-function getList() {
+function getList(start_date, end_date) {
+  const requestOptions = {
+    method: 'POST',
+    headers: { ...authHeader(), 'Content-Type': 'application/json' },
+    body: JSON.stringify({start_date, end_date})
+  }
+
+  return fetch(baseServerUrl+'/api/albums/get-list', requestOptions).then(handleResponse)
+}
+
+function getListDates() {
   const requestOptions = {
     method: 'GET',
     headers: authHeader()
   }
 
-  return fetch(baseServerUrl+'/api/albums/get-list', requestOptions).then(handleResponse)
+  return fetch(baseServerUrl+'/api/albums/get-list-dates', requestOptions).then(handleResponse)
 }
 
 function getOne(id) {

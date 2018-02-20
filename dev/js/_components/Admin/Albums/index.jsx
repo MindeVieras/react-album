@@ -24,7 +24,6 @@ class Albums extends React.Component {
     dispatch(footerActions.buttonsClear())
     dispatch(footerActions.buttonSet('', 'newAlbum', 'success'))
     dispatch(albumsActions.getOne(selected_album_id))
-    dispatch(albumsActions.getList())
   }
 
   onSidebarResize(e, direction, ref, delta, position) {
@@ -34,13 +33,13 @@ class Albums extends React.Component {
   }
 
   onSidebarResizeEnd(e, direction, ref, delta, position) {
-    const { user_id, dispatch } = this.props
+    const { dispatch } = this.props
     let width = ref.offsetWidth
-    dispatch(utilsActions.saveAdminSetting('sidebar_width', width, user_id))
+    dispatch(utilsActions.saveAdminSetting('sidebar_width', width))
   }
 
   render() {
-    const { client_width, sidebar_width, albums, selected_album, selected_album_id } = this.props
+    const { client_width, sidebar_width, selected_album } = this.props
     let info_width = client_width - sidebar_width
     return (
       <div id="albums_page">
@@ -66,9 +65,7 @@ class Albums extends React.Component {
             onResize={((e, direction, ref, delta, position) => this.onSidebarResize(e, direction, ref, delta, position))}
             onResizeStop={((e, direction, ref, delta, position) => this.onSidebarResizeEnd(e, direction, ref, delta, position))}
           >
-            {selected_album_id && albums &&
-              <AlbumsList albums={ albums } selected_album_id={ selected_album_id } />
-            }
+            <AlbumsList />
           </Rnd>
         </div>
         <div className="info-wrapper">
@@ -82,14 +79,12 @@ class Albums extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { auth, client, settings, admin_albums } = state
+  const { client, settings, admin_albums } = state
   return {
-    user_id: auth.user.id,
     selected_album: admin_albums.selected_album,
     selected_album_id: parseInt(settings.admin.selected_album),
     sidebar_width: parseInt(settings.admin.sidebar_width),
-    client_width: client.screen.width,
-    albums: admin_albums.list
+    client_width: client.screen.width
   }
 }
 

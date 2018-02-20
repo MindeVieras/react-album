@@ -16,6 +16,11 @@ const initialState = {
     loading: false,
     err: false,
     items: []
+  },
+  dates: {
+    loading: false,
+    err: false,
+    distinct_list: []
   }
 }
 
@@ -76,6 +81,27 @@ export function adminAlbums(state = initialState, action) {
     return {
       ...state,
       list: {
+        err: action.err
+      } 
+    }
+  case albumsConstants.GETLISTDATES_REQUEST:
+    return {
+      ...state,
+      dates: {
+        loading: true
+      }
+    }
+  case albumsConstants.GETLISTDATES_SUCCESS:
+    return {
+      ...state,
+      dates: {
+        distinct_list: action.dates
+      }
+    }
+  case albumsConstants.GETLIST_FAILURE:
+    return {
+      ...state,
+      dates: {
         err: action.err
       } 
     }
