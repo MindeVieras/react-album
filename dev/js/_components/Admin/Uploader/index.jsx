@@ -138,7 +138,7 @@ class Uploader extends Component {
   }
 
   render() {
-    const { author, entity, entity_id, status, files, initial_media, dispatch } = this.props
+    const { author, entity, entity_id, status, files, initial_media, wrapper_width, dispatch } = this.props
     const uploader = this.uploader
 
     let counter = files.length
@@ -161,7 +161,7 @@ class Uploader extends Component {
       return <div style={{color:'white'}}>{ `image ${i}` }</div>
     })
     const { photoIndex, isOpen } = this.state
-    
+
     return (
       <Dropzone
         uploader={ uploader }
@@ -215,6 +215,7 @@ class Uploader extends Component {
         <MediaList
           files={ files }
           uploader={ uploader }
+          wrapper_width={ wrapper_width }
         />
 
         { uploaderText }
@@ -229,11 +230,13 @@ Uploader.propTypes = {
   entity: PropTypes.number.isRequired,
   entity_id: PropTypes.number.isRequired,
   initial_media: PropTypes.array.isRequired,
-  files: PropTypes.array.isRequired
+  files: PropTypes.array.isRequired,
+  wrapper_width: PropTypes.number
 }
 
 Uploader.defaultProps = {
-  'cancelButton-children': <IoCloseCircled />
+  'cancelButton-children': <IoCloseCircled />,
+  wrapper_width: 500
 }
 
 const isFileGone = (statusToCheck, statusEnum) => {

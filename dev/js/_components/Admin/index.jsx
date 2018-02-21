@@ -27,9 +27,6 @@ class Admin extends Component {
   constructor(props) {
     super(props)
  
-    this.state = {
-      isFull: false
-    }
     this.onFullScreenChange = this.onFullScreenChange.bind(this)
   }
 

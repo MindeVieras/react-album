@@ -46,6 +46,7 @@ class AlbumInfo extends Component {
                 entity_id={selected_album.album.id}
                 status={mediaConstants.STATUS_ENABLED}
                 initial_media={ selected_album.album.media }
+                wrapper_width={ width }
               />
             }
 

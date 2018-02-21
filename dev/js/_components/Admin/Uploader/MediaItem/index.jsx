@@ -17,12 +17,18 @@ import StatusGenerateImageThumbsIcon from '../Icons/StatusGenerateImageThumbs'
 import StatusGenerateVideosIcon from '../Icons/StatusGenerateVideos'
 import StatusRekognitionLabelsIcon from '../Icons/StatusRekognitionLabels'
 
-const MediaItem = SortableElement(({id, media_id, status, fromServer, mime, metadata, filename, filesize, rekognition_labels, thumbs, videos, uploader }) => {
-  // console.log(id)
+const MediaItem = SortableElement(({id, media_id, status, fromServer, mime, metadata, filename, filesize, rekognition_labels, thumbs, videos, uploader, item_width, item_gap }) => {
+  // console.log(item_gap)
   let thumb
+
+  let itemStyle = {
+    width: `${item_width}px`,
+    marginRight: `${item_gap}px`
+  }
+
   if (fromServer) {
     thumb = <ThumbnailSrv
-      maxSize={ 240 }
+      maxSize={ item_width }
       mime={ mime }
       videos={ videos }
       thumbs={ thumbs }
@@ -31,15 +37,17 @@ const MediaItem = SortableElement(({id, media_id, status, fromServer, mime, meta
   else if (mime) {
     thumb = <Thumbnail
       id={ id }
-      uploader={ uploader }
-      maxSize={ 240 }
+      maxSize={ item_width }
       mime={ mime }
       videos={ videos }
     />
   }
 
   return (
-    <li className="uploader-file">
+    <li
+      className="uploader-file"
+      style={ itemStyle }
+    >
 
       <div
         style={{cursor: 'pointer'}}
