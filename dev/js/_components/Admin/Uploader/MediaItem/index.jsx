@@ -20,6 +20,7 @@ import StatusRekognitionLabelsIcon from '../Icons/StatusRekognitionLabels'
 const MediaItem = SortableElement(({id, media_id, status, fromServer, mime, metadata, filename, filesize, rekognition_labels, thumbs, videos, uploader, item_width, item_gap }) => {
   // console.log(item_gap)
   let thumb
+  let filenameWidth = item_width - 60
 
   let itemStyle = {
     width: `${item_width}px`,
@@ -32,6 +33,7 @@ const MediaItem = SortableElement(({id, media_id, status, fromServer, mime, meta
       mime={ mime }
       videos={ videos }
       thumbs={ thumbs }
+      uploader={ uploader }
     />
   } 
   else if (mime) {
@@ -40,6 +42,7 @@ const MediaItem = SortableElement(({id, media_id, status, fromServer, mime, meta
       maxSize={ item_width }
       mime={ mime }
       videos={ videos }
+      uploader={ uploader }
     />
   }
 
@@ -119,6 +122,7 @@ const MediaItem = SortableElement(({id, media_id, status, fromServer, mime, meta
         <div className="info">
           <Filename
             filename={ filename }
+            width={ filenameWidth }
           />
           <Filesize
             filesize={ filesize }
