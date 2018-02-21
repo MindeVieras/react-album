@@ -5,6 +5,7 @@ import { locationService } from '../_services'
 export const clientActions = {
   setBrowser,
   setScreen,
+  setFullScreen,
   setCurrentLocation
 }
 
@@ -24,6 +25,15 @@ function setScreen(screen) {
   }
 
   function set(screen) { return { type: clientConstants.SET_SCREEN, screen } }
+}
+
+function setFullScreen(full_screen) {
+
+  return dispatch => {
+    dispatch(set(full_screen))
+  }
+
+  function set(full_screen) { return { type: clientConstants.SET_FULLSCREEN, full_screen } }
 }
 
 function setCurrentLocation() {

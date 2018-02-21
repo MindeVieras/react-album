@@ -23,6 +23,7 @@
     "react-datetime": "^2.11.1",
     "react-dom": "^16.2.0",
     "react-dropzone": "^4.2.3",
+    "react-full-screen": "^0.2.2",
     "react-google-maps": "^9.4.5",
     "react-icons": "^2.2.7",
     "react-image-lightbox": "^4.5.0",

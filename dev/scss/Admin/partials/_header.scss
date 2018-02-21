@@ -20,9 +20,6 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    a {
-      color: inherit;
-    }
   }
 }
 
@@ -31,8 +28,6 @@
     display: inline-block;
     margin-left: 15px;
     font-size: 26px;
-    a {
-      color: $white;
-    }
+    cursor: pointer;
   }
 }

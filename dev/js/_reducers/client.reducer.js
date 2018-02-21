@@ -1,7 +1,9 @@
 
 import { clientConstants } from '../_constants'
 
-const initialState = {}
+const initialState = {
+  full_screen: false
+}
 
 export function client(state = initialState, action) {
   switch (action.type) {
@@ -14,6 +16,11 @@ export function client(state = initialState, action) {
     return {
       ...state,
       screen: action.screen
+    }
+  case clientConstants.SET_FULLSCREEN:
+    return {
+      ...state,
+      full_screen: action.full_screen
     }
   case clientConstants.SET_CURRENT_LOCATION:
     return {

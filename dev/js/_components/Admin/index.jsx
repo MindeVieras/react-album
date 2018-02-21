@@ -5,6 +5,7 @@ import { Switch, Route } from 'react-router-dom'
 import ReduxToastr from 'react-redux-toastr'
 import Popup from 'react-popup'
 import scriptLoader from 'react-async-script-loader'
+import Fullscreen from 'react-full-screen'
 
 import Header from './Partials/Header'
 import Footer from './Partials/Footer'
@@ -14,7 +15,7 @@ import TrashPage from './Trash'
 import Error404 from './Errors/404'
 
 import { googleKey } from '../../_helpers/config'
-import { utilsActions } from '../../_actions'
+import { utilsActions, clientActions } from '../../_actions'
 
 import 'react-datetime/css/react-datetime.css'
 import 'react-select/dist/react-select.css'
@@ -23,38 +24,61 @@ import '../../../scss/Admin/main.scss'
 
 class Admin extends Component {
 
+  constructor(props) {
+    super(props)
+ 
+    this.state = {
+      isFull: false
+    }
+    this.onFullScreenChange = this.onFullScreenChange.bind(this)
+  }
+
   componentDidMount() {
     const { dispatch } = this.props
     // Get Admin settings
     dispatch(utilsActions.getAdminSettings())
   }
 
+  onFullScreenChange(isFull) {
+    const { dispatch } = this.props
+    // Get Admin settings
+    dispatch(clientActions.setFullScreen(isFull))
+  }
+
   render() {
-    const { match, isScriptLoadSucceed, settings } = this.props
+    const { match, isScriptLoadSucceed, settings, full_screen } = this.props
     if (isScriptLoadSucceed && settings) {    
       return (
-        <div id="admin_wrapper">
-          
-          <Header />
-          
-          <div id="admin_content">
-            <Switch>
-              <Route exact path={ match.url } component={Albums} />
-              <Route exact path={`${match.url}/users`} component={UsersPage} />
-              {/*<PrivateRoute path="/user-create" component={UserCreatePage} />*/}
-              <Route exact path={`${match.url}/trash`} component={TrashPage} />
-              <Route component={Error404} />
-            </Switch>
-          </div>
+        <div>
+          <Fullscreen
+            enabled={ full_screen }
+            onChange={ this.onFullScreenChange }
+          >
+            <div id="admin_wrapper">
+              
+              <Header />
 
-          <Footer />
+              <div id="admin_content">
+                <Switch>
+                  <Route exact path={ match.url } component={Albums} />
+                  <Route exact path={`${match.url}/users`} component={UsersPage} />
+                  {/*<PrivateRoute path="/user-create" component={UserCreatePage} />*/}
+                  <Route exact path={`${match.url}/trash`} component={TrashPage} />
+                  <Route component={Error404} />
+                </Switch>
+              </div>
 
-          <ReduxToastr
-            timeOut={2000}
-          />
+              <Footer />
 
-          <Popup />
+              <ReduxToastr
+                timeOut={2000}
+              />
 
+              <Popup />
+
+            </div>
+
+          </Fullscreen>
         </div>
       )
     }
@@ -65,9 +89,10 @@ class Admin extends Component {
 }
 
 function mapStateToProps(state) {
-  const { settings } = state
+  const { settings, client } = state
   return {
-    settings: settings.admin
+    settings: settings.admin,
+    full_screen: client.full_screen
   }
 }
 

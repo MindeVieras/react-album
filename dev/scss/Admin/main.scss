@@ -32,6 +32,10 @@
 
 @import 'pages/trash';
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
 
 #admin_wrapper {
   background-image: url('https://s3-eu-west-1.amazonaws.com/app.mindelis.com/images/bg.jpg');
