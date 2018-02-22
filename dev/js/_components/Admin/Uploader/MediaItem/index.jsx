@@ -20,7 +20,7 @@ import StatusRekognitionLabelsIcon from '../Icons/StatusRekognitionLabels'
 const MediaItem = SortableElement(({id, media_id, status, fromServer, mime, metadata, filename, filesize, rekognition_labels, thumbs, videos, uploader, item_width, item_gap }) => {
   // console.log(item_gap)
   let thumb
-  let filenameWidth = item_width - 60
+  let filenameWidth = item_width - 65
 
   let itemStyle = {
     width: `${item_width}px`,

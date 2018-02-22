@@ -3,12 +3,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import PerfectScrollbar from 'react-perfect-scrollbar'
-
+import Marquee from 'react-text-marquee'
 import { RingLoader } from 'react-spinners'
 
 import Bar from './Bar'
 
-import { albumsActions, uploaderActions, utilsActions } from '../../../../_actions'
+import { headerActions, albumsActions, uploaderActions, utilsActions } from '../../../../_actions'
 
 class AlbumsList extends Component {
 
@@ -17,15 +17,17 @@ class AlbumsList extends Component {
     dispatch(albumsActions.getList(start_date, end_date))
   }
 
-  onAlbumSelect(id) {
+  onAlbumSelect(album) {
     const { dispatch } = this.props
+    const { id, name } = album
+    dispatch(headerActions.setTitle(name))
     dispatch(uploaderActions.clearFiles())
     dispatch(albumsActions.getOne(id))
     dispatch(utilsActions.saveAdminSetting('selected_album', id))
   }
 
   render() {
-    const { selected_album_id, albums } = this.props
+    const { selected_album_id, albums, width } = this.props
     const scrollbarOptions = {
       wheelSpeed: 1.25,
       // useBothWheelAxes: true
@@ -50,9 +52,16 @@ class AlbumsList extends Component {
                   <li
                     key={album.id}
                     className={`albums-item${ selected_album_id === album.id ? ' active' : ''}`}
-                    onClick={() => this.onAlbumSelect(album.id)}
+                    onClick={() => this.onAlbumSelect(album)}
+                    style={{width: `${width}px`}}
                   >
-                    <div className="name">{album.name}</div>
+                    <Marquee
+                      leading={ 500 }
+                      loop={ true }
+                      trailing={ 500 }
+                      text={ album.name }
+                      className="name"
+                    />
                   </li>
                 )}
               </ul>
@@ -69,7 +78,12 @@ class AlbumsList extends Component {
 
 AlbumsList.propTypes = {
   albums: PropTypes.object,
-  selected_album_id: PropTypes.number.isRequired
+  selected_album_id: PropTypes.number.isRequired,
+  width: PropTypes.number
+}
+
+AlbumsList.defaultProps = {
+  width: 200
 }
 
 function mapStateToProps(state) {

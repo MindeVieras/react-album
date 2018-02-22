@@ -19,7 +19,7 @@ class Albums extends React.Component {
   }
 
   componentDidMount() {
-    const { selected_album_id, dispatch } = this.props
+    const { selected_album_id, selected_album, dispatch } = this.props
     dispatch(headerActions.setTitle('Album'))
     dispatch(footerActions.buttonsClear())
     dispatch(footerActions.buttonSet('', 'newAlbum', 'success'))
@@ -65,7 +65,7 @@ class Albums extends React.Component {
             onResize={((e, direction, ref, delta, position) => this.onSidebarResize(e, direction, ref, delta, position))}
             onResizeStop={((e, direction, ref, delta, position) => this.onSidebarResizeEnd(e, direction, ref, delta, position))}
           >
-            <AlbumsList />
+            <AlbumsList width={ sidebar_width } />
           </Rnd>
         </div>
         <div className="info-wrapper">
