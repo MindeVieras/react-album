@@ -5,25 +5,9 @@
   height: 100%;
   .albums-sidebar {
     height: 100%;
-    // overflow: auto;
     border-right: 1px solid $grey;
-    .admin-albums-list-scrollbar {
-      position: relative;
+    .album-scrollbar {
       height: calc(100% - 15px);
-      .ps__scrollbar-y-rail {
-        left: 0;
-        .ps__scrollbar-y {
-          width: 7px;
-          margin-right: 4px;
-          @include border-radius(2px);
-        }
-        &:hover {
-          background-color: transparent;
-          .ps__scrollbar-y {
-            width: 7px;
-          }
-        }
-      }
     }
     .filter-bar {
       padding: 0 15px;

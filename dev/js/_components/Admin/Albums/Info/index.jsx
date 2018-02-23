@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import PerfectScrollbar from 'react-perfect-scrollbar'
 
 import Spinner from '../../Partials/Spinner'
 
@@ -21,6 +22,11 @@ class AlbumInfo extends Component {
 
   render() {
     const { width, selected_album } = this.props
+
+    const scrollbarOptions = {
+      wheelSpeed: 1.25,
+      // useBothWheelAxes: true
+    }
     return (
       <div className="album-info" style={{ width: `${width}px` }}>
         {selected_album.loading &&
@@ -30,33 +36,38 @@ class AlbumInfo extends Component {
           <div>{selected_album.err}</div>
         }
         {selected_album.album &&
-          <div className="selected-album">
-            {selected_album.album.id && selected_album.album.name &&
-              <Bar
-                album_id={ selected_album.album.id }
-                start_date={ selected_album.album.start_date }
-                end_date={ selected_album.album.end_date }
-                name={ selected_album.album.name }
-              />
-            }
-            
-            {selected_album.album.id &&
-              <Uploader
-                entity={contentConstants.TYPE_ALBUM}
-                entity_id={selected_album.album.id}
-                status={mediaConstants.STATUS_ENABLED}
-                initial_media={ selected_album.album.media }
-                wrapper_width={ width }
-              />
-            }
+          <PerfectScrollbar
+            option={ scrollbarOptions }
+            className="album-scrollbar default-scrollbar"
+          >
+            <div className="selected-album">
+              {selected_album.album.id && selected_album.album.name &&
+                <Bar
+                  album_id={ selected_album.album.id }
+                  start_date={ selected_album.album.start_date }
+                  end_date={ selected_album.album.end_date }
+                  name={ selected_album.album.name }
+                />
+              }
+              
+              {selected_album.album.id &&
+                <Uploader
+                  entity={contentConstants.TYPE_ALBUM}
+                  entity_id={selected_album.album.id}
+                  status={mediaConstants.STATUS_ENABLED}
+                  initial_media={ selected_album.album.media }
+                  wrapper_width={ width }
+                />
+              }
 
-            {selected_album.album.id &&
-              <Foot
-                album_id={ selected_album.album.id }
-              />
-            }
+              {selected_album.album.id &&
+                <Foot
+                  album_id={ selected_album.album.id }
+                />
+              }
 
-          </div>
+            </div>
+          </PerfectScrollbar>
         }
       </div>
     )

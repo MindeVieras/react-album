@@ -45,7 +45,7 @@ class AlbumsList extends Component {
           {albums.items &&
             <PerfectScrollbar
               option={ scrollbarOptions }
-              className="admin-albums-list-scrollbar"
+              className="album-scrollbar left-scrollbar default-scrollbar"
             >
               <ul>
                 {albums.items.map((album) =>
