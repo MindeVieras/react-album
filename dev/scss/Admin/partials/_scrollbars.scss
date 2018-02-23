@@ -4,22 +4,27 @@
   height: 100%;
   &.default-scrollbar {
     .ps__scrollbar-y-rail {
+      background-color: transparent!important;
       .ps__scrollbar-y {
-        width: 7px;
-        margin-right: 4px;
         @include border-radius(2px);
       }
       &:hover {
-        background-color: transparent;
-        .ps__scrollbar-y {
-          width: 7px;
-        }
+        background-color: transparent!important;
       }
     }
   }
   &.left-scrollbar {
     .ps__scrollbar-y-rail {
       left: 0;
+      .ps__scrollbar-y {
+        width: 7px;
+        margin-right: 4px;
+      }
+      &:hover {
+        .ps__scrollbar-y {
+          width: 7px;
+        }
+      }
     }
   }
 }

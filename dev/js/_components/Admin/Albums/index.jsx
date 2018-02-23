@@ -68,11 +68,11 @@ class Albums extends React.Component {
             <AlbumsList width={ sidebar_width } />
           </Rnd>
         </div>
-        <div className="info-wrapper">
-          {selected_album &&
-            <AlbumInfo selected_album={ selected_album } width={ info_width } />
-          }
-        </div>
+        
+        {selected_album &&
+          <AlbumInfo selected_album={ selected_album } width={ info_width } />
+        }
+
       </div>
     )
   }
