@@ -10,14 +10,21 @@ import Bar from './Bar'
 import Foot from './Foot'
 
 import { Uploader } from '../../Uploader'
-import { uploaderActions } from '../../../../_actions'
+import { headerActions, uploaderActions } from '../../../../_actions'
 import { contentConstants, mediaConstants } from '../../../../_constants'
 
 class AlbumInfo extends Component {
 
   componentDidMount() {
-    const { dispatch } = this.props
+    const { selected_album, dispatch } = this.props
     dispatch(uploaderActions.clearFiles())
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { selected_album, dispatch } = nextProps
+    if (selected_album.album) {
+      dispatch(headerActions.setTitle(selected_album.album.name))
+    }
   }
 
   render() {
@@ -41,12 +48,11 @@ class AlbumInfo extends Component {
             className="album-scrollbar default-scrollbar"
           >
             <div className="selected-album">
-              {selected_album.album.id && selected_album.album.name &&
+              {selected_album.album.id &&
                 <Bar
                   album_id={ selected_album.album.id }
                   start_date={ selected_album.album.start_date }
                   end_date={ selected_album.album.end_date }
-                  name={ selected_album.album.name }
                 />
               }
               

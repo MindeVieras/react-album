@@ -2,7 +2,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import Name from './Name'
 import Locations from './Locations'
 import Dates from './Dates'
 import TimeAgo from './TimeAgo'
@@ -11,7 +10,6 @@ const Bar = ({ album_id, name, start_date, end_date }) => {
 
   return (
     <div className="album-bar">
-      <Name name={ name } album_id={ album_id } />
       <div className="left">
         <Locations album_id={ album_id } />
         <Dates
@@ -28,8 +26,7 @@ const Bar = ({ album_id, name, start_date, end_date }) => {
 Bar.propTypes = {
   album_id: PropTypes.number.isRequired,
   start_date: PropTypes.string.isRequired,
-  end_date: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired
+  end_date: PropTypes.string.isRequired
 }
 
 export default Bar

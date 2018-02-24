@@ -9,7 +9,6 @@
   padding: 10px 15px;
   z-index: 100;
   .app-name {
-    display: inline-block;
     h1 {
       color: $white;
       font-size: 28px;
@@ -19,6 +18,22 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+  }
+  .name-wrapper {
+    display: inline-block;
+    padding-right: 20px;
+    .name {
+      float: left;
+      margin-right: 10px;
+    }
+    .btn {
+      display: none;
+    }
+    &:hover {
+      .btn {
+        display: inline-block;
+      }
     }
   }
 }

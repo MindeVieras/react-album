@@ -10,6 +10,7 @@ export const albumsActions = {
   getList,
   getListDates,
   getOne,
+  clearSelected,
   getLocations,
   removeLocation,
   setLocation,
@@ -82,6 +83,14 @@ function getOne(id) {
   function request() { return { type: albumsConstants.GETONE_REQUEST } }
   function success(album) { return { type: albumsConstants.GETONE_SUCCESS, album } }
   function failure(err) { return { type: albumsConstants.GETONE_FAILURE, err } }
+}
+
+function clearSelected() {
+  return dispatch => {
+    dispatch(clear())
+  }
+
+  function clear() { return { type: albumsConstants.CLEAR_SELECTED } }
 }
 
 function getLocations(id) {

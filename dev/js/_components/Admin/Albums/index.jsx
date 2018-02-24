@@ -6,7 +6,7 @@ import Rnd from 'react-rnd'
 import AlbumsList from './List'
 import AlbumInfo from './Info'
 
-import { headerActions, footerActions, utilsActions, albumsActions } from '../../../_actions'
+import { footerActions, utilsActions, albumsActions } from '../../../_actions'
 
 class Albums extends React.Component {
 
@@ -19,11 +19,15 @@ class Albums extends React.Component {
   }
 
   componentDidMount() {
-    const { selected_album_id, selected_album, dispatch } = this.props
-    dispatch(headerActions.setTitle('Album'))
+    const { selected_album_id, dispatch } = this.props
     dispatch(footerActions.buttonsClear())
     dispatch(footerActions.buttonSet('', 'newAlbum', 'success'))
     dispatch(albumsActions.getOne(selected_album_id))
+  }
+
+  componentWillUnmount() {
+    const { dispatch } = this.props
+    dispatch(albumsActions.clearSelected())
   }
 
   onSidebarResize(e, direction, ref, delta, position) {

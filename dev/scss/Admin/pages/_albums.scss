@@ -36,25 +36,6 @@
     height: 40px;
     line-height: 40px;
     padding: 0 10px;
-    .name-wrapper {
-      display: inline-block;
-      padding-right: 20px;
-      .name {
-        display: inline-block;
-        float: left;
-        font-size: 26px;
-        font-weight: 500;
-        margin-right: 10px;
-      }
-      .btn {
-        display: none;
-      }
-      &:hover {
-        .btn {
-          display: inline-block;
-        }
-      }
-    }
     .left {
       float: right;
       .locations-wrapper {
@@ -113,7 +94,7 @@
     li {
       overflow: hidden;
       padding: 0 10px;
-      padding-left: 15px;
+      padding-left: 12px;
       line-height: 27px;
       cursor: pointer;
       &.active {

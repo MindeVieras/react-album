@@ -126,6 +126,11 @@ export function adminAlbums(state = initialState, action) {
         err: action.err
       }
     }
+  case albumsConstants.CLEAR_SELECTED:
+    return {
+      ...state,
+      selected_album: initialState.selected_album
+    }
   case albumsConstants.GETLOCATIONS_REQUEST:
     return {
       ...state,

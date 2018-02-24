@@ -7,7 +7,7 @@ import { IoEdit } from 'react-icons/lib/io'
 
 import EditForm from './EditForm'
 
-class Name extends Component {
+class AlbumName extends Component {
 
   handleClick() {
     const content = <EditForm
@@ -37,9 +37,9 @@ class Name extends Component {
   }
 }
 
-Name.propTypes = {
+AlbumName.propTypes = {
   name: PropTypes.string.isRequired,
   album_id: PropTypes.number.isRequired
 }
 
-export default Name
+export default AlbumName
