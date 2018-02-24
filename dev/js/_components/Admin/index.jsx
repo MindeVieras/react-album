@@ -71,7 +71,9 @@ class Admin extends Component {
                 timeOut={2000}
               />
 
-              <Popup />
+              <Popup
+                wildClasses={ true }
+              />
 
             </div>
 

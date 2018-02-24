@@ -1,15 +1,42 @@
 
 // Album locations
 #album_map{
-  display: flex;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  .locations-bar {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    padding: 5px;
+    height: 45px;
+    z-index: 1;
+    color: $white;
+    .search-input-group {
+      .search-input {
+        background-color: $white;
+        padding: 5px 10px;
+        margin-top: 5px;
+        border-top-left-radius: 5px;
+        width: 200px;
+      }
+    }
+  }
   .map-container {
+    position: absolute;
+    top: 45px;
+    left: 0;
+    bottom: 0;
     width: calc(100% - 60px);
   }
   .map-items-list {
     background-color: $white;
     display: inline-block;
-    float: right;
     width: 60px;
+    position: absolute;
+    right: 0;
+    top: 45px;
+    bottom: 0;
     .item {
       display: inline-block;
       width: 54px;

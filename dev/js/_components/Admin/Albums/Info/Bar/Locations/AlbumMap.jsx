@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import Map from './Map'
+import LocationsBar from './LocationsBar'
 import ItemsList from './ItemsList'
 
 import { albumsActions } from '../../../../../../_actions'
@@ -19,13 +20,14 @@ class AlbumMap extends Component {
   render() {
     const { album_id, current_location, album_location, media_locations } = this.props
     // console.log(album_location)
-    const mapHeight = { height: `600px`}
+    // const mapHeight = { height: `100%`}
     return (
-      <div style={ mapHeight }>
+      <div>
         {current_location &&
           <div id="album_map">
+            <LocationsBar />
             <Map
-              containerElement={<div className="map-container" style={ mapHeight } />}
+              containerElement={<div className="map-container" />}
               mapElement={<div style={{ height: `100%` }} />}
               album_location={ album_location }
               current_location={ current_location }

@@ -15,7 +15,7 @@ class Dates extends Component {
     Popup.create({
       title: 'Edit album date',
       content,
-      className: 'datetime-picker'
+      className: 'datetime-picker-popup'
     })
   }
   

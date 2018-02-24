@@ -117,7 +117,7 @@
       line-height: 27px;
       cursor: pointer;
       &.active {
-        background-color: $red;
+        background-color: darken($red, 30);
       }
     }
   }
