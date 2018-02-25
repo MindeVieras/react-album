@@ -19,8 +19,7 @@ class AlbumsList extends Component {
 
   onAlbumSelect(album) {
     const { dispatch } = this.props
-    const { id, name } = album
-    dispatch(headerActions.setTitle(name))
+    const { id } = album
     dispatch(uploaderActions.clearFiles())
     dispatch(albumsActions.getOne(id))
     dispatch(utilsActions.saveAdminSetting('selected_album', id))

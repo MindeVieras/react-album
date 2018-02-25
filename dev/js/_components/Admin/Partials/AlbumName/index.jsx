@@ -24,9 +24,10 @@ class AlbumName extends Component {
   }
 
   render() {
-    const { name } = this.props
+    const { name, album_id } = this.props
+    let editClass = album_id ? ' edit' : ''
     return (
-      <div className="name-wrapper">
+      <div className={ `name-wrapper${editClass}` }>
         <Marquee
           leading={ 500 }
           loop={ true }
@@ -34,9 +35,11 @@ class AlbumName extends Component {
           text={ name }
           className="name"
         />
-        <div className="btn btn-xs btn-info">
-          <IoEdit onClick={ () => this.handleClick() } />
-        </div>
+        {album_id &&
+          <div className="btn btn-xs btn-info">
+            <IoEdit onClick={ () => this.handleClick() } />
+          </div>
+        }
       </div>
     )
   }
@@ -44,7 +47,11 @@ class AlbumName extends Component {
 
 AlbumName.propTypes = {
   name: PropTypes.string.isRequired,
-  album_id: PropTypes.number.isRequired
+  album_id: PropTypes.number
+}
+
+AlbumName.defaultProps = {
+  album_id: null
 }
 
 export default AlbumName

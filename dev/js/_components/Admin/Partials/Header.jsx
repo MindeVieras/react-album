@@ -34,17 +34,21 @@ class Header extends Component {
     let titleStyle = {
       width: client_width - 240
     }
-    
+    let album_id = null
     let headerTitle = title
     if (selected_album && selected_album.id > 0) {
-
-      headerTitle = <AlbumName name={ selected_album.name } album_id={ selected_album.id } />
+      album_id = selected_album.id
+      headerTitle = selected_album.name
     }
     return (
       <div className="header" id="app_header">
 
         <div className="app-name pull-left">
-          <h1 style={ titleStyle }><Link to="/admin">{ headerTitle }</Link></h1>
+          <h1 style={ titleStyle }>
+            <Link to="/admin">
+              <AlbumName name={ headerTitle } album_id={ album_id } />
+            </Link>
+          </h1>
         </div>
 
         <div className="pull-right">

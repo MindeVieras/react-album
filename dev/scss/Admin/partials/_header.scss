@@ -17,16 +17,17 @@
       font-weight: 500;
       line-height: 50px;
       margin: 0;
-      margin-right: 5px;
       .name-wrapper {
-        .name {
-          max-width: calc(100% - 30px);
-          float: left;
-        }
         .btn {
           display: none;
           margin-left: 5px;
           margin-top: -5px;
+        }
+        &.edit {
+          .name {
+            max-width: calc(100% - 30px);
+            float: left;
+          }
         }
         &:hover {
           .btn {
