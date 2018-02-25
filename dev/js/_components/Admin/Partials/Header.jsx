@@ -30,17 +30,21 @@ class Header extends Component {
   }
 
   render() {
-    const { title, full_screen, selected_album } = this.props
-    let headerTitle = <h1>{ title }</h1>
+    const { title, full_screen, client_width, selected_album } = this.props
+    let titleStyle = {
+      width: client_width - 240
+    }
+    
+    let headerTitle = title
     if (selected_album && selected_album.id > 0) {
 
-      headerTitle = <h1><AlbumName name={ selected_album.name } album_id={ selected_album.id } /></h1>
+      headerTitle = <AlbumName name={ selected_album.name } album_id={ selected_album.id } />
     }
     return (
       <div className="header" id="app_header">
 
         <div className="app-name pull-left">
-          <Link to="/admin">{ headerTitle }</Link>
+          <h1 style={ titleStyle }><Link to="/admin">{ headerTitle }</Link></h1>
         </div>
 
         <div className="pull-right">
@@ -65,6 +69,7 @@ class Header extends Component {
 Header.propTypes = {
   title: PropTypes.string.isRequired,
   full_screen: PropTypes.bool.isRequired,
+  client_width: PropTypes.number.isRequired,
   selected_album: PropTypes.object
 }
 
@@ -77,6 +82,7 @@ function mapStateToProps(state) {
   return {
     title: admin_header.title,
     full_screen: client.full_screen,
+    client_width: client.screen.width,
     selected_album: admin_albums.selected_album.album
   }
 }

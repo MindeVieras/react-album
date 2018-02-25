@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Popup from 'react-popup'
+import Marquee from 'react-text-marquee'
 
 import { IoEdit } from 'react-icons/lib/io'
 
@@ -26,9 +27,13 @@ class AlbumName extends Component {
     const { name } = this.props
     return (
       <div className="name-wrapper">
-        <div className="name">
-          { name }
-        </div>
+        <Marquee
+          leading={ 500 }
+          loop={ true }
+          trailing={ 500 }
+          text={ name }
+          className="name"
+        />
         <div className="btn btn-xs btn-info">
           <IoEdit onClick={ () => this.handleClick() } />
         </div>

@@ -10,19 +10,23 @@
   z-index: 100;
   .app-name {
     h1 {
+      display: inline-block;
+      position: relative;
       color: $white;
-      font-size: 28px;
+      font-size: 27px;
       font-weight: 500;
       line-height: 50px;
       margin: 0;
-      padding-right: 20px;
+      margin-right: 5px;
       .name-wrapper {
         .name {
+          max-width: calc(100% - 30px);
           float: left;
-          margin-right: 10px;
         }
         .btn {
           display: none;
+          margin-left: 5px;
+          margin-top: -5px;
         }
         &:hover {
           .btn {
