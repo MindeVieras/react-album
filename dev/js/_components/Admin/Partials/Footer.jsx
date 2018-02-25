@@ -6,6 +6,7 @@ import { submit } from 'redux-form'
 
 import { history } from '../../../_helpers'
 import NewAlbum from '../Buttons/NewAlbum'
+import DeleteAlbum from '../Buttons/DeleteAlbum'
 
 import { IoTrashA } from 'react-icons/lib/io'
 
@@ -35,6 +36,16 @@ class Footer extends Component {
           return (
             <NewAlbum
               key={ i }
+              type={ link.type }
+            />
+          )
+
+        if (link.action === 'deleteAlbum')
+          return (
+            <DeleteAlbum
+              key={ i }
+              id={ link.data.album_id }
+              name={ link.data.name }
               type={ link.type }
             />
           )

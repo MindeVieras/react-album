@@ -5,12 +5,10 @@ import { connect } from 'react-redux'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 
 import Spinner from '../../Partials/Spinner'
-
 import Bar from './Bar'
-import Foot from './Foot'
-
 import { Uploader } from '../../Uploader'
-import { headerActions, uploaderActions } from '../../../../_actions'
+
+import { headerActions, footerActions, uploaderActions } from '../../../../_actions'
 import { contentConstants, mediaConstants } from '../../../../_constants'
 
 class AlbumInfo extends Component {
@@ -23,7 +21,10 @@ class AlbumInfo extends Component {
   componentWillReceiveProps(nextProps) {
     const { selected_album, dispatch } = nextProps
     if (selected_album.album) {
-      dispatch(headerActions.setTitle(selected_album.album.name))
+      const { id, name } = selected_album.album
+      dispatch(headerActions.setTitle(name))
+      dispatch(footerActions.buttonRemove('deleteAlbum'))
+      dispatch(footerActions.buttonSet('', 'deleteAlbum', 'danger', {album_id: id, name}))
     }
   }
 
@@ -63,12 +64,6 @@ class AlbumInfo extends Component {
                   status={mediaConstants.STATUS_ENABLED}
                   initial_media={ selected_album.album.media }
                   wrapper_width={ width }
-                />
-              }
-
-              {selected_album.album.id &&
-                <Foot
-                  album_id={ selected_album.album.id }
                 />
               }
 

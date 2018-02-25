@@ -2,24 +2,52 @@
 import  React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import Popup from 'react-popup'
 
 import { IoTrashA } from 'react-icons/lib/io'
 
-import { albumsActions } from '../../../_actions'
+import { albumsActions, footerActions } from '../../../_actions'
 
 class DeleteAlbum extends Component {
 
   handleClick() {
-    const { id, dispatch } = this.props
-    dispatch(albumsActions.delete(id))
-    dispatch(albumsActions.getOne(53))
+    const { id, name, dispatch } = this.props
+    // dispatch(albumsActions.delete(id))
+    // dispatch(albumsActions.getOne(null))
+    // const content = <EditForm
+    //   name={ this.props.name }
+    //   id={ this.props.album_id }
+    // />
+
+    Popup.create({
+      title: 'Delete album',
+      content: 'Really delete '+name+'?',
+      className: 'confirm',
+      buttons: {
+        left: [{
+          text: 'Cancel',
+          className: 'btn btn-default',
+          action: () => { Popup.close() }
+        }],
+        right: [{
+          text: 'Delete',
+          className: 'btn btn-danger',
+          action: () => {
+            dispatch(albumsActions.delete(id))
+            dispatch(footerActions.buttonRemove('deleteAlbum'))
+            dispatch(albumsActions.getOne(null))
+            Popup.close()
+          }
+        }]
+      }
+    })
   }
 
   render() {
     return (
       <div
         onClick={() => this.handleClick()}
-        className={ `btn btn-xs btn-${this.props.type}` }
+        className={ `btn btn-sm btn-${this.props.type}` }
       >
         <IoTrashA />
       </div>
@@ -29,6 +57,7 @@ class DeleteAlbum extends Component {
 
 DeleteAlbum.propTypes = {
   id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
   type: PropTypes.string
 }
 

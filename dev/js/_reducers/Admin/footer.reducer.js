@@ -5,7 +5,11 @@ export function footer(state = [], action) {
   switch (action.type) {
   case footerConstants.BUTTON_SET:
     return {
-      buttons: [...state.buttons, action.button]
+      buttons: [action.button, ...state.buttons]
+    }
+  case footerConstants.BUTTON_REMOVE:
+    return {
+      buttons: state.buttons.filter(btn => btn.action !== action.actionType)
     }
   case footerConstants.BUTTONS_CLEAR:
     return { buttons:[] }

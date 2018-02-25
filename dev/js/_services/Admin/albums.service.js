@@ -117,7 +117,7 @@ function _delete(id) {
     headers: authHeader()
   }
 
-  return fetch(baseServerUrl+'/api/albums/delete/'+id, requestOptions).then(handleResponse)
+  return fetch(baseServerUrl+'/api/albums/move-to-trash/'+id, requestOptions).then(handleResponse)
 }
 
 function handleResponse(response) {
