@@ -9,7 +9,7 @@ import Bar from './Bar'
 import { Uploader } from '../../Uploader'
 
 import { headerActions, footerActions, uploaderActions } from '../../../../_actions'
-import { contentConstants, mediaConstants } from '../../../../_constants'
+import { albumsConstants, contentConstants, mediaConstants } from '../../../../_constants'
 
 class AlbumInfo extends Component {
 
@@ -21,10 +21,12 @@ class AlbumInfo extends Component {
   componentWillReceiveProps(nextProps) {
     const { selected_album, dispatch } = nextProps
     if (selected_album.album) {
-      const { id, name } = selected_album.album
+      const { id, name, status } = selected_album.album
       dispatch(headerActions.setTitle(name))
       dispatch(footerActions.buttonRemove('deleteAlbum'))
-      dispatch(footerActions.buttonSet('', 'deleteAlbum', 'danger', {album_id: id, name}))
+      if (albumsConstants.ENABLED === status) {
+        dispatch(footerActions.buttonSet('', 'deleteAlbum', 'danger', {album_id: id, name}))
+      }
     }
   }
 

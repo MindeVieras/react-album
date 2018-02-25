@@ -201,6 +201,13 @@ export function adminAlbums(state = initialState, action) {
       ...state,
       list: {
         items: state.list.items.filter(album => album.id !== action.id)
+      },
+      selected_album: {
+        ...state.selected_album,
+        album: {
+          ...state.selected_album.album,
+          status: albumsConstants.TRASHED
+        }
       }
     }
   case albumsConstants.DELETE_FAILURE:

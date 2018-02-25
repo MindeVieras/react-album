@@ -12,12 +12,6 @@ class DeleteAlbum extends Component {
 
   handleClick() {
     const { id, name, dispatch } = this.props
-    // dispatch(albumsActions.delete(id))
-    // dispatch(albumsActions.getOne(null))
-    // const content = <EditForm
-    //   name={ this.props.name }
-    //   id={ this.props.album_id }
-    // />
 
     Popup.create({
       title: 'Delete album',
@@ -35,7 +29,7 @@ class DeleteAlbum extends Component {
           action: () => {
             dispatch(albumsActions.delete(id))
             dispatch(footerActions.buttonRemove('deleteAlbum'))
-            dispatch(albumsActions.getOne(null))
+            // dispatch(albumsActions.getOne(null))
             Popup.close()
           }
         }]
