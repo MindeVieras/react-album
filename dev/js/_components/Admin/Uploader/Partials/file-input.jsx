@@ -21,15 +21,11 @@ class FileInput extends Component {
   }
 
   render() {
-    const { uploader, ...inputProps } = this.props
+    const { ...inputProps } = this.props
 
     return (
-      <div>
-        <div className="uploader-file-input" onClick={ this.handleClick.bind(this)}>
-          <div className="icon">
-            <IoUpload />
-          </div>
-        </div>
+      <div className="btn btn-sm btn-info" onClick={ this.handleClick.bind(this)}>
+        <IoUpload />
         <input
           { ...inputProps }
           ref="fileUploader"
@@ -50,7 +46,6 @@ class FileInput extends Component {
 }
 
 FileInput.propTypes = {
-  author: PropTypes.number.isRequired,
   entity: PropTypes.number.isRequired,
   entity_id: PropTypes.number.isRequired,
   status: PropTypes.number.isRequired,
@@ -58,8 +53,8 @@ FileInput.propTypes = {
 }
 
 const onFilesSelected = function(onChangeEvent) {
-  const { author, entity, entity_id, status, uploader } = this.props
-  const params = { author, entity, entity_id, status }
+  const { entity, entity_id, status, uploader } = this.props
+  const params = { entity, entity_id, status }
   uploader.methods.addFiles(onChangeEvent.target, params)
   this._resetInput()
 }

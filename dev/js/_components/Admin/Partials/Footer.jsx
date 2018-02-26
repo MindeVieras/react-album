@@ -7,6 +7,7 @@ import { submit } from 'redux-form'
 import { history } from '../../../_helpers'
 import NewAlbum from '../Buttons/NewAlbum'
 import DeleteAlbum from '../Buttons/DeleteAlbum'
+import UploadMedia from '../Buttons/UploadMedia'
 
 import { IoTrashA } from 'react-icons/lib/io'
 
@@ -47,6 +48,15 @@ class Footer extends Component {
               id={ link.data.album_id }
               name={ link.data.name }
               type={ link.type }
+            />
+          )
+
+        if (link.action === 'uploadMedia')
+          return (
+            <UploadMedia
+              key={ i }
+              type={ link.type }
+              { ...link.data }
             />
           )
 

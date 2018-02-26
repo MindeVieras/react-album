@@ -9,13 +9,12 @@ import Lightbox from 'lightbox-react'
 import { IoCloseCircled, IoUpload } from 'react-icons/lib/io'
 
 import Dropzone from './Partials/dropzone'
-import FileInput from './Partials/file-input'
 import TotalProgressBar from './Partials/total-progress-bar'
 
 import MediaList from './MediaList'
 
 import { authHeader, baseServerUrl } from '../../../_helpers'
-import { uploaderActions } from '../../../_actions'
+import { footerActions, uploaderActions } from '../../../_actions'
 import { mediaService } from '../../../_services'
 
 // const images = [
@@ -108,28 +107,41 @@ class Uploader extends Component {
   }
 
   componentDidMount() {
+    const uploader = this.uploader
+    const { initial_media, entity_id, entity, status, dispatch } = this.props
+
+    // Set footer upload input button
+    dispatch(footerActions.buttonRemove('uploadMedia'))
+    let buttonProps = {
+      entity,
+      entity_id,
+      status,
+      uploader
+    }
+    dispatch(footerActions.buttonSet('', 'uploadMedia', 'info', buttonProps))
+    // console.log(this.uploader)
     // Add initial media
-    this.props.initial_media.map((media, i) => {
+    initial_media.map((media, i) => {
       const { media_id, mime, name, size, thumbs, videos, metadata, rekognition_labels } = media
       let id = 100000 + i
-      this.props.dispatch(uploaderActions.submitFile(id, 'upload successful', true))
-      this.props.dispatch(uploaderActions.setMediaId(id, media_id))
-      this.props.dispatch(uploaderActions.setMime(id, mime))
-      this.props.dispatch(uploaderActions.setFilename(id, name))
-      this.props.dispatch(uploaderActions.setFilesize(id, size))
-      this.props.dispatch(uploaderActions.getMetadata(id, metadata))
-      this.props.dispatch(uploaderActions.getRekognitionLabels(id, rekognition_labels))
+      dispatch(uploaderActions.submitFile(id, 'upload successful', true))
+      dispatch(uploaderActions.setMediaId(id, media_id))
+      dispatch(uploaderActions.setMime(id, mime))
+      dispatch(uploaderActions.setFilename(id, name))
+      dispatch(uploaderActions.setFilesize(id, size))
+      dispatch(uploaderActions.getMetadata(id, metadata))
+      dispatch(uploaderActions.getRekognitionLabels(id, rekognition_labels))
 
       if (mime.includes('image')) {
-        this.props.dispatch(uploaderActions.getImageThumbs(id, thumbs))
+        dispatch(uploaderActions.getImageThumbs(id, thumbs))
       }
       if (mime.includes('video')) {
-        this.props.dispatch(uploaderActions.getVideos(id, videos))
+        dispatch(uploaderActions.getVideos(id, videos))
       }
     })
 
-    this.uploader.on('statusChange', this._onStatusChange)
-    this.uploader.on('complete', this._onComplete)
+    uploader.on('statusChange', this._onStatusChange)
+    uploader.on('complete', this._onComplete)
   }
 
   componentWillUnmount() {
@@ -138,7 +150,7 @@ class Uploader extends Component {
   }
 
   render() {
-    const { author, entity, entity_id, status, files, initial_media, wrapper_width, dispatch } = this.props
+    const { entity, entity_id, status, files, initial_media, wrapper_width, dispatch } = this.props
     const uploader = this.uploader
 
     let counter = files.length
@@ -165,7 +177,6 @@ class Uploader extends Component {
     return (
       <Dropzone
         uploader={ uploader }
-        author={ author }
         entity={ entity }
         entity_id={ entity_id }
         status={ status }
@@ -198,15 +209,6 @@ class Uploader extends Component {
         <TotalProgressBar
           uploader={ uploader }
         />
-        
-        <FileInput
-          uploader={ uploader }
-          author={ author }
-          entity={ entity }
-          entity_id={ entity_id }
-          status={ status }
-          multiple={ true }
-        />
 
         <div className="counter">
           { counter } files
@@ -226,9 +228,9 @@ class Uploader extends Component {
 }
 
 Uploader.propTypes = {
-  author: PropTypes.number.isRequired,
   entity: PropTypes.number.isRequired,
   entity_id: PropTypes.number.isRequired,
+  status: PropTypes.number.isRequired,
   initial_media: PropTypes.array.isRequired,
   files: PropTypes.array.isRequired,
   wrapper_width: PropTypes.number
@@ -247,9 +249,8 @@ const isFileGone = (statusToCheck, statusEnum) => {
 }
 
 function mapStateToProps(state) {
-  const { auth, uploader } = state
+  const { uploader } = state
   return {
-    author: auth.user.id,
     files: uploader.files
   }
 }
