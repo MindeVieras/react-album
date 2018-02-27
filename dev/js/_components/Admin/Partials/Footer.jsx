@@ -8,6 +8,7 @@ import { history } from '../../../_helpers'
 import NewAlbum from '../Buttons/NewAlbum'
 import DeleteAlbum from '../Buttons/DeleteAlbum'
 import UploadMedia from '../Buttons/UploadMedia'
+import OpenLightbox from '../Buttons/OpenLightbox'
 
 import { IoTrashA } from 'react-icons/lib/io'
 
@@ -56,6 +57,15 @@ class Footer extends Component {
             <UploadMedia
               key={ i }
               type={ link.type }
+              { ...link.data }
+            />
+          )
+
+        if (link.action === 'openLightbox')
+          return (
+            <OpenLightbox
+              key={ i }
+              btn_type={ link.type }
               { ...link.data }
             />
           )

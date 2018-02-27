@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import FineUploaderTraditional from 'fine-uploader-wrappers'
 import ReactTooltip from 'react-tooltip'
 import { toastr } from 'react-redux-toastr'
-import Lightbox from 'lightbox-react'
 import { IoCloseCircled, IoUpload } from 'react-icons/lib/io'
 
 import Dropzone from './Partials/dropzone'
@@ -17,21 +16,10 @@ import { authHeader, baseServerUrl } from '../../../_helpers'
 import { footerActions, uploaderActions } from '../../../_actions'
 import { mediaService } from '../../../_services'
 
-// const images = [
-//   '//placekitten.com/1500/500',
-//   '//placekitten.com/4000/3000',
-//   '//placekitten.com/800/1200',
-//   '//placekitten.com/1500/1500'
-// ]
 class Uploader extends Component {
 
   constructor(props) {
     super(props)
-    
-    this.state = {
-      photoIndex: 0,
-      isOpen: false
-    }
 
     this.uploader = new FineUploaderTraditional({
       options: {
@@ -58,20 +46,20 @@ class Uploader extends Component {
     this._onStatusChange = (id, oldStatus, status) => {
       // Submitting files
       if (status === statusEnum.SUBMITTED) {
-        this.props.dispatch(uploaderActions.submitFile(id, status, false))
+        props.dispatch(uploaderActions.submitFile(id, status, false))
         // Set file data
         const { name, size, type } = uploader.methods.getFile(id)
-        this.props.dispatch(uploaderActions.setMime(id, type))
-        this.props.dispatch(uploaderActions.setFilename(id, name))
-        this.props.dispatch(uploaderActions.setFilesize(id, size))
+        props.dispatch(uploaderActions.setMime(id, type))
+        props.dispatch(uploaderActions.setFilename(id, name))
+        props.dispatch(uploaderActions.setFilesize(id, size))
       }
       // On server or Uploaded
       else if (status === statusEnum.UPLOAD_SUCCESSFUL) {
-        this.props.dispatch(uploaderActions.setStatus(id, status))
+        props.dispatch(uploaderActions.setStatus(id, status))
       }
       // Remove file
       else if (isFileGone(status, statusEnum)) {
-        this.props.dispatch(uploaderActions.removeFile(id))
+        props.dispatch(uploaderActions.removeFile(id))
       }
     }
 
@@ -167,12 +155,6 @@ class Uploader extends Component {
         Click or Drop files here
       </span>
     }
-    
-    const images = initial_media.map((m, i) => {
-      // return m.thumbs.thumb
-      return <div style={{color:'white'}}>{ `image ${i}` }</div>
-    })
-    const { photoIndex, isOpen } = this.state
 
     return (
       <Dropzone
@@ -182,30 +164,7 @@ class Uploader extends Component {
         status={ status }
         multiple={ true }
         dropActiveClassName="active"
-      >
-        <button
-          type="button"
-          className="btn btn-success pull-left"
-          onClick={() => this.setState({ isOpen: true })}
-        >
-          LB
-        </button>
-        
-        {isOpen &&
-          <Lightbox
-            mainSrc={images[photoIndex]}
-            nextSrc={images[(photoIndex + 1) % images.length]}
-            prevSrc={images[(photoIndex + images.length - 1) % images.length]}
-            onCloseRequest={() => this.setState({ isOpen: false })}
-            onMovePrevRequest={() => this.setState({
-              photoIndex: (photoIndex + images.length - 1) % images.length,
-            })}
-            onMoveNextRequest={() => this.setState({
-              photoIndex: (photoIndex + 1) % images.length,
-            })}
-          />
-        }
-        
+      >        
         <TotalProgressBar
           uploader={ uploader }
         />

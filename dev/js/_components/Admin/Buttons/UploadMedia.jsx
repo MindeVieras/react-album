@@ -9,18 +9,9 @@ import FileInput from '../Uploader/Partials/file-input'
 import { albumsActions, footerActions } from '../../../_actions'
 
 class UploadMedia extends Component {
-
-  handleClick() {
-    const { entity, entity_id, uploader, dispatch } = this.props
-    console.log(uploader)
-    console.log(entity_id)
-    console.log(entity)
-    // dispatch(albumsActions.delete(id))
-    // dispatch(footerActions.buttonRemove('uploadMedia'))
-  }
   
   render() {
-    const { entity, entity_id, status, uploader } = this.props
+    const { entity, entity_id, status, type, uploader } = this.props
     return (
       <FileInput
         uploader={ uploader }
@@ -28,6 +19,7 @@ class UploadMedia extends Component {
         entity_id={ entity_id }
         status={ status }
         multiple={ true }
+        btn_type={ type }
       />
     )
   }

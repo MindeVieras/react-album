@@ -24,7 +24,7 @@ class FileInput extends Component {
     const { ...inputProps } = this.props
 
     return (
-      <div className="btn btn-sm btn-info" onClick={ this.handleClick.bind(this)}>
+      <div className={ `btn btn-sm btn-${this.props.btn_type}` } onClick={ this.handleClick.bind(this)}>
         <IoUpload />
         <input
           { ...inputProps }
@@ -32,9 +32,9 @@ class FileInput extends Component {
           className="uploader-file-input"
           key={ this.state.key }
           onChange={ this._onFilesSelected }
-          style={{display: "none"}}
-          name='file'
-          type='file'
+          style={{display: 'none'}}
+          name="file"
+          type="file"
         />
       </div>
     )
@@ -49,7 +49,12 @@ FileInput.propTypes = {
   entity: PropTypes.number.isRequired,
   entity_id: PropTypes.number.isRequired,
   status: PropTypes.number.isRequired,
-  uploader: PropTypes.object.isRequired
+  uploader: PropTypes.object.isRequired,
+  btn_type: PropTypes.string
+}
+
+FileInput.defaultProps = {
+  btn_type: 'info'
 }
 
 const onFilesSelected = function(onChangeEvent) {

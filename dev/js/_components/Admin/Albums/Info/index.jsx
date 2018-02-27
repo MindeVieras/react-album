@@ -21,11 +21,15 @@ class AlbumInfo extends Component {
   componentWillReceiveProps(nextProps) {
     const { selected_album, dispatch } = nextProps
     if (selected_album.album) {
-      const { id, name, status } = selected_album.album
+      const { id, name, media, status } = selected_album.album
       dispatch(headerActions.setTitle(name))
       dispatch(footerActions.buttonRemove('deleteAlbum'))
+      dispatch(footerActions.buttonRemove('openLightbox'))
       if (albumsConstants.ENABLED === status) {
         dispatch(footerActions.buttonSet('', 'deleteAlbum', 'danger', {album_id: id, name}))
+        if (media.length > 0) {
+          dispatch(footerActions.buttonSet('', 'openLightbox', 'success', {album_id: id}))
+        }
       }
     }
   }
