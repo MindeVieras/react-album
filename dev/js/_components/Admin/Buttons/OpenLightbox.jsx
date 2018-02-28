@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import Lightbox from 'lightbox-react'
 import { IoPlay } from 'react-icons/lib/io'
 
-import LightboxItem from '../Partials/Lightbox/LightboxItem'
+import LightboxVideo from '../Partials/Lightbox/LightboxVideo'
 import { albumsActions, footerActions } from '../../../_actions'
 
 // const images = [
@@ -30,7 +30,7 @@ class OpenLightbox extends Component {
 
   handleClick() {
     const { album_id, dispatch } = this.props
-    console.log(album_id)
+    // console.log(album_id)
     this.setState({ isOpen: true })
   }
 
@@ -39,13 +39,18 @@ class OpenLightbox extends Component {
     const { album } = this.props
     // console.log(album.media)
     let images = []
-    if (album && album.media.length) {    
+    if (album && album.media.length) {
       images = album.media.map(m => {
         // let thumb = m.thumbs.thumb
-        return <LightboxItem media={ m } />
+        if (m.mime.includes('image')) {
+          return m.thumbs.fullhd
+        }
+        else {
+          return <LightboxVideo media={ m } />
+        }
       })
     }
-    // console.log(images1)
+    // console.log(images)
     return (
       <div
         onClick={() => this.handleClick()}
