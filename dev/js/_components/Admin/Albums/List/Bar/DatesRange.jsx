@@ -17,17 +17,16 @@ class DatesRange extends Component {
 
   onChange(range) {
     const { dates, dispatch } = this.props
-    let start_step = Math.floor((dates.length - 1) * range[0]) / 100
-    let end_step = Math.floor((dates.length - 1) * range[1]) / 100
-
+    let start_step = Math.round((dates.length - 1) * range[0]) / 100
+    let end_step = Math.round((dates.length - 1) * range[1]) / 100
     dispatch(utilsActions.setAdminSetting('list_filter_start_date', dates[start_step]))
     dispatch(utilsActions.setAdminSetting('list_filter_end_date', dates[end_step]))
   }
 
   onAfterChange(range) {
     const { dates, dispatch } = this.props
-    let start_step = Math.floor((dates.length - 1) * range[0]) / 100
-    let end_step = Math.floor((dates.length - 1) * range[1]) / 100
+    let start_step = Math.round((dates.length - 1) * range[0]) / 100
+    let end_step = Math.round((dates.length - 1) * range[1]) / 100
 
     dispatch(utilsActions.saveAdminSetting('list_filter_start_date', dates[start_step]))
     dispatch(utilsActions.saveAdminSetting('list_filter_end_date', dates[end_step]))
