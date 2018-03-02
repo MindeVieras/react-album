@@ -11,8 +11,7 @@ const initialState = {
     album: {},
     map: {
       edit_enabled: false
-    },
-    locations: {}
+    }
   },
   list: {
     loading: false,
