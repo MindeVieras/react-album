@@ -3,7 +3,7 @@ import {toastr} from 'react-redux-toastr'
 import Popup from 'react-popup'
 
 import { albumsConstants } from '../../_constants'
-import { albumsService } from '../../_services'
+import { albumsService, mediaService } from '../../_services'
 
 export const albumsActions = {
   addToList,
@@ -11,10 +11,15 @@ export const albumsActions = {
   getListDates,
   getOne,
   clearSelected,
-  getLocations,
   removeLocation,
   setLocation,
   updateLocation,
+  setMediaLocation,
+  updateMediaLocation,
+  removeMediaLocation,
+  setMapEdit,
+  setMapCenter,
+  setMapZoom,
   rename,
   changeDate,
   delete: _delete
@@ -93,25 +98,6 @@ function clearSelected() {
   function clear() { return { type: albumsConstants.CLEAR_SELECTED } }
 }
 
-function getLocations(id) {
-  return dispatch => {
-    dispatch(request())
-
-    albumsService.getLocations(id)
-      .then(function(res) {
-        if (res.ack == 'ok') {
-          dispatch(success(res.data))
-        } else {
-          dispatch(failure(res.msg))
-        }
-      })
-  }
-
-  function request() { return { type: albumsConstants.GETLOCATIONS_REQUEST } }
-  function success(locations) { return { type: albumsConstants.GETLOCATIONS_SUCCESS, locations } }
-  function failure(err) { return { type: albumsConstants.GETLOCATIONS_FAILURE, err } }
-}
-
 function removeLocation(id) {
   return dispatch => {
     albumsService.removeLocation(id)
@@ -140,6 +126,60 @@ function updateLocation(album_id, location) {
       })
   }
   function set(location) { return { type: albumsConstants.SET_LOCATION, location } }
+}
+
+function setMediaLocation(media_id, location) {
+  return dispatch => {
+    mediaService.setLocation(media_id, location)
+      .then(function(res) {
+        dispatch(set(media_id, location))
+      })
+  }
+  function set(media_id, location) { return { type: albumsConstants.SET_MEDIA_LOCATION, media_id, location } }
+}
+
+function updateMediaLocation(media_id, location) {
+  return dispatch => {
+    mediaService.updateLocation(media_id, location)
+      .then(function(res) {
+        dispatch(set(media_id, location))
+      })
+  }
+  function set(media_id, location) { return { type: albumsConstants.SET_MEDIA_LOCATION, media_id, location } }
+}
+
+function removeMediaLocation(media_id) {
+  return dispatch => {
+    mediaService.removeLocation(media_id)
+      .then(function(res) {
+        dispatch(remove(media_id))
+      })
+  }
+  function remove(media_id) { return { type: albumsConstants.REMOVE_MEDIA_LOCATION, media_id } }
+}
+
+function setMapEdit(edit) {
+  return dispatch => {
+    dispatch(set(edit))
+  }
+
+  function set(edit) { return { type: albumsConstants.SET_LOCATIONS_MAP_EDIT, edit } }
+}
+
+function setMapCenter(center) {
+  return dispatch => {
+    dispatch(set(center))
+  }
+
+  function set(center) { return { type: albumsConstants.SET_LOCATIONS_MAP_CENTER, center } }
+}
+
+function setMapZoom(zoom) {
+  return dispatch => {
+    dispatch(set(zoom))
+  }
+
+  function set(zoom) { return { type: albumsConstants.SET_LOCATIONS_MAP_ZOOM, zoom } }
 }
 
 function rename(payload) {

@@ -71,15 +71,15 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   full_screen: PropTypes.bool.isRequired,
   client_width: PropTypes.number.isRequired,
   selected_album: PropTypes.object
 }
 
-// Header.defaultProps = {
-//   selected_album: null
-// }
+Header.defaultProps = {
+  title: ''
+}
 
 function mapStateToProps(state) {
   const { client, admin_header, admin_albums } = state

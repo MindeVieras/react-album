@@ -18,6 +18,7 @@ import { googleKey } from '../../_helpers/config'
 import { utilsActions, clientActions } from '../../_actions'
 
 import 'react-datetime/css/react-datetime.css'
+import 'react-toggle/style.css'
 import 'react-select/dist/react-select.css'
 import 'rc-slider/assets/index.css'
 import '../../../scss/Admin/main.scss'

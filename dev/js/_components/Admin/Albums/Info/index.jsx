@@ -14,7 +14,7 @@ import { albumsConstants, contentConstants, mediaConstants } from '../../../../_
 class AlbumInfo extends Component {
 
   componentDidMount() {
-    const { selected_album, dispatch } = this.props
+    const { dispatch } = this.props
     dispatch(uploaderActions.clearFiles())
   }
 
@@ -36,42 +36,38 @@ class AlbumInfo extends Component {
 
   render() {
     const { width, selected_album } = this.props
-
+    // console.log(selected_album.album.media)
     const scrollbarOptions = {
       wheelSpeed: 1.25,
       // useBothWheelAxes: true
     }
     return (
       <div className="album-info" style={{ width: `${width}px` }}>
-        {selected_album.loading &&
+        {selected_album.album.loading &&
           <Spinner type="primary" size={ 70 } />
         }
-        {selected_album.err &&
-          <div>{selected_album.err}</div>
+        {selected_album.album.err &&
+          <div>{selected_album.album.err}</div>
         }
-        {selected_album.album &&
+        {selected_album.album.id &&
           <PerfectScrollbar
             option={ scrollbarOptions }
             className="album-scrollbar default-scrollbar"
           >
             <div className="selected-album">
-              {selected_album.album.id &&
-                <Bar
-                  album_id={ selected_album.album.id }
-                  start_date={ selected_album.album.start_date }
-                  end_date={ selected_album.album.end_date }
-                />
-              }
+              <Bar
+                album_id={ selected_album.album.id }
+                start_date={ selected_album.album.start_date }
+                end_date={ selected_album.album.end_date }
+              />
               
-              {selected_album.album.id &&
-                <Uploader
-                  entity={contentConstants.TYPE_ALBUM}
-                  entity_id={selected_album.album.id}
-                  status={mediaConstants.STATUS_ENABLED}
-                  initial_media={ selected_album.album.media }
-                  wrapper_width={ width }
-                />
-              }
+              <Uploader
+                entity={contentConstants.TYPE_ALBUM}
+                entity_id={selected_album.album.id}
+                status={mediaConstants.STATUS_ENABLED}
+                initial_media={ selected_album.album.media }
+                wrapper_width={ width }
+              />
 
             </div>
           </PerfectScrollbar>

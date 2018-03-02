@@ -11,29 +11,50 @@ class ItemsList extends Component {
     super(props)
 
     this.onAlbumDblClick = this.onAlbumDblClick.bind(this)
+    this.onMediaDblClick = this.onMediaDblClick.bind(this)
   }
 
   onAlbumDblClick() {
-    const { album_id, current_location, dispatch } = this.props
-    // console.log(albums)
-    dispatch(albumsActions.setLocation(album_id, current_location))
+    const { album_id, map, dispatch } = this.props
+    if (map.edit_enabled)
+      dispatch(albumsActions.setLocation(album_id, map.center))
+    else
+      return
+  }
+
+  onMediaDblClick(media_id) {
+    const { map, dispatch } = this.props
+    if (map.edit_enabled)
+      dispatch(albumsActions.setMediaLocation(media_id, map.center))
+    else
+      return
   }
 
   render() {
-    const { current_location, album_location, media_locations } = this.props
+    const { current_location, album_location, media } = this.props
     let albumItem, mediaItems
+    
     if (album_location == null) {
       albumItem = <div className="item album-item" onDoubleClick={ this.onAlbumDblClick }>
         Album item
       </div>
     }
-    if (media_locations && media_locations.list) {
-      mediaItems = media_locations.list.map((loc, i) =>{
-        return <div key={ i } className="item media-item">
-          <img src={ loc.key } />
-        </div>
+    
+    if (media) {
+      mediaItems = media.map((m, i) =>{
+        // console.log(m.location)
+        const { media_id } = m
+        if (!m.location) {        
+          return <div key={ i } className="item media-item" onDoubleClick={ () => this.onMediaDblClick(media_id) }>
+            <img src={ m.thumbs.icon } />
+          </div>
+        }
+        else {
+          return <span key={ i } />
+        }
       })
     }
+    
     return (
       <div className="map-items-list">
         { albumItem }
@@ -46,9 +67,18 @@ class ItemsList extends Component {
 
 ItemsList.propTypes = {
   album_id: PropTypes.number.isRequired,
+  media: PropTypes.array,
   current_location: PropTypes.object.isRequired,
   album_location: PropTypes.object,
-  media_locations: PropTypes.object
+  map: PropTypes.object
 }
 
-export default connect()(ItemsList)
+function mapStateToProps(state) {
+  const { client, admin_albums } = state
+  return {
+    map: admin_albums.selected_album.map,
+    media: admin_albums.selected_album.album.media
+  }
+}
+
+export default connect(mapStateToProps)(ItemsList)

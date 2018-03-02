@@ -13,12 +13,20 @@
     z-index: 1;
     color: $white;
     .search-input-group {
+      display: inline-block;
       .search-input {
         background-color: $white;
         padding: 5px 10px;
         margin-top: 4px;
         border-top-left-radius: 5px;
         width: 200px;
+      }
+    }
+    .controls {
+      float: right;
+      margin-right: 50px;
+      .edit-switch {
+        margin-top: 5px;
       }
     }
   }

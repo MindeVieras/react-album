@@ -8,9 +8,11 @@ const initialState = {
     items: []
   },
   selected_album: {
-    loading: false,
-    err: false,
-    album: {}
+    album: {},
+    map: {
+      edit_enabled: false
+    },
+    locations: {}
   },
   list: {
     loading: false,
@@ -63,6 +65,7 @@ export function adminAlbums(state = initialState, action) {
         }
       }
     }
+
   case albumsConstants.GETLIST_REQUEST:
     return {
       ...state,
@@ -84,6 +87,7 @@ export function adminAlbums(state = initialState, action) {
         err: action.err
       } 
     }
+
   case albumsConstants.GETLISTDATES_REQUEST:
     return {
       ...state,
@@ -98,24 +102,29 @@ export function adminAlbums(state = initialState, action) {
         distinct_list: action.dates
       }
     }
-  case albumsConstants.GETLIST_FAILURE:
+  case albumsConstants.GETLISTDATES_FAILURE:
     return {
       ...state,
       dates: {
         err: action.err
       } 
     }
+
   case albumsConstants.GETONE_REQUEST:
     return {
       ...state,
       selected_album: {
-        loading: true
+        ...state.selected_album,
+        album: {
+          loading: true
+        }
       }
     }
   case albumsConstants.GETONE_SUCCESS:
     return {
       ...state,
       selected_album: {
+        ...state.selected_album,
         album: action.album
       }
     }
@@ -123,41 +132,64 @@ export function adminAlbums(state = initialState, action) {
     return {
       ...state,
       selected_album: {
-        err: action.err
+        ...state.selected_album,
+        album: {
+          err: action.err
+        }
       }
     }
+
   case albumsConstants.CLEAR_SELECTED:
     return {
       ...state,
       selected_album: initialState.selected_album
     }
-  case albumsConstants.GETLOCATIONS_REQUEST:
+
+  // Album locations Map
+  case albumsConstants.SET_LOCATIONS_MAP_EDIT:
     return {
       ...state,
       selected_album: {
         ...state.selected_album,
-        locations: {
-          loading: true
+        map: {
+          ...state.selected_album.map,
+          edit_enabled: action.edit
         }
       }
     }
-  case albumsConstants.GETLOCATIONS_SUCCESS:
+  case albumsConstants.SET_LOCATIONS_MAP_CENTER:
     return {
       ...state,
       selected_album: {
         ...state.selected_album,
-        locations: {
-          list: action.locations
+        map: {
+          ...state.selected_album.map,
+          center: action.center
         }
       }
     }
-  case albumsConstants.GETLOCATIONS_FAILURE:
+  case albumsConstants.SET_LOCATIONS_MAP_ZOOM:
     return {
       ...state,
       selected_album: {
         ...state.selected_album,
-        locations: {
-          err: action.err
+        map: {
+          ...state.selected_album.map,
+          zoom: action.zoom
+        }
+      }
+    }
+
+
+
+  case albumsConstants.SET_LOCATION:
+    return {
+      ...state,
+      selected_album: {
+        ...state.selected_album,
+        album: {
+          ...state.selected_album.album,
+          location: action.location
         }
       }
     }
@@ -172,17 +204,49 @@ export function adminAlbums(state = initialState, action) {
         }
       }
     }
-  case albumsConstants.SET_LOCATION:
+  case albumsConstants.SET_MEDIA_LOCATION:
     return {
       ...state,
       selected_album: {
         ...state.selected_album,
         album: {
           ...state.selected_album.album,
-          location: action.location
+          media: state.selected_album.album.media.map(m => {
+            if (m.media_id === action.media_id) {
+              const { ...mediaCopy } = m
+              return {
+                ...mediaCopy,
+                location: action.location
+              }
+            }
+            return m
+          })
         }
       }
     }
+  case albumsConstants.REMOVE_MEDIA_LOCATION:
+    return {
+      ...state,
+      selected_album: {
+        ...state.selected_album,
+        album: {
+          ...state.selected_album.album,
+          media: state.selected_album.album.media.map(m => {
+            if (m.media_id === action.media_id) {
+              const { ...mediaCopy } = m
+              return {
+                ...mediaCopy,
+                location: null
+              }
+            }
+            return m
+          })
+        }
+      }
+    }
+
+
+  // Delete album
   case albumsConstants.DELETE_REQUEST:
     return {
       ...state,
@@ -226,6 +290,8 @@ export function adminAlbums(state = initialState, action) {
         })
       }
     }
+
+  // Default
   default:
     return state
   }

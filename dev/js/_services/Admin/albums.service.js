@@ -6,7 +6,6 @@ export const albumsService = {
   getList,
   getListDates,
   getOne,
-  getLocations,
   removeLocation,
   setLocation,
   updateLocation,
@@ -51,15 +50,6 @@ function getOne(id) {
   }
 
   return fetch(baseServerUrl+'/api/albums/get-one/'+id, requestOptions).then(handleResponse)
-}
-
-function getLocations(id) {
-  const requestOptions = {
-    method: 'GET',
-    headers: authHeader()
-  }
-
-  return fetch(baseServerUrl+'/api/albums/get-locations/'+id, requestOptions).then(handleResponse)
 }
 
 function removeLocation(id) {

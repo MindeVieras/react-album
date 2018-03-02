@@ -7,7 +7,10 @@ export const mediaService = {
   generateImageThumbs,
   generateVideos,
   saveMetadata,
-  saveRekognitionLabels
+  saveRekognitionLabels,
+  removeLocation,
+  setLocation,
+  updateLocation
 }
 
 // Saves media file on upload
@@ -68,6 +71,35 @@ function saveRekognitionLabels(media_id) {
     body: JSON.stringify({ media_id })
   }
   return fetch(baseServerUrl+'/api/media/save-rekognition-labels', requestOptions).then(handleResponse)
+}
+
+function removeLocation(id) {
+  const requestOptions = {
+    method: 'GET',
+    headers: authHeader()
+  }
+
+  return fetch(baseServerUrl+'/api/media/remove-location/'+id, requestOptions).then(handleResponse)
+}
+
+function setLocation(media_id, location) {
+  const requestOptions = {
+    method: 'POST',
+    headers: { ...authHeader(), 'Content-Type': 'application/json' },
+    body: JSON.stringify({ media_id, location })
+  }
+
+  return fetch(baseServerUrl+'/api/media/set-location', requestOptions).then(handleResponse)
+}
+
+function updateLocation(media_id, location) {
+  const requestOptions = {
+    method: 'POST',
+    headers: { ...authHeader(), 'Content-Type': 'application/json' },
+    body: JSON.stringify({ media_id, location })
+  }
+
+  return fetch(baseServerUrl+'/api/media/update-location', requestOptions).then(handleResponse)
 }
 
 function handleResponse(response) {

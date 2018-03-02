@@ -14,11 +14,44 @@ class Map extends Component {
   
   constructor(props) {
     super(props)
+
+    this.onMapMounted = this.onMapMounted.bind(this)
+    this.onMapDragEnd = this.onMapDragEnd.bind(this)
+  }
+
+  componentWillMount() {
+    this.refs = {
+      map: undefined
+    }
+  }
+  
+  componentDidMount() {
+    const { album_location, current_location, dispatch } = this.props
+    dispatch(albumsActions.setMapZoom(10))
+    let defaultCenter = album_location || current_location
+    dispatch(albumsActions.setMapCenter(defaultCenter))
+  }
+
+  onMapMounted(ref) {
+    this.refs.map = ref
+  }
+
+  onMapDragEnd() {
+    const { dispatch } = this.props
+    const loc = this.refs.map.getCenter()
+    const center = {
+      lat: loc.lat(),
+      lng: loc.lng()
+    }
+    dispatch(albumsActions.setMapCenter(center))
   }
 
   removeAlbumLocation() {
-    const { album_id, dispatch } = this.props
-    dispatch(albumsActions.removeLocation(album_id))
+    const { album_id, map, dispatch } = this.props
+    if (map.edit_enabled)
+      dispatch(albumsActions.removeLocation(album_id))
+    else
+      return
   }
 
   updateAlbumLocation(loc) {
@@ -30,24 +63,66 @@ class Map extends Component {
     dispatch(albumsActions.updateLocation(album_id, album_loc))
   }
 
+  updateMediaLocation(loc, media_id) {
+    const { dispatch } = this.props
+    const media_loc = {
+      lat: loc.latLng.lat(),
+      lng: loc.latLng.lng()
+    }
+    dispatch(albumsActions.updateMediaLocation(media_id, media_loc))
+  }
+
+  removeMediaLocation(media_id) {
+    const { map, dispatch } = this.props
+    if (map.edit_enabled)
+      dispatch(albumsActions.removeMediaLocation(media_id))
+    else
+      return
+  }
+
   render() {
-    const { album_location, current_location } = this.props
-    return (
-      <GoogleMap
-        defaultZoom={15}
-        defaultCenter={album_location || current_location}
-        //onDragEnd={ (l) => console.log(l) }
-      >
-        {album_location &&
-          <Marker
-            position={ album_location }
-            icon={ albumMarkerIcon }
-            draggable={ true }
-            onDblClick={ () => this.removeAlbumLocation() }
-            onDragEnd={ (loc) => this.updateAlbumLocation(loc) }
+    const { album_location, map, media } = this.props
+    let mediaMarkers
+    if (media) {
+      mediaMarkers = media.map((m, i) => {
+        if (m.location) {         
+          return <Marker
+            key={ i }
+            position={ m.location }
+            draggable={ map.edit_enabled }
+            onDblClick={ () => this.removeMediaLocation(m.media_id) }
+            onDragEnd={ (loc) => this.updateMediaLocation(loc, m.media_id) }
           />
         }
-      </GoogleMap>
+      })
+    }
+    // console.log(mediaMarkers)
+    return (
+      <div>
+        {map &&
+          <GoogleMap
+            ref={ this.onMapMounted }
+            defaultZoom={ map.zoom }
+            defaultCenter={ map.center }
+            center={ map.center }
+            zoom={ map.zoom }
+            onDragEnd={ this.onMapDragEnd }
+          >
+            {album_location &&
+              <Marker
+                position={ album_location }
+                icon={ albumMarkerIcon }
+                draggable={ map.edit_enabled }
+                onDblClick={ () => this.removeAlbumLocation() }
+                onDragEnd={ (loc) => this.updateAlbumLocation(loc) }
+              />
+            }
+
+            { mediaMarkers }
+          
+          </GoogleMap>
+        }
+      </div>
     )
   }
 
@@ -57,7 +132,17 @@ class Map extends Component {
 Map.propTypes = {
   current_location: PropTypes.object.isRequired,
   album_id: PropTypes.number.isRequired,
-  album_location: PropTypes.object
+  media: PropTypes.array,
+  album_location: PropTypes.object,
+  map: PropTypes.object
 }
 
-export default connect()(withGoogleMap(Map))
+function mapStateToProps(state) {
+  const { admin_albums } = state
+  return {
+    map: admin_albums.selected_album.map,
+    media: admin_albums.selected_album.album.media
+  }
+}
+
+export default connect(mapStateToProps)(withGoogleMap(Map))
