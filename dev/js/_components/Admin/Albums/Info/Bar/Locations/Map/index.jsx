@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps'
+import { withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps'
 
 import AlbumMarker from './AlbumMarker'
 
@@ -17,6 +17,7 @@ class Map extends Component {
 
     this.onMapMounted = this.onMapMounted.bind(this)
     this.onMapDragEnd = this.onMapDragEnd.bind(this)
+    this.openMarker = this.openMarker.bind(this)
   }
 
   componentWillMount() {
@@ -80,19 +81,34 @@ class Map extends Component {
       return
   }
 
+  openMarker(media_id) {
+    const { dispatch } = this.props
+    // console.log(media_id)
+    dispatch(albumsActions.closeMediaLocationMarkers())
+    dispatch(albumsActions.openMediaLocationMarker(media_id, true))
+  }
+
   render() {
     const { album_location, map, media } = this.props
     let mediaMarkers
     if (media) {
       mediaMarkers = media.map((m, i) => {
+        // console.log(m)
         if (m.location) {         
           return <Marker
             key={ i }
             position={ m.location }
             draggable={ map.edit_enabled }
             onDblClick={ () => this.removeMediaLocation(m.media_id) }
+            onClick={ () => this.openMarker(m.media_id) }
             onDragEnd={ (loc) => this.updateMediaLocation(loc, m.media_id) }
-          />
+          > 
+            {m.marker_open &&
+              <InfoWindow>
+                <div><img src={ m.thumbs.icon } /></div>
+              </InfoWindow> 
+            }
+          </Marker>
         }
       })
     }

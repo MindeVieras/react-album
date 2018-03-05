@@ -17,6 +17,8 @@ export const albumsActions = {
   setMediaLocation,
   updateMediaLocation,
   removeMediaLocation,
+  openMediaLocationMarker,
+  closeMediaLocationMarkers,
   setMapEdit,
   setMapCenter,
   setMapZoom,
@@ -180,6 +182,22 @@ function setMapZoom(zoom) {
   }
 
   function set(zoom) { return { type: albumsConstants.SET_LOCATIONS_MAP_ZOOM, zoom } }
+}
+
+function openMediaLocationMarker(media_id, marker_open) {
+  return dispatch => {
+    dispatch(open(media_id, marker_open))
+  }
+
+  function open(media_id, marker_open) { return { type: albumsConstants.OPEN_MEDIA_LOCATION_MARKER, media_id, marker_open } }
+}
+
+function closeMediaLocationMarkers() {
+  return dispatch => {
+    dispatch(close())
+  }
+
+  function close() { return { type: albumsConstants.CLOSE_MEDIA_LOCATION_MARKERS } }
 }
 
 function rename(payload) {

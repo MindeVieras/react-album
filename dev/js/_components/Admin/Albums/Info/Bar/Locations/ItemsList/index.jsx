@@ -54,6 +54,8 @@ class ItemsList extends Component {
         }
       })
     }
+
+    const total = albumItem + mediaItems
     
     return (
       <div className="map-items-list">

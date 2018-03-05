@@ -243,6 +243,43 @@ export function adminAlbums(state = initialState, action) {
         }
       }
     }
+  case albumsConstants.OPEN_MEDIA_LOCATION_MARKER:
+    return {
+      ...state,
+      selected_album: {
+        ...state.selected_album,
+        album: {
+          ...state.selected_album.album,
+          media: state.selected_album.album.media.map(m => {
+            if (m.media_id === action.media_id) {
+              const { ...mediaCopy } = m
+              return {
+                ...mediaCopy,
+                marker_open: action.marker_open
+              }
+            }
+            return m
+          })
+        }
+      }
+    }
+  case albumsConstants.CLOSE_MEDIA_LOCATION_MARKERS:
+    return {
+      ...state,
+      selected_album: {
+        ...state.selected_album,
+        album: {
+          ...state.selected_album.album,
+          media: state.selected_album.album.media.map(m => {
+            const { ...mediaCopy } = m
+            return {
+              ...mediaCopy,
+              marker_open: false
+            }
+          })
+        }
+      }
+    }
 
 
   // Delete album
