@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps'
+import { Player } from 'video-react'
 
 import AlbumMarker from './AlbumMarker'
 
@@ -94,7 +95,16 @@ class Map extends Component {
     if (media) {
       mediaMarkers = media.map((m, i) => {
         // console.log(m)
-        if (m.location) {         
+        if (m.location) {
+          let infoContent
+          if (m.mime.includes('image')) {
+            infoContent = <img src={ m.thumbs.mini } />
+          }
+          if (m.mime.includes('video')) {
+            infoContent = <div style={{width: '220px', height: '220px'}}>
+              <Player playsInline src={ m.videos.video } />
+            </div>
+          }
           return <Marker
             key={ i }
             position={ m.location }
@@ -105,7 +115,7 @@ class Map extends Component {
           > 
             {m.marker_open &&
               <InfoWindow>
-                <div><img src={ m.thumbs.mini } /></div>
+                <div>{ infoContent }</div>
               </InfoWindow> 
             }
           </Marker>

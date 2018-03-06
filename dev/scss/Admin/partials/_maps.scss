@@ -46,6 +46,7 @@
     bottom: 0;
     .item {
       display: inline-block;
+      position: relative;
       width: 54px;
       height: 54px;
       border: 1px solid $grey;
@@ -54,6 +55,18 @@
       cursor: default;
       img {
         width: 100%;
+      }
+      &.video {
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        i {
+          color: $white;
+          font-size: 18px;
+          position: absolute;
+          bottom: 0;
+          right: 0;
+        }
       }
     }
   }

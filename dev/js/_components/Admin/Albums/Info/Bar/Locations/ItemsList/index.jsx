@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import { IoVideocamera } from 'react-icons/lib/io'
 
 import { albumsActions } from '../../../../../../../_actions'
 
@@ -43,11 +44,24 @@ class ItemsList extends Component {
     if (media) {
       mediaItems = media.map((m, i) =>{
         // console.log(m.location)
-        const { media_id } = m
-        if (!m.location) {        
-          return <div key={ i } className="item media-item" onDoubleClick={ () => this.onMediaDblClick(media_id) }>
+        const { media_id, mime } = m
+        // console.log(m.mime)
+        if (mime.includes('image') && !m.location) {
+          return <div key={ i } className="item media-item image" onDoubleClick={ () => this.onMediaDblClick(media_id) }>
             <img src={ m.thumbs.icon } />
           </div>
+        }
+        if (mime.includes('video') && !m.location) {
+          return (
+            <div
+              key={ i }
+              className="item media-item video"
+              onDoubleClick={ () => this.onMediaDblClick(media_id) }
+              style={{backgroundImage: `url(${m.videos.thumbs.medium})`}}
+            >
+              <i><IoVideocamera /></i>
+            </div>
+          )
         }
         else {
           return <span key={ i } />
