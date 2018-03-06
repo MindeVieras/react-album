@@ -10,7 +10,15 @@ import ItemsList from './ItemsList'
 class AlbumMap extends Component {
   
   render() {
-    const { album_id, current_location, album_location } = this.props
+    const { album_id, current_location, album_location, media } = this.props
+    let mediaItems = 0, mapWidth = '100%'
+
+    if (!album_location) { mediaItems++ }
+    media.map(m => {
+      if (!m.location) { mediaItems++ }
+    })
+    
+    if (mediaItems) { mapWidth = 'calc(100% - 60px)' }
 
     return (
       <div>
@@ -18,17 +26,21 @@ class AlbumMap extends Component {
           <div id="album_map">
             <LocationsBar />
             <Map
-              containerElement={<div className="map-container" />}
+              containerElement={<div className="map-container" style={{width: mapWidth}} />}
               mapElement={<div style={{ height: `100%` }} />}
               album_location={ album_location }
               current_location={ current_location }
               album_id={ album_id }
+              media={ media }
             />
-            <ItemsList
-              album_id={ album_id }
-              current_location={ current_location }
-              album_location={ album_location }
-            />
+            {mediaItems &&
+              <ItemsList
+                album_id={ album_id }
+                current_location={ current_location }
+                album_location={ album_location }
+                media={ media }
+              />
+            }
           </div>
         }
       </div>
@@ -40,14 +52,20 @@ class AlbumMap extends Component {
 AlbumMap.propTypes = {
   album_id: PropTypes.number.isRequired,
   album_location: PropTypes.object,
-  current_location: PropTypes.object
+  current_location: PropTypes.object,
+  media: PropTypes.array,
+}
+
+AlbumMap.defaultProps = {
+  media: []
 }
 
 function mapStateToProps(state) {
   const { client, admin_albums } = state
   return {
     current_location: client.location,
-    album_location: admin_albums.selected_album.album.location
+    album_location: admin_albums.selected_album.album.location,
+    media: admin_albums.selected_album.album.media
   }
 }
 

@@ -55,8 +55,6 @@ class ItemsList extends Component {
       })
     }
 
-    const total = albumItem + mediaItems
-    
     return (
       <div className="map-items-list">
         { albumItem }
@@ -69,17 +67,16 @@ class ItemsList extends Component {
 
 ItemsList.propTypes = {
   album_id: PropTypes.number.isRequired,
-  media: PropTypes.array,
   current_location: PropTypes.object.isRequired,
   album_location: PropTypes.object,
+  media: PropTypes.array,
   map: PropTypes.object
 }
 
 function mapStateToProps(state) {
-  const { client, admin_albums } = state
+  const { admin_albums } = state
   return {
-    map: admin_albums.selected_album.map,
-    media: admin_albums.selected_album.album.media
+    map: admin_albums.selected_album.map
   }
 }
 

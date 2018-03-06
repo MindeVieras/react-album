@@ -156,8 +156,7 @@ Map.propTypes = {
 function mapStateToProps(state) {
   const { admin_albums } = state
   return {
-    map: admin_albums.selected_album.map,
-    media: admin_albums.selected_album.album.media
+    map: admin_albums.selected_album.map
   }
 }
 
