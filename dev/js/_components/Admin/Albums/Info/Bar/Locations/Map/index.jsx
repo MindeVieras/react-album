@@ -105,7 +105,7 @@ class Map extends Component {
           > 
             {m.marker_open &&
               <InfoWindow>
-                <div><img src={ m.thumbs.icon } /></div>
+                <div><img src={ m.thumbs.mini } /></div>
               </InfoWindow> 
             }
           </Marker>
