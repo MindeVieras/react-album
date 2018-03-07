@@ -2,7 +2,6 @@
 import React from 'react'
 import ReactTooltip from 'react-tooltip'
 import { IoCheckmarkCircled, IoBug } from 'react-icons/lib/io'
-import { SortableElement } from 'react-sortable-hoc'
 
 import Thumbnail from './Thumbnail'
 import ThumbnailSrv from './ThumbnailSrv'
@@ -17,7 +16,7 @@ import StatusGenerateImageThumbsIcon from '../Icons/StatusGenerateImageThumbs'
 import StatusGenerateVideosIcon from '../Icons/StatusGenerateVideos'
 import StatusRekognitionLabelsIcon from '../Icons/StatusRekognitionLabels'
 
-const MediaItem = SortableElement(({id, media_id, status, fromServer, mime, metadata, filename, filesize, rekognition_labels, thumbs, videos, uploader, item_width, item_gap }) => {
+const MediaItem = ({id, media_id, status, fromServer, mime, metadata, filename, filesize, rekognition_labels, thumbs, videos, uploader, item_width, item_gap }) => {
   // console.log(item_gap)
   let thumb
   let filenameWidth = item_width - 65
@@ -136,6 +135,6 @@ const MediaItem = SortableElement(({id, media_id, status, fromServer, mime, meta
       }
     </li>
   )
-})
+}
 
 export default MediaItem

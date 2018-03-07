@@ -1,0 +1,20 @@
+
+.album-pagination {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  li {
+    background-color: rgba(0,0,0,.15);
+    display: inline-block;
+    margin: 20px 5px;
+    cursor: pointer;
+    a {
+      display: block;
+      padding: 5px 10px;
+      min-width: 32px;
+    }
+    &.active {
+      background-color: rgba(0,0,0,.5)
+    }
+  }
+}
