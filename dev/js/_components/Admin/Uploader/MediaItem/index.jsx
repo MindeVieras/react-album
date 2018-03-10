@@ -28,9 +28,15 @@ class MediaItem extends Component {
   }
   
   componentDidMount() {
+    const { mime, thumbs } = this.props
     const img = new Image()
     img.onload = () => this.props.connectDragPreview(img)
-    img.src = this.props.thumbs.icon
+    if (mime.includes('image')) {
+      img.src = this.props.thumbs.icon
+    }
+    if (mime.includes('video')) {
+      img.src = this.props.thumbs.medium
+    }
   }
 
   render() {
