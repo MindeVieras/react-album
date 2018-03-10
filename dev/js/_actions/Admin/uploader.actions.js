@@ -11,6 +11,7 @@ export const uploaderActions = {
   setMime,
   setFilename,
   setFilesize,
+  trashFile,
   removeFile,
   clearFiles,
   getImageThumbs,
@@ -71,17 +72,25 @@ function setFilesize(id, filesize) {
   function set(id, filesize) { return { type: uploaderConstants.SET_FILESIZE, id, filesize } }
 }
 
-function removeFile(media_id) {
+function trashFile(media_id) {
   return dispatch => {
     mediaService.putToTrash(media_id)
       .then(function(res) {
         if (res.ack == 'ok') {
-          dispatch(remove(media_id))
+          dispatch(trash(media_id))
           toastr.success('Success', res.msg)
         } else if (res.ack == 'err') {
           toastr.error('Error', res.msg)
         }
       })
+  }
+
+  function trash(media_id) { return { type: uploaderConstants.REMOVE_FILE, media_id } }
+}
+
+function removeFile(media_id) {
+  return dispatch => {
+    dispatch(remove(media_id))
   }
 
   function remove(media_id) { return { type: uploaderConstants.REMOVE_FILE, media_id } }

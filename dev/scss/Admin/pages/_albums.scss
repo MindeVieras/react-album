@@ -101,6 +101,9 @@
       &.active {
         background-color: darken($red, 30);
       }
+      &.dnd-dest-active {
+        background-color: $green;
+      }
     }
   }
 }

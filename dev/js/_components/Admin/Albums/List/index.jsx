@@ -3,10 +3,10 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import PerfectScrollbar from 'react-perfect-scrollbar'
-import Marquee from 'react-text-marquee'
 import { RingLoader } from 'react-spinners'
 
 import Bar from './Bar'
+import ListItem from './ListItem'
 
 import { headerActions, albumsActions, uploaderActions, utilsActions } from '../../../../_actions'
 
@@ -17,12 +17,11 @@ class AlbumsList extends Component {
     dispatch(albumsActions.getList(start_date, end_date))
   }
 
-  onAlbumSelect(album) {
+  onAlbumSelect(album_id) {
     const { dispatch } = this.props
-    const { id } = album
     dispatch(uploaderActions.clearFiles())
-    dispatch(albumsActions.getOne(id))
-    dispatch(utilsActions.saveAdminSetting('selected_album', id))
+    dispatch(albumsActions.getOne(album_id))
+    dispatch(utilsActions.saveAdminSetting('selected_album', album_id))
   }
 
   render() {
@@ -48,20 +47,14 @@ class AlbumsList extends Component {
             >
               <ul>
                 {albums.items.map((album) =>
-                  <li
-                    key={album.id}
-                    className={`albums-item${ selected_album_id === album.id ? ' active' : ''}`}
-                    onClick={() => this.onAlbumSelect(album)}
-                    style={{width: `${width}px`}}
-                  >
-                    <Marquee
-                      leading={ 500 }
-                      loop={ true }
-                      trailing={ 500 }
-                      text={ album.name }
-                      className="name"
-                    />
-                  </li>
+                  <ListItem
+                    key={ album.id }
+                    active={ selected_album_id === album.id }
+                    album_id={ album.id }
+                    name={ album.name }
+                    width={ width }
+                    onItemClick={(album_id) => this.onAlbumSelect(album_id)}
+                  />
                 )}
               </ul>
             </PerfectScrollbar>

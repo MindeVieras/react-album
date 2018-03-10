@@ -22,6 +22,7 @@ export const albumsActions = {
   setMapEdit,
   setMapCenter,
   setMapZoom,
+  moveMedia,
   rename,
   changeDate,
   delete: _delete
@@ -198,6 +199,22 @@ function closeMediaLocationMarkers() {
   }
 
   function close() { return { type: albumsConstants.CLOSE_MEDIA_LOCATION_MARKERS } }
+}
+
+function moveMedia(media_id, album_id) {
+  return dispatch => {
+    mediaService.moveMedia(media_id, album_id)
+      .then(function(res) {
+        if (res.ack == 'ok') {
+          dispatch(move(media_id, album_id))
+          Popup.close()
+          toastr.success('Success', res.msg)
+        } else {
+          toastr.error('Error', res.msg)
+        }
+      })
+  }
+  function move(media_id, album_id) { return { type: albumsConstants.MOVE_MEDIA, media_id, album_id } }
 }
 
 function rename(payload) {

@@ -4,6 +4,7 @@ import { authHeader, baseServerUrl } from '../../_helpers'
 export const mediaService = {
   save,
   putToTrash,
+  moveMedia,
   generateImageThumbs,
   generateVideos,
   saveMetadata,
@@ -31,6 +32,16 @@ function putToTrash(media_id) {
     body: JSON.stringify({ media_id })
   }
   return fetch(baseServerUrl+'/api/media/put-to-trash', requestOptions).then(handleResponse)
+}
+
+// Moves media to another album
+function moveMedia(media_id, album_id) {
+  const requestOptions = {
+    method: 'POST',
+    headers: { ...authHeader(), 'Content-Type': 'application/json' },
+    body: JSON.stringify({ media_id, album_id })
+  }
+  return fetch(baseServerUrl+'/api/media/move', requestOptions).then(handleResponse)
 }
 
 // Generates image Thumbnails

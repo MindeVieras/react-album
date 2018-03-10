@@ -59,7 +59,7 @@ class Uploader extends Component {
       }
       // Remove file
       else if (isFileGone(status, statusEnum)) {
-        props.dispatch(uploaderActions.removeFile(id))
+        props.dispatch(uploaderActions.trashFile(id))
       }
     }
 

@@ -11,7 +11,7 @@ class RemoveButton extends Component {
 
   handleClick() {
     const { media_id, dispatch } = this.props
-    dispatch(uploaderActions.removeFile(media_id))
+    dispatch(uploaderActions.trashFile(media_id))
   }
 
   render() {

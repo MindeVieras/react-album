@@ -282,6 +282,19 @@ export function adminAlbums(state = initialState, action) {
     }
 
 
+  case albumsConstants.MOVE_MEDIA:
+    return {
+      ...state,
+      selected_album: {
+        ...state.selected_album,
+        album: {
+          ...state.selected_album.album,
+          media: state.selected_album.album.media.filter(m => m.media_id != action.media_id)
+        }
+      }
+    }
+
+
   // Delete album
   case albumsConstants.DELETE_REQUEST:
     return {
