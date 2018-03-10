@@ -61,7 +61,6 @@ class MediaItem extends Component {
 
     let itemStyle = {
       width: `${item_width}px`,
-      height: `200px`,
       marginRight: `${item_gap}px`
     }
 
