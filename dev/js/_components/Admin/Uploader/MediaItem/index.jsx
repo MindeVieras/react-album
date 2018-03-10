@@ -35,7 +35,7 @@ class MediaItem extends Component {
       img.src = this.props.thumbs.icon
     }
     if (mime.includes('video')) {
-      img.src = this.props.thumbs.medium
+      img.src = this.props.videos.thumbs.medium
     }
   }
 
