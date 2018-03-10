@@ -8,8 +8,10 @@ import { utilsConstants } from '../../../../../_constants'
 
 class ListItem extends Component {
 
-  handleClick(album_id) {
-    this.props.onItemClick(album_id)
+  handleClick(active, album_id) {
+    if (!active) {
+      this.props.onItemClick(album_id)
+    }
   }
 
   render() {
@@ -18,7 +20,7 @@ class ListItem extends Component {
     return connectDropTarget(
       <li
         className={`albums-item${active ? ' active' : ''} ${isDndActive ? 'dnd-dest-active' : ''}`}
-        onClick={ () => this.handleClick(album_id) }
+        onClick={ () => this.handleClick(active, album_id) }
         style={{width: `${width}px`}}
       >
         <Marquee
