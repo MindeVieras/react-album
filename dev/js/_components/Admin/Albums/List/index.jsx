@@ -52,6 +52,7 @@ class AlbumsList extends Component {
                     active={ selected_album_id === album.id }
                     album_id={ album.id }
                     name={ album.name }
+                    start_date={ album.start_date }
                     width={ width }
                     onItemClick={(album_id) => this.onAlbumSelect(album_id)}
                   />

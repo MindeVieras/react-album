@@ -2,7 +2,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { DropTarget } from 'react-dnd'
+import uuidv4 from 'uuid/v4'
+import ReactTooltip from 'react-tooltip'
 import Marquee from 'react-text-marquee'
+import moment from 'moment'
 
 import { utilsConstants } from '../../../../../_constants'
 
@@ -15,13 +18,24 @@ class ListItem extends Component {
   }
 
   render() {
-    const { active, album_id, name, width, canDrop, isOver, connectDropTarget } = this.props
+    const tooltipId = uuidv4()
+    const {
+      active,
+      album_id,
+      name,
+      width,
+      start_date,
+      canDrop,
+      isOver,
+      connectDropTarget } = this.props
     const isDndActive = canDrop && isOver
     return connectDropTarget(
       <li
         className={`albums-item${active ? ' active' : ''} ${isDndActive ? 'dnd-dest-active' : ''}`}
         onClick={ () => this.handleClick(active, album_id) }
         style={{width: `${width}px`}}
+        data-tip
+        data-for={ tooltipId }
       >
         <Marquee
           leading={ 500 }
@@ -30,6 +44,12 @@ class ListItem extends Component {
           text={ name }
           className="name"
         />
+        <ReactTooltip
+          id={ tooltipId }
+          delayShow={ 400 }
+        >
+          { moment(start_date).format('YYYY-MM-DD') }
+        </ReactTooltip>
       </li>
     )
   }
@@ -43,6 +63,7 @@ ListItem.propTypes = {
   active: PropTypes.bool.isRequired,
   album_id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
+  start_date: PropTypes.string.isRequired,
   width: PropTypes.number
 }
 

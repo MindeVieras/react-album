@@ -96,8 +96,13 @@
       overflow: hidden;
       padding: 0 10px;
       padding-left: 12px;
-      line-height: 27px;
+      font-size: 18px;
+      line-height: 36px;
       cursor: pointer;
+      @include transition(all 0.15s ease);
+      &:hover {
+        background-color: rgba(0,0,0,.15);
+      }
       &.active {
         background-color: darken($red, 30);
         // cursor: default;
