@@ -26,6 +26,12 @@ class MediaItem extends Component {
   constructor(props) {
     super(props)
   }
+  
+  componentDidMount() {
+    const img = new Image()
+    img.onload = () => this.props.connectDragPreview(img)
+    img.src = this.props.thumbs.icon
+  }
 
   render() {
     const {
@@ -49,6 +55,7 @@ class MediaItem extends Component {
 
     let itemStyle = {
       width: `${item_width}px`,
+      height: `200px`,
       marginRight: `${item_gap}px`
     }
 
@@ -166,6 +173,7 @@ class MediaItem extends Component {
 
 MediaItem.propTypes = {
   connectDragSource: PropTypes.func.isRequired,
+  connectDragPreview: PropTypes.func.isRequired,
   isDragging: PropTypes.bool.isRequired,
   media_id: PropTypes.number.isRequired
 }
@@ -194,6 +202,7 @@ const boxSource = {
 function dndCollect(connect, monitor) {
   return {
     connectDragSource: connect.dragSource(),
+    connectDragPreview: connect.dragPreview(),
     isDragging: monitor.isDragging()
   }
 }
