@@ -35,7 +35,7 @@ class MediaItem extends Component {
       if (mime.includes('image')) {
         img.src = thumbs.icon
       }
-      if (mime.includes('video')) {
+      if (mime.includes('video') && videos) {
         img.src = videos.thumbs.medium
       }
     }
