@@ -27,7 +27,6 @@ class DatesRange extends Component {
     const { dates, dispatch } = this.props
     let start_step = Math.round((dates.length - 1) * range[0]) / 100
     let end_step = Math.round((dates.length - 1) * range[1]) / 100
-
     dispatch(utilsActions.saveAdminSetting('list_filter_start_date', dates[start_step]))
     dispatch(utilsActions.saveAdminSetting('list_filter_end_date', dates[end_step]))
     dispatch(albumsActions.getList(dates[start_step], dates[end_step]))

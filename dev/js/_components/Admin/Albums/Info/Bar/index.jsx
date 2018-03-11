@@ -4,20 +4,18 @@ import PropTypes from 'prop-types'
 
 import Locations from './Locations'
 import Dates from './Dates'
-import TimeAgo from './TimeAgo'
 
 const Bar = ({ album_id, name, start_date, end_date }) => {
 
   return (
     <div className="album-bar">
+      <Dates
+        album_id={ album_id }
+        start_date={ start_date }
+        end_date={ end_date }
+      />
       <div className="left">
         <Locations album_id={ album_id } />
-        <Dates
-          album_id={ album_id }
-          start_date={ start_date }
-          end_date={ end_date }
-        />
-        <TimeAgo start_date={ start_date } />
       </div>
     </div>
   )

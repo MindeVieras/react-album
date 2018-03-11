@@ -6,6 +6,7 @@ import Popup from 'react-popup'
 import { IoCalendar } from 'react-icons/lib/io'
 
 import Picker from './Picker'
+import TimeAgo from '../TimeAgo'
 
 class Dates extends Component {
   
@@ -27,9 +28,13 @@ class Dates extends Component {
         <div className="date">
           { date }
         </div>
+        <TimeAgo start_date={ start_date } />
         <div className="buttons">
-          <div className="btn btn-xs btn-info">
-            <IoCalendar onClick={ () => this.handleClick() } />
+          <div
+            className="btn btn-xs btn-info"
+            onClick={ () => this.handleClick() }
+          >
+            <IoCalendar />
           </div>
         </div>
       </div>
