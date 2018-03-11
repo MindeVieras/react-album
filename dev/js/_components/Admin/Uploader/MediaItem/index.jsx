@@ -28,14 +28,16 @@ class MediaItem extends Component {
   }
   
   componentDidMount() {
-    const { mime, thumbs } = this.props
-    const img = new Image(25, 25)
-    img.onload = () => this.props.connectDragPreview(img)
-    if (mime.includes('image')) {
-      img.src = this.props.thumbs.icon
-    }
-    if (mime.includes('video')) {
-      img.src = this.props.videos.thumbs.medium
+    const { mime, thumbs, videos, connectDragPreview } = this.props
+    if (mime) {    
+      const img = new Image(25, 25)
+      img.onload = () => connectDragPreview(img)
+      if (mime.includes('image')) {
+        img.src = thumbs.icon
+      }
+      if (mime.includes('video')) {
+        img.src = videos.thumbs.medium
+      }
     }
   }
 
@@ -180,7 +182,7 @@ MediaItem.propTypes = {
   connectDragSource: PropTypes.func.isRequired,
   connectDragPreview: PropTypes.func.isRequired,
   isDragging: PropTypes.bool.isRequired,
-  media_id: PropTypes.number.isRequired
+  // media_id: PropTypes.number.isRequired
 }
 
 // MediaItem.defaultProps = {

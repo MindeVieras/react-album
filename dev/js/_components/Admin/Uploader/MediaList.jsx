@@ -45,6 +45,11 @@ class MediaList extends Component {
     let allGaps = (cols + 1) * item_gap
     let item_width = (wrapper_width - allGaps) / cols
     // console.log(wrapper_width)
+
+    // const mediaItems = currentFiles.map((file, i) => {
+    //   return
+    // })
+
     return (
       <div>
         <ul
