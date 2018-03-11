@@ -67,8 +67,8 @@ class Albums extends Component {
                 bottomLeft:false,
                 topLeft:false
               }}
-              minWidth={ 100 }
-              maxWidth={ 300 }
+              minWidth={ 150 }
+              maxWidth={ 350 }
               disableDragging={ true }
               onResize={((e, direction, ref, delta, position) => this.onSidebarResize(e, direction, ref, delta, position))}
               onResizeStop={((e, direction, ref, delta, position) => this.onSidebarResizeEnd(e, direction, ref, delta, position))}
