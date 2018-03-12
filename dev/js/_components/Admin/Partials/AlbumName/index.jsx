@@ -36,8 +36,11 @@ class AlbumName extends Component {
           className="name"
         />
         {album_id &&
-          <div className="btn btn-xs btn-info">
-            <IoEdit onClick={ () => this.handleClick() } />
+          <div
+            className="btn btn-xs btn-info"
+             onClick={ () => this.handleClick() }
+            >
+            <IoEdit />
           </div>
         }
       </div>

@@ -17,20 +17,18 @@ class NewAlbum extends Component {
   }
 
   handleClick() {
-    const { auth, dispatch } = this.props
+    const { dispatch } = this.props
     let start_date = moment().format('YYYY-MM-DD HH:mm:ss')
     let end_date = moment().format('YYYY-MM-DD HH:mm:ss')
     const album = {
       name: 'Unknown album',
       start_date,
       end_date,
-      author: auth.user.id,
       access: albumsConstants.PRIVATE,
       status: albumsConstants.ENABLED
     }
     albumsService.create(album)
       .then(function(res){
-        console.log(res)
         if (res.ack == 'ok') {
           album.id = res.id
           dispatch(albumsActions.addToList(album))
@@ -54,11 +52,4 @@ class NewAlbum extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  const { auth } = state
-  return {
-    auth
-  }
-}
-
-export default connect(mapStateToProps)(NewAlbum)
+export default connect()(NewAlbum)
