@@ -13,11 +13,6 @@ import { albumsConstants, contentConstants, mediaConstants } from '../../../../_
 
 class AlbumInfo extends Component {
 
-  componentDidMount() {
-    const { dispatch } = this.props
-    dispatch(uploaderActions.clearFiles())
-  }
-
   componentWillReceiveProps(nextProps) {
     const { selected_album, dispatch } = nextProps
     if (selected_album.album) {

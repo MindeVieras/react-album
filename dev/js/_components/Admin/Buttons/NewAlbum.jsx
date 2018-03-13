@@ -6,7 +6,7 @@ import { toastr } from 'react-redux-toastr'
 
 import { IoPlusRound } from 'react-icons/lib/io'
 
-import { albumsActions } from '../../../_actions'
+import { albumsActions, utilsActions, uploaderActions } from '../../../_actions'
 import { albumsService } from '../../../_services'
 import { albumsConstants } from '../../../_constants'
 
@@ -32,7 +32,9 @@ class NewAlbum extends Component {
         if (res.ack == 'ok') {
           album.id = res.id
           dispatch(albumsActions.addToList(album))
+          dispatch(uploaderActions.clearFiles())
           dispatch(albumsActions.getOne(res.id))
+          dispatch(utilsActions.saveAdminSetting('selected_album', res.id))
           toastr.success('Success', res.msg)
         } else {
           toastr.error('Error', res.msg)

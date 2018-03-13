@@ -39,7 +39,7 @@ class OpenLightbox extends Component {
     const { album } = this.props
     // console.log(album.media)
     let images = []
-    if (album.media && album.media.length) {
+    if (album.media) {
       images = album.media.map(m => {
         // let thumb = m.thumbs.thumb
         if (m.mime.includes('image')) {
