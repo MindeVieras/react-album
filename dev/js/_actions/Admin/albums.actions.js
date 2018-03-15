@@ -6,10 +6,9 @@ import { albumsConstants } from '../../_constants'
 import { albumsService, mediaService } from '../../_services'
 
 export const albumsActions = {
-  addToList,
-  getList,
-  getListDates,
+  getList, getListDates, addToList,
   getOne,
+  rename, changeDate,
   clearSelected,
   removeLocation,
   setLocation,
@@ -23,18 +22,14 @@ export const albumsActions = {
   setMapCenter,
   setMapZoom,
   moveMedia,
-  rename,
-  changeDate,
   delete: _delete
 }
 
-function addToList(album) {
-  return dispatch => {
-    dispatch(add(album))
-  }
 
-  function add(album) { return { type: albumsConstants.ADD_TO_LIST, album } }
-}
+/*
+ * Album list actions
+ * calls getList, getListDates, addToList
+ */
 
 function getList(start_date, end_date) {
   return dispatch => {
@@ -50,11 +45,10 @@ function getList(start_date, end_date) {
       })
   }
 
-  function request() { return { type: albumsConstants.GETLIST_REQUEST } }
-  function success(albums) { return { type: albumsConstants.GETLIST_SUCCESS, albums } }
-  function failure(err) { return { type: albumsConstants.GETLIST_FAILURE, err } }
+  function request() { return { type: albumsConstants.GET_LIST_REQUEST } }
+  function success(albums) { return { type: albumsConstants.GET_LIST_SUCCESS, albums } }
+  function failure(err) { return { type: albumsConstants.GET_LIST_FAILURE, err } }
 }
-
 function getListDates() {
   return dispatch => {
     dispatch(request())
@@ -69,10 +63,23 @@ function getListDates() {
       })
   }
 
-  function request() { return { type: albumsConstants.GETLISTDATES_REQUEST } }
-  function success(dates) { return { type: albumsConstants.GETLISTDATES_SUCCESS, dates } }
-  function failure(err) { return { type: albumsConstants.GETLISTDATES_FAILURE, err } }
+  function request() { return { type: albumsConstants.GET_LIST_DATES_REQUEST } }
+  function success(dates) { return { type: albumsConstants.GET_LIST_DATES_SUCCESS, dates } }
+  function failure(err) { return { type: albumsConstants.GET_LIST_DATES_FAILURE, err } }
 }
+function addToList(album) {
+  return dispatch => {
+    dispatch(add(album))
+  }
+
+  function add(album) { return { type: albumsConstants.ADD_TO_LIST, album } }
+}
+
+
+/*
+ * Album list actions
+ * calls getOne
+ */
 
 function getOne(id) {
   return dispatch => {
@@ -88,10 +95,51 @@ function getOne(id) {
       })
   }
 
-  function request() { return { type: albumsConstants.GETONE_REQUEST } }
-  function success(album) { return { type: albumsConstants.GETONE_SUCCESS, album } }
-  function failure(err) { return { type: albumsConstants.GETONE_FAILURE, err } }
+  function request() { return { type: albumsConstants.GET_ONE_REQUEST } }
+  function success(album) { return { type: albumsConstants.GET_ONE_SUCCESS, album } }
+  function failure(err) { return { type: albumsConstants.GET_ONE_FAILURE, err } }
 }
+
+
+/*
+ * Album data actions
+ * calls rename, changeDate
+ */
+
+function rename(payload) {
+  return dispatch => {
+    albumsService.rename(payload)
+      .then(function(res) {
+        if (res.ack == 'ok') {
+          dispatch(rename(payload))
+          Popup.close()
+          toastr.success('Success', res.msg)
+        } else {
+          toastr.error('Error', res.msg)
+        }
+      })
+  }
+
+  function rename(payload) { return { type: albumsConstants.RENAME, payload } }
+}
+function changeDate(payload) {
+  return dispatch => {
+    albumsService.changeDate(payload)
+      .then(function(res) {
+        if (res.ack == 'ok') {
+          dispatch(change(payload))
+          Popup.close()
+          toastr.success('Success', res.msg)
+        } else {
+          toastr.error('Error', res.msg)
+        }
+      })
+  }
+  
+  function change(payload) { return { type: albumsConstants.CHANGE_DATE, payload } }
+}
+
+
 
 function clearSelected() {
   return dispatch => {
@@ -214,39 +262,7 @@ function moveMedia(media_id, album_id) {
         }
       })
   }
-  function move(media_id, album_id) { return { type: albumsConstants.MOVE_MEDIA, media_id, album_id } }
-}
-
-function rename(payload) {
-  return dispatch => {
-    albumsService.rename(payload.name, payload.id)
-      .then(function(res) {
-        if (res.ack == 'ok') {
-          dispatch(rename(payload))
-          Popup.close()
-          toastr.success('Success', res.msg)
-        } else {
-          toastr.error('Error', res.msg)
-        }
-      })
-  }
-  function rename(payload) { return { type: albumsConstants.RENAME, payload } }
-}
-
-function changeDate(payload) {
-  return dispatch => {
-    albumsService.changeDate(payload)
-      .then(function(res) {
-        if (res.ack == 'ok') {
-          dispatch(change(payload))
-          Popup.close()
-          toastr.success('Success', res.msg)
-        } else {
-          toastr.error('Error', res.msg)
-        }
-      })
-  }
-  function change(payload) { return { type: albumsConstants.CHANGE_DATE, payload } }
+  function move(media_id, album_id) { return { type: albumsConstants.REMOVE_MEDIA, media_id, album_id } }
 }
 
 // prefixed function name with underscore because delete is a reserved word in javascript

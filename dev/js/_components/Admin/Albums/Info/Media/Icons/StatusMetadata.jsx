@@ -10,7 +10,7 @@ import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu'
 import { ScaleLoader } from 'react-spinners'
 import { IoClipboard } from 'react-icons/lib/io'
 
-import { uploaderActions } from '../../../../_actions'
+import { uploaderActions } from '../../../../../../_actions'
 
 
 class StatusMetadataIcon extends Component {

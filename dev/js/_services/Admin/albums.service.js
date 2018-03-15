@@ -6,11 +6,11 @@ export const albumsService = {
   getList,
   getListDates,
   getOne,
+  rename,
+  changeDate,
   removeLocation,
   setLocation,
   updateLocation,
-  rename,
-  changeDate,
   delete: _delete
 }
 
@@ -24,6 +24,12 @@ function create(album) {
   return fetch(baseServerUrl+'/api/albums/create', requestOptions).then(handleResponse)
 }
 
+
+/*
+ * Album list services
+ * calls getList, getListDates
+ */
+
 function getList(start_date, end_date) {
   const requestOptions = {
     method: 'POST',
@@ -33,7 +39,6 @@ function getList(start_date, end_date) {
 
   return fetch(baseServerUrl+'/api/albums/get-list', requestOptions).then(handleResponse)
 }
-
 function getListDates() {
   const requestOptions = {
     method: 'GET',
@@ -43,6 +48,12 @@ function getListDates() {
   return fetch(baseServerUrl+'/api/albums/get-list-dates', requestOptions).then(handleResponse)
 }
 
+
+/*
+ * Album get one services
+ * calls getOne
+ */
+
 function getOne(id) {
   const requestOptions = {
     method: 'GET',
@@ -51,6 +62,33 @@ function getOne(id) {
 
   return fetch(baseServerUrl+'/api/albums/get-one/'+id, requestOptions).then(handleResponse)
 }
+
+
+/*
+ * Album data services
+ * calls rename, changeDate
+ */
+
+function rename(payload) {
+  const requestOptions = {
+    method: 'POST',
+    headers: { ...authHeader(), 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }
+
+  return fetch(baseServerUrl+'/api/albums/rename', requestOptions).then(handleResponse)
+}
+function changeDate(payload) {
+  const requestOptions = {
+    method: 'POST',
+    headers: { ...authHeader(), 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }
+
+  return fetch(baseServerUrl+'/api/albums/change-date', requestOptions).then(handleResponse)
+}
+
+
 
 function removeLocation(id) {
   const requestOptions = {
@@ -79,26 +117,6 @@ function updateLocation(album_id, location) {
   }
 
   return fetch(baseServerUrl+'/api/albums/update-location', requestOptions).then(handleResponse)
-}
-
-function rename(name, id) {
-  const requestOptions = {
-    method: 'POST',
-    headers: { ...authHeader(), 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name, id })
-  }
-
-  return fetch(baseServerUrl+'/api/albums/rename', requestOptions).then(handleResponse)
-}
-
-function changeDate(payload) {
-  const requestOptions = {
-    method: 'POST',
-    headers: { ...authHeader(), 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  }
-
-  return fetch(baseServerUrl+'/api/albums/change-date', requestOptions).then(handleResponse)
 }
 
 function _delete(id) {

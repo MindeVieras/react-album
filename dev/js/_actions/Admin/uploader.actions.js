@@ -1,7 +1,7 @@
 
 import { toastr } from 'react-redux-toastr'
 
-import { uploaderConstants } from '../../_constants'
+import { uploaderConstants, albumsConstants } from '../../_constants'
 import { mediaService } from '../../_services'
 
 export const uploaderActions = {
@@ -78,6 +78,7 @@ function trashFile(media_id) {
       .then(function(res) {
         if (res.ack == 'ok') {
           dispatch(trash(media_id))
+          dispatch(remove(media_id))
           toastr.success('Success', res.msg)
         } else if (res.ack == 'err') {
           toastr.error('Error', res.msg)
@@ -86,6 +87,7 @@ function trashFile(media_id) {
   }
 
   function trash(media_id) { return { type: uploaderConstants.REMOVE_FILE, media_id } }
+  function remove(media_id) { return { type: albumsConstants.REMOVE_MEDIA, media_id } }
 }
 
 function removeFile(media_id) {

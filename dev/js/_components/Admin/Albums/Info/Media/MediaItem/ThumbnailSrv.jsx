@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Player } from 'video-react'
 
-import Spinner from '../../Partials/Spinner'
+import Spinner from '../../../../Partials/Spinner'
 import { IoAlertCircled } from 'react-icons/lib/io'
 
 class ThumbnailSrv extends Component {

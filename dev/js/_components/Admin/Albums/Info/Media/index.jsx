@@ -12,11 +12,11 @@ import TotalProgressBar from './Partials/total-progress-bar'
 
 import MediaList from './MediaList'
 
-import { authHeader, baseServerUrl } from '../../../_helpers'
-import { footerActions, uploaderActions } from '../../../_actions'
-import { mediaService } from '../../../_services'
+import { authHeader, baseServerUrl } from '../../../../../_helpers'
+import { footerActions, uploaderActions } from '../../../../../_actions'
+import { mediaService } from '../../../../../_services'
 
-class Uploader extends Component {
+class Media extends Component {
 
   constructor(props) {
     super(props)
@@ -186,7 +186,7 @@ class Uploader extends Component {
   }
 }
 
-Uploader.propTypes = {
+Media.propTypes = {
   entity: PropTypes.number.isRequired,
   entity_id: PropTypes.number.isRequired,
   status: PropTypes.number.isRequired,
@@ -195,7 +195,7 @@ Uploader.propTypes = {
   wrapper_width: PropTypes.number
 }
 
-Uploader.defaultProps = {
+Media.defaultProps = {
   'cancelButton-children': <IoCloseCircled />,
   wrapper_width: 500
 }
@@ -214,5 +214,4 @@ function mapStateToProps(state) {
   }
 }
 
-const connectedUploader = connect(mapStateToProps)(Uploader)
-export { connectedUploader as Uploader }
+export default connect(mapStateToProps)(Media)

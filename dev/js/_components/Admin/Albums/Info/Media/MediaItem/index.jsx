@@ -19,8 +19,8 @@ import StatusGenerateImageThumbsIcon from '../Icons/StatusGenerateImageThumbs'
 import StatusGenerateVideosIcon from '../Icons/StatusGenerateVideos'
 import StatusRekognitionLabelsIcon from '../Icons/StatusRekognitionLabels'
 
-import { utilsConstants } from '../../../../_constants'
-import { albumsActions, uploaderActions } from '../../../../_actions'
+import { utilsConstants } from '../../../../../../_constants'
+import { albumsActions, uploaderActions } from '../../../../../../_actions'
 
 class MediaItem extends Component {
   constructor(props) {

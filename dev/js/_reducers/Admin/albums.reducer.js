@@ -2,16 +2,16 @@
 import { albumsConstants } from '../../_constants'
 
 const initialState = {
-  lightbox: {
-    is_open: false,
-    index: 0,
-    items: []
-  },
   selected_album: {
     album: {},
     map: {
       edit_enabled: false
     }
+  },
+  lightbox: {
+    is_open: false,
+    index: 0,
+    items: []
   },
   list: {
     loading: false,
@@ -27,6 +27,34 @@ const initialState = {
 
 export function adminAlbums(state = initialState, action) {
   switch (action.type) {
+
+  /*
+   * Album list reducers
+   * calls GET_LIST_REQUEST, GET_LIST_SUCCESS, GET_LIST_FAILURE
+   *       ADD_TO_LIST
+   */
+
+  case albumsConstants.GET_LIST_REQUEST:
+    return {
+      ...state,
+      list: {
+        loading: true
+      }
+    }
+  case albumsConstants.GET_LIST_SUCCESS:
+    return {
+      ...state,
+      list: {
+        items: action.albums
+      }
+    }
+  case albumsConstants.GET_LIST_FAILURE:
+    return {
+      ...state,
+      list: {
+        err: action.err
+      } 
+    }
   case albumsConstants.ADD_TO_LIST:
     return {
       ...state,
@@ -34,6 +62,76 @@ export function adminAlbums(state = initialState, action) {
         items: [action.album, ...state.list.items]
       }
     }
+
+
+  /*
+   * Album list dates reducers
+   * calls GET_LIST_DATES_REQUEST, GET_LIST_DATES_SUCCESS, GET_LIST_DATES_FAILURE
+   */
+
+  case albumsConstants.GET_LIST_DATES_REQUEST:
+    return {
+      ...state,
+      dates: {
+        loading: true
+      }
+    }
+  case albumsConstants.GET_LIST_DATES_SUCCESS:
+    return {
+      ...state,
+      dates: {
+        distinct_list: action.dates
+      }
+    }
+  case albumsConstants.GET_LIST_DATES_FAILURE:
+    return {
+      ...state,
+      dates: {
+        err: action.err
+      } 
+    }
+
+
+  /*
+   * Album get one reducers
+   * calls GET_ONE_REQUEST, GET_ONE_SUCCESS, GET_ONE_FAILURE
+   */
+
+  case albumsConstants.GET_ONE_REQUEST:
+    return {
+      ...state,
+      selected_album: {
+        ...state.selected_album,
+        album: {
+          loading: true
+        }
+      }
+    }
+  case albumsConstants.GET_ONE_SUCCESS:
+    return {
+      ...state,
+      selected_album: {
+        ...state.selected_album,
+        album: action.album
+      }
+    }
+  case albumsConstants.GET_ONE_FAILURE:
+    return {
+      ...state,
+      selected_album: {
+        ...state.selected_album,
+        album: {
+          err: action.err
+        }
+      }
+    }
+
+
+  /*
+   * Album data reducers
+   * calls RENAME, CHANGE_DATE
+   */
+
   case albumsConstants.RENAME:
     return {
       ...state,
@@ -43,9 +141,10 @@ export function adminAlbums(state = initialState, action) {
           name: action.payload.name
         }
       },
+      // Also rename album in list
       list: {
         items: state.list.items.map(album => {
-          if (album.id === action.payload.id) {
+          if (album.id === action.payload.album_id) {
             const { ...albumCopy } = album
             return { ...albumCopy, name: action.payload.name }
           }
@@ -62,81 +161,24 @@ export function adminAlbums(state = initialState, action) {
           start_date: action.payload.start_date,
           end_date: action.payload.end_date
         }
+      },
+      // Also change album date in list
+      list: {
+        items: state.list.items.map(album => {
+          if (album.id === action.payload.album_id) {
+            const { ...albumCopy } = album
+            return {
+              ...albumCopy,
+              start_date: action.payload.start_date,
+              end_date: action.payload.end_date
+            }
+          }
+          return album
+        })
       }
     }
 
-  case albumsConstants.GETLIST_REQUEST:
-    return {
-      ...state,
-      list: {
-        loading: true
-      }
-    }
-  case albumsConstants.GETLIST_SUCCESS:
-    return {
-      ...state,
-      list: {
-        items: action.albums
-      }
-    }
-  case albumsConstants.GETLIST_FAILURE:
-    return {
-      ...state,
-      list: {
-        err: action.err
-      } 
-    }
 
-  case albumsConstants.GETLISTDATES_REQUEST:
-    return {
-      ...state,
-      dates: {
-        loading: true
-      }
-    }
-  case albumsConstants.GETLISTDATES_SUCCESS:
-    return {
-      ...state,
-      dates: {
-        distinct_list: action.dates
-      }
-    }
-  case albumsConstants.GETLISTDATES_FAILURE:
-    return {
-      ...state,
-      dates: {
-        err: action.err
-      } 
-    }
-
-  case albumsConstants.GETONE_REQUEST:
-    return {
-      ...state,
-      selected_album: {
-        ...state.selected_album,
-        album: {
-          loading: true
-        }
-      }
-    }
-  case albumsConstants.GETONE_SUCCESS:
-    return {
-      ...state,
-      selected_album: {
-        ...state.selected_album,
-        album: action.album
-      }
-    }
-  case albumsConstants.GETONE_FAILURE:
-    return {
-      ...state,
-      selected_album: {
-        ...state.selected_album,
-        album: {
-          err: action.err
-        }
-      }
-    }
 
   case albumsConstants.CLEAR_SELECTED:
     return {
@@ -282,7 +324,7 @@ export function adminAlbums(state = initialState, action) {
     }
 
 
-  case albumsConstants.MOVE_MEDIA:
+  case albumsConstants.REMOVE_MEDIA:
     return {
       ...state,
       selected_album: {

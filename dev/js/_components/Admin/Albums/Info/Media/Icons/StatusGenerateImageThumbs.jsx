@@ -2,67 +2,57 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import _ from 'lodash'
 import uuidv4 from 'uuid/v4'
 import ReactTooltip from 'react-tooltip'
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu'
 
 import { ScaleLoader } from 'react-spinners'
-import { IoAperture } from 'react-icons/lib/io'
+import { IoImages } from 'react-icons/lib/io'
 
-import { uploaderActions } from '../../../../_actions'
+import { uploaderActions } from '../../../../../../_actions'
 
 
-class StatusRekognitionLabelsIcon extends Component {
+class StatusGenerateImageThumbsIcon extends Component {
   
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
 
-    this.handleResaveRekognitionLabels = this.handleResaveRekognitionLabels.bind(this)
+    this.handleRegenerateThumbs = this.handleRegenerateThumbs.bind(this)
   }
   
-  handleResaveRekognitionLabels(e) {
+  handleRegenerateThumbs(e) {
     const { id, media_id, dispatch } = this.props
-    dispatch(uploaderActions.rekognitionLabels(id, media_id))
+    dispatch(uploaderActions.generateImageThumbs(id, media_id))
   }
 
   render() {
     
     const tooltipId = uuidv4()
     const contextMenuId = uuidv4()
-    const { id, rekognition_labels } = this.props
+
+    const { id, thumbs } = this.props
 
     let className = ''
     let tooltipText = ''
+
     let icon = <ContextMenuTrigger id={ contextMenuId }>
-      <IoAperture />
+      <IoImages />
     </ContextMenuTrigger>
+
     let contextMenu = <ContextMenu id={ contextMenuId }>
-      <MenuItem onClick={ this.handleResaveRekognitionLabels }>
-        Reset rekognition labels
-      </MenuItem>
-      <MenuItem>
-        Edit rekognition labels
+      <MenuItem onClick={ this.handleRegenerateThumbs }>
+        Regenerate thumbnails
       </MenuItem>
     </ContextMenu>
 
-    if (rekognition_labels.ack == 'ok') {
+    if (thumbs.thumb || thumbs.ack == 'ok') {
       className = 'success'
-      tooltipText = <ul>
-        {
-          Object.keys(rekognition_labels).map((key, i) => {
-            if (key != 'ack') {
-              let confidence = rekognition_labels[key]
-              return (
-                <li key={ i }>{ key } { Math.trunc(confidence) }%</li>
-              )
-            }
-          })
-        }
-      </ul>
+      tooltipText = 'Thumbnails generated'
     }
-    else if (rekognition_labels.ack == 'loading') {
+    else if (thumbs.ack == 'loading') {
       className = 'loading'
-      tooltipText = rekognition_labels.msg
+      tooltipText = thumbs.msg
       icon = <ScaleLoader
         height={ 22 }
         width={ 1 }
@@ -70,9 +60,9 @@ class StatusRekognitionLabelsIcon extends Component {
         color={'#f6f6f5'}
       />
     }
-    else if (rekognition_labels.ack == 'err') {
+    else if (thumbs.ack == 'err') {
       className = 'failed'
-      tooltipText = rekognition_labels.msg
+      tooltipText = thumbs.msg
     }
 
     return (
@@ -95,10 +85,14 @@ class StatusRekognitionLabelsIcon extends Component {
   }
 }
 
-StatusRekognitionLabelsIcon.propTypes = {
+StatusGenerateImageThumbsIcon.propTypes = {
   id: PropTypes.number.isRequired,
   media_id: PropTypes.number.isRequired,
-  rekognition_labels: PropTypes.object.isRequired
+  thumbs: PropTypes.object.isRequired
 }
 
-export default connect()(StatusRekognitionLabelsIcon)
+export default connect()(StatusGenerateImageThumbsIcon)
+
+
+
+

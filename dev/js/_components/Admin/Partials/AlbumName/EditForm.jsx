@@ -17,7 +17,11 @@ class EditForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    this.props.dispatch(albumsActions.rename({ name: this.state.value, id: this.props.id }))
+    
+    const { album_id, dispatch } = this.props
+    const name = this.state.value
+
+    dispatch(albumsActions.rename({ album_id, name }))
   }
   
   handleFocus(e) {
@@ -31,15 +35,15 @@ class EditForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={ this.handleSubmit } >
         <div className="form-group">
           <input
             type="text"
             className="form-control"
-            value={this.state.value}
-            onChange={this.handleChange}
+            value={ this.state.value }
+            onChange={ this.handleChange }
             autoFocus
-            onFocus={this.handleFocus}
+            onFocus={ this.handleFocus }
           />
         </div>
         <input type="submit" value="Save" className="btn btn-success" />
@@ -51,7 +55,7 @@ class EditForm extends Component {
 
 EditForm.propTypes = {
   name: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
+  album_id: PropTypes.number.isRequired,
   dispatch: PropTypes.func
 }
 

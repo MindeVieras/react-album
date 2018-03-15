@@ -28,10 +28,9 @@ class Picker extends Component {
   handleSubmit(e) {
     e.preventDefault()
     this.props.dispatch(albumsActions.changeDate({
+      album_id: this.props.album_id,
       start_date: this.state.start_date,
-      end_date: this.state.end_date,
-      sd: '',
-      id: this.props.album_id
+      end_date: this.state.end_date
     }))
   }
 

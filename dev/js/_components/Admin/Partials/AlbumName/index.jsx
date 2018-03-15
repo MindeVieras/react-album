@@ -11,9 +11,10 @@ import EditForm from './EditForm'
 class AlbumName extends Component {
 
   handleClick() {
+    const { album_id, name } = this.props
     const content = <EditForm
-      name={ this.props.name }
-      id={ this.props.album_id }
+      name={ name }
+      album_id={ album_id }
     />
 
     Popup.create({
@@ -24,7 +25,7 @@ class AlbumName extends Component {
   }
 
   render() {
-    const { name, album_id } = this.props
+    const { album_id, name } = this.props
     let editClass = album_id ? ' edit' : ''
     return (
       <div className={ `name-wrapper${editClass}` }>

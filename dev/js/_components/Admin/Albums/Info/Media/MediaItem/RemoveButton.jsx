@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import { IoCloseCircled } from 'react-icons/lib/io'
 
-import { uploaderActions } from '../../../../_actions'
+import { uploaderActions } from '../../../../../../_actions'
 
 class RemoveButton extends Component {
 

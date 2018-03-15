@@ -6,7 +6,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar'
 
 import Spinner from '../../Partials/Spinner'
 import Bar from './Bar'
-import { Uploader } from '../../Uploader'
+import Media from './Media'
 
 import { headerActions, footerActions, uploaderActions } from '../../../../_actions'
 import { albumsConstants, contentConstants, mediaConstants } from '../../../../_constants'
@@ -56,7 +56,7 @@ class AlbumInfo extends Component {
                 end_date={ selected_album.album.end_date }
               />
               
-              <Uploader
+              <Media
                 entity={contentConstants.TYPE_ALBUM}
                 entity_id={selected_album.album.id}
                 status={mediaConstants.STATUS_ENABLED}
