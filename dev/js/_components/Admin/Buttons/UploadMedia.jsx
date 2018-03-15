@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import { IoUpload } from 'react-icons/lib/io'
 
-import FileInput from '../Albums/Media/Partials/file-input'
+import FileInput from '../Albums/Info/Media/Partials/file-input'
 import { albumsActions, footerActions } from '../../../_actions'
 
 class UploadMedia extends Component {
