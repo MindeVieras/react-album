@@ -179,14 +179,11 @@ export function adminAlbums(state = initialState, action) {
     }
 
 
+  /*
+   * Album locations map reducers
+   * calls SET_LOCATIONS_MAP_EDIT, SET_LOCATIONS_MAP_CENTER, SET_LOCATIONS_MAP_ZOOM
+   */
 
-  case albumsConstants.CLEAR_SELECTED:
-    return {
-      ...state,
-      selected_album: initialState.selected_album
-    }
-
-  // Album locations Map
   case albumsConstants.SET_LOCATIONS_MAP_EDIT:
     return {
       ...state,
@@ -222,6 +219,10 @@ export function adminAlbums(state = initialState, action) {
     }
 
 
+  /*
+   * Album location reducers
+   * calls SET_LOCATION, REMOVE_LOCATION
+   */
 
   case albumsConstants.SET_LOCATION:
     return {
@@ -245,6 +246,14 @@ export function adminAlbums(state = initialState, action) {
         }
       }
     }
+
+
+  /*
+   * Album Media location reducers
+   * calls SET_MEDIA_LOCATION, REMOVE_MEDIA_LOCATION
+   *       OPEN_MEDIA_LOCATION_MARKER, CLOSE_MEDIA_LOCATION_MARKERS
+   */
+
   case albumsConstants.SET_MEDIA_LOCATION:
     return {
       ...state,
@@ -324,6 +333,8 @@ export function adminAlbums(state = initialState, action) {
     }
 
 
+
+
   case albumsConstants.REMOVE_MEDIA:
     return {
       ...state,
@@ -336,6 +347,12 @@ export function adminAlbums(state = initialState, action) {
       }
     }
 
+
+  case albumsConstants.CLEAR_SELECTED:
+    return {
+      ...state,
+      selected_album: initialState.selected_album
+    }
 
   // Delete album
   case albumsConstants.DELETE_REQUEST:

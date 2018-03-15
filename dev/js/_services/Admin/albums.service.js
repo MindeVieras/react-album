@@ -6,9 +6,7 @@ export const albumsService = {
   getList, getListDates,
   getOne,
   rename, changeDate,
-  removeLocation,
-  setLocation,
-  updateLocation,
+  setLocation, updateLocation, removeLocation,
   delete: _delete
 }
 
@@ -37,6 +35,7 @@ function getList(start_date, end_date) {
 
   return fetch(baseServerUrl+'/api/albums/get-list', requestOptions).then(handleResponse)
 }
+
 function getListDates() {
   const requestOptions = {
     method: 'GET',
@@ -76,6 +75,7 @@ function rename(payload) {
 
   return fetch(baseServerUrl+'/api/albums/rename', requestOptions).then(handleResponse)
 }
+
 function changeDate(payload) {
   const requestOptions = {
     method: 'POST',
@@ -87,15 +87,10 @@ function changeDate(payload) {
 }
 
 
-
-function removeLocation(id) {
-  const requestOptions = {
-    method: 'GET',
-    headers: authHeader()
-  }
-
-  return fetch(baseServerUrl+'/api/albums/remove-location/'+id, requestOptions).then(handleResponse)
-}
+/*
+ * Album location services
+ * calls setLocation, updateLocation, removeLocation
+ */
 
 function setLocation(album_id, location) {
   const requestOptions = {
@@ -116,6 +111,17 @@ function updateLocation(album_id, location) {
 
   return fetch(baseServerUrl+'/api/albums/update-location', requestOptions).then(handleResponse)
 }
+
+function removeLocation(id) {
+  const requestOptions = {
+    method: 'GET',
+    headers: authHeader()
+  }
+
+  return fetch(baseServerUrl+'/api/albums/remove-location/'+id, requestOptions).then(handleResponse)
+}
+
+
 
 function _delete(id) {
   const requestOptions = {

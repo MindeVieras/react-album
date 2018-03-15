@@ -9,18 +9,14 @@ export const albumsActions = {
   getList, getListDates, addToList,
   getOne,
   rename, changeDate,
+  setMapEdit, setMapCenter, setMapZoom,
+  setLocation, updateLocation, removeLocation,
   clearSelected,
-  removeLocation,
-  setLocation,
-  updateLocation,
   setMediaLocation,
   updateMediaLocation,
   removeMediaLocation,
   openMediaLocationMarker,
   closeMediaLocationMarkers,
-  setMapEdit,
-  setMapCenter,
-  setMapZoom,
   moveMedia,
   delete: _delete
 }
@@ -49,6 +45,7 @@ function getList(start_date, end_date) {
   function success(albums) { return { type: albumsConstants.GET_LIST_SUCCESS, albums } }
   function failure(err) { return { type: albumsConstants.GET_LIST_FAILURE, err } }
 }
+
 function getListDates() {
   return dispatch => {
     dispatch(request())
@@ -67,6 +64,7 @@ function getListDates() {
   function success(dates) { return { type: albumsConstants.GET_LIST_DATES_SUCCESS, dates } }
   function failure(err) { return { type: albumsConstants.GET_LIST_DATES_FAILURE, err } }
 }
+
 function addToList(album) {
   return dispatch => {
     dispatch(add(album))
@@ -122,6 +120,7 @@ function rename(payload) {
 
   function rename(payload) { return { type: albumsConstants.RENAME, payload } }
 }
+
 function changeDate(payload) {
   return dispatch => {
     albumsService.changeDate(payload)
@@ -135,29 +134,45 @@ function changeDate(payload) {
         }
       })
   }
-  
+
   function change(payload) { return { type: albumsConstants.CHANGE_DATE, payload } }
 }
 
 
+/*
+ * Album locations map actions
+ * calls rename, changeDate
+ */
 
-function clearSelected() {
+function setMapEdit(edit) {
   return dispatch => {
-    dispatch(clear())
+    dispatch(set(edit))
   }
 
-  function clear() { return { type: albumsConstants.CLEAR_SELECTED } }
+  function set(edit) { return { type: albumsConstants.SET_LOCATIONS_MAP_EDIT, edit } }
 }
 
-function removeLocation(id) {
+function setMapCenter(center) {
   return dispatch => {
-    albumsService.removeLocation(id)
-      .then(function(res) {
-        dispatch(remove(id))
-      })
+    dispatch(set(center))
   }
-  function remove(id) { return { type: albumsConstants.REMOVE_LOCATION, id } }
+
+  function set(center) { return { type: albumsConstants.SET_LOCATIONS_MAP_CENTER, center } }
 }
+
+function setMapZoom(zoom) {
+  return dispatch => {
+    dispatch(set(zoom))
+  }
+
+  function set(zoom) { return { type: albumsConstants.SET_LOCATIONS_MAP_ZOOM, zoom } }
+}
+
+
+/*
+ * Album location actions
+ * calls rename, changeDate
+ */
 
 function setLocation(album_id, location) {
   return dispatch => {
@@ -178,6 +193,23 @@ function updateLocation(album_id, location) {
   }
   function set(location) { return { type: albumsConstants.SET_LOCATION, location } }
 }
+
+function removeLocation(id) {
+  return dispatch => {
+    albumsService.removeLocation(id)
+      .then(function(res) {
+        dispatch(remove(id))
+      })
+  }
+  function remove(id) { return { type: albumsConstants.REMOVE_LOCATION, id } }
+}
+
+
+/*
+ * Album Media location actions
+ * calls setMediaLocation, updateMediaLocation, removeMediaLocation
+ *       openMediaLocationMarker, closeMediaLocationMarkers
+ */
 
 function setMediaLocation(media_id, location) {
   return dispatch => {
@@ -209,30 +241,6 @@ function removeMediaLocation(media_id) {
   function remove(media_id) { return { type: albumsConstants.REMOVE_MEDIA_LOCATION, media_id } }
 }
 
-function setMapEdit(edit) {
-  return dispatch => {
-    dispatch(set(edit))
-  }
-
-  function set(edit) { return { type: albumsConstants.SET_LOCATIONS_MAP_EDIT, edit } }
-}
-
-function setMapCenter(center) {
-  return dispatch => {
-    dispatch(set(center))
-  }
-
-  function set(center) { return { type: albumsConstants.SET_LOCATIONS_MAP_CENTER, center } }
-}
-
-function setMapZoom(zoom) {
-  return dispatch => {
-    dispatch(set(zoom))
-  }
-
-  function set(zoom) { return { type: albumsConstants.SET_LOCATIONS_MAP_ZOOM, zoom } }
-}
-
 function openMediaLocationMarker(media_id, marker_open) {
   return dispatch => {
     dispatch(open(media_id, marker_open))
@@ -248,6 +256,18 @@ function closeMediaLocationMarkers() {
 
   function close() { return { type: albumsConstants.CLOSE_MEDIA_LOCATION_MARKERS } }
 }
+
+
+
+
+function clearSelected() {
+  return dispatch => {
+    dispatch(clear())
+  }
+
+  function clear() { return { type: albumsConstants.CLEAR_SELECTED } }
+}
+
 
 function moveMedia(media_id, album_id) {
   return dispatch => {
