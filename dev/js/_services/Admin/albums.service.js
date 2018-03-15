@@ -3,11 +3,9 @@ import { authHeader, baseServerUrl } from '../../_helpers'
 
 export const albumsService = {
   create,
-  getList,
-  getListDates,
+  getList, getListDates,
   getOne,
-  rename,
-  changeDate,
+  rename, changeDate,
   removeLocation,
   setLocation,
   updateLocation,
