@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Pager from 'react-pager'
 
 import MediaItem from './MediaItem'
@@ -82,6 +83,12 @@ class MediaList extends Component {
       </div>
     )
   }
+}
+
+MediaList.propTypes = {
+  files: PropTypes.array.isRequired,
+  wrapper_width: PropTypes.number.isRequired,
+  uploader: PropTypes.object.isRequired
 }
 
 export default MediaList

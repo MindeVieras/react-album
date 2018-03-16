@@ -8,7 +8,7 @@ import Spinner from '../../Partials/Spinner'
 import Bar from './Bar'
 import Media from './Media'
 
-import { headerActions, footerActions, uploaderActions } from '../../../../_actions'
+import { headerActions, footerActions } from '../../../../_actions'
 import { albumsConstants, contentConstants, mediaConstants } from '../../../../_constants'
 
 class AlbumInfo extends Component {
@@ -60,7 +60,7 @@ class AlbumInfo extends Component {
                 entity={contentConstants.TYPE_ALBUM}
                 entity_id={selected_album.album.id}
                 status={mediaConstants.STATUS_ENABLED}
-                initial_media={ selected_album.album.media }
+                files={ selected_album.album.media }
                 wrapper_width={ width }
               />
 

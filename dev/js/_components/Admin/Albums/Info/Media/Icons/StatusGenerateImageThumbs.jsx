@@ -10,7 +10,7 @@ import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu'
 import { ScaleLoader } from 'react-spinners'
 import { IoImages } from 'react-icons/lib/io'
 
-import { uploaderActions } from '../../../../../../_actions'
+import { albumsActions } from '../../../../../../_actions'
 
 
 class StatusGenerateImageThumbsIcon extends Component {
@@ -23,7 +23,7 @@ class StatusGenerateImageThumbsIcon extends Component {
   
   handleRegenerateThumbs(e) {
     const { id, media_id, dispatch } = this.props
-    dispatch(uploaderActions.generateImageThumbs(id, media_id))
+    dispatch(albumsActions.generateImageThumbs(id, media_id))
   }
 
   render() {

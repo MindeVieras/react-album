@@ -20,7 +20,7 @@ import StatusGenerateVideosIcon from '../Icons/StatusGenerateVideos'
 import StatusRekognitionLabelsIcon from '../Icons/StatusRekognitionLabels'
 
 import { utilsConstants } from '../../../../../../_constants'
-import { albumsActions, uploaderActions } from '../../../../../../_actions'
+import { albumsActions } from '../../../../../../_actions'
 
 class MediaItem extends Component {
   constructor(props) {
@@ -201,7 +201,6 @@ const boxSource = {
     const dropResult = monitor.getDropResult()
     if (dropResult) {
       props.dispatch(albumsActions.moveMedia(item.media_id, dropResult.album_id))
-      props.dispatch(uploaderActions.removeFile(item.media_id))
     }
   }
 }

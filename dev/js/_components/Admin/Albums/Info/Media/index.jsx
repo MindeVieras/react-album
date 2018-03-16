@@ -13,7 +13,7 @@ import TotalProgressBar from './Partials/total-progress-bar'
 import MediaList from './MediaList'
 
 import { authHeader, baseServerUrl } from '../../../../../_helpers'
-import { footerActions, uploaderActions } from '../../../../../_actions'
+import { footerActions, albumsActions } from '../../../../../_actions'
 import { mediaService } from '../../../../../_services'
 
 class Media extends Component {
@@ -46,57 +46,41 @@ class Media extends Component {
     this._onStatusChange = (id, oldStatus, status) => {
       // Submitting files
       if (status === statusEnum.SUBMITTED) {
-        props.dispatch(uploaderActions.submitFile(id, status, false))
-        // Set file data
+        props.dispatch(albumsActions.submitMedia(id, status, false))
+        // Set media data
         const { name, size, type } = uploader.methods.getFile(id)
-        props.dispatch(uploaderActions.setMime(id, type))
-        props.dispatch(uploaderActions.setFilename(id, name))
-        props.dispatch(uploaderActions.setFilesize(id, size))
+        const data = { filename: name, size, mime: type }
+        props.dispatch(albumsActions.setMediaData(id, data))
       }
       // On server or Uploaded
       else if (status === statusEnum.UPLOAD_SUCCESSFUL) {
-        props.dispatch(uploaderActions.setStatus(id, status))
-      }
-      // Remove file
-      else if (isFileGone(status, statusEnum)) {
-        props.dispatch(uploaderActions.trashFile(id))
+        props.dispatch(albumsActions.setMediaPhase(id, status))
       }
     }
 
     this._onComplete = (id, name, responseJSON, xhr) => {
       const { dispatch } = this.props
-      const file = responseJSON.data
-      const media_id = file.media_id
-      const key = file.s3_key
-      const mime = file.mime
+      const { media_id, s3_key, mime } = responseJSON.data
       
-      dispatch(uploaderActions.setMediaId(id, media_id))
-      dispatch(uploaderActions.saveMetadata(id, media_id))
-      dispatch(uploaderActions.rekognitionLabels(id, media_id))
+      dispatch(albumsActions.setMediaMediaId(id, media_id))
+      dispatch(albumsActions.saveMediaMetadata(id, media_id))
+      dispatch(albumsActions.saveRekognitionLabels(id, media_id))
       
       // If IMAGE
       if (mime.includes('image')) {
-        dispatch(uploaderActions.generateImageThumbs(id, media_id))
+        dispatch(albumsActions.generateImageThumbs(id, media_id))
       }
       // If VIDEO
       else if (mime.includes('video')) {
-        dispatch(uploaderActions.generateVideos(id, key))
+        dispatch(albumsActions.generateVideos(id, s3_key))
       }
     }
 
-    this._onDeleteComplete = (id, xhr, isError) => {
-      const res = JSON.parse(xhr.responseText)
-      if (res.ack == 'ok') {
-        toastr.success('Success', res.msg)
-      } else {
-        toastr.error('Error', res.msg)
-      }
-    }
   }
 
   componentDidMount() {
     const uploader = this.uploader
-    const { initial_media, entity_id, entity, status, dispatch } = this.props
+    const { entity_id, entity, status, dispatch } = this.props
 
     // Set footer upload input button
     dispatch(footerActions.buttonRemove('uploadMedia'))
@@ -107,26 +91,6 @@ class Media extends Component {
       uploader
     }
     dispatch(footerActions.buttonSet('', 'uploadMedia', 'info', buttonProps))
-    // console.log(this.uploader)
-    // Add initial media
-    initial_media.map((media, i) => {
-      const { media_id, mime, name, size, thumbs, videos, metadata, rekognition_labels } = media
-      let id = 100000 + i
-      dispatch(uploaderActions.submitFile(id, 'upload successful', true))
-      dispatch(uploaderActions.setMediaId(id, media_id))
-      dispatch(uploaderActions.setMime(id, mime))
-      dispatch(uploaderActions.setFilename(id, name))
-      dispatch(uploaderActions.setFilesize(id, size))
-      dispatch(uploaderActions.getMetadata(id, metadata))
-      dispatch(uploaderActions.getRekognitionLabels(id, rekognition_labels))
-
-      if (mime.includes('image')) {
-        dispatch(uploaderActions.getImageThumbs(id, thumbs))
-      }
-      if (mime.includes('video')) {
-        dispatch(uploaderActions.getVideos(id, videos))
-      }
-    })
 
     uploader.on('statusChange', this._onStatusChange)
     uploader.on('complete', this._onComplete)
@@ -138,14 +102,14 @@ class Media extends Component {
   }
 
   render() {
-    const { entity, entity_id, status, files, initial_media, wrapper_width, dispatch } = this.props
+    const { entity, entity_id, status, files, wrapper_width, dispatch } = this.props
     const uploader = this.uploader
 
     let counter = files.length
     
     // Remove/Add dropzone text and fileField if any visableFiles
     let uploaderText = ''
-    if (files.length > 0 || initial_media.length > 0) {
+    if (files.length > 0) {
       uploaderText = <span/>
     } else {
       uploaderText = <span className="dropzone-text">
@@ -190,28 +154,12 @@ Media.propTypes = {
   entity: PropTypes.number.isRequired,
   entity_id: PropTypes.number.isRequired,
   status: PropTypes.number.isRequired,
-  initial_media: PropTypes.array.isRequired,
   files: PropTypes.array.isRequired,
   wrapper_width: PropTypes.number
 }
 
 Media.defaultProps = {
-  'cancelButton-children': <IoCloseCircled />,
   wrapper_width: 500
 }
 
-const isFileGone = (statusToCheck, statusEnum) => {
-  return [
-    statusEnum.CANCELED,
-    statusEnum.DELETED,
-  ].indexOf(statusToCheck) >= 0
-}
-
-function mapStateToProps(state) {
-  const { uploader } = state
-  return {
-    files: uploader.files
-  }
-}
-
-export default connect(mapStateToProps)(Media)
+export default connect()(Media)

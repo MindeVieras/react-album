@@ -9,7 +9,7 @@ import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu'
 import { ScaleLoader } from 'react-spinners'
 import { IoAperture } from 'react-icons/lib/io'
 
-import { uploaderActions } from '../../../../../../_actions'
+import { albumsActions } from '../../../../../../_actions'
 
 
 class StatusRekognitionLabelsIcon extends Component {
@@ -22,7 +22,7 @@ class StatusRekognitionLabelsIcon extends Component {
   
   handleResaveRekognitionLabels(e) {
     const { id, media_id, dispatch } = this.props
-    dispatch(uploaderActions.rekognitionLabels(id, media_id))
+    dispatch(albumsActions.saveRekognitionLabels(id, media_id))
   }
 
   render() {

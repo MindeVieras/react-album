@@ -5,13 +5,13 @@ import PropTypes from 'prop-types'
 
 import { IoCloseCircled } from 'react-icons/lib/io'
 
-import { uploaderActions } from '../../../../../../_actions'
+import { albumsActions } from '../../../../../../_actions'
 
 class RemoveButton extends Component {
 
   handleClick() {
     const { media_id, dispatch } = this.props
-    dispatch(uploaderActions.trashFile(media_id))
+    dispatch(albumsActions.trashMedia(media_id))
   }
 
   render() {

@@ -42,11 +42,15 @@ class OpenLightbox extends Component {
     if (album.media) {
       images = album.media.map(m => {
         // let thumb = m.thumbs.thumb
-        if (m.mime.includes('image')) {
-          return m.thumbs.fullhd
-        }
-        else {
-          return <LightboxVideo media={ m } />
+        if (m.mime) {
+          if (m.mime.includes('image')) {
+            return m.thumbs.fullhd
+          }
+          else {
+            return <LightboxVideo media={ m } />
+          }
+        } else {
+          return <span />
         }
       })
     }

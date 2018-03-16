@@ -8,7 +8,12 @@ import { history } from '../../../_helpers'
 import NewAlbum from '../Buttons/NewAlbum'
 import DeleteAlbum from '../Buttons/DeleteAlbum'
 import UploadMedia from '../Buttons/UploadMedia'
-import OpenLightbox from '../Buttons/OpenLightbox'
+// import OpenLightbox from '../Buttons/OpenLightbox'
+// <OpenLightbox
+//   key={ i }
+//   btn_type={ link.type }
+//   { ...link.data }
+// />
 
 import { IoTrashA } from 'react-icons/lib/io'
 
@@ -63,11 +68,7 @@ class Footer extends Component {
 
         if (link.action === 'openLightbox')
           return (
-            <OpenLightbox
-              key={ i }
-              btn_type={ link.type }
-              { ...link.data }
-            />
+            <span key={ i } />
           )
 
         return <Link key={i} to={link.action} className={`btn btn-sm btn-${link.type}`}>{link.name}</Link>

@@ -8,7 +8,6 @@ import { settings } from './settings.reducer'
 import { auth } from './Login/auth.reducer'
 import { users } from './Admin/users.reducer'
 import { adminAlbums } from './Admin/albums.reducer'
-import { uploader } from './Admin/uploader.reducer'
 import { header } from './Admin/header.reducer'
 import { footer } from './Admin/footer.reducer'
 import { trash } from './Admin/trash.reducer'
@@ -28,7 +27,6 @@ const rootReducer = combineReducers({
   front_albums: frontAlbums,
   form: formReducer,
   toastr: toastrReducer,
-  uploader,
   trash
 })
 

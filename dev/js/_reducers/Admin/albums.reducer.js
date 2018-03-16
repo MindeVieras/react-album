@@ -249,6 +249,371 @@ export function adminAlbums(state = initialState, action) {
 
 
   /*
+   * Album Media reducers
+   * calls SUBMIT_MEDIA, SET_MEDIA_DATA, SET_MEDIA_PHASE
+   *       SET_MEDIA_MEDIA_ID
+   *       REMOVE_MEDIA
+   */
+
+  case albumsConstants.SUBMIT_MEDIA:
+    return {
+      ...state,
+      selected_album: {
+        ...state.selected_album,
+        album: {
+          ...state.selected_album.album,
+          media: [
+            ...state.selected_album.album.media,
+            {
+              id: action.id,
+              phase: action.phase,
+              fromServer: action.fromServer
+            }
+          ]
+        }
+      }
+    }
+  case albumsConstants.SET_MEDIA_DATA:
+    return {
+      ...state,
+      selected_album: {
+        ...state.selected_album,
+        album: {
+          ...state.selected_album.album,
+          media: state.selected_album.album.media.map(m => {
+            if (m.id === action.id) {
+              const { ...mCopy } = m
+              return {
+                ...mCopy,
+                filename: action.data.filename,
+                filesize: action.data.size,
+                mime: action.data.mime
+              }
+            }
+            return m
+          })
+        }
+      }
+    }
+  case albumsConstants.SET_MEDIA_PHASE:
+    return {
+      ...state,
+      selected_album: {
+        ...state.selected_album,
+        album: {
+          ...state.selected_album.album,
+          media: state.selected_album.album.media.map(m => {
+            if (m.id === action.id) {
+              const { ...mCopy } = m
+              return {
+                ...mCopy,
+                phase: action.phase
+              }
+            }
+            return m
+          })
+        }
+      }
+    }
+  case albumsConstants.SET_MEDIA_MEDIA_ID:
+    return {
+      ...state,
+      selected_album: {
+        ...state.selected_album,
+        album: {
+          ...state.selected_album.album,
+          media: state.selected_album.album.media.map(m => {
+            if (m.id === action.id) {
+              const { ...mCopy } = m
+              return {
+                ...mCopy,
+                media_id: action.media_id
+              }
+            }
+            return m
+          })
+        }
+      }
+    }
+  case albumsConstants.REMOVE_MEDIA_ONE:
+    return {
+      ...state,
+      selected_album: {
+        ...state.selected_album,
+        album: {
+          ...state.selected_album.album,
+          media: state.selected_album.album.media.filter(m => m.media_id != action.media_id)
+        }
+      }
+    }
+  case albumsConstants.CLEAR_MEDIA:
+    return {
+      ...state,
+      selected_album: {
+        ...state.selected_album,
+        album: {
+          ...state.selected_album.album,
+          media: []
+        }
+      }
+    }
+
+  /*
+   * Album Media meta reducers
+   * calls SAVE_MEDIA_METADATA_REQUEST, SAVE_MEDIA_METADATA_SUCCESS, SAVE_MEDIA_METADATA_FAILURE
+   *       SAVE_MEDIA_REKOGNITION_LABELS_REQUEST, SAVE_MEDIA_REKOGNITION_LABELS_SUCCESS, SAVE_MEDIA_REKOGNITION_LABELS_FAILURE
+   */
+
+  case albumsConstants.SAVE_MEDIA_METADATA_REQUEST:
+    return {
+      ...state,
+      selected_album: {
+        ...state.selected_album,
+        album: {
+          ...state.selected_album.album,
+          media: state.selected_album.album.media.map(m => {
+            if (m.id === action.id) {
+              const { ...mCopy } = m
+              return {
+                ...mCopy,
+                metadata: { ack: 'loading', msg: 'Metadata processing...' }
+              }
+            }
+            return m
+          })
+        }
+      }
+    }
+  case albumsConstants.SAVE_MEDIA_METADATA_SUCCESS:
+    return {
+      ...state,
+      selected_album: {
+        ...state.selected_album,
+        album: {
+          ...state.selected_album.album,
+          media: state.selected_album.album.media.map(m => {
+            if (m.id === action.id) {
+              const { ...mCopy } = m
+              return {
+                ...mCopy,
+                metadata: { ack: 'ok', ...action.metadata }
+              }
+            }
+            return m
+          })
+        }
+      }
+    }
+  case albumsConstants.SAVE_MEDIA_METADATA_FAILURE:
+    return {
+      ...state,
+      selected_album: {
+        ...state.selected_album,
+        album: {
+          ...state.selected_album.album,
+          media: state.selected_album.album.media.map(m => {
+            if (m.id === action.id) {
+              const { ...mCopy } = m
+              return {
+                ...mCopy,
+                metadata: { ack: 'err', msg: action.err }
+              }
+            }
+            return m
+          })
+        }
+      }
+    }
+  case albumsConstants.SAVE_MEDIA_REKOGNITION_LABELS_REQUEST:
+    return {
+      ...state,
+      selected_album: {
+        ...state.selected_album,
+        album: {
+          ...state.selected_album.album,
+          media: state.selected_album.album.media.map(m => {
+            if (m.id === action.id) {
+              const { ...mCopy } = m
+              return {
+                ...mCopy,
+                rekognition_labels: { ack: 'loading', msg: 'Rekognition labels processing...' }
+              }
+            }
+            return m
+          })
+        }
+      }
+    }
+  case albumsConstants.SAVE_MEDIA_REKOGNITION_LABELS_SUCCESS:
+    return {
+      ...state,
+      selected_album: {
+        ...state.selected_album,
+        album: {
+          ...state.selected_album.album,
+          media: state.selected_album.album.media.map(m => {
+            if (m.id === action.id) {
+              const { ...mCopy } = m
+              return {
+                ...mCopy,
+                rekognition_labels: { ack: 'ok', ...action.rekognition_labels }
+              }
+            }
+            return m
+          })
+        }
+      }
+    }
+  case albumsConstants.SAVE_MEDIA_REKOGNITION_LABELS_FAILURE:
+    return {
+      ...state,
+      selected_album: {
+        ...state.selected_album,
+        album: {
+          ...state.selected_album.album,
+          media: state.selected_album.album.media.map(m => {
+            if (m.id === action.id) {
+              const { ...mCopy } = m
+              return {
+                ...mCopy,
+                rekognition_labels: { ack: 'err', msg: action.err }
+              }
+            }
+            return m
+          })
+        }
+      }
+    }
+
+
+  /*
+   * Album Media image/video styles reducers
+   * calls GENERATE_IMG_THUMBS_REQUEST, GENERATE_IMG_THUMBS_SUCCESS, GENERATE_IMG_THUMBS_FAILURE
+   *       GENERATE_VIDEOS_REQUEST, GENERATE_VIDEOS_SUCCESS, GENERATE_VIDEOS_FAILURE
+   */
+
+  case albumsConstants.GENERATE_IMG_THUMBS_REQUEST:
+    return {
+      ...state,
+      selected_album: {
+        ...state.selected_album,
+        album: {
+          ...state.selected_album.album,
+          media: state.selected_album.album.media.map(m => {
+            if (m.id === action.id) {
+              const { ...mCopy } = m
+              return {
+                ...mCopy,
+                thumbs: { ack: 'loading', msg: 'Generating images thumbnails...' }
+              }
+            }
+            return m
+          })
+        }
+      }
+    }
+  case albumsConstants.GENERATE_IMG_THUMBS_SUCCESS:
+    return {
+      ...state,
+      selected_album: {
+        ...state.selected_album,
+        album: {
+          ...state.selected_album.album,
+          media: state.selected_album.album.media.map(m => {
+            if (m.id === action.id) {
+              const { ...mCopy } = m
+              return {
+                ...mCopy,
+                thumbs: { ack: 'ok' }
+              }
+            }
+            return m
+          })
+        }
+      }
+    }
+  case albumsConstants.GENERATE_IMG_THUMBS_FAILURE:
+    return {
+      ...state,
+      selected_album: {
+        ...state.selected_album,
+        album: {
+          ...state.selected_album.album,
+          media: state.selected_album.album.media.map(m => {
+            if (m.id === action.id) {
+              const { ...mCopy } = m
+              return {
+                ...mCopy,
+                thumbs: { ack: 'err', msg: action.err }
+              }
+            }
+            return m
+          })
+        }
+      }
+    }
+  case albumsConstants.GENERATE_VIDEOS_REQUEST:
+    return {
+      ...state,
+      selected_album: {
+        ...state.selected_album,
+        album: {
+          ...state.selected_album.album,
+          media: state.selected_album.album.media.map(m => {
+            if (m.id === action.id) {
+              const { ...mCopy } = m
+              return {
+                ...mCopy,
+                videos: { ack: 'loading', msg: 'Generating videos...' }
+              }
+            }
+            return m
+          })
+        }
+      }
+    }
+  case albumsConstants.GENERATE_VIDEOS_SUCCESS:
+    return {
+      ...state,
+      selected_album: {
+        ...state.selected_album,
+        album: {
+          ...state.selected_album.album,
+          media: state.selected_album.album.media.map(m => {
+            if (m.id === action.id) {
+              const { ...mCopy } = m
+              return {
+                ...mCopy,
+                videos: { ack: 'ok' }
+              }
+            }
+            return m
+          })
+        }
+      }
+    }
+  case albumsConstants.GENERATE_VIDEOS_FAILURE:
+    return {
+      ...state,
+      selected_album: {
+        ...state.selected_album,
+        album: {
+          ...state.selected_album.album,
+          media: state.selected_album.album.media.map(m => {
+            if (m.id === action.id) {
+              const { ...mCopy } = m
+              return {
+                ...mCopy,
+                videos: { ack: 'err', msg: action.err }
+              }
+            }
+            return m
+          })
+        }
+      }
+    }
+
+  /*
    * Album Media location reducers
    * calls SET_MEDIA_LOCATION, REMOVE_MEDIA_LOCATION
    *       OPEN_MEDIA_LOCATION_MARKER, CLOSE_MEDIA_LOCATION_MARKERS
@@ -334,19 +699,7 @@ export function adminAlbums(state = initialState, action) {
 
 
 
-
-  case albumsConstants.REMOVE_MEDIA:
-    return {
-      ...state,
-      selected_album: {
-        ...state.selected_album,
-        album: {
-          ...state.selected_album.album,
-          media: state.selected_album.album.media.filter(m => m.media_id != action.media_id)
-        }
-      }
-    }
-
+    // Unsorted reducers...
 
   case albumsConstants.CLEAR_SELECTED:
     return {

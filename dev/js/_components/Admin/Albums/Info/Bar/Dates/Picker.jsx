@@ -117,9 +117,9 @@ Picker.propTypes = {
 }
 
 function mapStateToProps(state) {
-  const { uploader } = state
+  const { admin_albums } = state
   return {
-    media_dates: uploader.files.map((f) => { return f.metadata.datetime }).filter(Boolean)
+    media_dates: admin_albums.selected_album.album.media.map((f) => { return f.metadata.datetime }).filter(Boolean)
   }
 }
 

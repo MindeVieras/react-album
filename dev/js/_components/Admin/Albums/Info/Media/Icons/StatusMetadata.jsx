@@ -10,7 +10,7 @@ import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu'
 import { ScaleLoader } from 'react-spinners'
 import { IoClipboard } from 'react-icons/lib/io'
 
-import { uploaderActions } from '../../../../../../_actions'
+import { albumsActions } from '../../../../../../_actions'
 
 
 class StatusMetadataIcon extends Component {
@@ -23,7 +23,7 @@ class StatusMetadataIcon extends Component {
   
   handleResaveMetadata(e) {
     const { id, media_id, dispatch } = this.props
-    dispatch(uploaderActions.saveMetadata(id, media_id))
+    dispatch(albumsActions.saveMediaMetadata(id, media_id))
   }
 
   render() {

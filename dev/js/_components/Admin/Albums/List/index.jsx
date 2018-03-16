@@ -8,7 +8,7 @@ import { RingLoader } from 'react-spinners'
 import Bar from './Bar'
 import ListItem from './ListItem'
 
-import { headerActions, albumsActions, uploaderActions, utilsActions } from '../../../../_actions'
+import { headerActions, albumsActions, utilsActions } from '../../../../_actions'
 
 class AlbumsList extends Component {
 
@@ -19,7 +19,7 @@ class AlbumsList extends Component {
 
   onAlbumSelect(album_id) {
     const { dispatch } = this.props
-    dispatch(uploaderActions.clearFiles())
+    dispatch(albumsActions.clearMedia())
     dispatch(albumsActions.getOne(album_id))
     dispatch(utilsActions.saveAdminSetting('selected_album', album_id))
   }

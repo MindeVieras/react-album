@@ -12,12 +12,12 @@ export const albumsActions = {
   setMapEdit, setMapCenter, setMapZoom,
   setLocation, updateLocation, removeLocation,
   clearSelected,
-  setMediaLocation,
-  updateMediaLocation,
-  removeMediaLocation,
-  openMediaLocationMarker,
-  closeMediaLocationMarkers,
-  moveMedia,
+  submitMedia, setMediaData, setMediaPhase, setMediaMediaId,
+  saveMediaMetadata, saveRekognitionLabels,
+  generateImageThumbs, generateVideos,
+  setMediaLocation, updateMediaLocation, removeMediaLocation,
+  openMediaLocationMarker, closeMediaLocationMarkers,
+  moveMedia, trashMedia, clearMedia,
   delete: _delete
 }
 
@@ -206,6 +206,162 @@ function removeLocation(id) {
 
 
 /*
+ * Album Media actions
+ * calls submitMedia, setMediaData
+ *       setMediaMediaId
+ *       trashMedia
+ */
+
+function submitMedia(id, phase, fromServer) {
+  return dispatch => {
+    dispatch(submit(id, phase, fromServer))
+  }
+
+  function submit(id, phase, fromServer) { return { type: albumsConstants.SUBMIT_MEDIA, id, phase, fromServer } }
+}
+
+function setMediaData(id, data) {
+  return dispatch => {
+    dispatch(set(id, data))
+  }
+
+  function set(id, data) { return { type: albumsConstants.SET_MEDIA_DATA, id, data } }
+}
+
+function setMediaPhase(id, phase) {
+  return dispatch => {
+    dispatch(set(id, phase))
+  }
+
+  function set(id, phase) { return { type: albumsConstants.SET_MEDIA_PHASE, id, phase } }
+}
+
+function setMediaMediaId(id, media_id) {
+  return dispatch => {
+    dispatch(set(id, media_id))
+  }
+
+  function set(id, media_id) { return { type: albumsConstants.SET_MEDIA_MEDIA_ID, id, media_id } }
+}
+
+function trashMedia(media_id) {
+  return dispatch => {
+    mediaService.putToTrash(media_id)
+      .then(function(res) {
+        if (res.ack == 'ok') {
+          dispatch(remove(media_id))
+          toastr.success('Success', res.msg)
+        } else if (res.ack == 'err') {
+          toastr.error('Error', res.msg)
+        }
+      })
+  }
+
+  function remove(media_id) { return { type: albumsConstants.REMOVE_MEDIA, media_id } }
+}
+
+
+/*
+ * Album Media meta actions
+ * calls saveMediaMetadata, saveRekognitionLabels
+ */
+
+function saveMediaMetadata(id, media_id) {
+  return dispatch => {
+    dispatch(request(id))
+
+    mediaService.saveMetadata(media_id)
+      .then(function(res) {
+        if (res.ack == 'ok') {
+          dispatch(success(id, res.metadata))
+        } else if (res.ack == 'err') {
+          dispatch(failure(id, res.msg))
+        }
+      })
+  }
+
+  function request(id) { return { type: albumsConstants.SAVE_MEDIA_METADATA_REQUEST, id } }
+  function success(id, metadata) { return { type: albumsConstants.SAVE_MEDIA_METADATA_SUCCESS, id, metadata } }
+  function failure(id, err) { return { type: albumsConstants.SAVE_MEDIA_METADATA_FAILURE, id, err } }
+}
+
+function saveRekognitionLabels(id, media_id) {
+  return dispatch => {
+    dispatch(request(id))
+
+    mediaService.saveRekognitionLabels(media_id)
+      .then(function(res) {
+        if (res.ack == 'ok') {
+          dispatch(success(id, res.rekognition_labels))
+        } else if (res.ack == 'err') {
+          dispatch(failure(id, res.msg))
+        }
+      })
+  }
+
+  function request(id) {
+    return {
+      type: albumsConstants.SAVE_MEDIA_REKOGNITION_LABELS_REQUEST, id
+    }
+  }
+  function success(id, rekognition_labels) {
+    return {
+      type: albumsConstants.SAVE_MEDIA_REKOGNITION_LABELS_SUCCESS, id, rekognition_labels
+    }
+  }
+  function failure(id, err) {
+    return {
+      type: albumsConstants.SAVE_MEDIA_REKOGNITION_LABELS_FAILURE, id, err
+    }
+  }
+}
+
+
+/*
+ * Album Media image/video styles actions
+ * calls generateImageThumbs, generateVideos
+ */
+
+function generateImageThumbs(id, media_id) {
+  return dispatch => {
+    dispatch(request(id))
+
+    mediaService.generateImageThumbs(media_id)
+      .then(function(res) {
+        if (res.ack == 'ok') {
+          dispatch(success(id, res.thumbs))
+        } else if (res.ack == 'err') {
+          dispatch(failure(id, res.msg))
+        }
+      })
+  }
+
+  function request(id) { return { type: albumsConstants.GENERATE_IMG_THUMBS_REQUEST, id } }
+  function success(id, thumbs) { return { type: albumsConstants.GENERATE_IMG_THUMBS_SUCCESS, id, thumbs } }
+  function failure(id, err) { return { type: albumsConstants.GENERATE_IMG_THUMBS_FAILURE, id, err } }
+}
+
+function generateVideos(id, key) {
+  return dispatch => {
+    dispatch(request(id))
+
+    mediaService.generateVideos(key)
+      .then(function(res) {
+        if (res.ack == 'ok') {
+          dispatch(success(id, res.videos))
+        } else if (res.ack == 'err') {
+          dispatch(failure(id, res.msg))
+        }
+      })
+  }
+
+  function request(id) { return { type: albumsConstants.GENERATE_VIDEOS_REQUEST, id } }
+  function success(id, videos) { return { type: albumsConstants.GENERATE_VIDEOS_SUCCESS, id, videos } }
+  function failure(id, err) { return { type: albumsConstants.GENERATE_VIDEOS_FAILURE, id, err } }
+}
+
+
+/*
  * Album Media location actions
  * calls setMediaLocation, updateMediaLocation, removeMediaLocation
  *       openMediaLocationMarker, closeMediaLocationMarkers
@@ -274,7 +430,7 @@ function moveMedia(media_id, album_id) {
     mediaService.moveMedia(media_id, album_id)
       .then(function(res) {
         if (res.ack == 'ok') {
-          dispatch(move(media_id, album_id))
+          dispatch(remove(media_id, album_id))
           Popup.close()
           toastr.success('Success', res.msg)
         } else {
@@ -282,7 +438,31 @@ function moveMedia(media_id, album_id) {
         }
       })
   }
-  function move(media_id, album_id) { return { type: albumsConstants.REMOVE_MEDIA, media_id, album_id } }
+  function remove(media_id) { return { type: albumsConstants.REMOVE_MEDIA_ONE, media_id } }
+}
+
+function trashMedia(media_id) {
+  return dispatch => {
+    mediaService.putToTrash(media_id)
+      .then(function(res) {
+        if (res.ack == 'ok') {
+          dispatch(remove(media_id))
+          toastr.success('Success', res.msg)
+        } else if (res.ack == 'err') {
+          toastr.error('Error', res.msg)
+        }
+      })
+  }
+
+  function remove(media_id) { return { type: albumsConstants.REMOVE_MEDIA_ONE, media_id } }
+}
+
+function clearMedia() {
+  return dispatch => {
+    dispatch(clear())
+  }
+
+  function clear() { return { type: albumsConstants.CLEAR_MEDIA } }
 }
 
 // prefixed function name with underscore because delete is a reserved word in javascript
