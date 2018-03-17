@@ -43,8 +43,28 @@
 .main-menu {
   li {
     display: inline-block;
-    margin-left: 15px;
+    margin-left: 10px;
     font-size: 26px;
     cursor: pointer;
   }
 }
+
+.select-app-locale {
+  .Select-control {
+    background: transparent;
+    display: inline-block;
+    border: 0;
+    cursor: pointer;
+  }
+  .select-value {
+    position: absolute;
+    color: $white;
+  }
+  &.is-focused {
+    .Select-control {
+      background: transparent;
+    }
+  }
+}
+
+

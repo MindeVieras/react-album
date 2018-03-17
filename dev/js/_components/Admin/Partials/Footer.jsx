@@ -16,6 +16,7 @@ import UploadMedia from '../Buttons/UploadMedia'
 // />
 
 import { IoTrashA } from 'react-icons/lib/io'
+import { MdFace } from 'react-icons/lib/md'
 
 class Footer extends Component {
 
@@ -79,6 +80,7 @@ class Footer extends Component {
       <div className="footer" id="app_footer">
         <div id="footer_link" className="pull-left">
           <Link to="/admin/trash"><IoTrashA /></Link>
+          <Link to="/admin/faces"><MdFace /></Link>
         </div>
 
         <div id="footer_buttons" className="pull-right">

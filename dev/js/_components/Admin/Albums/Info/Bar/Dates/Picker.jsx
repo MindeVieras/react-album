@@ -60,8 +60,9 @@ class Picker extends Component {
   }
 
   render() {
+    const { t } = this.context
     const { start_date, end_date } = this.state
-    const { media_dates } = this.props
+    const { media_dates, locale } = this.props
     // let yesterday = moment().subtract( 1, 'day' )
     // let valid = function( current ){
     //     return current.isAfter( yesterday )
@@ -86,6 +87,7 @@ class Picker extends Component {
             dateFormat={ 'YYYY-MM-DD' }
             timeFormat={ 'HH:mm:ss' }
             onChange={ this.startDateChange }
+            locale={ locale }
           />
         </div>
 
@@ -97,10 +99,11 @@ class Picker extends Component {
             dateFormat={ 'YYYY-MM-DD' }
             timeFormat={ 'HH:mm:ss' }
             onChange={ this.endDateChange }
+            locale={ locale }
           />
         </div>
         <div className="buttons">
-          <input type="submit" value="Save" className="btn btn-success" />
+          <input type="submit" value={ t('Save') } className="btn btn-success" />
           { setDatesButton }
         </div>
       </form>
@@ -113,13 +116,25 @@ Picker.propTypes = {
   start_date: PropTypes.string.isRequired,
   end_date: PropTypes.string.isRequired,
   album_id: PropTypes.number.isRequired,
-  media_dates: PropTypes.array.isRequired
+  media_dates: PropTypes.array.isRequired,
+  locale: PropTypes.string
+}
+
+Picker.defaultProps = {
+  locale: 'en'
+}
+
+Picker.contextTypes = {
+  t: PropTypes.func
 }
 
 function mapStateToProps(state) {
-  const { admin_albums } = state
+  const { admin_albums, i18nState } = state
   return {
-    media_dates: admin_albums.selected_album.album.media.map((f) => { return f.metadata.datetime }).filter(Boolean)
+    media_dates: admin_albums.selected_album.album.media.map(f => {
+      return f.metadata.datetime
+    }).filter(Boolean),
+    locale: i18nState.lang,
   }
 }
 

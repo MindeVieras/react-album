@@ -29,6 +29,7 @@ class StatusRekognitionLabelsIcon extends Component {
     
     const tooltipId = uuidv4()
     const contextMenuId = uuidv4()
+    const { t } = this.context
     const { id, rekognition_labels } = this.props
 
     let className = ''
@@ -53,7 +54,7 @@ class StatusRekognitionLabelsIcon extends Component {
             if (key != 'ack') {
               let confidence = rekognition_labels[key]
               return (
-                <li key={ i }>{ key } { Math.trunc(confidence) }%</li>
+                <li key={ i }>{ t(key) } { Math.trunc(confidence) }%</li>
               )
             }
           })
@@ -99,6 +100,10 @@ StatusRekognitionLabelsIcon.propTypes = {
   id: PropTypes.number.isRequired,
   media_id: PropTypes.number.isRequired,
   rekognition_labels: PropTypes.object.isRequired
+}
+
+StatusRekognitionLabelsIcon.contextTypes = {
+  t: PropTypes.func
 }
 
 export default connect()(StatusRekognitionLabelsIcon)

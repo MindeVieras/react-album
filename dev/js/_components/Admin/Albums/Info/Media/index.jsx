@@ -102,6 +102,7 @@ class Media extends Component {
   }
 
   render() {
+    const { t } = this.context
     const { entity, entity_id, status, files, wrapper_width, dispatch } = this.props
     const uploader = this.uploader
 
@@ -116,7 +117,7 @@ class Media extends Component {
         <div className="icon">
           <IoUpload />
         </div>
-        Click or Drop files here
+        { t('Drop files here') }
       </span>
     }
 
@@ -160,6 +161,10 @@ Media.propTypes = {
 
 Media.defaultProps = {
   wrapper_width: 500
+}
+
+Media.contextTypes = {
+  t: PropTypes.func
 }
 
 export default connect()(Media)

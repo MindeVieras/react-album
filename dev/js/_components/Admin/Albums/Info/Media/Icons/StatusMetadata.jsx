@@ -30,7 +30,7 @@ class StatusMetadataIcon extends Component {
     
     const tooltipId = uuidv4()
     const contextMenuId = uuidv4()
-
+    const { t } = this.context
     const { id, metadata } = this.props
 
     let className = ''
@@ -57,7 +57,7 @@ class StatusMetadataIcon extends Component {
             if (key != 'ack') {
               let value = metadata[key]
               return (
-                <li key={ i }><strong>{ _.startCase(_.toLower(key)) }:</strong> { value }</li>
+                <li key={ i }><strong>{ _.startCase(_.toLower(t(key))) }:</strong> { value }</li>
               )
             }
           })
@@ -103,6 +103,10 @@ StatusMetadataIcon.propTypes = {
   id: PropTypes.number.isRequired,
   media_id: PropTypes.number.isRequired,
   metadata: PropTypes.object.isRequired
+}
+
+StatusMetadataIcon.contextTypes = {
+  t: PropTypes.func
 }
 
 export default connect()(StatusMetadataIcon)

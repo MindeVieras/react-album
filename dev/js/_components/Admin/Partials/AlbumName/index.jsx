@@ -11,6 +11,7 @@ import EditForm from './EditForm'
 class AlbumName extends Component {
 
   handleClick() {
+    const { t } = this.context
     const { album_id, name } = this.props
     const content = <EditForm
       name={ name }
@@ -18,7 +19,7 @@ class AlbumName extends Component {
     />
 
     Popup.create({
-      title: 'Edit album name',
+      title: t('Edit album name'),
       content,
       className: 'alert'
     })
@@ -56,6 +57,10 @@ AlbumName.propTypes = {
 
 AlbumName.defaultProps = {
   album_id: null
+}
+
+AlbumName.contextTypes = {
+  t: PropTypes.func
 }
 
 export default AlbumName

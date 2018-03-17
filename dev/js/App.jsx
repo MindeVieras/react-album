@@ -24,7 +24,13 @@ class App extends Component {
     super(props)
 
     // Set browser info into state
-    props.dispatch(setLanguage(locale || 'en'))
+    let allowedLocales = ['en', 'lt'],
+        l = 'en'
+
+    if (allowedLocales.includes(locale))
+      l = locale
+
+    props.dispatch(setLanguage(l))
     const browser = detect()
     props.dispatch(clientActions.setBrowser(browser))
     props.dispatch(clientActions.setCurrentLocation())

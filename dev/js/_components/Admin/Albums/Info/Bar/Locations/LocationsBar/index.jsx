@@ -43,13 +43,13 @@ class LocationsBar extends Component {
   }
 
   render() {
-    
+    const { t } = this.context
     const { map } = this.props
 
     const inputProps = {
       value: this.state.address,
       onChange: this.onChange,
-      placeholder: 'Search...'
+      placeholder: t('Search...')
     }
 
     const cssClasses = {
@@ -82,6 +82,10 @@ class LocationsBar extends Component {
 
 LocationsBar.propTypes = {
   map: PropTypes.object
+}
+
+LocationsBar.contextTypes = {
+  t: PropTypes.func
 }
 
 function mapStateToProps(state) {

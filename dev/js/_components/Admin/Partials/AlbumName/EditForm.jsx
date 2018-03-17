@@ -34,6 +34,8 @@ class EditForm extends Component {
   }
 
   render() {
+    const { t } = this.context
+
     return (
       <form onSubmit={ this.handleSubmit } >
         <div className="form-group">
@@ -46,7 +48,7 @@ class EditForm extends Component {
             onFocus={ this.handleFocus }
           />
         </div>
-        <input type="submit" value="Save" className="btn btn-success" />
+        <input type="submit" value={ t('Save') } className="btn btn-success" />
       </form>
     )
   }
@@ -57,6 +59,10 @@ EditForm.propTypes = {
   name: PropTypes.string.isRequired,
   album_id: PropTypes.number.isRequired,
   dispatch: PropTypes.func
+}
+
+EditForm.contextTypes = {
+  t: PropTypes.func
 }
 
 export default connect()(EditForm)
