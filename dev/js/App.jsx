@@ -24,7 +24,7 @@ class App extends Component {
     super(props)
 
     // Set browser info into state
-    let allowedLocales = ['en', 'lt'],
+    let allowedLocales = ['en', 'lt', 'ru'],
         l = 'en'
 
     if (allowedLocales.includes(locale))

@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom'
 
 import { IoPersonStalker, IoHome, IoArrowExpand, IoArrowShrink } from 'react-icons/lib/io'
 import { GoSignOut } from 'react-icons/lib/go'
+import { MdFace } from 'react-icons/lib/md'
 
 import AlbumName from './AlbumName'
-import SelectLocale from '../Buttons/SelectLocale'
 
 import { clientActions } from '../../../_actions'
 
@@ -54,7 +54,7 @@ class Header extends Component {
 
         <div className="pull-right">
           <ul className="main-menu">
-            <li><SelectLocale /></li>
+            <li><Link to="/admin/faces"><MdFace /></Link></li>
             <li><Link to="/admin/users"><IoPersonStalker /></Link></li>
             <li><Link to="/"><IoHome /></Link></li>
             <li><Link to="/login"><GoSignOut /></Link></li>
