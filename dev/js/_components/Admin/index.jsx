@@ -1,11 +1,14 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { setTranslations } from 'redux-i18n'
 import { Switch, Route } from 'react-router-dom'
 import ReduxToastr from 'react-redux-toastr'
 import Popup from 'react-popup'
 import scriptLoader from 'react-async-script-loader'
 import Fullscreen from 'react-full-screen'
+
+import { adminTranslations } from '../../translations/adminTranslations'
 
 import Header from './Partials/Header'
 import Footer from './Partials/Footer'
@@ -33,6 +36,8 @@ class Admin extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props
+
+    dispatch(setTranslations(adminTranslations))
     // Get Admin settings
     dispatch(utilsActions.getAdminSettings())
   }

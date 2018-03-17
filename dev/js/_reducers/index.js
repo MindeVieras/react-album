@@ -1,5 +1,6 @@
 
 import { combineReducers } from 'redux'
+import { i18nState } from 'redux-i18n'
 import { reducer as formReducer } from 'redux-form'
 import { reducer as toastrReducer } from 'react-redux-toastr'
 
@@ -27,7 +28,8 @@ const rootReducer = combineReducers({
   front_albums: frontAlbums,
   form: formReducer,
   toastr: toastrReducer,
-  trash
+  trash,
+  i18nState
 })
 
 export default rootReducer

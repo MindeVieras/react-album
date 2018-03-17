@@ -1,9 +1,12 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { setTranslations } from 'redux-i18n'
 import { Link } from 'react-router-dom'
 import { RingLoader } from 'react-spinners'
 import PerfectScrollbar from 'react-perfect-scrollbar'
+
+import { frontTranslations } from '../../translations/frontTranslations'
 
 import CircleMenu from './Partials/CircleMenu'
 import Media from './Album/Media'
@@ -34,6 +37,9 @@ class Front extends Component {
 
   componentDidMount() {
     const { uid, dispatch } = this.props
+
+    dispatch(setTranslations(frontTranslations))
+
     dispatch(frontActions.getList(page, limit, media_limit))
     dispatch(utilsActions.getFrontSettings(uid))
   }

@@ -1,8 +1,11 @@
 
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-
+import { setLanguage, setTranslations } from 'redux-i18n'
 import { BeatLoader } from 'react-spinners'
+
+import { loginTranslations } from '../../translations/loginTranslations'
 
 import { loginActions } from '../../_actions'
 
@@ -25,6 +28,12 @@ class Login extends React.Component {
   }
 
   componentDidMount() {
+    const { dispatch } = this.props
+
+    // Set translations
+    dispatch(setLanguage('lt'))
+    dispatch(setTranslations(loginTranslations))
+
     this.usernameInput.focus()
   }
 
@@ -59,7 +68,7 @@ class Login extends React.Component {
 
             <input
               type="text"
-              placeholder="Username"
+              placeholder={ this.context.t('Username') }
               className="form-control"
               name="username"
               value={ username }
@@ -68,7 +77,7 @@ class Login extends React.Component {
             />
             <input
               type="password"
-              placeholder="Password"
+              placeholder={ this.context.t('Password') }
               className="form-control"
               name="password"
               value={ password }
@@ -77,11 +86,11 @@ class Login extends React.Component {
             <input
               type="submit"
               id="login_button"
-              value="Login"
+              value={ this.context.t('Login') }
             />
             {error &&
               <div className="alert">
-                <div className="error">{ msg }</div>
+                <div className="error">{ this.context.t(msg) }</div>
               </div>
             }
             {loading &&
@@ -97,6 +106,10 @@ class Login extends React.Component {
       </div>
     )
   }
+}
+
+Login.contextTypes = {
+  t: PropTypes.func
 }
 
 function mapStateToProps(state) {
