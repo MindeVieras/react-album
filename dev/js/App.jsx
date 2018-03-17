@@ -1,7 +1,9 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { setLanguage } from 'redux-i18n'
 import { Router, Switch, Route } from 'react-router-dom'
+var locale = require('browser-locale')()
 import { detect } from 'detect-browser'
 import WebFont from 'webfontloader'
 
@@ -22,6 +24,7 @@ class App extends Component {
     super(props)
 
     // Set browser info into state
+    props.dispatch(setLanguage(locale || 'en'))
     const browser = detect()
     props.dispatch(clientActions.setBrowser(browser))
     props.dispatch(clientActions.setCurrentLocation())

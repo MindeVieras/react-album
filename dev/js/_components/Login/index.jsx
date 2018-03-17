@@ -2,7 +2,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { setLanguage, setTranslations } from 'redux-i18n'
+import { setTranslations } from 'redux-i18n'
 import { BeatLoader } from 'react-spinners'
 
 import { loginTranslations } from '../../translations/loginTranslations'
@@ -31,7 +31,6 @@ class Login extends React.Component {
     const { dispatch } = this.props
 
     // Set translations
-    dispatch(setLanguage('lt'))
     dispatch(setTranslations(loginTranslations))
 
     this.usernameInput.focus()
@@ -53,6 +52,7 @@ class Login extends React.Component {
   }
 
   render() {
+    const { t } = this.context
     const { loading, error, msg } = this.props
     const { username, password } = this.state
     const errorClassName = error ? 'form-error' : ''
@@ -68,7 +68,7 @@ class Login extends React.Component {
 
             <input
               type="text"
-              placeholder={ this.context.t('Username') }
+              placeholder={ t('Username') }
               className="form-control"
               name="username"
               value={ username }
@@ -77,7 +77,7 @@ class Login extends React.Component {
             />
             <input
               type="password"
-              placeholder={ this.context.t('Password') }
+              placeholder={ t('Password') }
               className="form-control"
               name="password"
               value={ password }
@@ -86,11 +86,11 @@ class Login extends React.Component {
             <input
               type="submit"
               id="login_button"
-              value={ this.context.t('Login') }
+              value={ t('Login') }
             />
             {error &&
               <div className="alert">
-                <div className="error">{ this.context.t(msg) }</div>
+                <div className="error">{ t(msg) }</div>
               </div>
             }
             {loading &&
