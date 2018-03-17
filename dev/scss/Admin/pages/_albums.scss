@@ -23,6 +23,32 @@
       }
     }
   }
+  .albums-list {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    li {
+      overflow: hidden;
+      padding: 0 10px;
+      padding-left: 12px;
+      font-size: 18px;
+      line-height: 36px;
+      cursor: pointer;
+      @include transition(all 0.15s ease);
+      &:hover {
+        background-color: rgba(0,0,0,.15);
+      }
+      &.active {
+        background-color: darken($red, 30);
+        // cursor: default;
+      }
+      &.dnd-dest-active {
+        background-color: $green;
+      }
+    }
+  }
 
   .album-info {
     position: absolute;
@@ -87,32 +113,6 @@
     .time-ago {
       display: inline-block;
       font-size: 14px;
-    }
-  }
-  .albums-list {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    li {
-      overflow: hidden;
-      padding: 0 10px;
-      padding-left: 12px;
-      font-size: 18px;
-      line-height: 36px;
-      cursor: pointer;
-      @include transition(all 0.15s ease);
-      &:hover {
-        background-color: rgba(0,0,0,.15);
-      }
-      &.active {
-        background-color: darken($red, 30);
-        // cursor: default;
-      }
-      &.dnd-dest-active {
-        background-color: $green;
-      }
     }
   }
 }

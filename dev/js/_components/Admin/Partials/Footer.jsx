@@ -8,6 +8,7 @@ import { history } from '../../../_helpers'
 import NewAlbum from '../Buttons/NewAlbum'
 import DeleteAlbum from '../Buttons/DeleteAlbum'
 import UploadMedia from '../Buttons/UploadMedia'
+import MediaPager from './MediaPager'
 // import OpenLightbox from '../Buttons/OpenLightbox'
 // <OpenLightbox
 //   key={ i }
@@ -80,7 +81,7 @@ class Footer extends Component {
         <div id="footer_link" className="pull-left">
           <Link to="/admin/trash"><IoTrashA /></Link>
         </div>
-
+        <MediaPager />
         <div id="footer_buttons" className="pull-right">
           {buttons}
         </div>

@@ -1,12 +1,10 @@
 
-.album-pagination {
-  display: inline-block;
-  width: 100%;
+.album-media-pager {
   text-align: center;
   li {
     background-color: rgba(0,0,0,.15);
     display: inline-block;
-    margin: 20px 5px;
+    margin: 8px 5px;
     cursor: pointer;
     a {
       display: block;

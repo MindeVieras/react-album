@@ -1,37 +1,32 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Pager from 'react-pager'
+import { connect } from 'react-redux'
 
 import MediaItem from './MediaItem'
+
+import { albumsActions } from '../../../../../_actions'
 
 class MediaList extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      currentPage: 0,
-      perPage: 8
-    }
-
-    this.handlePageChanged = this.handlePageChanged.bind(this)
   }
-  
-  handlePageChanged(newPage) {
-    this.setState({ currentPage : newPage })
+
+  componentWillUnmount() {
+    const { dispatch } = this.props
+
+    dispatch(albumsActions.setMediaPagerPage(0))
   }
   
   render() {
-    const { files, uploader, wrapper_width } = this.props
-    const { currentPage, perPage } = this.state
+    const { files, pager, uploader, wrapper_width } = this.props
 
-    const firstList = currentPage * perPage
-    const lastList = firstList + perPage
+    const firstList = pager.current_page * pager.per_page
+    const lastList = firstList + pager.per_page
     const currentFiles = files.slice(firstList, lastList)
 
-    const totalPages = Math.ceil(files.length / perPage)
-
-    let cols = 1, item_gap = 20
+    let cols = 1, item_gap = 15
     
     if (wrapper_width < 680 && wrapper_width >= 480) {
       cols = 2
@@ -45,11 +40,6 @@ class MediaList extends Component {
     
     let allGaps = (cols + 1) * item_gap
     let item_width = (wrapper_width - allGaps) / cols
-    // console.log(wrapper_width)
-
-    // const mediaItems = currentFiles.map((file, i) => {
-    //   return
-    // })
 
     return (
       <div>
@@ -69,17 +59,6 @@ class MediaList extends Component {
           ))}
         </ul>
 
-        {totalPages > 1 &&
-          <Pager
-            total={ totalPages }
-            current={ currentPage }
-            visiblePages={ 4 }
-            titles={{ first: '<|', last: '>|' }}
-            className="album-pagination"
-            onPageChanged={this.handlePageChanged}
-          />
-        }
-
       </div>
     )
   }
@@ -88,7 +67,25 @@ class MediaList extends Component {
 MediaList.propTypes = {
   files: PropTypes.array.isRequired,
   wrapper_width: PropTypes.number.isRequired,
-  uploader: PropTypes.object.isRequired
+  uploader: PropTypes.object.isRequired,
+  pager: PropTypes.shape({
+    current_page: PropTypes.number,
+    per_page: PropTypes.number
+  })
 }
 
-export default MediaList
+MediaList.defaultProps = {
+  pager: {
+    current_page: 0,
+    per_page: 8
+  }
+}
+
+function mapStateToProps(state) {
+  const { admin_albums } = state
+  return {
+    pager: admin_albums.selected_album.pager
+  }
+}
+
+export default connect(mapStateToProps)(MediaList)

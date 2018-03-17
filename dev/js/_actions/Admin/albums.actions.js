@@ -17,6 +17,7 @@ export const albumsActions = {
   generateImageThumbs, generateVideos,
   setMediaLocation, updateMediaLocation, removeMediaLocation,
   openMediaLocationMarker, closeMediaLocationMarkers,
+  setMediaPagerPage,
   moveMedia, trashMedia, clearMedia,
   delete: _delete
 }
@@ -412,6 +413,24 @@ function closeMediaLocationMarkers() {
 
   function close() { return { type: albumsConstants.CLOSE_MEDIA_LOCATION_MARKERS } }
 }
+
+
+/*
+ * Album Media pager actions
+ * calls setMediaPagerPage
+ */
+
+function setMediaPagerPage(page) {
+  return dispatch => {
+    dispatch(set(page))
+  }
+
+  function set() { return { type: albumsConstants.SET_MEDIA_PAGER_PAGE, page } }
+}
+
+
+
+
 
 
 

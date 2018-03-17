@@ -6,6 +6,10 @@ const initialState = {
     album: {},
     map: {
       edit_enabled: false
+    },
+    pager: {
+      current_page: 0,
+      per_page: 8
     }
   },
   lightbox: {
@@ -700,6 +704,27 @@ export function adminAlbums(state = initialState, action) {
 
 
     // Unsorted reducers...
+
+
+  /*
+   * Album Media pager reducers
+   * calls SET_MEDIA_PAGER_PAGE
+   */
+
+  case albumsConstants.SET_MEDIA_PAGER_PAGE:
+    return {
+      ...state,
+      selected_album: {
+        ...state.selected_album,
+        pager: {
+          ...state.selected_album.pager,
+          current_page: action.page
+        }
+      }
+    }
+
+
+
 
   case albumsConstants.CLEAR_SELECTED:
     return {
