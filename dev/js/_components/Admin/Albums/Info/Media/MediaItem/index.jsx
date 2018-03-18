@@ -54,21 +54,24 @@ class MediaItem extends Component {
       rekognition_labels,
       thumbs, videos, uploader,
       item_width,
-      item_gap,
+      item_height,
+      gap_width,
+      gap_height,
       connectDragSource } = this.props
 
     // console.log(item_gap)
     let thumb
     let filenameWidth = item_width - 65
-
     let itemStyle = {
       width: `${item_width}px`,
-      marginRight: `${item_gap}px`
+      marginRight: `${gap_width}px`,
+      marginBottom: `${gap_height}px`
     }
-
+    let height = item_height - 50 // substract item footer
     if (fromServer) {
       thumb = <ThumbnailSrv
-        maxSize={ item_width }
+        width={ item_width }
+        height={ height }
         mime={ mime }
         videos={ videos }
         thumbs={ thumbs }

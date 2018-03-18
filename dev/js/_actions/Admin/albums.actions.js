@@ -17,7 +17,7 @@ export const albumsActions = {
   generateImageThumbs, generateVideos,
   setMediaLocation, updateMediaLocation, removeMediaLocation,
   openMediaLocationMarker, closeMediaLocationMarkers,
-  setMediaPagerPage,
+  setMediaPagerPage, setMediaPagerGrid,
   moveMedia, trashMedia, clearMedia,
   delete: _delete
 }
@@ -418,6 +418,7 @@ function closeMediaLocationMarkers() {
 /*
  * Album Media pager actions
  * calls setMediaPagerPage
+ *       setMediaPagerGrid
  */
 
 function setMediaPagerPage(page) {
@@ -425,9 +426,16 @@ function setMediaPagerPage(page) {
     dispatch(set(page))
   }
 
-  function set() { return { type: albumsConstants.SET_MEDIA_PAGER_PAGE, page } }
+  function set(page) { return { type: albumsConstants.SET_MEDIA_PAGER_PAGE, page } }
 }
 
+function setMediaPagerGrid(cols, rows) {
+  return dispatch => {
+    dispatch(set(cols, rows))
+  }
+
+  function set(cols, rows) { return { type: albumsConstants.SET_MEDIA_PAGER_GRID, cols, rows } }
+}
 
 
 

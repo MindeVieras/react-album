@@ -103,7 +103,7 @@ class Media extends Component {
 
   render() {
     const { t } = this.context
-    const { entity, entity_id, status, files, wrapper_width, dispatch } = this.props
+    const { entity, entity_id, status, files, wrapper_width, wrapper_height, dispatch } = this.props
     const uploader = this.uploader
 
     let counter = files.length
@@ -142,6 +142,7 @@ class Media extends Component {
           files={ files }
           uploader={ uploader }
           wrapper_width={ wrapper_width }
+          wrapper_height={ wrapper_height }
         />
 
         { uploaderText }
@@ -156,11 +157,13 @@ Media.propTypes = {
   entity_id: PropTypes.number.isRequired,
   status: PropTypes.number.isRequired,
   files: PropTypes.array.isRequired,
-  wrapper_width: PropTypes.number
+  wrapper_width: PropTypes.number,
+  wrapper_height: PropTypes.number
 }
 
 Media.defaultProps = {
-  wrapper_width: 500
+  wrapper_width: 500,
+  wrapper_height: 600
 }
 
 Media.contextTypes = {

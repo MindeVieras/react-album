@@ -9,10 +9,10 @@ import { IoAlertCircled } from 'react-icons/lib/io'
 class ThumbnailSrv extends Component {
 
   render() {
-    const { maxSize, mime, thumbs, videos } = this.props
+    const { width, height, mime, thumbs, videos } = this.props
     let sizeStyle = {
-      height: maxSize,
-      width: maxSize
+      height: height,
+      width: width
     }
     if (mime.includes('image')) {
       const style = {
@@ -54,7 +54,8 @@ class ThumbnailSrv extends Component {
 }
 
 ThumbnailSrv.propTypes = {
-  maxSize: PropTypes.number.isRequired,
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
   thumbs: PropTypes.object,
   videos: PropTypes.object,
   mime: PropTypes.string

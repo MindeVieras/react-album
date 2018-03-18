@@ -9,7 +9,9 @@ const initialState = {
     },
     pager: {
       current_page: 0,
-      per_page: 8
+      cols: 1,
+      rows: 1,
+      per_page: 1
     }
   },
   lightbox: {
@@ -709,6 +711,7 @@ export function adminAlbums(state = initialState, action) {
   /*
    * Album Media pager reducers
    * calls SET_MEDIA_PAGER_PAGE
+   *       SET_MEDIA_PAGER_GRID
    */
 
   case albumsConstants.SET_MEDIA_PAGER_PAGE:
@@ -719,6 +722,20 @@ export function adminAlbums(state = initialState, action) {
         pager: {
           ...state.selected_album.pager,
           current_page: action.page
+        }
+      }
+    }
+  case albumsConstants.SET_MEDIA_PAGER_GRID:
+    return {
+      ...state,
+      selected_album: {
+        ...state.selected_album,
+        pager: {
+          ...state.selected_album.pager,
+          current_page: 0,
+          cols: action.cols,
+          rows: action.rows,
+          per_page: action.cols * action.rows
         }
       }
     }

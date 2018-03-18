@@ -68,6 +68,7 @@ export const albumsConstants = {
 
   // Album Media pager constants
   SET_MEDIA_PAGER_PAGE: 'ALBUM_SET_MEDIA_PAGER_PAGE',
+  SET_MEDIA_PAGER_GRID: 'ALBUM_SET_MEDIA_PAGER_GRID',
 
   CLEAR_SELECTED: 'ALBUM_CLEAR_SELECTED',
 

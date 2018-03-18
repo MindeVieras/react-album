@@ -46,8 +46,9 @@ class Albums extends Component {
   }
 
   render() {
-    const { client_width, sidebar_width, selected_album } = this.props
+    const { client_width, client_height, sidebar_width, selected_album } = this.props
     let info_width = client_width - sidebar_width
+    let info_height = client_height - 90 // substract header and footer
     return (
       <DragDropContextProvider backend={HTML5Backend}>
         <div id="albums_page">
@@ -78,7 +79,11 @@ class Albums extends Component {
           </div>
           
           {selected_album &&
-            <AlbumInfo selected_album={ selected_album } width={ info_width } />
+            <AlbumInfo
+              selected_album={ selected_album }
+              width={ info_width }
+              height={ info_height }
+            />
           }
 
         </div>
@@ -93,7 +98,8 @@ function mapStateToProps(state) {
     selected_album: admin_albums.selected_album,
     selected_album_id: parseInt(settings.admin.selected_album),
     sidebar_width: parseInt(settings.admin.sidebar_width),
-    client_width: client.screen.width
+    client_width: client.screen.width,
+    client_height: client.screen.height
   }
 }
 

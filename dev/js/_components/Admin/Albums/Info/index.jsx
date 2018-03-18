@@ -13,29 +13,27 @@ import { albumsConstants, contentConstants, mediaConstants } from '../../../../_
 
 class AlbumInfo extends Component {
 
-  componentWillReceiveProps(nextProps) {
-    const { selected_album, dispatch } = nextProps
-    if (selected_album.album) {
-      const { id, name, media, status } = selected_album.album
-      dispatch(headerActions.setTitle(name))
-      dispatch(footerActions.buttonRemove('deleteAlbum'))
-      dispatch(footerActions.buttonRemove('openLightbox'))
-      if (albumsConstants.ENABLED === status) {
-        dispatch(footerActions.buttonSet('', 'deleteAlbum', 'danger', {album_id: id, name}))
-        if (media.length > 0) {
-          dispatch(footerActions.buttonSet('', 'openLightbox', 'success', {album_id: id}))
-        }
-      }
-    }
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   const { selected_album, dispatch } = nextProps
+  //   if (selected_album.album) {
+  //     const { id, name, media, status } = selected_album.album
+  //     dispatch(headerActions.setTitle(name))
+  //     dispatch(footerActions.buttonRemove('deleteAlbum'))
+  //     dispatch(footerActions.buttonRemove('openLightbox'))
+  //     if (albumsConstants.ENABLED === status) {
+  //       dispatch(footerActions.buttonSet('', 'deleteAlbum', 'danger', {album_id: id, name}))
+  //       if (media.length > 0) {
+  //         dispatch(footerActions.buttonSet('', 'openLightbox', 'success', {album_id: id}))
+  //       }
+  //     }
+  //   }
+  // }
 
   render() {
-    const { width, selected_album } = this.props
-    // console.log(selected_album.album.media)
-    const scrollbarOptions = {
-      wheelSpeed: 1.25,
-      // useBothWheelAxes: true
-    }
+    const { width, height, selected_album } = this.props
+
+    let wrapper_height = height - 38 // suctract infoBar height
+    
     return (
       <div className="album-info" style={{ width: `${width}px` }}>
         {selected_album.album.loading &&
@@ -45,27 +43,23 @@ class AlbumInfo extends Component {
           <div>{selected_album.album.err}</div>
         }
         {selected_album.album.id &&
-          <PerfectScrollbar
-            option={ scrollbarOptions }
-            className="album-scrollbar default-scrollbar"
-          >
-            <div className="selected-album">
-              <Bar
-                album_id={ selected_album.album.id }
-                start_date={ selected_album.album.start_date }
-                end_date={ selected_album.album.end_date }
-              />
-              
-              <Media
-                entity={contentConstants.TYPE_ALBUM}
-                entity_id={selected_album.album.id}
-                status={mediaConstants.STATUS_ENABLED}
-                files={ selected_album.album.media }
-                wrapper_width={ width }
-              />
+          <div className="selected-album">
+            <Bar
+              album_id={ selected_album.album.id }
+              start_date={ selected_album.album.start_date }
+              end_date={ selected_album.album.end_date }
+            />
+            
+            <Media
+              entity={contentConstants.TYPE_ALBUM}
+              entity_id={selected_album.album.id}
+              status={mediaConstants.STATUS_ENABLED}
+              files={ selected_album.album.media }
+              wrapper_width={ width }
+              wrapper_height={ wrapper_height }
+            />
 
-            </div>
-          </PerfectScrollbar>
+          </div>
         }
       </div>
     )
@@ -74,11 +68,13 @@ class AlbumInfo extends Component {
 
 AlbumInfo.propTypes = {
   selected_album: PropTypes.object.isRequired,
-  width: PropTypes.number
+  width: PropTypes.number,
+  height: PropTypes.number
 }
 
 AlbumInfo.defaultProps = {
-  width: 500
+  width: 500,
+  heght: 600
 }
 
 export default connect()(AlbumInfo)
