@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import HTML5Backend from 'react-dnd-html5-backend'
 import { DragDropContextProvider } from 'react-dnd'
 import Rnd from 'react-rnd'
+import keydown from 'react-keydown'
 
 import AlbumsList from './List'
 import AlbumInfo from './Info'
@@ -26,6 +27,34 @@ class Albums extends Component {
     dispatch(footerActions.buttonsClear())
     dispatch(footerActions.buttonSet('', 'newAlbum', 'success'))
     dispatch(albumsActions.getOne(selected_album_id))
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { selected_album, keydown, dispatch } = nextProps
+    if (keydown.event) {
+      // on key left and right navigate madia pager
+      const { keyCode } = keydown.event
+      // if navigating to right
+      if (keyCode === 37) {
+        const { current_page } = selected_album.pager
+        if (current_page > 0) {
+          let newPage = current_page - 1
+          dispatch(albumsActions.setMediaPagerPage(newPage))
+        }
+      }
+      // if navigating to left
+      if (keyCode === 39) {
+        if (selected_album.album.id) {        
+          const { current_page, per_page } = selected_album.pager
+          const totalPages = Math.ceil(selected_album.album.media.length / per_page)
+          let newPage = current_page + 1
+          if (newPage < totalPages) {          
+            dispatch(albumsActions.setMediaPagerPage(newPage))
+            console.log(newPage, totalPages)
+          }
+        }
+      }
+    }
   }
 
   componentWillUnmount() {
@@ -103,4 +132,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(Albums)
+export default connect(mapStateToProps)(keydown(Albums))

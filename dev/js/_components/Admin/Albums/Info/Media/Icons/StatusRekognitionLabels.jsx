@@ -48,13 +48,26 @@ class StatusRekognitionLabelsIcon extends Component {
 
     if (rekognition_labels.ack == 'ok') {
       className = 'success'
-      tooltipText = <ul>
+      let totalLabels = Object.keys(rekognition_labels).length - 1, // substract 'ack'
+          ulWidth = 150,
+          liWidth = 150
+
+      if (totalLabels > 20) {
+        ulWidth = 300
+      }
+
+      tooltipText = <ul style={{width: `${ulWidth}px`}}>
         {
           Object.keys(rekognition_labels).map((key, i) => {
             if (key != 'ack') {
               let confidence = rekognition_labels[key]
               return (
-                <li key={ i }>{ t(key) } { Math.trunc(confidence) }%</li>
+                <li
+                  key={ i }
+                  style={{width: `${liWidth}px`, display: `inline-block`}}
+                >
+                  { t(key) } { Math.trunc(confidence) }%
+                </li>
               )
             }
           })

@@ -225,6 +225,8 @@ export const adminTranslations = {
     "Cocktail": "Kokteilis",
     "Night Life": "Naktinis gyvenimas",
     "Make Out": "Aiškinimasis",
+    "Swimwear": "Maudymosi kostiumėlis",
+    "Finger": "Pirštas",
     
   }
 }
