@@ -30,27 +30,60 @@ class Albums extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { selected_album, keydown, dispatch } = nextProps
-    if (keydown.event) {
-      // on key left and right navigate madia pager
-      const { keyCode } = keydown.event
-      // if navigating to right
-      if (keyCode === 37) {
-        const { current_page } = selected_album.pager
-        if (current_page > 0) {
-          let newPage = current_page - 1
-          dispatch(albumsActions.setMediaPagerPage(newPage))
+    const { selected_album, albums_list, keydown, dispatch } = nextProps
+    const { album, pager } = selected_album
+    
+    if (album.id) {
+
+      if (keydown.event) {
+        const { keyCode } = keydown.event
+
+        // on key left and right navigate madia pager
+
+        // if navigating to right
+        if (keyCode === 37) {
+          const { current_page } = pager
+          if (current_page > 0) {
+            let newPage = current_page - 1
+            dispatch(albumsActions.setMediaPagerPage(newPage))
+          }
         }
-      }
-      // if navigating to left
-      if (keyCode === 39) {
-        if (selected_album.album.id) {        
-          const { current_page, per_page } = selected_album.pager
-          const totalPages = Math.ceil(selected_album.album.media.length / per_page)
+        // if navigating to left
+        if (keyCode === 39) {
+          const { current_page, per_page } = pager
+          const totalPages = Math.ceil(album.media.length / per_page)
           let newPage = current_page + 1
           if (newPage < totalPages) {          
             dispatch(albumsActions.setMediaPagerPage(newPage))
-            console.log(newPage, totalPages)
+          }
+        }
+
+        // on key up or down nawigate trough albums list
+        if (keyCode === 38 || keyCode === 40) {
+          if (albums_list.length > 1) {          
+            const totalAlbums = albums_list.length
+
+            // find album index in list
+            const index = albums_list.map(function(a) { return a.id }).indexOf(album.id)
+
+            // if navigation to up
+            if (keyCode === 38 && index > 0) {
+              const newIndex = index - 1
+              const newId = albums_list[newIndex].id
+              dispatch(albumsActions.getOne(newId))
+              dispatch(utilsActions.saveAdminSetting('selected_album', newId))
+            }
+
+            // if navigation to down
+            if (keyCode === 40) {
+              const newIndex = index + 1
+              if (newIndex < totalAlbums) {              
+                const newId = albums_list[newIndex].id
+                dispatch(albumsActions.getOne(newId))
+                dispatch(utilsActions.saveAdminSetting('selected_album', newId))
+              }
+            }
+
           }
         }
       }
@@ -126,6 +159,7 @@ function mapStateToProps(state) {
   return {
     selected_album: admin_albums.selected_album,
     selected_album_id: parseInt(settings.admin.selected_album),
+    albums_list: admin_albums.list.items,
     sidebar_width: parseInt(settings.admin.sidebar_width),
     client_width: client.screen.width,
     client_height: client.screen.height
