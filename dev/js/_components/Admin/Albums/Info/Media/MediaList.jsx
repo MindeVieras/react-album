@@ -14,11 +14,11 @@ class MediaList extends Component {
   }
   
   componentDidMount() {
-    this.setMediaGrid()
+    this.setMediaGrid(this.props)
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setMediaGrid()
+    this.setMediaGrid(nextProps)
   }
   
   componentWillUnmount() {
@@ -27,13 +27,11 @@ class MediaList extends Component {
     dispatch(albumsActions.setMediaPagerPage(0))
   }
   
-  setMediaGrid() {
-    const { pager, wrapper_width, wrapper_height, dispatch } = this.props
+  setMediaGrid(props) {
+    const { pager, wrapper_width, wrapper_height, dispatch } = props
     let cols = pager.cols,
         rows = pager.rows
 
-    // wrapper_height = client_height - 128 // sbstractig header, infobar and footer
-    // console.log(wrapper_height)
     if (wrapper_width < 480) {
       cols = 1
     }
@@ -122,7 +120,7 @@ MediaList.defaultProps = {
 }
 
 function mapStateToProps(state) {
-  const { client, admin_albums } = state
+  const { admin_albums } = state
   return {
     pager: admin_albums.selected_album.pager
   }
