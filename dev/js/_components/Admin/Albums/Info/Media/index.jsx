@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import FineUploaderTraditional from 'fine-uploader-wrappers'
+import FineUploaderS3 from 'fine-uploader-wrappers/s3'
 import ReactTooltip from 'react-tooltip'
 import { toastr } from 'react-redux-toastr'
 import { IoCloseCircled, IoUpload } from 'react-icons/lib/io'
@@ -12,7 +12,7 @@ import TotalProgressBar from './Partials/total-progress-bar'
 
 import MediaList from './MediaList'
 
-import { authHeader, baseServerUrl } from '../../../../../_helpers'
+import { bucket, awsAccessKey, authHeader, baseServerUrl } from '../../../../../_helpers'
 import { footerActions, albumsActions } from '../../../../../_actions'
 import { mediaService } from '../../../../../_services'
 
@@ -21,23 +21,37 @@ class Media extends Component {
   constructor(props) {
     super(props)
 
-    this.uploader = new FineUploaderTraditional({
+    this.uploader = new FineUploaderS3({
       options: {
-        debug: false,
-        chunking: {
-          enabled: false
-        },
         request: {
-          customHeaders: authHeader(),
-          endpoint: baseServerUrl+'/api/upload'
+          endpoint: bucket+'.s3.amazonaws.com',
+          accessKey: awsAccessKey
         },
-        deleteFile: {
-          customHeaders: authHeader(),
-          enabled: true,
-          method: 'POST',
-          endpoint: baseServerUrl+'/api/media/put-to-trash'
+        signature: {
+          endpoint: baseServerUrl+'/api/uploader/sign',
+          version: 2
+        },
+        chunking: {
+          enabled: true
+        },
+        resume: {
+          enabled: true
+        },
+        objectProperties: {
+          serverSideEncryption: true,
+          key: function(fileId) {
+            let name = this.getName(fileId)
+            let rand = Math.floor((Math.random() * 9999999) + 1)
+            let ext = name.substr(name.lastIndexOf('.') + 1)
+
+            return 'media/'+Date.now().toString()+'-'+rand+'.'+ext.toLowerCase()
+          }
+        },
+        uploadSuccess: {
+          endpoint: baseServerUrl+'/api/uploader/success'
         }
       }
+
     })
 
     const uploader = this.uploader
@@ -46,9 +60,16 @@ class Media extends Component {
     this._onStatusChange = (id, oldStatus, status) => {
       // Submitting files
       if (status === statusEnum.SUBMITTED) {
+        const { name, size, type } = uploader.methods.getFile(id)
+        // Set exptra filesize and mime type to S3 upload success
+        let s3params = {
+          filesize: size,
+          mime: type
+        }
+        uploader.methods.setUploadSuccessParams(s3params, id)
+
         props.dispatch(albumsActions.submitMedia(id, status, false))
         // Set media data
-        const { name, size, type } = uploader.methods.getFile(id)
         const data = { filename: name, size, mime: type }
         props.dispatch(albumsActions.setMediaData(id, data))
       }
