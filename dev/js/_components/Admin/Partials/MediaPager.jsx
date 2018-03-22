@@ -26,7 +26,10 @@ class MediaPager extends Component {
 
   render() {
     const { pager, media } = this.props
-    const totalPages = Math.ceil(media.length / pager.per_page)
+    let totalPages = 0
+    if (pager) {
+      totalPages = Math.ceil(media.length / pager.per_page)
+    }
 
     if (totalPages > 1) {
       return (
