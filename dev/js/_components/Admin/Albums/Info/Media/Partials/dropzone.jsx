@@ -38,9 +38,8 @@ class DropzoneElement extends Component {
   }
 
   _onProcessingDroppedFilesComplete(files) {
-    const { entity, entity_id, status, uploader } = this.props
-    const params = { entity, entity_id, status }
-    uploader.methods.addFiles(files, params)
+    const { uploader } = this.props
+    uploader.methods.addFiles(files)
 
     if (this.props.onProcessingDroppedFilesComplete) {
       this.props.onProcessingDroppedFilesComplete(files)
@@ -68,9 +67,6 @@ class DropzoneElement extends Component {
 }
 
 DropzoneElement.propTypes = {
-  entity: PropTypes.number.isRequired,
-  entity_id: PropTypes.number.isRequired,
-  status: PropTypes.number.isRequired,
   children: PropTypes.node,
   dropActiveClassName: PropTypes.string,
   element: PropTypes.object,

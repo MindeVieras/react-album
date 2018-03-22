@@ -46,9 +46,6 @@ class FileInput extends Component {
 }
 
 FileInput.propTypes = {
-  entity: PropTypes.number.isRequired,
-  entity_id: PropTypes.number.isRequired,
-  status: PropTypes.number.isRequired,
   uploader: PropTypes.object.isRequired,
   btn_type: PropTypes.string
 }
@@ -58,9 +55,8 @@ FileInput.defaultProps = {
 }
 
 const onFilesSelected = function(onChangeEvent) {
-  const { entity, entity_id, status, uploader } = this.props
-  const params = { entity, entity_id, status }
-  uploader.methods.addFiles(onChangeEvent.target, params)
+  const { uploader } = this.props
+  uploader.methods.addFiles(onChangeEvent.target)
   this._resetInput()
 }
 

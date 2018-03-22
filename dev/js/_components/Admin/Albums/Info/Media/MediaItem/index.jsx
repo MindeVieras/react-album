@@ -81,7 +81,8 @@ class MediaItem extends Component {
     else if (mime) {
       thumb = <Thumbnail
         id={ id }
-        maxSize={ item_width }
+        width={ item_width }
+        height={ height }
         mime={ mime }
         videos={ videos }
         uploader={ uploader }

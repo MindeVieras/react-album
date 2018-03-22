@@ -16,6 +16,9 @@ module.exports = function(grunt) {
                 replacements: [{
                     from: 'http://localhost:3000',
                     to: 'http://album.mindelis.com'
+                },{
+                    from: 'images.album.mindelis.com',
+                    to: 'media.album.mindelis.com'
                 }]
             }
         },

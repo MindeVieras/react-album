@@ -60,11 +60,15 @@ class Media extends Component {
     this._onStatusChange = (id, oldStatus, status) => {
       // Submitting files
       if (status === statusEnum.SUBMITTED) {
+        const { entity, entity_id, status } = this.props
         const { name, size, type } = uploader.methods.getFile(id)
         // Set exptra filesize and mime type to S3 upload success
         let s3params = {
           filesize: size,
-          mime: type
+          mime: type,
+          entity,
+          entity_id,
+          status
         }
         uploader.methods.setUploadSuccessParams(s3params, id)
 
@@ -101,14 +105,11 @@ class Media extends Component {
 
   componentDidMount() {
     const uploader = this.uploader
-    const { entity_id, entity, status, dispatch } = this.props
+    const { dispatch } = this.props
 
     // Set footer upload input button
     dispatch(footerActions.buttonRemove('uploadMedia'))
     let buttonProps = {
-      entity,
-      entity_id,
-      status,
       uploader
     }
     dispatch(footerActions.buttonSet('', 'uploadMedia', 'info', buttonProps))
@@ -145,9 +146,6 @@ class Media extends Component {
     return (
       <Dropzone
         uploader={ uploader }
-        entity={ entity }
-        entity_id={ entity_id }
-        status={ status }
         multiple={ true }
         dropActiveClassName="active"
       >        

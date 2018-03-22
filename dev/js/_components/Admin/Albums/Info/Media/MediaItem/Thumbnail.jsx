@@ -17,12 +17,12 @@ class Thumbnail extends Component {
   }
 
   componentDidMount() {
-    const { mime } = this.props
+    const { id, height, width, mime } = this.props
     if (mime.includes('image')) {    
       this.props.uploader.methods.drawThumbnail(
-        this.props.id,
+        id,
         this._canvas,
-        this.props.maxSize
+        Math.max(height, width)
       ).then(
         () => {
           this.setState({
@@ -49,12 +49,12 @@ class Thumbnail extends Component {
   }
 
   render() {
-    const { maxSize, mime, videos } = this.props
+    const { width, height, mime, videos } = this.props
     if (mime.includes('image')) {    
       return (
         <span
           className="uploader-thumbnail image"
-          style={{height: maxSize, width: maxSize}}
+          style={{height: height, width: width}}
         >
           <canvas
             className="thumbnail"
@@ -69,7 +69,7 @@ class Thumbnail extends Component {
       return (
         <span
           className="uploader-thumbnail video"
-          style={{height: maxSize, width: maxSize}}
+          style={{height: height, width: width}}
         >
           {videos &&
             <Player
@@ -93,8 +93,8 @@ class Thumbnail extends Component {
 
   get _maybePlaceholder() {
     const style = {
-      height: this.props.maxSize,
-      width: this.props.maxSize
+      height: this.props.height,
+      width: this.props.width
     }
     if (this._failure) {      
       return (
@@ -123,7 +123,8 @@ class Thumbnail extends Component {
 
 Thumbnail.propTypes = {
   id: PropTypes.number.isRequired,
-  maxSize: PropTypes.number.isRequired,
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
   videos: PropTypes.object,
   uploader: PropTypes.object.isRequired,
   mime: PropTypes.string.isRequired
