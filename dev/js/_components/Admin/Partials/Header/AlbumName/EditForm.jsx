@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import Popup from 'react-popup'
 import { connect } from 'react-redux'
 
-import { albumsActions } from '../../../../_actions'
+import { albumsActions } from '../../../../../_actions'
 
 class EditForm extends Component {
   constructor(props) {
