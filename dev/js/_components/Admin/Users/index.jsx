@@ -18,12 +18,10 @@ class UsersPage extends Component {
   render() {
     return (
       <div id="users_page">
-        <div className="pull-left users-wrapper">
+        <div className="users-wrapper">
           <UsersList />
         </div>
-        <div className="pull-right info-wrapper">
-          <UserInfo />
-        </div>
+        <UserInfo />
       </div>
     )
   }

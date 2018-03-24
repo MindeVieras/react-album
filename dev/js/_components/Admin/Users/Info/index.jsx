@@ -21,9 +21,8 @@ class UserInfo extends React.Component {
 
   render() {
     const { auth, selected_user } = this.props
-    console.log(this.props)
     return (
-      <div className="user-info">
+      <div className="info-wrapper">
         {selected_user.loading &&
           <RingLoader />
         }
@@ -40,31 +39,33 @@ class UserInfo extends React.Component {
               }
               <div className="inner">{selected_user.user.initials}</div>
             </div>
-            <div className="toolbar">
-              <div className="btn btn-xs btn-info">Edit</div>
-              {selected_user.user.id != auth.user.id &&
-              <div
-                className="btn btn-xs btn-danger"
-                onClick={() => this.onUserDelete(selected_user.user.id)}
-              >Delete</div>
+            <div className="user-info">
+              <div className="toolbar">
+                <div className="btn btn-xs btn-info">Edit</div>
+                {selected_user.user.id != auth.user.id &&
+                <div
+                  className="btn btn-xs btn-danger"
+                  onClick={() => this.onUserDelete(selected_user.user.id)}
+                >Delete</div>
+                }
+              </div>
+              <div className="info-group">
+                <div className="label">Username</div>
+                <div className="info-item">{selected_user.user.username}</div>
+              </div>
+              {selected_user.user.display_name &&
+              <div className="info-group">
+                <div className="label">Display name</div>
+                <div className="info-item">{selected_user.user.display_name}</div>
+              </div>
+              }
+              {selected_user.user.email &&
+              <div className="info-group">
+                <div className="label">Email</div>
+                <div className="info-item">{selected_user.user.email}</div>
+              </div>
               }
             </div>
-            <div className="info-group">
-              <div className="label">Username</div>
-              <div className="info-item">{selected_user.user.username}</div>
-            </div>
-            {selected_user.user.display_name &&
-            <div className="info-group">
-              <div className="label">Display name</div>
-              <div className="info-item">{selected_user.user.display_name}</div>
-            </div>
-            }
-            {selected_user.user.email &&
-            <div className="info-group">
-              <div className="label">Email</div>
-              <div className="info-item">{selected_user.user.email}</div>
-            </div>
-            }
           </div>
         }
       </div>

@@ -41,7 +41,8 @@ class MainMenu extends Component {
       isOpen: this.state.isMenuOpen,
       close: this.close,
       toggle: hamburger,
-      align: 'right'
+      align: 'right',
+      inverse: true
     }
 
     return (
