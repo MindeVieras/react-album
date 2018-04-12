@@ -2,12 +2,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import Spinner from '../Partials/Spinner'
+import Spinner from '../../Partials/Spinner'
 
 import DeleteButton from './DeleteButton'
 import RestoreButton from './RestoreButton'
 
-class ListItem extends Component {
+class MediaItem extends Component {
   
   render() {
     const { media } = this.props
@@ -24,8 +24,8 @@ class ListItem extends Component {
   }
 }
 
-ListItem.propTypes = {
+MediaItem.propTypes = {
   media: PropTypes.object.isRequired
 }
 
-export default ListItem
+export default MediaItem

@@ -5,7 +5,10 @@ const initialState = {
   list: {
     loading: false,
     err: false,
-    items: []
+    items: {
+      media: [],
+      albums: []
+    }
   }
 }
 
@@ -21,9 +24,7 @@ export function trash(state = initialState, action) {
   case trashConstants.GETLIST_SUCCESS:
     return {
       ...state,
-      list: {
-        items: action.media
-      }
+      list: action.list
     }
   case trashConstants.GETLIST_FAILURE:
     return {
@@ -32,12 +33,14 @@ export function trash(state = initialState, action) {
         err: action.err
       } 
     }
+    
   case trashConstants.RESTORE_REQUEST:
     return {
       ...state,
       list: {
-        items:
-          state.list.items.map(m =>
+        ...state.list,
+        media:
+          state.list.media.map(m =>
             m.id === action.id
               ? { ...m, restoring: true }
               : m
@@ -49,14 +52,16 @@ export function trash(state = initialState, action) {
     return {
       ...state,
       list: {
-        items: state.list.items.filter(m => m.id !== action.id)
+        ...state.list,
+        media: state.list.media.filter(m => m.id !== action.id)
       }
     }
   case trashConstants.RESTORE_FAILURE:
     return {
       ...state,
       list: {
-        items: state.list.items.map(m => {
+        ...state.list,
+        media: state.list.media.map(m => {
           if (m.id === action.id) {
             const { restoring, ...mCopy } = m
             return { ...mCopy, restoreError: action.err }
@@ -70,8 +75,9 @@ export function trash(state = initialState, action) {
     return {
       ...state,
       list: {
-        items:
-          state.list.items.map(m =>
+        ...state.list,
+        media:
+          state.list.media.map(m =>
             m.id === action.id
               ? { ...m, deleting: true }
               : m
@@ -83,14 +89,16 @@ export function trash(state = initialState, action) {
     return {
       ...state,
       list: {
-        items: state.list.items.filter(m => m.id !== action.id)
+        ...state.list,
+        media: state.list.media.filter(m => m.id !== action.id)
       }
     }
   case trashConstants.DELETE_FAILURE:
     return {
       ...state,
       list: {
-        items: state.list.items.map(m => {
+        ...state.list,
+        media: state.list.media.map(m => {
           if (m.id === action.id) {
             const { deleting, ...mCopy } = m
             return { ...mCopy, deleteError: action.err }

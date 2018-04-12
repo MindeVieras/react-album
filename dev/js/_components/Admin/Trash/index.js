@@ -5,7 +5,8 @@ import { connect } from 'react-redux'
 import Spinner from '../Partials/Spinner'
 
 import { IoTrashA } from 'react-icons/lib/io'
-import ListItem from './ListItem'
+import MediaItem from './MediaItem'
+import AlbumsItem from './AlbumsItem'
 
 import { headerActions, footerActions, trashActions } from '../../../_actions'
 
@@ -20,9 +21,11 @@ class TrashPage extends Component {
   }
 
   render() {
-    const { media } = this.props
-    let emptyContent = ''
-    if (media.items && media.items.length === 0) {
+    const { media, albums, loading, err } = this.props.list
+    // console.log(this.props.list)
+    let emptyContent
+
+    if (!media) {
       emptyContent = <span className="trash-empty-text">
         <div className="icon">
           <IoTrashA />
@@ -32,18 +35,31 @@ class TrashPage extends Component {
     }
     return (
       <div id="trash_page">
-        {media.loading &&
+        {loading &&
           <Spinner type="primary" size={ 70 } />
         }
-        {media.err &&
-          <div>{media.err}</div>
+        {err &&
+          <div>{err}</div>
         }
-        {media.items &&
-          <ul>
-            {media.items.map((m) =>
-              <ListItem key={ m.id } media={ m } />
-            )}
-          </ul>
+        {media &&
+          <div className="media-list list">
+            <div className="list-title">Media</div>
+            <ul>
+              {media.map((m) =>
+                <MediaItem key={ m.id } media={ m } />
+              )}
+            </ul>
+          </div>
+        }
+        {albums &&
+          <div className="albums-list list">
+            <div className="list-title">Albums</div>
+            <ul>
+              {albums.map((a) =>
+                <AlbumsItem key={ a.id } album={ a } />
+              )}
+            </ul>
+          </div>
         }
         { emptyContent }
       </div>
@@ -52,13 +68,13 @@ class TrashPage extends Component {
 }
 
 TrashPage.propTypes = {
-  media: PropTypes.object.isRequired
+  list: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state) {
   const { trash } = state
   return {
-    media: trash.list
+    list: trash.list
   }
 }
 

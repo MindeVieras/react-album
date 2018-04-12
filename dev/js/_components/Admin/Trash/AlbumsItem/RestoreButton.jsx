@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import { IoBackspace } from 'react-icons/lib/io'
 import { RingLoader } from 'react-spinners'
 
-import { trashActions } from '../../../_actions'
+import { trashActions } from '../../../../_actions'
 
 class RestoreButton extends Component {
 

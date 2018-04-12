@@ -17,7 +17,7 @@ function getList() {
     trashService.getList()
       .then(function(res) {
         if (res.ack == 'ok') {
-          dispatch(success(res.data))
+          dispatch(success(res.list))
         } else {
           dispatch(failure(res.msg))
         }
@@ -25,7 +25,7 @@ function getList() {
   }
 
   function request() { return { type: trashConstants.GETLIST_REQUEST } }
-  function success(media) { return { type: trashConstants.GETLIST_SUCCESS, media } }
+  function success(list) { return { type: trashConstants.GETLIST_SUCCESS, list } }
   function failure(err) { return { type: trashConstants.GETLIST_FAILURE, err } }
 }
 

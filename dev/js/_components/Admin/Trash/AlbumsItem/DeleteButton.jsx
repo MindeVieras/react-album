@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import { IoTrashA } from 'react-icons/lib/io'
 
-import { trashActions } from '../../../_actions'
+import { trashActions } from '../../../../_actions'
 
 class DeleteButton extends Component {
 

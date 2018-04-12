@@ -3,7 +3,7 @@ import {toastr} from 'react-redux-toastr'
 import Popup from 'react-popup'
 
 import { albumsConstants } from '../../_constants'
-import { albumsService, mediaService } from '../../_services'
+import { albumsService, mediaService, trashService } from '../../_services'
 
 export const albumsActions = {
   getList, getListDates, addToList,
@@ -18,7 +18,7 @@ export const albumsActions = {
   setMediaLocation, updateMediaLocation, removeMediaLocation,
   openMediaLocationMarker, closeMediaLocationMarkers,
   setMediaPagerPage, setMediaPagerGrid,
-  moveMedia, trashMedia, clearMedia,
+  moveMedia, trashMedia, deleteMedia, clearMedia,
   delete: _delete
 }
 
@@ -476,6 +476,22 @@ function trashMedia(media_id) {
           dispatch(remove(media_id))
           toastr.success('Success', res.msg)
         } else if (res.ack == 'err') {
+          toastr.error('Error', res.msg)
+        }
+      })
+  }
+
+  function remove(media_id) { return { type: albumsConstants.REMOVE_MEDIA_ONE, media_id } }
+}
+
+function deleteMedia(media_id) {
+  return dispatch => {
+    trashService.delete(media_id)
+      .then(function(res) {
+        if (res.ack == 'ok') {
+          dispatch(remove(media_id))
+          toastr.success('Success', res.msg)
+        } else {
           toastr.error('Error', res.msg)
         }
       })
