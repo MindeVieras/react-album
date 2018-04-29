@@ -33,7 +33,7 @@ function getList(start_date, end_date) {
     body: JSON.stringify({start_date, end_date})
   }
 
-  return fetch(baseServerUrl+'/api/albums/get-list', requestOptions).then(handleResponse)
+  return fetch(baseServerUrl+'/api/albums/list', requestOptions).then(handleResponse)
 }
 
 function getListDates() {
@@ -42,7 +42,7 @@ function getListDates() {
     headers: authHeader()
   }
 
-  return fetch(baseServerUrl+'/api/albums/get-list-dates', requestOptions).then(handleResponse)
+  return fetch(baseServerUrl+'/api/albums/list-dates', requestOptions).then(handleResponse)
 }
 
 
@@ -57,7 +57,7 @@ function getOne(id) {
     headers: authHeader()
   }
 
-  return fetch(baseServerUrl+'/api/albums/get-one/'+id, requestOptions).then(handleResponse)
+  return fetch(baseServerUrl+'/api/albums/one/'+id, requestOptions).then(handleResponse)
 }
 
 

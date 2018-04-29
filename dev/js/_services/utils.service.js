@@ -14,7 +14,7 @@ function getAppSettings() {
     method: 'GET'
   }
 
-  return fetch(baseServerUrl+'/api/utils/get-app-settings', requestOptions).then(handleResponse)
+  return fetch(baseServerUrl+'/api/utils/app-settings', requestOptions).then(handleResponse)
 }
 
 function getAdminSettings() {
@@ -23,7 +23,7 @@ function getAdminSettings() {
     headers: authHeader()
   }
 
-  return fetch(baseServerUrl+'/api/utils/get-admin-settings', requestOptions).then(handleResponse)
+  return fetch(baseServerUrl+'/api/utils/admin-settings', requestOptions).then(handleResponse)
 }
 
 function saveAdminSetting(name, value) {
@@ -33,7 +33,7 @@ function saveAdminSetting(name, value) {
     body: JSON.stringify({ name, value })
   }
 
-  return fetch(baseServerUrl+'/api/utils/save-admin-setting', requestOptions).then(handleResponse)
+  return fetch(baseServerUrl+'/api/utils/admin-settings', requestOptions).then(handleResponse)
 }
 
 function getFrontSettings(id) {
@@ -42,17 +42,17 @@ function getFrontSettings(id) {
     headers: authHeader()
   }
 
-  return fetch(baseServerUrl+'/api/utils/get-front-settings/'+id, requestOptions).then(handleResponse)
+  return fetch(baseServerUrl+'/api/utils/front-settings', requestOptions).then(handleResponse)
 }
 
 function saveFrontSetting(name, value, uid) {
   const requestOptions = {
     method: 'POST',
     headers: { ...authHeader(), 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name, value, uid })
+    body: JSON.stringify({ name, value })
   }
 
-  return fetch(baseServerUrl+'/api/utils/save-front-setting', requestOptions).then(handleResponse)
+  return fetch(baseServerUrl+'/api/utils/front-settings', requestOptions).then(handleResponse)
 }
 
 function handleResponse(response) {

@@ -7,5 +7,6 @@
 src/js/bundle.min.js
 
 node_modules
+package-lock.json
 
 aws-keys.json

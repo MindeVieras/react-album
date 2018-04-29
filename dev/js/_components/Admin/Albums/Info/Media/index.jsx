@@ -12,6 +12,7 @@ import TotalProgressBar from './Partials/total-progress-bar'
 
 import MediaList from './MediaList'
 
+import awsKeys from '../../../../../../../aws-keys.json'
 import { bucket, awsAccessKey, authHeader, baseServerUrl } from '../../../../../_helpers'
 import { footerActions, albumsActions } from '../../../../../_actions'
 import { mediaService } from '../../../../../_services'
@@ -20,12 +21,11 @@ class Media extends Component {
 
   constructor(props) {
     super(props)
-
     this.uploader = new FineUploaderS3({
       options: {
         request: {
           endpoint: bucket+'.s3.amazonaws.com',
-          accessKey: awsAccessKey
+          accessKey: awsKeys.AWSAccessKeyId
         },
         signature: {
           endpoint: baseServerUrl+'/api/uploader/sign',

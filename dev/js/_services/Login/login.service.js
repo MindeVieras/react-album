@@ -13,7 +13,7 @@ function login(username, password) {
     body: JSON.stringify({ username, password })
   }
 
-  return fetch(baseServerUrl+'/api/authenticate', requestOptions)
+  return fetch(baseServerUrl+'/api/auth', requestOptions)
     .then(response => {
       if (!response.ok) { 
         return Promise.reject(response.statusText)

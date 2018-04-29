@@ -2,26 +2,44 @@
 import { authHeader, baseServerUrl } from '../../_helpers'
 
 export const mediaService = {
-  save,
+  setLocation,
+  updateLocation,
+  removeLocation,
   putToTrash,
   moveMedia,
   generateImageThumbs,
   generateVideos,
   saveMetadata,
-  saveRekognitionLabels,
-  removeLocation,
-  setLocation,
-  updateLocation
+  saveRekognitionLabels
 }
 
-// Saves media file on upload
-function save(file, user_id, content_type) {
+function setLocation(media_id, location) {
   const requestOptions = {
     method: 'POST',
     headers: { ...authHeader(), 'Content-Type': 'application/json' },
-    body: JSON.stringify({ file, user_id, content_type })
+    body: JSON.stringify({ media_id, location })
   }
-  return fetch(baseServerUrl+'/api/media/save', requestOptions).then(handleResponse)
+
+  return fetch(baseServerUrl+'/api/media/set-location', requestOptions).then(handleResponse)
+}
+
+function updateLocation(media_id, location) {
+  const requestOptions = {
+    method: 'POST',
+    headers: { ...authHeader(), 'Content-Type': 'application/json' },
+    body: JSON.stringify({ media_id, location })
+  }
+
+  return fetch(baseServerUrl+'/api/media/update-location', requestOptions).then(handleResponse)
+}
+
+function removeLocation(id) {
+  const requestOptions = {
+    method: 'GET',
+    headers: authHeader()
+  }
+
+  return fetch(baseServerUrl+'/api/media/remove-location/'+id, requestOptions).then(handleResponse)
 }
 
 // Puts media file to trash
@@ -82,35 +100,6 @@ function saveRekognitionLabels(media_id) {
     body: JSON.stringify({ media_id })
   }
   return fetch(baseServerUrl+'/api/media/save-rekognition-labels', requestOptions).then(handleResponse)
-}
-
-function removeLocation(id) {
-  const requestOptions = {
-    method: 'GET',
-    headers: authHeader()
-  }
-
-  return fetch(baseServerUrl+'/api/media/remove-location/'+id, requestOptions).then(handleResponse)
-}
-
-function setLocation(media_id, location) {
-  const requestOptions = {
-    method: 'POST',
-    headers: { ...authHeader(), 'Content-Type': 'application/json' },
-    body: JSON.stringify({ media_id, location })
-  }
-
-  return fetch(baseServerUrl+'/api/media/set-location', requestOptions).then(handleResponse)
-}
-
-function updateLocation(media_id, location) {
-  const requestOptions = {
-    method: 'POST',
-    headers: { ...authHeader(), 'Content-Type': 'application/json' },
-    body: JSON.stringify({ media_id, location })
-  }
-
-  return fetch(baseServerUrl+'/api/media/update-location', requestOptions).then(handleResponse)
 }
 
 function handleResponse(response) {
