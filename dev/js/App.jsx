@@ -23,6 +23,9 @@ class App extends Component {
   constructor(props) {
     super(props)
 
+    // Get App settings
+    props.dispatch(utilsActions.getAppSettings())
+
     // Set browser info into state
     let allowedLocales = ['en', 'lt', 'ru'],
         l = 'en'
@@ -50,9 +53,6 @@ class App extends Component {
       }
     })
 
-    // Get App settings
-    this.props.dispatch(utilsActions.getAppSettings())
-
     // Add resize event listener
     this.updateDimensions()
     window.addEventListener("resize", this.updateDimensions.bind(this))
@@ -73,23 +73,35 @@ class App extends Component {
   }
 
   render() {
-    return (
-      <Router history={history}>
-        <Switch>
-          <PrivateRoute exact path="/" component={Front} />
-          <PrivateRoute path="/admin" component={Admin} />
-          <Route path="/login" component={Login} />
-          <PrivateRoute component={Error404} />
-        </Switch>
-      </Router>
-    )
+    const { app_settings } = this.props
+
+    if (app_settings && app_settings.app_name) {      
+      return (
+        <Router history={history}>
+          <Switch>
+            <PrivateRoute exact path="/" component={Front} />
+            <PrivateRoute path="/admin" component={Admin} />
+            <Route path="/login" component={Login} />
+            <PrivateRoute component={Error404} />
+          </Switch>
+        </Router>
+      )
+    }
+    else if (app_settings && app_settings.setup) {
+      return (
+        <div>SEEETTUTTUTUPPP!!!!!!!!!!!</div>
+      )
+    }
+    else {
+      return <div>APP Loading...</div>
+    }
   }
 }
 
 function mapStateToProps(state) {
-  const { auth } = state
+  const { settings } = state
   return {
-    user: auth.user
+    app_settings: settings.app
   }
 }
 
