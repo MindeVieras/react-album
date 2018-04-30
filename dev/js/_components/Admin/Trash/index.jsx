@@ -68,7 +68,8 @@ class TrashPage extends Component {
 }
 
 TrashPage.propTypes = {
-  list: PropTypes.object.isRequired
+  list: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired
 }
 
 function mapStateToProps(state) {

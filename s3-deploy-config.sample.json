@@ -1,0 +1,6 @@
+{
+  "accessKeyId": "YOUR_ACCEESS_KEY",
+  "secretAccessKey": "YOUR_SECRET_ACCEESS_KEY",
+  "region": "region",
+  "bucket": "bucket-name"
+}

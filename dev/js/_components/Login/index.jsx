@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { setTranslations } from 'redux-i18n'
@@ -11,7 +11,7 @@ import { loginActions } from '../../_actions'
 
 import '../../../scss/Login/main.scss'
 
-class Login extends React.Component {
+class Login extends Component {
   constructor(props) {
     super(props)
 

@@ -73,36 +73,17 @@ class App extends Component {
   }
 
   render() {
-    const { app_settings } = this.props
-
-    if (app_settings && app_settings.app_name) {      
-      return (
-        <Router history={history}>
-          <Switch>
-            <PrivateRoute exact path="/" component={Front} />
-            <PrivateRoute path="/admin" component={Admin} />
-            <Route path="/login" component={Login} />
-            <PrivateRoute component={Error404} />
-          </Switch>
-        </Router>
-      )
-    }
-    else if (app_settings && app_settings.setup) {
-      return (
-        <div>SEEETTUTTUTUPPP!!!!!!!!!!!</div>
-      )
-    }
-    else {
-      return <div>APP Loading...</div>
-    }
+    return (
+      <Router history={ history }>
+        <Switch>
+          <PrivateRoute exact path="/" component={ Front } />
+          <PrivateRoute path="/admin" component={ Admin } />
+          <Route path="/login" component={ Login } />
+          <PrivateRoute component={ Error404 } />
+        </Switch>
+      </Router>
+    )
   }
 }
 
-function mapStateToProps(state) {
-  const { settings } = state
-  return {
-    app_settings: settings.app
-  }
-}
-
-export default connect(mapStateToProps)(App)
+export default connect()(App)

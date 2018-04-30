@@ -403,7 +403,11 @@ function openMediaLocationMarker(media_id, marker_open) {
     dispatch(open(media_id, marker_open))
   }
 
-  function open(media_id, marker_open) { return { type: albumsConstants.OPEN_MEDIA_LOCATION_MARKER, media_id, marker_open } }
+  function open(media_id, marker_open) {
+    return {
+      type: albumsConstants.OPEN_MEDIA_LOCATION_MARKER, media_id, marker_open
+    }
+  }
 }
 
 function closeMediaLocationMarkers() {

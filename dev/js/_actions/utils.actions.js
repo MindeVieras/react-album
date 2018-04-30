@@ -16,7 +16,6 @@ function getAppSettings() {
   return dispatch => {
     utilsService.getAppSettings()
       .then(function(res) {
-        console.log(res)
         dispatch(get(res.data))
       })
   }
