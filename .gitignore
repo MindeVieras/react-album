@@ -9,5 +9,5 @@ src/js/bundle.min.js
 node_modules
 package-lock.json
 
-s3-deploy-config.json
+webpack/s3-deploy-config.json
 aws-keys.json

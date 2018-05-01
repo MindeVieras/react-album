@@ -6,9 +6,9 @@
   "scripts": {
     "start": "webpack-dev-server",
     "dev": "webpack --progress",
-    "build": "webpack --config webpack.production.config.js --progress",
-    "deploy": "webpack --config webpack.deploy.config.js --progress",
-    "clean": "rimraf dist",
+    "build": "webpack --config webpack/webpack.production.config.js --progress",
+    "deploy": "webpack --config webpack/webpack.deploy.config.js --progress",
+    "clean": "rimraf src",
     "test": "eslint dev/js"
   },
   "license": "ISC",
@@ -62,7 +62,7 @@
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
-    "babel-eslint": "^8.2.3",
+    "babel-eslint": "^8.2.2",
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",

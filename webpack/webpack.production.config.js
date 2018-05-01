@@ -1,16 +1,10 @@
 
 var path = require('path');
 var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    mode: 'development',
-    devServer: {
-        inline: true,
-        historyApiFallback: true,
-        contentBase: './src',
-        port: 8080
-    },
-    devtool: 'eval-source-map',
+    mode: 'production',
     entry: './dev/js/index.jsx',
     output: {
         path: process.cwd()+'/src',
@@ -37,5 +31,15 @@ module.exports = {
                 }]
             }
         ]
-    }
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: './dev/index.html',
+            inject: false,
+            minify: {
+                collapseWhitespace: true
+            }
+        })
+    ]
 };
+

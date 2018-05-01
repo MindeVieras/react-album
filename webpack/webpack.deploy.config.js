@@ -7,7 +7,7 @@ var fs = require('fs');
 
 
 var s3DeployConfig = {};
-if (fs.existsSync('./s3-deploy-config.json')) {
+if (fs.existsSync(path.resolve(__dirname, 's3-deploy-config.json'))) {
     var s3DeployConfig = require('./s3-deploy-config.json');
 }
 else {
@@ -16,24 +16,20 @@ else {
 
 module.exports = {
     mode: 'production',
-    entry: './src/js/index.jsx',
+    entry: './dev/js/index.jsx',
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'app.min.js'
+        path: process.cwd()+'/src',
+        filename: 'js/bundle.min.js'
     },
     resolve: {
-        extensions: ['.js', '.jsx'],
-        alias: {
-            Components: path.resolve(__dirname, 'src/js/components/'),
-            Images: path.resolve(__dirname, 'assets/images/')
-        }
+        extensions: ['.js', '.jsx']
     },
     module: {
         rules: [
             {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
-                loader: ['babel-loader', 'eslint-loader']
+                loader: ['babel-loader']
             },
             {
                 test: /\.(css|scss)$/,
@@ -44,21 +40,12 @@ module.exports = {
                 }, {
                     loader: "sass-loader"
                 }]
-            },
-            {
-                test: /\.(png|jpg|jpeg|gif)$/,
-                use: [{
-                    loader: 'file-loader',
-                    options: {
-                        name: '[path][name].[ext]'
-                    }  
-                }]
             }
         ]
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './src/index.html',
+            template: './dev/index.html',
             inject: false,
             minify: {
                 collapseWhitespace: true

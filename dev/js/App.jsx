@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { setLanguage } from 'redux-i18n'
 import { Router, Switch, Route } from 'react-router-dom'
@@ -27,8 +28,8 @@ class App extends Component {
     props.dispatch(utilsActions.getAppSettings())
 
     // Set browser info into state
-    let allowedLocales = ['en', 'lt', 'ru'],
-        l = 'en'
+    let allowedLocales = ['en', 'lt', 'ru']
+    let l = 'en'
 
     if (allowedLocales.includes(locale))
       l = locale
@@ -84,6 +85,10 @@ class App extends Component {
       </Router>
     )
   }
+}
+
+App.propTypes = {
+  dispatch: PropTypes.func.isRequired
 }
 
 export default connect()(App)
