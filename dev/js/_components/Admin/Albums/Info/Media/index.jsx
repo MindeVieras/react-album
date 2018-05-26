@@ -13,7 +13,7 @@ import TotalProgressBar from './Partials/total-progress-bar'
 import MediaList from './MediaList'
 
 import awsKeys from '../../../../../../../aws-keys.json'
-import { bucket, awsAccessKey, authHeader, baseServerUrl } from '../../../../../_helpers'
+import { authHeader, baseServerUrl } from '../../../../../_helpers'
 import { footerActions, albumsActions } from '../../../../../_actions'
 import { mediaService } from '../../../../../_services'
 
@@ -24,7 +24,7 @@ class Media extends Component {
     this.uploader = new FineUploaderS3({
       options: {
         request: {
-          endpoint: bucket+'.s3.amazonaws.com',
+          endpoint: props.bucket+'.s3.amazonaws.com',
           accessKey: awsKeys.AWSAccessKeyId
         },
         signature: {
@@ -86,11 +86,11 @@ class Media extends Component {
     this._onComplete = (id, name, responseJSON, xhr) => {
       const { dispatch } = this.props
       const { media_id, s3_key, mime } = responseJSON.data
-      
+
       dispatch(albumsActions.setMediaMediaId(id, media_id))
       dispatch(albumsActions.saveMediaMetadata(id, media_id))
       dispatch(albumsActions.saveRekognitionLabels(id, media_id))
-      
+
       // If IMAGE
       if (mime.includes('image')) {
         dispatch(albumsActions.generateImageThumbs(id, media_id))
@@ -129,7 +129,7 @@ class Media extends Component {
     const uploader = this.uploader
 
     let counter = files.length
-    
+
     // Remove/Add dropzone text and fileField if any visableFiles
     let uploaderText = ''
     if (files.length > 0) {
@@ -148,7 +148,7 @@ class Media extends Component {
         uploader={ uploader }
         multiple={ true }
         dropActiveClassName="active"
-      >        
+      >
         <TotalProgressBar
           uploader={ uploader }
         />
@@ -156,7 +156,7 @@ class Media extends Component {
         <div className="counter">
           { counter } files
         </div>
-        
+
         <MediaList
           files={ files }
           uploader={ uploader }
@@ -172,6 +172,7 @@ class Media extends Component {
 }
 
 Media.propTypes = {
+  bucket: PropTypes.string.isRequired,
   entity: PropTypes.number.isRequired,
   entity_id: PropTypes.number.isRequired,
   status: PropTypes.number.isRequired,
@@ -189,4 +190,11 @@ Media.contextTypes = {
   t: PropTypes.func
 }
 
-export default connect()(Media)
+function mapStateToProps(state) {
+  const { settings } = state
+  return {
+    bucket: settings.app.s3_bucket
+  }
+}
+
+export default connect(mapStateToProps)(Media)
