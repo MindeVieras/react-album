@@ -8,7 +8,7 @@ import LocationsBar from './LocationsBar'
 import ItemsList from './ItemsList'
 
 class AlbumMap extends Component {
-  
+
   render() {
     const { album_id, current_location, album_location, media } = this.props
     let mediaItems = 0, mapWidth = '100%'
@@ -17,7 +17,7 @@ class AlbumMap extends Component {
     media.map(m => {
       if (!m.location) { mediaItems++ }
     })
-    
+
     if (mediaItems) { mapWidth = 'calc(100% - 60px)' }
 
     return (
@@ -51,8 +51,8 @@ class AlbumMap extends Component {
 
 AlbumMap.propTypes = {
   album_id: PropTypes.number.isRequired,
-  album_location: PropTypes.object,
-  current_location: PropTypes.object,
+  album_location: PropTypes.object.isRequired,
+  current_location: PropTypes.object.isRequired,
   media: PropTypes.array,
 }
 

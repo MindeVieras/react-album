@@ -12,7 +12,7 @@ class UsersPage extends Component {
   componentDidMount() {
     this.props.dispatch(headerActions.setTitle('Users'))
     this.props.dispatch(footerActions.buttonsClear())
-    this.props.dispatch(footerActions.buttonSet('New user', '/user-create', 'success'))
+    this.props.dispatch(footerActions.buttonSet('New user', 'newUser', 'success'))
   }
 
   render() {

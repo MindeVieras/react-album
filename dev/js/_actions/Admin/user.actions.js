@@ -15,7 +15,7 @@ function create(user) {
     dispatch(request(user))
 
     userService.create(user)
-      .then(function(res){
+      .then(res => {
         if (res.ack == 'ok') {
           // console.log(res)
           dispatch(success())
@@ -39,12 +39,11 @@ function getList() {
     dispatch(request())
 
     userService.getList()
-      .then(function(res) {
-        if (res.ack == 'ok') {
-          dispatch(success(res.data))
-        } else {
+      .then(res => {
+        if (res.ack == 'ok')
+          dispatch(success(res.list))
+        else
           dispatch(failure(res.msg))
-        }
       })
   }
 
@@ -58,7 +57,7 @@ function getOne(id) {
     dispatch(request())
 
     userService.getOne(id)
-      .then(function(res) {
+      .then(res => {
         if (res.ack == 'ok') {
           dispatch(success(res.data))
         } else {
@@ -78,7 +77,7 @@ function _delete(id) {
     dispatch(request(id))
 
     userService.delete(id)
-      .then(function(res) {
+      .then(res => {
         if (res.ack == 'ok') {
           // dispatch(success(res.data))
           dispatch(success(id))

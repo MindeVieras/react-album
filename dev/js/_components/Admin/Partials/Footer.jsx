@@ -7,6 +7,7 @@ import { submit } from 'redux-form'
 import { history } from '../../../_helpers'
 import NewAlbum from '../Buttons/NewAlbum'
 import DeleteAlbum from '../Buttons/DeleteAlbum'
+import UserCreate from '../Buttons/UserCreate'
 import UploadMedia from '../Buttons/UploadMedia'
 import MediaPager from './MediaPager'
 // import OpenLightbox from '../Buttons/OpenLightbox'
@@ -28,18 +29,16 @@ class Footer extends Component {
       buttons = footer.buttons.map((link, i) => {
         if (link.action === 'goBack')
           return <div key={i} className={`btn btn-sm btn-${link.type}`} onClick={()=>history.goBack()}>{link.name}</div>
-        
-        if (link.action === 'userCreate')
+
+        if (link.action === 'newUser')
           return (
-            <div
-              key={i}
-              onClick={() => this.props.dispatch(submit('user_create'))}
-              className={`btn btn-sm btn-${link.type}`}
-            >
-              {link.name}
-            </div>
+            <UserCreate
+              key={ i }
+              type={ link.type }
+              name={ link.name }
+            />
           )
-        
+
         if (link.action === 'newAlbum')
           return (
             <NewAlbum

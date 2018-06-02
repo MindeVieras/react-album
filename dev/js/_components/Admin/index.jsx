@@ -33,7 +33,7 @@ class Admin extends Component {
 
   constructor(props) {
     super(props)
- 
+
     this.onFullScreenChange = this.onFullScreenChange.bind(this)
   }
 
@@ -48,7 +48,7 @@ class Admin extends Component {
   componentWillReceiveProps(nextProps) {
     const { selected_album, albums_list, keydown, dispatch } = nextProps
     const { album, pager } = selected_album
-    
+
     if (album.id) {
 
       if (keydown.event) {
@@ -69,14 +69,14 @@ class Admin extends Component {
           const { current_page, per_page } = pager
           const totalPages = Math.ceil(album.media.length / per_page)
           let newPage = current_page + 1
-          if (newPage < totalPages) {          
+          if (newPage < totalPages) {
             dispatch(albumsActions.setMediaPagerPage(newPage))
           }
         }
 
         // on key up or down nawigate trough albums list
         if (keyCode === 38 || keyCode === 40) {
-          if (albums_list.length > 1) {          
+          if (albums_list.length > 1) {
             const totalAlbums = albums_list.length
 
             // find album index in list
@@ -93,7 +93,7 @@ class Admin extends Component {
             // if navigation to down
             if (keyCode === 40) {
               const newIndex = index + 1
-              if (newIndex < totalAlbums) {              
+              if (newIndex < totalAlbums) {
                 const newId = albums_list[newIndex].id
                 dispatch(albumsActions.getOne(newId))
                 dispatch(utilsActions.saveAdminSetting('selected_album', newId))
@@ -114,7 +114,7 @@ class Admin extends Component {
 
   render() {
     const { match, isScriptLoadSucceed, settings, full_screen } = this.props
-    if (isScriptLoadSucceed && settings) {    
+    if (isScriptLoadSucceed && settings) {
       return (
         <div>
           <Fullscreen
@@ -122,14 +122,13 @@ class Admin extends Component {
             onChange={ this.onFullScreenChange }
           >
             <div id="admin_wrapper">
-              
+
               <Header />
 
               <div id="admin_content">
                 <Switch>
                   <Route exact path={ match.url } component={Albums} />
-                  <Route exact path={`${match.url}/users`} component={UsersPage} />
-                  {/*<PrivateRoute path="/user-create" component={UserCreatePage} />*/}
+                  <Route path={`${match.url}/users`} component={UsersPage} />
                   <Route exact path={`${match.url}/trash`} component={TrashPage} />
                   <Route component={Error404} />
                 </Switch>

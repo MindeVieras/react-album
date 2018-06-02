@@ -1,7 +1,10 @@
 .mm-popup {
   display: none;
+
   &.mm-popup--visible {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: fixed;
     top: 0;
     left: 0;
@@ -11,6 +14,27 @@
     overflow: auto;
     background: rgba(0, 0, 0, 0.5);
   }
+
+  .mm-popup__box {
+    width: 350px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    position: relative;
+    background: lighten($grey, 15);
+    box-shadow: 0px 5px 20px 0px rgba(26,37,40,0.20);
+    border-radius: 5px;
+    border: 1px solid #666;
+    overflow: hidden;
+    z-index: 1001;
+
+    // Popu sizes
+    &.xxl {
+      width: 95%;
+      height: 95%;
+    }
+  }
+
   .mm-popup__close {
     position: absolute;
     top: 10px;
@@ -44,20 +68,6 @@
   font-size: 14px;
   padding: 0 12px;
   color: #808080;
-  }
-
-  .mm-popup__box {
-  width: 350px;
-  position: fixed;
-  top: 10%;
-  left: 50%;
-  margin-left: -175px;
-  background: lighten($grey, 15);
-  box-shadow: 0px 5px 20px 0px rgba(26,37,40,0.20);
-  border-radius: 5px;
-  border: 1px solid #666;
-  overflow: hidden;
-  z-index: 1001;
   }
 
   .mm-popup__box__header {
@@ -135,47 +145,4 @@
   padding: 20px;
   }
 
-}
-// Album datetime picker
-.mm-popup .datetime-picker-popup{
-  width: 560px;
-  margin-left: -280px;
-}
-
-// Location popup
-.locations-popup{
-  .mm-popup__box__body {
-    padding: 0;
-    height: 100%;
-  }
-}
-
-
-@media (max-width: 420px) {
-    .mm-popup__box {
-        width: auto;
-        left: 10px;
-        right: 10px;
-        top: 10px;
-        margin-left: 0;
-    }
-
-    .mm-popup__box__footer__left-space {
-        float: none;
-    }
-
-    .mm-popup__box__footer__right-space {
-        float: none;
-    }
-
-    .mm-popup__box__footer {
-        padding-top: 30px;
-    }
-
-    .mm-popup__box__footer .mm-popup__btn {
-        display: block;
-        width: 100%;
-        text-align: center;
-        margin-top: 10px;
-    }
 }

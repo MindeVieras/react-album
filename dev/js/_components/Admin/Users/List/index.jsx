@@ -39,9 +39,9 @@ class UsersList extends Component {
         {users.err &&
           <div>{users.err}</div>
         }
-        {users.items && 
+        {users.items &&
           <ul>
-            {users.items.map((user) =>
+            {users.items.map(user =>
               <li
                 key={user.id}
                 className={`users-item${ this.state.currentSelectedId === user.id ? ' active' : ''}`}

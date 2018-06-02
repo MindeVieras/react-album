@@ -59,7 +59,7 @@ function _delete(id) {
 
 function handleResponse(response) {
   // console.log(response);
-  if (!response.ok) { 
+  if (!response.ok) {
     return Promise.reject(response.statusText)
   }
 

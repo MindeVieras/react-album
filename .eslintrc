@@ -1,5 +1,5 @@
 {
-  parser: "babel-eslint",
+  "parser": "babel-eslint",
   "plugins": [
     "react"
   ],
@@ -7,6 +7,8 @@
     "max-len": [1, 120, 2, {ignoreComments: true}],
     "indent": ["error", 2],
     "semi": ["error", "never"],
+    "prefer-arrow-callback": ["error", { "allowUnboundThis": false }],
+    "arrow-spacing": "error",
     "eol-last": ["error", "always"],
     "react/prop-types": [2, { skipUndeclared: false }],
     "react/require-default-props": [2, { forbidDefaultForRequired: true }]
