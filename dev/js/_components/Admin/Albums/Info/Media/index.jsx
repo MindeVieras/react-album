@@ -12,7 +12,6 @@ import TotalProgressBar from './Partials/total-progress-bar'
 
 import MediaList from './MediaList'
 
-import awsKeys from '../../../../../../../aws-keys.json'
 import { authHeader, baseServerUrl } from '../../../../../_helpers'
 import { footerActions, albumsActions } from '../../../../../_actions'
 import { mediaService } from '../../../../../_services'
@@ -21,11 +20,12 @@ class Media extends Component {
 
   constructor(props) {
     super(props)
+
     this.uploader = new FineUploaderS3({
       options: {
         request: {
           endpoint: props.bucket+'.s3.amazonaws.com',
-          accessKey: awsKeys.AWSAccessKeyId
+          accessKey: props.access_key
         },
         signature: {
           endpoint: baseServerUrl+'/api/uploader/sign',
@@ -173,6 +173,7 @@ class Media extends Component {
 
 Media.propTypes = {
   bucket: PropTypes.string.isRequired,
+  access_key: PropTypes.string.isRequired,
   entity: PropTypes.number.isRequired,
   entity_id: PropTypes.number.isRequired,
   status: PropTypes.number.isRequired,
@@ -193,7 +194,8 @@ Media.contextTypes = {
 function mapStateToProps(state) {
   const { settings } = state
   return {
-    bucket: settings.app.s3_bucket
+    bucket: settings.app.s3_bucket,
+    access_key: settings.app.access_key_id
   }
 }
 
