@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { setLanguage } from 'redux-i18n'
 import { Router, Switch, Route } from 'react-router-dom'
-var locale = require('browser-locale')()
+import locale from 'browser-locale'
 import { detect } from 'detect-browser'
 import WebFont from 'webfontloader'
 
@@ -56,12 +56,12 @@ class App extends Component {
 
     // Add resize event listener
     this.updateDimensions()
-    window.addEventListener("resize", this.updateDimensions.bind(this))
+    window.addEventListener('resize', this.updateDimensions.bind(this))
   }
-  
+
   componentWillUnmount() {
     // Remove resize event listener
-    window.removeEventListener("resize", this.updateDimensions.bind(this))
+    window.removeEventListener('resize', this.updateDimensions.bind(this))
   }
 
   // Calculate & Update state of new dimensions

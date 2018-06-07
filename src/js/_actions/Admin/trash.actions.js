@@ -15,7 +15,7 @@ function getList() {
     dispatch(request())
 
     trashService.getList()
-      .then(function(res) {
+      .then(res => {
         if (res.ack == 'ok') {
           dispatch(success(res.list))
         } else {
@@ -34,7 +34,7 @@ function restore(id) {
     dispatch(request(id))
 
     trashService.restore(id)
-      .then(function(res) {
+      .then(res => {
         if (res.ack == 'ok') {
           dispatch(success(id))
           toastr.success('Success', res.msg)
@@ -55,7 +55,7 @@ function _delete(id) {
     dispatch(request(id))
 
     trashService.delete(id)
-      .then(function(res) {
+      .then(res => {
         if (res.ack == 'ok') {
           dispatch(success(id))
           toastr.success('Success', res.msg)

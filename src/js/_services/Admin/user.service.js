@@ -15,7 +15,7 @@ function getList() {
     headers: authHeader()
   }
 
-  return fetch(baseServerUrl+'/api/users/get-list', requestOptions).then(handleResponse)
+  return fetch(`${baseServerUrl}/api/users/get-list`, requestOptions).then(handleResponse)
 }
 
 function getOne(id) {
@@ -24,7 +24,7 @@ function getOne(id) {
     headers: authHeader()
   }
 
-  return fetch(baseServerUrl+'/api/users/get-one/'+id, requestOptions).then(handleResponse)
+  return fetch(`${baseServerUrl}/api/users/get-one/${id}`, requestOptions).then(handleResponse)
 }
 
 function create(user) {
@@ -34,7 +34,7 @@ function create(user) {
     body: JSON.stringify(user)
   }
 
-  return fetch(baseServerUrl+'/api/users/create', requestOptions).then(handleResponse)
+  return fetch(`${baseServerUrl}/api/users/create`, requestOptions).then(handleResponse)
 }
 
 function update(user) {
@@ -44,7 +44,7 @@ function update(user) {
     body: JSON.stringify(user)
   }
 
-  return fetch('/users/' + user.id, requestOptions).then(handleResponse)
+  return fetch(`/users/${user.id}`, requestOptions).then(handleResponse)
 }
 
 // prefixed function name with underscore because delete is a reserved word in javascript
@@ -54,7 +54,7 @@ function _delete(id) {
     headers: authHeader()
   }
 
-  return fetch(baseServerUrl+'/api/users/delete/'+id, requestOptions).then(handleResponse)
+  return fetch(`${baseServerUrl}/api/users/delete/${id}`, requestOptions).then(handleResponse)
 }
 
 function handleResponse(response) {

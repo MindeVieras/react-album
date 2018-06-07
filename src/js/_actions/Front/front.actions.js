@@ -12,7 +12,7 @@ function getList(page, limit, media_limit) {
     dispatch(request())
 
     frontService.getList(page, limit, media_limit)
-      .then(function(res) {
+      .then(res => {
         if (res.ack == 'ok') {
           dispatch(success(res.data))
         } else {
@@ -31,7 +31,7 @@ function getListMore(page, limit, media_limit) {
     // dispatch(request())
 
     frontService.getList(page, limit, media_limit)
-      .then(function(res) {
+      .then(res => {
         if (res.ack == 'ok') {
           dispatch(loadMore(res.data))
         } else {

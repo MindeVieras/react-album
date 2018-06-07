@@ -13,7 +13,7 @@ function login(username, password) {
     dispatch(request())
 
     loginService.login(username, password)
-      .then(function(res) {
+      .then(res => {
         if (res.ack == 'ok') {
           const user = res.data
           dispatch(success(user))

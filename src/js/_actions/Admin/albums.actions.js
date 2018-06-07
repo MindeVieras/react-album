@@ -33,7 +33,7 @@ function getList(start_date, end_date) {
     dispatch(request())
 
     albumsService.getList(start_date, end_date)
-      .then(function(res) {
+      .then(res => {
         if (res.ack == 'ok') {
           dispatch(success(res.list))
         } else {
@@ -52,7 +52,7 @@ function getListDates() {
     dispatch(request())
 
     albumsService.getListDates()
-      .then(function(res) {
+      .then(res => {
         if (res.ack == 'ok') {
           dispatch(success(res.dates))
         } else {
@@ -85,7 +85,7 @@ function getOne(id) {
     dispatch(request())
 
     albumsService.getOne(id)
-      .then(function(res) {
+      .then(res => {
         if (res.ack == 'ok') {
           dispatch(success(res.data))
         } else {
@@ -108,7 +108,7 @@ function getOne(id) {
 function rename(payload) {
   return dispatch => {
     albumsService.rename(payload)
-      .then(function(res) {
+      .then(res => {
         if (res.ack == 'ok') {
           dispatch(rename(payload))
           Popup.close()
@@ -125,7 +125,7 @@ function rename(payload) {
 function changeDate(payload) {
   return dispatch => {
     albumsService.changeDate(payload)
-      .then(function(res) {
+      .then(res => {
         if (res.ack == 'ok') {
           dispatch(change(payload))
           Popup.close()
@@ -178,7 +178,7 @@ function setMapZoom(zoom) {
 function setLocation(album_id, location) {
   return dispatch => {
     albumsService.setLocation(album_id, location)
-      .then(function(res) {
+      .then(res => {
         dispatch(set(location))
       })
   }
@@ -188,7 +188,7 @@ function setLocation(album_id, location) {
 function updateLocation(album_id, location) {
   return dispatch => {
     albumsService.updateLocation(album_id, location)
-      .then(function(res) {
+      .then(res => {
         dispatch(set(location))
       })
   }
@@ -198,7 +198,7 @@ function updateLocation(album_id, location) {
 function removeLocation(id) {
   return dispatch => {
     albumsService.removeLocation(id)
-      .then(function(res) {
+      .then(res => {
         dispatch(remove(id))
       })
   }
@@ -248,7 +248,7 @@ function setMediaMediaId(id, media_id) {
 function trashMedia(media_id) {
   return dispatch => {
     mediaService.putToTrash(media_id)
-      .then(function(res) {
+      .then(res => {
         if (res.ack == 'ok') {
           dispatch(remove(media_id))
           toastr.success('Success', res.msg)
@@ -272,7 +272,7 @@ function saveMediaMetadata(id, media_id) {
     dispatch(request(id))
 
     mediaService.saveMetadata(media_id)
-      .then(function(res) {
+      .then(res => {
         if (res.ack == 'ok') {
           dispatch(success(id, res.metadata))
         } else if (res.ack == 'err') {
@@ -291,7 +291,7 @@ function saveRekognitionLabels(id, media_id) {
     dispatch(request(id))
 
     mediaService.saveRekognitionLabels(media_id)
-      .then(function(res) {
+      .then(res => {
         if (res.ack == 'ok') {
           dispatch(success(id, res.rekognition_labels))
         } else if (res.ack == 'err') {
@@ -328,7 +328,7 @@ function generateImageThumbs(id, media_id) {
     dispatch(request(id))
 
     mediaService.generateImageThumbs(media_id)
-      .then(function(res) {
+      .then(res => {
         if (res.ack == 'ok') {
           dispatch(success(id, res.thumbs))
         } else if (res.ack == 'err') {
@@ -347,7 +347,7 @@ function generateVideos(id, key) {
     dispatch(request(id))
 
     mediaService.generateVideos(key)
-      .then(function(res) {
+      .then(res => {
         if (res.ack == 'ok') {
           dispatch(success(id, res.videos))
         } else if (res.ack == 'err') {
@@ -371,7 +371,7 @@ function generateVideos(id, key) {
 function setMediaLocation(media_id, location) {
   return dispatch => {
     mediaService.setLocation(media_id, location)
-      .then(function(res) {
+      .then(res => {
         dispatch(set(media_id, location))
       })
   }
@@ -381,7 +381,7 @@ function setMediaLocation(media_id, location) {
 function updateMediaLocation(media_id, location) {
   return dispatch => {
     mediaService.updateLocation(media_id, location)
-      .then(function(res) {
+      .then(res => {
         dispatch(set(media_id, location))
       })
   }
@@ -391,7 +391,7 @@ function updateMediaLocation(media_id, location) {
 function removeMediaLocation(media_id) {
   return dispatch => {
     mediaService.removeLocation(media_id)
-      .then(function(res) {
+      .then(res => {
         dispatch(remove(media_id))
       })
   }
@@ -459,7 +459,7 @@ function clearSelected() {
 function moveMedia(media_id, album_id) {
   return dispatch => {
     mediaService.moveMedia(media_id, album_id)
-      .then(function(res) {
+      .then(res => {
         if (res.ack == 'ok') {
           dispatch(remove(media_id, album_id))
           Popup.close()
@@ -475,7 +475,7 @@ function moveMedia(media_id, album_id) {
 function trashMedia(media_id) {
   return dispatch => {
     mediaService.putToTrash(media_id)
-      .then(function(res) {
+      .then(res => {
         if (res.ack == 'ok') {
           dispatch(remove(media_id))
           toastr.success('Success', res.msg)
@@ -491,7 +491,7 @@ function trashMedia(media_id) {
 function deleteMedia(media_id) {
   return dispatch => {
     trashService.delete(media_id)
-      .then(function(res) {
+      .then(res => {
         if (res.ack == 'ok') {
           dispatch(remove(media_id))
           toastr.success('Success', res.msg)
@@ -518,7 +518,7 @@ function _delete(id) {
     dispatch(request(id))
 
     albumsService.delete(id)
-      .then(function(res) {
+      .then(res => {
         if (res.ack == 'ok') {
           dispatch(success(id))
           toastr.success('Success', res.msg)

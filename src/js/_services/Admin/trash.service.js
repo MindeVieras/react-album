@@ -13,7 +13,7 @@ function getList() {
     headers: authHeader()
   }
 
-  return fetch(baseServerUrl+'/api/trash/get-list', requestOptions).then(handleResponse)
+  return fetch(`${baseServerUrl}/api/trash/get-list`, requestOptions).then(handleResponse)
 }
 
 function restore(id) {
@@ -22,7 +22,7 @@ function restore(id) {
     headers: authHeader()
   }
 
-  return fetch(baseServerUrl+'/api/trash/restore/'+id, requestOptions).then(handleResponse)
+  return fetch(`${baseServerUrl}/api/trash/restore/${id}`, requestOptions).then(handleResponse)
 }
 
 function _delete(id) {
@@ -31,11 +31,11 @@ function _delete(id) {
     headers: authHeader()
   }
 
-  return fetch(baseServerUrl+'/api/trash/delete/'+id, requestOptions).then(handleResponse)
+  return fetch(`${baseServerUrl}/api/trash/delete/${id}`, requestOptions).then(handleResponse)
 }
 
 function handleResponse(response) {
-  if (!response.ok) { 
+  if (!response.ok) {
     return Promise.reject(response.statusText)
   }
 

@@ -40,7 +40,7 @@ function setCurrentLocation() {
 
   return dispatch => {
 
-    locationService.getCurrentLocation(function(pos){
+    locationService.getCurrentLocation(pos => {
       dispatch(set(pos))
     })
   }

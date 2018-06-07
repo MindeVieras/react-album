@@ -1,8 +1,6 @@
 
 import request from 'superagent'
 
-// import { authHeader, baseServerUrl } from '../../_helpers'
-
 export const locationService = {
   getCurrentLocation
 }
@@ -10,13 +8,13 @@ export const locationService = {
 function getCurrentLocation(cb) {
   // Try HTML5 geolocation.
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
+    navigator.geolocation.getCurrentPosition(position => {
       let loc = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
       }
       cb(loc)
-    }, function() {
+    }, () => {
       // If cant get current location
       getLocationFromApi((loc) => {
         cb(loc)

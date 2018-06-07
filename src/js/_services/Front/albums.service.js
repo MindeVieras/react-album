@@ -12,11 +12,11 @@ function getList(page, limit, media_limit) {
     body: JSON.stringify({ page, limit, media_limit })
   }
 
-  return fetch(baseServerUrl+'/api/front/albums', requestOptions).then(handleResponse)
+  return fetch(`${baseServerUrl}/api/front/albums`, requestOptions).then(handleResponse)
 }
 
 function handleResponse(response) {
-  if (!response.ok) { 
+  if (!response.ok) {
     return Promise.reject(response.statusText)
   }
 

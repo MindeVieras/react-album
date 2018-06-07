@@ -17,7 +17,7 @@ function create(album) {
     body: JSON.stringify(album)
   }
 
-  return fetch(baseServerUrl+'/api/albums/create', requestOptions).then(handleResponse)
+  return fetch(`${baseServerUrl}/api/albums/create`, requestOptions).then(handleResponse)
 }
 
 
@@ -33,7 +33,7 @@ function getList(start_date, end_date) {
     body: JSON.stringify({start_date, end_date})
   }
 
-  return fetch(baseServerUrl+'/api/albums/list', requestOptions).then(handleResponse)
+  return fetch(`${baseServerUrl}/api/albums/list`, requestOptions).then(handleResponse)
 }
 
 function getListDates() {
@@ -42,7 +42,7 @@ function getListDates() {
     headers: authHeader()
   }
 
-  return fetch(baseServerUrl+'/api/albums/list-dates', requestOptions).then(handleResponse)
+  return fetch(`${baseServerUrl}/api/albums/list-dates`, requestOptions).then(handleResponse)
 }
 
 
@@ -57,7 +57,7 @@ function getOne(id) {
     headers: authHeader()
   }
 
-  return fetch(baseServerUrl+'/api/albums/one/'+id, requestOptions).then(handleResponse)
+  return fetch(`${baseServerUrl}/api/albums/one/${id}`, requestOptions).then(handleResponse)
 }
 
 
@@ -73,7 +73,7 @@ function rename(payload) {
     body: JSON.stringify(payload)
   }
 
-  return fetch(baseServerUrl+'/api/albums/rename', requestOptions).then(handleResponse)
+  return fetch(`${baseServerUrl}/api/albums/rename`, requestOptions).then(handleResponse)
 }
 
 function changeDate(payload) {
@@ -83,7 +83,7 @@ function changeDate(payload) {
     body: JSON.stringify(payload)
   }
 
-  return fetch(baseServerUrl+'/api/albums/change-date', requestOptions).then(handleResponse)
+  return fetch(`${baseServerUrl}/api/albums/change-date`, requestOptions).then(handleResponse)
 }
 
 
@@ -99,7 +99,7 @@ function setLocation(album_id, location) {
     body: JSON.stringify({ album_id, location })
   }
 
-  return fetch(baseServerUrl+'/api/albums/set-location', requestOptions).then(handleResponse)
+  return fetch(`${baseServerUrl}/api/albums/set-location`, requestOptions).then(handleResponse)
 }
 
 function updateLocation(album_id, location) {
@@ -109,7 +109,7 @@ function updateLocation(album_id, location) {
     body: JSON.stringify({ album_id, location })
   }
 
-  return fetch(baseServerUrl+'/api/albums/update-location', requestOptions).then(handleResponse)
+  return fetch(`${baseServerUrl}/api/albums/update-location`, requestOptions).then(handleResponse)
 }
 
 function removeLocation(id) {
@@ -118,7 +118,7 @@ function removeLocation(id) {
     headers: authHeader()
   }
 
-  return fetch(baseServerUrl+'/api/albums/remove-location/'+id, requestOptions).then(handleResponse)
+  return fetch(`${baseServerUrl}/api/albums/remove-location/${id}`, requestOptions).then(handleResponse)
 }
 
 
@@ -129,11 +129,11 @@ function _delete(id) {
     headers: authHeader()
   }
 
-  return fetch(baseServerUrl+'/api/albums/move-to-trash/'+id, requestOptions).then(handleResponse)
+  return fetch(`${baseServerUrl}/api/albums/move-to-trash/${id}`, requestOptions).then(handleResponse)
 }
 
 function handleResponse(response) {
-  if (!response.ok) { 
+  if (!response.ok) {
     return Promise.reject(response.statusText)
   }
 

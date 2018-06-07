@@ -15,7 +15,7 @@ export const utilsActions = {
 function getAppSettings() {
   return dispatch => {
     utilsService.getAppSettings()
-      .then(function(res) {
+      .then(res => {
         dispatch(get(res.data))
       })
   }
@@ -25,7 +25,7 @@ function getAppSettings() {
 function getAdminSettings() {
   return dispatch => {
     utilsService.getAdminSettings()
-      .then(function(res) {
+      .then(res => {
         dispatch(get(res.data))
       })
   }
@@ -45,7 +45,7 @@ function saveAdminSetting(name, value) {
     // dispatch(request())
 
     utilsService.saveAdminSetting(name, value)
-      .then(function(res) {
+      .then(res => {
         if (res.ack == 'ok') {
           dispatch(save(name, value))
         } else {
@@ -62,7 +62,7 @@ function saveAdminSetting(name, value) {
 function getFrontSettings(id) {
   return dispatch => {
     utilsService.getFrontSettings(id)
-      .then(function(res) {
+      .then(res => {
         dispatch(get(res.data))
       })
   }
@@ -82,7 +82,7 @@ function saveFrontSetting(name, value, uid) {
     // dispatch(request())
 
     utilsService.saveFrontSetting(name, value, uid)
-      .then(function(res) {
+      .then(res => {
         if (res.ack == 'ok') {
           dispatch(save(name, value))
         } else {
