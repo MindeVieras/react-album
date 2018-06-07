@@ -8,8 +8,8 @@
     "dev": "webpack --progress",
     "build": "webpack --config webpack/webpack.production.config.js --progress",
     "deploy": "webpack --config webpack/webpack.deploy.config.js --progress",
-    "clean": "rimraf src",
-    "test": "eslint dev/js"
+    "clean": "rimraf dist",
+    "test": "eslint src/js"
   },
   "license": "ISC",
   "dependencies": {

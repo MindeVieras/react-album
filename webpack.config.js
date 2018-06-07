@@ -7,13 +7,13 @@ module.exports = {
     devServer: {
         inline: true,
         historyApiFallback: true,
-        contentBase: './src',
+        contentBase: process.cwd()+'/src',
         port: 8080
     },
     devtool: 'eval-source-map',
-    entry: './dev/js/index.jsx',
+    entry: process.cwd()+'/src/js/index.jsx',
     output: {
-        path: process.cwd()+'/src',
+        path: process.cwd()+'/dist',
         filename: 'js/bundle.min.js'
     },
     resolve: {

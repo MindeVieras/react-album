@@ -4,7 +4,7 @@
 *.map
 *.log
 
-src/js/bundle.min.js
+dist
 
 node_modules
 package-lock.json

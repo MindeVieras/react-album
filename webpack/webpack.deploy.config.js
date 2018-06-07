@@ -16,9 +16,9 @@ else {
 
 module.exports = {
     mode: 'production',
-    entry: './dev/js/index.jsx',
+    entry: process.cwd()+'/src/js/index.jsx',
     output: {
-        path: process.cwd()+'/src',
+        path: process.cwd()+'/dist',
         filename: 'js/bundle.min.js'
     },
     resolve: {
@@ -45,7 +45,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './dev/index.html',
+            template: process.cwd()+'/src/index.html',
             inject: false,
             minify: {
                 collapseWhitespace: true
