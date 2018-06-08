@@ -7,31 +7,29 @@ class Address extends Component {
 
   constructor(props) {
     super(props)
-    let initAddress = props.album_location ? 'Address loading...' : 'Location not set'
+
     this.state = {
-      address: initAddress
+      address: props.album_location ? '' : 'Location not set'
     }
 
-    if (props.album_location) {
+    if (props.album_location)
       this.setFormattedAddress(props.album_location)
-    }
   }
 
   componentWillReceiveProps() {
     const { album_location } = this.props
-    if (album_location) {
+    if (album_location)
       this.setFormattedAddress(album_location)
-    }
   }
 
   setFormattedAddress(location) {
     let geocoder = new google.maps.Geocoder
-    geocoder.geocode({'location': location}, function(results, status) {
+    geocoder.geocode({'location': location}, (results, status) => {
       if (status === 'OK') {
         if (results[0]) {
+          let { address_components } = results[0]
           this.setState({
-            // address: getAddress(results[0].address_components)
-            address: results[0].formatted_address
+            address: getAddress(address_components)
           })
         } else {
           console.log('No results found')
@@ -39,7 +37,7 @@ class Address extends Component {
       } else {
         console.log('Geocoder failed due to: ' + status)
       }
-    }.bind(this))
+    })
   }
 
   render() {
@@ -52,21 +50,37 @@ class Address extends Component {
 }
 
 function getAddress(addrComponents) {
-  for (var i = 0; i < addrComponents.length; i++) {
-    if (addrComponents[i].types[0] == "country") {
-      return addrComponents[i].long_name
+
+  let country, city
+
+  addrComponents.map(i => {
+
+    // Set country name
+    if (i.types.length == 2 && i.types[0] == 'political') {
+      country = i.long_name
     }
-    if (addrComponents[i].types.length == 2) {
-      if (addrComponents[i].types[0] == "political") {
-        return addrComponents[i].short_name
-      }
+    if (i.types[0] == 'country') {
+      country =  i.long_name
     }
-  }
-  return false
+
+    // Set city name
+    if (i.types[0] == 'locality') {
+      city =  i.long_name
+    }
+    if(!city && i.types[0] == 'administrative_area_level_2') {
+      city =  i.long_name
+    }
+  })
+
+  return city + ', ' + country
 }
 
 Address.propTypes = {
   album_location: PropTypes.object
+}
+
+Address.defaultProps = {
+  album_location: {}
 }
 
 function mapStateToProps(state) {
