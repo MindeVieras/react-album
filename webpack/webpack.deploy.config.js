@@ -32,6 +32,15 @@ module.exports = {
                 loader: ['babel-loader']
             },
             {
+                test: /_helpers\/config\.js$/,
+                loader: 'string-replace-loader',
+                options: {
+                    search: 'http://localhost:3000',
+                    replace: 'https://node-album.herokuapp.com',
+                    strict: true
+                }
+            },
+            {
                 test: /\.(css|scss)$/,
                 use: [{
                     loader: "style-loader"
