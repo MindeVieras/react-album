@@ -141,7 +141,7 @@ class Admin extends Component {
               />
 
               <Popup
-                wildClasses={ true }
+                escToClose={ true }
               />
 
             </div>

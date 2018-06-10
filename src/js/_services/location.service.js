@@ -16,14 +16,14 @@ function getCurrentLocation(cb) {
       cb(loc)
     }, () => {
       // If cant get current location
-      getLocationFromApi((loc) => {
+      getLocationFromApi(loc => {
         cb(loc)
       })
 
     })
   } else {
     // Browser doesn't support Geolocation
-    getLocationFromApi((loc) => {
+    getLocationFromApi(loc => {
       cb(loc)
     })
   }

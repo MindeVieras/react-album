@@ -12,7 +12,7 @@ class AlbumMap extends Component {
   render() {
     const { album_id, current_location, album_location, media } = this.props
     let mediaItems = 0, mapWidth = '100%'
-
+    console.log(current_location)
     if (!album_location) { mediaItems++ }
     media.map(m => {
       if (!m.location) { mediaItems++ }
@@ -51,8 +51,8 @@ class AlbumMap extends Component {
 
 AlbumMap.propTypes = {
   album_id: PropTypes.number.isRequired,
-  album_location: PropTypes.object.isRequired,
   current_location: PropTypes.object.isRequired,
+  album_location: PropTypes.object.isRequired,
   media: PropTypes.array,
 }
 

@@ -16,21 +16,21 @@ class LocationsBar extends Component {
     }
 
     this.handleEditChange = this.handleEditChange.bind(this)
-    this.onChange = this.onChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSelect = this.handleSelect.bind(this)
   }
-  
+
   handleEditChange(e) {
     const { dispatch } = this.props
     const edit = e.target.checked
     dispatch(albumsActions.setMapEdit(edit))
   }
 
-  onChange(address) {
+  handleChange(address) {
     this.setState({ address })
   }
 
-  handleSubmit() {
+  handleSelect() {
     const { dispatch } = this.props
 
     geocodeByAddress(this.state.address)
@@ -46,28 +46,40 @@ class LocationsBar extends Component {
     const { t } = this.context
     const { map } = this.props
 
-    const inputProps = {
-      value: this.state.address,
-      onChange: this.onChange,
-      placeholder: t('Search...')
-    }
-
-    const cssClasses = {
-      root: 'search-input-group',
-      input: 'search-input',
-      autocompleteContainer: 'search-autocomplete-container'
-    }
-    
-    // console.log(this.state)
-    
     return (
       <div className="locations-bar">
+
         <PlacesAutocomplete
-          inputProps={ inputProps }
-          classNames={ cssClasses }
-          onEnterKeyDown={ this.handleSubmit }
-          onSelect={ this.handleSubmit }
-        />
+          value={ this.state.address }
+          onChange={ this.handleChange }
+          onSelect={ this.handleSelect }
+        >
+          {({ getInputProps, suggestions, getSuggestionItemProps }) => (
+            <div className="search-input-group">
+              <input
+                {...getInputProps({
+                  placeholder: t('Search...'),
+                  className: 'search-input'
+                })}
+              />
+              <div className="search-autocomplete-container">
+                {suggestions.map(suggestion => {
+                  const className = suggestion.active ? 'suggestion-item--active' : 'suggestion-item'
+                  // inline style for demonstration purpose
+                  const style = suggestion.active
+                    ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                    : { backgroundColor: '#ffffff', cursor: 'pointer' }
+                  return (
+                    <div {...getSuggestionItemProps(suggestion, { className, style })}>
+                      <span>{suggestion.description}</span>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          )}
+        </PlacesAutocomplete>
+
         <div className="controls">
           <Toggle
             defaultChecked={ map.edit_enabled }
@@ -82,6 +94,10 @@ class LocationsBar extends Component {
 
 LocationsBar.propTypes = {
   map: PropTypes.object
+}
+
+LocationsBar.defaultProps = {
+  map: {}
 }
 
 LocationsBar.contextTypes = {

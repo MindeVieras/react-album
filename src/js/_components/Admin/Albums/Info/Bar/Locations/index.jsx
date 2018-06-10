@@ -15,21 +15,7 @@ class Locations extends Component {
     Popup.create({
       title: null,
       content,
-      className: 'locations-popup',
-      position: function (box) {
-
-        let leftPadding = 5 // percents
-        let topPadding  = 5 // percents
-        let popupWidth  = 100 - (leftPadding * 2)
-        let popupHeight = 100 - (topPadding * 2)
-
-        box.style.top     = topPadding+'%'
-        box.style.left    = leftPadding+'%'
-        box.style.width   = popupWidth+'%'
-        box.style.height  = popupHeight+'%'
-        box.style.margin  = 0
-        box.style.opacity = 1
-      }
+      className: 'xxl'
     })
   }
 
@@ -38,8 +24,8 @@ class Locations extends Component {
       <div className="locations-wrapper">
         <Address />
         <div className="buttons">
-          <div className="btn btn-xs btn-info">
-            <IoEdit onClick={ () => this.handleClick() } />
+          <div className="btn btn-xs btn-info" onClick={ () => this.handleClick() } >
+            <IoEdit />
           </div>
         </div>
       </div>

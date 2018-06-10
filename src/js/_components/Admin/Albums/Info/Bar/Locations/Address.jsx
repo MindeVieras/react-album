@@ -55,7 +55,7 @@ function getAddress(addrComponents) {
 
   addrComponents.map(i => {
 
-    // Set country name
+    // Make country name
     if (i.types.length == 2 && i.types[0] == 'political') {
       country = i.long_name
     }
@@ -63,11 +63,11 @@ function getAddress(addrComponents) {
       country =  i.long_name
     }
 
-    // Set city name
+    // Make city name
     if (i.types[0] == 'locality') {
       city =  i.long_name
     }
-    if(!city && i.types[0] == 'administrative_area_level_2') {
+    if (!city && i.types[0] == 'administrative_area_level_2') {
       city =  i.long_name
     }
   })

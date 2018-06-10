@@ -8,8 +8,8 @@ import { store } from './_helpers'
 import App from './App'
 
 render(
-  <Provider store={store}>
-    <I18n translations={{}} useReducer={true} initialLang="en">
+  <Provider store={ store }>
+    <I18n translations={{}} useReducer={ true } initialLang="en">
       <App />
     </I18n>
   </Provider>,
