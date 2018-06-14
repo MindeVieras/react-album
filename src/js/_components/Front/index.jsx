@@ -79,7 +79,7 @@ class Front extends Component {
     this.setState({
       current_page: cp
     })
-    
+
   }
 
   render() {
@@ -101,7 +101,7 @@ class Front extends Component {
                     <PerfectScrollbar
                       option={ scrollbarOptions }
                       onYReachEnd={ this.onScrollDown }
-                    >           
+                    >
                       {albums.items.map((album, i) =>
                         <div
                           key={ i }

@@ -27,6 +27,7 @@ import 'react-select/dist/react-select.css'
 import 'rc-slider/assets/index.css'
 import 'hamburgers/dist/hamburgers.css'
 import 'react-dd-menu/dist/react-dd-menu.css'
+import '../../../scss/base/normalize.scss'
 import '../../../scss/Admin/main.scss'
 
 class Admin extends Component {

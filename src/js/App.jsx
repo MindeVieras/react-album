@@ -17,8 +17,6 @@ import Error404 from './_components/404'
 import { history } from './_helpers'
 import { clientActions, utilsActions } from './_actions'
 
-import '../scss/base/normalize.scss'
-
 class App extends Component {
 
   constructor(props) {

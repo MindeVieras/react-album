@@ -13,6 +13,8 @@
   },
   "license": "ISC",
   "dependencies": {
+    "@material-ui/core": "^1.2.1",
+    "@material-ui/icons": "^1.1.0",
     "browser-locale": "^1.0.3",
     "detect-browser": "^2.5.1",
     "fine-uploader": "^5.15.4",
