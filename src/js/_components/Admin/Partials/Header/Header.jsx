@@ -3,13 +3,13 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import fscreen from 'fscreen'
-import { withStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
+import Tooltip from '@material-ui/core/Tooltip'
+import blueGrey from '@material-ui/core/colors/blueGrey'
 import Fullscreen from '@material-ui/icons/Fullscreen'
 import FullscreenExit from '@material-ui/icons/FullscreenExit'
-import blueGrey from '@material-ui/core/colors/blueGrey'
 
 import AlbumName from './AlbumName'
 import MainMenu from './MainMenu'
@@ -21,8 +21,11 @@ const styles = {
     flexGrow: 1,
     backgroundColor: blueGrey[800]
   },
-  flex: {
-    flex: 1
+  toolbar: {
+    justifyContent: `space-between`,
+  },
+  menus: {
+    display: `flex`,
   }
 }
 
@@ -39,6 +42,7 @@ class Header extends Component {
     dispatch(clientActions.setFullScreen(true))
     fscreen.requestFullscreen(document.body)
   }
+
   goOutFullscreen() {
     const { dispatch } = this.props
     dispatch(clientActions.setFullScreen(false))
@@ -46,7 +50,9 @@ class Header extends Component {
   }
 
   render() {
-    const { classes, title, full_screen, selected_album } = this.props
+
+    const { t } = this.context
+    const { title, full_screen, selected_album } = this.props
 
     let album_id = null
     let headerTitle = title
@@ -56,25 +62,40 @@ class Header extends Component {
     }
 
     return (
-      <AppBar position="static" className={ classes.root }>
-        <Toolbar>
+      <AppBar position="static" style={ styles.root }>
+        <Toolbar style={ styles.toolbar }>
 
-          <div className={ classes.flex }>
+          <div>
             <AlbumName name={ headerTitle } album_id={ album_id } />
           </div>
 
-          {!full_screen &&
-            <IconButton onClick={ this.goFullscreen } color="inherit">
-              <Fullscreen />
-            </IconButton>
-          }
-          {full_screen &&
-            <IconButton onClick={ this.goOutFullscreen } color="inherit">
-              <FullscreenExit />
-            </IconButton>
-          }
+          <div style={ styles.menus }>
+            {!full_screen &&
+              <Tooltip
+                id="tooltip_go_fullscreen"
+                title={ t(`Go fullscreen mode`) }
+                enterDelay={ 500 }
+              >
+                <IconButton onClick={ this.goFullscreen } color="inherit">
+                  <Fullscreen />
+                </IconButton>
+              </Tooltip>
+            }
+            {full_screen &&
+              <Tooltip
+                id="tooltip_exit_fullscreen"
+                title={ t(`Exit fullscreen mode`) }
+                enterDelay={ 500 }
+              >
+                <IconButton onClick={ this.goOutFullscreen } color="inherit">
+                  <FullscreenExit />
+                </IconButton>
+              </Tooltip>
+            }
 
-          <MainMenu />
+            <MainMenu />
+
+          </div>
 
         </Toolbar>
       </AppBar>
@@ -82,9 +103,12 @@ class Header extends Component {
   }
 }
 
+Header.contextTypes = {
+  t: PropTypes.func
+}
+
 Header.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  classes: PropTypes.object.isRequired,
   title: PropTypes.string,
   full_screen: PropTypes.bool.isRequired,
   selected_album: PropTypes.object
@@ -104,4 +128,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(Header))
+export default connect(mapStateToProps)(Header)

@@ -29,8 +29,9 @@ class App extends Component {
     let allowedLocales = ['en', 'lt', 'ru']
     let l = 'en'
 
-    if (allowedLocales.includes(locale))
-      l = locale
+    if (allowedLocales.includes(locale())) {
+      l = locale()
+    }
 
     props.dispatch(setLanguage(l))
     const browser = detect()

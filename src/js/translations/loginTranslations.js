@@ -4,6 +4,7 @@ export const loginTranslations = {
     'Username': 'Vartotojas',
     'Password': 'Slaptažodis',
     'Login': 'Prisijungti',
-    'Incorrect details': 'Neteisingi prisijungimo duomenys'
+    'Incorrect details': 'Neteisingi prisijungimo duomenys',
+    'Required': 'Privalomas laukelis'
   }
 }
