@@ -43,11 +43,11 @@ class App extends Component {
     WebFont.load({
       google: {
         families: [
-          // 'Roboto:100,300,400,500,700,900',
-          'Dosis:300,400,500,600,700,800',
-          'Oxygen:300,400,700',
+          'Roboto:100,300,400,500,700,900',
+          // 'Dosis:300,400,500,600,700,800',
+          // 'Oxygen:300,400,700',
           // 'Ruda:400,700,900',
-          'sans-serif'
+          // 'sans-serif'
         ]
       }
     })

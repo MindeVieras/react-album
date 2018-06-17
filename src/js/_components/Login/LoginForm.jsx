@@ -6,7 +6,7 @@ import { Field, reduxForm } from 'redux-form'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
-import renderText from '../Common/Form/renderText'
+import renderText from '../Common/Form/Fields'
 import RenderButton from '../Common/Form/RenderButton'
 import { loginActions } from '../../_actions'
 

@@ -13,9 +13,6 @@ import Media from './Album/Media'
 
 import { frontActions, frontUiActions, utilsActions } from '../../_actions'
 
-import '../../../scss/Front/main.scss'
-
-
 const page = 0
 const limit = 1
 const media_limit = 2

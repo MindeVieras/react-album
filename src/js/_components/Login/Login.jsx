@@ -11,11 +11,9 @@ import { loginTranslations } from '../../translations/loginTranslations'
 import { loginActions } from '../../_actions'
 import LoginForm from './LoginForm'
 
-// import '../../../scss/Login/main.scss'
-
 const styles = theme => ({
   root: {
-    backgroundColor: green[400],
+    backgroundColor: green[500],
     position: `absolute`,
     top: 0,
     left: 0,

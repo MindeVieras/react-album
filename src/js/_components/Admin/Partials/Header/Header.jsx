@@ -1,0 +1,107 @@
+
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import fscreen from 'fscreen'
+import { withStyles } from '@material-ui/core/styles'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import IconButton from '@material-ui/core/IconButton'
+import Fullscreen from '@material-ui/icons/Fullscreen'
+import FullscreenExit from '@material-ui/icons/FullscreenExit'
+import blueGrey from '@material-ui/core/colors/blueGrey'
+
+import AlbumName from './AlbumName'
+import MainMenu from './MainMenu'
+
+import { clientActions } from '../../../../_actions'
+
+const styles = {
+  root: {
+    flexGrow: 1,
+    backgroundColor: blueGrey[800]
+  },
+  flex: {
+    flex: 1
+  }
+}
+
+class Header extends Component {
+  constructor(props) {
+    super(props)
+
+    this.goFullscreen = this.goFullscreen.bind(this)
+    this.goOutFullscreen = this.goOutFullscreen.bind(this)
+  }
+
+  goFullscreen() {
+    const { dispatch } = this.props
+    dispatch(clientActions.setFullScreen(true))
+    fscreen.requestFullscreen(document.body)
+  }
+  goOutFullscreen() {
+    const { dispatch } = this.props
+    dispatch(clientActions.setFullScreen(false))
+    fscreen.exitFullscreen()
+  }
+
+  render() {
+    const { classes, title, full_screen, selected_album } = this.props
+
+    let album_id = null
+    let headerTitle = title
+    if (selected_album && selected_album.id > 0) {
+      album_id = selected_album.id
+      headerTitle = selected_album.name
+    }
+
+    return (
+      <AppBar position="static" className={ classes.root }>
+        <Toolbar>
+
+          <div className={ classes.flex }>
+            <AlbumName name={ headerTitle } album_id={ album_id } />
+          </div>
+
+          {!full_screen &&
+            <IconButton onClick={ this.goFullscreen } color="inherit">
+              <Fullscreen />
+            </IconButton>
+          }
+          {full_screen &&
+            <IconButton onClick={ this.goOutFullscreen } color="inherit">
+              <FullscreenExit />
+            </IconButton>
+          }
+
+          <MainMenu />
+
+        </Toolbar>
+      </AppBar>
+    )
+  }
+}
+
+Header.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  classes: PropTypes.object.isRequired,
+  title: PropTypes.string,
+  full_screen: PropTypes.bool.isRequired,
+  selected_album: PropTypes.object
+}
+
+Header.defaultProps = {
+  title: '',
+  selected_album: {}
+}
+
+function mapStateToProps(state) {
+  const { client, admin_header, admin_albums } = state
+  return {
+    title: admin_header.title,
+    full_screen: client.full_screen,
+    selected_album: admin_albums.selected_album.album
+  }
+}
+
+export default connect(mapStateToProps)(withStyles(styles)(Header))
