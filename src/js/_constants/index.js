@@ -1,6 +1,7 @@
 
 export * from './client.constants'
 export * from './front.constants'
+export * from './admin.constants'
 export * from './header.constants'
 export * from './footer.constants'
 export * from './user.constants'

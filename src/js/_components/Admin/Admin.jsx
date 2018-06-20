@@ -32,6 +32,8 @@ import '../../../scss/Admin/main.scss'
 
 const styles = theme => ({
   root: {
+    display: `flex`,
+    flexDirection: `column`,
     position: `absolute`,
     top: 0,
     bottom: 0,
@@ -52,6 +54,9 @@ const styles = theme => ({
     // overflow: hidden;
     // -webkit-font-smoothing: antialiased;
     // -moz-osx-font-smoothing: grayscale;
+  },
+  flex: {
+    flex: 1
   }
 })
 
@@ -136,25 +141,27 @@ class Admin extends Component {
 
     if (isScriptLoadSucceed && settings) {
       return (
-        <div className={ classes.root } >
+        <div>
+          <div className={ classes.root } >
 
-          <Header />
+            <Header />
 
-          <div id="admin_content">
-            <Switch>
-              <Route exact path={ match.url } component={Albums} />
-              <Route path={`${match.url}/users`} component={UsersPage} />
-              <Route exact path={`${match.url}/trash`} component={TrashPage} />
-              <Route component={Error404} />
-            </Switch>
+            <div className={ classes.flex }>
+              <Switch>
+                <Route exact path={ match.url } component={Albums} />
+                <Route path={`${match.url}/users`} component={UsersPage} />
+                <Route exact path={`${match.url}/trash`} component={TrashPage} />
+                <Route component={Error404} />
+              </Switch>
+            </div>
+
+            <Footer />
+
           </div>
-
-          <Footer />
 
           <ReduxToastr timeOut={ 2000 } />
 
           <Popup escToClose={ true } />
-
         </div>
       )
     }

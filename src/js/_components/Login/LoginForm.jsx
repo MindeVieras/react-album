@@ -50,6 +50,8 @@ class LoginForm extends Component {
           loading={ loading }
           text={ t(`Login`) }
           fullWidth={ true }
+          variant="raised"
+          color="primary"
           className={ classes.btn_submit }
         />
 

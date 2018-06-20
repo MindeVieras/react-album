@@ -12,14 +12,13 @@ const styles = theme => ({
   }
 })
 
-const RenderButton = ({ classes, className, type, loading, text, fullWidth }) => (
+const RenderButton = ({ classes, className, type, loading, text, fullWidth, ...other }) => (
   <div className={ `${classes.btn_wrapper} ${className}` }>
     <Button
       type={ type }
-      variant="raised"
-      color="primary"
       fullWidth={ fullWidth }
       size="large"
+      { ...other }
     >
       { text }
     </Button>

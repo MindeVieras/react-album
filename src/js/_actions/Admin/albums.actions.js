@@ -111,7 +111,6 @@ function rename(payload) {
       .then(res => {
         if (res.ack == 'ok') {
           dispatch(rename(payload))
-          Popup.close()
           toastr.success('Success', res.msg)
         } else {
           toastr.error('Error', res.msg)

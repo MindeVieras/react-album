@@ -11,14 +11,13 @@ import blueGrey from '@material-ui/core/colors/blueGrey'
 import Fullscreen from '@material-ui/icons/Fullscreen'
 import FullscreenExit from '@material-ui/icons/FullscreenExit'
 
-import AlbumName from './AlbumName'
+import Title from './Title'
 import MainMenu from './MainMenu'
 
 import { clientActions } from '../../../../_actions'
 
 const styles = {
   root: {
-    flexGrow: 1,
     backgroundColor: blueGrey[800]
   },
   toolbar: {
@@ -65,9 +64,7 @@ class Header extends Component {
       <AppBar position="static" style={ styles.root }>
         <Toolbar style={ styles.toolbar }>
 
-          <div>
-            <AlbumName name={ headerTitle } album_id={ album_id } />
-          </div>
+          <Title title={ headerTitle } album_id={ album_id } />
 
           <div style={ styles.menus }>
             {!full_screen &&
