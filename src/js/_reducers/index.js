@@ -23,7 +23,7 @@ const rootReducer = combineReducers({
   auth,
   admin_ui: adminUi,
   admin_header: header,
-  admin_footer: footer,
+  // admin_footer: footer,
   users,
   admin_albums: adminAlbums,
   front_ui: frontUi,

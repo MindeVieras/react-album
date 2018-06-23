@@ -1,19 +1,33 @@
 
 import  React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import moment from 'moment'
 import { toastr } from 'react-redux-toastr'
 
-import { IoPlusRound } from 'react-icons/lib/io'
+import { withStyles } from '@material-ui/core/styles'
+import Tooltip from '@material-ui/core/Tooltip'
+import Button from '@material-ui/core/Button'
+
+import AddIcon from '@material-ui/icons/Add'
 
 import { albumsActions, utilsActions } from '../../../_actions'
 import { albumsService } from '../../../_services'
 import { albumsConstants } from '../../../_constants'
 
+const styles = theme => ({
+  button: {
+    position: `fixed`,
+    right: 0,
+    bottom: 0,
+    margin: theme.spacing.unit,
+    zIndex: theme.zIndex.appBar
+  }
+})
+
 class NewAlbum extends Component {
   constructor(props) {
     super(props)
-
   }
 
   handleClick() {
@@ -28,7 +42,7 @@ class NewAlbum extends Component {
       status: albumsConstants.ENABLED
     }
     albumsService.create(album)
-      .then(function(res){
+      .then(res => {
         if (res.ack == 'ok') {
           album.id = res.id
           dispatch(albumsActions.addToList(album))
@@ -43,15 +57,37 @@ class NewAlbum extends Component {
   }
 
   render() {
+
+    const { t } = this.context
+    const { classes } = this.props
+
     return (
-      <div
-        onClick={() => this.handleClick()}
-        className={ `btn btn-sm btn-${this.props.type}` }
+      <Tooltip
+        id="tooltip_create_new_album"
+        title={ t(`Create new album`) }
+        enterDelay={ 500 }
       >
-        <IoPlusRound />
-      </div>
+        <Button
+          onClick={() => this.handleClick()}
+          variant="fab"
+          color="primary"
+          aria-label="add"
+          className={ classes.button }
+        >
+          <AddIcon />
+        </Button>
+      </Tooltip>
     )
   }
 }
 
-export default connect()(NewAlbum)
+NewAlbum.contextTypes = {
+  t: PropTypes.func
+}
+
+NewAlbum.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  classes: PropTypes.object.isRequired
+}
+
+export default connect()(withStyles(styles)(NewAlbum))

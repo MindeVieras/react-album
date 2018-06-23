@@ -6,15 +6,16 @@ import { DragDropContextProvider } from 'react-dnd'
 import Rnd from 'react-rnd'
 
 import AlbumsList from './List'
-import AlbumInfo from './Info'
+import AlbumInfo from './AlbumInfo'
+import NewAlbum from '../Buttons/NewAlbum'
 
-import { headerActions, footerActions, utilsActions, albumsActions } from '../../../_actions'
+import { headerActions, utilsActions, albumsActions } from '../../../_actions'
 
 class Albums extends Component {
 
   constructor(props) {
     super(props)
-    
+
     this.state = {
       infoWidth: props.client_width - props.sidebar_width
     }
@@ -23,8 +24,6 @@ class Albums extends Component {
   componentDidMount() {
     const { selected_album_id, dispatch } = this.props
     dispatch(headerActions.setTitle(''))
-    dispatch(footerActions.buttonsClear())
-    dispatch(footerActions.buttonSet('', 'newAlbum', 'success'))
     dispatch(albumsActions.getOne(selected_album_id))
   }
 
@@ -77,7 +76,7 @@ class Albums extends Component {
               <AlbumsList width={ sidebar_width } />
             </Rnd>
           </div>
-          
+
           {selected_album &&
             <AlbumInfo
               selected_album={ selected_album }
@@ -85,6 +84,8 @@ class Albums extends Component {
               height={ info_height }
             />
           }
+
+          <NewAlbum />
 
         </div>
       </DragDropContextProvider>

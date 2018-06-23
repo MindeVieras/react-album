@@ -3,11 +3,13 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import fscreen from 'fscreen'
+
+import { withStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
 import Tooltip from '@material-ui/core/Tooltip'
-import blueGrey from '@material-ui/core/colors/blueGrey'
+
 import Fullscreen from '@material-ui/icons/Fullscreen'
 import FullscreenExit from '@material-ui/icons/FullscreenExit'
 
@@ -16,9 +18,9 @@ import MainMenu from './MainMenu'
 
 import { clientActions } from '../../../../_actions'
 
-const styles = {
+const styles = theme => ({
   root: {
-    backgroundColor: blueGrey[800]
+    backgroundColor: theme.palette.background.header
   },
   toolbar: {
     justifyContent: `space-between`,
@@ -26,7 +28,7 @@ const styles = {
   menus: {
     display: `flex`,
   }
-}
+})
 
 class Header extends Component {
   constructor(props) {
@@ -51,7 +53,7 @@ class Header extends Component {
   render() {
 
     const { t } = this.context
-    const { title, full_screen, selected_album } = this.props
+    const { classes, title, full_screen, selected_album } = this.props
 
     let album_id = null
     let headerTitle = title
@@ -61,12 +63,12 @@ class Header extends Component {
     }
 
     return (
-      <AppBar position="static" style={ styles.root }>
-        <Toolbar style={ styles.toolbar }>
+      <AppBar position="static" className={ classes.root }>
+        <Toolbar className={ classes.toolbar }>
 
           <Title title={ headerTitle } album_id={ album_id } />
 
-          <div style={ styles.menus }>
+          <div className={ classes.menus }>
             {!full_screen &&
               <Tooltip
                 id="tooltip_go_fullscreen"
@@ -106,6 +108,7 @@ Header.contextTypes = {
 
 Header.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  classes: PropTypes.object.isRequired,
   title: PropTypes.string,
   full_screen: PropTypes.bool.isRequired,
   selected_album: PropTypes.object
@@ -125,4 +128,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(Header)
+export default connect(mapStateToProps)(withStyles(styles)(Header))

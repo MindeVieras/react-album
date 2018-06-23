@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 
 import Spinner from '../../Partials/Spinner'
+import DeleteAlbum from '../../Buttons/DeleteAlbum'
 import Bar from './Bar'
 import Media from './Media'
 
@@ -18,14 +19,14 @@ class AlbumInfo extends Component {
     if (selected_album.album) {
       const { id, name, media, status } = selected_album.album
       dispatch(headerActions.setTitle(name))
-      dispatch(footerActions.buttonRemove('deleteAlbum'))
-      dispatch(footerActions.buttonRemove('openLightbox'))
-      if (albumsConstants.ENABLED === status) {
-        dispatch(footerActions.buttonSet('', 'deleteAlbum', 'danger', {album_id: id, name}))
-        if (media.length > 0) {
-          dispatch(footerActions.buttonSet('', 'openLightbox', 'success', {album_id: id}))
-        }
-      }
+      // dispatch(footerActions.buttonRemove('deleteAlbum'))
+      // dispatch(footerActions.buttonRemove('openLightbox'))
+      // if (albumsConstants.ENABLED === status) {
+      //   dispatch(footerActions.buttonSet('', 'deleteAlbum', 'danger', {album_id: id, name}))
+      //   if (media.length > 0) {
+      //     dispatch(footerActions.buttonSet('', 'openLightbox', 'success', {album_id: id}))
+      //   }
+      // }
     }
   }
 
@@ -33,7 +34,7 @@ class AlbumInfo extends Component {
     const { width, height, selected_album } = this.props
 
     let wrapper_height = height - 38 // suctract infoBar height
-    
+
     return (
       <div className="album-info" style={{ width: `${width}px` }}>
         {selected_album.album.loading &&
@@ -49,7 +50,7 @@ class AlbumInfo extends Component {
               start_date={ selected_album.album.start_date }
               end_date={ selected_album.album.end_date }
             />
-            
+
             <Media
               entity={contentConstants.TYPE_ALBUM}
               entity_id={selected_album.album.id}
@@ -59,8 +60,14 @@ class AlbumInfo extends Component {
               wrapper_height={ wrapper_height }
             />
 
+            <DeleteAlbum
+              id={ selected_album.album.id }
+              name={ selected_album.album.name }
+            />
+
           </div>
         }
+
       </div>
     )
   }

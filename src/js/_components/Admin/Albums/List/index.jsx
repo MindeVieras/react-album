@@ -45,7 +45,7 @@ class AlbumsList extends Component {
               option={ scrollbarOptions }
               className="album-scrollbar left-scrollbar default-scrollbar"
             >
-              <ul>
+              <ul style={{padding:0,margin:0}}>
                 {albums.items.map((album) =>
                   <ListItem
                     key={ album.id }

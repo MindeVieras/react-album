@@ -1,6 +1,8 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
+
 import Typography from '@material-ui/core/Typography'
 
 import AlbumName from './AlbumName'
@@ -16,7 +18,7 @@ const Title = ({ album_id, title }) => {
         variant="title"
         color="inherit"
       >
-        { title }
+        <Link to="/admin">{ title }</Link>
       </Typography>
     )
   }

@@ -9,13 +9,10 @@ import Popup from 'react-popup'
 import scriptLoader from 'react-async-script-loader'
 import keydown from 'react-keydown'
 import { withStyles } from '@material-ui/core/styles'
-import blueGrey from '@material-ui/core/colors/blueGrey'
-import grey from '@material-ui/core/colors/grey'
 
 import { adminTranslations } from '../../translations/adminTranslations'
 
 import Header from './Partials/Header'
-import Footer from './Partials/Footer'
 import Albums from './Albums'
 import UsersPage from './Users'
 import TrashPage from './Trash'
@@ -34,26 +31,13 @@ const styles = theme => ({
   root: {
     display: `flex`,
     flexDirection: `column`,
-    position: `absolute`,
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    // fontFamily: `Dosis`,
-    backgroundColor: blueGrey[900],
-    color: grey[50],
+    height: `100vh`,
+    overflow: `hidden`,
     // background-image: url(https://s3-eu-west-1.amazonaws.com/app.mindelis.com/images/bg.jpg);
     // background-position: center;
     // background-repeat: no-repeat;
     // background-size: cover;
     // background-attachment: fixed;
-    // font-size: 16px;
-    // line-height: 1;
-    // width: 100%;
-    // height: 100%;
-    // overflow: hidden;
-    // -webkit-font-smoothing: antialiased;
-    // -moz-osx-font-smoothing: grayscale;
   },
   flex: {
     flex: 1
@@ -70,6 +54,7 @@ class Admin extends Component {
   componentDidMount() {
     const { dispatch } = this.props
 
+    // Set admin translations
     dispatch(setTranslations(adminTranslations))
     // Get Admin settings
     dispatch(utilsActions.getAdminSettings())
@@ -155,8 +140,6 @@ class Admin extends Component {
               </Switch>
             </div>
 
-            <Footer />
-
           </div>
 
           <ReduxToastr timeOut={ 2000 } />
@@ -174,12 +157,6 @@ class Admin extends Component {
 Admin.propTypes = {
   classes: PropTypes.object.isRequired
 }
-
-// Admin.defaultProps = {
-//   loading: false,
-//   error: false,
-//   msg: ''
-// }
 
 function mapStateToProps(state) {
   const { admin_albums, settings } = state

@@ -39,7 +39,7 @@ class Footer extends Component {
             />
           )
 
-        if (link.action === 'newAlbum')
+        if (link.action === 'newAlbums')
           return (
             <NewAlbum
               key={ i }
@@ -77,9 +77,6 @@ class Footer extends Component {
 
     return (
       <div className="footer" id="app_footer">
-        <div id="footer_link" className="pull-left">
-          <Link to="/admin/trash"><IoTrashA /></Link>
-        </div>
         <MediaPager />
         <div id="footer_buttons" className="pull-right">
           {buttons}

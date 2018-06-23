@@ -5,11 +5,24 @@ import { Provider } from 'react-redux'
 import I18n from 'redux-i18n'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
+import green from '@material-ui/core/colors/green'
+import blueGrey from '@material-ui/core/colors/blueGrey'
+import indigo from '@material-ui/core/colors/indigo'
 
 import { store } from './_helpers'
 import App from './App'
 
-const theme = createMuiTheme()
+const theme = createMuiTheme({
+  palette: {
+    background: {
+      default: blueGrey[900],
+      header: blueGrey[800],
+      login: green[500]
+    }
+  }
+})
+
+// console.log(theme)
 
 const AlbumApp = () => (
   <Provider store={ store }>

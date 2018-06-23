@@ -3,24 +3,21 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { setTranslations } from 'redux-i18n'
+
 import { withStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
-import green from '@material-ui/core/colors/green'
+
+import LoginForm from './LoginForm'
 
 import { loginTranslations } from '../../translations/loginTranslations'
 import { loginActions } from '../../_actions'
-import LoginForm from './LoginForm'
 
 const styles = theme => ({
   root: {
-    backgroundColor: green[500],
-    position: `absolute`,
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    padding: `10% 10px`,
-    overflow: `auto`
+    backgroundColor: theme.palette.background.login,
+    padding: `10% ${theme.spacing.unit}px`,
+    overflow: `auto`,
+    height: `100vh`
   },
   container: {
     maxWidth: 360,

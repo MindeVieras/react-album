@@ -11,6 +11,7 @@ import Dropzone from './Partials/dropzone'
 import TotalProgressBar from './Partials/total-progress-bar'
 
 import MediaList from './MediaList'
+import UploadMedia from '../../../Buttons/UploadMedia'
 
 import { authHeader, baseServerUrl } from '../../../../../_helpers'
 import { footerActions, albumsActions } from '../../../../../_actions'
@@ -105,14 +106,14 @@ class Media extends Component {
 
   componentDidMount() {
     const uploader = this.uploader
-    const { dispatch } = this.props
+    // const { dispatch } = this.props
 
-    // Set footer upload input button
-    dispatch(footerActions.buttonRemove('uploadMedia'))
-    let buttonProps = {
-      uploader
-    }
-    dispatch(footerActions.buttonSet('', 'uploadMedia', 'info', buttonProps))
+    // // Set footer upload input button
+    // dispatch(footerActions.buttonRemove('uploadMedia'))
+    // let buttonProps = {
+    //   uploader
+    // }
+    // dispatch(footerActions.buttonSet('', 'uploadMedia', 'info', buttonProps))
 
     uploader.on('statusChange', this._onStatusChange)
     uploader.on('complete', this._onComplete)
@@ -144,34 +145,42 @@ class Media extends Component {
     }
 
     return (
-      <Dropzone
-        uploader={ uploader }
-        multiple={ true }
-        dropActiveClassName="active"
-      >
-        <TotalProgressBar
+      <div>
+        <Dropzone
+          uploader={ uploader }
+          multiple={ true }
+          dropActiveClassName="active"
+        >
+          <TotalProgressBar
+            uploader={ uploader }
+          />
+
+          <div className="counter">
+            { counter } files
+          </div>
+
+          <MediaList
+            files={ files }
+            uploader={ uploader }
+            wrapper_width={ wrapper_width }
+            wrapper_height={ wrapper_height }
+          />
+
+          { uploaderText }
+
+        </Dropzone>
+
+        <UploadMedia
           uploader={ uploader }
         />
 
-        <div className="counter">
-          { counter } files
-        </div>
-
-        <MediaList
-          files={ files }
-          uploader={ uploader }
-          wrapper_width={ wrapper_width }
-          wrapper_height={ wrapper_height }
-        />
-
-        { uploaderText }
-
-      </Dropzone>
+      </div>
     )
   }
 }
 
 Media.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   bucket: PropTypes.string.isRequired,
   access_key: PropTypes.string.isRequired,
   entity: PropTypes.number.isRequired,

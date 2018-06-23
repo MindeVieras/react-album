@@ -3,11 +3,13 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
+
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
 import renderText from '../Common/Form/Fields'
 import RenderButton from '../Common/Form/RenderButton'
+
 import { loginActions } from '../../_actions'
 
 const styles = theme => ({
@@ -28,22 +30,18 @@ class LoginForm extends Component {
 
     return (
       <form onSubmit={ handleSubmit }>
-        <div>
-          <Field
-            name="username"
-            component={ renderText }
-            label={ t(`Username`) }
-            type="text"
-          />
-        </div>
-        <div>
-          <Field
-            name="password"
-            component={ renderText }
-            label={ t(`Password`) }
-            type="password"
-          />
-        </div>
+        <Field
+          name="username"
+          component={ renderText }
+          label={ t(`Username`) }
+          type="text"
+        />
+        <Field
+          name="password"
+          component={ renderText }
+          label={ t(`Password`) }
+          type="password"
+        />
 
         <RenderButton
           type="submit"

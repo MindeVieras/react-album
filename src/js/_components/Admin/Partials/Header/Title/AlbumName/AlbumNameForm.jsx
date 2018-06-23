@@ -4,26 +4,19 @@ import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
 
 import { withStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
-import Avatar from '@material-ui/core/Avatar'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemAvatar from '@material-ui/core/ListItemAvatar'
-import ListItemText from '@material-ui/core/ListItemText'
-import Dialog from '@material-ui/core/Dialog'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
-import DialogActions from '@material-ui/core/DialogActions'
+
 import PersonIcon from '@material-ui/icons/Person'
 import AddIcon from '@material-ui/icons/Add'
-import Typography from '@material-ui/core/Typography'
 
 import renderText from '../../../../../Common/Form/Fields'
 import RenderButton from '../../../../../Common/Form/RenderButton'
-import { albumsActions, adminUiActions } from '../../../../../../_actions'
 
-const modal_id = `album_rename`
+import { albumsActions, adminUiActions } from '../../../../../../_actions'
+import { adminConstants } from '../../../../../../_constants'
+
+const modal_id = adminConstants.MODAL_ALBUM_RENEME
 
 const styles = {
   actions_wrapper: {
@@ -72,7 +65,6 @@ class AlbumNameForm extends Component {
             type="submit"
             text={ t(`Save`) }
             color="primary"
-            className={ classes.btn_submit }
           />
         </div>
 

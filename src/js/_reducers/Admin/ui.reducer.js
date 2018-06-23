@@ -5,7 +5,8 @@ const initialState = {
   modals: {
     album_rename: false,
     album_dates: false,
-    album_map: false
+    album_map: false,
+    album_delete: false
   }
 }
 

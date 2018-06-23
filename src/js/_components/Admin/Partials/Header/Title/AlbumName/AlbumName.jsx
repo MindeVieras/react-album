@@ -1,16 +1,20 @@
 
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Tooltip from '@material-ui/core/Tooltip'
 import IconButton from '@material-ui/core/IconButton'
-import lightBlue from '@material-ui/core/colors/lightBlue'
+
 import Edit from '@material-ui/icons/Edit'
+
+import lightBlue from '@material-ui/core/colors/lightBlue'
 
 import AlbumNameForm from './AlbumNameForm'
 import SimpleModal from '../../../../../Common/Modals'
+
 import { adminUiActions } from '../../../../../../_actions'
 
 const styles = theme => ({
@@ -28,7 +32,7 @@ const styles = theme => ({
   },
   edit_btn: {
     fontSize: 16,
-    color: lightBlue[500]
+    color: lightBlue[400]
   }
 })
 
@@ -54,7 +58,7 @@ class AlbumName extends Component {
     const { classes, album_id, name } = this.props
 
     return (
-      <div>
+      <Fragment>
         <Typography
           variant="title"
           color="inherit"
@@ -92,7 +96,7 @@ class AlbumName extends Component {
         >
           <AlbumNameForm name={ name } album_id={ album_id } />
         </SimpleModal>
-      </div>
+      </Fragment>
     )
   }
 }
