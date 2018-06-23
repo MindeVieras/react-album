@@ -1,14 +1,24 @@
 
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import { RingLoader } from 'react-spinners'
 
+import { withStyles } from '@material-ui/core/styles'
+import List from '@material-ui/core/List'
+
 import Bar from './Bar'
 import ListItem from './ListItem'
 
 import { headerActions, albumsActions, utilsActions } from '../../../../_actions'
+
+const styles = theme => ({
+  scrollbar: {
+    display: `flex`,
+    overflow: `hidden`
+  }
+})
 
 class AlbumsList extends Component {
 
@@ -25,14 +35,15 @@ class AlbumsList extends Component {
   }
 
   render() {
-    const { selected_album_id, albums, width } = this.props
+    const { classes, selected_album_id, albums, width } = this.props
     const scrollbarOptions = {
       wheelSpeed: 1.25,
+      suppressScrollX: true
       // useBothWheelAxes: true
     }
     if (albums) {
       return (
-        <div className="albums-list">
+        <Fragment>
           <Bar />
           {albums.loading &&
             <RingLoader />
@@ -43,9 +54,9 @@ class AlbumsList extends Component {
           {albums.items &&
             <PerfectScrollbar
               option={ scrollbarOptions }
-              className="album-scrollbar left-scrollbar default-scrollbar"
+              className={ classes.scrollbar }
             >
-              <ul style={{padding:0,margin:0}}>
+              <List disablePadding={ true }>
                 {albums.items.map((album) =>
                   <ListItem
                     key={ album.id }
@@ -57,10 +68,10 @@ class AlbumsList extends Component {
                     onItemClick={(album_id) => this.onAlbumSelect(album_id)}
                   />
                 )}
-              </ul>
+              </List>
             </PerfectScrollbar>
           }
-        </div>
+        </Fragment>
       )
     }
     else {
@@ -70,12 +81,14 @@ class AlbumsList extends Component {
 }
 
 AlbumsList.propTypes = {
-  albums: PropTypes.object,
+  classes: PropTypes.object.isRequired,
   selected_album_id: PropTypes.number.isRequired,
+  albums: PropTypes.object,
   width: PropTypes.number
 }
 
 AlbumsList.defaultProps = {
+  albums: {},
   width: 200
 }
 
@@ -89,4 +102,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(AlbumsList)
+export default connect(mapStateToProps)(withStyles(styles)(AlbumsList))

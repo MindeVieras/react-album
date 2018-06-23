@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 
+import { withStyles } from '@material-ui/core/styles'
+
 import Spinner from '../../Partials/Spinner'
 import DeleteAlbum from '../../Buttons/DeleteAlbum'
 import Bar from './Bar'
@@ -11,6 +13,14 @@ import Media from './Media'
 
 import { headerActions, footerActions } from '../../../../_actions'
 import { albumsConstants, contentConstants, mediaConstants } from '../../../../_constants'
+
+const styles = theme => ({
+  info_wrapper: {
+    position: `absolute`,
+    top: 0,
+    right: 0
+  }
+})
 
 class AlbumInfo extends Component {
 
@@ -31,12 +41,12 @@ class AlbumInfo extends Component {
   }
 
   render() {
-    const { width, height, selected_album } = this.props
+    const { classes, width, height, selected_album } = this.props
 
     let wrapper_height = height - 38 // suctract infoBar height
 
     return (
-      <div className="album-info" style={{ width: `${width}px` }}>
+      <div className={ classes.info_wrapper } style={{ width: `${width}px` }}>
         {selected_album.album.loading &&
           <Spinner type="primary" size={ 70 } />
         }
@@ -74,6 +84,7 @@ class AlbumInfo extends Component {
 }
 
 AlbumInfo.propTypes = {
+  classes: PropTypes.object.isRequired,
   selected_album: PropTypes.object.isRequired,
   width: PropTypes.number,
   height: PropTypes.number
@@ -84,4 +95,4 @@ AlbumInfo.defaultProps = {
   heght: 600
 }
 
-export default connect()(AlbumInfo)
+export default connect()(withStyles(styles)(AlbumInfo))

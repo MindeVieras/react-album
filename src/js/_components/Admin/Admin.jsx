@@ -1,5 +1,5 @@
 
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { setTranslations } from 'redux-i18n'
@@ -8,6 +8,7 @@ import ReduxToastr from 'react-redux-toastr'
 import Popup from 'react-popup'
 import scriptLoader from 'react-async-script-loader'
 import keydown from 'react-keydown'
+
 import { withStyles } from '@material-ui/core/styles'
 
 import { adminTranslations } from '../../translations/adminTranslations'
@@ -26,6 +27,7 @@ import 'react-toggle/style.css'
 import 'react-select/dist/react-select.css'
 import 'rc-slider/assets/index.css'
 import '../../../scss/Admin/main.scss'
+import 'react-perfect-scrollbar/dist/css/styles.css'
 
 const styles = theme => ({
   root: {
@@ -40,6 +42,7 @@ const styles = theme => ({
     // background-attachment: fixed;
   },
   flex: {
+    display: `flex`,
     flex: 1
   }
 })
@@ -126,7 +129,7 @@ class Admin extends Component {
 
     if (isScriptLoadSucceed && settings) {
       return (
-        <div>
+        <Fragment>
           <div className={ classes.root } >
 
             <Header />
@@ -145,7 +148,7 @@ class Admin extends Component {
           <ReduxToastr timeOut={ 2000 } />
 
           <Popup escToClose={ true } />
-        </div>
+        </Fragment>
       )
     }
     else {

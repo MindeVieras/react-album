@@ -7,6 +7,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import green from '@material-ui/core/colors/green'
 import blueGrey from '@material-ui/core/colors/blueGrey'
+import grey from '@material-ui/core/colors/grey'
 import indigo from '@material-ui/core/colors/indigo'
 
 import { store } from './_helpers'
@@ -18,6 +19,9 @@ const theme = createMuiTheme({
       default: blueGrey[900],
       header: blueGrey[800],
       login: green[500]
+    },
+    text: {
+      primary: grey[50]
     }
   }
 })

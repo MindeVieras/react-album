@@ -7,7 +7,17 @@ import ReactTooltip from 'react-tooltip'
 import Marquee from 'react-text-marquee'
 import moment from 'moment'
 
+import { withStyles } from '@material-ui/core/styles'
+import MuiListItem from '@material-ui/core/ListItem'
+import Typography from '@material-ui/core/Typography'
+
 import { utilsConstants } from '../../../../../_constants'
+
+const styles = theme => ({
+  item: {
+    color: theme.palette.text.primary
+  }
+})
 
 class ListItem extends Component {
 
@@ -20,6 +30,7 @@ class ListItem extends Component {
   render() {
     const tooltipId = uuidv4()
     const {
+      classes,
       active,
       album_id,
       name,
@@ -31,31 +42,43 @@ class ListItem extends Component {
     const isDndActive = canDrop && isOver
     return connectDropTarget(
       <li
-        className={`albums-item${active ? ' active' : ''} ${isDndActive ? 'dnd-dest-active' : ''}`}
+        className={`${active ? 'active' : ''} ${isDndActive ? ' dnd-dest-active' : ''}` }
         onClick={ () => this.handleClick(active, album_id) }
         style={{width: `${width}px`}}
         data-tip
         data-for={ tooltipId }
       >
-        <Marquee
-          leading={ 500 }
-          loop={ true }
-          trailing={ 500 }
-          text={ name }
-          className="name"
-        />
-        <ReactTooltip
-          id={ tooltipId }
-          delayShow={ 400 }
+        <MuiListItem
+          button
+          className={ classes.item }
         >
-          { moment(start_date).format('YYYY-MM-DD') }
-        </ReactTooltip>
+
+          <Typography
+            variant="body1"
+            color="inherit"
+          >
+            <Marquee
+              leading={ 500 }
+              loop={ true }
+              trailing={ 500 }
+              text={ name }
+              className="name"
+            />
+          </Typography>
+          <ReactTooltip
+            id={ tooltipId }
+            delayShow={ 400 }
+          >
+            { moment(start_date).format('YYYY-MM-DD') }
+          </ReactTooltip>
+        </MuiListItem>
       </li>
     )
   }
 }
 
 ListItem.propTypes = {
+  classes: PropTypes.object.isRequired,
   connectDropTarget: PropTypes.func.isRequired,
   isOver: PropTypes.bool.isRequired,
   canDrop: PropTypes.bool.isRequired,
@@ -91,4 +114,4 @@ function dndCollect(connect, monitor) {
   }
 }
 
-export default DropTarget(utilsConstants.DND_MOVE_MEDIA, boxTarget, dndCollect)(ListItem)
+export default DropTarget(utilsConstants.DND_MOVE_MEDIA, boxTarget, dndCollect)(withStyles(styles)(ListItem))
