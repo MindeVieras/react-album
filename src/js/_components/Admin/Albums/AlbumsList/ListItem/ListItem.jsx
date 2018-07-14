@@ -10,15 +10,21 @@ import { withStyles } from '@material-ui/core/styles'
 import MuiListItem from '@material-ui/core/ListItem'
 import Typography from '@material-ui/core/Typography'
 
-import blue from '@material-ui/core/colors/blue'
+import blueGrey from '@material-ui/core/colors/blueGrey'
 
 import { utilsConstants } from '../../../../../_constants'
 
 const styles = theme => ({
   item: {
-    color: blue[50],
+    color: blueGrey[50],
     paddingLeft: theme.spacing.unit * 1.5,
     paddingRight: theme.spacing.unit * 1.5
+  },
+  active: {
+    backgroundColor: blueGrey[800]
+  },
+  dndActive: {
+    backgroundColor: blueGrey[700]
   }
 })
 
@@ -42,9 +48,13 @@ class ListItem extends Component {
       isOver,
       connectDropTarget } = this.props
     const isDndActive = canDrop && isOver
+
+    let activeClass = active ? classes.active : ``
+    let dndClass = isDndActive ? classes.dndActive : ``
+
     return connectDropTarget(
       <li
-        className={`${active ? 'active' : ''} ${isDndActive ? ' dnd-dest-active' : ''}` }
+        className={ `${activeClass} ${dndClass}` }
         onClick={ () => this.handleClick(active, album_id) }
         data-tip
         data-for={ tooltipId }
@@ -55,7 +65,7 @@ class ListItem extends Component {
         >
 
           <Typography
-            variant="body1"
+            variant="body2"
             color="inherit"
           >
             { name }
@@ -104,4 +114,8 @@ function dndCollect(connect, monitor) {
   }
 }
 
-export default DropTarget(utilsConstants.DND_MOVE_MEDIA, boxTarget, dndCollect)(withStyles(styles)(ListItem))
+export default DropTarget(
+  utilsConstants.DND_MOVE_MEDIA,
+  boxTarget,
+  dndCollect
+)(withStyles(styles)(ListItem))

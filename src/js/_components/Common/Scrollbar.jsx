@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react'
 import { PropTypes } from 'prop-types'
 import PerfectScrollbar from 'react-perfect-scrollbar'
@@ -15,7 +16,7 @@ class Scrollbar extends Component {
 
   render() {
     const { classes, children, position } = this.props
-    console.log(position)
+
     const scrollbarOptions = {
       wheelSpeed: 1.25,
       suppressScrollX: true
@@ -43,3 +44,4 @@ Scrollbar.defaultProps = {
 }
 
 export default withStyles(styles)(Scrollbar)
+
