@@ -81,7 +81,7 @@ class Albums extends Component {
             onResizeStop={ this.onSidebarResizeEnd.bind(this) }
             style={ styles.rnd_wrapper }
           >
-            <AlbumsList width={ sidebar_width } />
+            <AlbumsList />
           </Rnd>
 
           {selected_album &&

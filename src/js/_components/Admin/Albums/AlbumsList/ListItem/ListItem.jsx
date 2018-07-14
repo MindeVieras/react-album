@@ -4,18 +4,21 @@ import PropTypes from 'prop-types'
 import { DropTarget } from 'react-dnd'
 import uuidv4 from 'uuid/v4'
 import ReactTooltip from 'react-tooltip'
-import Marquee from 'react-text-marquee'
 import moment from 'moment'
 
 import { withStyles } from '@material-ui/core/styles'
 import MuiListItem from '@material-ui/core/ListItem'
 import Typography from '@material-ui/core/Typography'
 
+import blue from '@material-ui/core/colors/blue'
+
 import { utilsConstants } from '../../../../../_constants'
 
 const styles = theme => ({
   item: {
-    color: theme.palette.text.primary
+    color: blue[50],
+    paddingLeft: theme.spacing.unit * 1.5,
+    paddingRight: theme.spacing.unit * 1.5
   }
 })
 
@@ -34,7 +37,6 @@ class ListItem extends Component {
       active,
       album_id,
       name,
-      width,
       start_date,
       canDrop,
       isOver,
@@ -44,7 +46,6 @@ class ListItem extends Component {
       <li
         className={`${active ? 'active' : ''} ${isDndActive ? ' dnd-dest-active' : ''}` }
         onClick={ () => this.handleClick(active, album_id) }
-        style={{width: `${width}px`}}
         data-tip
         data-for={ tooltipId }
       >
@@ -57,13 +58,7 @@ class ListItem extends Component {
             variant="body1"
             color="inherit"
           >
-            <Marquee
-              leading={ 500 }
-              loop={ true }
-              trailing={ 500 }
-              text={ name }
-              className="name"
-            />
+            { name }
           </Typography>
           <ReactTooltip
             id={ tooltipId }
@@ -86,12 +81,7 @@ ListItem.propTypes = {
   active: PropTypes.bool.isRequired,
   album_id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
-  start_date: PropTypes.string.isRequired,
-  width: PropTypes.number
-}
-
-ListItem.defaultProps = {
-  width: 200
+  start_date: PropTypes.string.isRequired
 }
 
 const boxTarget = {

@@ -19,9 +19,6 @@ const theme = createMuiTheme({
       default: blueGrey[900],
       header: blueGrey[800],
       login: green[500]
-    },
-    text: {
-      primary: grey[50]
     }
   }
 })
