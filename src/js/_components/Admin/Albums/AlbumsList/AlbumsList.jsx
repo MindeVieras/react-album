@@ -14,10 +14,9 @@ import Scrollbar from '../../../Common/Scrollbar'
 import { albumsActions, utilsActions } from '../../../../_actions'
 
 const styles = theme => ({
-  // scrollbar: {
-  //   display: `flex`,
-  //   overflow: `hidden`
-  // }
+  list: {
+    width: `100%`
+  }
 })
 
 class AlbumsList extends Component {
@@ -49,7 +48,10 @@ class AlbumsList extends Component {
           }
           {albums.items &&
             <Scrollbar position="left">
-              <List disablePadding={ true }>
+              <List
+                className={ classes.list }
+                disablePadding={ true }
+              >
                 {albums.items.map((album) =>
                   <ListItem
                     key={ album.id }
