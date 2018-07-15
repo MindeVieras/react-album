@@ -3,9 +3,23 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
+import { withStyles } from '@material-ui/core/styles'
+
+import grey from '@material-ui/core/colors/grey'
+
 import DatesRange from './DatesRange'
 
 import { albumsActions } from '../../../../../_actions'
+
+const styles = theme => ({
+  bar_wrapper: {
+    paddingTop: theme.spacing.unit * 0.5,
+    paddingBottom: theme.spacing.unit * 0.5,
+    paddingLeft: theme.spacing.unit * 1.5,
+    paddingRight: theme.spacing.unit * 1.5,
+    borderBottom: `1px solid ${grey[800]}`
+  }
+})
 
 class Bar extends Component {
   constructor(props) {
@@ -19,15 +33,9 @@ class Bar extends Component {
   }
 
   render() {
-    const { dates, start_date, end_date } = this.props
+    const { classes, dates, start_date, end_date } = this.props
     return (
-      <div className="filter-bar">
-        {dates.loading &&
-          <div>Loading...</div>
-        }
-        {dates.err &&
-          <div>{dates.err}</div>
-        }
+      <div className={ classes.bar_wrapper }>
         {dates.distinct_list &&
           <DatesRange
             dates={ dates.distinct_list }
@@ -41,6 +49,8 @@ class Bar extends Component {
 }
 
 Bar.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  classes: PropTypes.object.isRequired,
   dates: PropTypes.object,
   start_date: PropTypes.string,
   end_date: PropTypes.string
@@ -55,4 +65,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(Bar)
+export default connect(mapStateToProps)(withStyles(styles)(Bar))

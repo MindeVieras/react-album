@@ -1,11 +1,27 @@
 
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import { Range } from 'rc-slider'
 import moment from 'moment'
 
+import { withStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
+
+import grey from '@material-ui/core/colors/grey'
+
 import { albumsActions, utilsActions } from '../../../../../_actions'
+
+const styles = theme => ({
+  dates_wrapper: {
+    display: `flex`,
+    justifyContent: `space-between`
+  },
+  dates_text: {
+    color: grey[200],
+    fontSize: 12
+  }
+})
 
 class DatesRange extends Component {
   constructor(props) {
@@ -33,7 +49,8 @@ class DatesRange extends Component {
   }
 
   render() {
-    const { dates, start_date, end_date } = this.props    
+    const { classes, dates, start_date, end_date } = this.props
+
     let step = 1
     let defaultStart = 0
     let defaultEnd = 100
@@ -41,27 +58,38 @@ class DatesRange extends Component {
       step = 100 / (dates.length - 1)
       defaultStart = (dates.indexOf(start_date)) * step
       defaultEnd = (dates.indexOf(end_date)) * step
-      // console.log(defaultStart, defaultEnd)
     }
 
     return (
-      <div>
+      <Fragment>
         <Range
           step={ step }
           defaultValue={ [defaultStart, defaultEnd] }
           onChange={ this.onChange }
           onAfterChange={ this.onAfterChange }
         />
-        <div className="dates">
-          <span className="start">{ start_date }</span>
-          <span className="end">{ end_date }</span>
+        <div
+          className={ classes.dates_wrapper }
+        >
+          <Typography
+            className={ classes.dates_text }
+          >
+            { start_date }
+          </Typography>
+          <Typography
+            className={ classes.dates_text }
+          >
+            { end_date }
+          </Typography>
         </div>
-      </div>
+      </Fragment>
     )
   }
 }
 
 DatesRange.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  classes: PropTypes.object.isRequired,
   dates: PropTypes.array.isRequired,
   start_date: PropTypes.string,
   end_date: PropTypes.string
@@ -72,4 +100,4 @@ DatesRange.defaultProps = {
   end_date: moment().format('YYYY-M-D')
 }
 
-export default connect()(DatesRange)
+export default connect()(withStyles(styles)(DatesRange))

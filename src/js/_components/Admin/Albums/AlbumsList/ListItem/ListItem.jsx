@@ -16,7 +16,8 @@ import { utilsConstants } from '../../../../../_constants'
 
 const styles = theme => ({
   item: {
-    color: blueGrey[50],
+    // color: blueGrey[50],
+    color: theme.palette.common.white,
     paddingLeft: theme.spacing.unit * 1.5,
     paddingRight: theme.spacing.unit * 1.5
   },
