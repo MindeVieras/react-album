@@ -1,5 +1,5 @@
 
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import PerfectScrollbar from 'react-perfect-scrollbar'
@@ -18,7 +18,13 @@ const styles = theme => ({
   info_wrapper: {
     position: `absolute`,
     top: 0,
-    right: 0
+    right: 0,
+    bottom: 0,
+    display: `flex`,
+    flexDirection: `column`
+  },
+  flex: {
+    flex: 1
   }
 })
 
@@ -54,20 +60,21 @@ class AlbumInfo extends Component {
           <div>{selected_album.album.err}</div>
         }
         {selected_album.album.id &&
-          <div className="selected-album">
+          <Fragment>
+            <div className={ classes.flex }>
+              <Media
+                entity={contentConstants.TYPE_ALBUM}
+                entity_id={selected_album.album.id}
+                status={mediaConstants.STATUS_ENABLED}
+                files={ selected_album.album.media }
+                wrapper_width={ width }
+                wrapper_height={ wrapper_height }
+              />
+            </div>
             <Bar
               album_id={ selected_album.album.id }
               start_date={ selected_album.album.start_date }
               end_date={ selected_album.album.end_date }
-            />
-
-            <Media
-              entity={contentConstants.TYPE_ALBUM}
-              entity_id={selected_album.album.id}
-              status={mediaConstants.STATUS_ENABLED}
-              files={ selected_album.album.media }
-              wrapper_width={ width }
-              wrapper_height={ wrapper_height }
             />
 
             <DeleteAlbum
@@ -75,7 +82,7 @@ class AlbumInfo extends Component {
               name={ selected_album.album.name }
             />
 
-          </div>
+          </Fragment>
         }
 
       </div>

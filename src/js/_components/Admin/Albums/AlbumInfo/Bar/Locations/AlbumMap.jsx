@@ -1,5 +1,5 @@
 
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
@@ -21,10 +21,12 @@ class AlbumMap extends Component {
     if (mediaItems) { mapWidth = 'calc(100% - 60px)' }
 
     return (
-      <div>
+      <Fragment>
         {current_location &&
-          <div id="album_map">
+          <Fragment>
+
             <LocationsBar />
+
             <Map
               containerElement={<div className="map-container" style={{width: mapWidth}} />}
               mapElement={<div style={{ height: `100%` }} />}
@@ -33,6 +35,7 @@ class AlbumMap extends Component {
               album_id={ album_id }
               media={ media }
             />
+
             {mediaItems &&
               <ItemsList
                 album_id={ album_id }
@@ -41,9 +44,10 @@ class AlbumMap extends Component {
                 media={ media }
               />
             }
-          </div>
+
+          </Fragment>
         }
-      </div>
+      </Fragment>
     )
   }
 

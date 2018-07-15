@@ -93,6 +93,7 @@ class LocationsBar extends Component {
 }
 
 LocationsBar.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   map: PropTypes.object
 }
 

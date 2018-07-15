@@ -18,7 +18,7 @@ const styles = theme => ({
     justifyContent: `space-between`
   },
   dates_text: {
-    color: grey[200],
+    color: grey[400],
     fontSize: 12
   }
 })

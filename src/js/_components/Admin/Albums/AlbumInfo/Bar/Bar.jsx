@@ -3,27 +3,43 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
+import { withStyles } from '@material-ui/core/styles'
+
 import Locations from './Locations'
 import Dates from './Dates'
 
-const Bar = ({ album_id, name, start_date, end_date, locale }) => {
+const styles = theme => ({
+  bar_wrapper: {
+    display: `flex`,
+    flexDirection: `column`,
+    alignItems: `flex-start`,
+    paddingTop: theme.spacing.unit / 2,
+    paddingBottom: theme.spacing.unit / 2,
+    paddingLeft: theme.spacing.unit,
+    paddingRight: theme.spacing.unit
+  }
+})
+
+const Bar = ({ classes, album_id, start_date, end_date, locale }) => {
 
   return (
-    <div className="album-bar">
+    <div className={ classes.bar_wrapper }>
+
       <Dates
         album_id={ album_id }
         start_date={ start_date }
         end_date={ end_date }
         locale={ locale }
       />
-      <div className="left">
-        <Locations album_id={ album_id } />
-      </div>
+
+      <Locations album_id={ album_id } />
+
     </div>
   )
 }
 
 Bar.propTypes = {
+  classes: PropTypes.object.isRequired,
   album_id: PropTypes.number.isRequired,
   start_date: PropTypes.string.isRequired,
   end_date: PropTypes.string.isRequired,
@@ -41,4 +57,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(Bar)
+export default connect(mapStateToProps)(withStyles(styles)(Bar))

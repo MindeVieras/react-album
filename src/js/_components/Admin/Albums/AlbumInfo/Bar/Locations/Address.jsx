@@ -1,5 +1,5 @@
 
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
@@ -9,7 +9,7 @@ class Address extends Component {
     super(props)
 
     this.state = {
-      address: props.album_location ? '' : 'Location not set'
+      address: props.album_location ? '...' : 'Location not set'
     }
 
     if (props.album_location)
@@ -42,9 +42,9 @@ class Address extends Component {
 
   render() {
     return (
-      <div className="address">
+      <Fragment>
         { this.state.address }
-      </div>
+      </Fragment>
     )
   }
 }

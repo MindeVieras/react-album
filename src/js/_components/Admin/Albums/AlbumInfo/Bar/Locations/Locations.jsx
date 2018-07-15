@@ -1,5 +1,5 @@
 
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -12,20 +12,24 @@ import Edit from '@material-ui/icons/Edit'
 
 import lightBlue from '@material-ui/core/colors/lightBlue'
 
-import AlbumNameForm from './AlbumNameForm'
+import Address from './Address'
+import AlbumMap from './AlbumMap'
 import SimpleModal from '../../../../../Common/Modals'
 
 import { adminConstants } from '../../../../../../_constants'
 import { adminUiActions } from '../../../../../../_actions'
 
-const modal_id = adminConstants.MODAL_ALBUM_RENEME
+const modal_id = adminConstants.MODAL_ALBUM_LOCATIONS
 
 const styles = theme => ({
-  title: {
+  text_wrapper: {
     position: `relative`,
     display: `flex`,
     alignItems: `center`,
     paddingRight: 35
+  },
+  text: {
+    color: theme.palette.common.white
   },
   button: {
     position: `absolute`,
@@ -39,7 +43,7 @@ const styles = theme => ({
   }
 })
 
-class AlbumName extends Component {
+class Locations extends Component {
 
   constructor(props) {
     super(props)
@@ -57,59 +61,60 @@ class AlbumName extends Component {
 
     const { t } = this.context
     const { showEditBtn } = this.state
-    const { classes, album_id, name } = this.props
+    const { classes, album_id } = this.props
 
     return (
-      <Fragment>
+      <div
+        className={ classes.text_wrapper }
+        onMouseOver={ () => this.setState({ showEditBtn: true }) }
+        onMouseLeave={ () => this.setState({ showEditBtn: false }) }
+        onClick={ () => this.setState({ showEditBtn: !showEditBtn }) }
+      >
+
         <Typography
-          variant="title"
-          color="inherit"
-          className={ classes.title }
-          onMouseOver={ () => this.setState({ showEditBtn: true }) }
-          onMouseLeave={ () => this.setState({ showEditBtn: false }) }
-          onClick={ () => this.setState({ showEditBtn: !showEditBtn }) }
+          className={ classes.text }
+          variant="subheading"
         >
-
-          { name }
-
-          {showEditBtn &&
-            <Tooltip
-              id="tooltip_edit_album_name"
-              title={ t(`Edit album name`) }
-              enterDelay={ 500 }
-            >
-              <IconButton
-                className={ classes.button }
-                onClick={ () => this.handleModalOpen() }
-              >
-                <Edit className={ classes.edit_btn } />
-              </IconButton>
-            </Tooltip>
-          }
-
+          <Address />
         </Typography>
+
+        {showEditBtn &&
+          <Tooltip
+            id="tooltip_edit_album_locations"
+            title={ t(`Edit album locations`) }
+            enterDelay={ 500 }
+          >
+            <IconButton
+              className={ classes.button }
+              onClick={ () => this.handleModalOpen() }
+            >
+              <Edit className={ classes.edit_btn } />
+            </IconButton>
+          </Tooltip>
+        }
 
         <SimpleModal
           modal_id={ modal_id }
-          title={ t(`Edit album name`) }
+          title={ t(`Edit album locations`) }
+          size="full"
           disableEscapeKeyDown={ true }
         >
-          <AlbumNameForm name={ name } album_id={ album_id } />
+          <AlbumMap album_id={ album_id } />
         </SimpleModal>
-      </Fragment>
+
+      </div>
     )
   }
 }
 
-AlbumName.contextTypes = {
-  t: PropTypes.func
-}
-
-AlbumName.propTypes = {
+Locations.propTypes = {
   dispatch: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
-  name: PropTypes.string.isRequired,
   album_id: PropTypes.number.isRequired
 }
 
-export default connect()(withStyles(styles)(AlbumName))
+Locations.contextTypes = {
+  t: PropTypes.func
+}
+
+export default connect()(withStyles(styles)(Locations))

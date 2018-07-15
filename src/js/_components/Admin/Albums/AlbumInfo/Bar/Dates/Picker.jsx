@@ -11,7 +11,7 @@ import { IoRefresh } from 'react-icons/lib/io'
 import { albumsActions } from '../../../../../../_actions'
 
 class Picker extends Component {
-  
+
   constructor(props) {
     super(props)
     this.state = {
@@ -43,11 +43,11 @@ class Picker extends Component {
     const end_date = dt.format('YYYY-MM-DD HH:mm:ss')
     this.setState({end_date})
   }
-  
+
   handleGetDates(e) {
     const { media_dates } = this.props
-    
-    media_dates.sort(function(a,b){
+
+    media_dates.sort((a,b) => {
       return moment.utc(a).diff(moment.utc(b))
     })
 

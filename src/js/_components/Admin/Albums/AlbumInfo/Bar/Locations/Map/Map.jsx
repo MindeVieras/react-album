@@ -12,7 +12,7 @@ import { albumsActions } from '../../../../../../../_actions'
 const albumMarkerIcon = 'https://s3-eu-west-1.amazonaws.com/app.mindelis.com/images/icons/album-marker.png'
 
 class Map extends Component {
-  
+
   constructor(props) {
     super(props)
 
@@ -26,7 +26,7 @@ class Map extends Component {
       map: undefined
     }
   }
-  
+
   componentDidMount() {
     const { album_location, current_location, dispatch } = this.props
     dispatch(albumsActions.setMapZoom(10))
@@ -112,11 +112,11 @@ class Map extends Component {
             onDblClick={ () => this.removeMediaLocation(m.media_id) }
             onClick={ () => this.openMarker(m.media_id) }
             onDragEnd={ (loc) => this.updateMediaLocation(loc, m.media_id) }
-          > 
+          >
             {m.marker_open &&
               <InfoWindow>
                 <div>{ infoContent }</div>
-              </InfoWindow> 
+              </InfoWindow>
             }
           </Marker>
         }
@@ -145,7 +145,7 @@ class Map extends Component {
             }
 
             { mediaMarkers }
-          
+
           </GoogleMap>
         }
       </div>

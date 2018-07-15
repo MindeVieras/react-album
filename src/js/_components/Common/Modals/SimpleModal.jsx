@@ -14,36 +14,60 @@ const styles = theme => ({
     justifyContent: `center`,
     alignItems: `center`
   },
+  flex: {
+    flex: 1
+  },
   paper: {
-    maxWidth: 360,
+    display: `flex`,
+    flexDirection: `column`,
     width: `100%`,
-    margin: `10% 10px`,
     backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
+    boxShadow: theme.shadows[5]
+  },
+  small: {
+    maxWidth: 360,
+    margin: `10% 10px`,
     padding: theme.spacing.unit * 2
+  },
+  medium: {
+    maxWidth: 480,
+    margin: `10% 10px`,
+    padding: theme.spacing.unit * 2
+  },
+  full: {
+    maxWidth: `95%`,
+    height: `95%`,
+    padding: theme.spacing.unit
   }
 })
 
 class SimpleModal extends Component {
-
-  constructor(props) {
-    super(props)
-  }
 
   handleClose(modal_id) {
     this.props.dispatch(adminUiActions.modalClose(modal_id))
   }
 
   render() {
-    const { dispatch, classes, children, modal_id, modals, title, ...other } = this.props
+    const { dispatch, classes, children, modal_id, modals, title, size, ...other } = this.props
 
     let isOpen = false
 
-    Object.keys(modals).forEach(key => {
+    Object.keys(modals).map(key => {
       if (key === modal_id) {
         isOpen = modals[modal_id]
       }
     })
+
+    let modalClass = classes.paper
+
+    if (size === 'small')
+      modalClass = `${classes.paper} ${classes.small}`
+
+    if (size === 'medium')
+      modalClass = `${classes.paper} ${classes.medium}`
+
+    if (size === 'full')
+      modalClass = `${classes.paper} ${classes.full}`
 
     return (
       <Modal
@@ -54,13 +78,13 @@ class SimpleModal extends Component {
         onClose={ () => this.handleClose(modal_id) }
         { ...other }
       >
-        <div className={ classes.paper }>
+        <div className={ modalClass }>
           {title &&
             <Typography variant="title" id="modal-title">
               { title }
             </Typography>
           }
-          { children }
+          <div className={ classes.flex }>{ children }</div>
         </div>
       </Modal>
     )
@@ -73,11 +97,13 @@ SimpleModal.propTypes = {
   children: PropTypes.node.isRequired,
   modal_id: PropTypes.string.isRequired,
   modals: PropTypes.object.isRequired,
-  title: PropTypes.string
+  title: PropTypes.string,
+  size: PropTypes.string
 }
 
 SimpleModal.defaultProps = {
-  title: ''
+  title: '',
+  size: 'small'
 }
 
 function mapStateToProps(state) {

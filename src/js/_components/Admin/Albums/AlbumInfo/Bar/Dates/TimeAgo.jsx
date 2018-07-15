@@ -1,17 +1,20 @@
 
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
+
 class TimeAgo extends Component {
 
   render() {
+
     const { start_date, locale } = this.props
     moment.locale(locale)
     let ago = moment(start_date).fromNow()
+
     return (
-      <div className="time-ago">
+      <Fragment>
         { ago }
-      </div>
+      </Fragment>
     )
   }
 }

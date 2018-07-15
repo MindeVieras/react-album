@@ -26,10 +26,10 @@ class MediaItem extends Component {
   constructor(props) {
     super(props)
   }
-  
+
   componentDidMount() {
     const { mime, thumbs, videos, connectDragPreview } = this.props
-    if (mime) {    
+    if (mime) {
       const img = new Image(25, 25)
       img.onload = () => connectDragPreview(img)
       if (mime.includes('image')) {
@@ -67,7 +67,7 @@ class MediaItem extends Component {
       marginRight: `${gap_width}px`,
       marginBottom: `${gap_height}px`
     }
-    let height = item_height - 50 // substract item footer
+    let height = item_height - 90 // substract item footer
     if (fromServer) {
       thumb = <ThumbnailSrv
         width={ item_width }
@@ -77,7 +77,7 @@ class MediaItem extends Component {
         thumbs={ thumbs }
         uploader={ uploader }
       />
-    } 
+    }
     else if (mime) {
       thumb = <Thumbnail
         id={ id }
@@ -101,12 +101,12 @@ class MediaItem extends Component {
         >
           { thumb }
         </div>
-        
+
         <ProgressBar
           id={ id }
           uploader={ uploader }
         />
-        
+
         <div className="footer">
           <div className="status-bar">
             <div className="status">

@@ -4,9 +4,9 @@ import { adminConstants } from '../../_constants'
 const initialState = {
   modals: {
     album_rename: false,
+    album_delete: false,
     album_dates: false,
-    album_map: false,
-    album_delete: false
+    album_locations: false
   }
 }
 
