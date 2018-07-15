@@ -1,11 +1,12 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 
 import Typography from '@material-ui/core/Typography'
 
 import AlbumName from './AlbumName'
+
+import { history } from '../../../../../_helpers'
 
 const Title = ({ album_id, title }) => {
 
@@ -17,8 +18,10 @@ const Title = ({ album_id, title }) => {
       <Typography
         variant="title"
         color="inherit"
+        style={{ cursor: `pointer` }}
+        onClick={ () => history.push('/admin') }
       >
-        <Link to="/admin">{ title }</Link>
+        { title }
       </Typography>
     )
   }
