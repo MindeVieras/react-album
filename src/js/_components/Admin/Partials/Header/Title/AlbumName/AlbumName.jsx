@@ -92,6 +92,7 @@ class AlbumName extends Component {
         <SimpleModal
           modal_id={ modal_id }
           title={ t(`Edit album name`) }
+          closeButton={ false }
           disableEscapeKeyDown={ true }
         >
           <AlbumNameForm name={ name } album_id={ album_id } />

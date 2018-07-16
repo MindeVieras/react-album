@@ -47,8 +47,10 @@ class DeleteAlbum extends Component {
   }
 
   render() {
+
     const { t } = this.context
     const { classes, name, id } = this.props
+
     return (
       <Fragment>
         <Tooltip
@@ -71,6 +73,7 @@ class DeleteAlbum extends Component {
         <SimpleModal
           modal_id={ modal_id }
           title={ `${t('Really delete')} '${name}'?` }
+          closeButton={ false }
         >
           <div className={ classes.actions_wrapper }>
             <Button

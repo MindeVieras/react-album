@@ -1,18 +1,29 @@
 
 import React, { Component, Fragment } from 'react'
-import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
-import Map from './Map'
-import LocationsBar from './LocationsBar'
+import { withStyles } from '@material-ui/core/styles'
+
+import Gmap from './Gmap'
 import ItemsList from './ItemsList'
+
+const styles = theme => ({
+  map_wrapper: {
+    position: `absolute`,
+    top: 0,
+    left: 0,
+    width: `100%`,
+    height: `100%`
+  }
+})
 
 class AlbumMap extends Component {
 
   render() {
-    const { album_id, current_location, album_location, media } = this.props
+    const { classes, album_id, current_location, album_location, media } = this.props
     let mediaItems = 0, mapWidth = '100%'
-    console.log(current_location)
+
     if (!album_location) { mediaItems++ }
     media.map(m => {
       if (!m.location) { mediaItems++ }
@@ -25,10 +36,8 @@ class AlbumMap extends Component {
         {current_location &&
           <Fragment>
 
-            <LocationsBar />
-
-            <Map
-              containerElement={<div className="map-container" style={{width: mapWidth}} />}
+            <Gmap
+              containerElement={<div className={ classes.map_wrapper } />}
               mapElement={<div style={{ height: `100%` }} />}
               album_location={ album_location }
               current_location={ current_location }
@@ -54,6 +63,7 @@ class AlbumMap extends Component {
 }
 
 AlbumMap.propTypes = {
+  classes: PropTypes.object.isRequired,
   album_id: PropTypes.number.isRequired,
   current_location: PropTypes.object.isRequired,
   album_location: PropTypes.object.isRequired,
@@ -73,4 +83,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(AlbumMap)
+export default connect(mapStateToProps)(withStyles(styles)(AlbumMap))

@@ -14,6 +14,7 @@ import lightBlue from '@material-ui/core/colors/lightBlue'
 
 import Address from './Address'
 import AlbumMap from './AlbumMap'
+import LocationsBar from './LocationsBar'
 import SimpleModal from '../../../../../Common/Modals'
 
 import { adminConstants } from '../../../../../../_constants'
@@ -96,6 +97,7 @@ class Locations extends Component {
         <SimpleModal
           modal_id={ modal_id }
           title={ t(`Edit album locations`) }
+          title_controls={ <LocationsBar /> }
           size="full"
           disableEscapeKeyDown={ true }
         >

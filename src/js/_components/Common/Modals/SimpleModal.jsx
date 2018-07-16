@@ -1,11 +1,14 @@
 
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Modal from '@material-ui/core/Modal'
-import Button from '@material-ui/core/Button'
+import IconButton from '@material-ui/core/IconButton'
+
+import Close from '@material-ui/icons/Close'
 
 import { adminUiActions } from '../../../_actions'
 
@@ -14,8 +17,27 @@ const styles = theme => ({
     justifyContent: `center`,
     alignItems: `center`
   },
-  flex: {
-    flex: 1
+  content: {
+    flex: 1,
+    position: `relative`
+  },
+  title_wrapper: {
+    display: `flex`,
+    justifyContent: `space-between`,
+    marginBottom: theme.spacing.unit / 2
+  },
+  controls_wrapper: {
+    display: `flex`
+  },
+  title_controls: {
+    marginRight: theme.spacing.unit
+  },
+  close_btn: {
+    width: 28,
+    height: 28
+  },
+  close_icon: {
+    fontSize: 20
   },
   paper: {
     display: `flex`,
@@ -48,7 +70,14 @@ class SimpleModal extends Component {
   }
 
   render() {
-    const { dispatch, classes, children, modal_id, modals, title, size, ...other } = this.props
+
+    const {
+      dispatch, classes,
+      children, modal_id, modals,
+      title, title_controls,
+      size, closeButton,
+      ...other
+    } = this.props
 
     let isOpen = false
 
@@ -80,11 +109,33 @@ class SimpleModal extends Component {
       >
         <div className={ modalClass }>
           {title &&
-            <Typography variant="title" id="modal-title">
-              { title }
-            </Typography>
+            <div className={ classes.title_wrapper }>
+              <Typography
+                variant="title"
+                id="modal-title"
+              >
+                { title }
+              </Typography>
+
+              <div className={ classes.controls_wrapper }>
+                {title_controls &&
+                  <div className={ classes.title_controls }>
+                    { title_controls }
+                  </div>
+                }
+                {closeButton &&
+                  <IconButton
+                    className={ classes.close_btn }
+                    onClick={ () => this.handleClose(modal_id) }
+                  >
+                    <Close className={ classes.close_icon } />
+                  </IconButton>
+                }
+              </div>
+
+            </div>
           }
-          <div className={ classes.flex }>{ children }</div>
+          <div className={ classes.content }>{ children }</div>
         </div>
       </Modal>
     )
@@ -98,12 +149,16 @@ SimpleModal.propTypes = {
   modal_id: PropTypes.string.isRequired,
   modals: PropTypes.object.isRequired,
   title: PropTypes.string,
-  size: PropTypes.string
+  title_controls: PropTypes.node,
+  size: PropTypes.string,
+  closeButton: PropTypes.bool
 }
 
 SimpleModal.defaultProps = {
   title: '',
-  size: 'small'
+  title_controls: <span />,
+  size: 'small',
+  closeButton: true
 }
 
 function mapStateToProps(state) {

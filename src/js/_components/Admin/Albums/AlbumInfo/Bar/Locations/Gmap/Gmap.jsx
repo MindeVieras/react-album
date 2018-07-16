@@ -11,7 +11,7 @@ import { albumsActions } from '../../../../../../../_actions'
 
 const albumMarkerIcon = 'https://s3-eu-west-1.amazonaws.com/app.mindelis.com/images/icons/album-marker.png'
 
-class Map extends Component {
+class Gmap extends Component {
 
   constructor(props) {
     super(props)
@@ -84,7 +84,6 @@ class Map extends Component {
 
   openMarker(media_id) {
     const { dispatch } = this.props
-    // console.log(media_id)
     dispatch(albumsActions.closeMediaLocationMarkers())
     dispatch(albumsActions.openMediaLocationMarker(media_id, true))
   }
@@ -122,7 +121,7 @@ class Map extends Component {
         }
       })
     }
-    // console.log(mediaMarkers)
+
     return (
       <div>
         {map &&
@@ -151,16 +150,21 @@ class Map extends Component {
       </div>
     )
   }
-
-  // methods
 }
 
-Map.propTypes = {
+Gmap.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   current_location: PropTypes.object.isRequired,
   album_id: PropTypes.number.isRequired,
   media: PropTypes.array,
   album_location: PropTypes.object,
   map: PropTypes.object
+}
+
+Gmap.defaultProps = {
+  media: [],
+  album_location: {},
+  map: {}
 }
 
 function mapStateToProps(state) {
@@ -170,4 +174,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(withGoogleMap(Map))
+export default connect(mapStateToProps)(withGoogleMap(Gmap))

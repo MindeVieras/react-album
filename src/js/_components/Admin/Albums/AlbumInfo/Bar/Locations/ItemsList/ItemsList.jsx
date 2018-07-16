@@ -2,9 +2,20 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+
+import { withStyles } from '@material-ui/core/styles'
+
 import { IoVideocamera } from 'react-icons/lib/io'
 
 import { albumsActions } from '../../../../../../../_actions'
+
+const styles = theme => ({
+  listWrapper: {
+    position: `absolute`,
+    top: 50,
+    left: 10
+  }
+})
 
 class ItemsList extends Component {
 
@@ -32,15 +43,15 @@ class ItemsList extends Component {
   }
 
   render() {
-    const { current_location, album_location, media } = this.props
+    const { classes, current_location, album_location, media } = this.props
     let albumItem, mediaItems
-    
+
     if (album_location == null) {
       albumItem = <div className="item album-item" onDoubleClick={ this.onAlbumDblClick }>
         Album item
       </div>
     }
-    
+
     if (media) {
       mediaItems = media.map((m, i) =>{
         // console.log(m.location)
@@ -70,7 +81,7 @@ class ItemsList extends Component {
     }
 
     return (
-      <div className="map-items-list">
+      <div className={ classes.listWrapper }>
         { albumItem }
         { mediaItems }
       </div>
@@ -80,6 +91,7 @@ class ItemsList extends Component {
 }
 
 ItemsList.propTypes = {
+  classes: PropTypes.object.isRequired,
   album_id: PropTypes.number.isRequired,
   current_location: PropTypes.object.isRequired,
   album_location: PropTypes.object,
@@ -94,4 +106,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(ItemsList)
+export default connect(mapStateToProps)(withStyles(styles)(ItemsList))
