@@ -24,7 +24,8 @@ const styles = theme => ({
     flexDirection: `column`
   },
   flex: {
-    flex: 1
+    flex: 1,
+    overflow: `auto`
   }
 })
 
@@ -75,6 +76,8 @@ class AlbumInfo extends Component {
               album_id={ selected_album.album.id }
               start_date={ selected_album.album.start_date }
               end_date={ selected_album.album.end_date }
+              counter={ selected_album.album.total_media }
+              total_filesize={ selected_album.album.total_filesize }
             />
 
             <DeleteAlbum

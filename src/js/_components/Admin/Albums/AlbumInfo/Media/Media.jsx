@@ -129,8 +129,6 @@ class Media extends Component {
     const { entity, entity_id, status, files, wrapper_width, wrapper_height, dispatch } = this.props
     const uploader = this.uploader
 
-    let counter = files.length
-
     // Remove/Add dropzone text and fileField if any visableFiles
     let uploaderText = ''
     if (files.length > 0) {
@@ -154,10 +152,6 @@ class Media extends Component {
           <TotalProgressBar
             uploader={ uploader }
           />
-
-          <div className="counter">
-            { counter } files
-          </div>
 
           <MediaList
             files={ files }

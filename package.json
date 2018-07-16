@@ -17,6 +17,7 @@
     "@material-ui/icons": "^1.1.0",
     "browser-locale": "^1.0.3",
     "detect-browser": "^2.5.1",
+    "filesize": "^3.6.1",
     "fine-uploader": "^5.15.4",
     "fine-uploader-wrappers": "^1.1.0",
     "fscreen": "^1.0.2",
