@@ -1,5 +1,5 @@
 
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import FineUploaderS3 from 'fine-uploader-wrappers/s3'
@@ -143,7 +143,7 @@ class Media extends Component {
     }
 
     return (
-      <div>
+      <Fragment>
         <Dropzone
           uploader={ uploader }
           multiple={ true }
@@ -168,7 +168,7 @@ class Media extends Component {
           uploader={ uploader }
         />
 
-      </div>
+      </Fragment>
     )
   }
 }

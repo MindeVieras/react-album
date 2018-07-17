@@ -2,6 +2,19 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import { withStyles } from '@material-ui/core/styles'
+import LinearProgress from '@material-ui/core/LinearProgress'
+
+const styles = theme => ({
+  progress_wrapper: {
+    position: `fixed`,
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: theme.zIndex.appBar + 1
+  }
+})
+
 class TotalProgressBar extends Component {
 
   constructor(props) {
@@ -28,28 +41,24 @@ class TotalProgressBar extends Component {
   }
 
   render() {
-      
-    const percentWidth = this.state.bytesUploaded / this.state.totalSize * 100 || 0
+
+    const { classes } = this.props
+    const { bytesUploaded, totalSize, hidden } = this.state
+
+    const percentWidth = bytesUploaded / totalSize * 100 || 0
 
     return (
       <div
-        className="uploader-total-progress-bar"
-        hidden={ this.state.hidden }
+        className={ classes.progress_wrapper }
+        hidden={ hidden }
       >
-        <div
-          aria-valuemax="100"
-          aria-valuemin="0"
-          aria-valuenow={ percentWidth }
-          className="progress-bar"
-          role="progressbar"
-          style={ { width: percentWidth + '%' } }
-        />
+        <LinearProgress variant="determinate" value={ percentWidth } />
       </div>
     )
   }
 
   _createEventHandlers() {
-    
+
     this._trackProgressEventHandler = (bytesUploaded, totalSize) => {
       this.setState({ bytesUploaded, totalSize })
     }
@@ -73,6 +82,7 @@ class TotalProgressBar extends Component {
 }
 
 TotalProgressBar.propTypes = {
+  classes: PropTypes.object.isRequired,
   uploader: PropTypes.object.isRequired
 }
 
@@ -82,4 +92,4 @@ const isUploadComplete = (statusToCheck, statusEnum) => (
   || statusToCheck === statusEnum.CANCELED
 )
 
-export default TotalProgressBar
+export default withStyles(styles)(TotalProgressBar)

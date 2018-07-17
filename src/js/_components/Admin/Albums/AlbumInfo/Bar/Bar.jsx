@@ -7,11 +7,14 @@ import filesize from 'filesize'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
+import grey from '@material-ui/core/colors/grey'
+
 import Locations from './Locations'
 import Dates from './Dates'
 
 const styles = theme => ({
   bar_wrapper: {
+    backgroundColor: grey[800],
     display: `flex`,
     justifyContent: `space-between`,
     alignItems: `flex-end`,

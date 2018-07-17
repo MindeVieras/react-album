@@ -12,7 +12,7 @@ class MediaList extends Component {
     super(props)
 
   }
-  
+
   componentDidMount() {
     this.setMediaGrid(this.props)
   }
@@ -20,13 +20,13 @@ class MediaList extends Component {
   componentWillReceiveProps(nextProps) {
     this.setMediaGrid(nextProps)
   }
-  
+
   componentWillUnmount() {
     const { dispatch } = this.props
 
     dispatch(albumsActions.setMediaPagerPage(0))
   }
-  
+
   setMediaGrid(props) {
     const { pager, wrapper_width, wrapper_height, dispatch } = props
     let cols = pager.cols,
@@ -77,26 +77,23 @@ class MediaList extends Component {
     }
 
     return (
-      <div>
-        <ul
-          className="uploader-files"
-          style={ ulStyle }
-        >
-          {currentFiles.map((file, i) => (
-            <MediaItem
-              key={ i }
-              index={ i }
-              uploader={ uploader }
-              item_width={ item_width }
-              item_height={ item_height }
-              gap_width={ gap_width }
-              gap_height={ gap_height }
-              { ...file }
-            />
-          ))}
-        </ul>
-
-      </div>
+      <ul
+        className="uploader-files"
+        style={ ulStyle }
+      >
+        {currentFiles.map((file, i) => (
+          <MediaItem
+            key={ i }
+            index={ i }
+            uploader={ uploader }
+            item_width={ item_width }
+            item_height={ item_height }
+            gap_width={ gap_width }
+            gap_height={ gap_height }
+            { ...file }
+          />
+        ))}
+      </ul>
     )
   }
 }

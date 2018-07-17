@@ -50,7 +50,7 @@ class AlbumInfo extends Component {
   render() {
     const { classes, width, height, selected_album } = this.props
 
-    let wrapper_height = height - 38 // suctract infoBar height
+    let wrapper_height = height - 38 // substract infoBar height
 
     return (
       <div className={ classes.info_wrapper } style={{ width: `${width}px` }}>
