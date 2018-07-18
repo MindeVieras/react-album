@@ -17,10 +17,7 @@ import AlbumMap from './AlbumMap'
 import LocationsBar from './LocationsBar'
 import SimpleModal from '../../../../../Common/Modals'
 
-import { adminConstants } from '../../../../../../_constants'
 import { adminUiActions } from '../../../../../../_actions'
-
-const modal_id = adminConstants.MODAL_ALBUM_LOCATIONS
 
 const styles = theme => ({
   text_wrapper: {
@@ -54,7 +51,7 @@ class Locations extends Component {
     }
   }
 
-  handleModalOpen() {
+  handleModalOpen(modal_id) {
     this.props.dispatch(adminUiActions.modalOpen(modal_id))
   }
 
@@ -63,6 +60,8 @@ class Locations extends Component {
     const { t } = this.context
     const { showEditBtn } = this.state
     const { classes, album_id } = this.props
+
+    const modal_id = `album_locations_${album_id}`
 
     return (
       <div
@@ -87,7 +86,7 @@ class Locations extends Component {
           >
             <IconButton
               className={ classes.button }
-              onClick={ () => this.handleModalOpen() }
+              onClick={ () => this.handleModalOpen(modal_id) }
             >
               <Edit className={ classes.edit_btn } />
             </IconButton>

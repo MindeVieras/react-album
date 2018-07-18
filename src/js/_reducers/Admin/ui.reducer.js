@@ -2,13 +2,7 @@
 import { adminConstants } from '../../_constants'
 
 const initialState = {
-  modals: {
-    album_rename: false,
-    album_delete: false,
-    album_dates: false,
-    album_locations: false,
-    album_media_remove: false
-  }
+  modals: {}
 }
 
 export function adminUi(state = initialState, action) {

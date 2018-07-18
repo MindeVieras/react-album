@@ -18,10 +18,7 @@ import Close from '@material-ui/icons/Close'
 
 import SimpleModal from '../../../../../Common/Modals'
 
-import { adminConstants } from '../../../../../../_constants'
 import { albumsActions, trashActions, adminUiActions } from '../../../../../../_actions'
-
-const modal_id = adminConstants.MODAL_ALBUM_MEDIA_REMOVE
 
 const styles = theme => ({
   closeBtn: {
@@ -43,23 +40,23 @@ const styles = theme => ({
 })
 class RemoveButton extends Component {
 
-  handleModalOpen() {
+  handleModalOpen(modal_id) {
     const { dispatch } = this.props
     dispatch(adminUiActions.modalOpen(modal_id))
   }
 
-  handleClose() {
+  handleClose(modal_id) {
     const { dispatch } = this.props
     dispatch(adminUiActions.modalClose(modal_id))
   }
 
-  handleDelete() {
+  handleDelete(modal_id) {
     const { media_id, dispatch } = this.props
     dispatch(albumsActions.deleteMedia(media_id))
     dispatch(adminUiActions.modalClose(modal_id))
   }
 
-  handleTrash() {
+  handleTrash(modal_id) {
     const { media_id, dispatch } = this.props
     dispatch(albumsActions.trashMedia(media_id))
     dispatch(adminUiActions.modalClose(modal_id))
@@ -100,7 +97,9 @@ class RemoveButton extends Component {
   render() {
 
     const { t } = this.context
-    const { classes } = this.props
+    const { classes, media_id } = this.props
+
+    const modal_id = `album_media_remove_${media_id}`
 
     return (
       <Fragment>
@@ -110,7 +109,7 @@ class RemoveButton extends Component {
           enterDelay={ 500 }
         >
           <IconButton
-            onClick={ () => this.handleModalOpen() }
+            onClick={ () => this.handleModalOpen(modal_id) }
             className={ classes.closeBtn }
           >
             <Close className={ classes.closeIcon } />
@@ -124,21 +123,21 @@ class RemoveButton extends Component {
         >
           <div className={ classes.actions_wrapper }>
             <Button
-              onClick={ () => this.handleClose() }
+              onClick={ () => this.handleClose(modal_id) }
               color="primary"
               variant="raised"
             >
               { t(`Cancel`) }
             </Button>
             <Button
-              onClick={ () => this.handleTrash() }
+              onClick={ () => this.handleTrash(modal_id) }
               color="secondary"
               variant="raised"
             >
               { t(`Trash`) }
             </Button>
             <Button
-              onClick={ () => this.handleDelete() }
+              onClick={ () => this.handleDelete(modal_id) }
               color="secondary"
               variant="raised"
             >

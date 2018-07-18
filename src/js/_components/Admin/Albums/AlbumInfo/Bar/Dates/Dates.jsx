@@ -18,10 +18,7 @@ import Picker from './Picker'
 import TimeAgo from './TimeAgo'
 import SimpleModal from '../../../../../Common/Modals'
 
-import { adminConstants } from '../../../../../../_constants'
 import { adminUiActions } from '../../../../../../_actions'
-
-const modal_id = adminConstants.MODAL_ALBUM_DATES
 
 const styles = theme => ({
   text_wrapper: {
@@ -60,7 +57,7 @@ class Dates extends Component {
     }
   }
 
-  handleModalOpen() {
+  handleModalOpen(modal_id) {
     this.props.dispatch(adminUiActions.modalOpen(modal_id))
   }
 
@@ -70,6 +67,8 @@ class Dates extends Component {
     const { showEditBtn } = this.state
     const { classes, album_id, start_date, end_date, locale } = this.props
     const date = moment(start_date).format('YYYY-MM-DD')
+
+    const modal_id = `album_dates_${album_id}`
 
     return (
       <div
@@ -102,7 +101,7 @@ class Dates extends Component {
           >
             <IconButton
               className={ classes.button }
-              onClick={ () => this.handleModalOpen() }
+              onClick={ () => this.handleModalOpen(modal_id) }
             >
               <Edit className={ classes.edit_btn } />
             </IconButton>

@@ -11,10 +11,7 @@ import DeleteForever from '@material-ui/icons/DeleteForever'
 
 import SimpleModal from '../../Common/Modals'
 
-import { adminConstants } from '../../../_constants'
 import { albumsActions, adminUiActions } from '../../../_actions'
-
-const modal_id = adminConstants.MODAL_ALBUM_DELETE
 
 const styles = theme => ({
   button: {
@@ -33,15 +30,15 @@ const styles = theme => ({
 
 class DeleteAlbum extends Component {
 
-  handleModalOpen() {
+  handleModalOpen(modal_id) {
     this.props.dispatch(adminUiActions.modalOpen(modal_id))
   }
 
-  handleClose() {
+  handleClose(modal_id) {
     this.props.dispatch(adminUiActions.modalClose(modal_id))
   }
 
-  handleDelete(id) {
+  handleDelete(id, modal_id) {
     this.props.dispatch(albumsActions.delete(id))
     this.props.dispatch(adminUiActions.modalClose(modal_id))
   }
@@ -50,7 +47,7 @@ class DeleteAlbum extends Component {
 
     const { t } = this.context
     const { classes, name, id } = this.props
-
+    const modal_id = `album_delete_${id}`
     return (
       <Fragment>
         <Tooltip
@@ -59,7 +56,7 @@ class DeleteAlbum extends Component {
           enterDelay={ 500 }
         >
           <Button
-            onClick={ () => this.handleModalOpen() }
+            onClick={ () => this.handleModalOpen(modal_id) }
             variant="fab"
             color="secondary"
             aria-label="delete"
@@ -77,14 +74,14 @@ class DeleteAlbum extends Component {
         >
           <div className={ classes.actions_wrapper }>
             <Button
-              onClick={ () => this.handleClose() }
+              onClick={ () => this.handleClose(modal_id) }
               color="primary"
               variant="raised"
             >
               { t(`Cancel`) }
             </Button>
             <Button
-              onClick={ () => this.handleDelete(id) }
+              onClick={ () => this.handleDelete(id, modal_id) }
               color="secondary"
               variant="raised"
             >

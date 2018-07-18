@@ -15,10 +15,7 @@ import lightBlue from '@material-ui/core/colors/lightBlue'
 import AlbumNameForm from './AlbumNameForm'
 import SimpleModal from '../../../../../Common/Modals'
 
-import { adminConstants } from '../../../../../../_constants'
 import { adminUiActions } from '../../../../../../_actions'
-
-const modal_id = adminConstants.MODAL_ALBUM_RENEME
 
 const styles = theme => ({
   title: {
@@ -49,7 +46,7 @@ class AlbumName extends Component {
     }
   }
 
-  handleModalOpen() {
+  handleModalOpen(modal_id) {
     this.props.dispatch(adminUiActions.modalOpen(modal_id))
   }
 
@@ -58,6 +55,8 @@ class AlbumName extends Component {
     const { t } = this.context
     const { showEditBtn } = this.state
     const { classes, album_id, name } = this.props
+
+    const modal_id = `album_rename_${album_id}`
 
     return (
       <Fragment>
@@ -80,7 +79,7 @@ class AlbumName extends Component {
             >
               <IconButton
                 className={ classes.button }
-                onClick={ () => this.handleModalOpen() }
+                onClick={ () => this.handleModalOpen(modal_id) }
               >
                 <Edit className={ classes.edit_btn } />
               </IconButton>
