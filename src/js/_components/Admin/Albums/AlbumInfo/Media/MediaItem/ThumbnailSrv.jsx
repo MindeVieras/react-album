@@ -23,16 +23,16 @@ class ThumbnailSrv extends Component {
         backgroundSize: 'contain'
       }
       return (
-        <span
+        <div
           className="uploader-thumbnail image"
           style={ style }
         >
-        </span>
+        </div>
       )
     }
-    else if (mime.includes('video')) {    
+    else if (mime.includes('video')) {
       return (
-        <span
+        <div
           className="uploader-thumbnail video"
           style={ sizeStyle }
         >
@@ -43,7 +43,7 @@ class ThumbnailSrv extends Component {
               src={ videos.video }
             />
           }
-        </span>
+        </div>
       )
     }
     else {

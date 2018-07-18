@@ -59,7 +59,7 @@ class DeleteAlbum extends Component {
           enterDelay={ 500 }
         >
           <Button
-            onClick={ () => this.handleModalOpen(modal_id) }
+            onClick={ () => this.handleModalOpen() }
             variant="fab"
             color="secondary"
             aria-label="delete"
@@ -77,7 +77,7 @@ class DeleteAlbum extends Component {
         >
           <div className={ classes.actions_wrapper }>
             <Button
-              onClick={ () => this.handleClose(modal_id) }
+              onClick={ () => this.handleClose() }
               color="primary"
               variant="raised"
             >

@@ -18,7 +18,7 @@ class Thumbnail extends Component {
 
   componentDidMount() {
     const { id, height, width, mime } = this.props
-    if (mime.includes('image')) {    
+    if (mime.includes('image')) {
       this.props.uploader.methods.drawThumbnail(
         id,
         this._canvas,
@@ -50,9 +50,9 @@ class Thumbnail extends Component {
 
   render() {
     const { width, height, mime, videos } = this.props
-    if (mime.includes('image')) {    
+    if (mime.includes('image')) {
       return (
-        <span
+        <div
           className="uploader-thumbnail image"
           style={{height: height, width: width}}
         >
@@ -62,12 +62,12 @@ class Thumbnail extends Component {
             ref={ component => this._canvas = component }
           />
           { this._maybePlaceholder }
-        </span>
+        </div>
       )
     }
-    else if (mime.includes('video')) {    
+    else if (mime.includes('video')) {
       return (
-        <span
+        <div
           className="uploader-thumbnail video"
           style={{height: height, width: width}}
         >
@@ -79,7 +79,7 @@ class Thumbnail extends Component {
             />
           }
           { this._maybePlaceholder }
-        </span>
+        </div>
       )
     }
     else {
@@ -96,7 +96,7 @@ class Thumbnail extends Component {
       height: this.props.height,
       width: this.props.width
     }
-    if (this._failure) {      
+    if (this._failure) {
       return (
         <div
           className="placeholder not-available"

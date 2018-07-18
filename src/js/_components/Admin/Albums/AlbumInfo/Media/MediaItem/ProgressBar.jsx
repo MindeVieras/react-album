@@ -105,10 +105,10 @@ class ProgressBar extends Component {
 }
 
 ProgressBar.propTypes = {
+  uploader: PropTypes.object.isRequired,
   id: PropTypes.number,
   hideBeforeStart: PropTypes.bool,
-  hideOnComplete: PropTypes.bool,
-  uploader: PropTypes.object.isRequired
+  hideOnComplete: PropTypes.bool
 }
 
 ProgressBar.defaultProps = {

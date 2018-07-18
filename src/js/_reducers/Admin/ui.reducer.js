@@ -6,7 +6,8 @@ const initialState = {
     album_rename: false,
     album_delete: false,
     album_dates: false,
-    album_locations: false
+    album_locations: false,
+    album_media_remove: false
   }
 }
 

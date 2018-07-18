@@ -2,7 +2,6 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import PerfectScrollbar from 'react-perfect-scrollbar'
 
 import { withStyles } from '@material-ui/core/styles'
 
@@ -24,6 +23,7 @@ const styles = theme => ({
     flexDirection: `column`
   },
   flex: {
+    display: `flex`,
     flex: 1,
     overflow: `auto`
   }

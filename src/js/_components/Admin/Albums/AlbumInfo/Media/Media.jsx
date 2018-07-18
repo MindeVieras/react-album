@@ -5,7 +5,13 @@ import { connect } from 'react-redux'
 import FineUploaderS3 from 'fine-uploader-wrappers/s3'
 import ReactTooltip from 'react-tooltip'
 import { toastr } from 'react-redux-toastr'
-import { IoCloseCircled, IoUpload } from 'react-icons/lib/io'
+
+import { withStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
+
+import CloudUpload from '@material-ui/icons/CloudUpload'
+
+import grey from '@material-ui/core/colors/grey'
 
 import Dropzone from './Partials/dropzone'
 import TotalProgressBar from './Partials/total-progress-bar'
@@ -16,6 +22,28 @@ import UploadMedia from '../../../Buttons/UploadMedia'
 import { authHeader, baseServerUrl } from '../../../../../_helpers'
 import { footerActions, albumsActions } from '../../../../../_actions'
 import { mediaService } from '../../../../../_services'
+
+const styles = theme => ({
+  dz_wrapper: {
+    flex: 1,
+    display: `flex`
+  },
+  empty_text_wrapper: {
+    flex: 1,
+    display: `flex`,
+    justifyContent: `center`,
+    alignItems: `center`
+  },
+  empty_text: {
+    display: `flex`,
+    alignItems: `center`,
+    color: grey[600]
+  },
+  empty_text_icon: {
+    fontSize: 52,
+    marginRight: theme.spacing.unit * 2
+  }
+})
 
 class Media extends Component {
 
@@ -125,29 +153,39 @@ class Media extends Component {
   }
 
   render() {
+
     const { t } = this.context
-    const { entity, entity_id, status, files, wrapper_width, wrapper_height, dispatch } = this.props
+    const {
+      classes, entity, entity_id,
+      status, files,
+      wrapper_width, wrapper_height,
+      dispatch
+    } = this.props
+
     const uploader = this.uploader
 
     // Remove/Add dropzone text and fileField if any visableFiles
     let uploaderText = ''
-    if (files.length > 0) {
+
+    if (files.length > 0)
       uploaderText = <span/>
-    } else {
-      uploaderText = <span className="dropzone-text">
-        <div className="icon">
-          <IoUpload />
-        </div>
-        { t('Drop files here') }
-      </span>
-    }
+
+    else
+      uploaderText = <div className={ classes.empty_text_wrapper }>
+        <Typography
+          className={ classes.empty_text }
+          variant="display2"
+        >
+          <CloudUpload className={ classes.empty_text_icon } /> { t('Drop files here') }
+        </Typography>
+      </div>
 
     return (
       <Fragment>
         <Dropzone
           uploader={ uploader }
           multiple={ true }
-          dropActiveClassName="active"
+          className={ classes.dz_wrapper }
         >
           <TotalProgressBar
             uploader={ uploader }
@@ -175,6 +213,7 @@ class Media extends Component {
 
 Media.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  classes: PropTypes.object.isRequired,
   bucket: PropTypes.string.isRequired,
   access_key: PropTypes.string.isRequired,
   entity: PropTypes.number.isRequired,
@@ -202,4 +241,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(Media)
+export default connect(mapStateToProps)(withStyles(styles)(Media))

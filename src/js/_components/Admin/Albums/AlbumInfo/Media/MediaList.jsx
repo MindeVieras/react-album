@@ -3,9 +3,21 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
+import { withStyles } from '@material-ui/core/styles'
+import List from '@material-ui/core/List'
+
 import MediaItem from './MediaItem'
 
 import { albumsActions } from '../../../../../_actions'
+
+const styles = theme => ({
+  list: {
+    display: `flex`,
+    flexWrap: `wrap`,
+    alignItems: `flex-start`,
+    width: `100%`
+  }
+})
 
 class MediaList extends Component {
   constructor(props) {
@@ -57,7 +69,7 @@ class MediaList extends Component {
   }
 
   render() {
-    const { files, pager, uploader, wrapper_width, wrapper_height } = this.props
+    const { classes, files, pager, uploader, wrapper_width, wrapper_height } = this.props
 
     const firstList = pager.current_page * pager.per_page
     const lastList = firstList + pager.per_page
@@ -77,9 +89,10 @@ class MediaList extends Component {
     }
 
     return (
-      <ul
-        className="uploader-files"
+      <List
+        className={ classes.list }
         style={ ulStyle }
+        disablePadding={ true }
       >
         {currentFiles.map((file, i) => (
           <MediaItem
@@ -93,12 +106,14 @@ class MediaList extends Component {
             { ...file }
           />
         ))}
-      </ul>
+      </List>
     )
   }
 }
 
 MediaList.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  classes: PropTypes.object.isRequired,
   files: PropTypes.array.isRequired,
   wrapper_width: PropTypes.number.isRequired,
   wrapper_height: PropTypes.number.isRequired,
@@ -123,4 +138,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(MediaList)
+export default connect(mapStateToProps)(withStyles(styles)(MediaList))

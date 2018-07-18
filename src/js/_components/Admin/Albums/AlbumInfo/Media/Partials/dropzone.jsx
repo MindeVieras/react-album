@@ -23,7 +23,6 @@ class DropzoneElement extends Component {
     return (
       <div
         { ...getElementProps(this.props) }
-        className="uploader-dropzone-container"
         ref="dropZone"
       >
         { this.props.children }
@@ -67,18 +66,19 @@ class DropzoneElement extends Component {
 }
 
 DropzoneElement.propTypes = {
+  uploader: PropTypes.object.isRequired,
   children: PropTypes.node,
   dropActiveClassName: PropTypes.string,
   element: PropTypes.object,
   multiple: PropTypes.bool,
   onDropError: PropTypes.func,
   onProcessingDroppedFiles: PropTypes.func,
-  onProcessingDroppedFilesComplete: PropTypes.func,
-  uploader: PropTypes.object.isRequired
+  onProcessingDroppedFilesComplete: PropTypes.func
 }
 
 DropzoneElement.defaultProps = {
-  dropActiveClassName: 'active'
+  dropActiveClassName: 'active',
+  children: <span />
 }
 
 const getElementProps = actualProps => {

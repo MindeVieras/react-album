@@ -4,11 +4,17 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import ReactTooltip from 'react-tooltip'
 import { DragSource } from 'react-dnd'
+
+import { withStyles } from '@material-ui/core/styles'
+import Card from '@material-ui/core/Card'
+
+import blueGrey from '@material-ui/core/colors/blueGrey'
+
 import { IoCheckmarkCircled, IoBug } from 'react-icons/lib/io'
 
 import Thumbnail from './Thumbnail'
 import ThumbnailSrv from './ThumbnailSrv'
-import ProgressBar from './progress-bar'
+import ProgressBar from './ProgressBar'
 import Status from './Status'
 import Filename from './Filename'
 import Filesize from './Filesize'
@@ -21,6 +27,20 @@ import StatusRekognitionLabelsIcon from '../Icons/StatusRekognitionLabels'
 
 import { utilsConstants } from '../../../../../../_constants'
 import { albumsActions } from '../../../../../../_actions'
+
+const styles = theme => ({
+  cardRoot: {
+    backgroundColor: blueGrey[800],
+    position: `relative`
+  },
+  footer: {
+    paddingLeft: theme.spacing.unit / 2,
+    paddingRight: theme.spacing.unit / 2
+  },
+  statusBar: {
+    display: `flex`
+  }
+})
 
 class MediaItem extends Component {
   constructor(props) {
@@ -43,6 +63,7 @@ class MediaItem extends Component {
 
   render() {
     const {
+      classes,
       id,
       media_id,
       status,
@@ -63,7 +84,9 @@ class MediaItem extends Component {
     let thumb
     let filenameWidth = item_width - 65
     let itemStyle = {
-      width: `${item_width}px`,
+      // height: `50%`,
+      // width: `33%`,
+      // width: `${item_width}px`,
       marginRight: `${gap_width}px`,
       marginBottom: `${gap_height}px`
     }
@@ -94,29 +117,24 @@ class MediaItem extends Component {
         className="uploader-file"
         style={ itemStyle }
       >
-
-        <div
-          style={{cursor: 'pointer'}}
-          onClick={() => console.log('open lightbox')}
-        >
+        <Card className={ classes.cardRoot }>
           { thumb }
-        </div>
 
-        <ProgressBar
-          id={ id }
-          uploader={ uploader }
-        />
+          <ProgressBar
+            id={ id }
+            uploader={ uploader }
+          />
 
-        <div className="footer">
-          <div className="status-bar">
-            <div className="status">
+          <div className={ classes.footer }>
+            <div className={ classes.statusBar }>
+              <Filesize
+                filesize={ filesize }
+              />
               <Status
                 id={ id }
                 uploader={ uploader }
                 fromServer={ fromServer }
               />
-            </div>
-            <div className="icons">
               {mime && rekognition_labels &&
                 <StatusRekognitionLabelsIcon
                   rekognition_labels={ rekognition_labels }
@@ -161,28 +179,28 @@ class MediaItem extends Component {
                 </div>
               }
             </div>
+            <div className="info">
+              <Filename
+                filename={ filename }
+                width={ filenameWidth }
+              />
+            </div>
           </div>
-          <div className="info">
-            <Filename
-              filename={ filename }
-              width={ filenameWidth }
+
+          {media_id &&
+            <RemoveButton
+              media_id={ media_id }
             />
-            <Filesize
-              filesize={ filesize }
-            />
-          </div>
-        </div>
-        {media_id &&
-          <RemoveButton
-            media_id={ media_id }
-          />
-        }
+          }
+        </Card>
+
       </li>
     )
   }
 }
 
 MediaItem.propTypes = {
+  classes: PropTypes.object.isRequired,
   connectDragSource: PropTypes.func.isRequired,
   connectDragPreview: PropTypes.func.isRequired,
   isDragging: PropTypes.bool.isRequired,
@@ -217,4 +235,9 @@ function dndCollect(connect, monitor) {
   }
 }
 
-export default connect()(DragSource(utilsConstants.DND_MOVE_MEDIA, boxSource, dndCollect)(MediaItem))
+export default connect()(
+  DragSource(
+    utilsConstants.DND_MOVE_MEDIA,
+    boxSource,
+    dndCollect
+  )(withStyles(styles)(MediaItem)))
