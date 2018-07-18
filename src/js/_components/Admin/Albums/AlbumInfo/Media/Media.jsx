@@ -165,13 +165,18 @@ class Media extends Component {
     const uploader = this.uploader
 
     // Remove/Add dropzone text and fileField if any visableFiles
-    let uploaderText = ''
+    let uploaderContent = ''
 
     if (files.length > 0)
-      uploaderText = <span/>
+      uploaderContent = <MediaList
+        files={ files }
+        uploader={ uploader }
+        wrapper_width={ wrapper_width }
+        wrapper_height={ wrapper_height }
+      />
 
     else
-      uploaderText = <div className={ classes.empty_text_wrapper }>
+      uploaderContent = <div className={ classes.empty_text_wrapper }>
         <Typography
           className={ classes.empty_text }
           variant="display2"
@@ -191,14 +196,7 @@ class Media extends Component {
             uploader={ uploader }
           />
 
-          <MediaList
-            files={ files }
-            uploader={ uploader }
-            wrapper_width={ wrapper_width }
-            wrapper_height={ wrapper_height }
-          />
-
-          { uploaderText }
+          { uploaderContent }
 
         </Dropzone>
 
