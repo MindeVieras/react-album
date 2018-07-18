@@ -14,8 +14,7 @@ const styles = theme => ({
   list: {
     display: `flex`,
     flexWrap: `wrap`,
-    alignItems: `flex-start`,
-    width: `100%`
+    // alignItems: `flex-start`
   }
 })
 
@@ -75,17 +74,19 @@ class MediaList extends Component {
     const lastList = firstList + pager.per_page
     const currentFiles = files.slice(firstList, lastList)
 
-    let { cols, rows} = pager,
-        gap_width = 15,
-        gap_height = 15
+    let { cols, rows} = pager
+    let gap_width = 12
+    let gap_height = 12
 
     let vertGaps = (cols + 1) * gap_width
     let horiGaps = (rows + 1) * gap_height
     let item_width = (wrapper_width - vertGaps) / cols
     let item_height = (wrapper_height - horiGaps) / rows
     let ulStyle = {
-      paddingLeft: `${gap_width}px`,
-      paddingTop: `${gap_height}px`
+      width: wrapper_width,
+      height: wrapper_height,
+      paddingLeft: gap_width,
+      paddingTop: gap_height
     }
 
     return (

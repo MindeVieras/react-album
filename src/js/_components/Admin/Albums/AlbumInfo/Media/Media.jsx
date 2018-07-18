@@ -28,6 +28,9 @@ const styles = theme => ({
     flex: 1,
     display: `flex`
   },
+  dz_wrapper_active: {
+    backgroundColor: grey[900],
+  },
   empty_text_wrapper: {
     flex: 1,
     display: `flex`,
@@ -191,6 +194,7 @@ class Media extends Component {
           uploader={ uploader }
           multiple={ true }
           className={ classes.dz_wrapper }
+          dropActiveClassName={ classes.dz_wrapper_active }
         >
           <TotalProgressBar
             uploader={ uploader }

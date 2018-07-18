@@ -6,7 +6,7 @@ import ReactTooltip from 'react-tooltip'
 import { DragSource } from 'react-dnd'
 
 import { withStyles } from '@material-ui/core/styles'
-import Card from '@material-ui/core/Card'
+import Paper from '@material-ui/core/Paper'
 
 import blueGrey from '@material-ui/core/colors/blueGrey'
 
@@ -29,16 +29,27 @@ import { utilsConstants } from '../../../../../../_constants'
 import { albumsActions } from '../../../../../../_actions'
 
 const styles = theme => ({
-  cardRoot: {
+  item: {
+    display: `flex`
+  },
+  paperRoot: {
     backgroundColor: blueGrey[800],
     position: `relative`
   },
   footer: {
-    paddingLeft: theme.spacing.unit / 2,
-    paddingRight: theme.spacing.unit / 2
+    paddingLeft: theme.spacing.unit,
+    paddingRight: theme.spacing.unit
   },
   statusBar: {
     display: `flex`
+  },
+  nameSizeWrapper: {
+    display: `flex`,
+    justifyContent: `space-between`
+  },
+  nameSizeText: {
+    color: blueGrey[50],
+    alignSelf: `flex-end`
   }
 })
 
@@ -64,33 +75,30 @@ class MediaItem extends Component {
   render() {
     const {
       classes,
-      id,
-      media_id,
-      status,
-      fromServer,
+      id, media_id,
+      status, fromServer,
       mime,
       metadata,
-      filename,
-      filesize,
+      filename, filesize,
       rekognition_labels,
       thumbs, videos, uploader,
-      item_width,
-      item_height,
-      gap_width,
-      gap_height,
-      connectDragSource } = this.props
+      item_width, item_height,
+      gap_width, gap_height,
+      connectDragSource
+    } = this.props
 
     // console.log(item_gap)
     let thumb
-    let filenameWidth = item_width - 65
+
     let itemStyle = {
-      // height: `50%`,
-      // width: `33%`,
-      // width: `${item_width}px`,
-      marginRight: `${gap_width}px`,
-      marginBottom: `${gap_height}px`
+      height: item_height,
+      width: item_width,
+      marginRight: gap_width,
+      marginBottom: gap_height
     }
-    let height = item_height - 90 // substract item footer
+
+    let footerHeight = 50
+    let height = item_height - footerHeight // substract item footer
     if (fromServer) {
       thumb = <ThumbnailSrv
         width={ item_width }
@@ -114,10 +122,10 @@ class MediaItem extends Component {
 
     return connectDragSource(
       <li
-        className="uploader-file"
+        className={ classes.item }
         style={ itemStyle }
       >
-        <Card className={ classes.cardRoot }>
+        <Paper className={ classes.paperRoot }>
           { thumb }
 
           <ProgressBar
@@ -127,9 +135,7 @@ class MediaItem extends Component {
 
           <div className={ classes.footer }>
             <div className={ classes.statusBar }>
-              <Filesize
-                filesize={ filesize }
-              />
+
               <Status
                 id={ id }
                 uploader={ uploader }
@@ -179,12 +185,22 @@ class MediaItem extends Component {
                 </div>
               }
             </div>
-            <div className="info">
+
+            <div className={ classes.nameSizeWrapper }>
+
               <Filename
                 filename={ filename }
-                width={ filenameWidth }
+                width={ item_width - 90 }
+                className={ classes.nameSizeText }
               />
+
+              <Filesize
+                filesize={ filesize }
+                className={ classes.nameSizeText }
+              />
+
             </div>
+
           </div>
 
           {media_id &&
@@ -192,7 +208,7 @@ class MediaItem extends Component {
               media_id={ media_id }
             />
           }
-        </Card>
+        </Paper>
 
       </li>
     )
@@ -204,6 +220,9 @@ MediaItem.propTypes = {
   connectDragSource: PropTypes.func.isRequired,
   connectDragPreview: PropTypes.func.isRequired,
   isDragging: PropTypes.bool.isRequired,
+  id: PropTypes.number.isRequired,
+  filename: PropTypes.string.isRequired,
+  filesize: PropTypes.number.isRequired,
   // media_id: PropTypes.number.isRequired
 }
 
