@@ -221,14 +221,15 @@ MediaItem.propTypes = {
   connectDragPreview: PropTypes.func.isRequired,
   isDragging: PropTypes.bool.isRequired,
   id: PropTypes.number.isRequired,
-  filename: PropTypes.string.isRequired,
-  filesize: PropTypes.number.isRequired,
+  filename: PropTypes.string,
+  filesize: PropTypes.number,
   // media_id: PropTypes.number.isRequired
 }
 
-// MediaItem.defaultProps = {
-//   wrapper_width: 500
-// }
+MediaItem.defaultProps = {
+  filename: '',
+  filesize: 0
+}
 
 const boxSource = {
   beginDrag(props) {

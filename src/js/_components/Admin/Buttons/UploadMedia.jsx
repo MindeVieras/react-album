@@ -34,7 +34,7 @@ class UploadMedia extends Component {
       key: newKey()
     }
 
-    this._onFilesSelected = onFilesSelected.bind(this)
+    this.onFilesSelected = onFilesSelected.bind(this)
     this.handleClick = this.handleClick.bind(this)
   }
 

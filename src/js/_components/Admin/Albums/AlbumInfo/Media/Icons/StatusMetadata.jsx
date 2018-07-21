@@ -14,20 +14,20 @@ import { albumsActions } from '../../../../../../_actions'
 
 
 class StatusMetadataIcon extends Component {
-  
+
   constructor() {
     super()
 
     this.handleResaveMetadata = this.handleResaveMetadata.bind(this)
   }
-  
+
   handleResaveMetadata(e) {
     const { id, media_id, dispatch } = this.props
     dispatch(albumsActions.saveMediaMetadata(id, media_id))
   }
 
   render() {
-    
+
     const tooltipId = uuidv4()
     const contextMenuId = uuidv4()
     const { t } = this.context
@@ -51,11 +51,15 @@ class StatusMetadataIcon extends Component {
 
     if (metadata.ack == 'ok') {
       className = 'success'
+      // Remove location
+      let { location, ...restMeta } = metadata
+      let newMeta = { ...restMeta }
+
       tooltipText = <ul>
         {
-          Object.keys(metadata).sort().map((key, i) => {
+          Object.keys(newMeta).sort().map((key, i) => {
             if (key != 'ack') {
-              let value = metadata[key]
+              let value = newMeta[key]
               return (
                 <li key={ i }><strong>{ _.startCase(_.toLower(t(key))) }:</strong> { value }</li>
               )
@@ -91,9 +95,9 @@ class StatusMetadataIcon extends Component {
             { tooltipText }
           </ReactTooltip>
         </div>
-        
+
         { contextMenu }
-      
+
       </span>
     )
   }

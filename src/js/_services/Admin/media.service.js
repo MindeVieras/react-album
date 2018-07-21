@@ -49,7 +49,7 @@ function putToTrash(media_id) {
     headers: { ...authHeader(), 'Content-Type': 'application/json' },
     body: JSON.stringify({ media_id })
   }
-  return fetch(`{baseServerUrl}/api/media/put-to-trash`, requestOptions).then(handleResponse)
+  return fetch(`${baseServerUrl}/api/media/put-to-trash`, requestOptions).then(handleResponse)
 }
 
 // Moves media to another album

@@ -274,6 +274,13 @@ function saveMediaMetadata(id, media_id) {
       .then(res => {
         if (res.ack == 'ok') {
           dispatch(success(id, res.metadata))
+          if (res.metadata && res.metadata.location) {
+            let loc = {
+              lat: res.metadata.location.lat,
+              lng: res.metadata.location.lon
+            }
+            dispatch(setLocation(media_id, loc))
+          }
         } else if (res.ack == 'err') {
           dispatch(failure(id, res.msg))
         }
@@ -283,6 +290,7 @@ function saveMediaMetadata(id, media_id) {
   function request(id) { return { type: albumsConstants.SAVE_MEDIA_METADATA_REQUEST, id } }
   function success(id, metadata) { return { type: albumsConstants.SAVE_MEDIA_METADATA_SUCCESS, id, metadata } }
   function failure(id, err) { return { type: albumsConstants.SAVE_MEDIA_METADATA_FAILURE, id, err } }
+  function setLocation(media_id, location) { return { type: albumsConstants.SET_MEDIA_LOCATION, media_id, location } }
 }
 
 function saveRekognitionLabels(id, media_id) {

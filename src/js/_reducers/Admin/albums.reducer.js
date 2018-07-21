@@ -59,7 +59,7 @@ export function adminAlbums(state = initialState, action) {
       ...state,
       list: {
         err: action.err
-      } 
+      }
     }
   case albumsConstants.ADD_TO_LIST:
     return {
@@ -94,7 +94,7 @@ export function adminAlbums(state = initialState, action) {
       ...state,
       dates: {
         err: action.err
-      } 
+      }
     }
 
 

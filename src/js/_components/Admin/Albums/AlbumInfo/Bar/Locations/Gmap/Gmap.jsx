@@ -28,9 +28,16 @@ class Gmap extends Component {
   }
 
   componentDidMount() {
-    const { album_location, current_location, dispatch } = this.props
+    const { album_location, current_location, media, dispatch } = this.props
+
+    let defaultCenters = []
+    media.map(m => {
+      if (m.location) {
+        defaultCenters.push(m.location)
+      }
+    })
     dispatch(albumsActions.setMapZoom(10))
-    let defaultCenter = album_location || current_location
+    let defaultCenter = album_location || defaultCenters[0] || current_location
     dispatch(albumsActions.setMapCenter(defaultCenter))
   }
 

@@ -22,14 +22,12 @@ class AlbumMap extends Component {
 
   render() {
     const { classes, album_id, current_location, album_location, media } = this.props
-    let mediaItems = 0, mapWidth = '100%'
+    let mediaItems = 0
 
     if (!album_location) { mediaItems++ }
     media.map(m => {
       if (!m.location) { mediaItems++ }
     })
-
-    if (mediaItems) { mapWidth = 'calc(100% - 60px)' }
 
     return (
       <Fragment>
@@ -66,11 +64,12 @@ AlbumMap.propTypes = {
   classes: PropTypes.object.isRequired,
   album_id: PropTypes.number.isRequired,
   current_location: PropTypes.object.isRequired,
-  album_location: PropTypes.object.isRequired,
+  album_location: PropTypes.object,
   media: PropTypes.array,
 }
 
 AlbumMap.defaultProps = {
+  album_location: {},
   media: []
 }
 

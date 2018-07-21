@@ -34,7 +34,7 @@ class ThumbnailSrv extends Component {
       return (
         <div
           className="uploader-thumbnail video"
-          style={ sizeStyle }
+          style={ { overflow: `hidden`, height: 200 } }
         >
           {videos &&
             <Player
