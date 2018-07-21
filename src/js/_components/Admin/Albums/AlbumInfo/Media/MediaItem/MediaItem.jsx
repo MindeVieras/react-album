@@ -41,6 +41,10 @@ const styles = theme => ({
     paddingRight: theme.spacing.unit
   },
   statusBar: {
+    display: `flex`,
+    justifyContent: `space-between`
+  },
+  icons: {
     display: `flex`
   },
   nameSizeWrapper: {
@@ -140,50 +144,53 @@ class MediaItem extends Component {
                 id={ id }
                 uploader={ uploader }
                 fromServer={ fromServer }
+                className={ classes.nameSizeText }
               />
-              {mime && rekognition_labels &&
-                <StatusRekognitionLabelsIcon
-                  rekognition_labels={ rekognition_labels }
-                  mime={ mime }
-                  id={ id }
-                  media_id={ media_id }
-                />
-              }
-              {metadata &&
-                <StatusMetadataIcon
-                  metadata={ metadata }
-                  id={ id }
-                  media_id={ media_id }
-                />
-              }
-              {thumbs &&
-                <StatusGenerateImageThumbsIcon
-                  thumbs={ thumbs }
-                  id={ id }
-                  media_id={ media_id }
-                />
-              }
-              {videos &&
-                <StatusGenerateVideosIcon videos={ videos } />
-              }
-              {status === 'upload successful' &&
-                <div
-                  className="icon success"
-                  data-tip="Successfuly uploaded"
-                >
-                  <IoCheckmarkCircled />
-                  <ReactTooltip />
-                </div>
-              }
-              {status === 'upload failed' &&
-                <div
-                  className="icon failed"
-                  data-tip="Error saving file"
-                >
-                  <IoBug />
-                  <ReactTooltip />
-                </div>
-              }
+              <div className={ classes.icons }>
+                {mime && rekognition_labels &&
+                  <StatusRekognitionLabelsIcon
+                    rekognition_labels={ rekognition_labels }
+                    mime={ mime }
+                    id={ id }
+                    media_id={ media_id }
+                  />
+                }
+                {metadata &&
+                  <StatusMetadataIcon
+                    metadata={ metadata }
+                    id={ id }
+                    media_id={ media_id }
+                  />
+                }
+                {thumbs &&
+                  <StatusGenerateImageThumbsIcon
+                    thumbs={ thumbs }
+                    id={ id }
+                    media_id={ media_id }
+                  />
+                }
+                {videos &&
+                  <StatusGenerateVideosIcon videos={ videos } />
+                }
+                {status === 'upload successful' &&
+                  <div
+                    className="icon success"
+                    data-tip="Successfuly uploaded"
+                  >
+                    <IoCheckmarkCircled />
+                    <ReactTooltip />
+                  </div>
+                }
+                {status === 'upload failed' &&
+                  <div
+                    className="icon failed"
+                    data-tip="Error saving file"
+                  >
+                    <IoBug />
+                    <ReactTooltip />
+                  </div>
+                }
+              </div>
             </div>
 
             <div className={ classes.nameSizeWrapper }>

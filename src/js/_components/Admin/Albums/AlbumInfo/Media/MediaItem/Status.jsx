@@ -3,6 +3,8 @@ import objectAssign from 'object-assign'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import Typography from '@material-ui/core/Typography'
+
 class Status extends Component {
 
   constructor(props) {
@@ -44,17 +46,23 @@ class Status extends Component {
 
   render() {
 
-    const status = this.props.fromServer ? 'On server' : this.state.status
+    const { className, fromServer } = this.props
+
+    const status = fromServer ? 'On server' : this.state.status
 
     return (
-      <span>
+      <Typography
+        className={ className }
+        variant="caption"
+      >
         { status }
-      </span>
+      </Typography>
     )
   }
 }
 
 Status.propTypes = {
+  className: PropTypes.string,
   fromServer: PropTypes.bool,
   id: PropTypes.number.isRequired,
   text: PropTypes.shape({
@@ -73,6 +81,7 @@ Status.propTypes = {
 }
 
 Status.defaultProps = {
+  className: '',
   text: {
     canceled: 'Canceled',
     deleted: 'Deleted',
