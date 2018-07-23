@@ -2,14 +2,15 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import Slider from 'react-slick'
+import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel'
 
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Modal from '@material-ui/core/Modal'
 import IconButton from '@material-ui/core/IconButton'
 
-import Close from '@material-ui/icons/Close'
+import ChevronLeft from '@material-ui/icons/ChevronLeft'
+import ChevronRight from '@material-ui/icons/ChevronRight'
 
 import { adminUiActions } from '../../../../../../_actions'
 
@@ -22,17 +23,48 @@ const styles = theme => ({
     height: `100%`
   },
   paper: {
-    width: `95%`,
-    height: `95%`,
-    backgroundColor: theme.palette.background.paper,
+    position: `relative`,
+    width: `98%`,
+    height: `98%`,
+    // backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5]
   },
-  slide: {
-    width: 200,
+  slider: {
+    position: `absolute`,
+    width: `100%`,
+    height: `100%`,
+    overflow: `hidden`
+  },
+  sliderTray: {
+    display: `flex`,
     height: `100%`
   },
+  slide: {
+    display: `flex`
+  },
+  slideInner: {
+    flex: 1
+  },
   imageBg: {
-    backgroundPosition: `center`
+    backgroundRepeat: `no-repeat`,
+    backgroundPosition: `center`,
+    backgroundSize: `contain`,
+    width: `100%`,
+    height: `100%`
+  },
+  prevNextBtns: {
+    position: `absolute`,
+    top: `50%`,
+    background: `none`,
+    border: `none`,
+    padding: 0,
+    margin: 0
+  },
+  prevBtn: {
+    left: 0
+  },
+  nextBtn: {
+    right: 0
   }
 })
 
@@ -48,19 +80,26 @@ class LightboxSlider extends Component {
 
     const { media } = selected_album.album
 
-    const slides = media.map(m => {
+    const slides = media.map((m, i) => {
 
       const { mime } = m
 
       if (mime.includes('image')) {
         return (
-          <div
+          <Slide
+            index={ i }
             key={ m.id }
             className={ classes.slide }
+            innerClassName={ classes.slideInner }
+            tag="div"
           >
-            <div className={ classes.imageBg }></div>
-            { m.filename }
-          </div>
+            <div
+              className={ classes.imageBg }
+              style={{ backgroundImage: `url(${m.thumbs.fullhd})` }}
+            >
+
+            </div>
+          </Slide>
         )
       }
       else {
@@ -90,9 +129,31 @@ class LightboxSlider extends Component {
         disableAutoFocus={ true }
       >
         <div className={ classes.paper }>
-          <Slider {...sliderSettings}>
-            { slides }
-          </Slider>
+          <CarouselProvider
+            totalSlides={ media.length }
+            currentSlide={ 1 }
+          >
+            <Slider
+              classNameTrayWrap={ classes.slider }
+              classNameTray={ classes.sliderTray }
+              trayTag="div"
+            >
+              { slides }
+            </Slider>
+
+            <ButtonBack
+              className={ `${classes.prevNextBtns} ${classes.prevBtn}` }
+            >
+              <ChevronLeft fontSize={ 42 } />
+            </ButtonBack>
+
+            <ButtonNext
+              className={ `${classes.prevNextBtns} ${classes.nextBtn}` }
+            >
+              <ChevronRight fontSize={ 42 } />
+            </ButtonNext>
+
+          </CarouselProvider>
         </div>
       </Modal>
     )
