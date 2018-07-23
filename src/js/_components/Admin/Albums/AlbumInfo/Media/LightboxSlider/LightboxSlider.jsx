@@ -77,12 +77,13 @@ class LightboxSlider extends Component {
   render() {
 
     const { dispatch, classes, isOpen, initialId, selected_album } = this.props
-
     const { media } = selected_album.album
+
+    const initialSlide = media.findIndex(m => m.id === initialId)
 
     const slides = media.map((m, i) => {
 
-      const { mime } = m
+      const { id, mime } = m
 
       if (mime.includes('image')) {
         return (
@@ -119,8 +120,6 @@ class LightboxSlider extends Component {
       adaptiveHeight: true
     }
 
-    console.log(media)
-
     return (
       <Modal
         className={ classes.root }
@@ -131,7 +130,7 @@ class LightboxSlider extends Component {
         <div className={ classes.paper }>
           <CarouselProvider
             totalSlides={ media.length }
-            currentSlide={ 1 }
+            currentSlide={ initialSlide }
           >
             <Slider
               classNameTrayWrap={ classes.slider }
