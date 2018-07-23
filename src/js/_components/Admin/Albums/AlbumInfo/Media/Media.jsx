@@ -17,6 +17,7 @@ import Dropzone from './Partials/dropzone'
 import TotalProgressBar from './Partials/total-progress-bar'
 
 import MediaList from './MediaList'
+import LightboxSlider from './LightboxSlider'
 import UploadMedia from '../../../Buttons/UploadMedia'
 
 import { authHeader, baseServerUrl } from '../../../../../_helpers'
@@ -162,7 +163,8 @@ class Media extends Component {
       classes, entity, entity_id,
       status, files,
       wrapper_width, wrapper_height,
-      dispatch
+      dispatch,
+      isLightboxOpen
     } = this.props
 
     const uploader = this.uploader
@@ -208,6 +210,8 @@ class Media extends Component {
           uploader={ uploader }
         />
 
+        <LightboxSlider isOpen={ isLightboxOpen } />
+
       </Fragment>
     )
   }
@@ -222,6 +226,7 @@ Media.propTypes = {
   entity_id: PropTypes.number.isRequired,
   status: PropTypes.number.isRequired,
   files: PropTypes.array.isRequired,
+  isLightboxOpen: PropTypes.bool.isRequired,
   wrapper_width: PropTypes.number,
   wrapper_height: PropTypes.number
 }
@@ -236,10 +241,11 @@ Media.contextTypes = {
 }
 
 function mapStateToProps(state) {
-  const { settings } = state
+  const { settings, admin_ui } = state
   return {
     bucket: settings.app.s3_bucket,
-    access_key: settings.app.access_key_id
+    access_key: settings.app.access_key_id,
+    isLightboxOpen: admin_ui.lightbox.isOpen
   }
 }
 

@@ -9,7 +9,7 @@ import { IoAlertCircled } from 'react-icons/lib/io'
 class ThumbnailSrv extends Component {
 
   render() {
-    const { width, height, mime, thumbs, videos } = this.props
+    const { onClick, width, height, mime, thumbs, videos } = this.props
     let sizeStyle = {
       height: height,
       width: width
@@ -26,6 +26,7 @@ class ThumbnailSrv extends Component {
         <div
           className="uploader-thumbnail image"
           style={ style }
+          onClick={ onClick }
         >
         </div>
       )
@@ -54,6 +55,7 @@ class ThumbnailSrv extends Component {
 }
 
 ThumbnailSrv.propTypes = {
+  onClick: PropTypes.func.isRequired,
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
   thumbs: PropTypes.object,

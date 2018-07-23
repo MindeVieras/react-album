@@ -2,7 +2,8 @@
 import { adminConstants } from '../../_constants'
 
 export const adminUiActions = {
-  modalOpen, modalClose
+  modalOpen, modalClose,
+  lightboxOpen, lightboxClose
 }
 
 
@@ -25,4 +26,25 @@ function modalClose(modal_id) {
   }
 
   function close(modal_id) { return { type: adminConstants.UI_MODAL_CLOSE, modal_id } }
+}
+
+/*
+ * Admin Media Lightbox Open/Close
+ * calls lightboxOpen, lightboxClose
+ */
+
+function lightboxOpen(id) {
+  return dispatch => {
+    dispatch(open(id))
+  }
+
+  function open(id) { return { type: adminConstants.UI_LIGHTBOX_OPEN, id } }
+}
+
+function lightboxClose() {
+  return dispatch => {
+    dispatch(close())
+  }
+
+  function close() { return { type: adminConstants.UI_LIGHTBOX_CLOSE } }
 }

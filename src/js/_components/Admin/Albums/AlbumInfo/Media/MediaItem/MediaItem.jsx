@@ -26,7 +26,7 @@ import StatusGenerateVideosIcon from '../Icons/StatusGenerateVideos'
 import StatusRekognitionLabelsIcon from '../Icons/StatusRekognitionLabels'
 
 import { utilsConstants } from '../../../../../../_constants'
-import { albumsActions } from '../../../../../../_actions'
+import { albumsActions, adminUiActions } from '../../../../../../_actions'
 
 const styles = theme => ({
   item: {
@@ -76,6 +76,10 @@ class MediaItem extends Component {
     }
   }
 
+  openLightbox(id) {
+    this.props.dispatch(adminUiActions.lightboxOpen(id))
+  }
+
   render() {
     const {
       classes,
@@ -111,6 +115,7 @@ class MediaItem extends Component {
         videos={ videos }
         thumbs={ thumbs }
         uploader={ uploader }
+        onClick={ () => this.openLightbox(id) }
       />
     }
     else if (mime) {
@@ -130,6 +135,7 @@ class MediaItem extends Component {
         style={ itemStyle }
       >
         <Paper className={ classes.paperRoot }>
+
           { thumb }
 
           <ProgressBar
@@ -224,6 +230,7 @@ class MediaItem extends Component {
 
 MediaItem.propTypes = {
   classes: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
   connectDragSource: PropTypes.func.isRequired,
   connectDragPreview: PropTypes.func.isRequired,
   isDragging: PropTypes.bool.isRequired,
