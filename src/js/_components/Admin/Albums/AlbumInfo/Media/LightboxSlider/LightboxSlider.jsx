@@ -15,12 +15,12 @@ import ChevronRight from '@material-ui/icons/ChevronRight'
 import { adminUiActions } from '../../../../../../_actions'
 
 const styles = theme => ({
+  backdrop: {
+    backgroundColor: `rgba(0,0,0,0.8)`
+  },
   root: {
     justifyContent: `center`,
     alignItems: `center`
-  },
-  sliderWrapper: {
-    height: `100%`
   },
   paper: {
     position: `relative`,
@@ -110,22 +110,13 @@ class LightboxSlider extends Component {
       }
     })
 
-    const sliderSettings = {
-      className: classes.sliderWrapper,
-      dots: true,
-      infinite: true,
-      speed: 1000,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      adaptiveHeight: true
-    }
-
     return (
       <Modal
         className={ classes.root }
         open={ isOpen }
         onClose={ () => this.handleClose() }
         disableAutoFocus={ true }
+        BackdropProps={{ classes: { root: classes.backdrop } }}
       >
         <div className={ classes.paper }>
           <CarouselProvider
