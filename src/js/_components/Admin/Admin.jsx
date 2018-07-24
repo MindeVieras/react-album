@@ -68,60 +68,51 @@ class Admin extends Component {
     const { selected_album, albums_list, keydown, dispatch } = nextProps
     const { album, pager } = selected_album
 
-    if (album.id) {
+    if (album.id && keydown.event && albums_list.length > 1) {
 
-      if (keydown.event) {
-        const { keyCode } = keydown.event
+      const { keyCode } = keydown.event
+      const { current_page, per_page } = pager
+      const totalAlbums = albums_list.length
+
+      // find album index in list
+      const index = albums_list.map(function(a) { return a.id }).indexOf(album.id)
+
+      switch(keyCode) {
+
+        // on key up or down nawigate trough albums list
+        case 38: // if navigation to up
+          if (index > 0) {
+            const newIndex = index - 1
+            const newId = albums_list[newIndex].id
+            dispatch(albumsActions.getOne(newId))
+            dispatch(utilsActions.saveAdminSetting('selected_album', newId))
+          }
+          break
+        case 40: // if navigation to down
+          const newIndex = index + 1
+          if (newIndex < totalAlbums) {
+            const newId = albums_list[newIndex].id
+            dispatch(albumsActions.getOne(newId))
+            dispatch(utilsActions.saveAdminSetting('selected_album', newId))
+          }
+          break
 
         // on key left and right navigate madia pager
-
-        // if navigating to right
-        if (keyCode === 37) {
-          const { current_page } = pager
+        case 37: // if navigating to right
           if (current_page > 0) {
             let newPage = current_page - 1
             dispatch(albumsActions.setMediaPagerPage(newPage))
           }
-        }
-        // if navigating to left
-        if (keyCode === 39) {
-          const { current_page, per_page } = pager
+          break
+        case 39: // if navigating to right
           const totalPages = Math.ceil(album.media.length / per_page)
           let newPage = current_page + 1
           if (newPage < totalPages) {
             dispatch(albumsActions.setMediaPagerPage(newPage))
           }
-        }
 
-        // on key up or down nawigate trough albums list
-        if (keyCode === 38 || keyCode === 40) {
-          if (albums_list.length > 1) {
-            const totalAlbums = albums_list.length
-
-            // find album index in list
-            const index = albums_list.map(function(a) { return a.id }).indexOf(album.id)
-
-            // if navigation to up
-            if (keyCode === 38 && index > 0) {
-              const newIndex = index - 1
-              const newId = albums_list[newIndex].id
-              dispatch(albumsActions.getOne(newId))
-              dispatch(utilsActions.saveAdminSetting('selected_album', newId))
-            }
-
-            // if navigation to down
-            if (keyCode === 40) {
-              const newIndex = index + 1
-              if (newIndex < totalAlbums) {
-                const newId = albums_list[newIndex].id
-                dispatch(albumsActions.getOne(newId))
-                dispatch(utilsActions.saveAdminSetting('selected_album', newId))
-              }
-            }
-
-          }
-        }
       }
+
     }
   }
 
