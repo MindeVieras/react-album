@@ -1,8 +1,9 @@
 
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
+import { Tooltip } from 'react-tippy'
 
-import Tooltip from '@material-ui/core/Tooltip'
+import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
@@ -49,9 +50,8 @@ class MainMenu extends Component {
     return (
       <Fragment>
         <Tooltip
-          id="tooltip_open_main_menu"
-          title={ t(`Main menu`) }
-          enterDelay={ 500 }
+          html={ <Typography>Main menu</Typography> }
+          size="small"
         >
           <IconButton
             aria-label="Menu"

@@ -79,7 +79,10 @@ class LightboxSlider extends Component {
     const { dispatch, classes, isOpen, initialId, selected_album } = this.props
     const { media } = selected_album.album
 
-    const initialSlide = media.findIndex(m => m.id === initialId)
+    let initialSlide = 0
+    if (initialId) {
+      initialSlide = media.findIndex(m => m.id === initialId)
+    }
 
     const slides = media.map((m, i) => {
 
@@ -159,7 +162,7 @@ LightboxSlider.propTypes = {
 }
 
 LightboxSlider.defaultProps = {
-  initialId: null,
+  initialId: 0,
   selected_album: {}
 }
 

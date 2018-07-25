@@ -20,7 +20,7 @@ import TrashPage from './Trash'
 import Error404 from './Errors/404'
 
 import { googleKey } from '../../_helpers/config'
-import { albumsActions, utilsActions } from '../../_actions'
+import { adminUiActions, albumsActions, utilsActions } from '../../_actions'
 
 import 'react-datetime/css/react-datetime.css'
 // import 'react-toggle/style.css'
@@ -28,6 +28,7 @@ import 'react-datetime/css/react-datetime.css'
 import 'rc-slider/assets/index.css'
 import 'react-perfect-scrollbar/dist/css/styles.css'
 import 'video-react/dist/video-react.css'
+import 'react-tippy/dist/tippy.css'
 // import '../../../scss/Admin/main.scss'
 
 const styles = theme => ({
@@ -65,7 +66,7 @@ class Admin extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { selected_album, albums_list, keydown, dispatch } = nextProps
+    const { selected_album, albums_list, lightbox, keydown, dispatch } = nextProps
     const { album, pager } = selected_album
 
     if (album.id && keydown.event && albums_list.length > 1) {
@@ -110,6 +111,15 @@ class Admin extends Component {
           if (newPage < totalPages) {
             dispatch(albumsActions.setMediaPagerPage(newPage))
           }
+          break
+
+        // on space key open lightbox
+        case 32: // if space key
+          if (lightbox.isOpen)
+            dispatch(adminUiActions.lightboxClose())
+          else if (!lightbox.isOpen)
+            dispatch(adminUiActions.lightboxOpen())
+          break
 
       }
 
@@ -154,11 +164,12 @@ Admin.propTypes = {
 }
 
 function mapStateToProps(state) {
-  const { admin_albums, settings } = state
+  const { admin_albums, admin_ui, settings } = state
   return {
     settings: settings.admin,
     selected_album: admin_albums.selected_album,
-    albums_list: admin_albums.list.items
+    albums_list: admin_albums.list.items,
+    lightbox: admin_ui.lightbox
   }
 }
 

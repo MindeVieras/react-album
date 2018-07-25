@@ -15,6 +15,7 @@ import App from './App'
 
 const theme = createMuiTheme({
   palette: {
+    type: 'dark',
     background: {
       default: blueGrey[900],
       header: blueGrey[800],
@@ -23,7 +24,7 @@ const theme = createMuiTheme({
   }
 })
 
-// console.log(theme)
+console.log(theme)
 
 const AlbumApp = () => (
   <Provider store={ store }>
