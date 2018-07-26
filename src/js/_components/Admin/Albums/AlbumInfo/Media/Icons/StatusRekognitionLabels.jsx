@@ -3,34 +3,51 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import uuidv4 from 'uuid/v4'
-import ReactTooltip from 'react-tooltip'
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu'
+
+import { withStyles } from '@material-ui/core/styles'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import Typography from '@material-ui/core/Typography'
 
 import { ScaleLoader } from 'react-spinners'
 import { IoAperture } from 'react-icons/lib/io'
 
+import Tip from 'Common'
+
 import { albumsActions } from '../../../../../../_actions'
 
+const styles = theme => ({
+  tipListRoot: {
+    display: `flex`,
+    justifyContent: `space-between`,
+    flexWrap: `wrap`
+  },
+  tipListItemRoot: {
+    display: `flex`,
+    justifyContent: `space-between`,
+    padding: 0
+  }
+})
 
 class StatusRekognitionLabelsIcon extends Component {
-  
+
   constructor(props) {
     super(props)
 
     this.handleResaveRekognitionLabels = this.handleResaveRekognitionLabels.bind(this)
   }
-  
+
   handleResaveRekognitionLabels(e) {
     const { id, media_id, dispatch } = this.props
     dispatch(albumsActions.saveRekognitionLabels(id, media_id))
   }
 
   render() {
-    
-    const tooltipId = uuidv4()
+
     const contextMenuId = uuidv4()
     const { t } = this.context
-    const { id, rekognition_labels } = this.props
+    const { classes, id, rekognition_labels } = this.props
 
     let className = ''
     let tooltipText = ''
@@ -52,27 +69,36 @@ class StatusRekognitionLabelsIcon extends Component {
           ulWidth = 150,
           liWidth = 150
 
-      if (totalLabels > 20) {
-        ulWidth = 300
+      if (totalLabels > 20 && totalLabels <= 30) {
+        ulWidth = 320
+      }
+      else if (totalLabels > 30) {
+        ulWidth = 480
       }
 
-      tooltipText = <ul style={{width: `${ulWidth}px`}}>
+      tooltipText = <List
+        disablePadding={ true }
+        classes={{ root: classes.tipListRoot }}
+        style={{ width: `${ulWidth}px` }}
+      >
         {
           Object.keys(rekognition_labels).map((key, i) => {
             if (key != 'ack') {
               let confidence = rekognition_labels[key]
               return (
-                <li
+                <ListItem
                   key={ i }
-                  style={{width: `${liWidth}px`, display: `inline-block`}}
+                  classes={{ root: classes.tipListItemRoot }}
+                  style={{ width: `${liWidth}px` }}
                 >
-                  { t(key) } { Math.trunc(confidence) }%
-                </li>
+                  <Typography variant="body2">{ t(key) }</Typography>
+                  <Typography>{ Math.trunc(confidence) }%</Typography>
+                </ListItem>
               )
             }
           })
         }
-      </ul>
+      </List>
     }
     else if (rekognition_labels.ack == 'loading') {
       className = 'loading'
@@ -92,24 +118,23 @@ class StatusRekognitionLabelsIcon extends Component {
     return (
       <span>
         <div
-          className={`icon ${className}`}
           data-tip
-          data-for={ tooltipId }
+          data-for={ `tip_album_media_rekognition_labels_${id}` }
+          className={`icon ${className}`}
         >
           { icon }
-          <ReactTooltip id={ tooltipId }>
-            { tooltipText }
-          </ReactTooltip>
+          <Tip id={ `tip_album_media_rekognition_labels_${id}` }>{ tooltipText }</Tip>
         </div>
-        
+
         { contextMenu }
-      
+
       </span>
     )
   }
 }
 
 StatusRekognitionLabelsIcon.propTypes = {
+  classes: PropTypes.object.isRequired,
   id: PropTypes.number.isRequired,
   media_id: PropTypes.number.isRequired,
   rekognition_labels: PropTypes.object.isRequired
@@ -119,4 +144,4 @@ StatusRekognitionLabelsIcon.contextTypes = {
   t: PropTypes.func
 }
 
-export default connect()(StatusRekognitionLabelsIcon)
+export default connect()(withStyles(styles)(StatusRekognitionLabelsIcon))

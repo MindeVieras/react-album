@@ -4,14 +4,27 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import uuidv4 from 'uuid/v4'
-import ReactTooltip from 'react-tooltip'
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu'
+
+import { withStyles } from '@material-ui/core/styles'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import Typography from '@material-ui/core/Typography'
 
 import { ScaleLoader } from 'react-spinners'
 import { IoClipboard } from 'react-icons/lib/io'
 
+import Tip from 'Common'
+
 import { albumsActions } from '../../../../../../_actions'
 
+const styles = theme => ({
+  tipListItem: {
+    display: `flex`,
+    justifyContent: `space-between`,
+    padding: 0
+  }
+})
 
 class StatusMetadataIcon extends Component {
 
@@ -28,10 +41,9 @@ class StatusMetadataIcon extends Component {
 
   render() {
 
-    const tooltipId = uuidv4()
     const contextMenuId = uuidv4()
     const { t } = this.context
-    const { id, metadata } = this.props
+    const { classes, id, metadata } = this.props
 
     let className = ''
     let tooltipText = ''
@@ -51,22 +63,29 @@ class StatusMetadataIcon extends Component {
 
     if (metadata.ack == 'ok') {
       className = 'success'
-      // Remove location
-      let { location, ...restMeta } = metadata
+
+      // Remove ack and location from metadata
+      let { ack, location, ...restMeta } = metadata
       let newMeta = { ...restMeta }
 
-      tooltipText = <ul>
+      tooltipText = <List disablePadding={ true }>
         {
           Object.keys(newMeta).sort().map((key, i) => {
-            if (key != 'ack') {
-              let value = newMeta[key]
-              return (
-                <li key={ i }><strong>{ _.startCase(_.toLower(t(key))) }:</strong> { value }</li>
-              )
-            }
+            let value = newMeta[key]
+            return (
+              <ListItem
+                key={ i }
+                classes={{ root: classes.tipListItem }}
+              >
+                <Typography variant="body2">
+                  { _.startCase(_.toLower(t(key))) }:
+                </Typography>
+                <Typography>{ value }</Typography>
+              </ListItem>
+            )
           })
         }
-      </ul>
+      </List>
     }
     else if (metadata.ack == 'loading') {
       className = 'loading'
@@ -86,14 +105,12 @@ class StatusMetadataIcon extends Component {
     return (
       <span>
         <div
-          className={`icon ${className}`}
           data-tip
-          data-for={ tooltipId }
+          data-for={ `tip_album_media_metadata_${id}` }
+          className={`icon ${className}`}
         >
           { icon }
-          <ReactTooltip id={ tooltipId }>
-            { tooltipText }
-          </ReactTooltip>
+          <Tip id={ `tip_album_media_metadata_${id}` }>{ tooltipText }</Tip>
         </div>
 
         { contextMenu }
@@ -104,6 +121,7 @@ class StatusMetadataIcon extends Component {
 }
 
 StatusMetadataIcon.propTypes = {
+  classes: PropTypes.object.isRequired,
   id: PropTypes.number.isRequired,
   media_id: PropTypes.number.isRequired,
   metadata: PropTypes.object.isRequired
@@ -113,4 +131,4 @@ StatusMetadataIcon.contextTypes = {
   t: PropTypes.func
 }
 
-export default connect()(StatusMetadataIcon)
+export default connect()(withStyles(styles)(StatusMetadataIcon))

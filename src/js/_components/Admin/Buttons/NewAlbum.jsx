@@ -1,5 +1,5 @@
 
-import  React, { Component } from 'react'
+import  React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import moment from 'moment'
@@ -17,7 +17,7 @@ import { albumsService } from '../../../_services'
 import { albumsConstants } from '../../../_constants'
 
 const styles = theme => ({
-  buttonTipWrapper: {
+  button: {
     position: `fixed`,
     right: 0,
     bottom: 0,
@@ -63,19 +63,20 @@ class NewAlbum extends Component {
     const { classes } = this.props
 
     return (
-      <Tip
-        content={ t(`Create new album`) }
-        className={ classes.buttonTipWrapper }
-      >
+      <Fragment>
         <Button
+          data-tip
+          data-for="tip_create_new_album"
           onClick={() => this.handleClick()}
           variant="fab"
           color="primary"
           aria-label="add"
+          className={ classes.button }
         >
           <AddIcon />
         </Button>
-      </Tip>
+        <Tip id="tip_create_new_album">{ t(`Create new album`) }</Tip>
+      </Fragment>
     )
   }
 }

@@ -57,22 +57,23 @@ class ListItem extends Component {
         className={ `${activeClass} ${dndClass}` }
         onClick={ () => this.handleClick(active, album_id) }
       >
-        <Tip
-          content={ moment(start_date).format('YYYY-MM-DD') }
-          followCursor={ true }
+        <MuiListItem
+          data-tip
+          data-for={ `tip_album_list_item_${album_id}` }
+          button
+          className={ classes.item }
         >
-          <MuiListItem
-            button
-            className={ classes.item }
+          <Typography
+            variant="body2"
+            color="inherit"
           >
-            <Typography
-              variant="body2"
-              color="inherit"
-            >
-              { name }
-            </Typography>
-          </MuiListItem>
-        </Tip>
+            { name }
+          </Typography>
+        </MuiListItem>
+        <Tip
+          id={ `tip_album_list_item_${album_id}` }
+          effect="float"
+        >{ moment(start_date).format('YYYY-MM-DD') }</Tip>
       </li>
     )
   }

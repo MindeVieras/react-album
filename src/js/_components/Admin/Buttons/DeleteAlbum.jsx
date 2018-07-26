@@ -14,7 +14,7 @@ import SimpleModal from '../../Common/Modals'
 import { albumsActions, adminUiActions } from '../../../_actions'
 
 const styles = theme => ({
-  buttonTipWrapper: {
+  button: {
     position: `fixed`,
     right: theme.spacing.unit * 8,
     bottom: 0,
@@ -50,20 +50,21 @@ class DeleteAlbum extends Component {
     const modal_id = `album_delete_${id}`
     return (
       <Fragment>
-        <Tip
-          content={ t(`Delete album`) }
-          className={ classes.buttonTipWrapper }
+
+        <Button
+          data-tip
+          data-for="tip_album_delete"
+          onClick={ () => this.handleModalOpen(modal_id) }
+          variant="fab"
+          color="secondary"
+          aria-label="delete"
+          mini
+          className={ classes.button }
         >
-          <Button
-            onClick={ () => this.handleModalOpen(modal_id) }
-            variant="fab"
-            color="secondary"
-            aria-label="delete"
-            mini
-          >
-            <DeleteForever />
-          </Button>
-        </Tip>
+          <DeleteForever />
+        </Button>
+
+        <Tip id="tip_album_delete">{ t(`Delete album`) }</Tip>
 
         <SimpleModal
           modal_id={ modal_id }

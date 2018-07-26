@@ -1,14 +1,9 @@
 
 import React, { Component, Fragment } from 'react'
-import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import Popup from 'react-popup'
-
-import { IoCloseCircled } from 'react-icons/lib/io'
-
+import { connect } from 'react-redux'
 
 import { withStyles } from '@material-ui/core/styles'
-import Tooltip from '@material-ui/core/Tooltip'
 import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton'
 
@@ -16,6 +11,7 @@ import grey from '@material-ui/core/colors/grey'
 
 import Close from '@material-ui/icons/Close'
 
+import Tip from 'Common'
 import SimpleModal from '../../../../../Common/Modals'
 
 import { albumsActions, trashActions, adminUiActions } from '../../../../../../_actions'
@@ -62,38 +58,6 @@ class RemoveButton extends Component {
     dispatch(adminUiActions.modalClose(modal_id))
   }
 
-  handleClick() {
-    const { media_id, dispatch } = this.props
-
-    Popup.create({
-      title: 'Delete file',
-      content: 'Really delete this file?',
-      className: 'confirm',
-      buttons: {
-        left: [{
-          text: 'Cancel',
-          className: 'btn btn-default',
-          action: () => { Popup.close() }
-        }],
-        right: [{
-          text: 'Trash',
-          className: 'btn btn-warning',
-          action: () => {
-            dispatch(albumsActions.trashMedia(media_id))
-            Popup.close()
-          }
-        },{
-          text: 'Hard delete',
-          className: 'btn btn-danger',
-          action: () => {
-            dispatch(albumsActions.deleteMedia(media_id))
-            Popup.close()
-          }
-        }]
-      }
-    })
-  }
-
   render() {
 
     const { t } = this.context
@@ -103,18 +67,17 @@ class RemoveButton extends Component {
 
     return (
       <Fragment>
-        <Tooltip
-          id="tooltip_remove_album_media"
-          title={ t(`Remove`) }
-          enterDelay={ 500 }
-        >
+        <Fragment>
           <IconButton
+            data-tip
+            data-for={ `tip_album_rename_${media_id}` }
             onClick={ () => this.handleModalOpen(modal_id) }
             className={ classes.closeBtn }
           >
             <Close className={ classes.closeIcon } />
           </IconButton>
-        </Tooltip>
+          <Tip id={ `tip_album_rename_${media_id}` }>{ t(`Remove`) }</Tip>
+        </Fragment>
 
         <SimpleModal
           modal_id={ modal_id }

@@ -1,5 +1,5 @@
 
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import fscreen from 'fscreen'
@@ -70,22 +70,30 @@ class Header extends Component {
 
           <div className={ classes.menus }>
             {!full_screen &&
-              <Tip
-                content={ t(`Go fullscreen mode`) }
-              >
-                <IconButton onClick={ this.goFullscreen } color="inherit">
+              <Fragment>
+                <IconButton
+                  data-tip
+                  data-for="tip_go_fullscreen"
+                  onClick={ this.goFullscreen }
+                  color="inherit"
+                >
                   <Fullscreen />
                 </IconButton>
-              </Tip>
+                <Tip id="tip_go_fullscreen" effect="solid">{ t(`Go fullscreen mode`) }</Tip>
+              </Fragment>
             }
             {full_screen &&
-              <Tip
-                content={ t(`Exit fullscreen mode`) }
-              >
-                <IconButton onClick={ this.goOutFullscreen } color="inherit">
+              <Fragment>
+                <IconButton
+                  data-tip
+                  data-for="tip_exit_fullscreen"
+                  onClick={ this.goOutFullscreen }
+                  color="inherit"
+                >
                   <FullscreenExit />
                 </IconButton>
-              </Tip>
+                <Tip id="tip_exit_fullscreen">{ t(`Exit fullscreen mode`) }</Tip>
+              </Fragment>
             }
 
             <MainMenu />

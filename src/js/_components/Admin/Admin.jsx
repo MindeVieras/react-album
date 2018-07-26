@@ -28,7 +28,6 @@ import 'react-datetime/css/react-datetime.css'
 import 'rc-slider/assets/index.css'
 import 'react-perfect-scrollbar/dist/css/styles.css'
 import 'video-react/dist/video-react.css'
-import 'react-tippy/dist/tippy.css'
 // import '../../../scss/Admin/main.scss'
 
 const styles = theme => ({

@@ -9,7 +9,6 @@ import Typography from '@material-ui/core/Typography'
 
 import grey from '@material-ui/core/colors/grey'
 
-import Tip from 'Common'
 import Locations from './Locations'
 import Dates from './Dates'
 
@@ -53,12 +52,6 @@ const Bar = ({ classes, album_id, start_date, end_date, locale, counter, total_f
 
         <Locations album_id={ album_id } />
       </div>
-
-      <Tip
-        content="Test tooltip."
-      >
-        <div>TIP</div>
-      </Tip>
 
       <div className={ classes.flex_right }>
 

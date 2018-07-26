@@ -49,19 +49,19 @@ class MainMenu extends Component {
 
     return (
       <Fragment>
-        <Tip
-          content={ `Main menu` }
+        <IconButton
+          data-tip
+          data-for="tip_main_menu"
+          aria-label="Menu"
+          aria-owns={ anchorEl ? 'main-menu' : null }
+          aria-haspopup="true"
+          onClick={ this.handleClick }
+          color="inherit"
         >
-          <IconButton
-            aria-label="Menu"
-            aria-owns={ anchorEl ? 'main-menu' : null }
-            aria-haspopup="true"
-            onClick={ this.handleClick }
-            color="inherit"
-          >
-            <MoreVertIcon />
-          </IconButton>
-        </Tip>
+          <MoreVertIcon />
+        </IconButton>
+
+        <Tip id="tip_main_menu">Main menu</Tip>
 
         <Menu
           id="main-menu"

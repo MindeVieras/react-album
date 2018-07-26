@@ -4,31 +4,31 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import uuidv4 from 'uuid/v4'
-import ReactTooltip from 'react-tooltip'
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu'
 
 import { ScaleLoader } from 'react-spinners'
 import { IoImages } from 'react-icons/lib/io'
 
+import Tip from 'Common'
+
 import { albumsActions } from '../../../../../../_actions'
 
 
 class StatusGenerateImageThumbsIcon extends Component {
-  
+
   constructor() {
     super()
 
     this.handleRegenerateThumbs = this.handleRegenerateThumbs.bind(this)
   }
-  
+
   handleRegenerateThumbs(e) {
     const { id, media_id, dispatch } = this.props
     dispatch(albumsActions.generateImageThumbs(id, media_id))
   }
 
   render() {
-    
-    const tooltipId = uuidv4()
+
     const contextMenuId = uuidv4()
 
     const { id, thumbs } = this.props
@@ -68,18 +68,16 @@ class StatusGenerateImageThumbsIcon extends Component {
     return (
       <span>
         <div
-          className={`icon ${className}`}
           data-tip
-          data-for={ tooltipId }
+          data-for={ `tip_album_image_thumb_generate_${id}` }
+          className={`icon ${className}`}
         >
           { icon }
-          <ReactTooltip id={ tooltipId }>
-            { tooltipText }
-          </ReactTooltip>
+          <Tip id={ `tip_album_image_thumb_generate_${id}` }>{ tooltipText }</Tip>
         </div>
-        
+
         { contextMenu }
-      
+
       </span>
     )
   }

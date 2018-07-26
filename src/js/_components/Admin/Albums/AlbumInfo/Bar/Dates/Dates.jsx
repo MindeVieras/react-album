@@ -1,5 +1,5 @@
 
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import moment from 'moment'
@@ -35,11 +35,9 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit / 2,
     marginTop: theme.spacing.unit / 4
   },
-  buttonTipWrapper: {
-    position: `absolute`,
-    right: 0
-  },
   button: {
+    position: `absolute`,
+    right: 0,
     width: 32,
     height: 32
   },
@@ -96,17 +94,17 @@ class Dates extends Component {
 
 
         {showEditBtn &&
-          <Tip
-            content={ t(`Edit album dates`) }
-            className={ classes.buttonTipWrapper }
-          >
+          <Fragment>
             <IconButton
+              data-tip
+              data-for="tip_album_edit_dates"
               className={ classes.button }
               onClick={ () => this.handleModalOpen(modal_id) }
             >
               <Edit className={ classes.edit_btn } />
             </IconButton>
-          </Tip>
+            <Tip id="tip_album_edit_dates">{ t(`Edit album dates`) }</Tip>
+          </Fragment>
         }
 
         <SimpleModal

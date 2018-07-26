@@ -15,16 +15,14 @@ import Tip from 'Common'
 import { albumsActions } from '../../../_actions'
 
 const styles = theme => ({
-  buttonTipWrapper: {
+  button: {
+    backgroundColor: green[500],
+    color: theme.palette.common.white,
     position: `fixed`,
     right: theme.spacing.unit * 14,
     bottom: 0,
     margin: theme.spacing.unit,
     zIndex: theme.zIndex.appBar
-  },
-  button: {
-    backgroundColor: green[500],
-    color: theme.palette.common.white
   }
 })
 
@@ -52,21 +50,21 @@ class UploadMedia extends Component {
 
     return (
       <Fragment>
-        <Tip
-          content={ t(`Upload media`) }
-          className={ classes.buttonTipWrapper }
+
+        <Button
+          data-tip
+          data-for="tip_upload_media"
+          onClick={ () => this.handleClick() }
+          variant="fab"
+          color="secondary"
+          aria-label="upload"
+          mini
+          className={ classes.button }
         >
-          <Button
-            onClick={ () => this.handleClick() }
-            variant="fab"
-            color="secondary"
-            aria-label="upload"
-            mini
-            className={ classes.button }
-          >
-            <CloudUpload />
-          </Button>
-        </Tip>
+          <CloudUpload />
+        </Button>
+        <Tip id="tip_upload_media">{ t(`Upload media`) }</Tip>
+
         <input
           multiple={ true }
           ref="fileUploader"
@@ -77,6 +75,7 @@ class UploadMedia extends Component {
           name="file"
           type="file"
         />
+
       </Fragment>
     )
   }

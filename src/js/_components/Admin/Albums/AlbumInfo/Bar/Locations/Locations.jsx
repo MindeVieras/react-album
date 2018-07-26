@@ -1,17 +1,17 @@
 
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import Tooltip from '@material-ui/core/Tooltip'
 import IconButton from '@material-ui/core/IconButton'
 
 import Edit from '@material-ui/icons/Edit'
 
 import lightBlue from '@material-ui/core/colors/lightBlue'
 
+import Tip from 'Common'
 import Address from './Address'
 import AlbumMap from './AlbumMap'
 import LocationsBar from './LocationsBar'
@@ -79,18 +79,17 @@ class Locations extends Component {
         </Typography>
 
         {showEditBtn &&
-          <Tooltip
-            id="tooltip_edit_album_locations"
-            title={ t(`Edit album locations`) }
-            enterDelay={ 500 }
-          >
+          <Fragment>
             <IconButton
+              data-tip
+              data-for="tip_album_edit_locations"
               className={ classes.button }
               onClick={ () => this.handleModalOpen(modal_id) }
             >
               <Edit className={ classes.edit_btn } />
             </IconButton>
-          </Tooltip>
+            <Tip id="tip_album_edit_locations">{ t(`Edit album locations`) }</Tip>
+          </Fragment>
         }
 
         <SimpleModal

@@ -5,13 +5,13 @@ import { connect } from 'react-redux'
 
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import Tooltip from '@material-ui/core/Tooltip'
 import IconButton from '@material-ui/core/IconButton'
 
 import Edit from '@material-ui/icons/Edit'
 
 import lightBlue from '@material-ui/core/colors/lightBlue'
 
+import Tip from 'Common'
 import AlbumNameForm from './AlbumNameForm'
 import SimpleModal from '../../../../../Common/Modals'
 
@@ -72,18 +72,17 @@ class AlbumName extends Component {
           { name }
 
           {showEditBtn &&
-            <Tooltip
-              id="tooltip_edit_album_name"
-              title={ t(`Edit album name`) }
-              enterDelay={ 500 }
-            >
+            <Fragment>
               <IconButton
+                data-tip
+                data-for="tip_album_rename"
                 className={ classes.button }
                 onClick={ () => this.handleModalOpen(modal_id) }
               >
                 <Edit className={ classes.edit_btn } />
               </IconButton>
-            </Tooltip>
+              <Tip id="tip_album_rename">{ t(`Edit album name`) }</Tip>
+            </Fragment>
           }
 
         </Typography>
