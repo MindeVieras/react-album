@@ -3,8 +3,10 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import I18n from 'redux-i18n'
+
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
+
 import green from '@material-ui/core/colors/green'
 import blueGrey from '@material-ui/core/colors/blueGrey'
 import grey from '@material-ui/core/colors/grey'
