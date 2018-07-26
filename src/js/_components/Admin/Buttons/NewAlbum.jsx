@@ -6,17 +6,18 @@ import moment from 'moment'
 import { toastr } from 'react-redux-toastr'
 
 import { withStyles } from '@material-ui/core/styles'
-import Tooltip from '@material-ui/core/Tooltip'
 import Button from '@material-ui/core/Button'
 
 import AddIcon from '@material-ui/icons/Add'
+
+import Tip from 'Common'
 
 import { albumsActions, utilsActions } from '../../../_actions'
 import { albumsService } from '../../../_services'
 import { albumsConstants } from '../../../_constants'
 
 const styles = theme => ({
-  button: {
+  buttonTipWrapper: {
     position: `fixed`,
     right: 0,
     bottom: 0,
@@ -62,21 +63,19 @@ class NewAlbum extends Component {
     const { classes } = this.props
 
     return (
-      <Tooltip
-        id="tooltip_create_new_album"
-        title={ t(`Create new album`) }
-        enterDelay={ 500 }
+      <Tip
+        content={ t(`Create new album`) }
+        className={ classes.buttonTipWrapper }
       >
         <Button
           onClick={() => this.handleClick()}
           variant="fab"
           color="primary"
           aria-label="add"
-          className={ classes.button }
         >
           <AddIcon />
         </Button>
-      </Tooltip>
+      </Tip>
     )
   }
 }

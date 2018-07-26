@@ -4,17 +4,17 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import { withStyles } from '@material-ui/core/styles'
-import Tooltip from '@material-ui/core/Tooltip'
 import Button from '@material-ui/core/Button'
 
 import DeleteForever from '@material-ui/icons/DeleteForever'
 
+import Tip from 'Common'
 import SimpleModal from '../../Common/Modals'
 
 import { albumsActions, adminUiActions } from '../../../_actions'
 
 const styles = theme => ({
-  button: {
+  buttonTipWrapper: {
     position: `fixed`,
     right: theme.spacing.unit * 8,
     bottom: 0,
@@ -50,10 +50,9 @@ class DeleteAlbum extends Component {
     const modal_id = `album_delete_${id}`
     return (
       <Fragment>
-        <Tooltip
-          id="tooltip_delete_album"
-          title={ t(`Delete album`) }
-          enterDelay={ 500 }
+        <Tip
+          content={ t(`Delete album`) }
+          className={ classes.buttonTipWrapper }
         >
           <Button
             onClick={ () => this.handleModalOpen(modal_id) }
@@ -61,11 +60,10 @@ class DeleteAlbum extends Component {
             color="secondary"
             aria-label="delete"
             mini
-            className={ classes.button }
           >
             <DeleteForever />
           </Button>
-        </Tooltip>
+        </Tip>
 
         <SimpleModal
           modal_id={ modal_id }

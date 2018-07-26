@@ -1,7 +1,6 @@
 
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { Tooltip } from 'react-tippy'
 
 import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
@@ -18,6 +17,7 @@ import Delete from '@material-ui/icons/Delete'
 import Home from '@material-ui/icons/Home'
 import PowerSettingsNew from '@material-ui/icons/PowerSettingsNew'
 
+import Tip from 'Common'
 import { history } from '../../../../../_helpers'
 
 class MainMenu extends Component {
@@ -49,9 +49,8 @@ class MainMenu extends Component {
 
     return (
       <Fragment>
-        <Tooltip
-          html={ <Typography>Main menu</Typography> }
-          size="small"
+        <Tip
+          content={ `Main menu` }
         >
           <IconButton
             aria-label="Menu"
@@ -62,7 +61,7 @@ class MainMenu extends Component {
           >
             <MoreVertIcon />
           </IconButton>
-        </Tooltip>
+        </Tip>
 
         <Menu
           id="main-menu"

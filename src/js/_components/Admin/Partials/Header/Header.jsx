@@ -8,11 +8,11 @@ import { withStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
-import Tooltip from '@material-ui/core/Tooltip'
 
 import Fullscreen from '@material-ui/icons/Fullscreen'
 import FullscreenExit from '@material-ui/icons/FullscreenExit'
 
+import Tip from 'Common'
 import Title from './Title'
 import MainMenu from './MainMenu'
 
@@ -70,26 +70,22 @@ class Header extends Component {
 
           <div className={ classes.menus }>
             {!full_screen &&
-              <Tooltip
-                id="tooltip_go_fullscreen"
-                title={ t(`Go fullscreen mode`) }
-                enterDelay={ 500 }
+              <Tip
+                content={ t(`Go fullscreen mode`) }
               >
                 <IconButton onClick={ this.goFullscreen } color="inherit">
                   <Fullscreen />
                 </IconButton>
-              </Tooltip>
+              </Tip>
             }
             {full_screen &&
-              <Tooltip
-                id="tooltip_exit_fullscreen"
-                title={ t(`Exit fullscreen mode`) }
-                enterDelay={ 500 }
+              <Tip
+                content={ t(`Exit fullscreen mode`) }
               >
                 <IconButton onClick={ this.goOutFullscreen } color="inherit">
                   <FullscreenExit />
                 </IconButton>
-              </Tooltip>
+              </Tip>
             }
 
             <MainMenu />

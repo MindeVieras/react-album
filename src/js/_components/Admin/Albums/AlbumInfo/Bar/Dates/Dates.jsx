@@ -6,7 +6,6 @@ import moment from 'moment'
 
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import Tooltip from '@material-ui/core/Tooltip'
 import IconButton from '@material-ui/core/IconButton'
 
 import Edit from '@material-ui/icons/Edit'
@@ -14,6 +13,7 @@ import Edit from '@material-ui/icons/Edit'
 import grey from '@material-ui/core/colors/grey'
 import lightBlue from '@material-ui/core/colors/lightBlue'
 
+import Tip from 'Common'
 import Picker from './Picker'
 import TimeAgo from './TimeAgo'
 import SimpleModal from '../../../../../Common/Modals'
@@ -35,9 +35,11 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit / 2,
     marginTop: theme.spacing.unit / 4
   },
-  button: {
+  buttonTipWrapper: {
     position: `absolute`,
-    right: 0,
+    right: 0
+  },
+  button: {
     width: 32,
     height: 32
   },
@@ -94,10 +96,9 @@ class Dates extends Component {
 
 
         {showEditBtn &&
-          <Tooltip
-            id="tooltip_edit_album_dates"
-            title={ t(`Edit album dates`) }
-            enterDelay={ 500 }
+          <Tip
+            content={ t(`Edit album dates`) }
+            className={ classes.buttonTipWrapper }
           >
             <IconButton
               className={ classes.button }
@@ -105,7 +106,7 @@ class Dates extends Component {
             >
               <Edit className={ classes.edit_btn } />
             </IconButton>
-          </Tooltip>
+          </Tip>
         }
 
         <SimpleModal

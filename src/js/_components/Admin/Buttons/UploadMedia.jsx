@@ -4,24 +4,27 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import { withStyles } from '@material-ui/core/styles'
-import Tooltip from '@material-ui/core/Tooltip'
 import Button from '@material-ui/core/Button'
 
 import CloudUpload from '@material-ui/icons/CloudUpload'
 
 import green from '@material-ui/core/colors/green'
 
+import Tip from 'Common'
+
 import { albumsActions } from '../../../_actions'
 
 const styles = theme => ({
-  button: {
+  buttonTipWrapper: {
     position: `fixed`,
     right: theme.spacing.unit * 14,
     bottom: 0,
     margin: theme.spacing.unit,
-    zIndex: theme.zIndex.appBar,
-    color: theme.palette.common.white,
-    backgroundColor: green[500]
+    zIndex: theme.zIndex.appBar
+  },
+  button: {
+    backgroundColor: green[500],
+    color: theme.palette.common.white
   }
 })
 
@@ -49,10 +52,9 @@ class UploadMedia extends Component {
 
     return (
       <Fragment>
-        <Tooltip
-          id="tooltip_upload_media"
-          title={ t(`Upload media`) }
-          enterDelay={ 500 }
+        <Tip
+          content={ t(`Upload media`) }
+          className={ classes.buttonTipWrapper }
         >
           <Button
             onClick={ () => this.handleClick() }
@@ -64,7 +66,7 @@ class UploadMedia extends Component {
           >
             <CloudUpload />
           </Button>
-        </Tooltip>
+        </Tip>
         <input
           multiple={ true }
           ref="fileUploader"

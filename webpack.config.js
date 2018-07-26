@@ -17,7 +17,10 @@ module.exports = {
         filename: 'js/bundle.min.js'
     },
     resolve: {
-        extensions: ['.js', '.jsx']
+        extensions: ['.js', '.jsx'],
+        alias: {
+            Common: process.cwd()+'/src/js/_components/Common'
+        }
     },
     module: {
         rules: [

@@ -2,8 +2,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { DropTarget } from 'react-dnd'
-import uuidv4 from 'uuid/v4'
-import ReactTooltip from 'react-tooltip'
 import moment from 'moment'
 
 import { withStyles } from '@material-ui/core/styles'
@@ -11,6 +9,8 @@ import MuiListItem from '@material-ui/core/ListItem'
 import Typography from '@material-ui/core/Typography'
 
 import blueGrey from '@material-ui/core/colors/blueGrey'
+
+import Tip from 'Common'
 
 import { utilsConstants } from '../../../../../_constants'
 
@@ -38,7 +38,6 @@ class ListItem extends Component {
   }
 
   render() {
-    const tooltipId = uuidv4()
     const {
       classes,
       active,
@@ -57,27 +56,23 @@ class ListItem extends Component {
       <li
         className={ `${activeClass} ${dndClass}` }
         onClick={ () => this.handleClick(active, album_id) }
-        data-tip
-        data-for={ tooltipId }
       >
-        <MuiListItem
-          button
-          className={ classes.item }
+        <Tip
+          content={ moment(start_date).format('YYYY-MM-DD') }
+          followCursor={ true }
         >
-
-          <Typography
-            variant="body2"
-            color="inherit"
+          <MuiListItem
+            button
+            className={ classes.item }
           >
-            { name }
-          </Typography>
-          <ReactTooltip
-            id={ tooltipId }
-            delayShow={ 400 }
-          >
-            { moment(start_date).format('YYYY-MM-DD') }
-          </ReactTooltip>
-        </MuiListItem>
+            <Typography
+              variant="body2"
+              color="inherit"
+            >
+              { name }
+            </Typography>
+          </MuiListItem>
+        </Tip>
       </li>
     )
   }
