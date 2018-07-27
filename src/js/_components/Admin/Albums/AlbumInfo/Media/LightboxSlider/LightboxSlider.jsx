@@ -24,62 +24,17 @@ const styles = theme => ({
     alignItems: `center`
   },
   lightbox: {
-    // display: `flex`,
     position: `relative`,
     width: `100%`,
     height: `100%`,
-    // backgroundColor: theme.palette.background.paper,
-    // boxShadow: theme.shadows[5]
   },
   slickSlider: {
-    height: `100%`,
+
+  },
+  slideWrapper: {
     display: `flex`,
     alignItems: `center`,
     justifyContent: `center`
-    // position: relative;
-
-    // display: block;
-    // box-sizing: border-box;
-
-    // -webkit-user-select: none;
-    //    -moz-user-select: none;
-    //     -ms-user-select: none;
-    //         user-select: none;
-
-    // -webkit-touch-callout: none;
-    // -khtml-user-select: none;
-    // -ms-touch-action: pan-y;
-    //     touch-action: pan-y;
-    // -webkit-tap-highlight-color: transparent;
-
-    // position: `absolute`,
-    // width: `100%`,
-    // height: `100%`,
-    // overflow: `hidden`
-  },
-  sliderTray: {
-    display: `flex`,
-    height: `100%`,
-    transition: `all 0.3s cubic-bezier(0.4, 0, 0.6, 1)`
-  },
-  slide: {
-    display: `flex`
-  },
-  slideInner: {
-    flex: 1
-  },
-  imageBg: {
-    backgroundRepeat: `no-repeat`,
-    backgroundPosition: `center`,
-    backgroundSize: `contain`
-  },
-  imageClassHor: {
-    width: `100%`,
-    height: `auto`
-  },
-  imageClassVer: {
-    width: `auto`,
-    height: `100%`
   }
 })
 
@@ -114,22 +69,36 @@ class LightboxSlider extends Component {
       let clientRatio = clientWidth / clientHeight
       let mediaRatio = mediaWidth / mediaHeight
 
-      let imageClass = classes.imageClassHor
-      if (clientRatio > mediaRatio) {
-        imageClass = classes.imageClassVer
+      if (mediaWidth > clientWidth || mediaHeight > clientHeight) {
+
+        mediaWidth = clientWidth
+        mediaHeight = clientHeight
+
+        let mH = clientWidth / mediaRatio
+        let mW = clientHeight * mediaRatio
+
+        if (mediaRatio > clientRatio)
+          mediaHeight = mH
+        else
+          mediaWidth = mW
+
       }
 
       if (mime.includes('image')) {
         return (
           <div key={ i }>
             <div
-              className={ classes.imageBg }
+              className={ classes.slideWrapper }
               style={{
-                backgroundImage: `url(${m.thumbs.fullhd})`,
                 width: clientWidth,
                 height: clientHeight
               }}
             >
+              <img
+                src={ m.thumbs.fullhd }
+                width={ mediaWidth }
+                height={ mediaHeight }
+              />
             </div>
           </div>
         )
