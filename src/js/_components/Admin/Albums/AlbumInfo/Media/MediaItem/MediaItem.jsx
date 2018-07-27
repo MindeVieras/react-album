@@ -77,7 +77,7 @@ class MediaItem extends Component {
   }
 
   openLightbox(id) {
-    this.props.dispatch(adminUiActions.lightboxOpen(0))
+    this.props.dispatch(adminUiActions.lightboxOpen(id))
   }
 
   render() {

@@ -19,6 +19,7 @@ const styles = theme => ({
     padding: 0,
     margin: 0,
     height: 80,
+    zIndex: 1,
     '&:hover, &$focusVisible': {
       backgroundColor: grey[800]
     }
