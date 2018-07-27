@@ -2,15 +2,16 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel'
+import Slider from 'react-slick'
 
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Modal from '@material-ui/core/Modal'
 import IconButton from '@material-ui/core/IconButton'
 
-import ChevronLeft from '@material-ui/icons/ChevronLeft'
-import ChevronRight from '@material-ui/icons/ChevronRight'
+import grey from '@material-ui/core/colors/grey'
+
+import { PrevArrow, NextArrow } from './Arrows'
 
 import { adminUiActions } from '../../../../../../_actions'
 
@@ -24,7 +25,7 @@ const styles = theme => ({
   },
   paper: {
     position: `relative`,
-    width: `98%`,
+    width: `90%`,
     height: `98%`,
     // backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5]
@@ -37,7 +38,8 @@ const styles = theme => ({
   },
   sliderTray: {
     display: `flex`,
-    height: `100%`
+    height: `100%`,
+    transition: `all 0.3s cubic-bezier(0.4, 0, 0.6, 1)`
   },
   slide: {
     display: `flex`
@@ -51,20 +53,6 @@ const styles = theme => ({
     backgroundSize: `contain`,
     width: `100%`,
     height: `100%`
-  },
-  prevNextBtns: {
-    position: `absolute`,
-    top: `50%`,
-    background: `none`,
-    border: `none`,
-    padding: 0,
-    margin: 0
-  },
-  prevBtn: {
-    left: 0
-  },
-  nextBtn: {
-    right: 0
   }
 })
 
@@ -90,28 +78,30 @@ class LightboxSlider extends Component {
 
       if (mime.includes('image')) {
         return (
-          <Slide
-            index={ i }
-            key={ m.id }
-            className={ classes.slide }
-            innerClassName={ classes.slideInner }
-            tag="div"
+          <div
+            className={ classes.imageBg }
+            key={ i }
           >
-            <div
-              className={ classes.imageBg }
-              style={{ backgroundImage: `url(${m.thumbs.fullhd})` }}
-            >
-
-            </div>
-          </Slide>
+            <img src={ m.thumbs.fullhd } />
+          </div>
         )
       }
       else {
         return (
-          <div><Typography>Unsuported format</Typography></div>
+          <div key={ i }><Typography>Unsuported format</Typography></div>
         )
       }
     })
+
+    const slickSettings = {
+      dots: true,
+      infinite: false,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      nextArrow: <NextArrow />,
+      prevArrow: <PrevArrow />
+    }
 
     return (
       <Modal
@@ -122,31 +112,9 @@ class LightboxSlider extends Component {
         BackdropProps={{ classes: { root: classes.backdrop } }}
       >
         <div className={ classes.paper }>
-          <CarouselProvider
-            totalSlides={ media.length }
-            currentSlide={ initialSlide }
-          >
-            <Slider
-              classNameTrayWrap={ classes.slider }
-              classNameTray={ classes.sliderTray }
-              trayTag="div"
-            >
-              { slides }
-            </Slider>
-
-            <ButtonBack
-              className={ `${classes.prevNextBtns} ${classes.prevBtn}` }
-            >
-              <ChevronLeft fontSize={ 42 } />
-            </ButtonBack>
-
-            <ButtonNext
-              className={ `${classes.prevNextBtns} ${classes.nextBtn}` }
-            >
-              <ChevronRight fontSize={ 42 } />
-            </ButtonNext>
-
-          </CarouselProvider>
+          <Slider { ...slickSettings }>
+            { slides }
+          </Slider>
         </div>
       </Modal>
     )
