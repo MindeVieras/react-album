@@ -13,8 +13,7 @@ import { albumsActions } from '../../../../../_actions'
 const styles = theme => ({
   list: {
     display: `flex`,
-    flexWrap: `wrap`,
-    // alignItems: `flex-start`
+    flexWrap: `wrap`
   }
 })
 
@@ -39,32 +38,26 @@ class MediaList extends Component {
   }
 
   setMediaGrid(props) {
+
     const { pager, wrapper_width, wrapper_height, dispatch } = props
-    let cols = pager.cols,
-        rows = pager.rows
+    let { cols, rows } = pager
 
-    if (wrapper_width < 480) {
+    if (wrapper_width < 480)
       cols = 1
-    }
-    if (wrapper_width < 680 && wrapper_width >= 480) {
+    if (wrapper_width < 680 && wrapper_width >= 480)
       cols = 2
-    }
-    else if (wrapper_width >= 680 && wrapper_width < 1000) {
+    else if (wrapper_width >= 680 && wrapper_width < 1000)
       cols = 3
-    }
-    else if (wrapper_width >= 1000) {
+    else if (wrapper_width >= 1000)
       cols = 4
-    }
 
-    if (wrapper_height < 400) {
+    if (wrapper_height < 400)
       rows = 1
-    } else if (wrapper_height >= 400) {
+    else if (wrapper_height >= 400)
       rows = 2
-    }
 
-    if (pager.cols != cols || pager.rows != rows) {
+    if (pager.cols != cols || pager.rows != rows)
       dispatch(albumsActions.setMediaPagerGrid(cols, rows))
-    }
   }
 
   render() {
@@ -75,25 +68,26 @@ class MediaList extends Component {
     const currentFiles = files.slice(firstList, lastList)
 
     let { cols, rows} = pager
+
     let gap_width = 12
     let gap_height = 12
 
     let vertGaps = (cols + 1) * gap_width
     let horiGaps = (rows + 1) * gap_height
+
     let item_width = (wrapper_width - vertGaps) / cols
     let item_height = (wrapper_height - horiGaps) / rows
-    let ulStyle = {
-      width: wrapper_width,
-      height: wrapper_height,
-      paddingLeft: gap_width,
-      paddingTop: gap_height
-    }
 
     return (
       <List
         className={ classes.list }
-        style={ ulStyle }
         disablePadding={ true }
+        style={{
+          width: wrapper_width,
+          height: wrapper_height,
+          paddingLeft: gap_width,
+          paddingTop: gap_height
+        }}
       >
         {currentFiles.map((file, i) => (
           <MediaItem

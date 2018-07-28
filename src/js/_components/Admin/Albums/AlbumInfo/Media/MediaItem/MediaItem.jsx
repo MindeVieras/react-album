@@ -81,41 +81,28 @@ class MediaItem extends Component {
   }
 
   render() {
+
     const {
-      classes,
+      classes, uploader, connectDragSource,
+      item_width, item_height, gap_width, gap_height,
       id, media_id,
       status, fromServer,
-      mime,
-      metadata,
-      filename, filesize,
-      rekognition_labels,
-      thumbs, videos, uploader,
-      item_width, item_height,
-      gap_width, gap_height,
-      connectDragSource
+      mime, filename, filesize,
+      metadata, rekognition_labels,
+      thumbs, videos
     } = this.props
 
-    // console.log(item_gap)
+    // console.log(this.props)
     let thumb
 
-    let itemStyle = {
-      height: item_height,
-      width: item_width,
-      marginRight: gap_width,
-      marginBottom: gap_height
-    }
-
-    let footerHeight = 50
-    let height = item_height - footerHeight // substract item footer
     if (fromServer) {
       thumb = <ThumbnailSrv
         width={ item_width }
-        height={ height }
+        height={ item_height - 50 } // substract item footer
         mime={ mime }
         videos={ videos }
         thumbs={ thumbs }
         metadata={ metadata }
-        uploader={ uploader }
         onClick={ () => this.openLightbox(id) }
       />
     }
@@ -133,7 +120,12 @@ class MediaItem extends Component {
     return connectDragSource(
       <li
         className={ classes.item }
-        style={ itemStyle }
+        style={{
+          height: item_height,
+          width: item_width,
+          marginRight: gap_width,
+          marginBottom: gap_height
+        }}
       >
         <Paper className={ classes.paperRoot }>
 
@@ -232,9 +224,14 @@ class MediaItem extends Component {
 MediaItem.propTypes = {
   classes: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
+  uploader: PropTypes.object.isRequired,
   connectDragSource: PropTypes.func.isRequired,
   connectDragPreview: PropTypes.func.isRequired,
   isDragging: PropTypes.bool.isRequired,
+  item_width: PropTypes.number.isRequired,
+  item_height: PropTypes.number.isRequired,
+  gap_width: PropTypes.number.isRequired,
+  gap_height: PropTypes.number.isRequired,
   id: PropTypes.number.isRequired,
   filename: PropTypes.string,
   filesize: PropTypes.number,

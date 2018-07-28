@@ -1,61 +1,67 @@
 
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import ReactPlayer from 'react-player'
 
-import Spinner from '../../../../Partials/Spinner'
+import { withStyles } from '@material-ui/core/styles'
+
 import { IoAlertCircled } from 'react-icons/lib/io'
+
+import { fitMediaToWrapper } from '../../../../../../_helpers'
+
+const styles = theme => ({
+  root: {
+    display: `flex`,
+    justifyContent: `center`,
+    alignItems: `center`
+  },
+  image: {
+    cursor: `zoom-in`
+  }
+})
 
 class ThumbnailSrv extends Component {
 
   render() {
-    const { onClick, width, height, mime, thumbs, videos } = this.props
-    let sizeStyle = {
-      height: height,
-      width: width
-    }
+    const { classes, onClick, width, height, mime, thumbs, videos, metadata } = this.props
+
+    const mediaSize = fitMediaToWrapper(width, height, metadata.width, metadata.height)
+    let sizeStyle = { height, width }
+
+    let item = <span>Unsupoerted media type</span>
+
     if (mime.includes('image')) {
-      const style = {
-        ...sizeStyle,
-        backgroundImage: `url(${thumbs.thumb})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',
-        backgroundSize: 'contain'
-      }
-      return (
-        <div
-          className="uploader-thumbnail image"
-          style={ style }
-          onClick={ onClick }
-        >
-        </div>
-      )
+      item = <img
+        src={ thumbs.thumb }
+        onClick={ onClick }
+        width={ mediaSize.width }
+        height={ mediaSize.height }
+        className={ classes.image }
+      />
     }
     else if (mime.includes('video')) {
-      return (
-        <div
-          className="uploader-thumbnail video"
-          style={{ ...sizeStyle, overflow: `hidden`, display: `flex`, alignItems: `center`, justifyContent: `center` }}
-        >
-          {videos &&
-            <ReactPlayer
-              url={ videos.video }
-              controls={ true }
-              width={ width }
-              height={ height }
-            />
-          }
-        </div>
-      )
+      item = <ReactPlayer
+        url={ videos.video }
+        controls={ true }
+        width={ mediaSize.width }
+        height={ mediaSize.height }
+      />
     }
-    else {
-      return <span />
-    }
+
+    return (
+      <div
+        className={ classes.root }
+        style={ sizeStyle }
+      >
+        { item }
+      </div>
+    )
   }
 
 }
 
 ThumbnailSrv.propTypes = {
+  classes: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
@@ -69,4 +75,4 @@ ThumbnailSrv.defaultProps = {
   mime: ''
 }
 
-export default ThumbnailSrv
+export default withStyles(styles)(ThumbnailSrv)

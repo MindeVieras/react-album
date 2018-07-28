@@ -14,6 +14,7 @@ import grey from '@material-ui/core/colors/grey'
 
 import { PrevArrow, NextArrow } from './Arrows'
 
+import { fitMediaToWrapper } from '../../../../../../_helpers'
 import { adminUiActions } from '../../../../../../_actions'
 
 const styles = theme => ({
@@ -66,26 +67,8 @@ class LightboxSlider extends Component {
       const { id, mime, metadata, videos } = m
 
       if (metadata && metadata.width && metadata.height) {
-        let mediaWidth = metadata.width
-        let mediaHeight = metadata.height
 
-        let clientRatio = clientWidth / clientHeight
-        let mediaRatio = mediaWidth / mediaHeight
-
-        if (mediaWidth > clientWidth || mediaHeight > clientHeight) {
-
-          mediaWidth = clientWidth
-          mediaHeight = clientHeight
-
-          let mH = clientWidth / mediaRatio
-          let mW = clientHeight * mediaRatio
-
-          if (mediaRatio > clientRatio)
-            mediaHeight = mH
-          else
-            mediaWidth = mW
-
-        }
+        const mediaFitSize = fitMediaToWrapper(clientWidth, clientHeight, metadata.width, metadata.height)
 
         if (mime.includes('image')) {
           return (
@@ -99,8 +82,8 @@ class LightboxSlider extends Component {
               >
                 <img
                   src={ m.thumbs.fullhd }
-                  width={ mediaWidth }
-                  height={ mediaHeight }
+                  width={ mediaFitSize.width }
+                  height={ mediaFitSize.height }
                 />
               </div>
             </div>
@@ -120,8 +103,8 @@ class LightboxSlider extends Component {
                   <ReactPlayer
                     url={ videos.video }
                     controls={ true }
-                    width={ mediaWidth }
-                    height={ mediaHeight }
+                    width={ mediaFitSize.width }
+                    height={ mediaFitSize.height }
                   />
                 }
               </div>
@@ -156,7 +139,6 @@ class LightboxSlider extends Component {
         className={ classes.root }
         open={ isOpen }
         onClose={ () => this.handleClose() }
-        disableAutoFocus={ true }
         BackdropProps={{ classes: { root: classes.backdrop } }}
       >
         <div className={ classes.lightbox }>
