@@ -25,6 +25,7 @@ import StatusGenerateImageThumbsIcon from '../Icons/StatusGenerateImageThumbs'
 import StatusGenerateVideosIcon from '../Icons/StatusGenerateVideos'
 import StatusRekognitionLabelsIcon from '../Icons/StatusRekognitionLabels'
 
+import { fitMediaToWrapper } from '../../../../../../_helpers'
 import { utilsConstants } from '../../../../../../_constants'
 import { albumsActions, adminUiActions } from '../../../../../../_actions'
 
@@ -35,6 +36,11 @@ const styles = theme => ({
   paperRoot: {
     backgroundColor: blueGrey[800],
     position: `relative`
+  },
+  thumbWrapper: {
+    display: `flex`,
+    justifyContent: `center`,
+    alignItems: `center`
   },
   footer: {
     paddingLeft: theme.spacing.unit,
@@ -92,13 +98,17 @@ class MediaItem extends Component {
       thumbs, videos
     } = this.props
 
+    let itemWidth = item_width
+    let itemHeight = item_height - 50  // substract item footer
+
     // console.log(this.props)
     let thumb
 
     if (fromServer) {
+      const mediaSize = fitMediaToWrapper(itemWidth, itemHeight, metadata.width, metadata.height)
       thumb = <ThumbnailSrv
-        width={ item_width }
-        height={ item_height - 50 } // substract item footer
+        width={ mediaSize.width }
+        height={ mediaSize.height }
         mime={ mime }
         videos={ videos }
         thumbs={ thumbs }
@@ -109,8 +119,8 @@ class MediaItem extends Component {
     else if (mime) {
       thumb = <Thumbnail
         id={ id }
-        width={ item_width }
-        height={ height }
+        width={ itemWidth }
+        height={ itemHeight }
         mime={ mime }
         videos={ videos }
         uploader={ uploader }
@@ -129,7 +139,15 @@ class MediaItem extends Component {
       >
         <Paper className={ classes.paperRoot }>
 
-          { thumb }
+          <div
+            className={ classes.thumbWrapper }
+            style={{
+              width: itemWidth,
+              height: itemHeight
+            }}
+          >
+            { thumb }
+          </div>
 
           <ProgressBar
             id={ id }
@@ -196,7 +214,7 @@ class MediaItem extends Component {
 
               <Filename
                 filename={ filename }
-                width={ item_width - 90 }
+                width={ itemWidth - 90 }
                 className={ classes.nameSizeText }
               />
 

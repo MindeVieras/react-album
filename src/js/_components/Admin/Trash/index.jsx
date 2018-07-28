@@ -8,15 +8,14 @@ import { IoTrashA } from 'react-icons/lib/io'
 import MediaItem from './MediaItem'
 import AlbumsItem from './AlbumsItem'
 
-import { headerActions, footerActions, trashActions } from '../../../_actions'
+import { headerActions, trashActions } from '../../../_actions'
 
 class TrashPage extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props
-    dispatch(headerActions.setTitle('Trash'))
-    dispatch(footerActions.buttonsClear())
 
+    dispatch(headerActions.setTitle('Trash'))
     dispatch(trashActions.getList())
   }
 

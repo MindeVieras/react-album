@@ -1,5 +1,5 @@
 
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import ReactPlayer from 'react-player'
 
@@ -17,7 +17,9 @@ class Thumbnail extends Component {
   }
 
   componentDidMount() {
+
     const { id, height, width, mime } = this.props
+
     if (mime.includes('image')) {
       this.props.uploader.methods.drawThumbnail(
         id,
@@ -52,17 +54,14 @@ class Thumbnail extends Component {
     const { width, height, mime, videos } = this.props
     if (mime.includes('image')) {
       return (
-        <div
-          className="uploader-thumbnail image"
-          style={{height: height, width: width}}
-        >
+        <Fragment>
           <canvas
             className="thumbnail"
             hidden={ !this.state.drawComplete || this._failure }
             ref={ component => this._canvas = component }
           />
           { this._maybePlaceholder }
-        </div>
+        </Fragment>
       )
     }
     else if (mime.includes('video')) {
@@ -126,9 +125,13 @@ Thumbnail.propTypes = {
   id: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
-  videos: PropTypes.object,
   uploader: PropTypes.object.isRequired,
-  mime: PropTypes.string.isRequired
+  mime: PropTypes.string.isRequired,
+  videos: PropTypes.object
+}
+
+Thumbnail.defaultProps = {
+  videos: null
 }
 
 export default Thumbnail

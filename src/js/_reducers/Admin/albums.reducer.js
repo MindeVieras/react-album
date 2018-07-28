@@ -14,11 +14,6 @@ const initialState = {
       per_page: 1
     }
   },
-  lightbox: {
-    is_open: false,
-    index: 0,
-    items: []
-  },
   list: {
     loading: false,
     err: false,
