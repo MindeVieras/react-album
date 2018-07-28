@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Player } from 'video-react'
+import ReactPlayer from 'react-player'
 
 import Spinner from '../../../../Partials/Spinner'
 import { IoAlertCircled } from 'react-icons/lib/io'
@@ -72,10 +72,11 @@ class Thumbnail extends Component {
           style={{height: height, width: width}}
         >
           {videos &&
-            <Player
-              playsInline
-              // poster="/assets/poster.png"
-              src={ videos.video }
+            <ReactPlayer
+              url={ videos.video }
+              controls={ true }
+              width={ width }
+              height={ height }
             />
           }
           { this._maybePlaceholder }

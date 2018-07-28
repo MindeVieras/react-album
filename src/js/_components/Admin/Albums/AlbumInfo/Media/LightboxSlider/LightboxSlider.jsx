@@ -3,7 +3,7 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Slider from 'react-slick'
-import { Player } from 'video-react'
+import ReactPlayer from 'react-player'
 
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
@@ -115,10 +115,11 @@ class LightboxSlider extends Component {
               }}
             >
               {videos &&
-                <Player
-                  playsInline
-                  // poster="/assets/poster.png"
-                  src={ videos.video }
+                <ReactPlayer
+                  url={ videos.video }
+                  controls={ true }
+                  width={ mediaWidth }
+                  height={ mediaHeight }
                 />
               }
             </div>

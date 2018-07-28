@@ -40,6 +40,7 @@
     "react-paginate": "^5.2.3",
     "react-perfect-scrollbar": "^1.1.1",
     "react-places-autocomplete": "^7.1.2",
+    "react-player": "^1.6.4",
     "react-popup": "^0.9.3",
     "react-redux": "^5.0.6",
     "react-redux-toastr": "^7.2.6",
@@ -57,7 +58,6 @@
     "redux-thunk": "^2.3.0",
     "superagent": "^3.8.3",
     "uuid": "^3.1.0",
-    "video-react": "^0.10.9",
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
