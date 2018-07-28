@@ -3,6 +3,7 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Slider from 'react-slick'
+import { Player } from 'video-react'
 
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
@@ -62,9 +63,9 @@ class LightboxSlider extends Component {
 
     const slides = media.map((m, i) => {
 
-      const { id, mime } = m
-      let mediaWidth = m.metadata.width
-      let mediaHeight = m.metadata.height
+      const { id, mime, metadata, videos } = m
+      let mediaWidth = metadata.width
+      let mediaHeight = metadata.height
 
       let clientRatio = clientWidth / clientHeight
       let mediaRatio = mediaWidth / mediaHeight
@@ -99,6 +100,27 @@ class LightboxSlider extends Component {
                 width={ mediaWidth }
                 height={ mediaHeight }
               />
+            </div>
+          </div>
+        )
+      }
+      else if (mime.includes('video')) {
+        return (
+          <div key={ i }>
+            <div
+              className={ classes.slideWrapper }
+              style={{
+                width: clientWidth,
+                height: clientHeight
+              }}
+            >
+              {videos &&
+                <Player
+                  playsInline
+                  // poster="/assets/poster.png"
+                  src={ videos.video }
+                />
+              }
             </div>
           </div>
         )
