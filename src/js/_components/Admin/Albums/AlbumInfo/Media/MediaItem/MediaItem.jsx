@@ -114,6 +114,7 @@ class MediaItem extends Component {
         mime={ mime }
         videos={ videos }
         thumbs={ thumbs }
+        metadata={ metadata }
         uploader={ uploader }
         onClick={ () => this.openLightbox(id) }
       />

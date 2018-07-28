@@ -34,13 +34,18 @@ class UploadMedia extends Component {
     this.state = {
       key: newKey()
     }
-
-    this.onFilesSelected = onFilesSelected.bind(this)
-    this.handleClick = this.handleClick.bind(this)
   }
 
   handleClick(e) {
     this.refs.fileUploader.click()
+  }
+
+
+  onFilesSelected(e) {
+    const { uploader } = this.props
+
+    uploader.methods.addFiles(e.target)
+    this._resetInput()
   }
 
   render() {
@@ -70,8 +75,8 @@ class UploadMedia extends Component {
           ref="fileUploader"
           className="uploader-file-input"
           key={ this.state.key }
-          onChange={ this._onFilesSelected }
-          style={{display: 'none'}}
+          onChange={ (e) => this.onFilesSelected(e) }
+          style={{ display: 'none' }}
           name="file"
           type="file"
         />
@@ -83,12 +88,6 @@ class UploadMedia extends Component {
   _resetInput() {
     this.setState({ key: newKey() })
   }
-}
-
-const onFilesSelected = onChangeEvent => {
-  const { uploader } = this.props
-  uploader.methods.addFiles(onChangeEvent.target)
-  this._resetInput()
 }
 
 const newKey = () => Date.now()

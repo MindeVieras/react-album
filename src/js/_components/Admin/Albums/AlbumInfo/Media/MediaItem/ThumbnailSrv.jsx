@@ -61,6 +61,7 @@ ThumbnailSrv.propTypes = {
   height: PropTypes.number.isRequired,
   thumbs: PropTypes.object,
   videos: PropTypes.object,
+  metadata: PropTypes.object,
   mime: PropTypes.string
 }
 

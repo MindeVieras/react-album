@@ -64,73 +64,80 @@ class LightboxSlider extends Component {
     const slides = media.map((m, i) => {
 
       const { id, mime, metadata, videos } = m
-      let mediaWidth = metadata.width
-      let mediaHeight = metadata.height
 
-      let clientRatio = clientWidth / clientHeight
-      let mediaRatio = mediaWidth / mediaHeight
+      if (metadata && metadata.width && metadata.height) {
+        let mediaWidth = metadata.width
+        let mediaHeight = metadata.height
 
-      if (mediaWidth > clientWidth || mediaHeight > clientHeight) {
+        let clientRatio = clientWidth / clientHeight
+        let mediaRatio = mediaWidth / mediaHeight
 
-        mediaWidth = clientWidth
-        mediaHeight = clientHeight
+        if (mediaWidth > clientWidth || mediaHeight > clientHeight) {
 
-        let mH = clientWidth / mediaRatio
-        let mW = clientHeight * mediaRatio
+          mediaWidth = clientWidth
+          mediaHeight = clientHeight
 
-        if (mediaRatio > clientRatio)
-          mediaHeight = mH
-        else
-          mediaWidth = mW
+          let mH = clientWidth / mediaRatio
+          let mW = clientHeight * mediaRatio
 
-      }
+          if (mediaRatio > clientRatio)
+            mediaHeight = mH
+          else
+            mediaWidth = mW
 
-      if (mime.includes('image')) {
-        return (
-          <div key={ i }>
-            <div
-              className={ classes.slideWrapper }
-              style={{
-                width: clientWidth,
-                height: clientHeight
-              }}
-            >
-              <img
-                src={ m.thumbs.fullhd }
-                width={ mediaWidth }
-                height={ mediaHeight }
-              />
-            </div>
-          </div>
-        )
-      }
-      else if (mime.includes('video')) {
-        return (
-          <div key={ i }>
-            <div
-              className={ classes.slideWrapper }
-              style={{
-                width: clientWidth,
-                height: clientHeight
-              }}
-            >
-              {videos &&
-                <ReactPlayer
-                  url={ videos.video }
-                  controls={ true }
+        }
+
+        if (mime.includes('image')) {
+          return (
+            <div key={ i }>
+              <div
+                className={ classes.slideWrapper }
+                style={{
+                  width: clientWidth,
+                  height: clientHeight
+                }}
+              >
+                <img
+                  src={ m.thumbs.fullhd }
                   width={ mediaWidth }
                   height={ mediaHeight }
                 />
-              }
+              </div>
             </div>
-          </div>
-        )
+          )
+        }
+        else if (mime.includes('video')) {
+          return (
+            <div key={ i }>
+              <div
+                className={ classes.slideWrapper }
+                style={{
+                  width: clientWidth,
+                  height: clientHeight
+                }}
+              >
+                {videos &&
+                  <ReactPlayer
+                    url={ videos.video }
+                    controls={ true }
+                    width={ mediaWidth }
+                    height={ mediaHeight }
+                  />
+                }
+              </div>
+            </div>
+          )
+        }
+        else {
+          return (
+            <div key={ i }><Typography>Unsuported format</Typography></div>
+          )
+        }
       }
       else {
-        return (
-          <div key={ i }><Typography>Unsuported format</Typography></div>
-        )
+        return <div key={ i }>Still uploading...</div>
       }
+
     })
 
     const slickSettings = {
