@@ -1,6 +1,4 @@
 
-import { toastr } from 'react-redux-toastr'
-
 import { trashConstants } from '../../_constants'
 import { trashService } from '../../_services'
 
@@ -37,10 +35,8 @@ function restore(id) {
       .then(res => {
         if (res.ack == 'ok') {
           dispatch(success(id))
-          toastr.success('Success', res.msg)
         } else {
           dispatch(failure(id, res.msg))
-          toastr.error('Error', res.msg)
         }
       })
   }
@@ -58,10 +54,8 @@ function _delete(id) {
       .then(res => {
         if (res.ack == 'ok') {
           dispatch(success(id))
-          toastr.success('Success', res.msg)
         } else {
           dispatch(failure(id, res.msg))
-          toastr.error('Error', res.msg)
         }
       })
   }

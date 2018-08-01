@@ -3,8 +3,9 @@ import  React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { IoBackspace } from 'react-icons/lib/io'
-import { RingLoader } from 'react-spinners'
+import Button from '@material-ui/core/Button'
+
+import RestoreIcon from '@material-ui/icons/Restore'
 
 import { trashActions } from '../../../../_actions'
 
@@ -16,33 +17,23 @@ class RestoreButton extends Component {
   }
 
   render() {
-    const { restoring } = this.props
-    let content = ''
-    if (restoring) {
-      content = <RingLoader />
-    }
-    else {
-      content = <IoBackspace />
-    }
     return (
-      <div
+      <Button
+        variant="contained"
+        size="small"
+        color="primary"
         onClick={() => this.handleClick()}
-        className="restore-button"
       >
-        { content }
-      </div>
+        <RestoreIcon />
+        Restore
+      </Button>
     )
   }
 }
 
 RestoreButton.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  id: PropTypes.number.isRequired,
-  restoring: PropTypes.bool
-}
-
-RestoreButton.defaultProps = {
-  restoring: false
+  id: PropTypes.number.isRequired
 }
 
 export default connect()(RestoreButton)

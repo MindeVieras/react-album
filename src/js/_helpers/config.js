@@ -32,3 +32,20 @@ export function fitMediaToWrapper(wrapW, wrapH, mediaW, mediaH) {
 
   return mediaSize
 }
+
+// draw image into canvas
+export function drawCanvasImage(canvas, imageSrc) {
+
+  const ctx = canvas.getContext('2d')
+
+  const img = new Image()
+  img.src = imageSrc
+
+  img.onerror = () => {
+    img.src = `http://via.placeholder.com/${canvas.width}x${canvas.height}`
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+  }
+  img.onload = () => {
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+  }
+}
