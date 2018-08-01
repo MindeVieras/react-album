@@ -51,9 +51,6 @@ const styles = theme => ({
   actionsRoot: {
     borderTop: `1px solid ${grey[600]}`
   },
-  actionsAction: {
-    color: theme.spacing.unit
-  },
   metaTableRow: {
     height: theme.spacing.unit * 4.5
   },
