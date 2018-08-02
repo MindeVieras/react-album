@@ -91,7 +91,7 @@ class MediaItem extends Component {
     const {
       classes, uploader, connectDragSource,
       item_width, item_height, gap_width, gap_height,
-      id, media_id,
+      s3_key, id, media_id,
       status, fromServer,
       mime, filename, filesize,
       metadata, rekognition_labels,
@@ -187,7 +187,11 @@ class MediaItem extends Component {
                   />
                 }
                 {videos &&
-                  <StatusGenerateVideosIcon videos={ videos } />
+                  <StatusGenerateVideosIcon
+                    videos={ videos }
+                    id={ id }
+                    s3_key={ s3_key }
+                  />
                 }
                 {status === 'upload successful' &&
                   <div

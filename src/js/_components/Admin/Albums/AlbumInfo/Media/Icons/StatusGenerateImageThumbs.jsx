@@ -2,7 +2,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import _ from 'lodash'
 import uuidv4 from 'uuid/v4'
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu'
 
@@ -22,7 +21,7 @@ class StatusGenerateImageThumbsIcon extends Component {
     this.handleRegenerateThumbs = this.handleRegenerateThumbs.bind(this)
   }
 
-  handleRegenerateThumbs(e) {
+  handleRegenerateThumbs() {
     const { id, media_id, dispatch } = this.props
     dispatch(albumsActions.generateImageThumbs(id, media_id))
   }
@@ -90,7 +89,3 @@ StatusGenerateImageThumbsIcon.propTypes = {
 }
 
 export default connect()(StatusGenerateImageThumbsIcon)
-
-
-
-

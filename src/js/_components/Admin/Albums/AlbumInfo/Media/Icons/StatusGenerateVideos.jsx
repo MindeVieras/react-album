@@ -1,64 +1,92 @@
 
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import ReactTooltip from 'react-tooltip'
+import { connect } from 'react-redux'
 import uuidv4 from 'uuid/v4'
+import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu'
 
 import { ScaleLoader } from 'react-spinners'
 import { IoVideocamera } from 'react-icons/lib/io'
 
-const StatusGenerateVideosIcon = ({ videos }) => {
-  if (videos.video || videos.ack == 'ok') {
-    const tooltipId = uuidv4()
-    return (    
-      <div
-        className="icon success"
-        data-tip
-        data-for={ tooltipId }
-      >
-        <IoVideocamera />
-        <ReactTooltip id={ tooltipId }>
-          Videos generated
-        </ReactTooltip>
-      </div>
-    )
+import Tip from 'Common'
+
+import { albumsActions } from '../../../../../../_actions'
+
+
+class StatusGenerateVideosIcon extends Component {
+
+  constructor() {
+    super()
+
+    this.handleRegenerateVideos = this.handleRegenerateVideos.bind(this)
   }
-  else if (videos.ack == 'loading') {
+
+  handleRegenerateVideos() {
+    const { id, s3_key, dispatch } = this.props
+    dispatch(albumsActions.generateVideos(id, s3_key))
+  }
+
+  render() {
+
+    const contextMenuId = uuidv4()
+
+    const { id, videos } = this.props
+
+    let className = ''
+    let tooltipText = ''
+
+    let icon = <ContextMenuTrigger id={ contextMenuId }>
+      <IoVideocamera />
+    </ContextMenuTrigger>
+
+    let contextMenu = <ContextMenu id={ contextMenuId }>
+      <MenuItem onClick={ this.handleRegenerateVideos }>
+        Regenerate videos
+      </MenuItem>
+    </ContextMenu>
+
+    if (videos.video || videos.ack == 'ok') {
+      className = 'success'
+      tooltipText = 'Videos generated'
+    }
+    else if (videos.ack == 'loading') {
+      className = 'loading'
+      tooltipText = videos.msg
+      icon = <ScaleLoader
+        height={ 22 }
+        width={ 1 }
+        margin={ '1px' }
+        color={'#f6f6f5'}
+      />
+    }
+    else if (vides.ack == 'err') {
+      className = 'failed'
+      tooltipText = videos.msg
+    }
+
     return (
-      <div
-        className="icon loading"
-      >
-        <ScaleLoader
-          height={ 22 }
-          width={ 1 }
-          margin={ '1px' }
-          color={'#f6f6f5'}
-        />
-      </div>
+      <span>
+        <div
+          data-tip
+          data-for={ `tip_album_videos_generate_${id}` }
+          className={`icon ${className}`}
+        >
+          { icon }
+          <Tip id={ `tip_album_videos_generate_${id}` }>{ tooltipText }</Tip>
+        </div>
+
+        { contextMenu }
+
+      </span>
     )
-  }
-  else if (videos.ack == 'err') {
-    return (    
-      <div
-        className="icon failed"
-        data-tip={ videos.msg }
-      >
-        <IoVideocamera />
-        <ReactTooltip />
-      </div>
-    )
-  }
-  else {
-    return <span />
   }
 }
 
 StatusGenerateVideosIcon.propTypes = {
-  videos: PropTypes.object
+  id: PropTypes.number.isRequired,
+  s3_key: PropTypes.string.isRequired,
+  videos: PropTypes.object.isRequired
 }
 
-StatusGenerateVideosIcon.defaultProps = {
-  videos: {}
-}
+export default connect()(StatusGenerateVideosIcon)
 
-export default StatusGenerateVideosIcon

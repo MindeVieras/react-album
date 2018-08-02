@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import fsize from 'filesize'
 
 import { withStyles } from '@material-ui/core/styles'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
@@ -133,6 +134,10 @@ class MediaItem extends Component {
                 <TableRow className={ classes.metaTableRow }>
                   <TableCell className={ classes.metaTableCell }>Height</TableCell>
                   <TableCell className={ classes.metaTableCell }>{ media.height }</TableCell>
+                </TableRow>
+                <TableRow className={ classes.metaTableRow }>
+                  <TableCell className={ classes.metaTableCell }>Size</TableCell>
+                  <TableCell className={ classes.metaTableCell }>{ fsize(media.filesize) }</TableCell>
                 </TableRow>
               </TableBody>
             </Table>
