@@ -91,6 +91,7 @@ class MediaItem extends Component {
     const {
       classes, uploader, connectDragSource,
       item_width, item_height, gap_width, gap_height,
+      width, height,
       s3_key, id, media_id,
       status, fromServer,
       mime, filename, filesize,
@@ -105,7 +106,7 @@ class MediaItem extends Component {
     let thumb
 
     if (fromServer) {
-      const mediaSize = fitMediaToWrapper(itemWidth, itemHeight, metadata.width, metadata.height)
+      const mediaSize = fitMediaToWrapper(itemWidth, itemHeight, width, height)
       thumb = <ThumbnailSrv
         width={ mediaSize.width }
         height={ mediaSize.height }
@@ -255,6 +256,8 @@ MediaItem.propTypes = {
   gap_width: PropTypes.number.isRequired,
   gap_height: PropTypes.number.isRequired,
   id: PropTypes.number.isRequired,
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
   filename: PropTypes.string,
   filesize: PropTypes.number,
   // media_id: PropTypes.number.isRequired

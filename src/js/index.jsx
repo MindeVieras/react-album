@@ -26,7 +26,7 @@ const theme = createMuiTheme({
   }
 })
 
-console.log(theme)
+// console.log(theme)
 
 const AlbumApp = () => (
   <Provider store={ store }>

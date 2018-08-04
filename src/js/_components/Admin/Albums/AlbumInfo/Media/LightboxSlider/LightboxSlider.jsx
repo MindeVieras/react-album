@@ -64,61 +64,55 @@ class LightboxSlider extends Component {
 
     const slides = media.map((m, i) => {
 
-      const { id, mime, metadata, videos } = m
+      const { id, mime, width, height, videos } = m
 
-      if (metadata && metadata.width && metadata.height) {
+      const mediaFitSize = fitMediaToWrapper(clientWidth, clientHeight, width, height)
 
-        const mediaFitSize = fitMediaToWrapper(clientWidth, clientHeight, metadata.width, metadata.height)
-
-        if (mime.includes('image')) {
-          return (
-            <div key={ i }>
-              <div
-                className={ classes.slideWrapper }
-                style={{
-                  width: clientWidth,
-                  height: clientHeight
-                }}
-              >
-                <img
-                  src={ m.thumbs.fullhd }
+      if (mime.includes('image')) {
+        return (
+          <div key={ i }>
+            <div
+              className={ classes.slideWrapper }
+              style={{
+                width: clientWidth,
+                height: clientHeight
+              }}
+            >
+              <img
+                src={ m.thumbs.fullhd }
+                width={ mediaFitSize.width }
+                height={ mediaFitSize.height }
+              />
+            </div>
+          </div>
+        )
+      }
+      else if (mime.includes('video')) {
+        return (
+          <div key={ i }>
+            <div
+              className={ classes.slideWrapper }
+              style={{
+                width: clientWidth,
+                height: clientHeight
+              }}
+            >
+              {videos &&
+                <ReactPlayer
+                  url={ videos.video }
+                  controls={ true }
                   width={ mediaFitSize.width }
                   height={ mediaFitSize.height }
                 />
-              </div>
+              }
             </div>
-          )
-        }
-        else if (mime.includes('video')) {
-          return (
-            <div key={ i }>
-              <div
-                className={ classes.slideWrapper }
-                style={{
-                  width: clientWidth,
-                  height: clientHeight
-                }}
-              >
-                {videos &&
-                  <ReactPlayer
-                    url={ videos.video }
-                    controls={ true }
-                    width={ mediaFitSize.width }
-                    height={ mediaFitSize.height }
-                  />
-                }
-              </div>
-            </div>
-          )
-        }
-        else {
-          return (
-            <div key={ i }><Typography>Unsuported format</Typography></div>
-          )
-        }
+          </div>
+        )
       }
       else {
-        return <div key={ i }>Still uploading...</div>
+        return (
+          <div key={ i }><Typography>Unsuported format</Typography></div>
+        )
       }
 
     })

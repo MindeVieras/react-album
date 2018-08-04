@@ -21,7 +21,7 @@ import LightboxSlider from './LightboxSlider'
 import UploadMedia from '../../../Buttons/UploadMedia'
 
 import { authHeader, baseServerUrl } from '../../../../../_helpers'
-import { footerActions, albumsActions } from '../../../../../_actions'
+import { albumsActions } from '../../../../../_actions'
 import { mediaService } from '../../../../../_services'
 
 const styles = theme => ({
@@ -82,6 +82,10 @@ class Media extends Component {
         },
         uploadSuccess: {
           endpoint: baseServerUrl+'/api/uploader/success'
+        },
+        validation: {
+          allowedExtensions: ['jpeg', 'jpg'],
+          stopOnFirstInvalidFile: false
         }
       }
 
@@ -95,6 +99,7 @@ class Media extends Component {
       if (status === statusEnum.SUBMITTED) {
         const { entity, entity_id, status } = this.props
         const { name, size, type } = uploader.methods.getFile(id)
+
         // Set exptra filesize and mime type to S3 upload success
         let s3params = {
           filesize: size,
@@ -120,40 +125,34 @@ class Media extends Component {
       const { dispatch } = this.props
       const { media_id, s3_key, mime } = responseJSON.data
 
+      console.log(responseJSON.data)
+
       dispatch(albumsActions.setMediaMediaId(id, media_id))
       dispatch(albumsActions.saveMediaMetadata(id, media_id))
-      dispatch(albumsActions.saveRekognitionLabels(id, media_id))
+      // dispatch(albumsActions.saveRekognitionLabels(id, media_id))
 
-      // If IMAGE
+      // // If IMAGE
       if (mime.includes('image')) {
         dispatch(albumsActions.generateImageThumbs(id, media_id))
       }
-      // If VIDEO
-      else if (mime.includes('video')) {
-        dispatch(albumsActions.generateVideos(id, s3_key))
-      }
+      // // If VIDEO
+      // else if (mime.includes('video')) {
+      //   dispatch(albumsActions.generateVideos(id, s3_key))
+      // }
     }
 
   }
 
   componentDidMount() {
     const uploader = this.uploader
-    // const { dispatch } = this.props
-
-    // // Set footer upload input button
-    // dispatch(footerActions.buttonRemove('uploadMedia'))
-    // let buttonProps = {
-    //   uploader
-    // }
-    // dispatch(footerActions.buttonSet('', 'uploadMedia', 'info', buttonProps))
-
     uploader.on('statusChange', this._onStatusChange)
     uploader.on('complete', this._onComplete)
   }
 
   componentWillUnmount() {
-    this.uploader.off('statusChange', this._onStatusChange)
-    this.uploader.off('complete', this._onComplete)
+    const uploader = this.uploader
+    uploader.off('statusChange', this._onStatusChange)
+    uploader.off('complete', this._onComplete)
   }
 
   render() {

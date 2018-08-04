@@ -15,7 +15,7 @@ const ThumbnailSrv = (props) => {
 
   const { classes, onClick, width, height, mime, thumbs, videos, metadata } = props
 
-  let item = <span>Unsupoerted media type</span>
+  let item = <span>Unsuported media type</span>
 
   if (mime.includes('image')) {
     item = <img
