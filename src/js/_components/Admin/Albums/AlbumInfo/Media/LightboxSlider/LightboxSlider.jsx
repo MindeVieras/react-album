@@ -66,48 +66,51 @@ class LightboxSlider extends Component {
 
       const { id, mime, width, height, videos } = m
 
-      const mediaFitSize = fitMediaToWrapper(clientWidth, clientHeight, width, height)
+      if (width && height) {
 
-      if (mime.includes('image')) {
-        return (
-          <div key={ i }>
-            <div
-              className={ classes.slideWrapper }
-              style={{
-                width: clientWidth,
-                height: clientHeight
-              }}
-            >
-              <img
-                src={ m.thumbs.fullhd }
-                width={ mediaFitSize.width }
-                height={ mediaFitSize.height }
-              />
-            </div>
-          </div>
-        )
-      }
-      else if (mime.includes('video')) {
-        return (
-          <div key={ i }>
-            <div
-              className={ classes.slideWrapper }
-              style={{
-                width: clientWidth,
-                height: clientHeight
-              }}
-            >
-              {videos &&
-                <ReactPlayer
-                  url={ videos.video }
-                  controls={ true }
+        const mediaFitSize = fitMediaToWrapper(clientWidth, clientHeight, width, height)
+
+        if (mime.includes('image')) {
+          return (
+            <div key={ i }>
+              <div
+                className={ classes.slideWrapper }
+                style={{
+                  width: clientWidth,
+                  height: clientHeight
+                }}
+              >
+                <img
+                  src={ m.thumbs.fullhd }
                   width={ mediaFitSize.width }
                   height={ mediaFitSize.height }
                 />
-              }
+              </div>
             </div>
-          </div>
-        )
+          )
+        }
+        else if (mime.includes('video')) {
+          return (
+            <div key={ i }>
+              <div
+                className={ classes.slideWrapper }
+                style={{
+                  width: clientWidth,
+                  height: clientHeight
+                }}
+              >
+                {videos &&
+                  <ReactPlayer
+                    url={ videos.video }
+                    controls={ true }
+                    width={ mediaFitSize.width }
+                    height={ mediaFitSize.height }
+                  />
+                }
+              </div>
+            </div>
+          )
+        }
       }
       else {
         return (

@@ -256,14 +256,16 @@ MediaItem.propTypes = {
   gap_width: PropTypes.number.isRequired,
   gap_height: PropTypes.number.isRequired,
   id: PropTypes.number.isRequired,
-  width: PropTypes.number.isRequired,
-  height: PropTypes.number.isRequired,
+  width: PropTypes.number,
+  height: PropTypes.number,
   filename: PropTypes.string,
   filesize: PropTypes.number,
   // media_id: PropTypes.number.isRequired
 }
 
 MediaItem.defaultProps = {
+  width: null,
+  height: null,
   filename: '',
   filesize: 0
 }
