@@ -58,6 +58,8 @@ class Thumbnail extends Component {
           <canvas
             className="thumbnail"
             hidden={ !this.state.drawComplete || this._failure }
+            width={ width }
+            height={ height }
             ref={ component => this._canvas = component }
           />
           { this._maybePlaceholder }

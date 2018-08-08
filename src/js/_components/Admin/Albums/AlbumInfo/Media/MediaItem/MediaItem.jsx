@@ -191,7 +191,7 @@ class MediaItem extends Component {
                   <StatusGenerateVideosIcon
                     videos={ videos }
                     id={ id }
-                    s3_key={ s3_key }
+                    media_id={ media_id }
                   />
                 }
                 {status === 'upload successful' &&

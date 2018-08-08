@@ -73,11 +73,11 @@ function generateImageThumbs(media_id) {
 }
 
 // Generates videos
-function generateVideos(key) {
+function generateVideos(media_id) {
   const requestOptions = {
     method: 'POST',
     headers: { ...authHeader(), 'Content-Type': 'application/json' },
-    body: JSON.stringify({ key })
+    body: JSON.stringify({ media_id })
   }
   return fetch(`${baseServerUrl}/api/media/generate-videos`, requestOptions).then(handleResponse)
 }

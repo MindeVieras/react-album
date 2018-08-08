@@ -66,7 +66,7 @@ class MediaList extends Component {
     const firstList = pager.current_page * pager.per_page
     const lastList = firstList + pager.per_page
     const currentFiles = files.slice(firstList, lastList)
-    console.log(currentFiles)
+
     let { cols, rows} = pager
 
     let gap_width = 12

@@ -84,7 +84,7 @@ class Media extends Component {
           endpoint: baseServerUrl+'/api/uploader/success'
         },
         validation: {
-          allowedExtensions: ['jpeg', 'jpg'],
+          allowedExtensions: ['jpeg', 'jpg', 'mp4'],
           stopOnFirstInvalidFile: false
         }
       }
@@ -123,9 +123,7 @@ class Media extends Component {
 
     this._onComplete = (id, name, responseJSON, xhr) => {
       const { dispatch } = this.props
-      const { media_id, s3_key, mime } = responseJSON.data
-
-      console.log(responseJSON.data)
+      const { media_id, mime } = responseJSON.data
 
       dispatch(albumsActions.setMediaMediaId(id, media_id))
       dispatch(albumsActions.saveMediaMetadata(id, media_id))
@@ -137,7 +135,7 @@ class Media extends Component {
       }
       // If VIDEO
       else if (mime.includes('video')) {
-        dispatch(albumsActions.generateVideos(id, s3_key))
+        dispatch(albumsActions.generateVideos(id, media_id))
       }
     }
 

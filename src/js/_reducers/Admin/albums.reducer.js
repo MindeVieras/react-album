@@ -585,7 +585,7 @@ export function adminAlbums(state = initialState, action) {
               const { ...mCopy } = m
               return {
                 ...mCopy,
-                videos: { ack: 'ok' }
+                videos: action.videos
               }
             }
             return m

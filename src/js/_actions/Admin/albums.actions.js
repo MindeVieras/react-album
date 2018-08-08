@@ -349,11 +349,11 @@ function generateImageThumbs(id, media_id) {
   function failure(id, err) { return { type: albumsConstants.GENERATE_IMG_THUMBS_FAILURE, id, err } }
 }
 
-function generateVideos(id, key) {
+function generateVideos(id, media_id) {
   return dispatch => {
     dispatch(request(id))
 
-    mediaService.generateVideos(key)
+    mediaService.generateVideos(media_id)
       .then(res => {
         if (res.ack == 'ok') {
           dispatch(success(id, res.videos))

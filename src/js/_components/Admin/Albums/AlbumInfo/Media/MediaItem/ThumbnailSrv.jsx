@@ -29,7 +29,7 @@ const ThumbnailSrv = (props) => {
 
   else if (mime.includes('video')) {
     item = <ReactPlayer
-      url={ videos.video }
+      url={ videos.medium }
       controls={ true }
       width={ width }
       height={ height }

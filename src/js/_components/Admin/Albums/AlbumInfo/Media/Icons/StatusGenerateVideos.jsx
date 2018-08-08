@@ -22,8 +22,8 @@ class StatusGenerateVideosIcon extends Component {
   }
 
   handleRegenerateVideos() {
-    const { id, s3_key, dispatch } = this.props
-    dispatch(albumsActions.generateVideos(id, s3_key))
+    const { id, media_id, dispatch } = this.props
+    dispatch(albumsActions.generateVideos(id, media_id))
   }
 
   render() {
@@ -59,7 +59,7 @@ class StatusGenerateVideosIcon extends Component {
         color={'#f6f6f5'}
       />
     }
-    else if (vides.ack == 'err') {
+    else if (videos.ack == 'err') {
       className = 'failed'
       tooltipText = videos.msg
     }
@@ -84,7 +84,7 @@ class StatusGenerateVideosIcon extends Component {
 
 StatusGenerateVideosIcon.propTypes = {
   id: PropTypes.number.isRequired,
-  s3_key: PropTypes.string.isRequired,
+  media_id: PropTypes.number.isRequired,
   videos: PropTypes.object.isRequired
 }
 
