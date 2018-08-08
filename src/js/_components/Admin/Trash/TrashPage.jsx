@@ -49,7 +49,7 @@ class TrashPage extends Component {
   render() {
     const { classes } = this.props
     const { media, albums, loading, err } = this.props.list
-    // console.log(this.props.list)
+    console.log(media)
     let emptyContent
 
     if (!media) {
@@ -70,30 +70,40 @@ class TrashPage extends Component {
         }
         {media &&
           <div className={ classes.flex }>
+
             <Typography
               variant="headline"
               gutterBottom
               className={ classes.subtitle }
-            >Media</Typography>
+            >
+              Media
+            </Typography>
+
             <div className={ classes.list }>
               {media.map((m) =>
                 <MediaItem key={ m.id } media={ m } />
               )}
             </div>
+
           </div>
         }
         {albums &&
           <div className={ classes.flex }>
+
             <Typography
               variant="headline"
               gutterBottom
               className={ classes.subtitle }
-            >Albums</Typography>
+            >
+              Albums
+            </Typography>
+
             <div className={ classes.list }>
               {albums.map((a) =>
                 <AlbumsItem key={ a.id } album={ a } />
               )}
             </div>
+
           </div>
         }
         { emptyContent }
