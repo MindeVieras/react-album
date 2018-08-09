@@ -9,9 +9,9 @@ import Select from 'react-select'
 import Toggle from 'react-toggle'
 
 import { textField } from './Fields'
-import { userService } from '../../../_services'
+import { userService } from 'Services'
 // import { userActions } from 'Actions'
-// import { history } from '../../../../_helpers'
+// import { history } from 'Helpers'
 
 class UserCreateForm extends React.Component {
   render() {

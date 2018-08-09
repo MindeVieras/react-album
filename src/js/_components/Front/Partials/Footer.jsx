@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { submit } from 'redux-form'
 
-import { history } from '../../../_helpers'
+import { history } from 'Helpers'
 import NewAlbum from '../Buttons/NewAlbum'
 
 import { IoTrashA } from 'react-icons/lib/io'
@@ -19,7 +19,7 @@ class Footer extends Component {
       buttons = footer.buttons.map((link, i) => {
         if (link.action === 'goBack')
           return <div key={i} className={`btn btn-sm btn-${link.type}`} onClick={()=>history.goBack()}>{link.name}</div>
-        
+
         if (link.action === 'userCreate')
           return (
             <div
@@ -30,7 +30,7 @@ class Footer extends Component {
               {link.name}
             </div>
           )
-        
+
         if (link.action === 'newAlbum')
           return (
             <NewAlbum

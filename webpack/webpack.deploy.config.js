@@ -25,7 +25,10 @@ module.exports = {
         extensions: ['.js', '.jsx'],
         alias: {
             Common: process.cwd()+'/src/js/_components/Common',
-            Actions: process.cwd()+'/src/js/_actions'
+            Constants: process.cwd()+'/src/js/_constants',
+            Actions: process.cwd()+'/src/js/_actions',
+            Services: process.cwd()+'/src/js/_services',
+            Helpers: process.cwd()+'/src/js/_helpers'
         }
     },
     module: {

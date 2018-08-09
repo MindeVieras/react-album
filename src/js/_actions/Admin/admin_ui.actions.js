@@ -1,5 +1,5 @@
 
-import { adminConstants } from '../../_constants'
+import { adminConstants } from 'Constants'
 
 export const adminUiActions = {
   modalOpen, modalClose,

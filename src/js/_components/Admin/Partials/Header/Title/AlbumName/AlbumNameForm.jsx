@@ -14,7 +14,7 @@ import renderText from '../../../../../Common/Form/Fields'
 import RenderButton from '../../../../../Common/Form/RenderButton'
 
 import { albumsActions, adminUiActions } from 'Actions'
-import { adminConstants } from '../../../../../../_constants'
+import { adminConstants } from 'Constants'
 
 const modal_id = adminConstants.MODAL_ALBUM_RENEME
 

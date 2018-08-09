@@ -23,7 +23,7 @@ import { Spinner } from 'Common'
 import DeleteButton from './DeleteButton'
 import RestoreButton from './RestoreButton'
 
-import { fitMediaToWrapper, drawCanvasImage } from '../../../../_helpers'
+import { fitMediaToWrapper, drawCanvasImage } from 'Helpers'
 
 const styles = theme => ({
   panelExpanded: {

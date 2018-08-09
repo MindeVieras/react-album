@@ -1,6 +1,6 @@
 
-import { utilsConstants } from '../_constants'
-import { utilsService } from '../_services'
+import { utilsConstants } from 'Constants'
+import { utilsService } from 'Services'
 
 export const utilsActions = {
   getAppSettings,

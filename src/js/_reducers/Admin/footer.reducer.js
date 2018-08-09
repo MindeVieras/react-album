@@ -1,5 +1,5 @@
 
-import { footerConstants } from '../../_constants'
+import { footerConstants } from 'Constants'
 
 export function footer(state = [], action) {
   switch (action.type) {

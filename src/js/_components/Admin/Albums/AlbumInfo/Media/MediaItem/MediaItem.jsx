@@ -25,8 +25,8 @@ import StatusGenerateImageThumbsIcon from '../Icons/StatusGenerateImageThumbs'
 import StatusGenerateVideosIcon from '../Icons/StatusGenerateVideos'
 import StatusRekognitionLabelsIcon from '../Icons/StatusRekognitionLabels'
 
-import { fitMediaToWrapper } from '../../../../../../_helpers'
-import { utilsConstants } from '../../../../../../_constants'
+import { fitMediaToWrapper } from 'Helpers'
+import { utilsConstants } from 'Constants'
 import { albumsActions, adminUiActions } from 'Actions'
 
 const styles = theme => ({

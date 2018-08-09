@@ -1,5 +1,5 @@
 
-import { authHeader, baseServerUrl } from '../_helpers'
+import { authHeader, baseServerUrl } from 'Helpers'
 
 export const utilsService = {
   getAppSettings,

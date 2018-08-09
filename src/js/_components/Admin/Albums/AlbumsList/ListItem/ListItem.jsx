@@ -12,7 +12,7 @@ import blueGrey from '@material-ui/core/colors/blueGrey'
 
 import { Tip } from 'Common'
 
-import { utilsConstants } from '../../../../../_constants'
+import { utilsConstants } from 'Constants'
 
 const styles = theme => ({
   item: {

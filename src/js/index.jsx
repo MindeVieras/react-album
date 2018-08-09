@@ -12,7 +12,7 @@ import blueGrey from '@material-ui/core/colors/blueGrey'
 import grey from '@material-ui/core/colors/grey'
 import indigo from '@material-ui/core/colors/indigo'
 
-import { store } from './_helpers'
+import { store } from 'Helpers'
 import App from './App'
 
 const theme = createMuiTheme({

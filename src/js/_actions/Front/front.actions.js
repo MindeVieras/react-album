@@ -1,6 +1,6 @@
 
-import { frontConstants } from '../../_constants'
-import { frontService } from '../../_services'
+import { frontConstants } from 'Constants'
+import { frontService } from 'Services'
 
 export const frontActions = {
   getList,

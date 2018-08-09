@@ -1,6 +1,6 @@
 
-import { trashConstants } from '../../_constants'
-import { trashService } from '../../_services'
+import { trashConstants } from 'Constants'
+import { trashService } from 'Services'
 
 export const trashActions = {
   getList,

@@ -1,5 +1,5 @@
 
-import { albumsConstants } from '../../_constants'
+import { albumsConstants } from 'Constants'
 
 const initialState = {
   selected_album: {

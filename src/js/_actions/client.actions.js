@@ -1,6 +1,6 @@
 
-import { clientConstants } from '../_constants'
-import { locationService } from '../_services'
+import { clientConstants } from 'Constants'
+import { locationService } from 'Services'
 
 export const clientActions = {
   setBrowser,

@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography'
 
 import AlbumName from './AlbumName'
 
-import { history } from '../../../../../_helpers'
+import { history } from 'Helpers'
 
 const Title = ({ album_id, title }) => {
 

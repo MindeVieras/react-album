@@ -1,5 +1,5 @@
 
-import { utilsConstants } from '../_constants'
+import { utilsConstants } from 'Constants'
 
 const initialState = {}
 

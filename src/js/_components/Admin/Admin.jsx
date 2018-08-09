@@ -19,7 +19,7 @@ import Users from './Users'
 import TrashPage from './Trash'
 import Error404 from './Errors/404'
 
-import { googleKey } from '../../_helpers/config'
+import { googleKey } from 'Helpers'
 import { adminUiActions, albumsActions, utilsActions } from 'Actions'
 
 import 'react-datetime/css/react-datetime.css'

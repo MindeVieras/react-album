@@ -1,5 +1,5 @@
 
-import { adminConstants } from '../../_constants'
+import { adminConstants } from 'Constants'
 
 const initialState = {
   modals: {},

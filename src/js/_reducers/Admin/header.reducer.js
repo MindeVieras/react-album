@@ -1,5 +1,5 @@
 
-import { headerConstants } from '../../_constants'
+import { headerConstants } from 'Constants'
 
 export function header(state = { title: '' }, action) {
   switch (action.type) {

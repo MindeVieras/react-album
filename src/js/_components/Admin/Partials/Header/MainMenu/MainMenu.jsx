@@ -18,7 +18,7 @@ import Home from '@material-ui/icons/Home'
 import PowerSettingsNew from '@material-ui/icons/PowerSettingsNew'
 
 import { Tip } from 'Common'
-import { history } from '../../../../../_helpers'
+import { history } from 'Helpers'
 
 class MainMenu extends Component {
 

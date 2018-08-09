@@ -1,7 +1,7 @@
 
-import { userConstants } from '../../_constants'
-import { loginService } from '../../_services'
-import { history } from '../../_helpers'
+import { userConstants } from 'Constants'
+import { loginService } from 'Services'
+import { history } from 'Helpers'
 
 export const loginActions = {
   login,

@@ -1,5 +1,5 @@
 
-import { clientConstants } from '../_constants'
+import { clientConstants } from 'Constants'
 
 const initialState = {
   full_screen: false

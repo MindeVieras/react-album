@@ -11,7 +11,7 @@ import Bar from './Bar'
 import Media from './Media'
 
 import { headerActions, footerActions } from 'Actions'
-import { albumsConstants, contentConstants, mediaConstants } from '../../../../_constants'
+import { albumsConstants, contentConstants, mediaConstants } from 'Constants'
 
 const styles = theme => ({
   info_wrapper: {

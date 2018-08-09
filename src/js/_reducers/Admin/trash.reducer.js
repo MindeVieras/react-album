@@ -1,5 +1,5 @@
 
-import { trashConstants } from '../../_constants'
+import { trashConstants } from 'Constants'
 
 const initialState = {
   list: {
@@ -31,9 +31,9 @@ export function trash(state = initialState, action) {
       ...state,
       list: {
         err: action.err
-      } 
+      }
     }
-    
+
   case trashConstants.RESTORE_REQUEST:
     return {
       ...state,

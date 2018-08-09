@@ -20,9 +20,9 @@ import MediaList from './MediaList'
 import LightboxSlider from './LightboxSlider'
 import UploadMedia from '../../../Buttons/UploadMedia'
 
-import { authHeader, baseServerUrl } from '../../../../../_helpers'
+import { authHeader, baseServerUrl } from 'Helpers'
 import { albumsActions } from 'Actions'
-import { mediaService } from '../../../../../_services'
+import { mediaService } from 'Services'
 
 const styles = theme => ({
   dz_wrapper: {

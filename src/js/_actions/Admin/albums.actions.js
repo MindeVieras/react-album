@@ -2,8 +2,8 @@
 import {toastr} from 'react-redux-toastr'
 import Popup from 'react-popup'
 
-import { albumsConstants } from '../../_constants'
-import { albumsService, mediaService, trashService } from '../../_services'
+import { albumsConstants } from 'Constants'
+import { albumsService, mediaService, trashService } from 'Services'
 
 export const albumsActions = {
   getList, getListDates, addToList,

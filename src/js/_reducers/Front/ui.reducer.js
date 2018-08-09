@@ -1,5 +1,5 @@
 
-import { frontConstants } from '../../_constants'
+import { frontConstants } from 'Constants'
 
 const initialState = {
   menu_open: false

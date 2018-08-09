@@ -1,5 +1,5 @@
 
-import { userConstants } from '../../_constants'
+import { userConstants } from 'Constants'
 
 const initialState = {
   selected_user: {
@@ -54,7 +54,7 @@ export function users(state = initialState, action) {
     return {
       list: {
         err: action.err
-      } 
+      }
     }
   case userConstants.DELETE_REQUEST:
     // add 'deleting:true' property to user being deleted
@@ -79,7 +79,7 @@ export function users(state = initialState, action) {
       }
     }
   case userConstants.DELETE_FAILURE:
-    // remove 'deleting:true' property and add 'deleteError:[error]' property to user 
+    // remove 'deleting:true' property and add 'deleteError:[error]' property to user
     return {
       ...state,
       list: {

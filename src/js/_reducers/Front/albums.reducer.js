@@ -1,5 +1,5 @@
 
-import { frontConstants } from '../../_constants'
+import { frontConstants } from 'Constants'
 
 const initialState = {
   list: {
@@ -36,7 +36,7 @@ export function frontAlbums(state = initialState, action) {
     return {
       list: {
         err: action.err
-      } 
+      }
     }
   default:
     return state

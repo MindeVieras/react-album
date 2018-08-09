@@ -1,5 +1,5 @@
 
-import { frontConstants } from '../../_constants'
+import { frontConstants } from 'Constants'
 
 export const frontUiActions = {
   menuOpen

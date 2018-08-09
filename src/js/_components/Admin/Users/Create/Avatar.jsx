@@ -6,9 +6,9 @@ import Dropzone from 'react-dropzone'
 
 import { RingLoader } from 'react-spinners'
 
-// import { uploadService } from '../../../../_services'
+// import { uploadService } from 'Services'
 import { uploadActions } from 'Actions'
-import { mediaConstants, contentConstants } from '../../../../_constants'
+import { mediaConstants, contentConstants } from 'Constants'
 
 class UserCreateAvatar extends React.Component {
   constructor() {
