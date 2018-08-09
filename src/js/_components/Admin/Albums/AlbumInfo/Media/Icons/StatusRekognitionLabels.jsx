@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography'
 import { ScaleLoader } from 'react-spinners'
 import { IoAperture } from 'react-icons/lib/io'
 
-import Tip from 'Common'
+import { Tip } from 'Common'
 
 import { albumsActions } from '../../../../../../_actions'
 

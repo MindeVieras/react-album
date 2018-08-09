@@ -2,13 +2,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import Spinner from '../../Partials/Spinner'
+import { Spinner } from 'Common'
 
 import DeleteButton from './DeleteButton'
 import RestoreButton from './RestoreButton'
 
 class AlbumsItem extends Component {
-  
+
   render() {
     const { album } = this.props
     return (

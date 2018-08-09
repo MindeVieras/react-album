@@ -15,7 +15,7 @@ const styles = theme => ({
 class Scrollbar extends Component {
 
   render() {
-    const { classes, children, position } = this.props
+    const { classes, children, className, position } = this.props
 
     const scrollbarOptions = {
       wheelSpeed: 1.25,
@@ -25,7 +25,7 @@ class Scrollbar extends Component {
     return (
       <PerfectScrollbar
         option={ scrollbarOptions }
-        className={ classes.scrollbar }
+        className={ `${classes.scrollbar} ${className}` }
       >
         {children}
       </PerfectScrollbar>
@@ -36,10 +36,12 @@ class Scrollbar extends Component {
 Scrollbar.propTypes = {
   children: PropTypes.node.isRequired,
   classes: PropTypes.object.isRequired,
+  className: PropTypes.string,
   position: PropTypes.string
 }
 
 Scrollbar.defaultProps = {
+  className: '',
   position: 'right'
 }
 

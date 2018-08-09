@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 import { withStyles } from '@material-ui/core/styles'
 
-import Spinner from '../../Partials/Spinner'
+import { Spinner } from 'Common'
 import DeleteAlbum from '../../Buttons/DeleteAlbum'
 import Bar from './Bar'
 import Media from './Media'

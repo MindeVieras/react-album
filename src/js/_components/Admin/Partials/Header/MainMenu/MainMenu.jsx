@@ -17,7 +17,7 @@ import Delete from '@material-ui/icons/Delete'
 import Home from '@material-ui/icons/Home'
 import PowerSettingsNew from '@material-ui/icons/PowerSettingsNew'
 
-import Tip from 'Common'
+import { Tip } from 'Common'
 import { history } from '../../../../../_helpers'
 
 class MainMenu extends Component {

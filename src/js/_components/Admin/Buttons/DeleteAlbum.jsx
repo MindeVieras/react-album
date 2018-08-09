@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button'
 
 import DeleteForever from '@material-ui/icons/DeleteForever'
 
-import Tip from 'Common'
+import { Tip } from 'Common'
 import SimpleModal from '../../Common/Modals'
 
 import { albumsActions, adminUiActions } from '../../../_actions'

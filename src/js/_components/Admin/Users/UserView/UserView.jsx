@@ -1,30 +1,31 @@
 
-import React from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import { RingLoader } from 'react-spinners'
+import { Spinner } from 'Common'
 
-import Blur from 'react-blur'
+import { headerActions, userActions } from '../../../../_actions'
 
-import { userActions } from '../../../../_actions'
-
-class UserInfo extends React.Component {
+class UserView extends Component {
 
   componentDidMount() {
-    this.props.dispatch(userActions.getOne(this.props.auth.user.id))
+    const { dispatch, match } = this.props
+
+    dispatch(headerActions.setTitle(match.params.username))
+    dispatch(userActions.getOne(match.params.username))
   }
 
   onUserDelete(id) {
-    this.props.dispatch(userActions.delete(id))
+    // this.props.dispatch(userActions.delete(id))
   }
 
   render() {
-    const { auth, selected_user } = this.props
+    const { selected_user } = this.props
     return (
-      <div className="info-wrapper">
+      <Fragment>
         {selected_user.loading &&
-          <RingLoader />
+          <Spinner type="primary" size={ 70 } />
         }
         {selected_user.err &&
           <div>{selected_user.err}</div>
@@ -37,12 +38,10 @@ class UserInfo extends React.Component {
             <div className="user-info">
               <div className="toolbar">
                 <div className="btn btn-xs btn-info">Edit</div>
-                {selected_user.user.id != auth.user.id &&
                 <div
                   className="btn btn-xs btn-danger"
                   onClick={() => this.onUserDelete(selected_user.user.id)}
                 >Delete</div>
-                }
               </div>
               <div className="info-group">
                 <div className="label">Username</div>
@@ -63,23 +62,21 @@ class UserInfo extends React.Component {
             </div>
           </div>
         }
-      </div>
+      </Fragment>
     )
   }
 }
 
-UserInfo.propTypes = {
-  auth: PropTypes.object.isRequired,
+UserView.propTypes = {
   selected_user: PropTypes.object,
   dispatch: PropTypes.func
 }
 
 function mapStateToProps(state) {
-  const { auth, users } = state
+  const { users } = state
   return {
-    auth,
     selected_user: users.selected_user
   }
 }
 
-export default connect(mapStateToProps)(UserInfo)
+export default connect(mapStateToProps)(UserView)

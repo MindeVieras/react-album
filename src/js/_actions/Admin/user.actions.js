@@ -52,11 +52,11 @@ function getList() {
   function failure(err) { return { type: userConstants.GETLIST_FAILURE, err } }
 }
 
-function getOne(id) {
+function getOne(username) {
   return dispatch => {
     dispatch(request())
 
-    userService.getOne(id)
+    userService.getOne(username)
       .then(res => {
         if (res.ack == 'ok') {
           dispatch(success(res.data))

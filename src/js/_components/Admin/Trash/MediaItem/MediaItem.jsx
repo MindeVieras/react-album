@@ -18,7 +18,7 @@ import grey from '@material-ui/core/colors/grey'
 
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
-import Spinner from '../../Partials/Spinner'
+import { Spinner } from 'Common'
 
 import DeleteButton from './DeleteButton'
 import RestoreButton from './RestoreButton'

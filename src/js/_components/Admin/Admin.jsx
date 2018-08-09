@@ -15,7 +15,7 @@ import { adminTranslations } from '../../translations/adminTranslations'
 
 import Header from './Partials/Header'
 import Albums from './Albums'
-import UsersPage from './Users'
+import Users from './Users'
 import TrashPage from './Trash'
 import Error404 from './Errors/404'
 
@@ -136,10 +136,10 @@ class Admin extends Component {
 
             <div className={ classes.flex }>
               <Switch>
-                <Route exact path={ match.url } component={Albums} />
-                <Route path={`${match.url}/users`} component={UsersPage} />
-                <Route exact path={`${match.url}/trash`} component={TrashPage} />
-                <Route component={Error404} />
+                <Route exact path={ match.url } component={ Albums } />
+                <Route path={`${match.url}/users`} component={ Users } />
+                <Route exact path={`${match.url}/trash`} component={ TrashPage } />
+                <Route component={ Error404 } />
               </Switch>
             </div>
 

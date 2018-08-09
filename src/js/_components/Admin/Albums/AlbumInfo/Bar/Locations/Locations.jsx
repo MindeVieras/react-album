@@ -11,7 +11,7 @@ import Edit from '@material-ui/icons/Edit'
 
 import lightBlue from '@material-ui/core/colors/lightBlue'
 
-import Tip from 'Common'
+import { Tip } from 'Common'
 import Address from './Address'
 import AlbumMap from './AlbumMap'
 import LocationsBar from './LocationsBar'

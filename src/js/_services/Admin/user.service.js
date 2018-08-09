@@ -18,13 +18,13 @@ function getList() {
   return fetch(`${baseServerUrl}/api/users/get-list`, requestOptions).then(handleResponse)
 }
 
-function getOne(id) {
+function getOne(username) {
   const requestOptions = {
     method: 'GET',
     headers: authHeader()
   }
 
-  return fetch(`${baseServerUrl}/api/users/get-one/${id}`, requestOptions).then(handleResponse)
+  return fetch(`${baseServerUrl}/api/users/get-one/${username}`, requestOptions).then(handleResponse)
 }
 
 function create(user) {

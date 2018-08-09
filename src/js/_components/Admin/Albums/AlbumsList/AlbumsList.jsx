@@ -9,7 +9,7 @@ import List from '@material-ui/core/List'
 
 import Bar from './Bar'
 import ListItem from './ListItem'
-import Scrollbar from '../../../Common/Scrollbar'
+import { Scrollbar } from 'Common'
 
 import { albumsActions, utilsActions } from '../../../../_actions'
 

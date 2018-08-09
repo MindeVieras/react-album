@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography'
 
 import blueGrey from '@material-ui/core/colors/blueGrey'
 
-import Tip from 'Common'
+import { Tip } from 'Common'
 
 import { utilsConstants } from '../../../../../_constants'
 

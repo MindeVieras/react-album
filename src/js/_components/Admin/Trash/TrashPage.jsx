@@ -15,9 +15,10 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 import { IoTrashA } from 'react-icons/lib/io'
 
+import { Spinner } from 'Common'
+
 import MediaItem from './MediaItem'
 import AlbumsItem from './AlbumsItem'
-import Spinner from '../Partials/Spinner'
 
 import { headerActions, trashActions } from '../../../_actions'
 

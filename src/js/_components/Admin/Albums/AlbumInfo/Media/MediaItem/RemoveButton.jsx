@@ -11,7 +11,7 @@ import grey from '@material-ui/core/colors/grey'
 
 import Close from '@material-ui/icons/Close'
 
-import Tip from 'Common'
+import { Tip } from 'Common'
 import SimpleModal from '../../../../../Common/Modals'
 
 import { albumsActions, trashActions, adminUiActions } from '../../../../../../_actions'

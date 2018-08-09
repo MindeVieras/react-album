@@ -10,7 +10,7 @@ import CloudUpload from '@material-ui/icons/CloudUpload'
 
 import green from '@material-ui/core/colors/green'
 
-import Tip from 'Common'
+import { Tip } from 'Common'
 
 import { albumsActions } from '../../../_actions'
 

@@ -10,7 +10,7 @@ import Button from '@material-ui/core/Button'
 
 import AddIcon from '@material-ui/icons/Add'
 
-import Tip from 'Common'
+import { Tip } from 'Common'
 
 import { albumsActions, utilsActions } from '../../../_actions'
 import { albumsService } from '../../../_services'

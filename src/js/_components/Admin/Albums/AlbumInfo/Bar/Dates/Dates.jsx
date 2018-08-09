@@ -13,7 +13,7 @@ import Edit from '@material-ui/icons/Edit'
 import grey from '@material-ui/core/colors/grey'
 import lightBlue from '@material-ui/core/colors/lightBlue'
 
-import Tip from 'Common'
+import { Tip } from 'Common'
 import Picker from './Picker'
 import TimeAgo from './TimeAgo'
 import SimpleModal from '../../../../../Common/Modals'

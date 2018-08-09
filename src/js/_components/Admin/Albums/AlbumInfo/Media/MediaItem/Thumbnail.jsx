@@ -3,7 +3,7 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import ReactPlayer from 'react-player'
 
-import Spinner from '../../../../Partials/Spinner'
+import { Spinner } from 'Common'
 import { IoAlertCircled } from 'react-icons/lib/io'
 
 class Thumbnail extends Component {

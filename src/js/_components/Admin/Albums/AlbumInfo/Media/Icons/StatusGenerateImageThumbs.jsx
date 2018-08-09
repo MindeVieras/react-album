@@ -8,7 +8,7 @@ import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu'
 import { ScaleLoader } from 'react-spinners'
 import { IoImages } from 'react-icons/lib/io'
 
-import Tip from 'Common'
+import { Tip } from 'Common'
 
 import { albumsActions } from '../../../../../../_actions'
 
