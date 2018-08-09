@@ -16,7 +16,7 @@ import { Tip } from 'Common'
 import Title from './Title'
 import MainMenu from './MainMenu'
 
-import { clientActions } from '../../../../_actions'
+import { clientActions } from 'Actions'
 
 const styles = theme => ({
   root: {

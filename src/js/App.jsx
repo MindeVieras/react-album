@@ -15,7 +15,7 @@ import Admin from './_components/Admin'
 import Error404 from './_components/404'
 
 import { history } from './_helpers'
-import { clientActions, utilsActions } from './_actions'
+import { clientActions, utilsActions } from 'Actions'
 
 class App extends Component {
 

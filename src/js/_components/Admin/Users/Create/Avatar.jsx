@@ -7,7 +7,7 @@ import Dropzone from 'react-dropzone'
 import { RingLoader } from 'react-spinners'
 
 // import { uploadService } from '../../../../_services'
-import { uploadActions } from '../../../../_actions'
+import { uploadActions } from 'Actions'
 import { mediaConstants, contentConstants } from '../../../../_constants'
 
 class UserCreateAvatar extends React.Component {
@@ -66,7 +66,7 @@ class UserCreateAvatar extends React.Component {
         <div className="btn btn-sm btn-info" onClick={() => { dropzoneRef.open() }}>
           Upload file
         </div>
-        
+
       </div>
     )
   }

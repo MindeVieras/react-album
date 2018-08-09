@@ -10,7 +10,7 @@ import Paper from '@material-ui/core/Paper'
 import LoginForm from './LoginForm'
 
 import { loginTranslations } from '../../translations/loginTranslations'
-import { loginActions } from '../../_actions'
+import { loginActions } from 'Actions'
 
 const styles = theme => ({
   root: {

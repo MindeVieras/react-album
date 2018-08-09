@@ -11,7 +11,7 @@ import DeleteForever from '@material-ui/icons/DeleteForever'
 import { Tip } from 'Common'
 import SimpleModal from '../../Common/Modals'
 
-import { albumsActions, adminUiActions } from '../../../_actions'
+import { albumsActions, adminUiActions } from 'Actions'
 
 const styles = theme => ({
   button: {

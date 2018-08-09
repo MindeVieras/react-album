@@ -11,7 +11,7 @@ import Switch from '@material-ui/core/Switch'
 
 import green from '@material-ui/core/colors/green'
 
-import { albumsActions } from '../../../../../../../_actions'
+import { albumsActions } from 'Actions'
 
 const styles = theme => ({
   root: {

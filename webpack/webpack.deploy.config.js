@@ -24,7 +24,8 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.jsx'],
         alias: {
-            Common: process.cwd()+'/src/js/_components/Common'
+            Common: process.cwd()+'/src/js/_components/Common',
+            Actions: process.cwd()+'/src/js/_actions'
         }
     },
     module: {

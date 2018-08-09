@@ -7,7 +7,7 @@ import ReactPlayer from 'react-player'
 
 import AlbumMarker from './AlbumMarker'
 
-import { albumsActions } from '../../../../../../../_actions'
+import { albumsActions } from 'Actions'
 
 const albumMarkerIcon = 'https://s3-eu-west-1.amazonaws.com/app.mindelis.com/images/icons/album-marker.png'
 

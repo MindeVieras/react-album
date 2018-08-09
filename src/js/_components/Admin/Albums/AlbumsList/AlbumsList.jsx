@@ -11,7 +11,7 @@ import Bar from './Bar'
 import ListItem from './ListItem'
 import { Scrollbar } from 'Common'
 
-import { albumsActions, utilsActions } from '../../../../_actions'
+import { albumsActions, utilsActions } from 'Actions'
 
 const styles = theme => ({
   list: {

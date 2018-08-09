@@ -14,7 +14,7 @@ import Close from '@material-ui/icons/Close'
 import { Tip } from 'Common'
 import SimpleModal from '../../../../../Common/Modals'
 
-import { albumsActions, trashActions, adminUiActions } from '../../../../../../_actions'
+import { albumsActions, trashActions, adminUiActions } from 'Actions'
 
 const styles = theme => ({
   closeBtn: {

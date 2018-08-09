@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { UserCreateForm } from './Form'
 import { UserCreateAvatar } from './Avatar'
 
-import { headerActions, footerActions } from '../../../../_actions'
+import { headerActions, footerActions } from 'Actions'
 
 class UserCreatePage extends React.Component {
 

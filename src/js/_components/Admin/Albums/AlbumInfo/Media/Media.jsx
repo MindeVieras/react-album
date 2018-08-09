@@ -21,7 +21,7 @@ import LightboxSlider from './LightboxSlider'
 import UploadMedia from '../../../Buttons/UploadMedia'
 
 import { authHeader, baseServerUrl } from '../../../../../_helpers'
-import { albumsActions } from '../../../../../_actions'
+import { albumsActions } from 'Actions'
 import { mediaService } from '../../../../../_services'
 
 const styles = theme => ({

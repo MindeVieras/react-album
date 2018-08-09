@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography'
 import renderText from '../Common/Form/Fields'
 import RenderButton from '../Common/Form/RenderButton'
 
-import { loginActions } from '../../_actions'
+import { loginActions } from 'Actions'
 
 const styles = theme => ({
   auth_error: {

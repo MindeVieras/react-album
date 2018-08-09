@@ -12,7 +12,7 @@ import AddIcon from '@material-ui/icons/Add'
 
 import { Tip } from 'Common'
 
-import { albumsActions, utilsActions } from '../../../_actions'
+import { albumsActions, utilsActions } from 'Actions'
 import { albumsService } from '../../../_services'
 import { albumsConstants } from '../../../_constants'
 

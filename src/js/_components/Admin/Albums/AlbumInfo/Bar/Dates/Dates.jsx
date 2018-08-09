@@ -18,7 +18,7 @@ import Picker from './Picker'
 import TimeAgo from './TimeAgo'
 import SimpleModal from '../../../../../Common/Modals'
 
-import { adminUiActions } from '../../../../../../_actions'
+import { adminUiActions } from 'Actions'
 
 const styles = theme => ({
   text_wrapper: {

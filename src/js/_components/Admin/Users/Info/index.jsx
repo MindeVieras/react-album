@@ -7,7 +7,7 @@ import { RingLoader } from 'react-spinners'
 
 import Blur from 'react-blur'
 
-import { userActions } from '../../../../_actions'
+import { userActions } from 'Actions'
 
 class UserInfo extends React.Component {
 

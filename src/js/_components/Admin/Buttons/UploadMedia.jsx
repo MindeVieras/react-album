@@ -12,7 +12,7 @@ import green from '@material-ui/core/colors/green'
 
 import { Tip } from 'Common'
 
-import { albumsActions } from '../../../_actions'
+import { albumsActions } from 'Actions'
 
 const styles = theme => ({
   button: {

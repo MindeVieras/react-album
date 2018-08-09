@@ -13,7 +13,7 @@ import AddIcon from '@material-ui/icons/Add'
 import renderText from '../../../../../Common/Form/Fields'
 import RenderButton from '../../../../../Common/Form/RenderButton'
 
-import { albumsActions, adminUiActions } from '../../../../../../_actions'
+import { albumsActions, adminUiActions } from 'Actions'
 import { adminConstants } from '../../../../../../_constants'
 
 const modal_id = adminConstants.MODAL_ALBUM_RENEME

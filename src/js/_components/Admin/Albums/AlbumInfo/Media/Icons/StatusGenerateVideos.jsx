@@ -10,7 +10,7 @@ import { IoVideocamera } from 'react-icons/lib/io'
 
 import { Tip } from 'Common'
 
-import { albumsActions } from '../../../../../../_actions'
+import { albumsActions } from 'Actions'
 
 
 class StatusGenerateVideosIcon extends Component {

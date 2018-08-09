@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography'
 
 import grey from '@material-ui/core/colors/grey'
 
-import { albumsActions, utilsActions } from '../../../../../_actions'
+import { albumsActions, utilsActions } from 'Actions'
 
 const styles = theme => ({
   dates_wrapper: {

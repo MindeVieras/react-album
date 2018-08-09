@@ -8,7 +8,7 @@ import moment from 'moment'
 import Datetime from 'react-datetime'
 import { IoRefresh } from 'react-icons/lib/io'
 
-import { albumsActions } from '../../../../../../_actions'
+import { albumsActions } from 'Actions'
 
 class Picker extends Component {
 

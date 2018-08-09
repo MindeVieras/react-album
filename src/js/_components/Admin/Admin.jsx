@@ -20,7 +20,7 @@ import TrashPage from './Trash'
 import Error404 from './Errors/404'
 
 import { googleKey } from '../../_helpers/config'
-import { adminUiActions, albumsActions, utilsActions } from '../../_actions'
+import { adminUiActions, albumsActions, utilsActions } from 'Actions'
 
 import 'react-datetime/css/react-datetime.css'
 // import 'react-toggle/style.css'

@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button'
 
 import RestoreIcon from '@material-ui/icons/Restore'
 
-import { trashActions } from '../../../../_actions'
+import { trashActions } from 'Actions'
 
 const styles = theme => ({
   button: {

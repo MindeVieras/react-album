@@ -10,7 +10,7 @@ import DeleteAlbum from '../../Buttons/DeleteAlbum'
 import Bar from './Bar'
 import Media from './Media'
 
-import { headerActions, footerActions } from '../../../../_actions'
+import { headerActions, footerActions } from 'Actions'
 import { albumsConstants, contentConstants, mediaConstants } from '../../../../_constants'
 
 const styles = theme => ({

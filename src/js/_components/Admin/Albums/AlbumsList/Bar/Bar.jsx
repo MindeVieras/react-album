@@ -9,7 +9,7 @@ import grey from '@material-ui/core/colors/grey'
 
 import DatesRange from './DatesRange'
 
-import { albumsActions } from '../../../../../_actions'
+import { albumsActions } from 'Actions'
 
 const styles = theme => ({
   bar_wrapper: {

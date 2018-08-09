@@ -27,7 +27,7 @@ import StatusRekognitionLabelsIcon from '../Icons/StatusRekognitionLabels'
 
 import { fitMediaToWrapper } from '../../../../../../_helpers'
 import { utilsConstants } from '../../../../../../_constants'
-import { albumsActions, adminUiActions } from '../../../../../../_actions'
+import { albumsActions, adminUiActions } from 'Actions'
 
 const styles = theme => ({
   item: {

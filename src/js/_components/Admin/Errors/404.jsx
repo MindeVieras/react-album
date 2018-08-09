@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography'
 
 import grey from '@material-ui/core/colors/grey'
 
-import { headerActions, footerActions } from '../../../_actions'
+import { headerActions, footerActions } from 'Actions'
 
 const styles = theme => ({
   error_wrapper: {

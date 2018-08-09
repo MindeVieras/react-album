@@ -9,7 +9,7 @@ import AlbumsList from './AlbumsList'
 import AlbumInfo from './AlbumInfo'
 import NewAlbum from '../Buttons/NewAlbum'
 
-import { headerActions, utilsActions, albumsActions } from '../../../_actions'
+import { headerActions, utilsActions, albumsActions } from 'Actions'
 
 const styles = {
   rnd_wrapper: {

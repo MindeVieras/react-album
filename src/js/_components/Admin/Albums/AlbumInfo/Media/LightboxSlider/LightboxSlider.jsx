@@ -15,7 +15,7 @@ import grey from '@material-ui/core/colors/grey'
 import { PrevArrow, NextArrow } from './Arrows'
 
 import { fitMediaToWrapper } from '../../../../../../_helpers'
-import { adminUiActions } from '../../../../../../_actions'
+import { adminUiActions } from 'Actions'
 
 const styles = theme => ({
   backdrop: {

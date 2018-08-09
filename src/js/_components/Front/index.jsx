@@ -11,7 +11,7 @@ import { frontTranslations } from '../../translations/frontTranslations'
 import CircleMenu from './Partials/CircleMenu'
 import Media from './Album/Media'
 
-import { frontActions, frontUiActions, utilsActions } from '../../_actions'
+import { frontActions, frontUiActions, utilsActions } from 'Actions'
 
 const page = 0
 const limit = 1

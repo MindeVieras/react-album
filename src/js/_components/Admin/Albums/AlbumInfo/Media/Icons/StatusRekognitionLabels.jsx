@@ -15,7 +15,7 @@ import { IoAperture } from 'react-icons/lib/io'
 
 import { Tip } from 'Common'
 
-import { albumsActions } from '../../../../../../_actions'
+import { albumsActions } from 'Actions'
 
 const styles = theme => ({
   tipListRoot: {

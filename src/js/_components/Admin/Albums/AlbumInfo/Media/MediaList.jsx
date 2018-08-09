@@ -8,7 +8,7 @@ import List from '@material-ui/core/List'
 
 import MediaItem from './MediaItem'
 
-import { albumsActions } from '../../../../../_actions'
+import { albumsActions } from 'Actions'
 
 const styles = theme => ({
   list: {

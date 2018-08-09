@@ -10,7 +10,7 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
 
 import { IoTrashA } from 'react-icons/lib/io'
 
-import { trashActions } from '../../../../_actions'
+import { trashActions } from 'Actions'
 
 const styles = theme => ({
   icon: {

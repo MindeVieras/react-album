@@ -20,7 +20,7 @@ import { Spinner } from 'Common'
 import MediaItem from './MediaItem'
 import AlbumsItem from './AlbumsItem'
 
-import { headerActions, trashActions } from '../../../_actions'
+import { headerActions, trashActions } from 'Actions'
 
 const styles = theme => ({
   flex: {

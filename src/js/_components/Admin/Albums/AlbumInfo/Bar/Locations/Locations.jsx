@@ -17,7 +17,7 @@ import AlbumMap from './AlbumMap'
 import LocationsBar from './LocationsBar'
 import SimpleModal from '../../../../../Common/Modals'
 
-import { adminUiActions } from '../../../../../../_actions'
+import { adminUiActions } from 'Actions'
 
 const styles = theme => ({
   text_wrapper: {

@@ -8,7 +8,7 @@ import Select from 'react-select'
 import Toggle from 'react-toggle'
 
 import { userService } from '../../../../_services'
-import { userActions } from '../../../../_actions'
+import { userActions } from 'Actions'
 // import { history } from '../../../../_helpers'
 
 class UserCreateForm extends React.Component {

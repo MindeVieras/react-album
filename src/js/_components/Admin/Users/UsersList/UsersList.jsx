@@ -10,7 +10,7 @@ import { Scrollbar, Spinner } from 'Common'
 
 import UsersListItem from './UsersListItem'
 
-import { headerActions, userActions } from '../../../../_actions'
+import { headerActions, userActions } from 'Actions'
 
 const styles = theme => ({
   scrollbar: {

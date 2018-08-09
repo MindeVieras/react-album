@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 import { Spinner } from 'Common'
 
-import { headerActions, userActions } from '../../../../_actions'
+import { headerActions, userActions } from 'Actions'
 
 class UserView extends Component {
 

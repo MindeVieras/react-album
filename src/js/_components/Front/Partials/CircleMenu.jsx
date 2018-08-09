@@ -8,7 +8,7 @@ import Rnd from 'react-rnd'
 
 import { IoNavicon, IoCube, IoHome, IoLogOut } from 'react-icons/lib/io'
 
-import { frontUiActions, utilsActions } from '../../../_actions'
+import { frontUiActions, utilsActions } from 'Actions'
 
 // CONSTANTS
 // Value of 1 degree in radians
@@ -34,18 +34,18 @@ function toRadians(degrees) {
 }
 
 class CircleMenu extends Component {
-  
+
   constructor(props){
     super(props)
 
     this.toggleMenu = this.toggleMenu.bind(this)
   }
-  
+
   toggleMenu(){
     const { menu_open, dispatch } = this.props
     dispatch(frontUiActions.menuOpen(!menu_open))
   }
-  
+
   getMainButtonStyle(){
     let { mainButtonDiam } = this.props
     return {
@@ -53,7 +53,7 @@ class CircleMenu extends Component {
       height: mainButtonDiam
     }
   }
-  
+
   getInitalChildButtonStyle(){
     let { childButtonDiam, mainButtonDiam, stiffness, damping } = this.props
     return {
@@ -64,7 +64,7 @@ class CircleMenu extends Component {
       left: spring(mainButtonDiam/2 - childButtonDiam/2, {stiffness, damping})
     }
   }
-  
+
   getFinalChildButtonStyle(index){
     let { childButtonDiam, mainButtonDiam, stiffness, damping } = this.props
     let { deltaX, deltaY } = this.getFinalDeltaPositions(index)
@@ -76,7 +76,7 @@ class CircleMenu extends Component {
       left: spring(mainButtonDiam/2 - deltaY, {stiffness, damping})
     }
   }
-  
+
   getFinalDeltaPositions(index) {
     let NUM_CHILDREN = this.props.elements.length
     let CHILD_BUTTON_DIAM = this.props.childButtonDiam
@@ -85,14 +85,14 @@ class CircleMenu extends Component {
     let ROTATION = this.props.rotation
     let FAN_ANGLE = (NUM_CHILDREN - 1) * SEPARATION_ANGLE
     let BASE_ANGLE = ((180 - FAN_ANGLE)/2)+90+ROTATION
-    
+
     let TARGET_ANGLE = BASE_ANGLE + ( index * SEPARATION_ANGLE )
     return {
       deltaX: FLY_OUT_RADIUS * Math.cos(toRadians(TARGET_ANGLE)) - (CHILD_BUTTON_DIAM/2),
       deltaY: FLY_OUT_RADIUS * Math.sin(toRadians(TARGET_ANGLE)) + (CHILD_BUTTON_DIAM/2)
     }
   }
-  
+
   getCProps(){
     return {
       childButtonProps: (style, onClick) => ({
@@ -106,11 +106,11 @@ class CircleMenu extends Component {
       })
     }
   }
-  
+
   renderChildButton(item, index){
     let { menu_open } = this.props
     let cp = this.getCProps()
-    
+
     return <Motion {...cp.childButtonMotionProps(index, menu_open)}>
       {
         (style) => <div {...cp.childButtonProps(style, item.onClick)}>

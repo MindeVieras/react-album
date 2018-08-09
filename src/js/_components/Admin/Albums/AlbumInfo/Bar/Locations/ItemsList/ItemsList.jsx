@@ -7,7 +7,7 @@ import { withStyles } from '@material-ui/core/styles'
 
 import { IoVideocamera } from 'react-icons/lib/io'
 
-import { albumsActions } from '../../../../../../../_actions'
+import { albumsActions } from 'Actions'
 
 const styles = theme => ({
   listWrapper: {

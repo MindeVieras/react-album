@@ -12,7 +12,7 @@ import grey from '@material-ui/core/colors/grey'
 import ChevronLeft from '@material-ui/icons/ChevronLeft'
 import ChevronRight from '@material-ui/icons/ChevronRight'
 
-import { albumsActions } from '../../../_actions'
+import { albumsActions } from 'Actions'
 
 const styles = theme => ({
   pagerList: {

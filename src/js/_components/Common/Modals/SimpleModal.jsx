@@ -10,7 +10,7 @@ import IconButton from '@material-ui/core/IconButton'
 
 import Close from '@material-ui/icons/Close'
 
-import { adminUiActions } from '../../../_actions'
+import { adminUiActions } from 'Actions'
 
 const styles = theme => ({
   root: {

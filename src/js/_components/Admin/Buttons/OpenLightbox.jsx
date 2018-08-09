@@ -6,7 +6,8 @@ import Lightbox from 'lightbox-react'
 import { IoPlay } from 'react-icons/lib/io'
 
 import LightboxVideo from '../Partials/Lightbox/LightboxVideo'
-import { albumsActions, footerActions } from '../../../_actions'
+
+import { albumsActions, footerActions } from 'Actions'
 
 // const images = [
 //   '//placekitten.com/1500/500',
@@ -19,7 +20,7 @@ class OpenLightbox extends Component {
 
   constructor(props) {
     super(props)
-    
+
     this.state = {
       photoIndex: 0,
       isOpen: false

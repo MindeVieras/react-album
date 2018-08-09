@@ -6,7 +6,7 @@ import { submit } from 'redux-form'
 import Popup from 'react-popup'
 
 import UserCreateForm from '../Forms/UserCreateForm'
-import { footerActions } from '../../../_actions'
+import { footerActions } from 'Actions'
 
 class UserCreate extends Component {
 
