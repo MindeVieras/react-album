@@ -83,6 +83,7 @@ class StatusGenerateImageThumbsIcon extends Component {
 }
 
 StatusGenerateImageThumbsIcon.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
   media_id: PropTypes.number.isRequired,
   thumbs: PropTypes.object.isRequired

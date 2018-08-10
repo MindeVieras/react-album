@@ -53,14 +53,20 @@ class ItemsList extends Component {
     }
 
     if (media) {
-      mediaItems = media.map((m, i) =>{
+      mediaItems = media.map((m, i) => {
         // console.log(m.location)
         const { media_id, mime } = m
         // console.log(m.mime)
         if (mime.includes('image') && !m.location) {
-          return <div key={ i } className="item media-item image" onDoubleClick={ () => this.onMediaDblClick(media_id) }>
-            <img src={ m.thumbs.icon } />
-          </div>
+          return (
+            <div
+              key={ i }
+              className="item media-item image"
+              onDoubleClick={ () => this.onMediaDblClick(media_id) }
+            >
+              <img src={ m.thumbs.icon } />
+            </div>
+          )
         }
         if (mime.includes('video') && !m.location) {
           return (
@@ -92,11 +98,18 @@ class ItemsList extends Component {
 
 ItemsList.propTypes = {
   classes: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
   album_id: PropTypes.number.isRequired,
   current_location: PropTypes.object.isRequired,
   album_location: PropTypes.object,
   media: PropTypes.array,
   map: PropTypes.object
+}
+
+ItemsList.defaultProps = {
+  album_location: {},
+  media: [],
+  map: {}
 }
 
 function mapStateToProps(state) {

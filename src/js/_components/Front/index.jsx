@@ -1,14 +1,16 @@
 
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { setTranslations } from 'redux-i18n'
 import { Link } from 'react-router-dom'
 import { RingLoader } from 'react-spinners'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 
+import { IoCube, IoHome, IoLogOut } from 'react-icons/lib/io'
+
 import { frontTranslations } from '../../translations/frontTranslations'
 
-import CircleMenu from './Partials/CircleMenu'
 import Media from './Album/Media'
 
 import { frontActions, frontUiActions, utilsActions } from 'Actions'
@@ -130,13 +132,23 @@ class Front extends Component {
 
             </div>
 
-            <CircleMenu />
+            <Link to="/login"><IoLogOut /></Link>
+            <Link to="/"><IoHome /></Link>
+            <Link to="/admin"><IoCube /></Link>
+
           </div>
         }
 
       </div>
     )
   }
+}
+
+Front.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  front_settings: PropTypes.object.isRequired,
+  albums: PropTypes.object.isRequired,
+  uid: PropTypes.number.isRequired
 }
 
 function mapStateToProps(state) {

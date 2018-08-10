@@ -64,7 +64,6 @@ export function adminAlbums(state = initialState, action) {
       }
     }
 
-
   /*
    * Album list dates reducers
    * calls GET_LIST_DATES_REQUEST, GET_LIST_DATES_SUCCESS, GET_LIST_DATES_FAILURE

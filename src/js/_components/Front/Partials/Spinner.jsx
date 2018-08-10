@@ -60,7 +60,7 @@ const Spinner = ({ type, size }) => {
       </div>
     )
   }
-  
+
 }
 
 Spinner.propTypes = {
@@ -72,4 +72,5 @@ Spinner.defaultProps = {
   type: 'primary',
   size: 70
 }
+
 export default Spinner

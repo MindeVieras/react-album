@@ -65,9 +65,9 @@ class StatusRekognitionLabelsIcon extends Component {
 
     if (rekognition_labels.ack == 'ok') {
       className = 'success'
-      let totalLabels = Object.keys(rekognition_labels).length - 1, // substract 'ack'
-          ulWidth = 150,
-          liWidth = 150
+      let totalLabels = Object.keys(rekognition_labels).length - 1 // substract 'ack'
+      let ulWidth = 150
+      let liWidth = 150
 
       if (totalLabels > 20 && totalLabels <= 30) {
         ulWidth = 320
@@ -135,6 +135,7 @@ class StatusRekognitionLabelsIcon extends Component {
 
 StatusRekognitionLabelsIcon.propTypes = {
   classes: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
   media_id: PropTypes.number.isRequired,
   rekognition_labels: PropTypes.object.isRequired

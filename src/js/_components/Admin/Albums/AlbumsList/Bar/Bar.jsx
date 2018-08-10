@@ -51,9 +51,9 @@ class Bar extends Component {
 Bar.propTypes = {
   dispatch: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
-  dates: PropTypes.object,
-  start_date: PropTypes.string,
-  end_date: PropTypes.string
+  dates: PropTypes.object.isRequired,
+  start_date: PropTypes.string.isRequired,
+  end_date: PropTypes.string.isRequired
 }
 
 function mapStateToProps(state) {

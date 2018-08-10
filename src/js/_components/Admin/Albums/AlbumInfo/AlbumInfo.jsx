@@ -94,6 +94,7 @@ class AlbumInfo extends Component {
 }
 
 AlbumInfo.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
   selected_album: PropTypes.object.isRequired,
   width: PropTypes.number,
@@ -102,7 +103,7 @@ AlbumInfo.propTypes = {
 
 AlbumInfo.defaultProps = {
   width: 500,
-  heght: 600
+  height: 600
 }
 
 export default connect()(withStyles(styles)(AlbumInfo))

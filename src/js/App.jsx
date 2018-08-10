@@ -71,8 +71,8 @@ class App extends Component {
     let orientation = (width < height) ? 'portrait' : 'landscape'
     dispatch(clientActions.setScreen({ width, height, orientation }))
   }
-
   render() {
+
     return (
       <Router history={ history }>
         <Switch>

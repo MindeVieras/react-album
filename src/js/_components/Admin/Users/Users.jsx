@@ -5,7 +5,6 @@ import { Switch, Route } from 'react-router-dom'
 
 import UsersList from './UsersList'
 import UserView from './UserView'
-import UserInfo from './Info'
 import Error404 from '../Errors/404'
 
 const Users = (props) => {

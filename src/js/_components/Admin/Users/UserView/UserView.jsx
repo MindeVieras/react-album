@@ -68,8 +68,9 @@ class UserView extends Component {
 }
 
 UserView.propTypes = {
-  selected_user: PropTypes.object,
-  dispatch: PropTypes.func
+  dispatch: PropTypes.func.isRequired,
+  match: PropTypes.object.isRequired,
+  selected_user: PropTypes.object.isRequired,
 }
 
 function mapStateToProps(state) {

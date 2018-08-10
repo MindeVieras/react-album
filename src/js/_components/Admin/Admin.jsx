@@ -74,50 +74,50 @@ class Admin extends Component {
       const totalAlbums = albums_list.length
 
       // find album index in list
-      const index = albums_list.map(function(a) { return a.id }).indexOf(album.id)
+      const index = albums_list.map((a) => { return a.id }).indexOf(album.id)
 
       switch(keyCode) {
 
-        // on key up or down nawigate trough albums list
-        case 38: // if navigation to up
-          if (index > 0) {
-            const newIndex = index - 1
-            const newId = albums_list[newIndex].id
-            dispatch(albumsActions.getOne(newId))
-            dispatch(utilsActions.saveAdminSetting('selected_album', newId))
-          }
-          break
-        case 40: // if navigation to down
-          const newIndex = index + 1
-          if (newIndex < totalAlbums) {
-            const newId = albums_list[newIndex].id
-            dispatch(albumsActions.getOne(newId))
-            dispatch(utilsActions.saveAdminSetting('selected_album', newId))
-          }
-          break
+      // on key up or down nawigate trough albums list
+      case 38: // if navigation to up
+        if (index > 0) {
+          const newIndex = index - 1
+          const newId = albums_list[newIndex].id
+          dispatch(albumsActions.getOne(newId))
+          dispatch(utilsActions.saveAdminSetting('selected_album', newId))
+        }
+        break
+      case 40: // if navigation to down
+        const newIndex = index + 1
+        if (newIndex < totalAlbums) {
+          const newId = albums_list[newIndex].id
+          dispatch(albumsActions.getOne(newId))
+          dispatch(utilsActions.saveAdminSetting('selected_album', newId))
+        }
+        break
 
-        // on key left and right navigate madia pager
-        case 37: // if navigating to right
-          if (current_page > 0) {
-            let newPage = current_page - 1
-            dispatch(albumsActions.setMediaPagerPage(newPage))
-          }
-          break
-        case 39: // if navigating to right
-          const totalPages = Math.ceil(album.media.length / per_page)
-          let newPage = current_page + 1
-          if (newPage < totalPages) {
-            dispatch(albumsActions.setMediaPagerPage(newPage))
-          }
-          break
+      // on key left and right navigate madia pager
+      case 37: // if navigating to right
+        if (current_page > 0) {
+          let newPage = current_page - 1
+          dispatch(albumsActions.setMediaPagerPage(newPage))
+        }
+        break
+      case 39: // if navigating to right
+        const totalPages = Math.ceil(album.media.length / per_page)
+        let newPage = current_page + 1
+        if (newPage < totalPages) {
+          dispatch(albumsActions.setMediaPagerPage(newPage))
+        }
+        break
 
-        // on space key open lightbox
-        case 32: // if space key
-          if (lightbox.isOpen)
-            dispatch(adminUiActions.lightboxClose())
-          else if (!lightbox.isOpen)
-            dispatch(adminUiActions.lightboxOpen())
-          break
+      // on space key open lightbox
+      case 32: // if space key
+        if (lightbox.isOpen)
+          dispatch(adminUiActions.lightboxClose())
+        else if (!lightbox.isOpen)
+          dispatch(adminUiActions.lightboxOpen())
+        break
 
       }
 
@@ -158,11 +158,26 @@ class Admin extends Component {
 }
 
 Admin.propTypes = {
-  classes: PropTypes.object.isRequired
+  dispatch: PropTypes.func.isRequired,
+  classes: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
+  keydown: PropTypes.object.isRequired,
+  isScriptLoadSucceed: PropTypes.bool.isRequired,
+  selected_album: PropTypes.object.isRequired,
+  settings: PropTypes.object,
+  albums_list: PropTypes.array,
+  lightbox: PropTypes.object
+}
+
+Admin.defaultProps = {
+  settings: {},
+  albums_list: [],
+  lightbox: {}
 }
 
 function mapStateToProps(state) {
   const { admin_albums, admin_ui, settings } = state
+
   return {
     settings: settings.admin,
     selected_album: admin_albums.selected_album,

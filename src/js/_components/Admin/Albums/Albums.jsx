@@ -1,5 +1,6 @@
 
 import React, { Component, Fragment } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import HTML5Backend from 'react-dnd-html5-backend'
 import { DragDropContextProvider } from 'react-dnd'
@@ -98,6 +99,15 @@ class Albums extends Component {
       </DragDropContextProvider>
     )
   }
+}
+
+Albums.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  selected_album_id: PropTypes.number.isRequired,
+  client_width: PropTypes.number.isRequired,
+  client_height: PropTypes.number.isRequired,
+  sidebar_width: PropTypes.number.isRequired,
+  selected_album: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state) {

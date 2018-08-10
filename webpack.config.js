@@ -34,6 +34,11 @@ module.exports = {
                 loader: ['babel-loader']
             },
             {
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
+                use: ['babel-loader', 'eslint-loader']
+            },
+            {
                 test: /\.(css|scss)$/,
                 use: [{
                     loader: "style-loader"

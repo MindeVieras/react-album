@@ -82,6 +82,7 @@ Status.propTypes = {
 
 Status.defaultProps = {
   className: '',
+  fromServer: false,
   text: {
     canceled: 'Canceled',
     deleted: 'Deleted',

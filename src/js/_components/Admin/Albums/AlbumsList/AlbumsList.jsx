@@ -78,6 +78,8 @@ AlbumsList.propTypes = {
   dispatch: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
   selected_album_id: PropTypes.number.isRequired,
+  start_date: PropTypes.string.isRequired,
+  end_date: PropTypes.string.isRequired,
   albums: PropTypes.object
 }
 

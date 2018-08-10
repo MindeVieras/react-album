@@ -92,7 +92,7 @@ class MediaItem extends Component {
       classes, uploader, connectDragSource,
       item_width, item_height, gap_width, gap_height,
       width, height,
-      s3_key, id, media_id,
+      id, media_id,
       status, fromServer,
       mime, filename, filesize,
       metadata, rekognition_labels,
@@ -164,55 +164,57 @@ class MediaItem extends Component {
                 fromServer={ fromServer }
                 className={ classes.nameSizeText }
               />
-              <div className={ classes.icons }>
-                {mime && rekognition_labels &&
-                  <StatusRekognitionLabelsIcon
-                    rekognition_labels={ rekognition_labels }
-                    mime={ mime }
-                    id={ id }
-                    media_id={ media_id }
-                  />
-                }
-                {metadata &&
-                  <StatusMetadataIcon
-                    metadata={ metadata }
-                    id={ id }
-                    media_id={ media_id }
-                  />
-                }
-                {thumbs &&
-                  <StatusGenerateImageThumbsIcon
-                    thumbs={ thumbs }
-                    id={ id }
-                    media_id={ media_id }
-                  />
-                }
-                {videos &&
-                  <StatusGenerateVideosIcon
-                    videos={ videos }
-                    id={ id }
-                    media_id={ media_id }
-                  />
-                }
-                {status === 'upload successful' &&
-                  <div
-                    className="icon success"
-                    data-tip="Successfuly uploaded"
-                  >
-                    <IoCheckmarkCircled />
-                    <ReactTooltip />
-                  </div>
-                }
-                {status === 'upload failed' &&
-                  <div
-                    className="icon failed"
-                    data-tip="Error saving file"
-                  >
-                    <IoBug />
-                    <ReactTooltip />
-                  </div>
-                }
-              </div>
+              {media_id &&
+                <div className={ classes.icons }>
+                  {mime && rekognition_labels &&
+                    <StatusRekognitionLabelsIcon
+                      rekognition_labels={ rekognition_labels }
+                      mime={ mime }
+                      id={ id }
+                      media_id={ media_id }
+                    />
+                  }
+                  {metadata &&
+                    <StatusMetadataIcon
+                      metadata={ metadata }
+                      id={ id }
+                      media_id={ media_id }
+                    />
+                  }
+                  {thumbs &&
+                    <StatusGenerateImageThumbsIcon
+                      thumbs={ thumbs }
+                      id={ id }
+                      media_id={ media_id }
+                    />
+                  }
+                  {videos &&
+                    <StatusGenerateVideosIcon
+                      videos={ videos }
+                      id={ id }
+                      media_id={ media_id }
+                    />
+                  }
+                  {status === 'upload successful' &&
+                    <div
+                      className="icon success"
+                      data-tip="Successfuly uploaded"
+                    >
+                      <IoCheckmarkCircled />
+                      <ReactTooltip />
+                    </div>
+                  }
+                  {status === 'upload failed' &&
+                    <div
+                      className="icon failed"
+                      data-tip="Error saving file"
+                    >
+                      <IoBug />
+                      <ReactTooltip />
+                    </div>
+                  }
+                </div>
+              }
             </div>
 
             <div className={ classes.nameSizeWrapper }>
@@ -256,18 +258,33 @@ MediaItem.propTypes = {
   gap_width: PropTypes.number.isRequired,
   gap_height: PropTypes.number.isRequired,
   id: PropTypes.number.isRequired,
+  status: PropTypes.string,
+  mime: PropTypes.string,
   width: PropTypes.number,
   height: PropTypes.number,
   filename: PropTypes.string,
   filesize: PropTypes.number,
-  // media_id: PropTypes.number.isRequired
+  media_id: PropTypes.number,
+  fromServer: PropTypes.bool,
+  thumbs: PropTypes.object,
+  videos: PropTypes.object,
+  metadata: PropTypes.object,
+  rekognition_labels: PropTypes.object
 }
 
 MediaItem.defaultProps = {
+  status: '',
+  mime: '',
   width: null,
   height: null,
   filename: '',
-  filesize: 0
+  filesize: 0,
+  media_id: null,
+  fromServer: false,
+  thumbs: {},
+  videos: {},
+  metadata: {},
+  rekognition_labels: {}
 }
 
 const boxSource = {

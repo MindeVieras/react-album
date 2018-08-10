@@ -265,6 +265,7 @@ function flashToString(dec) {
 
 StatusMetadataIcon.propTypes = {
   classes: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
   media_id: PropTypes.number.isRequired,
   metadata: PropTypes.object.isRequired

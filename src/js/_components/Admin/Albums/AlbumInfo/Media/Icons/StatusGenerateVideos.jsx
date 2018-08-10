@@ -83,6 +83,7 @@ class StatusGenerateVideosIcon extends Component {
 }
 
 StatusGenerateVideosIcon.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
   media_id: PropTypes.number.isRequired,
   videos: PropTypes.object.isRequired

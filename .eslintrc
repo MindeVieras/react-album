@@ -5,7 +5,7 @@
   ],
   "rules": {
     "max-len": [1, 120, 2, {ignoreComments: true}],
-    "indent": ["error", 2],
+    "indent": ["error", 2, {ignoreComments: true}],
     "semi": ["error", "never"],
     "quotes": ["error", "single", { "allowTemplateLiterals": true }],
     "prefer-arrow-callback": ["error", { "allowUnboundThis": false }],

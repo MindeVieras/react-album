@@ -1,7 +1,7 @@
 
-import qq from 'fine-uploader/lib/dnd'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import qq from 'fine-uploader/lib/dnd'
 
 class DropzoneElement extends Component {
 
@@ -48,7 +48,7 @@ class DropzoneElement extends Component {
   _registerDropzone() {
     this._qqDropzone && this._qqDropzone.dispose()
 
-    const dropzoneEl = this.props.element || this.refs.dropZone
+    const dropzoneEl = this.refs.dropZone
     // console.log(this.props);
     this._qqDropzone = new qq.DragAndDrop({
       allowMultipleItems: !!this.props.multiple,
@@ -69,7 +69,6 @@ DropzoneElement.propTypes = {
   uploader: PropTypes.object.isRequired,
   children: PropTypes.node,
   dropActiveClassName: PropTypes.string,
-  element: PropTypes.object,
   multiple: PropTypes.bool,
   onDropError: PropTypes.func,
   onProcessingDroppedFiles: PropTypes.func,
@@ -78,7 +77,11 @@ DropzoneElement.propTypes = {
 
 DropzoneElement.defaultProps = {
   dropActiveClassName: 'active',
-  children: <span />
+  children: <span />,
+  multiple: false,
+  onDropError: null,
+  onProcessingDroppedFiles: null,
+  onProcessingDroppedFilesComplete: null
 }
 
 const getElementProps = actualProps => {

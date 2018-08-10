@@ -113,6 +113,7 @@ class Picker extends Component {
 }
 
 Picker.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   start_date: PropTypes.string.isRequired,
   end_date: PropTypes.string.isRequired,
   album_id: PropTypes.number.isRequired,

@@ -38,18 +38,18 @@ class UsersListItem extends Component {
               root: classes.itemRoot
             }}
           >
-              <Avatar
-                alt={ username }
-              >
-                { initials }
-              </Avatar>
+            <Avatar
+              alt={ username }
+            >
+              { initials }
+            </Avatar>
 
-              <ListItemText primary={ username } />
+            <ListItemText primary={ username } />
 
 
-              {deleting &&
-                <Spinner type="primary" size={ 70 } />
-              }
+            {deleting &&
+              <Spinner type="primary" size={ 70 } />
+            }
 
           </ListItem>
 
