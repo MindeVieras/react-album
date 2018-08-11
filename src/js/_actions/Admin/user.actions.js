@@ -12,26 +12,22 @@ export const userActions = {
 
 function create(user) {
   return dispatch => {
-    dispatch(request(user))
+    dispatch(request())
 
     userService.create(user)
       .then(res => {
         if (res.ack == 'ok') {
-          // console.log(res)
           dispatch(success())
           // history.push('/login')
-          // dispatch(alertActions.success('Registration successful'))
         } else {
-          // console.log(res)
           dispatch(failure(res.msg))
-          // dispatch(alertActions.error(res.msg))
         }
       })
   }
 
-  function request(user) { return { type: userConstants.CREATE_REQUEST, user } }
+  function request() { return { type: userConstants.CREATE_REQUEST } }
   function success(user) { return { type: userConstants.CREATE_SUCCESS, user } }
-  function failure(error) { return { type: userConstants.CREATE_FAILURE, error } }
+  function failure(err) { return { type: userConstants.CREATE_FAILURE, err } }
 }
 
 function getList() {

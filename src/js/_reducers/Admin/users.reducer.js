@@ -7,6 +7,11 @@ const initialState = {
     err: false,
     user: {}
   },
+  create_user: {
+    loading: false,
+    err: false,
+    user: {}
+  },
   list: {
     loading: false,
     err: false,
@@ -33,6 +38,26 @@ export function users(state = initialState, action) {
   case userConstants.GETONE_FAILURE:
     return {
       selected_user: {
+        err: action.err
+      }
+    }
+  case userConstants.CREATE_REQUEST:
+    return {
+      ...state,
+      create_user: {
+        loading: true
+      }
+    }
+  case userConstants.CREATE_SUCCESS:
+    return {
+      ...state,
+      create_user: {
+        user: action.user
+      }
+    }
+  case userConstants.CREATE_FAILURE:
+    return {
+      create_user: {
         err: action.err
       }
     }

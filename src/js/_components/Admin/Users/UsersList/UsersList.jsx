@@ -9,6 +9,7 @@ import List from '@material-ui/core/List'
 import { Scrollbar, Spinner } from 'Common'
 
 import UsersListItem from './UsersListItem'
+import UserCreateButton from './UserCreateButton'
 
 import { headerActions, userActions } from 'Actions'
 
@@ -58,6 +59,9 @@ class UsersList extends Component {
             </List>
           </Scrollbar>
         }
+
+        <UserCreateButton />
+
       </Fragment>
     )
   }

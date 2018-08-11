@@ -12,13 +12,12 @@ const styles = theme => ({
   }
 })
 
-const RenderButton = ({ classes, className, type, loading, text, fullWidth, ...other }) => (
+const RenderButton = ({ classes, className, type, loading, text, ...otherProps }) => (
   <div className={ `${classes.btn_wrapper} ${className}` }>
     <Button
       type={ type }
-      fullWidth={ fullWidth }
       size="large"
-      { ...other }
+      { ...otherProps }
     >
       { text }
     </Button>
@@ -34,8 +33,7 @@ RenderButton.propTypes = {
   className: PropTypes.string,
   type: PropTypes.string,
   loading: PropTypes.bool,
-  text: PropTypes.string,
-  fullWidth: PropTypes.bool
+  text: PropTypes.string
 }
 
 RenderButton.defaultProps = {
