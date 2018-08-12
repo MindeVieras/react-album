@@ -20,8 +20,7 @@ const theme = createMuiTheme({
     type: 'dark',
     background: {
       default: blueGrey[900],
-      header: blueGrey[800],
-      login: green[500]
+      header: blueGrey[800]
     }
   }
 })

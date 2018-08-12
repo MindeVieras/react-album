@@ -23,7 +23,6 @@ import { googleKey } from 'Helpers'
 import { adminUiActions, albumsActions, utilsActions } from 'Actions'
 
 import 'react-datetime/css/react-datetime.css'
-// import 'react-toggle/style.css'
 // import 'react-select/dist/react-select.css'
 import 'rc-slider/assets/index.css'
 import 'react-perfect-scrollbar/dist/css/styles.css'

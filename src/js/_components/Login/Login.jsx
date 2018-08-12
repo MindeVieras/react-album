@@ -14,7 +14,6 @@ import { loginActions } from 'Actions'
 
 const styles = theme => ({
   root: {
-    backgroundColor: theme.palette.background.login,
     padding: `10% ${theme.spacing.unit}px`,
     overflow: `auto`,
     height: `100vh`

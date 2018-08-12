@@ -18,7 +18,7 @@ function create(user) {
       .then(res => {
         if (res.ack == 'ok') {
           dispatch(success())
-          // history.push('/login')
+          history.push('/admin/users/' + res.user.username)
         } else {
           dispatch(failure(res.msg))
         }

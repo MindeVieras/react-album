@@ -3,20 +3,37 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
+import validator from 'validator'
 
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
-import { renderText, renderSelect, RenderButton } from 'Common'
+import { renderText, renderSelect, renderToggle, RenderButton } from 'Common'
 
-import { loginActions } from 'Actions'
+import { userActions } from 'Actions'
 
 const styles = theme => ({
-  auth_error: {
-    marginTop: theme.spacing.unit
+  fieldGroup: {
+    display: `flex`,
+    justifyContent: `space-between`,
+    alignItems: `center`
   },
-  btn_submit: {
+  accessLevelField: {
+    maxWidth: theme.spacing.unit * 30,
+    flex: 1
+  },
+  statusField: {
+    maxWidth: theme.spacing.unit * 12.5,
+    marginLeft: theme.spacing.unit * 2
+  },
+  actionsRoot: {
+    display: `flex`,
+    justifyContent: `space-between`,
+    alignItems: `center`,
     marginTop: theme.spacing.unit * 2
+  },
+  auth_error: {
+    marginLeft: theme.spacing.unit
   }
 })
 
@@ -25,7 +42,7 @@ class UserCreateForm extends Component {
   render() {
 
     const { t } = this.context
-    const { classes, handleSubmit, loading, error, msg } = this.props
+    const { classes, handleSubmit, serverLoading, serverError } = this.props
 
     return (
       <form onSubmit={ handleSubmit }>
@@ -46,7 +63,7 @@ class UserCreateForm extends Component {
         <Field
           name="confirm_password"
           component={ renderText }
-          label={ t(`Confirm password`) }
+          label={ t(`Confirm password *`) }
           type="password"
           autoComplete="confirm-new-password"
           margin="dense"
@@ -64,32 +81,45 @@ class UserCreateForm extends Component {
           label={ t(`Display name`) }
           margin="dense"
         />
-        <Field
-          name="access_level"
-          component={ renderSelect }
-          label={ t(`Access level *`) }
-          options={ accessLevelOptions }
-          margin="dense"
-        />
 
-        <RenderButton
-          type="submit"
-          loading={ loading }
-          text={ t(`Save`) }
-          variant="raised"
-          color="primary"
-          className={ classes.btn_submit }
-        />
+        <div className={ classes.fieldGroup }>
+          <Field
+            className={ classes.accessLevelField }
+            name="access_level"
+            component={ renderSelect }
+            label={ t(`Access level`) }
+            options={ accessLevelOptions }
+            margin="dense"
+          />
+          <Field
+            className={ classes.statusField }
+            name="status"
+            component={ renderToggle }
+            margin="dense"
+            onLabel="Active"
+            offLabel="Passive"
+          />
+        </div>
 
-        {error &&
-          <Typography
-            className={ classes.auth_error }
-            align="center"
-            color="error"
-          >
-            { t(msg) }
-          </Typography>
-        }
+        <div className={ classes.actionsRoot }>
+          <RenderButton
+            type="submit"
+            loading={ serverLoading }
+            text={ t(`Save`) }
+            variant="raised"
+            color="primary"
+          />
+
+          {serverError &&
+            <Typography
+              className={ classes.auth_error }
+              align="right"
+              color="error"
+            >
+              { t(serverError) }
+            </Typography>
+          }
+        </div>
       </form>
     )
   }
@@ -101,24 +131,38 @@ const accessLevelOptions = [
   { value: '100', label: 'Admin' }
 ]
 
+// Form validation
 const validate = values => {
+
+  const { username, password, confirm_password, email } = values
   const errors = {}
-  const requiredFields = [
-    'username',
-    'access_level',
-  ]
-  requiredFields.forEach(field => {
-    if (!values[field]) {
-      errors[field] = 'Required'
-    }
-  })
+
+  // vlaidate username
+  if (!username || validator.isEmpty(username))
+    errors['username'] = `Username is required`
+  else if (validator.isLength(username, {min:0, max:4}))
+    errors['username'] = `Username must be at least 5 chars long`
+
+  // vlaidate password
+  if (!password || validator.isEmpty(password))
+    errors['password'] = `Password is required`
+  else if (validator.isLength(password, {min:0, max:4}))
+    errors['password'] = `Password must be at least 5 chars long`
+
+  // vlaidate confirm password
+  if (password && confirm_password && !validator.equals(password, confirm_password))
+    errors['confirm_password'] = `Passwords must match`
+
+  // vlaidate email
+  if (email && !validator.isEmail(email))
+    errors['email'] =  `Email must be valid`
+
   return errors
 }
 
+// dispatch submit handler
 function submit(values, dispatch, form) {
-  console.log(values)
-  // const { username, password } = values
-  // dispatch(loginActions.login(username, password))
+  dispatch(userActions.create(values))
 }
 
 UserCreateForm.contextTypes = {
@@ -129,21 +173,23 @@ UserCreateForm.propTypes = {
   classes: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  loading: PropTypes.bool,
-  error: PropTypes.any,
-  msg: PropTypes.string
+  serverLoading: PropTypes.bool,
+  serverError: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.bool
+  ])
 }
 
 UserCreateForm.defaultProps = {
-  loading: false,
-  error: false,
-  msg: ''
+  serverLoading: false,
+  serverError: false,
 }
 
 function mapStateToProps(state) {
-  const { loading, err, msg } = state.users.create_user
+  const { loading, err } = state.users.create_user
   return {
-    loading
+    serverLoading: loading,
+    serverError: err
   }
 }
 
@@ -156,6 +202,7 @@ export default reduxForm({
     email: '',
     display_name: '',
     access_level: '50',
+    status: true
   },
   validate
 })(withStyles(styles)(UserCreateForm))

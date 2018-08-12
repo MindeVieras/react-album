@@ -52,7 +52,6 @@
     "react-slick": "^0.23.1",
     "react-spinners": "^0.3.3",
     "react-text-marquee": "^1.0.1",
-    "react-toggle": "^4.0.2",
     "react-tooltip": "^3.6.1",
     "react-transition-group": "^2.4.0",
     "redux": "^4.0.0",
@@ -61,6 +60,7 @@
     "redux-thunk": "^2.3.0",
     "superagent": "^3.8.3",
     "uuid": "^3.3.2",
+    "validator": "^10.5.0",
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {

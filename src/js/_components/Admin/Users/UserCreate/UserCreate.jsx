@@ -23,7 +23,7 @@ const styles = theme => ({
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
     width: `100%`,
-    maxWidth: theme.spacing.unit * 60
+    maxWidth: theme.spacing.unit * 52.5
   }
 })
 

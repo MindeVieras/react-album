@@ -115,7 +115,6 @@ const renderSelect = (props) => {
         value={ transformedValue }
         multi={ multi }
         options={ options }
-        isSearchable={ false }
         onChange={multi
           ? multiChangeHandler(onChange)
           : singleChangeHandler(onChange)

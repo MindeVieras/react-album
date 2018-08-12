@@ -7,6 +7,5 @@
 dist
 
 node_modules
-package-lock.json
 
 webpack/s3-deploy-config.json
