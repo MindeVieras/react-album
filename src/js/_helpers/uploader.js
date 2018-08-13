@@ -34,7 +34,7 @@ export function mediaUploader(bucket, access_key, allowed = allowedExtensions) {
         }
       },
       uploadSuccess: {
-        endpoint: baseServerUrl+'/api/uploader/succes'
+        endpoint: baseServerUrl+'/api/uploader/success'
       },
       validation: {
         allowedExtensions: allowed,
