@@ -63,7 +63,7 @@ class UserCreateForm extends Component {
         <Field
           name="confirm_password"
           component={ renderText }
-          label={ t(`Confirm password *`) }
+          label={ t(`Confirm password`) }
           type="password"
           autoComplete="confirm-new-password"
           margin="dense"
@@ -140,6 +140,8 @@ const validate = values => {
   // vlaidate username
   if (!username || validator.isEmpty(username))
     errors['username'] = `Username is required`
+  else if (!validator.isAlphanumeric(username))
+    errors['username'] = `Username must be alphanumeric only`
   else if (validator.isLength(username, {min:0, max:4}))
     errors['username'] = `Username must be at least 5 chars long`
 

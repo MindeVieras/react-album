@@ -16,12 +16,13 @@ const styles = theme => ({
     display: `flex`,
     justifyContent: `center`,
     alignItems: `center`,
-    padding: theme.spacing.unit * 2
+    padding: theme.spacing.unit
   },
   paperRoot: {
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
+    margin: theme.spacing.unit,
     width: `100%`,
     maxWidth: theme.spacing.unit * 52.5
   }

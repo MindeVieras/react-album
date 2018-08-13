@@ -1,7 +1,7 @@
 
 import  React, { Component, Fragment } from 'react'
-import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
 import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
@@ -39,7 +39,6 @@ class UploadMedia extends Component {
   handleClick(e) {
     this.refs.fileUploader.click()
   }
-
 
   onFilesSelected(e) {
     const { uploader } = this.props

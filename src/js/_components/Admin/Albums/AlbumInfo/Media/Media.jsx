@@ -3,7 +3,6 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import FineUploaderS3 from 'fine-uploader-wrappers/s3'
-import ReactTooltip from 'react-tooltip'
 import { toastr } from 'react-redux-toastr'
 
 import { withStyles } from '@material-ui/core/styles'
@@ -20,7 +19,7 @@ import MediaList from './MediaList'
 import LightboxSlider from './LightboxSlider'
 import UploadMedia from '../../../Buttons/UploadMedia'
 
-import { authHeader, baseServerUrl } from 'Helpers'
+import { mediaUploader } from 'Helpers'
 import { albumsActions } from 'Actions'
 import { mediaService } from 'Services'
 
@@ -54,42 +53,9 @@ class Media extends Component {
   constructor(props) {
     super(props)
 
-    this.uploader = new FineUploaderS3({
-      options: {
-        request: {
-          endpoint: props.bucket+'.s3.amazonaws.com',
-          accessKey: props.access_key
-        },
-        signature: {
-          endpoint: baseServerUrl+'/api/uploader/sign',
-          version: 2
-        },
-        chunking: {
-          enabled: true
-        },
-        resume: {
-          enabled: true
-        },
-        objectProperties: {
-          serverSideEncryption: true,
-          key: function(fileId) {
-            let name = this.getName(fileId)
-            let rand = Math.floor((Math.random() * 9999999) + 1)
-            let ext = name.substr(name.lastIndexOf('.') + 1)
+    const { bucket, access_key } = props
 
-            return 'media/'+Date.now().toString()+'-'+rand+'.'+ext.toLowerCase()
-          }
-        },
-        uploadSuccess: {
-          endpoint: baseServerUrl+'/api/uploader/success'
-        },
-        validation: {
-          allowedExtensions: ['jpeg', 'jpg', 'mp4'],
-          stopOnFirstInvalidFile: false
-        }
-      }
-
-    })
+    this.uploader = mediaUploader(bucket, access_key)
 
     const uploader = this.uploader
     const statusEnum = uploader.qq.status
