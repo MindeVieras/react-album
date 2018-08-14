@@ -10,7 +10,7 @@ import DeleteAlbum from '../../Buttons/DeleteAlbum'
 import Bar from './Bar'
 import Media from './Media'
 
-import { headerActions, footerActions } from 'Actions'
+import { headerActions } from 'Actions'
 import { albumsConstants, contentConstants, mediaConstants } from 'Constants'
 
 const styles = theme => ({
@@ -33,17 +33,9 @@ class AlbumInfo extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { selected_album, dispatch } = nextProps
-    if (selected_album.album) {
-      const { id, name, media, status } = selected_album.album
+    if (selected_album) {
+      const { id, name, media, status } = selected_album
       dispatch(headerActions.setTitle(name))
-      // dispatch(footerActions.buttonRemove('deleteAlbum'))
-      // dispatch(footerActions.buttonRemove('openLightbox'))
-      // if (albumsConstants.ENABLED === status) {
-      //   dispatch(footerActions.buttonSet('', 'deleteAlbum', 'danger', {album_id: id, name}))
-      //   if (media.length > 0) {
-      //     dispatch(footerActions.buttonSet('', 'openLightbox', 'success', {album_id: id}))
-      //   }
-      // }
     }
   }
 
@@ -54,35 +46,35 @@ class AlbumInfo extends Component {
 
     return (
       <div className={ classes.info_wrapper } style={{ width: `${width}px` }}>
-        {selected_album.album.loading &&
+        {selected_album.loading &&
           <Spinner type="primary" size={ 70 } />
         }
-        {selected_album.album.err &&
-          <div>{selected_album.album.err}</div>
+        {selected_album.err &&
+          <div>{selected_album.err}</div>
         }
-        {selected_album.album.id &&
+        {selected_album.id &&
           <Fragment>
             <div className={ classes.flex }>
               <Media
                 entity={contentConstants.TYPE_ALBUM}
-                entity_id={selected_album.album.id}
+                entity_id={selected_album.id}
                 status={mediaConstants.STATUS_ENABLED}
-                files={ selected_album.album.media }
+                files={ selected_album.media }
                 wrapper_width={ width }
                 wrapper_height={ wrapper_height }
               />
             </div>
             <Bar
-              album_id={ selected_album.album.id }
-              start_date={ selected_album.album.start_date }
-              end_date={ selected_album.album.end_date }
-              counter={ selected_album.album.total_media }
-              total_filesize={ selected_album.album.total_filesize }
+              album_id={ selected_album.id }
+              start_date={ selected_album.start_date }
+              end_date={ selected_album.end_date }
+              counter={ selected_album.total_media }
+              total_filesize={ selected_album.total_filesize }
             />
 
             <DeleteAlbum
-              id={ selected_album.album.id }
-              name={ selected_album.album.name }
+              id={ selected_album.id }
+              name={ selected_album.name }
             />
 
           </Fragment>
@@ -97,13 +89,15 @@ AlbumInfo.propTypes = {
   dispatch: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
   selected_album: PropTypes.object.isRequired,
-  width: PropTypes.number,
-  height: PropTypes.number
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired
 }
 
-AlbumInfo.defaultProps = {
-  width: 500,
-  height: 600
+function mapStateToProps(state) {
+  const { admin_albums } = state
+  return {
+    selected_album: admin_albums.selected_album.album
+  }
 }
 
-export default connect()(withStyles(styles)(AlbumInfo))
+export default connect(mapStateToProps)(withStyles(styles)(AlbumInfo))
