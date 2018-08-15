@@ -127,7 +127,7 @@ class Admin extends Component {
   render() {
     const { classes, match, isScriptLoadSucceed, settings } = this.props
 
-    if (isScriptLoadSucceed && settings) {
+    if (isScriptLoadSucceed && settings && settings.admin) {
       return (
         <Fragment>
           <div className={ classes.root } >
@@ -179,7 +179,7 @@ function mapStateToProps(state) {
   const { admin_albums, admin_ui, settings } = state
 
   return {
-    settings: settings.admin,
+    settings,
     selected_album: admin_albums.selected_album,
     albums_list: admin_albums.list.items,
     lightbox: admin_ui.lightbox

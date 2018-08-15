@@ -58,7 +58,7 @@ class Albums extends Component {
     let info_height = client_height - 90 // substract header and footer
 
     return (
-      <DragDropContextProvider backend={HTML5Backend}>
+      <DragDropContextProvider backend={ HTML5Backend }>
         <Fragment>
           <Rnd
             default={{
@@ -66,14 +66,14 @@ class Albums extends Component {
               height: `100%`
             }}
             enableResizing={{
-              top:false,
-              right:true,
-              bottom:false,
-              left:false,
-              topRight:false,
-              bottomRight:false,
-              bottomLeft:false,
-              topLeft:false
+              top: false,
+              right: true,
+              bottom: false,
+              left: false,
+              topRight: false,
+              bottomRight: false,
+              bottomLeft: false,
+              topLeft: false
             }}
             minWidth={ 150 }
             maxWidth={ 350 }
@@ -108,7 +108,6 @@ Albums.propTypes = {
 
 function mapStateToProps(state) {
   const { client, settings, admin_albums } = state
-  console.log(settings)
   return {
     selected_album_id: parseInt(settings.admin.selected_album),
     sidebar_width: parseInt(settings.admin.sidebar_width),
