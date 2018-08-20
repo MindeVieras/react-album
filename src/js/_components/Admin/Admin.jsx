@@ -137,8 +137,8 @@ class Admin extends Component {
             <div className={ classes.flex }>
               <Switch>
                 <Route exact path={ match.url } component={ Albums } />
-                <Route path={`${match.url}/users`} component={ Users } />
-                <Route exact path={`${match.url}/trash`} component={ TrashPage } />
+                <Route path={ `${match.url}/users` } component={ Users } />
+                <Route exact path={ `${match.url}/trash` } component={ TrashPage } />
                 <Route component={ Error404 } />
               </Switch>
             </div>

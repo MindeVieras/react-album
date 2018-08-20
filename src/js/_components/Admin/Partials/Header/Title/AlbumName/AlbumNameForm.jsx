@@ -10,8 +10,7 @@ import Button from '@material-ui/core/Button'
 import PersonIcon from '@material-ui/icons/Person'
 import AddIcon from '@material-ui/icons/Add'
 
-import renderText from '../../../../../Common/Form/Fields'
-import RenderButton from '../../../../../Common/Form/RenderButton'
+import { renderText, RenderButton } from 'Common'
 
 import { albumsActions, adminUiActions } from 'Actions'
 import { adminConstants } from 'Constants'
