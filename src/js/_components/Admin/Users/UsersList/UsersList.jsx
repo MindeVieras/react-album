@@ -48,7 +48,7 @@ class UsersList extends Component {
         }
 
         {users.items &&
-          <Scrollbar position="left" className={ classes.scrollbar }>
+          <Scrollbar className={ classes.scrollbar }>
             <List
               className={ classes.list }
               disablePadding={ true }

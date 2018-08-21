@@ -1,21 +1,42 @@
 
 import React, { Component } from 'react'
 import { PropTypes } from 'prop-types'
+import classNames from 'classnames'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 
 import { withStyles } from '@material-ui/core/styles'
 
+import blueGrey from '@material-ui/core/colors/blueGrey'
+
 const styles = theme => ({
   scrollbar: {
-    display: `flex`,
-    overflow: `hidden`
+    '& .ps__rail-y': {
+      width: theme.spacing.unit * 1.5,
+      '&:hover': {
+        backgroundColor: blueGrey[800],
+        '& .ps__thumb-y': {
+          width: theme.spacing.unit
+        }
+      }
+    }
+  },
+  scrollbarLeft: {
+    '& .ps__rail-y': {
+      left: 0
+    },
+    '& .ps__thumb-y': {
+      left: theme.spacing.unit / 4
+    }
   }
 })
 
 class Scrollbar extends Component {
 
   render() {
+
     const { classes, children, className, position } = this.props
+
+    console.log(position)
 
     const scrollbarOptions = {
       wheelSpeed: 1.25,
@@ -25,7 +46,11 @@ class Scrollbar extends Component {
     return (
       <PerfectScrollbar
         option={ scrollbarOptions }
-        className={ `${classes.scrollbar} ${className}` }
+        className={classNames(
+          className,
+          classes.scrollbar,
+          { [classes.scrollbarLeft]: position === 'left' }
+        )}
       >
         {children}
       </PerfectScrollbar>

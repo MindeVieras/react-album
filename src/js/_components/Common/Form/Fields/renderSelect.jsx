@@ -80,8 +80,6 @@ const renderSelect = (props) => {
   const transformedValue = transformValue(value, options, multi)
   const { active, valid, error } = meta
 
-  // console.log(meta)
-
   let rootClass = classes.root
   if (margin === 'dense')
     rootClass = classes.rootDense
