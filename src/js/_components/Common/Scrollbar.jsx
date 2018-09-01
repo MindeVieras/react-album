@@ -36,8 +36,6 @@ class Scrollbar extends Component {
 
     const { classes, children, className, position } = this.props
 
-    console.log(position)
-
     const scrollbarOptions = {
       wheelSpeed: 1.25,
       suppressScrollX: true

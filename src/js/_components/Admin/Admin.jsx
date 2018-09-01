@@ -35,11 +35,11 @@ const styles = theme => ({
     flexDirection: `column`,
     height: `100vh`,
     overflow: `hidden`,
-    // background-image: url(https://s3-eu-west-1.amazonaws.com/app.mindelis.com/images/bg.jpg);
-    // background-position: center;
-    // background-repeat: no-repeat;
-    // background-size: cover;
-    // background-attachment: fixed;
+    backgroundImage: `url(https://s3-eu-west-1.amazonaws.com/app.mindelis.com/images/bg.jpg)`,
+    backgroundPosition: `center`,
+    backgroundRepeat: `no-repeat`,
+    backgroundSize: `cover`,
+    backgroundAttachment: `fixed`
   },
   flex: {
     display: `flex`,

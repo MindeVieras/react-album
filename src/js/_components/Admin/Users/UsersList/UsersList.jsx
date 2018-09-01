@@ -4,11 +4,10 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import { withStyles } from '@material-ui/core/styles'
-import List from '@material-ui/core/List'
 
-import { Scrollbar, Spinner } from 'Common'
+import { Spinner } from 'Common'
 
-import UsersListItem from './UsersListItem'
+import UsersVirtualList from './UsersVirtualList'
 import UserCreateButton from './UserCreateButton'
 
 import { headerActions, userActions } from 'Actions'
@@ -21,7 +20,8 @@ const styles = theme => ({
   },
   list: {
     width: `100%`,
-    padding: theme.spacing.unit * 2
+    padding: theme.spacing.unit * 2,
+    overflow: `auto`
   }
 })
 
@@ -48,16 +48,9 @@ class UsersList extends Component {
         }
 
         {users.items &&
-          <Scrollbar className={ classes.scrollbar }>
-            <List
-              className={ classes.list }
-              disablePadding={ true }
-            >
-              {users.items.map(user =>
-                <UsersListItem key={ user.id } { ...user } />
-              )}
-            </List>
-          </Scrollbar>
+          <UsersVirtualList
+            users={ users.items }
+          />
         }
 
         <UserCreateButton />
@@ -70,14 +63,12 @@ class UsersList extends Component {
 UsersList.propTypes = {
   dispatch: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired,
   users: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state) {
-  const { auth, users } = state
+  const { users } = state
   return {
-    auth,
     users: users.list
   }
 }
