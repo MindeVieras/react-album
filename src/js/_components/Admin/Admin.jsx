@@ -19,6 +19,7 @@ import Users from './Users'
 import TrashPage from './Trash'
 import Error404 from './Errors/404'
 
+import { Spinner } from 'Common'
 import { googleKey } from 'Helpers'
 import { adminUiActions, albumsActions, utilsActions } from 'Actions'
 
@@ -31,15 +32,15 @@ import '../../../scss/Admin/main.scss'
 
 const styles = theme => ({
   root: {
+    backgroundImage: `url(https://s3-eu-west-1.amazonaws.com/app.mindelis.com/images/bg.jpg)`,
+    backgroundPosition: `center`,
+    backgroundRepeat: `no-repeat`,
+    backgroundSize: `cover`,
+    backgroundAttachment: `fixed`,
     display: `flex`,
     flexDirection: `column`,
     height: `100vh`,
-    overflow: `hidden`,
-    // background-image: url(https://s3-eu-west-1.amazonaws.com/app.mindelis.com/images/bg.jpg);
-    // background-position: center;
-    // background-repeat: no-repeat;
-    // background-size: cover;
-    // background-attachment: fixed;
+    overflow: `hidden`
   },
   flex: {
     display: `flex`,
@@ -152,7 +153,7 @@ class Admin extends Component {
       )
     }
     else {
-      return <div>APP loading...</div>
+      return <Spinner type="primary" size={ 70 } />
     }
   }
 }
