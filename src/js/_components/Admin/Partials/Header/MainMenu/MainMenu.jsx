@@ -8,8 +8,10 @@ import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
+import Divider from '@material-ui/core/Divider'
 
 import MoreVertIcon from '@material-ui/icons/MoreVert'
+import AccountCircle from '@material-ui/icons/AccountCircle'
 import Dashboard from '@material-ui/icons/Dashboard'
 import Face from '@material-ui/icons/Face'
 import People from '@material-ui/icons/People'
@@ -45,6 +47,7 @@ class MainMenu extends Component {
   render() {
 
     const { t } = this.context
+    const { user } = this.props
     const { anchorEl } = this.state
 
     return (
@@ -69,6 +72,14 @@ class MainMenu extends Component {
           open={ Boolean(anchorEl) }
           onClose={ () => this.setState({ anchorEl: null }) }
         >
+          <MenuItem onClick={ () => this.handleMenuClick(`/admin/users/${user.username}`) }>
+            <ListItemIcon>
+              <AccountCircle />
+            </ListItemIcon>
+            <ListItemText inset primary={ user.username } />
+            <Typography variant="caption">{ user.email }</Typography>
+          </MenuItem>
+          <Divider />
           <MenuItem onClick={ () => this.handleMenuClick('/admin') }>
             <ListItemIcon>
               <Dashboard />
@@ -113,6 +124,12 @@ class MainMenu extends Component {
 
 MainMenu.contextTypes = {
   t: PropTypes.func
+}
+
+MainMenu.propTypes = {
+  user: PropTypes.shape({
+    username: PropTypes.string,
+  }).isRequired
 }
 
 export default MainMenu

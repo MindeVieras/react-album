@@ -53,7 +53,7 @@ class Header extends Component {
   render() {
 
     const { t } = this.context
-    const { classes, title, full_screen, selected_album } = this.props
+    const { classes, user, title, full_screen, selected_album } = this.props
 
     let album_id = null
     let headerTitle = title
@@ -96,7 +96,7 @@ class Header extends Component {
               </Fragment>
             }
 
-            <MainMenu />
+            <MainMenu user={ user } />
 
           </div>
 
@@ -113,8 +113,9 @@ Header.contextTypes = {
 Header.propTypes = {
   dispatch: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
-  title: PropTypes.string,
+  user: PropTypes.object.isRequired,
   full_screen: PropTypes.bool.isRequired,
+  title: PropTypes.string,
   selected_album: PropTypes.object
 }
 
@@ -124,8 +125,9 @@ Header.defaultProps = {
 }
 
 function mapStateToProps(state) {
-  const { client, admin_header, admin_albums } = state
+  const { auth, client, admin_header, admin_albums } = state
   return {
+    user: auth.user,
     title: admin_header.title,
     full_screen: client.full_screen,
     selected_album: admin_albums.selected_album.album
