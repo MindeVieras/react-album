@@ -1,7 +1,8 @@
 
-import React, { Component, Fragment } from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import PropTypes from 'prop-types'
 
+import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
 import Menu from '@material-ui/core/Menu'
@@ -22,7 +23,14 @@ import PowerSettingsNew from '@material-ui/icons/PowerSettingsNew'
 import { Tip } from 'Common'
 import { history } from 'Helpers'
 
-class MainMenu extends Component {
+const styles = theme => ({
+  accountMenuItem: {
+    paddingLeft: theme.spacing.unit * 2,
+    paddingRight: theme.spacing.unit * 2
+  }
+})
+
+class MainMenu extends PureComponent {
 
   constructor(props) {
     super(props)
@@ -47,7 +55,7 @@ class MainMenu extends Component {
   render() {
 
     const { t } = this.context
-    const { user } = this.props
+    const { classes, user } = this.props
     const { anchorEl } = this.state
 
     return (
@@ -76,8 +84,10 @@ class MainMenu extends Component {
             <ListItemIcon>
               <AccountCircle />
             </ListItemIcon>
-            <ListItemText inset primary={ user.username } />
-            <Typography variant="caption">{ user.email }</Typography>
+            <div className={ classes.accountMenuItem }>
+              <Typography>{ user.username }</Typography>
+              <Typography variant="caption">{ user.email }</Typography>
+            </div>
           </MenuItem>
           <Divider />
           <MenuItem onClick={ () => this.handleMenuClick('/admin') }>
@@ -127,9 +137,10 @@ MainMenu.contextTypes = {
 }
 
 MainMenu.propTypes = {
+  classes: PropTypes.object.isRequired,
   user: PropTypes.shape({
-    username: PropTypes.string,
+    username: PropTypes.string
   }).isRequired
 }
 
-export default MainMenu
+export default withStyles(styles)(MainMenu)
