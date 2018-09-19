@@ -61,6 +61,7 @@ class TrashPage extends Component {
         Trash is empty
       </span>
     }
+
     return (
       <Fragment>
         {loading &&

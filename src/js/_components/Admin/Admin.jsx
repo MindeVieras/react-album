@@ -19,6 +19,7 @@ import Users from './Users'
 import TrashPage from './Trash'
 import Error404 from './Errors/404'
 
+import { userConstants } from 'Constants'
 import { Spinner } from 'Common'
 import { googleKey } from 'Helpers'
 import { adminUiActions, albumsActions, utilsActions } from 'Actions'
@@ -126,7 +127,7 @@ class Admin extends Component {
   }
 
   render() {
-    const { classes, match, isScriptLoadSucceed, settings } = this.props
+    const { classes, match, isScriptLoadSucceed, access_level, settings } = this.props
 
     if (isScriptLoadSucceed && settings && settings.admin) {
       return (
@@ -139,7 +140,9 @@ class Admin extends Component {
               <Switch>
                 <Route exact path={ match.url } component={ Albums } />
                 <Route path={ `${match.url}/users` } component={ Users } />
-                <Route exact path={ `${match.url}/trash` } component={ TrashPage } />
+                {access_level === userConstants.USER_ACCESS_ADMIN &&
+                  <Route exact path={ `${match.url}/trash` } component={ TrashPage } />
+                }
                 <Route component={ Error404 } />
               </Switch>
             </div>
@@ -164,6 +167,7 @@ Admin.propTypes = {
   match: PropTypes.object.isRequired,
   keydown: PropTypes.object.isRequired,
   isScriptLoadSucceed: PropTypes.bool.isRequired,
+  access_level: PropTypes.number.isRequired,
   selected_album: PropTypes.object.isRequired,
   settings: PropTypes.object,
   albums_list: PropTypes.array,
@@ -177,9 +181,10 @@ Admin.defaultProps = {
 }
 
 function mapStateToProps(state) {
-  const { admin_albums, admin_ui, settings } = state
+  const { auth, admin_albums, admin_ui, settings } = state
 
   return {
+    access_level: auth.user.access_level,
     settings,
     selected_album: admin_albums.selected_album,
     albums_list: admin_albums.list.items,

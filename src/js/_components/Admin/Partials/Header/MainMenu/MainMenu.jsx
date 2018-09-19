@@ -20,6 +20,7 @@ import Delete from '@material-ui/icons/Delete'
 import Home from '@material-ui/icons/Home'
 import PowerSettingsNew from '@material-ui/icons/PowerSettingsNew'
 
+import { userConstants } from 'Constants'
 import { Tip } from 'Common'
 import { history } from 'Helpers'
 
@@ -108,12 +109,14 @@ class MainMenu extends PureComponent {
             </ListItemIcon>
             <ListItemText inset primary={ t(`Users`) } />
           </MenuItem>
-          <MenuItem onClick={ () => this.handleMenuClick('/admin/trash') }>
-            <ListItemIcon>
-              <Delete />
-            </ListItemIcon>
-            <ListItemText inset primary={ t(`Trash`) } />
-          </MenuItem>
+          {user.access_level === userConstants.USER_ACCESS_ADMIN &&
+            <MenuItem onClick={ () => this.handleMenuClick('/admin/trash') }>
+              <ListItemIcon>
+                <Delete />
+              </ListItemIcon>
+              <ListItemText inset primary={ t(`Trash`) } />
+            </MenuItem>
+          }
           <MenuItem onClick={ () => this.handleMenuClick('/') }>
             <ListItemIcon>
               <Home />

@@ -25,7 +25,7 @@ class App extends Component {
     // Get App settings
     props.dispatch(utilsActions.getAppSettings())
 
-    // Set browser info into state
+    // Set browser info
     let allowedLocales = ['en', 'lt', 'ru']
     let l = 'en'
 

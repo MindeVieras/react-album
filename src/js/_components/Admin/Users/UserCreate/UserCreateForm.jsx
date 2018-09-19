@@ -7,6 +7,9 @@ import validator from 'validator'
 
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+import IconButton from '@material-ui/core/IconButton'
+
+import AutorenewIcon from '@material-ui/icons/Autorenew'
 
 import { renderText, renderSelect, renderToggle, RenderButton } from 'Common'
 
@@ -28,9 +31,12 @@ const styles = theme => ({
   },
   actionsRoot: {
     display: `flex`,
-    justifyContent: `space-between`,
     alignItems: `center`,
     marginTop: theme.spacing.unit * 2
+  },
+  resetButton: {
+    marginLeft: theme.spacing.unit / 2,
+    marginRight: theme.spacing.unit / 2
   },
   auth_error: {
     marginLeft: theme.spacing.unit
@@ -42,8 +48,8 @@ class UserCreateForm extends Component {
   render() {
 
     const { t } = this.context
-    const { classes, handleSubmit, serverLoading, serverError } = this.props
-
+    const { classes, handleSubmit, reset, serverLoading, serverError } = this.props
+    // console.log(this.props)
     return (
       <form onSubmit={ handleSubmit }>
         <Field
@@ -102,6 +108,7 @@ class UserCreateForm extends Component {
         </div>
 
         <div className={ classes.actionsRoot }>
+
           <RenderButton
             type="submit"
             loading={ serverLoading }
@@ -109,6 +116,12 @@ class UserCreateForm extends Component {
             variant="raised"
             color="primary"
           />
+          <IconButton
+            className={ classes.resetButton }
+            onClick={ reset }
+            aria-label="Reset form">
+            <AutorenewIcon />
+          </IconButton>
 
           {serverError &&
             <Typography
@@ -175,6 +188,7 @@ UserCreateForm.propTypes = {
   classes: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  reset: PropTypes.func.isRequired,
   serverLoading: PropTypes.bool,
   serverError: PropTypes.oneOfType([
     PropTypes.string,

@@ -17,7 +17,7 @@ function login(username, password) {
         if (res.ack == 'ok') {
           const user = res.data
           dispatch(success(user))
-          if (user.access_level === 'admin') {
+          if (user.access_level >= userConstants.USER_ACCESS_AUTHED) {
             history.push('/admin')
           } else {
             history.push('/')

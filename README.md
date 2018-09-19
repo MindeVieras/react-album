@@ -8,7 +8,7 @@ To get started, first install all the necessary dependencies.
 
 Run an initial webpack build
 ```
-> npm run buld
+> npm run build
 ```
 
 Start the development server (changes will now update live in browser)
