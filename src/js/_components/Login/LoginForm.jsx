@@ -1,15 +1,15 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
+import validator from 'validator'
 
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
 import { renderText, RenderButton } from 'Common'
 
-import { loginActions } from 'Actions'
+import submit from './submit'
 
 const styles = theme => ({
   auth_error: {
@@ -25,10 +25,10 @@ class LoginForm extends Component {
   render() {
 
     const { t } = this.context
-    const { classes, handleSubmit, loading, error, msg } = this.props
+    const { classes, handleSubmit, error, submitting } = this.props
 
     return (
-      <form onSubmit={ handleSubmit }>
+      <form onSubmit={ handleSubmit(submit) }>
         <Field
           name="username"
           component={ renderText }
@@ -44,7 +44,7 @@ class LoginForm extends Component {
 
         <RenderButton
           type="submit"
-          loading={ loading }
+          loading={ submitting }
           text={ t(`Login`) }
           fullWidth={ true }
           variant="raised"
@@ -58,7 +58,7 @@ class LoginForm extends Component {
             align="center"
             color="error"
           >
-            { t(msg) }
+            { t(error) }
           </Typography>
         }
       </form>
@@ -67,22 +67,19 @@ class LoginForm extends Component {
 }
 
 const validate = values => {
-  const errors = {}
-  const requiredFields = [
-    'username',
-    'password'
-  ]
-  requiredFields.forEach(field => {
-    if (!values[field]) {
-      errors[field] = 'Required'
-    }
-  })
-  return errors
-}
 
-function submit(values, dispatch, form) {
   const { username, password } = values
-  dispatch(loginActions.login(username, password))
+  let errors = {}
+
+  // vlaidate username
+  if (!username || validator.isEmpty(username))
+    errors['username'] = `Username is required`
+
+  // vlaidate password
+  if (!password || validator.isEmpty(password))
+    errors['password'] = `Password is required`
+
+  return errors
 }
 
 LoginForm.contextTypes = {
@@ -91,32 +88,17 @@ LoginForm.contextTypes = {
 
 LoginForm.propTypes = {
   classes: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  loading: PropTypes.bool,
-  error: PropTypes.any,
-  msg: PropTypes.string
+  error: PropTypes.string,
+  submitting: PropTypes.bool
 }
 
 LoginForm.defaultProps = {
-  loading: false,
-  error: false,
-  msg: ''
+  error: null,
+  submitting: false
 }
-
-function mapStateToProps(state) {
-  const { loading, error, msg } = state.auth
-  return {
-    loading,
-    error,
-    msg
-  }
-}
-
-LoginForm = connect(mapStateToProps)(LoginForm)
 
 export default reduxForm({
   form: 'login_form',
-  onSubmit: submit,
   validate
 })(withStyles(styles)(LoginForm))

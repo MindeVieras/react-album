@@ -6,7 +6,7 @@ import { reducer as toastrReducer } from 'react-redux-toastr'
 
 import { client } from './client.reducer'
 import { settings } from './settings.reducer'
-import { auth } from './Login/auth.reducer'
+import { auth } from './auth.reducer'
 import { adminUi } from './Admin/ui.reducer'
 import { users } from './Admin/users.reducer'
 import { adminAlbums } from './Admin/albums.reducer'

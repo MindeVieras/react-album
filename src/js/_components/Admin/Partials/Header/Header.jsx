@@ -127,7 +127,7 @@ Header.defaultProps = {
 function mapStateToProps(state) {
   const { auth, client, admin_header, admin_albums } = state
   return {
-    user: auth.user,
+    user: auth,
     title: admin_header.title,
     full_screen: client.full_screen,
     selected_album: admin_albums.selected_album.album

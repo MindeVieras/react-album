@@ -184,7 +184,7 @@ function mapStateToProps(state) {
   const { auth, admin_albums, admin_ui, settings } = state
 
   return {
-    access_level: auth.user.access_level,
+    access_level: auth.access_level,
     settings,
     selected_album: admin_albums.selected_album,
     albums_list: admin_albums.list.items,

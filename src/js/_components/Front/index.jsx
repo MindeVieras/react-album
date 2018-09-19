@@ -154,7 +154,7 @@ Front.propTypes = {
 function mapStateToProps(state) {
   const { auth, client, settings, front_albums } = state
   return {
-    uid: auth.user.id,
+    uid: auth.id,
     screen: client.screen,
     albums: front_albums.list,
     front_settings: settings.front
