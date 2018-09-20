@@ -8,52 +8,74 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import Avatar from '@material-ui/core/Avatar'
 
-import { Spinner } from 'Common'
+import { Spinner, Tip } from 'Common'
+import DeleteUser from '../../../Buttons/DeleteUser'
 
 const styles = theme => ({
+  root: {
+    position: `relative`
+  },
   link: {
+    display: `flex`,
+    alignItems: `center`,
     textDecoration: `none`,
     color: `inherit`
   },
   itemRoot: {
+    justifyContent: `space-between`,
     width: `100%`,
     backgroundColor: theme.palette.background.paper,
     marginBottom: theme.spacing.unit,
     boxShadow: theme.shadows[3]
   },
+  itemTextPrimary: {
+    fontSize: 18
+  }
 })
 
 class UsersListItem extends Component {
 
   render() {
-    const { classes, id, username, initials, deleting } = this.props
+
+    const { classes, id, username, email, initials, deleting } = this.props
+
+    const ItemLink = props => <Link to={ `/admin/users/${username}` } {...props} />
+
     return (
-      <li>
-        <Link className={ classes.link } to={ `/admin/users/${username}` }>
+      <li className={ classes.root }>
 
-          <ListItem
-            dense
-            button
-            classes={{
-              root: classes.itemRoot
-            }}
+        <ListItem
+          button
+          component={ ItemLink }
+          classes={{
+            root: classes.itemRoot
+          }}
+        >
+          <Avatar
+            alt={ username }
           >
-            <Avatar
-              alt={ username }
-            >
-              { initials }
-            </Avatar>
+            { initials }
+          </Avatar>
 
-            <ListItemText primary={ username } />
+          <ListItemText
+            primary={ username }
+            secondary={ email }
+            classes={{
+              primary: classes.itemTextPrimary
+            }}
+          />
 
+          {deleting &&
+            <Spinner type="list-item" size={ 30 } />
+          }
 
-            {deleting &&
-              <Spinner type="primary" size={ 70 } />
-            }
+        </ListItem>
 
-          </ListItem>
+        <DeleteUser
+          id={ id }
+          username={ username }
+        />
 
-        </Link>
       </li>
     )
   }
@@ -64,10 +86,12 @@ UsersListItem.propTypes = {
   id: PropTypes.number.isRequired,
   username: PropTypes.string.isRequired,
   initials: PropTypes.string.isRequired,
+  email: PropTypes.string,
   deleting: PropTypes.bool
 }
 
 UsersListItem.defaultProps = {
+  email: null,
   deleting: false
 }
 

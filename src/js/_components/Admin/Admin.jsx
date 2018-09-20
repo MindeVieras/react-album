@@ -149,7 +149,7 @@ class Admin extends Component {
 
           </div>
 
-          <ReduxToastr timeOut={ 2000 } />
+          <ReduxToastr />
 
           <Popup escToClose={ true } />
         </Fragment>

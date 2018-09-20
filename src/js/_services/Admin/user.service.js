@@ -54,7 +54,7 @@ function _delete(id) {
     headers: authHeader()
   }
 
-  return fetch(`${baseServerUrl}/api/users/delete/${id}`, requestOptions).then(handleResponse)
+  return fetch(`${baseServerUrl}/api/users/${id}`, requestOptions).then(handleResponse)
 }
 
 function handleResponse(response) {

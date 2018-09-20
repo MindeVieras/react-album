@@ -19,7 +19,8 @@ const styles = theme => ({
   },
   listSpinnerWrapper: {
     backgroundColor: `rgba(0,0,0,0.5)`,
-    cursor: `progress`
+    cursor: `progress`,
+    zIndex: theme.zIndex.tooltip + 1
   }
 })
 

@@ -1,5 +1,5 @@
 
-import {toastr} from 'react-redux-toastr'
+import { toastr } from 'react-redux-toastr'
 import Popup from 'react-popup'
 
 import { albumsConstants } from 'Constants'

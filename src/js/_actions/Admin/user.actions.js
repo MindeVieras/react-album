@@ -1,4 +1,6 @@
 
+import { toastr } from 'react-redux-toastr'
+
 import { userConstants } from 'Constants'
 import { userService } from 'Services'
 import { history } from 'Helpers'
@@ -75,11 +77,10 @@ function _delete(id) {
     userService.delete(id)
       .then(res => {
         if (res.ack == 'ok') {
-          // dispatch(success(res.data))
           dispatch(success(id))
         } else {
-          // dispatch(failure(res.msg))
           dispatch(failure(id, res.msg))
+          toastr.error('Error', res.msg, { timeOut: 3000 })
         }
       })
   }
