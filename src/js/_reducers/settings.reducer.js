@@ -36,6 +36,12 @@ export function settings(state = initialState, action) {
   //       err: action.err
   //     }
   //   }
+
+  case utilsConstants.CLEAR_ADMIN_SETTINGS:
+    const { admin, ...stateCopy } = state
+    return {
+      ...stateCopy
+    }
   case utilsConstants.GET_FRONT_SETTINGS:
     return {
       ...state,

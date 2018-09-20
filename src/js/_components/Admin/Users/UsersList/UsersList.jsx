@@ -28,32 +28,37 @@ const styles = theme => ({
 class UsersList extends Component {
 
   componentDidMount(){
-    const { dispatch } = this.props
+    const { dispatch, users: { items } } = this.props
 
     dispatch(headerActions.setTitle('Users'))
-    dispatch(userActions.getList())
+
+    // load user from API only if none
+    if (items && items.length === 0)
+      dispatch(userActions.getList())
   }
 
   render() {
-    const { classes, users } = this.props
+
+    const { classes, users: { loading, err, items } } = this.props
+
     return (
       <Fragment>
 
-        {users.loading &&
+        {loading &&
           <Spinner type="primary" size={ 70 } />
         }
 
-        {users.err &&
-          <div>{users.err}</div>
+        {err &&
+          <div>{err}</div>
         }
 
-        {users.items &&
+        {items &&
           <Scrollbar className={ classes.scrollbar }>
             <List
               className={ classes.list }
               disablePadding={ true }
             >
-              {users.items.map(user =>
+              {items.map(user =>
                 <UsersListItem key={ user.id } { ...user } />
               )}
             </List>
@@ -70,14 +75,12 @@ class UsersList extends Component {
 UsersList.propTypes = {
   dispatch: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired,
   users: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state) {
-  const { auth, users } = state
+  const { users } = state
   return {
-    auth,
     users: users.list
   }
 }

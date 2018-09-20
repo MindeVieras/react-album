@@ -21,6 +21,7 @@ const initialState = {
 
 export function users(state = initialState, action) {
   switch (action.type) {
+
   case userConstants.GETONE_REQUEST:
     return {
       ...state,
@@ -41,6 +42,7 @@ export function users(state = initialState, action) {
         err: action.err
       }
     }
+
   case userConstants.CREATE_REQUEST:
     return {
       ...state,
@@ -61,6 +63,7 @@ export function users(state = initialState, action) {
         err: action.err
       }
     }
+
   case userConstants.GETLIST_REQUEST:
     return {
       ...state,
@@ -77,6 +80,7 @@ export function users(state = initialState, action) {
     }
   case userConstants.GETLIST_FAILURE:
     return {
+      ...state,
       list: {
         err: action.err
       }
@@ -120,6 +124,8 @@ export function users(state = initialState, action) {
         })
       }
     }
+  case userConstants.CLEAR:
+    return initialState
   default:
     return state
   }

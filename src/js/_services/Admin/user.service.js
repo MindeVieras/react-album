@@ -15,7 +15,7 @@ function getList() {
     headers: authHeader()
   }
 
-  return fetch(`${baseServerUrl}/api/users/get-list`, requestOptions).then(handleResponse)
+  return fetch(`${baseServerUrl}/api/users`, requestOptions).then(handleResponse)
 }
 
 function getOne(username) {
