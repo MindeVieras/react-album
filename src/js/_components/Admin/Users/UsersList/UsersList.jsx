@@ -39,7 +39,7 @@ class UsersList extends Component {
 
   render() {
 
-    const { classes, users: { loading, err, items } } = this.props
+    const { classes, authId, users: { loading, err, items } } = this.props
 
     return (
       <Fragment>
@@ -59,7 +59,7 @@ class UsersList extends Component {
               disablePadding={ true }
             >
               {items.map(user =>
-                <UsersListItem key={ user.id } { ...user } />
+                <UsersListItem key={ user.id } authId={ authId } { ...user } />
               )}
             </List>
           </Scrollbar>
@@ -75,12 +75,14 @@ class UsersList extends Component {
 UsersList.propTypes = {
   dispatch: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
+  authId: PropTypes.number.isRequired,
   users: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state) {
-  const { users } = state
+  const { auth, users } = state
   return {
+    authId: auth.id,
     users: users.list
   }
 }

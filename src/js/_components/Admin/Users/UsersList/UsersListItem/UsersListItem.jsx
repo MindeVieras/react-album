@@ -37,7 +37,7 @@ class UsersListItem extends Component {
 
   render() {
 
-    const { classes, id, username, email, initials, deleting } = this.props
+    const { classes, authId, id, username, email, initials, deleting } = this.props
 
     const ItemLink = props => <Link to={ `/admin/users/${username}` } {...props} />
 
@@ -71,10 +71,12 @@ class UsersListItem extends Component {
 
         </ListItem>
 
-        <DeleteUser
-          id={ id }
-          username={ username }
-        />
+        {authId != id &&
+          <DeleteUser
+            id={ id }
+            username={ username }
+          />
+        }
 
       </li>
     )
@@ -83,6 +85,7 @@ class UsersListItem extends Component {
 
 UsersListItem.propTypes = {
   classes: PropTypes.object.isRequired,
+  authId: PropTypes.number.isRequired,
   id: PropTypes.number.isRequired,
   username: PropTypes.string.isRequired,
   initials: PropTypes.string.isRequired,
