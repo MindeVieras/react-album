@@ -13,7 +13,7 @@ import AutorenewIcon from '@material-ui/icons/Autorenew'
 
 import { renderText, renderSelect, renderToggle, RenderButton } from 'Common'
 
-import { userActions } from 'Actions'
+import submit from './submit'
 
 const styles = theme => ({
   fieldGroup: {
@@ -48,10 +48,10 @@ class UserCreateForm extends Component {
   render() {
 
     const { t } = this.context
-    const { classes, handleSubmit, reset, serverLoading, serverError } = this.props
+    const { classes, handleSubmit, reset, submitting, error } = this.props
     // console.log(this.props)
     return (
-      <form onSubmit={ handleSubmit }>
+      <form onSubmit={ handleSubmit(submit) }>
         <Field
           name="username"
           component={ renderText }
@@ -111,7 +111,7 @@ class UserCreateForm extends Component {
 
           <RenderButton
             type="submit"
-            loading={ serverLoading }
+            loading={ submitting }
             text={ t(`Save`) }
             variant="raised"
             color="primary"
@@ -123,13 +123,12 @@ class UserCreateForm extends Component {
             <AutorenewIcon />
           </IconButton>
 
-          {serverError &&
+          {error &&
             <Typography
               className={ classes.auth_error }
-              align="right"
               color="error"
             >
-              { t(serverError) }
+              { t(error) }
             </Typography>
           }
         </div>
@@ -175,11 +174,6 @@ const validate = values => {
   return errors
 }
 
-// dispatch submit handler
-function submit(values, dispatch, form) {
-  dispatch(userActions.create(values))
-}
-
 UserCreateForm.contextTypes = {
   t: PropTypes.func
 }
@@ -189,31 +183,19 @@ UserCreateForm.propTypes = {
   dispatch: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   reset: PropTypes.func.isRequired,
-  serverLoading: PropTypes.bool,
-  serverError: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool
-  ])
+  error: PropTypes.string,
+  submitting: PropTypes.bool
 }
 
 UserCreateForm.defaultProps = {
-  serverLoading: false,
-  serverError: false,
+  error: null,
+  submitting: false
 }
 
-function mapStateToProps(state) {
-  const { loading, err } = state.users.create_user
-  return {
-    serverLoading: loading,
-    serverError: err
-  }
-}
-
-UserCreateForm = connect(mapStateToProps)(UserCreateForm)
+UserCreateForm = connect()(UserCreateForm)
 
 export default reduxForm({
   form: 'user_create_form',
-  onSubmit: submit,
   initialValues: {
     email: '',
     display_name: '',

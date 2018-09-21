@@ -34,7 +34,7 @@ function create(user) {
     body: JSON.stringify(user)
   }
 
-  return fetch(`${baseServerUrl}/api/users/create`, requestOptions).then(handleResponse)
+  return fetch(`${baseServerUrl}/api/users`, requestOptions).then(handleResponse)
 }
 
 function update(user) {

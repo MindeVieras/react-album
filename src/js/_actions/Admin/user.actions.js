@@ -14,22 +14,10 @@ export const userActions = {
 
 function create(user) {
   return dispatch => {
-    dispatch(request())
-
-    userService.create(user)
-      .then(res => {
-        if (res.ack == 'ok') {
-          dispatch(success())
-          history.push('/admin/users/' + res.user.username)
-        } else {
-          dispatch(failure(res.msg))
-        }
-      })
+    dispatch(success(user))
   }
 
-  function request() { return { type: userConstants.CREATE_REQUEST } }
   function success(user) { return { type: userConstants.CREATE_SUCCESS, user } }
-  function failure(err) { return { type: userConstants.CREATE_FAILURE, err } }
 }
 
 function getList() {
