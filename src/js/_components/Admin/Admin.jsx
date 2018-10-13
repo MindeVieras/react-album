@@ -24,7 +24,7 @@ import { Spinner } from 'Common'
 import { googleKey } from 'Helpers'
 import { adminUiActions, albumsActions, utilsActions } from 'Actions'
 
-import 'react-datetime/css/react-datetime.css'
+// import 'react-datetime/css/react-datetime.css'
 // import 'react-select/dist/react-select.css'
 import 'cropperjs/dist/cropper.css'
 import 'rc-slider/assets/index.css'

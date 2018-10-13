@@ -68,7 +68,7 @@ const styles = theme => ({
   }
 })
 
-const renderSelect = (props) => {
+const renderSelect = props => {
 
   const {
     classes, margin, fullWidth, label,

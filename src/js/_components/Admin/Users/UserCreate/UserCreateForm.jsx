@@ -180,7 +180,6 @@ UserCreateForm.contextTypes = {
 
 UserCreateForm.propTypes = {
   classes: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   reset: PropTypes.func.isRequired,
   error: PropTypes.string,

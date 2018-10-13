@@ -14,7 +14,7 @@ import grey from '@material-ui/core/colors/grey'
 import lightBlue from '@material-ui/core/colors/lightBlue'
 
 import { Tip } from 'Common'
-import Picker from './Picker'
+import DatesPickerForm from './DatesPickerForm'
 import TimeAgo from './TimeAgo'
 import SimpleModal from '../../../../../Common/Modals'
 
@@ -71,41 +71,44 @@ class Dates extends Component {
     const modal_id = `album_dates_${album_id}`
 
     return (
-      <div
-        className={ classes.text_wrapper }
-        onMouseOver={ () => this.setState({ showEditBtn: true }) }
-        onMouseLeave={ () => this.setState({ showEditBtn: false }) }
-        onClick={ () => this.setState({ showEditBtn: !showEditBtn }) }
-      >
-
-        <Typography
-          className={ classes.text }
-          variant="subheading"
+      <Fragment>
+        <div
+          className={ classes.text_wrapper }
+          onMouseOver={ () => this.setState({ showEditBtn: true }) }
+          onMouseLeave={ () => this.setState({ showEditBtn: false }) }
+          onClick={ () => this.setState({ showEditBtn: !showEditBtn }) }
         >
-          { date }
-        </Typography>
 
-        <Typography
-          className={ classes.text_ago }
-          variant="caption"
-        >
-          <TimeAgo start_date={ start_date } locale={ locale } />
-        </Typography>
+          <Typography
+            className={ classes.text }
+            variant="subheading"
+          >
+            { date }
+          </Typography>
+
+          <Typography
+            className={ classes.text_ago }
+            variant="caption"
+          >
+            <TimeAgo start_date={ start_date } locale={ locale } />
+          </Typography>
 
 
-        {showEditBtn &&
-          <Fragment>
-            <IconButton
-              data-tip
-              data-for="tip_album_edit_dates"
-              className={ classes.button }
-              onClick={ () => this.handleModalOpen(modal_id) }
-            >
-              <Edit className={ classes.edit_btn } />
-            </IconButton>
-            <Tip id="tip_album_edit_dates">{ t(`Edit album dates`) }</Tip>
-          </Fragment>
-        }
+          {showEditBtn &&
+            <Fragment>
+              <IconButton
+                data-tip
+                data-for="tip_album_edit_dates"
+                className={ classes.button }
+                onClick={ () => this.handleModalOpen(modal_id) }
+              >
+                <Edit className={ classes.edit_btn } />
+              </IconButton>
+              <Tip id="tip_album_edit_dates">{ t(`Edit album dates`) }</Tip>
+            </Fragment>
+          }
+
+        </div>
 
         <SimpleModal
           modal_id={ modal_id }
@@ -113,14 +116,14 @@ class Dates extends Component {
           size="medium"
           disableEscapeKeyDown={ true }
         >
-          <Picker
+          <DatesPickerForm
             album_id={ album_id }
             start_date={ start_date }
             end_date={ end_date }
           />
         </SimpleModal>
 
-      </div>
+      </Fragment>
     )
   }
 }
