@@ -10,11 +10,11 @@ export function mediaUploader(bucket, access_key, allowed = allowedExtensions) {
   return new FineUploaderS3({
     options: {
       request: {
-        endpoint: bucket+'.s3.amazonaws.com',
+        endpoint: bucket + '.s3.amazonaws.com',
         accessKey: access_key
       },
       signature: {
-        endpoint: baseServerUrl+'/api/uploader/sign',
+        endpoint: baseServerUrl + '/api/uploader/sign',
         version: 2
       },
       chunking: {
@@ -34,7 +34,7 @@ export function mediaUploader(bucket, access_key, allowed = allowedExtensions) {
         }
       },
       uploadSuccess: {
-        endpoint: baseServerUrl+'/api/uploader/success'
+        endpoint: baseServerUrl + '/api/uploader/success'
       },
       validation: {
         allowedExtensions: allowed,

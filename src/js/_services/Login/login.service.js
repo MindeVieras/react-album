@@ -1,5 +1,5 @@
 
-import { authHeader, baseServerUrl } from 'Helpers'
+import { baseServerUrl } from 'Helpers'
 
 export const loginService = {
   login,
