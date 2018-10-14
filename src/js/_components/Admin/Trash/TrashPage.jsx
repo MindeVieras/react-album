@@ -4,6 +4,9 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import { withStyles } from '@material-ui/core/styles'
+import Paper from '@material-ui/core/Paper'
+import Tabs from '@material-ui/core/Tabs'
+import Tab from '@material-ui/core/Tab'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
@@ -40,6 +43,16 @@ const styles = theme => ({
 
 class TrashPage extends Component {
 
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      activeTab: 0
+    }
+
+    this.handleChange = this.handleChange.bind(this)
+  }
+
   componentDidMount() {
     const { dispatch } = this.props
 
@@ -47,10 +60,18 @@ class TrashPage extends Component {
     dispatch(trashActions.getList())
   }
 
+  handleChange(event, value) {
+    console.log(value)
+    this.setState({ activeTab: value })
+  }
+
   render() {
+
+    const { activeTab } = this.state
+    console.log(activeTab)
     const { classes } = this.props
     const { media, albums, loading, err } = this.props.list
-    console.log(media)
+    // console.log(media)
     let emptyContent
 
     if (!media) {
@@ -70,6 +91,14 @@ class TrashPage extends Component {
         {err &&
           <div>{err}</div>
         }
+
+        <Paper square>
+          <Tabs value={ activeTab } onChange={ this.handleChange }>
+            <Tab label="Media" />
+            <Tab label="Albums" />
+          </Tabs>
+        </Paper>
+
         {media &&
           <div className={ classes.flex }>
 
