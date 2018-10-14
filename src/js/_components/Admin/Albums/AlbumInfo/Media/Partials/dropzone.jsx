@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import qq from 'fine-uploader/lib/dnd'
 
-class DropzoneElement extends Component {
+class Dropzone extends Component {
 
   componentDidMount() {
     this._registerDropzone()
@@ -65,7 +65,7 @@ class DropzoneElement extends Component {
   }
 }
 
-DropzoneElement.propTypes = {
+Dropzone.propTypes = {
   uploader: PropTypes.object.isRequired,
   children: PropTypes.node,
   dropActiveClassName: PropTypes.string,
@@ -75,7 +75,7 @@ DropzoneElement.propTypes = {
   onProcessingDroppedFilesComplete: PropTypes.func
 }
 
-DropzoneElement.defaultProps = {
+Dropzone.defaultProps = {
   dropActiveClassName: 'active',
   children: <span />,
   multiple: false,
@@ -86,10 +86,10 @@ DropzoneElement.defaultProps = {
 
 const getElementProps = actualProps => {
   const actualPropsCopy = { ...actualProps }
-  const expectedPropNames = Object.keys(DropzoneElement.propTypes)
+  const expectedPropNames = Object.keys(Dropzone.propTypes)
 
   expectedPropNames.forEach(expectedPropName => delete actualPropsCopy[expectedPropName])
   return actualPropsCopy
 }
 
-export default DropzoneElement
+export default Dropzone

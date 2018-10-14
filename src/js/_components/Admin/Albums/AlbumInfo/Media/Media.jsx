@@ -2,8 +2,6 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import FineUploaderS3 from 'fine-uploader-wrappers/s3'
-import { toastr } from 'react-redux-toastr'
 
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
@@ -12,16 +10,15 @@ import CloudUpload from '@material-ui/icons/CloudUpload'
 
 import grey from '@material-ui/core/colors/grey'
 
-import Dropzone from './Partials/dropzone'
-import TotalProgressBar from './Partials/total-progress-bar'
+import Dropzone from './Partials/Dropzone'
+import TotalProgressBar from './Partials/TotalProgressBar'
+import UploadMediaButton from './Partials/UploadMediaButton'
 
 import MediaList from './MediaList'
 import LightboxSlider from './LightboxSlider'
-import UploadMedia from '../../../Buttons/UploadMedia'
 
 import { mediaUploader } from 'Helpers'
 import { albumsActions } from 'Actions'
-import { mediaService } from 'Services'
 
 const styles = theme => ({
   dz_wrapper: {
@@ -123,10 +120,8 @@ class Media extends Component {
 
     const { t } = this.context
     const {
-      classes, entity, entity_id,
-      status, files,
+      classes, files,
       wrapper_width, wrapper_height,
-      dispatch,
       isLightboxOpen
     } = this.props
 
@@ -155,24 +150,29 @@ class Media extends Component {
 
     return (
       <Fragment>
+
+        {/* Dropzone with all uploaded files */}
         <Dropzone
           uploader={ uploader }
           multiple={ true }
           className={ classes.dz_wrapper }
           dropActiveClassName={ classes.dz_wrapper_active }
         >
+
+          {/* Progress for all uploading files */}
           <TotalProgressBar
             uploader={ uploader }
           />
 
+          {/* Media items */}
           { uploaderContent }
 
         </Dropzone>
 
-        <UploadMedia
-          uploader={ uploader }
-        />
+        {/* Upload media buttton */}
+        <UploadMediaButton uploader={ uploader } />
 
+        {/* Lightbox component */}
         <LightboxSlider isOpen={ isLightboxOpen } />
 
       </Fragment>
