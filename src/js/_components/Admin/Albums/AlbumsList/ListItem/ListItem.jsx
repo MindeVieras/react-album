@@ -31,9 +31,9 @@ const styles = theme => ({
 
 class ListItem extends Component {
 
-  handleClick(active, album_id) {
+  handleClick(active, album_id, name) {
     if (!active) {
-      this.props.onItemClick(album_id)
+      this.props.onItemClick(album_id, name)
     }
   }
 
@@ -53,7 +53,7 @@ class ListItem extends Component {
           { [classes.active]: active },
           { [classes.dndActive]: isDndActive }
         )}
-        onClick={ () => this.handleClick(active, album_id) }
+        onClick={ () => this.handleClick(active, album_id, name) }
       >
         <MuiListItem
           data-tip
