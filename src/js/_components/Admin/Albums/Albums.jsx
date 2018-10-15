@@ -30,7 +30,6 @@ class Albums extends Component {
     }
 
     const { selected_album_id, dispatch } = this.props
-    dispatch(headerActions.setTitle(''))
     dispatch(albumsActions.getOne(selected_album_id))
   }
 
