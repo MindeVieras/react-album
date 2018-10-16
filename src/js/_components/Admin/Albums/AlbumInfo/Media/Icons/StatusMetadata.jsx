@@ -67,20 +67,18 @@ class StatusMetadataIcon extends Component {
       // Remove ack and location from metadata
       let { ack, location, ...restMeta } = metadata
       let newMeta = { ...restMeta }
-
+      console.log(metadata)
       // Set orientation readable string
       if (metadata.orientation) {
-        let orientation = orientationToString(metadata.orientation)
+        let orientation = orientationToString(parseInt(metadata.orientation))
         newMeta = { ...newMeta, orientation }
       }
 
       // Set flash readable string
-      if (metadata.flash) {
-        let flash = flashToString(metadata.flash)
+      if (metadata.flash || metadata.flash === 0) {
+        let flash = flashToString(parseInt(metadata.flash))
         newMeta = { ...newMeta, flash }
       }
-
-      // console.log(newMeta)
 
       tooltipText = <List disablePadding={ true }>
         {
@@ -139,28 +137,28 @@ function orientationToString(dec) {
 
   switch(dec) {
 
-  case '1':
+  case 1:
     return `Horizontal`
     break
-  case '2':
+  case 2:
     return `Mirror horizontal`
     break
-  case '3':
+  case 3:
     return `Rotate 180`
     break
-  case '4':
+  case 4:
     return `Mirror vertical`
     break
-  case '5':
+  case 5:
     return `Mirror horizontal and rotate 270 CW`
     break
-  case '6':
+  case 6:
     return `Rotate 90 CW`
     break
-  case '7':
+  case 7:
     return `Mirror horizontal and rotate 90 CW`
     break
-  case '8':
+  case 8:
     return `Rotate 270 CW`
     break
 
@@ -175,85 +173,85 @@ function flashToString(dec) {
 
   switch(dec) {
 
-  case '0':
+  case 0:
     return `No Flash`
     break
-  case '1':
+  case 1:
     return `Fired`
     break
-  case '5':
+  case 5:
     return `Fired, Return not detected`
     break
-  case '7':
+  case 7:
     return `Fired, Return detected`
     break
-  case '8':
+  case 8:
     return `On, Did not fire`
     break
-  case '9':
+  case 9:
     return `On, Fired`
     break
-  case '13':
+  case 13:
     return `On, Return not detected`
     break
-  case '15':
+  case 15:
     return `On, Return detected`
     break
-  case '16':
+  case 16:
     return `Off, Did not fire`
     break
-  case '20':
+  case 20:
     return `Off, Did not fire, Return not detected`
     break
-  case '24':
+  case 24:
     return `Auto, Did not fire`
     break
-  case '25':
+  case 25:
     return `Auto, Fired`
     break
-  case '29':
+  case 29:
     return `Auto, Fired, Return not detected`
     break
-  case '31':
+  case 31:
     return `Auto, Fired, Return detected`
     break
-  case '32':
+  case 32:
     return `No flash function`
     break
-  case '48':
+  case 48:
     return `Off, No flash function`
     break
-  case '65':
+  case 65:
     return `Fired, Red-eye reduction`
     break
-  case '69':
+  case 69:
     return `Fired, Red-eye reduction, Return not detected`
     break
-  case '71':
+  case 71:
     return `Fired, Red-eye reduction, Return detected`
     break
-  case '73':
+  case 73:
     return `On, Red-eye reduction`
     break
-  case '77':
+  case 77:
     return `On, Red-eye reduction, Return not detected`
     break
-  case '79':
+  case 79:
     return `On, Red-eye reduction, Return detected`
     break
-  case '80':
+  case 80:
     return `Off, Red-eye reduction`
     break
-  case '88':
+  case 88:
     return `Auto, Did not fire, Red-eye reduction`
     break
-  case '89':
+  case 89:
     return `Auto, Fired, Red-eye reduction`
     break
-  case '93':
+  case 93:
     return `Auto, Fired, Red-eye reduction, Return not detected`
     break
-  case '95':
+  case 95:
     return `Auto, Fired, Red-eye reduction, Return detected`
     break
 
