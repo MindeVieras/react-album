@@ -67,7 +67,7 @@ class StatusMetadataIcon extends Component {
       // Remove ack and location from metadata
       let { ack, location, ...restMeta } = metadata
       let newMeta = { ...restMeta }
-      console.log(metadata)
+      
       // Set orientation readable string
       if (metadata.orientation) {
         let orientation = orientationToString(parseInt(metadata.orientation))
