@@ -1,17 +1,32 @@
 
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import uuidv4 from 'uuid/v4'
+import classNames from 'classnames'
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu'
 
+import { withStyles } from '@material-ui/core/styles'
+
+import CollectionsIcon from '@material-ui/icons/Collections'
+
+import green from '@material-ui/core/colors/green'
+import red from '@material-ui/core/colors/red'
+
 import { ScaleLoader } from 'react-spinners'
-import { IoImages } from 'react-icons/lib/io'
 
 import { Tip } from 'Common'
 
 import { albumsActions } from 'Actions'
 
+const styles = theme => ({
+  iconSuccess: {
+    color: green[700]
+  },
+  iconError: {
+    color: red[700]
+  }
+})
 
 class StatusGenerateImageThumbsIcon extends Component {
 
@@ -30,13 +45,18 @@ class StatusGenerateImageThumbsIcon extends Component {
 
     const contextMenuId = uuidv4()
 
-    const { id, thumbs } = this.props
+    const { classes, className, id, thumbs } = this.props
 
-    let className = ''
     let tooltipText = ''
 
     let icon = <ContextMenuTrigger id={ contextMenuId }>
-      <IoImages />
+      <CollectionsIcon
+        className={classNames(
+          className,
+          { [classes.iconSuccess]: thumbs.ack == 'ok' || true },
+          { [classes.iconError]: thumbs.ack == 'err' }
+        )}
+      />
     </ContextMenuTrigger>
 
     let contextMenu = <ContextMenu id={ contextMenuId }>
@@ -46,11 +66,9 @@ class StatusGenerateImageThumbsIcon extends Component {
     </ContextMenu>
 
     if (thumbs.thumb || thumbs.ack == 'ok') {
-      className = 'success'
       tooltipText = 'Thumbnails generated'
     }
     else if (thumbs.ack == 'loading') {
-      className = 'loading'
       tooltipText = thumbs.msg
       icon = <ScaleLoader
         height={ 22 }
@@ -60,16 +78,14 @@ class StatusGenerateImageThumbsIcon extends Component {
       />
     }
     else if (thumbs.ack == 'err') {
-      className = 'failed'
       tooltipText = thumbs.msg
     }
 
     return (
-      <span>
+      <Fragment>
         <div
           data-tip
           data-for={ `tip_album_image_thumb_generate_${id}` }
-          className={`icon ${className}`}
         >
           { icon }
           <Tip id={ `tip_album_image_thumb_generate_${id}` }>{ tooltipText }</Tip>
@@ -77,16 +93,22 @@ class StatusGenerateImageThumbsIcon extends Component {
 
         { contextMenu }
 
-      </span>
+      </Fragment>
     )
   }
 }
 
 StatusGenerateImageThumbsIcon.propTypes = {
+  classes: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
   media_id: PropTypes.number.isRequired,
-  thumbs: PropTypes.object.isRequired
+  thumbs: PropTypes.object.isRequired,
+  className: PropTypes.string
 }
 
-export default connect()(StatusGenerateImageThumbsIcon)
+StatusGenerateImageThumbsIcon.defaultProps = {
+  className: null
+}
+
+export default connect()(withStyles(styles)(StatusGenerateImageThumbsIcon))

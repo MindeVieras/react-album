@@ -50,8 +50,15 @@ const styles = theme => ({
     display: `flex`,
     justifyContent: `space-between`
   },
-  icons: {
-    display: `flex`
+  statusIcons: {
+    display: `flex`,
+    alignItems: `center`,
+    height: theme.spacing.unit * 2.5
+  },
+  statusIcon: {
+    display: `flex`,
+    fontSize: 16,
+    marginLeft: theme.spacing.unit / 3
   },
   nameSizeWrapper: {
     display: `flex`,
@@ -102,7 +109,7 @@ class MediaItem extends Component {
     let itemWidth = item_width
     let itemHeight = item_height - 50  // substract item footer
 
-    console.log(videos)
+    // console.log(videos)
     let thumb
     
     if (fromServer) {
@@ -165,13 +172,14 @@ class MediaItem extends Component {
                 className={ classes.nameSizeText }
               />
               {media_id &&
-                <div className={ classes.icons }>
+                <div className={ classes.statusIcons }>
                   {mime && rekognition_labels &&
                     <StatusRekognitionLabelsIcon
                       rekognition_labels={ rekognition_labels }
                       mime={ mime }
                       id={ id }
                       media_id={ media_id }
+                      className={ classes.statusIcon }
                     />
                   }
                   {metadata &&
@@ -179,6 +187,7 @@ class MediaItem extends Component {
                       metadata={ metadata }
                       id={ id }
                       media_id={ media_id }
+                      className={ classes.statusIcon }
                     />
                   }
                   {thumbs &&
@@ -186,6 +195,7 @@ class MediaItem extends Component {
                       thumbs={ thumbs }
                       id={ id }
                       media_id={ media_id }
+                      className={ classes.statusIcon }
                     />
                   }
                   {videos &&
@@ -193,6 +203,7 @@ class MediaItem extends Component {
                       videos={ videos }
                       id={ id }
                       media_id={ media_id }
+                      className={ classes.statusIcon }
                     />
                   }
                   {status === 'upload successful' &&

@@ -1,8 +1,9 @@
 
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import uuidv4 from 'uuid/v4'
+import classNames from 'classnames'
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu'
 
 import { withStyles } from '@material-ui/core/styles'
@@ -10,14 +11,24 @@ import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import Typography from '@material-ui/core/Typography'
 
+import ToysIcon from '@material-ui/icons/Toys'
+
+import green from '@material-ui/core/colors/green'
+import red from '@material-ui/core/colors/red'
+
 import { ScaleLoader } from 'react-spinners'
-import { IoAperture } from 'react-icons/lib/io'
 
 import { Tip } from 'Common'
 
 import { albumsActions } from 'Actions'
 
 const styles = theme => ({
+  iconSuccess: {
+    color: green[700]
+  },
+  iconError: {
+    color: red[700]
+  },
   tipListRoot: {
     display: `flex`,
     justifyContent: `space-between`,
@@ -47,13 +58,20 @@ class StatusRekognitionLabelsIcon extends Component {
 
     const contextMenuId = uuidv4()
     const { t } = this.context
-    const { classes, id, rekognition_labels } = this.props
+    const { classes, className, id, rekognition_labels } = this.props
 
-    let className = ''
     let tooltipText = ''
-    let icon = <ContextMenuTrigger id={ contextMenuId }>
-      <IoAperture />
+
+    let icon = <ContextMenuTrigger id={ contextMenuId } className={ classes.flex }>
+      <ToysIcon
+        className={classNames(
+          className,
+          { [classes.iconSuccess]: rekognition_labels.ack == 'ok' || true },
+          { [classes.iconError]: rekognition_labels.ack == 'err' }
+        )}
+      />
     </ContextMenuTrigger>
+    
     let contextMenu = <ContextMenu id={ contextMenuId }>
       <MenuItem onClick={ this.handleResaveRekognitionLabels }>
         Reset rekognition labels
@@ -64,7 +82,7 @@ class StatusRekognitionLabelsIcon extends Component {
     </ContextMenu>
 
     if (rekognition_labels.ack == 'ok') {
-      className = 'success'
+      
       let totalLabels = Object.keys(rekognition_labels).length - 1 // substract 'ack'
       let ulWidth = 150
       let liWidth = 150
@@ -101,7 +119,6 @@ class StatusRekognitionLabelsIcon extends Component {
       </List>
     }
     else if (rekognition_labels.ack == 'loading') {
-      className = 'loading'
       tooltipText = rekognition_labels.msg
       icon = <ScaleLoader
         height={ 22 }
@@ -111,16 +128,14 @@ class StatusRekognitionLabelsIcon extends Component {
       />
     }
     else if (rekognition_labels.ack == 'err') {
-      className = 'failed'
       tooltipText = rekognition_labels.msg
     }
 
     return (
-      <span>
+      <Fragment>
         <div
           data-tip
           data-for={ `tip_album_media_rekognition_labels_${id}` }
-          className={`icon ${className}`}
         >
           { icon }
           <Tip id={ `tip_album_media_rekognition_labels_${id}` }>{ tooltipText }</Tip>
@@ -128,7 +143,7 @@ class StatusRekognitionLabelsIcon extends Component {
 
         { contextMenu }
 
-      </span>
+      </Fragment>
     )
   }
 }
@@ -138,7 +153,12 @@ StatusRekognitionLabelsIcon.propTypes = {
   dispatch: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
   media_id: PropTypes.number.isRequired,
-  rekognition_labels: PropTypes.object.isRequired
+  rekognition_labels: PropTypes.object.isRequired,
+  className: PropTypes.string
+}
+
+StatusRekognitionLabelsIcon.defaultProps = {
+  className: null
 }
 
 StatusRekognitionLabelsIcon.contextTypes = {

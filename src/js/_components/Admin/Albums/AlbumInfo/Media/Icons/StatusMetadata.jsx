@@ -1,9 +1,10 @@
 
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 import uuidv4 from 'uuid/v4'
+import classNames from 'classnames'
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu'
 
 import { withStyles } from '@material-ui/core/styles'
@@ -11,14 +12,24 @@ import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import Typography from '@material-ui/core/Typography'
 
+import DvrIcon from '@material-ui/icons/Dvr'
+
+import green from '@material-ui/core/colors/green'
+import red from '@material-ui/core/colors/red'
+
 import { ScaleLoader } from 'react-spinners'
-import { IoClipboard } from 'react-icons/lib/io'
 
 import { Tip } from 'Common'
 
 import { albumsActions } from 'Actions'
 
 const styles = theme => ({
+  iconSuccess: {
+    color: green[700]
+  },
+  iconError: {
+    color: red[700]
+  },
   tipListItem: {
     display: `flex`,
     justifyContent: `space-between`,
@@ -43,13 +54,18 @@ class StatusMetadataIcon extends Component {
 
     const contextMenuId = uuidv4()
     const { t } = this.context
-    const { classes, id, metadata } = this.props
+    const { classes, className, id, metadata } = this.props
 
-    let className = ''
     let tooltipText = ''
 
     let icon = <ContextMenuTrigger id={ contextMenuId }>
-      <IoClipboard />
+      <DvrIcon
+        className={classNames(
+          className,
+          { [classes.iconSuccess]: metadata.ack == 'ok' || true },
+          { [classes.iconError]: metadata.ack == 'err' }
+        )}
+      />
     </ContextMenuTrigger>
 
     let contextMenu = <ContextMenu id={ contextMenuId }>
@@ -62,7 +78,6 @@ class StatusMetadataIcon extends Component {
     </ContextMenu>
 
     if (metadata.ack == 'ok') {
-      className = 'success'
 
       // Remove ack and location from metadata
       let { ack, location, ...restMeta } = metadata
@@ -100,7 +115,6 @@ class StatusMetadataIcon extends Component {
       </List>
     }
     else if (metadata.ack == 'loading') {
-      className = 'loading'
       tooltipText = metadata.msg
       icon = <ScaleLoader
         height={ 22 }
@@ -110,16 +124,14 @@ class StatusMetadataIcon extends Component {
       />
     }
     else if (metadata.ack == 'err') {
-      className = 'failed'
       tooltipText = metadata.msg
     }
 
     return (
-      <span>
+      <Fragment>
         <div
           data-tip
           data-for={ `tip_album_media_metadata_${id}` }
-          className={`icon ${className}`}
         >
           { icon }
           <Tip id={ `tip_album_media_metadata_${id}` }>{ tooltipText }</Tip>
@@ -127,7 +139,7 @@ class StatusMetadataIcon extends Component {
 
         { contextMenu }
 
-      </span>
+      </Fragment>
     )
   }
 }
@@ -266,7 +278,12 @@ StatusMetadataIcon.propTypes = {
   dispatch: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
   media_id: PropTypes.number.isRequired,
-  metadata: PropTypes.object.isRequired
+  metadata: PropTypes.object.isRequired,
+  className: PropTypes.string
+}
+
+StatusMetadataIcon.defaultProps = {
+  className: null
 }
 
 StatusMetadataIcon.contextTypes = {
