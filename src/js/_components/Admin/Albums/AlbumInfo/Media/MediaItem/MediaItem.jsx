@@ -102,7 +102,7 @@ class MediaItem extends Component {
     let itemWidth = item_width
     let itemHeight = item_height - 50  // substract item footer
 
-    // console.log(id)
+    console.log(videos)
     let thumb
     
     if (fromServer) {
@@ -282,7 +282,7 @@ MediaItem.defaultProps = {
   media_id: null,
   fromServer: false,
   thumbs: {},
-  videos: {},
+  videos: null,
   metadata: {},
   rekognition_labels: {}
 }
