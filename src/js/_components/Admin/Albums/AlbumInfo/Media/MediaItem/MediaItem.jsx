@@ -102,22 +102,22 @@ class MediaItem extends Component {
     let itemWidth = item_width
     let itemHeight = item_height - 50  // substract item footer
 
-    // console.log(this.props)
+    // console.log(id)
     let thumb
-
+    
     if (fromServer) {
       const mediaSize = fitMediaToWrapper(itemWidth, itemHeight, width, height)
       thumb = <ThumbnailSrv
+        id={ id }
         width={ mediaSize.width }
         height={ mediaSize.height }
         mime={ mime }
         videos={ videos }
         thumbs={ thumbs }
-        metadata={ metadata }
         onClick={ () => this.openLightbox(id) }
       />
     }
-    else if (mime) {
+    else {
       thumb = <Thumbnail
         id={ id }
         width={ itemWidth }
