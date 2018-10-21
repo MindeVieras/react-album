@@ -6,7 +6,7 @@ import { loginActions } from 'Actions'
 import { loginService } from 'Services'
 import { history } from 'Helpers'
 
-function submit(values, dispatch, props) {
+function submit(values, dispatch) {
 
   const { username, password } = values
 

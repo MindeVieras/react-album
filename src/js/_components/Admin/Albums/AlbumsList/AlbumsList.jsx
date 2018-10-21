@@ -11,7 +11,7 @@ import Bar from './Bar'
 import ListItem from './ListItem'
 import { Scrollbar } from 'Common'
 
-import { albumsActions, utilsActions } from 'Actions'
+import { headerActions, albumsActions, utilsActions } from 'Actions'
 
 const styles = theme => ({
   list: {
@@ -26,8 +26,9 @@ class AlbumsList extends Component {
     dispatch(albumsActions.getList(start_date, end_date))
   }
 
-  onAlbumSelect(album_id) {
+  onAlbumSelect(album_id, name) {
     const { dispatch } = this.props
+    dispatch(headerActions.setTitle(name))
     dispatch(albumsActions.clearMedia())
     dispatch(albumsActions.getOne(album_id))
     dispatch(utilsActions.saveAdminSetting('selected_album', album_id))
@@ -59,7 +60,7 @@ class AlbumsList extends Component {
                     album_id={ album.id }
                     name={ album.name }
                     start_date={ album.start_date }
-                    onItemClick={(album_id) => this.onAlbumSelect(album_id)}
+                    onItemClick={(album_id, name) => this.onAlbumSelect(album_id, name)}
                   />
                 )}
               </List>

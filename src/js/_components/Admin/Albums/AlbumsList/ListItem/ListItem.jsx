@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import classNames from 'classnames'
 import { DropTarget } from 'react-dnd'
 import moment from 'moment'
 
@@ -15,9 +16,8 @@ import { Tip } from 'Common'
 import { utilsConstants } from 'Constants'
 
 const styles = theme => ({
-  item: {
-    // color: blueGrey[50],
-    color: theme.palette.common.white,
+  listItem: {
+    color: theme.palette.text.primary,
     paddingLeft: theme.spacing.unit * 1.5,
     paddingRight: theme.spacing.unit * 1.5
   },
@@ -31,37 +31,35 @@ const styles = theme => ({
 
 class ListItem extends Component {
 
-  handleClick(active, album_id) {
+  handleClick(active, album_id, name) {
     if (!active) {
-      this.props.onItemClick(album_id)
+      this.props.onItemClick(album_id, name)
     }
   }
 
   render() {
     const {
-      classes,
-      active,
-      album_id,
-      name,
+      classes, active,
+      album_id, name,
       start_date,
-      canDrop,
-      isOver,
-      connectDropTarget } = this.props
-    const isDndActive = canDrop && isOver
+      canDrop, isOver, connectDropTarget
+    } = this.props
 
-    let activeClass = active ? classes.active : ``
-    let dndClass = isDndActive ? classes.dndActive : ``
+    const isDndActive = canDrop && isOver
 
     return connectDropTarget(
       <li
-        className={ `${activeClass} ${dndClass}` }
-        onClick={ () => this.handleClick(active, album_id) }
+        className={classNames(
+          { [classes.active]: active },
+          { [classes.dndActive]: isDndActive }
+        )}
+        onClick={ () => this.handleClick(active, album_id, name) }
       >
         <MuiListItem
           data-tip
           data-for={ `tip_album_list_item_${album_id}` }
           button
-          className={ classes.item }
+          className={ classes.listItem }
         >
           <Typography
             variant="body2"

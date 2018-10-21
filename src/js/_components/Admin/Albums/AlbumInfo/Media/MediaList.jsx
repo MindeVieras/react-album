@@ -18,10 +18,6 @@ const styles = theme => ({
 })
 
 class MediaList extends Component {
-  constructor(props) {
-    super(props)
-
-  }
 
   componentDidMount() {
     this.setMediaGrid(this.props)
@@ -33,7 +29,6 @@ class MediaList extends Component {
 
   componentWillUnmount() {
     const { dispatch } = this.props
-
     dispatch(albumsActions.setMediaPagerPage(0))
   }
 

@@ -1,7 +1,6 @@
 
 import  React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 
 import { withStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
@@ -11,8 +10,6 @@ import CloudUpload from '@material-ui/icons/CloudUpload'
 import green from '@material-ui/core/colors/green'
 
 import { Tip } from 'Common'
-
-import { albumsActions } from 'Actions'
 
 const styles = theme => ({
   button: {
@@ -26,7 +23,7 @@ const styles = theme => ({
   }
 })
 
-class UploadMedia extends Component {
+class UploadMediaButton extends Component {
 
   constructor() {
     super()
@@ -36,7 +33,7 @@ class UploadMedia extends Component {
     }
   }
 
-  handleClick(e) {
+  handleClick() {
     this.refs.fileUploader.click()
   }
 
@@ -50,7 +47,7 @@ class UploadMedia extends Component {
   render() {
 
     const { t } = this.context
-    const { uploader, classes } = this.props
+    const { classes } = this.props
 
     return (
       <Fragment>
@@ -91,13 +88,13 @@ class UploadMedia extends Component {
 
 const newKey = () => Date.now()
 
-UploadMedia.contextTypes = {
+UploadMediaButton.contextTypes = {
   t: PropTypes.func
 }
 
-UploadMedia.propTypes = {
+UploadMediaButton.propTypes = {
   uploader: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired
 }
 
-export default connect()(withStyles(styles)(UploadMedia))
+export default withStyles(styles)(UploadMediaButton)

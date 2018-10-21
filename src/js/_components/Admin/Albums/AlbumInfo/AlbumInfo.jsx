@@ -11,7 +11,7 @@ import Bar from './Bar'
 import Media from './Media'
 
 import { headerActions } from 'Actions'
-import { albumsConstants, contentConstants, mediaConstants } from 'Constants'
+import { contentConstants, mediaConstants } from 'Constants'
 
 const styles = theme => ({
   info_wrapper: {
@@ -31,10 +31,10 @@ const styles = theme => ({
 
 class AlbumInfo extends Component {
 
-  componentWillReceiveProps(nextProps) {
-    const { selected_album, dispatch } = nextProps
+  componentDidMount() {
+    const { selected_album, dispatch } = this.props
     if (selected_album) {
-      const { id, name, media, status } = selected_album
+      const { name } = selected_album
       dispatch(headerActions.setTitle(name))
     }
   }

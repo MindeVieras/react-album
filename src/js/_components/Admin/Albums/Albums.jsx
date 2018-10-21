@@ -10,7 +10,7 @@ import AlbumsList from './AlbumsList'
 import AlbumInfo from './AlbumInfo'
 import NewAlbum from '../Buttons/NewAlbum'
 
-import { headerActions, utilsActions, albumsActions } from 'Actions'
+import { utilsActions, albumsActions } from 'Actions'
 
 const styles = {
   rnd_wrapper: {
@@ -30,7 +30,6 @@ class Albums extends Component {
     }
 
     const { selected_album_id, dispatch } = this.props
-    dispatch(headerActions.setTitle(''))
     dispatch(albumsActions.getOne(selected_album_id))
   }
 
@@ -107,7 +106,7 @@ Albums.propTypes = {
 }
 
 function mapStateToProps(state) {
-  const { client, settings, admin_albums } = state
+  const { client, settings } = state
   return {
     selected_album_id: parseInt(settings.admin.selected_album),
     sidebar_width: parseInt(settings.admin.sidebar_width),
