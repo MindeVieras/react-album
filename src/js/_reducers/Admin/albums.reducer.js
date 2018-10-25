@@ -758,11 +758,6 @@ export function adminAlbums(state = initialState, action) {
       }
     }
 
-
-
-    // Unsorted reducers...
-
-
   /*
    * Album Media pager reducers
    * calls SET_MEDIA_PAGER_PAGE
@@ -794,6 +789,10 @@ export function adminAlbums(state = initialState, action) {
         }
       }
     }
+
+
+
+    // Unsorted reducers...
 
 
 

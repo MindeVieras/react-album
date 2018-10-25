@@ -15,11 +15,17 @@ const styles = theme => ({
 
 class ThumbnailSrv extends Component {
   
+  constructor(props) {
+    super(props)
+
+    this.imageRef = React.createRef()
+  }
+
   componentDidMount() {
 
     const { id, mime, thumbs, metadata, text } = this.props
-    
-    let canvas = this.refs['image_canvas_'+id]
+    console.log(id)
+    let canvas = this.imageRef.current
     if (mime.includes('image')) {
       // Draw summary icon image canvas
       let orientation = 1
@@ -30,30 +36,33 @@ class ThumbnailSrv extends Component {
     }
   }
 
-  componentWillReceiveProps() {
+  componentWillReceiveProps(nextProps) {
 
-    const { id, mime, thumbs, metadata, text } = this.props
-    
-    let canvas = this.refs['image_canvas_'+id]
-    if (mime.includes('image')) {
-      // Draw summary icon image canvas
-      let orientation = 1
-      if (metadata && metadata.orientation) {
-        orientation = metadata.orientation
+    if (this.props.id != nextProps.id) {
+      
+      const { id, mime, thumbs, metadata, text } = nextProps
+
+      let canvas = this.imageRef.current
+      if (mime.includes('image')) {
+        // Draw summary icon image canvas
+        let orientation = 1
+        if (metadata && metadata.orientation) {
+          orientation = metadata.orientation
+        }
+        drawCanvasImage(canvas, thumbs.thumb, orientation, text)
       }
-      drawCanvasImage(canvas, thumbs.thumb, orientation, text)
     }
   }
 
   render() {
 
     const { classes, onClick, id, width, height, mime, thumbs, videos } = this.props
-
+    // console.log(id, thumbs.thumb)
     let item = <span>Unsuported media type</span>
     
     if (mime.includes('image')) {  
       item = <canvas
-        ref={ `image_canvas_${id}` }
+        ref={ this.imageRef }
         onClick={ onClick }
         width={ width }
         height={ height }

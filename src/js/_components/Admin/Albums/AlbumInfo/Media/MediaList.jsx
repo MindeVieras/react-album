@@ -58,11 +58,11 @@ class MediaList extends Component {
   render() {
     const { classes, files, pager, uploader, wrapper_width, wrapper_height } = this.props
 
-    const firstList = pager.current_page * pager.per_page
-    const lastList = firstList + pager.per_page
-    const currentFiles = files.slice(firstList, lastList)
+    const { current_page, cols, rows, per_page} = pager
 
-    let { cols, rows} = pager
+    const firstList = current_page * per_page
+    const lastList = firstList + per_page
+    const currentFiles = files.slice(firstList, lastList)
 
     let gap_width = 12
     let gap_height = 12
@@ -72,7 +72,7 @@ class MediaList extends Component {
 
     let item_width = (wrapper_width - vertGaps) / cols
     let item_height = (wrapper_height - horiGaps) / rows
-
+    
     return (
       <List
         className={ classes.list }
@@ -84,7 +84,7 @@ class MediaList extends Component {
           paddingTop: gap_height
         }}
       >
-        {currentFiles.map((file, i) => (
+        {currentFiles && currentFiles.map((file, i) => (
           <MediaItem
             key={ i }
             index={ i }

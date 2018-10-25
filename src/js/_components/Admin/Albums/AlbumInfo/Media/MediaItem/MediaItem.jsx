@@ -110,7 +110,6 @@ class MediaItem extends Component {
     let itemWidth = item_width
     let itemHeight = item_height - 50  // substract item footer
 
-    // console.log(videos)
     let thumb
     
     if (fromServer) {
