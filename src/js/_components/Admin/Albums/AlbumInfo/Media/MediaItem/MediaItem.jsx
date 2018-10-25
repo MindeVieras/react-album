@@ -24,6 +24,7 @@ import StatusMetadataIcon from '../Icons/StatusMetadata'
 import StatusGenerateImageThumbsIcon from '../Icons/StatusGenerateImageThumbs'
 import StatusGenerateVideosIcon from '../Icons/StatusGenerateVideos'
 import StatusRekognitionLabelsIcon from '../Icons/StatusRekognitionLabels'
+import StatusRekognitionTextIcon from '../Icons/StatusRekognitionText'
 
 import { fitMediaToWrapper } from 'Helpers'
 import { utilsConstants } from 'Constants'
@@ -102,7 +103,7 @@ class MediaItem extends Component {
       id, media_id,
       status, fromServer,
       mime, filename, filesize,
-      metadata, rekognition_labels,
+      metadata, rekognition_labels, rekognition_text,
       thumbs, videos
     } = this.props
 
@@ -121,6 +122,8 @@ class MediaItem extends Component {
         mime={ mime }
         videos={ videos }
         thumbs={ thumbs }
+        metadata={ metadata }
+        text={ rekognition_text.text }
         onClick={ () => this.openLightbox(id) }
       />
     }
@@ -173,6 +176,14 @@ class MediaItem extends Component {
               />
               {media_id &&
                 <div className={ classes.statusIcons }>
+                  {rekognition_text &&
+                    <StatusRekognitionTextIcon
+                      rekognition_text={ rekognition_text }
+                      id={ id }
+                      media_id={ media_id }
+                      className={ classes.statusIcon }
+                    />
+                  }
                   {mime && rekognition_labels &&
                     <StatusRekognitionLabelsIcon
                       rekognition_labels={ rekognition_labels }
@@ -280,7 +291,8 @@ MediaItem.propTypes = {
   thumbs: PropTypes.object,
   videos: PropTypes.object,
   metadata: PropTypes.object,
-  rekognition_labels: PropTypes.object
+  rekognition_labels: PropTypes.object,
+  rekognition_text: PropTypes.object
 }
 
 MediaItem.defaultProps = {
@@ -292,10 +304,11 @@ MediaItem.defaultProps = {
   filesize: 0,
   media_id: null,
   fromServer: false,
-  thumbs: {},
+  thumbs: null,
   videos: null,
-  metadata: {},
-  rekognition_labels: {}
+  metadata: null,
+  rekognition_labels: null,
+  rekognition_text: null
 }
 
 const boxSource = {

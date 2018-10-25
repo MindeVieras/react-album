@@ -17,24 +17,31 @@ class ThumbnailSrv extends Component {
   
   componentDidMount() {
 
-    const { id, mime, thumbs } = this.props
+    const { id, mime, thumbs, metadata, text } = this.props
     
     let canvas = this.refs['image_canvas_'+id]
     if (mime.includes('image')) {
       // Draw summary icon image canvas
-      drawCanvasImage(canvas, thumbs.thumb)
+      let orientation = 1
+      if (metadata && metadata.orientation) {
+        orientation = parseInt(metadata.orientation)
+      }
+      drawCanvasImage(canvas, thumbs.thumb, orientation, text)
     }
-
   }
 
   componentWillReceiveProps() {
 
-    const { id, mime, thumbs } = this.props
+    const { id, mime, thumbs, metadata, text } = this.props
     
     let canvas = this.refs['image_canvas_'+id]
     if (mime.includes('image')) {
       // Draw summary icon image canvas
-      drawCanvasImage(canvas, thumbs.thumb)
+      let orientation = 1
+      if (metadata && metadata.orientation) {
+        orientation = metadata.orientation
+      }
+      drawCanvasImage(canvas, thumbs.thumb, orientation, text)
     }
   }
 
@@ -73,15 +80,19 @@ ThumbnailSrv.propTypes = {
   id: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
+  mime: PropTypes.string,
   thumbs: PropTypes.object,
   videos: PropTypes.object,
-  mime: PropTypes.string
+  metadata: PropTypes.object,
+  text: PropTypes.array
 }
 
 ThumbnailSrv.defaultProps = {
+  mime: '',
   thumbs: null,
   videos: null,
-  mime: ''
+  metadata: null,
+  text: null
 }
 
 export default withStyles(styles)(ThumbnailSrv)

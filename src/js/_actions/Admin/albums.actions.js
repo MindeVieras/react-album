@@ -13,7 +13,7 @@ export const albumsActions = {
   setLocation, updateLocation, removeLocation,
   clearSelected,
   submitMedia, setMediaData, setMediaPhase, setMediaMediaId,
-  saveMediaMetadata, saveRekognitionLabels,
+  saveMediaMetadata, saveRekognitionLabels, saveRekognitionText,
   generateImageThumbs, generateVideos,
   setMediaLocation, updateMediaLocation, removeMediaLocation,
   openMediaLocationMarker, closeMediaLocationMarkers,
@@ -323,6 +323,38 @@ function saveRekognitionLabels(id, media_id) {
     }
   }
 }
+
+function saveRekognitionText(id, media_id) {
+  return dispatch => {
+    dispatch(request(id))
+
+    mediaService.saveRekognitionText(media_id)
+      .then(res => {
+        if (res.ack == 'ok') {
+          dispatch(success(id, res.rekognition_text))
+        } else if (res.ack == 'err') {
+          dispatch(failure(id, res.msg))
+        }
+      })
+  }
+
+  function request(id) {
+    return {
+      type: albumsConstants.SAVE_MEDIA_REKOGNITION_TEXT_REQUEST, id
+    }
+  }
+  function success(id, rekognition_text) {
+    return {
+      type: albumsConstants.SAVE_MEDIA_REKOGNITION_TEXT_SUCCESS, id, rekognition_text
+    }
+  }
+  function failure(id, err) {
+    return {
+      type: albumsConstants.SAVE_MEDIA_REKOGNITION_TEXT_FAILURE, id, err
+    }
+  }
+}
+
 
 
 /*

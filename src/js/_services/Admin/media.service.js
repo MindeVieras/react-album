@@ -2,15 +2,11 @@
 import { authHeader, baseServerUrl } from 'Helpers'
 
 export const mediaService = {
-  setLocation,
-  updateLocation,
-  removeLocation,
-  putToTrash,
-  moveMedia,
-  generateImageThumbs,
-  generateVideos,
+  setLocation, updateLocation, removeLocation,
+  putToTrash, moveMedia,
+  generateImageThumbs, generateVideos,
   saveMetadata,
-  saveRekognitionLabels
+  saveRekognitionLabels, saveRekognitionText
 }
 
 function setLocation(media_id, location) {
@@ -100,6 +96,16 @@ function saveRekognitionLabels(media_id) {
     body: JSON.stringify({ media_id })
   }
   return fetch(`${baseServerUrl}/api/media/save-rekognition-labels`, requestOptions).then(handleResponse)
+}
+
+// Saves rekognition text to DB
+function saveRekognitionText(media_id) {
+  const requestOptions = {
+    method: 'POST',
+    headers: { ...authHeader(), 'Content-Type': 'application/json' },
+    body: JSON.stringify({ media_id })
+  }
+  return fetch(`${baseServerUrl}/api/media/save-rekognition-text`, requestOptions).then(handleResponse)
 }
 
 function handleResponse(response) {

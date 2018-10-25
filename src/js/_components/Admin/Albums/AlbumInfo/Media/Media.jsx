@@ -91,10 +91,12 @@ class Media extends Component {
       dispatch(albumsActions.setMediaMediaId(id, media_id))
       dispatch(albumsActions.saveMediaMetadata(id, media_id))
       dispatch(albumsActions.saveRekognitionLabels(id, media_id))
+      dispatch(albumsActions.saveRekognitionText(id, media_id))
 
       // // If IMAGE
       if (mime.includes('image')) {
         dispatch(albumsActions.generateImageThumbs(id, media_id))
+        dispatch(albumsActions.saveRekognitionText(id, media_id))
       }
       // If VIDEO
       else if (mime.includes('video')) {

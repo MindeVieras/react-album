@@ -362,6 +362,7 @@ export function adminAlbums(state = initialState, action) {
    * Album Media meta reducers
    * calls SAVE_MEDIA_METADATA_REQUEST, SAVE_MEDIA_METADATA_SUCCESS, SAVE_MEDIA_METADATA_FAILURE
    *       SAVE_MEDIA_REKOGNITION_LABELS_REQUEST, SAVE_MEDIA_REKOGNITION_LABELS_SUCCESS, SAVE_MEDIA_REKOGNITION_LABELS_FAILURE
+   *       SAVE_MEDIA_REKOGNITION_TEXT_REQUEST, SAVE_MEDIA_REKOGNITION_TEXT_SUCCESS, SAVE_MEDIA_REKOGNITION_TEXT_FAILURE
    */
 
   case albumsConstants.SAVE_MEDIA_METADATA_REQUEST:
@@ -477,6 +478,66 @@ export function adminAlbums(state = initialState, action) {
               return {
                 ...mCopy,
                 rekognition_labels: { ack: 'err', msg: action.err }
+              }
+            }
+            return m
+          })
+        }
+      }
+    }
+  case albumsConstants.SAVE_MEDIA_REKOGNITION_TEXT_REQUEST:
+    return {
+      ...state,
+      selected_album: {
+        ...state.selected_album,
+        album: {
+          ...state.selected_album.album,
+          media: state.selected_album.album.media.map(m => {
+            if (m.id === action.id) {
+              const { ...mCopy } = m
+              return {
+                ...mCopy,
+                rekognition_text: { ack: 'loading', msg: 'Rekognition text processing...' }
+              }
+            }
+            return m
+          })
+        }
+      }
+    }
+  case albumsConstants.SAVE_MEDIA_REKOGNITION_TEXT_SUCCESS:
+    return {
+      ...state,
+      selected_album: {
+        ...state.selected_album,
+        album: {
+          ...state.selected_album.album,
+          media: state.selected_album.album.media.map(m => {
+            if (m.id === action.id) {
+              const { ...mCopy } = m
+              return {
+                ...mCopy,
+                rekognition_text: { ack: 'ok', ...action.rekognition_text }
+              }
+            }
+            return m
+          })
+        }
+      }
+    }
+  case albumsConstants.SAVE_MEDIA_REKOGNITION_TEXT_FAILURE:
+    return {
+      ...state,
+      selected_album: {
+        ...state.selected_album,
+        album: {
+          ...state.selected_album.album,
+          media: state.selected_album.album.media.map(m => {
+            if (m.id === action.id) {
+              const { ...mCopy } = m
+              return {
+                ...mCopy,
+                rekognition_text: { ack: 'err', msg: action.err }
               }
             }
             return m
