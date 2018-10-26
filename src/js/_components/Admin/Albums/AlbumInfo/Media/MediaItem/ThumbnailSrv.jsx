@@ -23,8 +23,8 @@ class ThumbnailSrv extends Component {
 
   componentDidMount() {
 
-    const { id, mime, thumbs, metadata, text } = this.props
-    console.log(id)
+    const { mime, thumbs, metadata, text } = this.props
+    
     let canvas = this.imageRef.current
     if (mime.includes('image')) {
       // Draw summary icon image canvas
