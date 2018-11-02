@@ -16,6 +16,7 @@ import { adminTranslations } from '../../translations/adminTranslations'
 import Header from './Partials/Header'
 import Albums from './Albums'
 import Users from './Users'
+import Faces from './Faces'
 import TrashPage from './Trash'
 import Error404 from './Errors/404'
 
@@ -140,6 +141,7 @@ class Admin extends Component {
               <Switch>
                 <Route exact path={ match.url } component={ Albums } />
                 <Route path={ `${match.url}/users` } component={ Users } />
+                <Route path={ `${match.url}/faces` } component={ Faces } />
                 {access_level === userConstants.USER_ACCESS_ADMIN &&
                   <Route exact path={ `${match.url}/trash` } component={ TrashPage } />
                 }

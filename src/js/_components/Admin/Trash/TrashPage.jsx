@@ -7,14 +7,9 @@ import { withStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
-import ExpansionPanel from '@material-ui/core/ExpansionPanel'
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import Typography from '@material-ui/core/Typography'
 
 import grey from '@material-ui/core/colors/grey'
-
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 import { IoTrashA } from 'react-icons/lib/io'
 
@@ -68,7 +63,7 @@ class TrashPage extends Component {
   render() {
 
     const { activeTab } = this.state
-    console.log(activeTab)
+    
     const { classes } = this.props
     const { media, albums, loading, err } = this.props.list
     // console.log(media)
