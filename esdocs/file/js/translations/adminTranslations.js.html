@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">js/translations/adminTranslations.js | album-app</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="React Album app"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="album-app"><meta property="twitter:description" content="React Album app"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-actions">_actions</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-clientActions">clientActions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-utilsActions">utilsActions</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-actions-admin">_actions/Admin</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-adminUiActions">adminUiActions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-albumsActions">albumsActions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-facesActions">facesActions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-footerActions">footerActions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-headerActions">headerActions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-trashActions">trashActions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-userActions">userActions</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-actions-front">_actions/Front</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-frontActions">frontActions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-frontUiActions">frontUiActions</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-actions-login">_actions/Login</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-loginActions">loginActions</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components">_components</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/_components/404.jsx~Error404.html">Error404</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-PrivateRoute">PrivateRoute</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-admin-albums-albuminfo-bar-dates">_components/Admin/Albums/AlbumInfo/Bar/Dates</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/_components/Admin/Albums/AlbumInfo/Bar/Dates/TimeAgo.jsx~TimeAgo.html">TimeAgo</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-admin-albums-albuminfo-bar-locations-gmap">_components/Admin/Albums/AlbumInfo/Bar/Locations/Gmap</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-AlbumMarker">AlbumMarker</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-admin-albums-albuminfo-media-mediaitem">_components/Admin/Albums/AlbumInfo/Media/MediaItem</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/_components/Admin/Albums/AlbumInfo/Media/MediaItem/ProgressBar.jsx~ProgressBar.html">ProgressBar</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/_components/Admin/Albums/AlbumInfo/Media/MediaItem/Status.jsx~Status.html">Status</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/_components/Admin/Albums/AlbumInfo/Media/MediaItem/Thumbnail.jsx~Thumbnail.html">Thumbnail</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Filename">Filename</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Filesize">Filesize</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-admin-albums-albuminfo-media-partials">_components/Admin/Albums/AlbumInfo/Media/Partials</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/_components/Admin/Albums/AlbumInfo/Media/Partials/dropzone.jsx~Dropzone.html">Dropzone</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-admin-faces-people">_components/Admin/Faces/People</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/_components/Admin/Faces/People/People.jsx~People.html">People</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-admin-forms-fields">_components/Admin/Forms/Fields</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-textField">textField</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-admin-partials-header-title">_components/Admin/Partials/Header/Title</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Title">Title</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-admin-trash-albumsitem">_components/Admin/Trash/AlbumsItem</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/_components/Admin/Trash/AlbumsItem/index.jsx~AlbumsItem.html">AlbumsItem</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-admin-users">_components/Admin/Users</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Users">Users</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-admin-users-usercreate">_components/Admin/Users/UserCreate</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-submit">submit</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-common-form-fields">_components/Common/Form/Fields</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-renderText">renderText</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-front-album">_components/Front/Album</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/_components/Front/Album/Media.jsx~Media.html">Media</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-front-partials">_components/Front/Partials</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Spinner">Spinner</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-login">_components/Login</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-submit">submit</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-constants">_constants</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-adminConstants">adminConstants</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-albumsConstants">albumsConstants</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-clientConstants">clientConstants</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-contentConstants">contentConstants</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-facesConstants">facesConstants</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-footerConstants">footerConstants</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-frontConstants">frontConstants</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-headerConstants">headerConstants</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-mediaConstants">mediaConstants</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-trashConstants">trashConstants</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-userConstants">userConstants</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-utilsConstants">utilsConstants</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-helpers">_helpers</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-authHeader">authHeader</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-drawCanvasImage">drawCanvasImage</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-fitMediaToWrapper">fitMediaToWrapper</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-mediaUploader">mediaUploader</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-baseServerUrl">baseServerUrl</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-googleKey">googleKey</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-history">history</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-store">store</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-reducers">_reducers</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-auth">auth</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-client">client</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-settings">settings</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-rootReducer">rootReducer</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-reducers-admin">_reducers/Admin</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-adminAlbums">adminAlbums</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-faces">faces</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-footer">footer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-header">header</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-trash">trash</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-adminUi">adminUi</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-users">users</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-reducers-front">_reducers/Front</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-frontAlbums">frontAlbums</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-frontUi">frontUi</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-services">_services</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-locationService">locationService</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-utilsService">utilsService</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-services-admin">_services/Admin</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-albumsService">albumsService</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-facesService">facesService</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-mediaService">mediaService</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-trashService">trashService</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-userService">userService</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-services-front">_services/Front</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-frontService">frontService</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-services-login">_services/Login</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-loginService">loginService</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#translations">translations</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-adminTranslations">adminTranslations</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-frontTranslations">frontTranslations</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-loginTranslations">loginTranslations</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">js/translations/adminTranslations.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">
+export const adminTranslations = {
+  &apos;lt&apos;: {
+    &apos;Edit album name&apos;: &apos;Redaguoti albumo pavadinim&#x105;&apos;,
+    &apos;Edit album date&apos;: &apos;Keisti albumo dat&#x105;&apos;,
+    &apos;Save&apos;: &apos;I&#x161;saugoti&apos;,
+    &apos;Search...&apos;: &apos;Ie&#x161;koti...&apos;,
+    &apos;Drop files here&apos;: &apos;Meskite failus &#x10D;ia&apos;,
+    &apos;Go fullscreen mode&apos;: &apos;Per vis&#x105; ekran&#x105;&apos;,
+    &apos;Exit fullscreen mode&apos;: &apos;Suma&#x17E;inti ekran&#x105;&apos;,
+    &apos;Main menu&apos;: &apos;Pagrindinis meniu&apos;,
+    &apos;Albums&apos;: &apos;Albumai&apos;,
+    &apos;Faces&apos;: &apos;Veidai&apos;,
+    &apos;Users&apos;: &apos;Vartotojai&apos;,
+    &apos;Front&apos;: &apos;Pradinis&apos;,
+    &apos;Logout&apos;: &apos;Atsijungti&apos;,
+
+    // Media metadata
+    &apos;width&apos;: &apos;plotis&apos;,
+    &apos;height&apos;: &apos;auk&#x161;tis&apos;,
+    &apos;aspect&apos;: &apos;vaizdo santykis&apos;,
+    &apos;datetime&apos;: &apos;data&apos;,
+    &apos;codec&apos;: &apos;kodekas&apos;,
+    &apos;frame_rate&apos;: &apos;kadrai&apos;,
+    &apos;duration&apos;: &apos;trukm&#x117;&apos;,
+    &apos;make&apos;: &apos;mark&#x117;&apos;,
+    &apos;model&apos;: &apos;modelis&apos;,
+    &apos;flash&apos;: &apos;blykst&#x117;&apos;,
+    &apos;orientation&apos;: &apos;orientacija&apos;,
+
+    // Recognition labels
+    &apos;Face&apos;: &apos;Veidas&apos;,
+    &apos;Head&apos;: &apos;Galva&apos;,
+    &apos;Person&apos;: &apos;Asmuo&apos;,
+    &apos;Human&apos;: &apos;&#x17D;mogus&apos;,
+    &apos;Smile&apos;: &apos;&#x160;ypsena&apos;,
+    &apos;Female&apos;: &apos;Patel&#x117;&apos;,
+    &apos;Woman&apos;: &apos;Moteris&apos;,
+    &apos;Girl&apos;: &apos;Mergait&#x117;&apos;,
+    &apos;Blonde&apos;: &apos;Blondin&#x117;&apos;,
+    &apos;People&apos;: &apos;&#x17D;mon&#x117;s&apos;,
+    &apos;Portrait&apos;: &apos;Portretas&apos;,
+    &apos;Clothing&apos;: &apos;Apranga&apos;,
+    &apos;Apparel&apos;: &apos;Drabu&#x17E;iai&apos;,
+    &apos;Costume&apos;: &apos;Kostiumas&apos;,
+    &apos;Panties&apos;: &apos;Kelnait&#x117;s&apos;,
+    &apos;Underwear&apos;: &apos;Apatiniai drabu&#x17E;iai&apos;,
+    &apos;Lingerie&apos;: &apos;Apatinis trikota&#x17E;as&apos;,
+    &apos;Jewelry&apos;: &apos;Papuo&#x161;alai&apos;,
+    &apos;Ring&apos;: &apos;&#x17D;iedas&apos;,
+    &apos;Flora&apos;: &apos;Augalija&apos;,
+    &apos;Flower&apos;: &apos;G&#x117;l&#x117;&apos;,
+    &apos;Wedding&apos;: &apos;Vestuv&#x117;s&apos;,
+    &apos;Furniture&apos;: &apos;Baldai&apos;,
+    &apos;Chair&apos;: &apos;Ked&#x117;&apos;,
+    &apos;Laptop&apos;: &apos;Laptopas&apos;,
+    &apos;Computer&apos;: &apos;Kompiuteris&apos;,
+    &apos;Electronics&apos;: &apos;Elektronika&apos;,
+    &apos;Ornament&apos;: &apos;Ornamentas&apos;,
+    &apos;Reading&apos;: &apos;Skaitymas&apos;,
+    &apos;Lighting&apos;: &apos;Ap&#x161;vietimas&apos;,
+    &apos;Housing&apos;: &apos;B&#x16B;stas&apos;,
+    &apos;Building&apos;: &apos;Pastatas&apos;,
+    &apos;Apartment&apos;: &apos;Butas&apos;,
+    &apos;Bedroom&apos;: &apos;Miegamasis&apos;,
+    &apos;Indoors&apos;: &apos;Patalpoje&apos;,
+    &apos;Room&apos;: &apos;Kambarys&apos;,
+    &apos;Brick&apos;: &apos;Plyta&apos;,
+    &apos;Interior Design&apos;: &apos;Interjero dizainas&apos;,
+    &apos;Theater&apos;: &apos;Teatras&apos;,
+    &apos;Ankle&apos;: &apos;Kulk&#x161;nis&apos;,
+    &apos;Newborn&apos;: &apos;Naujagimis&apos;,
+    &apos;Child&apos;: &apos;Vaikas&apos;,
+    &apos;Baby&apos;: &apos;K&#x16B;dikis&apos;,
+    &apos;Kid&apos;: &apos;Vaikutis&apos;,
+    &apos;Cushion&apos;: &apos;Pagalv&#x117;l&#x117;&apos;,
+    &apos;Couch&apos;: &apos;Ku&#x161;et&#x117;&apos;,
+    &apos;Home Decor&apos;: &apos;Nam&#x173; dekoras&apos;,
+    &apos;Transportation&apos;: &apos;Transportas&apos;,
+    &apos;Vehicle&apos;: &apos;Transporto priemon&#x117;&apos;,
+    &apos;Bicycle&apos;: &apos;Dviratis&apos;,
+    &apos;Bike&apos;: &apos;Dviratis&apos;,
+    &apos;Luggage&apos;: &apos;Baga&#x17E;as&apos;,
+    &apos;Suitcase&apos;: &apos;Lagaminas&apos;,
+    &apos;Vase&apos;: &apos;Vaza&apos;,
+    &apos;Jar&apos;: &apos;Stiklainis&apos;,
+    &apos;Shirt&apos;: &apos;Mar&#x161;kiniai&apos;,
+    &apos;Plant&apos;: &apos;Augalas&apos;,
+    &apos;Pottery&apos;: &apos;Keramika&apos;,
+    &apos;Potted Plant&apos;: &apos;Pasodintas augalas&apos;,
+    &apos;Blanket&apos;: &apos;Antklod&#x117;&apos;,
+    &apos;Lip&apos;: &apos;L&#x16B;pa&apos;,
+    &apos;Mouth&apos;: &apos;Burna&apos;,
+    &apos;Tongue&apos;: &apos;Lie&#x17E;uvis&apos;,
+    &apos;Blossom&apos;: &apos;&#x17D;iedas&apos;,
+    &apos;Gladiolus&apos;: &apos;Kardelis&apos;,
+    &apos;Geranium&apos;: &apos;Pelargonija&apos;,
+    &apos;Ivy&apos;: &apos;Geben&#x117;&apos;,
+    &apos;Bush&apos;: &apos;Kr&#x16B;mas&apos;,
+    &apos;Vegetation&apos;: &apos;Augmenija&apos;,
+    &apos;Forest&apos;: &apos;Mi&#x161;kas&apos;,
+    &apos;Land&apos;: &apos;&#x17D;em&#x117;&apos;,
+    &apos;Pub&apos;: &apos;Alud&#x117;&apos;,
+    &apos;Pine&apos;: &apos;Pu&#x161;is&apos;,
+    &apos;Beard&apos;: &apos;Barzda&apos;,
+    &apos;Conifer&apos;: &apos;Spygliuotis&apos;,
+    &apos;Tree&apos;: &apos;Medis&apos;,
+    &apos;Yew&apos;: &apos;Kukmedis&apos;,
+    &apos;Vine&apos;: &apos;Vynmedis&apos;,
+    &apos;Oak&apos;: &apos;&#x104;&#x17E;uolas&apos;,
+    &apos;Sycamore&apos;: &apos;Jovaras&apos;,
+    &apos;Maple&apos;: &apos;Klevas&apos;,
+    &apos;Dirt Road&apos;: &apos;Gruntkelis&apos;,
+    &apos;Gravel&apos;: &apos;&#x17D;vyras&apos;,
+    &apos;Road&apos;: &apos;Kelias&apos;,
+    &apos;Moss&apos;: &apos;Samanos&apos;,
+    &apos;Grass&apos;: &apos;&#x17D;ol&#x117;&apos;,
+    &apos;Soil&apos;: &apos;Dirvo&#x17E;emis&apos;,
+    &apos;Leisure Activities&apos;: &apos;Laisvalaikio u&#x17E;si&#x117;mimai&apos;,
+    &apos;Fence&apos;: &apos;Tvora&apos;,
+    &apos;Hedge&apos;: &apos;Gyvatvor&#x117;&apos;,
+    &apos;Backyard&apos;: &apos;Galinis kiemas&apos;,
+    &apos;Yard&apos;: &apos;Kiemas&apos;,
+    &apos;Trail&apos;: &apos;Kelelis&apos;,
+    &apos;Path&apos;: &apos;Takas&apos;,
+    &apos;Nature&apos;: &apos;Gamta&apos;,
+    &apos;Outdoors&apos;: &apos;Lauke&apos;,
+    &apos;Grove&apos;: &apos;Girait&#x117;&apos;,
+    &apos;Birch&apos;: &apos;Ber&#x17E;as&apos;,
+    &apos;Fir&apos;: &apos;Egl&#x117;&apos;,
+    &apos;Spruce&apos;: &apos;Melsvoji egl&#x117;&apos;,
+    &apos;Herbs&apos;: &apos;&#x17D;olel&#x117;s&apos;,
+    &apos;Planter&apos;: &apos;Plantatorius&apos;,
+    &apos;Rainforest&apos;: &apos;Atogr&#x105;&#x17E;&#x173; mi&#x161;kai&apos;,
+    &apos;Jungle&apos;: &apos;D&#x17E;iungl&#x117;s&apos;,
+    &apos;Bulldozer&apos;: &apos;Buldozeris&apos;,
+    &apos;Algae&apos;: &apos;Dumbliai&apos;,
+    &apos;Food&apos;: &apos;Maistas&apos;,
+    &apos;Grapes&apos;: &apos;Vynuog&#x117;s&apos;,
+    &apos;Fruit&apos;: &apos;Vaisiai&apos;,
+    &apos;Rock&apos;: &apos;Uola&apos;,
+    &apos;Rubble&apos;: &apos;Skalda&apos;,
+    &apos;Pot&apos;: &apos;Puodas&apos;,
+    &apos;Van&apos;: &apos;Furgonas&apos;,
+    &apos;Tractor&apos;: &apos;Traktorius&apos;,
+    &apos;Clinic&apos;: &apos;Klinika&apos;,
+    &apos;Hospital&apos;: &apos;Ligonin&#x117;&apos;,
+    &apos;Ambulance&apos;: &apos;Greitosios pagalbos automobilis&apos;,
+    &apos;Denim&apos;: &apos;D&#x17E;insinis audinys&apos;,
+    &apos;Jeans&apos;: &apos;D&#x17E;insai&apos;,
+    &apos;Pants&apos;: &apos;Keln&#x117;s&apos;,
+    &apos;Sidewalk&apos;: &apos;&#x160;aligatvis&apos;,
+    &apos;Sedan&apos;: &apos;Sedanas&apos;,
+    &apos;Tire&apos;: &apos;Padanga&apos;,
+    &apos;Asleep&apos;: &apos;Miega&apos;,
+    &apos;Animal&apos;: &apos;Gyv&#x16B;nas&apos;,
+    &apos;Bird&apos;: &apos;Pauk&#x161;tis&apos;,
+    &apos;Water&apos;: &apos;Vanduo&apos;,
+    &apos;Cabinet&apos;: &apos;Spintel&#x117;&apos;,
+    &apos;China Cabinet&apos;: &apos;Kinieti&#x161;ka spintel&#x117;&apos;,
+    &apos;Pantry&apos;: &apos;Sand&#x117;liukas&apos;,
+    &apos;Shelf&apos;: &apos;Lentyna&apos;,
+    &apos;Dining Room&apos;: &apos;Valgomasis&apos;,
+    &apos;Confectionery&apos;: &apos;Konditerija&apos;,
+    &apos;Sweets&apos;: &apos;Saldumynai&apos;,
+    &apos;Cafe&apos;: &apos;Kavin&#x117;&apos;,
+    &apos;Restaurant&apos;: &apos;Restoranas&apos;,
+    &apos;Reception&apos;: &apos;Pri&#x117;mimas&apos;,
+    &apos;Reception Room&apos;: &apos;Priimamasis&apos;,
+    &apos;Waiting Room&apos;: &apos;Laukiamasis&apos;,
+    &apos;Dinner&apos;: &apos;Piet&#x16B;s&apos;,
+    &apos;Supper&apos;: &apos;Vakarien&#x117;&apos;,
+    &apos;Meal&apos;: &apos;Valgis&apos;,
+    &apos;Appliance&apos;: &apos;Prietaisas&apos;,
+    &apos;Electrical Device&apos;: &apos;Elektrinis prietaisas&apos;,
+    &apos;Fridge&apos;: &apos;&#x160;aldytuvas&apos;,
+    &apos;Refrigerator&apos;: &apos;Refri&#x17E;eratorius&apos;,
+    &apos;Accessories&apos;: &apos;Aksesuarai&apos;,
+    &apos;Drawer&apos;: &apos;Stal&#x10D;ius&apos;,
+    &apos;Sweater&apos;: &apos;Megztinis&apos;,
+    &apos;Cardigan&apos;: &apos;D&#x17E;emperis&apos;,
+    &apos;Box&apos;: &apos;D&#x117;&#x17E;&#x117;&apos;,
+    &apos;Bed&apos;: &apos;Lova&apos;,
+    &apos;Bowl&apos;: &apos;Dubuo&apos;,
+    &apos;Glass&apos;: &apos;Stiklin&#x117;&apos;,
+    &apos;Plate&apos;: &apos;L&#x117;k&#x161;t&#x117;&apos;,
+    &apos;Dish&apos;: &apos;Patiekalas&apos;,
+    &apos;Table&apos;: &apos;Stalas&apos;,
+    &apos;Dessert&apos;: &apos;Desertas&apos;,
+    &apos;Dining Table&apos;: &apos;Piet&#x173; stalas&apos;,
+    &apos;Meat Loaf&apos;: &apos;M&#x117;sos kepsnys&apos;,
+    &apos;Hat&apos;: &apos;Skryb&#x117;l&#x117;&apos;,
+    &apos;Basket&apos;: &apos;Krep&#x161;ys&apos;,
+    &apos;Oven&apos;: &apos;Orkait&#x117;&apos;,
+    &apos;Cooker&apos;: &apos;Virykl&#x117;&apos;,
+    &apos;Drink&apos;: &apos;G&#x117;rimas&apos;,
+    &apos;Coke&apos;: &apos;Kokakola&apos;,
+    &apos;Beverage&apos;: &apos;G&#x117;ralas&apos;,
+    &apos;Apron&apos;: &apos;Prijuost&#x117;&apos;,
+    &apos;Headrest&apos;: &apos;Galvos atrama&apos;,
+    &apos;Breakfast&apos;: &apos;Pusry&#x10D;iai&apos;,
+    &apos;Hair&apos;: &apos;Plaukai&apos;,
+    &apos;Haircut&apos;: &apos;&#x160;ukuosena&apos;,
+    &apos;Senior Citizen&apos;: &apos;Pagyvenes pilietis&apos;,
+    &apos;Party&apos;: &apos;Vakar&#x117;lis&apos;,
+    &apos;Bottle&apos;: &apos;Butelis&apos;,
+    &apos;Kitchen&apos;: &apos;Virtuv&#x117;&apos;,
+    &apos;Tabletop&apos;: &apos;Stalvir&#x161;is&apos;,
+    &apos;Eating&apos;: &apos;Valgymas&apos;,
+    &apos;Fondue&apos;: &apos;Kar&#x161;tas pada&#x17E;as su s&#x16B;riu&apos;,
+    &apos;Coat&apos;: &apos;Paltas&apos;,
+    &apos;Overcoat&apos;: &apos;Apsiaustas&apos;,
+    &apos;Beer&apos;: &apos;Alus&apos;,
+    &apos;Beer Bottle&apos;: &apos;Alaus butelis&apos;,
+    &apos;Alcohol&apos;: &apos;Alkoholis&apos;,
+    &apos;Bread&apos;: &apos;Duona&apos;,
+    &apos;Wood&apos;: &apos;Mediena&apos;,
+    &apos;Hardwood&apos;: &apos;Kietmedis&apos;,
+    &apos;Coffee Table&apos;: &apos;Kavos stalelis&apos;,
+    &apos;Cornbread&apos;: &apos;Kukur&#x16B;zin&#x117; duona&apos;,
+    &apos;Hostel&apos;: &apos;Hostelis&apos;,
+    &apos;Man&apos;: &apos;Vyras&apos;,
+    &apos;Handrail&apos;: &apos;Tur&#x117;klai&apos;,
+    &apos;Banister&apos;: &apos;Tur&#x117;klas&apos;,
+    &apos;Dog&apos;: &apos;&#x160;uo&apos;,
+    &apos;Pet&apos;: &apos;Naminis gyv&#x16B;n&#x117;lis&apos;,
+    &apos;Poodle&apos;: &apos;Pudelis&apos;,
+    &apos;Shoe&apos;: &apos;Batas&apos;,
+    &apos;Footwear&apos;: &apos;Avalyn&#x117;&apos;,
+    &apos;Art&apos;: &apos;Menas&apos;,
+    &apos;Boot&apos;: &apos;Butcas&apos;,
+    &apos;Platter&apos;: &apos;Pailga lek&#x161;t&#x117;&apos;,
+    &apos;Cocktail&apos;: &apos;Kokteilis&apos;,
+    &apos;Night Life&apos;: &apos;Naktinis gyvenimas&apos;,
+    &apos;Make Out&apos;: &apos;Ai&#x161;kinimasis&apos;,
+    &apos;Swimwear&apos;: &apos;Maudymosi kostium&#x117;lis&apos;,
+    &apos;Finger&apos;: &apos;Pir&#x161;tas&apos;,
+    &apos;Cap&apos;: &apos;Kepur&#x117;&apos;,
+    &apos;Baseball Cap&apos;: &apos;Beisbolo kepur&#x117;&apos;,
+    &apos;Glasses&apos;: &apos;Akiniai&apos;,
+    &apos;Park&apos;: &apos;Parkas&apos;,
+    &apos;Afro Hairstyle&apos;: &apos;Afro &#x161;ukuosena&apos;,
+    &apos;Astronomy&apos;: &apos;Astronomija&apos;,
+    &apos;Moon&apos;: &apos;M&#x117;nulis&apos;,
+    &apos;Night&apos;: &apos;Naktis&apos;,
+    &apos;Eclipse&apos;: &apos;U&#x17E;temimas&apos;,
+    &apos;Lunar Eclipse&apos;: &apos;M&#x117;nulio u&#x17E;temimas&apos;,
+    &apos;Space&apos;: &apos;Kosmosas&apos;,
+    &apos;Outer Space&apos;: &apos;Kosmin&#x117; erdv&#x117;&apos;,
+    &apos;Universe&apos;: &apos;Visata&apos;,
+    &apos;Machine&apos;: &apos;Ma&#x161;ina&apos;,
+    &apos;Engine&apos;: &apos;Variklis&apos;,
+    &apos;Wheel&apos;: &apos;Ratas&apos;,
+    &apos;Motor&apos;: &apos;Motoras&apos;,
+    &apos;Automobile&apos;: &apos;Automobilis&apos;,
+    &apos;Car Wheel&apos;: &apos;Automobilio ratas&apos;,
+    &apos;Sports Car&apos;: &apos;Sportinis automobilis&apos;,
+    &apos;Coupe&apos;: &apos;Kup&#x117;&apos;,
+    &apos;Spoke&apos;: &apos;Stipinas&apos;,
+    &apos;Toilet&apos;: &apos;Tualetas&apos;,
+    &apos;Slow Cooker&apos;: &apos;L&#x117;ta virykl&#x117;&apos;,
+    &apos;Flooring&apos;: &apos;Gring&#x173; danga&apos;,
+    &apos;Floor&apos;: &apos;Grindys&apos;,
+    &apos;Plywood&apos;: &apos;Fanera&apos;,
+    &apos;Flagstone&apos;: &apos;Akmens plok&#x161;t&#x117;&apos;,
+    &apos;Sink&apos;: &apos;Kriaukl&#x117;&apos;,
+    &apos;Basement&apos;: &apos;R&#x16B;sys&apos;,
+    &apos;Lumber&apos;: &apos;Statybin&#x117; mediena&apos;,
+    &apos;Crypt&apos;: &apos;Kripta&apos;,
+    &apos;Cottage&apos;: &apos;Koted&#x17E;as&apos;,
+    &apos;Town&apos;: &apos;Miestas&apos;,
+    &apos;Landscape&apos;: &apos;Kra&#x161;tovaizdis&apos;,
+    &apos;House&apos;: &apos;Namas&apos;,
+    &apos;City&apos;: &apos;Didmiestis&apos;,
+    &apos;Neighborhood&apos;: &apos;Kaimynyst&#x117;&apos;,
+    &apos;Church&apos;: &apos;Ba&#x17E;ny&#x10D;ia&apos;,
+    &apos;Campus&apos;: &apos;Kampusas&apos;,
+    &apos;Countryside&apos;: &apos;Kaimaviet&#x117;&apos;,
+    &apos;Scenery&apos;: &apos;Paiza&#x17E;as&apos;,
+    &apos;Tower&apos;: &apos;Bok&#x161;tas&apos;,
+    &apos;Spire&apos;: &apos;&#x160;pilis&apos;,
+    &apos;Worship&apos;: &apos;Pamaldos&apos;,
+    &apos;Freeway&apos;: &apos;Greitkelis&apos;,
+    &apos;Urban&apos;: &apos;Miesti&#x161;kas&apos;,
+    &apos;Steeple&apos;: &apos;Smailas bok&#x161;tas&apos;,
+    &apos;Mammal&apos;: &apos;&#x17D;induolis&apos;,
+    &apos;Spaniel&apos;: &apos;Spanielis&apos;,
+    &apos;Collie&apos;: &apos;Kolis&apos;,
+    &apos;Hound&apos;: &apos;Skalikas&apos;,
+    &apos;Beagle&apos;: &apos;Skalikas&apos;,
+    &apos;Cocker Spaniel&apos;: &apos;Kokerspanielis&apos;,
+    &apos;Papillon&apos;: &apos;Papiljonas&apos;,
+    &apos;Canine&apos;: &apos;&#x160;un&#x173; &#x161;eimos atstovas&apos;,
+    &apos;Gutter&apos;: &apos;Latakas&apos;,
+    &apos;Bust&apos;: &apos;Biustas&apos;,
+    &apos;Architecture&apos;: &apos;Architekt&#x16B;ra&apos;,
+    &apos;Arch&apos;: &apos;Arka&apos;,
+    &apos;Arched&apos;: &apos;I&#x161;lenktas&apos;,
+    &apos;Paper&apos;: &apos;Popierius&apos;,
+    &apos;Applique&apos;: &apos;Aplikacija&apos;,
+    &apos;Ketchup&apos;: &apos;Ke&#x10D;iupas&apos;,
+    &apos;Seasoning&apos;: &apos;Prieskoniai&apos;,
+    &apos;Cup&apos;: &apos;Puodelis&apos;,
+    &apos;Hand&apos;: &apos;Ranka&apos;,
+    &apos;Bucket&apos;: &apos;Kibiras&apos;,
+    &apos;Hearth&apos;: &apos;&#x17D;aizdras&apos;,
+    &apos;Heater&apos;: &apos;&#x160;ildytuvas&apos;,
+    &apos;Space Heater&apos;: &apos;Erdvinis &#x161;ildytuvas&apos;,
+    &apos;Fireplace&apos;: &apos;&#x17D;idinys&apos;,
+    &apos;Alphabet&apos;: &apos;Alfabetas&apos;,
+    &apos;Text&apos;: &apos;Tekstas&apos;,
+    &apos;Stove&apos;: &apos;Oro &#x161;ildytuvas&apos;,
+    &apos;Ampersand&apos;: &apos;Ampersandas&apos;,
+    &apos;Dog House&apos;: &apos;&#x160;uns b&#x16B;da&apos;,
+    &apos;Kennel&apos;: &apos;&#x160;un&#x173; veislynas&apos;,
+    &apos;Den&apos;: &apos;Lindyn&#x117;&apos;,
+
+  }
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

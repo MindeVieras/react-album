@@ -3,13 +3,31 @@ import { toastr } from 'react-redux-toastr'
 
 import { userConstants } from 'Constants'
 import { userService } from 'Services'
-import { history } from 'Helpers'
 
 export const userActions = {
-  create,
   getList,
+  create,
   getOne,
   delete: _delete
+}
+
+function getList() {
+  return dispatch => {
+    dispatch(request())
+
+    userService.getList()
+      .then(res => {
+        
+        if (res.status == 'success')
+          dispatch(success(res.data.users))
+        else
+          dispatch(failure(res.msg))
+      })
+  }
+
+  function request() { return { type: userConstants.GETLIST_REQUEST } }
+  function success(users) { return { type: userConstants.GETLIST_SUCCESS, users } }
+  function failure(err) { return { type: userConstants.GETLIST_FAILURE, err } }
 }
 
 function create(user) {
@@ -20,23 +38,6 @@ function create(user) {
   function success(user) { return { type: userConstants.CREATE_SUCCESS, user } }
 }
 
-function getList() {
-  return dispatch => {
-    dispatch(request())
-
-    userService.getList()
-      .then(res => {
-        if (res.ack == 'ok')
-          dispatch(success(res.list))
-        else
-          dispatch(failure(res.msg))
-      })
-  }
-
-  function request() { return { type: userConstants.GETLIST_REQUEST } }
-  function success(users) { return { type: userConstants.GETLIST_SUCCESS, users } }
-  function failure(err) { return { type: userConstants.GETLIST_FAILURE, err } }
-}
 
 function getOne(username) {
   return dispatch => {

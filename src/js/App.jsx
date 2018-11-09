@@ -17,6 +17,9 @@ import Error404 from './_components/404'
 import { history } from 'Helpers'
 import { clientActions, utilsActions } from 'Actions'
 
+/**
+ * this is App.
+ */
 class App extends Component {
 
   constructor(props) {

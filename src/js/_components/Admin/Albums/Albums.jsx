@@ -20,6 +20,11 @@ const styles = {
   }
 }
 
+/**
+ * This is Albums.
+ * @reactProps {!number} prop1 - this is prop1
+ * @reactProps {string} prop2 - this is prop2
+ */
 class Albums extends Component {
 
   constructor(props) {

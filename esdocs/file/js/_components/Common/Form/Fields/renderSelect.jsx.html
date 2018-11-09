@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../../../">
+  <title data-ice="title">js/_components/Common/Form/Fields/renderSelect.jsx | album-app</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="React Album app"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="album-app"><meta property="twitter:description" content="React Album app"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-actions">_actions</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-clientActions">clientActions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-utilsActions">utilsActions</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-actions-admin">_actions/Admin</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-adminUiActions">adminUiActions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-albumsActions">albumsActions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-facesActions">facesActions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-footerActions">footerActions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-headerActions">headerActions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-trashActions">trashActions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-userActions">userActions</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-actions-front">_actions/Front</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-frontActions">frontActions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-frontUiActions">frontUiActions</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-actions-login">_actions/Login</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-loginActions">loginActions</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components">_components</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/_components/404.jsx~Error404.html">Error404</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-PrivateRoute">PrivateRoute</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-admin-albums-albuminfo-bar-dates">_components/Admin/Albums/AlbumInfo/Bar/Dates</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/_components/Admin/Albums/AlbumInfo/Bar/Dates/TimeAgo.jsx~TimeAgo.html">TimeAgo</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-admin-albums-albuminfo-bar-locations-gmap">_components/Admin/Albums/AlbumInfo/Bar/Locations/Gmap</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-AlbumMarker">AlbumMarker</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-admin-albums-albuminfo-media-mediaitem">_components/Admin/Albums/AlbumInfo/Media/MediaItem</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/_components/Admin/Albums/AlbumInfo/Media/MediaItem/ProgressBar.jsx~ProgressBar.html">ProgressBar</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/_components/Admin/Albums/AlbumInfo/Media/MediaItem/Status.jsx~Status.html">Status</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/_components/Admin/Albums/AlbumInfo/Media/MediaItem/Thumbnail.jsx~Thumbnail.html">Thumbnail</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Filename">Filename</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Filesize">Filesize</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-admin-albums-albuminfo-media-partials">_components/Admin/Albums/AlbumInfo/Media/Partials</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/_components/Admin/Albums/AlbumInfo/Media/Partials/dropzone.jsx~Dropzone.html">Dropzone</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-admin-faces-people">_components/Admin/Faces/People</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/_components/Admin/Faces/People/People.jsx~People.html">People</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-admin-forms-fields">_components/Admin/Forms/Fields</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-textField">textField</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-admin-partials-header-title">_components/Admin/Partials/Header/Title</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Title">Title</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-admin-trash-albumsitem">_components/Admin/Trash/AlbumsItem</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/_components/Admin/Trash/AlbumsItem/index.jsx~AlbumsItem.html">AlbumsItem</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-admin-users">_components/Admin/Users</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Users">Users</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-admin-users-usercreate">_components/Admin/Users/UserCreate</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-submit">submit</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-common-form-fields">_components/Common/Form/Fields</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-renderText">renderText</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-front-album">_components/Front/Album</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/_components/Front/Album/Media.jsx~Media.html">Media</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-front-partials">_components/Front/Partials</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Spinner">Spinner</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-login">_components/Login</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-submit">submit</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-constants">_constants</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-adminConstants">adminConstants</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-albumsConstants">albumsConstants</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-clientConstants">clientConstants</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-contentConstants">contentConstants</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-facesConstants">facesConstants</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-footerConstants">footerConstants</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-frontConstants">frontConstants</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-headerConstants">headerConstants</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-mediaConstants">mediaConstants</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-trashConstants">trashConstants</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-userConstants">userConstants</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-utilsConstants">utilsConstants</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-helpers">_helpers</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-authHeader">authHeader</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-drawCanvasImage">drawCanvasImage</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-fitMediaToWrapper">fitMediaToWrapper</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-mediaUploader">mediaUploader</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-baseServerUrl">baseServerUrl</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-googleKey">googleKey</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-history">history</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-store">store</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-reducers">_reducers</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-auth">auth</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-client">client</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-settings">settings</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-rootReducer">rootReducer</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-reducers-admin">_reducers/Admin</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-adminAlbums">adminAlbums</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-faces">faces</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-footer">footer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-header">header</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-trash">trash</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-adminUi">adminUi</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-users">users</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-reducers-front">_reducers/Front</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-frontAlbums">frontAlbums</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-frontUi">frontUi</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-services">_services</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-locationService">locationService</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-utilsService">utilsService</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-services-admin">_services/Admin</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-albumsService">albumsService</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-facesService">facesService</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-mediaService">mediaService</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-trashService">trashService</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-userService">userService</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-services-front">_services/Front</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-frontService">frontService</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-services-login">_services/Login</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-loginService">loginService</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#translations">translations</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-adminTranslations">adminTranslations</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-frontTranslations">frontTranslations</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-loginTranslations">loginTranslations</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">js/_components/Common/Form/Fields/renderSelect.jsx</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">
+import React from &apos;react&apos;
+import PropTypes from &apos;prop-types&apos;
+import classNames from &apos;classnames&apos;
+
+import Select from &apos;react-select&apos;
+
+import { withStyles } from &apos;@material-ui/core/styles&apos;
+import Typography from &apos;@material-ui/core/Typography&apos;
+
+const styles = theme =&gt; ({
+  root: {
+    display: `inline-flex`,
+    flexDirection: `column`,
+    border: 0,
+    padding: 0,
+    position: `relative`,
+    minWidth: 0
+  },
+  rootNormal: {
+    marginTop: theme.spacing.unit * 2,
+    marginBottom: theme.spacing.unit
+  },
+  rootDense: {
+    marginTop: theme.spacing.unit,
+    marginBottom: theme.spacing.unit / 2
+  },
+  fullWidth: {
+    width: `100%`
+  },
+  labelRoot: {
+    position: `absolute`,
+    top: 0,
+    left: 0,
+    color: theme.palette.text.secondary,
+    padding: 0,
+    fontSize: `1rem`,
+    fontFamily: theme.typography.fontFamily,
+    lineHeight: 1,
+    transform: `translate(0, 1.5px) scale(0.75)`,
+    transformOrigin: `top left`
+  },
+  labelActive: {
+    color: theme.palette.primary.light
+  },
+  labelError: {
+    color: theme.palette.error.main
+  },
+  selectRoot: {
+    color: `#fff`,
+    display: `inline-flex`,
+    position: `relative`,
+    fontSize: `1rem`,
+    fontFamily: `&quot;Roboto&quot;, &quot;Helvetica&quot;, &quot;Arial&quot;, sans-serif`,
+    lineHeight: `1.1875em`
+  },
+  selectWithLabel: {
+    marginTop: theme.spacing.unit * 2
+  },
+  helperRoot: {
+    margin: 0,
+    marginTop: theme.spacing.unit,
+    minHeight: `1em`,
+    lineHeight: `1em`
+  },
+  helperDense: {
+    marginTop: theme.spacing.unit / 2
+  }
+})
+
+const renderSelect = (props) =&gt; {
+
+  const {
+    classes, margin, fullWidth, label,
+    input , options, multi, className,
+    meta
+  } = props
+
+  const { name, value, onBlur, onChange, onFocus } = input
+  const transformedValue = transformValue(value, options, multi)
+  const { active, valid, error } = meta
+
+  let rootClass = classes.root
+  if (margin === &apos;dense&apos;)
+    rootClass = classes.rootDense
+  if (margin === &apos;normal&apos;)
+    rootClass === rootNormal
+
+  return (
+    &lt;div
+      className={classNames(
+        className,
+        classes.root,
+        rootClass,
+        { [classes.fullWidth]: fullWidth }
+      )}
+    &gt;
+      {label &amp;&amp;
+        &lt;label
+          className={classNames(
+            classes.labelRoot,
+            { [classes.labelError]: !valid },
+            { [classes.labelActive]: active }
+          )}
+        &gt;
+          { label }
+        &lt;/label&gt;
+      }
+
+      &lt;Select
+        valueKey=&quot;value&quot;
+        name={ name }
+        value={ transformedValue }
+        multi={ multi }
+        options={ options }
+        onChange={multi
+          ? multiChangeHandler(onChange)
+          : singleChangeHandler(onChange)
+        }
+        onBlur={ () =&gt; onBlur(value) }
+        onFocus={ onFocus }
+        className={classNames(
+          classes.selectRoot,
+          { [classes.fullWidth]: fullWidth },
+          { [classes.selectWithLabel]: label }
+        )}
+      /&gt;
+
+      {!valid &amp;&amp;
+        &lt;Typography
+          variant=&quot;caption&quot;
+          align=&quot;left&quot;
+          component=&quot;p&quot;
+          className={classNames(
+            classes.helperRoot,
+            { [classes.labelError]: !valid },
+            { [classes.helperDense]: margin === &apos;dense&apos; }
+          )}
+        &gt;
+          { error }
+        &lt;/Typography&gt;
+      }
+
+    &lt;/div&gt;
+  )
+}
+
+/**
+ * onChange from Redux Form Field has to be called explicity.
+ */
+function singleChangeHandler(func) {
+  return function handleSingleChange(value) {
+    func(value ? value.value : &apos;&apos;)
+  }
+}
+
+/**
+ * onBlur from Redux Form Field has to be called explicity.
+ */
+function multiChangeHandler(func) {
+  return function handleMultiHandler(values) {
+    func(values.map(value =&gt; value.value))
+  }
+}
+
+/**
+ * For single select, Redux Form keeps the value as a string, while React Select
+ * wants the value in the form { value: &quot;grape&quot;, label: &quot;Grape&quot; }
+ *
+ * * For multi select, Redux Form keeps the value as array of strings, while React Select
+ * wants the array of values in the form [{ value: &quot;grape&quot;, label: &quot;Grape&quot; }]
+ */
+function transformValue(value, options, multi) {
+  if (multi &amp;&amp; typeof value === &apos;string&apos;) return []
+
+  const filteredOptions = options.filter(option =&gt; {
+    return multi
+      ? value.indexOf(option.value) !== -1
+      : option.value === value
+  })
+
+  return multi ? filteredOptions : filteredOptions[0]
+}
+
+renderSelect.propTypes = {
+  classes: PropTypes.object.isRequired,
+  input: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+    onBlur: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
+    onFocus: PropTypes.func.isRequired,
+  }).isRequired,
+  meta: PropTypes.shape({
+    valid: PropTypes.bool.isRequired,
+    error: PropTypes.string
+  }),
+  options: PropTypes.array.isRequired,
+  label: PropTypes.string,
+  multi: PropTypes.bool,
+  className: PropTypes.string,
+  margin: PropTypes.string,
+  fullWidth: PropTypes.bool
+}
+
+renderSelect.defaultProps = {
+  meta: PropTypes.shape({
+    error: null
+  }),
+  label: null,
+  multi: false,
+  className: &apos;&apos;,
+  margin: &apos;normal&apos;,
+  fullWidth: true
+}
+
+export default withStyles(styles)(renderSelect)
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

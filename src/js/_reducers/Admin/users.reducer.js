@@ -17,6 +17,28 @@ const initialState = {
 export function users(state = initialState, action) {
   switch (action.type) {
 
+  case userConstants.GETLIST_REQUEST:
+    return {
+      ...state,
+      list: {
+        loading: true
+      }
+    }
+  case userConstants.GETLIST_SUCCESS:
+    return {
+      ...state,
+      list: {
+        items: action.users
+      }
+    }
+  case userConstants.GETLIST_FAILURE:
+    return {
+      ...state,
+      list: {
+        err: action.err
+      }
+    }
+
   case userConstants.GETONE_REQUEST:
     return {
       ...state,
@@ -47,27 +69,6 @@ export function users(state = initialState, action) {
       }
     }
 
-  case userConstants.GETLIST_REQUEST:
-    return {
-      ...state,
-      list: {
-        loading: true
-      }
-    }
-  case userConstants.GETLIST_SUCCESS:
-    return {
-      ...state,
-      list: {
-        items: action.users
-      }
-    }
-  case userConstants.GETLIST_FAILURE:
-    return {
-      ...state,
-      list: {
-        err: action.err
-      }
-    }
   case userConstants.DELETE_REQUEST:
     // add 'deleting:true' property to user being deleted
     return {

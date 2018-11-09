@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../../../../../">
+  <title data-ice="title">js/_components/Admin/Albums/AlbumInfo/Media/MediaItem/RemoveButton.jsx | album-app</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="React Album app"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="album-app"><meta property="twitter:description" content="React Album app"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-actions">_actions</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-clientActions">clientActions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-utilsActions">utilsActions</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-actions-admin">_actions/Admin</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-adminUiActions">adminUiActions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-albumsActions">albumsActions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-facesActions">facesActions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-footerActions">footerActions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-headerActions">headerActions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-trashActions">trashActions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-userActions">userActions</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-actions-front">_actions/Front</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-frontActions">frontActions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-frontUiActions">frontUiActions</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-actions-login">_actions/Login</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-loginActions">loginActions</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components">_components</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/_components/404.jsx~Error404.html">Error404</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-PrivateRoute">PrivateRoute</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-admin-albums-albuminfo-bar-dates">_components/Admin/Albums/AlbumInfo/Bar/Dates</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/_components/Admin/Albums/AlbumInfo/Bar/Dates/TimeAgo.jsx~TimeAgo.html">TimeAgo</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-admin-albums-albuminfo-bar-locations-gmap">_components/Admin/Albums/AlbumInfo/Bar/Locations/Gmap</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-AlbumMarker">AlbumMarker</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-admin-albums-albuminfo-media-mediaitem">_components/Admin/Albums/AlbumInfo/Media/MediaItem</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/_components/Admin/Albums/AlbumInfo/Media/MediaItem/ProgressBar.jsx~ProgressBar.html">ProgressBar</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/_components/Admin/Albums/AlbumInfo/Media/MediaItem/Status.jsx~Status.html">Status</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/_components/Admin/Albums/AlbumInfo/Media/MediaItem/Thumbnail.jsx~Thumbnail.html">Thumbnail</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Filename">Filename</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Filesize">Filesize</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-admin-albums-albuminfo-media-partials">_components/Admin/Albums/AlbumInfo/Media/Partials</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/_components/Admin/Albums/AlbumInfo/Media/Partials/dropzone.jsx~Dropzone.html">Dropzone</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-admin-faces-people">_components/Admin/Faces/People</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/_components/Admin/Faces/People/People.jsx~People.html">People</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-admin-forms-fields">_components/Admin/Forms/Fields</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-textField">textField</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-admin-partials-header-title">_components/Admin/Partials/Header/Title</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Title">Title</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-admin-trash-albumsitem">_components/Admin/Trash/AlbumsItem</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/_components/Admin/Trash/AlbumsItem/index.jsx~AlbumsItem.html">AlbumsItem</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-admin-users">_components/Admin/Users</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Users">Users</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-admin-users-usercreate">_components/Admin/Users/UserCreate</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-submit">submit</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-common-form-fields">_components/Common/Form/Fields</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-renderText">renderText</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-front-album">_components/Front/Album</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/js/_components/Front/Album/Media.jsx~Media.html">Media</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-front-partials">_components/Front/Partials</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Spinner">Spinner</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-components-login">_components/Login</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-submit">submit</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-constants">_constants</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-adminConstants">adminConstants</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-albumsConstants">albumsConstants</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-clientConstants">clientConstants</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-contentConstants">contentConstants</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-facesConstants">facesConstants</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-footerConstants">footerConstants</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-frontConstants">frontConstants</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-headerConstants">headerConstants</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-mediaConstants">mediaConstants</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-trashConstants">trashConstants</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-userConstants">userConstants</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-utilsConstants">utilsConstants</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-helpers">_helpers</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-authHeader">authHeader</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-drawCanvasImage">drawCanvasImage</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-fitMediaToWrapper">fitMediaToWrapper</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-mediaUploader">mediaUploader</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-baseServerUrl">baseServerUrl</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-googleKey">googleKey</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-history">history</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-store">store</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-reducers">_reducers</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-auth">auth</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-client">client</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-settings">settings</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-rootReducer">rootReducer</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-reducers-admin">_reducers/Admin</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-adminAlbums">adminAlbums</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-faces">faces</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-footer">footer</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-header">header</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-trash">trash</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-adminUi">adminUi</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-users">users</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-reducers-front">_reducers/Front</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-frontAlbums">frontAlbums</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-frontUi">frontUi</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-services">_services</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-locationService">locationService</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-utilsService">utilsService</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-services-admin">_services/Admin</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-albumsService">albumsService</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-facesService">facesService</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-mediaService">mediaService</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-trashService">trashService</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-userService">userService</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-services-front">_services/Front</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-frontService">frontService</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#-services-login">_services/Login</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-loginService">loginService</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#translations">translations</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-adminTranslations">adminTranslations</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-frontTranslations">frontTranslations</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-loginTranslations">loginTranslations</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">js/_components/Admin/Albums/AlbumInfo/Media/MediaItem/RemoveButton.jsx</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">
+import React, { Component, Fragment } from &apos;react&apos;
+import PropTypes from &apos;prop-types&apos;
+import { connect } from &apos;react-redux&apos;
+
+import { withStyles } from &apos;@material-ui/core/styles&apos;
+import Button from &apos;@material-ui/core/Button&apos;
+import IconButton from &apos;@material-ui/core/IconButton&apos;
+
+import grey from &apos;@material-ui/core/colors/grey&apos;
+
+import Close from &apos;@material-ui/icons/Close&apos;
+
+import { Tip } from &apos;Common&apos;
+import SimpleModal from &apos;../../../../../Common/Modals&apos;
+
+import { albumsActions, trashActions, adminUiActions } from &apos;Actions&apos;
+
+const styles = theme =&gt; ({
+  closeBtn: {
+    position: `absolute`,
+    top: 0,
+    right: 0,
+    width: 28,
+    height: 28
+  },
+  closeIcon: {
+    fontSize: 20,
+    color: grey[500]
+  },
+  actions_wrapper: {
+    display: `flex`,
+    justifyContent: `space-between`,
+    marginTop: theme.spacing.unit * 2
+  }
+})
+class RemoveButton extends Component {
+
+  handleModalOpen(modal_id) {
+    const { dispatch } = this.props
+    dispatch(adminUiActions.modalOpen(modal_id))
+  }
+
+  handleClose(modal_id) {
+    const { dispatch } = this.props
+    dispatch(adminUiActions.modalClose(modal_id))
+  }
+
+  handleDelete(modal_id) {
+    const { media_id, dispatch } = this.props
+    dispatch(albumsActions.deleteMedia(media_id))
+    dispatch(adminUiActions.modalClose(modal_id))
+  }
+
+  handleTrash(modal_id) {
+    const { media_id, dispatch } = this.props
+    dispatch(albumsActions.trashMedia(media_id))
+    dispatch(adminUiActions.modalClose(modal_id))
+  }
+
+  render() {
+
+    const { t } = this.context
+    const { classes, media_id } = this.props
+
+    const modal_id = `album_media_remove_${media_id}`
+
+    return (
+      &lt;Fragment&gt;
+        &lt;Fragment&gt;
+          &lt;IconButton
+            data-tip
+            data-for={ `tip_album_rename_${media_id}` }
+            onClick={ () =&gt; this.handleModalOpen(modal_id) }
+            className={ classes.closeBtn }
+          &gt;
+            &lt;Close className={ classes.closeIcon } /&gt;
+          &lt;/IconButton&gt;
+          &lt;Tip id={ `tip_album_rename_${media_id}` }&gt;{ t(`Remove`) }&lt;/Tip&gt;
+        &lt;/Fragment&gt;
+
+        &lt;SimpleModal
+          modal_id={ modal_id }
+          title={ `${t(&apos;Really delete&apos;)} &apos;${name}&apos;?` }
+          closeButton={ false }
+        &gt;
+          &lt;div className={ classes.actions_wrapper }&gt;
+            &lt;Button
+              onClick={ () =&gt; this.handleClose(modal_id) }
+              color=&quot;primary&quot;
+              variant=&quot;raised&quot;
+            &gt;
+              { t(`Cancel`) }
+            &lt;/Button&gt;
+            &lt;Button
+              onClick={ () =&gt; this.handleTrash(modal_id) }
+              color=&quot;secondary&quot;
+              variant=&quot;raised&quot;
+            &gt;
+              { t(`Trash`) }
+            &lt;/Button&gt;
+            &lt;Button
+              onClick={ () =&gt; this.handleDelete(modal_id) }
+              color=&quot;secondary&quot;
+              variant=&quot;raised&quot;
+            &gt;
+              { t(`Delete`) }
+            &lt;/Button&gt;
+          &lt;/div&gt;
+        &lt;/SimpleModal&gt;
+      &lt;/Fragment&gt;
+    )
+  }
+}
+
+RemoveButton.contextTypes = {
+  t: PropTypes.func
+}
+
+RemoveButton.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  classes: PropTypes.object.isRequired,
+  media_id: PropTypes.number.isRequired
+}
+
+export default connect()(withStyles(styles)(RemoveButton))
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

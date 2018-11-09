@@ -1,0 +1,1520 @@
+{
+  "coverage": "0.61%",
+  "expectCount": 647,
+  "actualCount": 4,
+  "files": {
+    "js/App.jsx": {
+      "expectCount": 6,
+      "actualCount": 1,
+      "undocumentLines": [
+        25,
+        45,
+        64,
+        70,
+        77
+      ]
+    },
+    "js/_actions/Admin/admin_ui.actions.js": {
+      "expectCount": 5,
+      "actualCount": 0,
+      "undocumentLines": [
+        4,
+        15,
+        23,
+        36,
+        44
+      ]
+    },
+    "js/_actions/Admin/albums.actions.js": {
+      "expectCount": 36,
+      "actualCount": 0,
+      "undocumentLines": [
+        8,
+        31,
+        50,
+        69,
+        83,
+        108,
+        124,
+        147,
+        155,
+        163,
+        177,
+        187,
+        197,
+        215,
+        223,
+        231,
+        239,
+        247,
+        269,
+        296,
+        327,
+        365,
+        384,
+        410,
+        420,
+        430,
+        440,
+        452,
+        467,
+        475,
+        489,
+        498,
+        514,
+        530,
+        546,
+        555
+      ]
+    },
+    "js/_actions/Admin/faces.actions.js": {
+      "expectCount": 3,
+      "actualCount": 0,
+      "undocumentLines": [
+        7,
+        12,
+        30
+      ]
+    },
+    "js/_actions/Admin/footer.actions.js": {
+      "expectCount": 4,
+      "actualCount": 0,
+      "undocumentLines": [
+        4,
+        10,
+        15,
+        19
+      ]
+    },
+    "js/_actions/Admin/header.actions.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        4,
+        8
+      ]
+    },
+    "js/_actions/Admin/trash.actions.js": {
+      "expectCount": 4,
+      "actualCount": 0,
+      "undocumentLines": [
+        5,
+        11,
+        30,
+        49
+      ]
+    },
+    "js/_actions/Admin/user.actions.js": {
+      "expectCount": 5,
+      "actualCount": 0,
+      "undocumentLines": [
+        7,
+        14,
+        33,
+        42,
+        62
+      ]
+    },
+    "js/_actions/Front/front.actions.js": {
+      "expectCount": 3,
+      "actualCount": 0,
+      "undocumentLines": [
+        5,
+        10,
+        29
+      ]
+    },
+    "js/_actions/Front/front_ui.actions.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        4,
+        8
+      ]
+    },
+    "js/_actions/Login/login.actions.js": {
+      "expectCount": 3,
+      "actualCount": 0,
+      "undocumentLines": [
+        5,
+        10,
+        18
+      ]
+    },
+    "js/_actions/client.actions.js": {
+      "expectCount": 5,
+      "actualCount": 0,
+      "undocumentLines": [
+        5,
+        12,
+        21,
+        30,
+        39
+      ]
+    },
+    "js/_actions/utils.actions.js": {
+      "expectCount": 8,
+      "actualCount": 0,
+      "undocumentLines": [
+        5,
+        15,
+        25,
+        35,
+        43,
+        62,
+        72,
+        80
+      ]
+    },
+    "js/_components/404.jsx": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        4,
+        6
+      ]
+    },
+    "js/_components/Admin/Admin.jsx": {
+      "expectCount": 7,
+      "actualCount": 0,
+      "undocumentLines": [
+        35,
+        53,
+        55,
+        60,
+        69,
+        130,
+        185
+      ]
+    },
+    "js/_components/Admin/Albums/AlbumInfo/AlbumInfo.jsx": {
+      "expectCount": 5,
+      "actualCount": 0,
+      "undocumentLines": [
+        16,
+        32,
+        34,
+        42,
+        96
+      ]
+    },
+    "js/_components/Admin/Albums/AlbumInfo/Bar/Bar.jsx": {
+      "expectCount": 3,
+      "actualCount": 0,
+      "undocumentLines": [
+        16,
+        42,
+        97
+      ]
+    },
+    "js/_components/Admin/Albums/AlbumInfo/Bar/Dates/Dates.jsx": {
+      "expectCount": 6,
+      "actualCount": 0,
+      "undocumentLines": [
+        23,
+        50,
+        52,
+        55,
+        60,
+        64
+      ]
+    },
+    "js/_components/Admin/Albums/AlbumInfo/Bar/Dates/Picker.jsx": {
+      "expectCount": 9,
+      "actualCount": 0,
+      "undocumentLines": [
+        13,
+        15,
+        17,
+        28,
+        37,
+        42,
+        47,
+        62,
+        132
+      ]
+    },
+    "js/_components/Admin/Albums/AlbumInfo/Bar/Dates/TimeAgo.jsx": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        6,
+        8
+      ]
+    },
+    "js/_components/Admin/Albums/AlbumInfo/Bar/Locations/Address.jsx": {
+      "expectCount": 8,
+      "actualCount": 0,
+      "undocumentLines": [
+        6,
+        8,
+        11,
+        19,
+        25,
+        43,
+        52,
+        86
+      ]
+    },
+    "js/_components/Admin/Albums/AlbumInfo/Bar/Locations/AlbumMap.jsx": {
+      "expectCount": 4,
+      "actualCount": 0,
+      "undocumentLines": [
+        11,
+        21,
+        23,
+        76
+      ]
+    },
+    "js/_components/Admin/Albums/AlbumInfo/Bar/Locations/Gmap/AlbumMarker.jsx": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        6
+      ]
+    },
+    "js/_components/Admin/Albums/AlbumInfo/Bar/Locations/Gmap/Gmap.jsx": {
+      "expectCount": 15,
+      "actualCount": 0,
+      "undocumentLines": [
+        12,
+        14,
+        16,
+        24,
+        25,
+        30,
+        44,
+        48,
+        58,
+        66,
+        75,
+        84,
+        92,
+        98,
+        182
+      ]
+    },
+    "js/_components/Admin/Albums/AlbumInfo/Bar/Locations/ItemsList/ItemsList.jsx": {
+      "expectCount": 7,
+      "actualCount": 0,
+      "undocumentLines": [
+        12,
+        20,
+        22,
+        29,
+        37,
+        45,
+        115
+      ]
+    },
+    "js/_components/Admin/Albums/AlbumInfo/Bar/Locations/Locations.jsx": {
+      "expectCount": 6,
+      "actualCount": 0,
+      "undocumentLines": [
+        22,
+        44,
+        46,
+        49,
+        54,
+        58
+      ]
+    },
+    "js/_components/Admin/Albums/AlbumInfo/Bar/Locations/LocationsBar/LocationsBar.jsx": {
+      "expectCount": 9,
+      "actualCount": 0,
+      "undocumentLines": [
+        16,
+        65,
+        66,
+        69,
+        78,
+        84,
+        88,
+        100,
+        189
+      ]
+    },
+    "js/_components/Admin/Albums/AlbumInfo/Media/Icons/StatusGenerateImageThumbs.jsx": {
+      "expectCount": 5,
+      "actualCount": 0,
+      "undocumentLines": [
+        22,
+        31,
+        33,
+        39,
+        44
+      ]
+    },
+    "js/_components/Admin/Albums/AlbumInfo/Media/Icons/StatusGenerateVideos.jsx": {
+      "expectCount": 4,
+      "actualCount": 0,
+      "undocumentLines": [
+        16,
+        18,
+        24,
+        29
+      ]
+    },
+    "js/_components/Admin/Albums/AlbumInfo/Media/Icons/StatusMetadata.jsx": {
+      "expectCount": 7,
+      "actualCount": 0,
+      "undocumentLines": [
+        26,
+        40,
+        42,
+        48,
+        53,
+        148,
+        184
+      ]
+    },
+    "js/_components/Admin/Albums/AlbumInfo/Media/Icons/StatusRekognitionLabels.jsx": {
+      "expectCount": 5,
+      "actualCount": 0,
+      "undocumentLines": [
+        25,
+        44,
+        46,
+        52,
+        57
+      ]
+    },
+    "js/_components/Admin/Albums/AlbumInfo/Media/Icons/StatusRekognitionText.jsx": {
+      "expectCount": 5,
+      "actualCount": 0,
+      "undocumentLines": [
+        25,
+        43,
+        45,
+        51,
+        56
+      ]
+    },
+    "js/_components/Admin/Albums/AlbumInfo/Media/LightboxSlider/Arrows/NextArrow.jsx": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        12,
+        33
+      ]
+    },
+    "js/_components/Admin/Albums/AlbumInfo/Media/LightboxSlider/Arrows/PrevArrow.jsx": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        12,
+        34
+      ]
+    },
+    "js/_components/Admin/Albums/AlbumInfo/Media/LightboxSlider/LightboxSlider.jsx": {
+      "expectCount": 5,
+      "actualCount": 0,
+      "undocumentLines": [
+        20,
+        43,
+        45,
+        49,
+        169
+      ]
+    },
+    "js/_components/Admin/Albums/AlbumInfo/Media/Media.jsx": {
+      "expectCount": 10,
+      "actualCount": 0,
+      "undocumentLines": [
+        23,
+        48,
+        50,
+        55,
+        60,
+        87,
+        109,
+        115,
+        121,
+        208
+      ]
+    },
+    "js/_components/Admin/Albums/AlbumInfo/Media/MediaItem/Filename.jsx": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        8
+      ]
+    },
+    "js/_components/Admin/Albums/AlbumInfo/Media/MediaItem/Filesize.jsx": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        8
+      ]
+    },
+    "js/_components/Admin/Albums/AlbumInfo/Media/MediaItem/MediaItem.jsx": {
+      "expectCount": 8,
+      "actualCount": 0,
+      "undocumentLines": [
+        33,
+        74,
+        75,
+        79,
+        93,
+        97,
+        313,
+        329
+      ]
+    },
+    "js/_components/Admin/Albums/AlbumInfo/Media/MediaItem/ProgressBar.jsx": {
+      "expectCount": 13,
+      "actualCount": 0,
+      "undocumentLines": [
+        119,
+        5,
+        7,
+        10,
+        19,
+        24,
+        25,
+        29,
+        49,
+        51,
+        65,
+        91,
+        95
+      ]
+    },
+    "js/_components/Admin/Albums/AlbumInfo/Media/MediaItem/RemoveButton.jsx": {
+      "expectCount": 7,
+      "actualCount": 0,
+      "undocumentLines": [
+        19,
+        37,
+        39,
+        44,
+        49,
+        55,
+        61
+      ]
+    },
+    "js/_components/Admin/Albums/AlbumInfo/Media/MediaItem/Status.jsx": {
+      "expectCount": 10,
+      "actualCount": 0,
+      "undocumentLines": [
+        100,
+        8,
+        10,
+        13,
+        18,
+        30,
+        34,
+        42,
+        43,
+        47
+      ]
+    },
+    "js/_components/Admin/Albums/AlbumInfo/Media/MediaItem/Thumbnail.jsx": {
+      "expectCount": 7,
+      "actualCount": 0,
+      "undocumentLines": [
+        9,
+        11,
+        14,
+        19,
+        53,
+        92,
+        96
+      ]
+    },
+    "js/_components/Admin/Albums/AlbumInfo/Media/MediaItem/ThumbnailSrv.jsx": {
+      "expectCount": 7,
+      "actualCount": 0,
+      "undocumentLines": [
+        10,
+        16,
+        18,
+        21,
+        24,
+        39,
+        57
+      ]
+    },
+    "js/_components/Admin/Albums/AlbumInfo/Media/MediaList.jsx": {
+      "expectCount": 8,
+      "actualCount": 0,
+      "undocumentLines": [
+        13,
+        20,
+        22,
+        26,
+        30,
+        35,
+        58,
+        124
+      ]
+    },
+    "js/_components/Admin/Albums/AlbumInfo/Media/Partials/TotalProgressBar.jsx": {
+      "expectCount": 12,
+      "actualCount": 0,
+      "undocumentLines": [
+        8,
+        18,
+        20,
+        23,
+        32,
+        37,
+        38,
+        43,
+        60,
+        62,
+        68,
+        89
+      ]
+    },
+    "js/_components/Admin/Albums/AlbumInfo/Media/Partials/UploadMediaButton.jsx": {
+      "expectCount": 9,
+      "actualCount": 0,
+      "undocumentLines": [
+        14,
+        26,
+        28,
+        31,
+        36,
+        40,
+        47,
+        84,
+        89
+      ]
+    },
+    "js/_components/Admin/Albums/AlbumInfo/Media/Partials/dropzone.jsx": {
+      "expectCount": 10,
+      "actualCount": 0,
+      "undocumentLines": [
+        87,
+        6,
+        8,
+        12,
+        16,
+        17,
+        20,
+        33,
+        39,
+        48
+      ]
+    },
+    "js/_components/Admin/Albums/Albums.jsx": {
+      "expectCount": 9,
+      "actualCount": 0,
+      "undocumentLines": [
+        15,
+        28,
+        30,
+        33,
+        41,
+        46,
+        52,
+        58,
+        113
+      ]
+    },
+    "js/_components/Admin/Albums/AlbumsList/AlbumsList.jsx": {
+      "expectCount": 6,
+      "actualCount": 0,
+      "undocumentLines": [
+        16,
+        22,
+        24,
+        29,
+        37,
+        91
+      ]
+    },
+    "js/_components/Admin/Albums/AlbumsList/Bar/Bar.jsx": {
+      "expectCount": 6,
+      "actualCount": 0,
+      "undocumentLines": [
+        14,
+        24,
+        25,
+        30,
+        35,
+        59
+      ]
+    },
+    "js/_components/Admin/Albums/AlbumsList/Bar/DatesRange.jsx": {
+      "expectCount": 6,
+      "actualCount": 0,
+      "undocumentLines": [
+        15,
+        26,
+        27,
+        34,
+        42,
+        51
+      ]
+    },
+    "js/_components/Admin/Albums/AlbumsList/ListItem/ListItem.jsx": {
+      "expectCount": 6,
+      "actualCount": 0,
+      "undocumentLines": [
+        18,
+        32,
+        34,
+        40,
+        92,
+        104
+      ]
+    },
+    "js/_components/Admin/Buttons/DeleteAlbum.jsx": {
+      "expectCount": 6,
+      "actualCount": 0,
+      "undocumentLines": [
+        16,
+        31,
+        33,
+        37,
+        41,
+        46
+      ]
+    },
+    "js/_components/Admin/Buttons/DeleteUser.jsx": {
+      "expectCount": 6,
+      "actualCount": 0,
+      "undocumentLines": [
+        19,
+        39,
+        41,
+        45,
+        49,
+        54
+      ]
+    },
+    "js/_components/Admin/Buttons/NewAlbum.jsx": {
+      "expectCount": 5,
+      "actualCount": 0,
+      "undocumentLines": [
+        19,
+        29,
+        30,
+        34,
+        60
+      ]
+    },
+    "js/_components/Admin/Buttons/OpenLightbox.jsx": {
+      "expectCount": 6,
+      "actualCount": 0,
+      "undocumentLines": [
+        19,
+        21,
+        24,
+        32,
+        38,
+        94
+      ]
+    },
+    "js/_components/Admin/Errors/404.jsx": {
+      "expectCount": 4,
+      "actualCount": 0,
+      "undocumentLines": [
+        13,
+        25,
+        27,
+        33
+      ]
+    },
+    "js/_components/Admin/Faces/Collection/Collection.jsx": {
+      "expectCount": 5,
+      "actualCount": 0,
+      "undocumentLines": [
+        15,
+        27,
+        29,
+        37,
+        76
+      ]
+    },
+    "js/_components/Admin/Faces/Collection/CollectionListItem/CollectionListItem.jsx": {
+      "expectCount": 3,
+      "actualCount": 0,
+      "undocumentLines": [
+        12,
+        34,
+        36
+      ]
+    },
+    "js/_components/Admin/Faces/Collection/CollectionListItem/DeleteCollectionItem.jsx": {
+      "expectCount": 6,
+      "actualCount": 0,
+      "undocumentLines": [
+        19,
+        39,
+        41,
+        45,
+        49,
+        54
+      ]
+    },
+    "js/_components/Admin/Faces/Faces.jsx": {
+      "expectCount": 6,
+      "actualCount": 0,
+      "undocumentLines": [
+        16,
+        22,
+        24,
+        27,
+        36,
+        40
+      ]
+    },
+    "js/_components/Admin/Faces/People/People.jsx": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        4,
+        6
+      ]
+    },
+    "js/_components/Admin/Forms/Fields/textField.jsx": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        5
+      ]
+    },
+    "js/_components/Admin/Forms/UserCreateForm.jsx": {
+      "expectCount": 6,
+      "actualCount": 0,
+      "undocumentLines": [
+        16,
+        17,
+        67,
+        72,
+        85,
+        103
+      ]
+    },
+    "js/_components/Admin/Partials/Header/Header.jsx": {
+      "expectCount": 7,
+      "actualCount": 0,
+      "undocumentLines": [
+        21,
+        33,
+        34,
+        41,
+        47,
+        53,
+        127
+      ]
+    },
+    "js/_components/Admin/Partials/Header/MainMenu/MainMenu.jsx": {
+      "expectCount": 7,
+      "actualCount": 0,
+      "undocumentLines": [
+        27,
+        34,
+        36,
+        39,
+        47,
+        51,
+        56
+      ]
+    },
+    "js/_components/Admin/Partials/Header/Title/AlbumName/AlbumName.jsx": {
+      "expectCount": 6,
+      "actualCount": 0,
+      "undocumentLines": [
+        20,
+        39,
+        41,
+        44,
+        49,
+        53
+      ]
+    },
+    "js/_components/Admin/Partials/Header/Title/AlbumName/AlbumNameForm.jsx": {
+      "expectCount": 9,
+      "actualCount": 0,
+      "undocumentLines": [
+        18,
+        20,
+        27,
+        29,
+        34,
+        39,
+        43,
+        75,
+        88
+      ]
+    },
+    "js/_components/Admin/Partials/Header/Title/Title.jsx": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        11
+      ]
+    },
+    "js/_components/Admin/Partials/MediaPager.jsx": {
+      "expectCount": 6,
+      "actualCount": 0,
+      "undocumentLines": [
+        17,
+        49,
+        50,
+        56,
+        62,
+        116
+      ]
+    },
+    "js/_components/Admin/Trash/AlbumsItem/DeleteButton.jsx": {
+      "expectCount": 3,
+      "actualCount": 0,
+      "undocumentLines": [
+        10,
+        12,
+        17
+      ]
+    },
+    "js/_components/Admin/Trash/AlbumsItem/RestoreButton.jsx": {
+      "expectCount": 3,
+      "actualCount": 0,
+      "undocumentLines": [
+        11,
+        13,
+        18
+      ]
+    },
+    "js/_components/Admin/Trash/AlbumsItem/index.jsx": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        10,
+        12
+      ]
+    },
+    "js/_components/Admin/Trash/MediaItem/DeleteButton.jsx": {
+      "expectCount": 4,
+      "actualCount": 0,
+      "undocumentLines": [
+        15,
+        21,
+        23,
+        28
+      ]
+    },
+    "js/_components/Admin/Trash/MediaItem/MediaItem.jsx": {
+      "expectCount": 4,
+      "actualCount": 0,
+      "undocumentLines": [
+        28,
+        64,
+        66,
+        83
+      ]
+    },
+    "js/_components/Admin/Trash/MediaItem/RestoreButton.jsx": {
+      "expectCount": 4,
+      "actualCount": 0,
+      "undocumentLines": [
+        13,
+        22,
+        24,
+        29
+      ]
+    },
+    "js/_components/Admin/Trash/TrashPage.jsx": {
+      "expectCount": 8,
+      "actualCount": 0,
+      "undocumentLines": [
+        23,
+        39,
+        41,
+        44,
+        51,
+        58,
+        63,
+        147
+      ]
+    },
+    "js/_components/Admin/Users/UserCreate/UserCreate.jsx": {
+      "expectCount": 4,
+      "actualCount": 0,
+      "undocumentLines": [
+        13,
+        31,
+        33,
+        39
+      ]
+    },
+    "js/_components/Admin/Users/UserCreate/UserCreateForm.jsx": {
+      "expectCount": 5,
+      "actualCount": 0,
+      "undocumentLines": [
+        18,
+        46,
+        48,
+        140,
+        147
+      ]
+    },
+    "js/_components/Admin/Users/UserCreate/submit.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        8
+      ]
+    },
+    "js/_components/Admin/Users/UserView/UserView.jsx": {
+      "expectCount": 5,
+      "actualCount": 0,
+      "undocumentLines": [
+        10,
+        12,
+        19,
+        23,
+        76
+      ]
+    },
+    "js/_components/Admin/Users/Users.jsx": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        11
+      ]
+    },
+    "js/_components/Admin/Users/UsersList/UserCreateButton.jsx": {
+      "expectCount": 4,
+      "actualCount": 0,
+      "undocumentLines": [
+        14,
+        24,
+        26,
+        30
+      ]
+    },
+    "js/_components/Admin/Users/UsersList/UsersList.jsx": {
+      "expectCount": 5,
+      "actualCount": 0,
+      "undocumentLines": [
+        16,
+        28,
+        30,
+        40,
+        82
+      ]
+    },
+    "js/_components/Admin/Users/UsersList/UsersListItem/UsersListItem.jsx": {
+      "expectCount": 3,
+      "actualCount": 0,
+      "undocumentLines": [
+        14,
+        36,
+        38
+      ]
+    },
+    "js/_components/Common/Form/Fields/renderSelect.jsx": {
+      "expectCount": 5,
+      "actualCount": 3,
+      "undocumentLines": [
+        11,
+        71
+      ]
+    },
+    "js/_components/Common/Form/Fields/renderText.jsx": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        6
+      ]
+    },
+    "js/_components/Common/Form/Fields/renderToggle.jsx": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        13,
+        58
+      ]
+    },
+    "js/_components/Common/Form/RenderButton.jsx": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        9,
+        15
+      ]
+    },
+    "js/_components/Common/Modals/SimpleModal.jsx": {
+      "expectCount": 5,
+      "actualCount": 0,
+      "undocumentLines": [
+        15,
+        67,
+        69,
+        73,
+        165
+      ]
+    },
+    "js/_components/Common/Scrollbar.jsx": {
+      "expectCount": 3,
+      "actualCount": 0,
+      "undocumentLines": [
+        11,
+        33,
+        35
+      ]
+    },
+    "js/_components/Common/Spinner.jsx": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        9,
+        27
+      ]
+    },
+    "js/_components/Common/Spinners/CircleSpinner.jsx": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        9,
+        27
+      ]
+    },
+    "js/_components/Common/Tip.jsx": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        10,
+        19
+      ]
+    },
+    "js/_components/Front/Album/Media.jsx": {
+      "expectCount": 3,
+      "actualCount": 0,
+      "undocumentLines": [
+        5,
+        7,
+        12
+      ]
+    },
+    "js/_components/Front/Partials/Spinner.jsx": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        7
+      ]
+    },
+    "js/_components/Front/index.jsx": {
+      "expectCount": 13,
+      "actualCount": 0,
+      "undocumentLines": [
+        18,
+        19,
+        20,
+        22,
+        24,
+        27,
+        37,
+        46,
+        51,
+        56,
+        72,
+        84,
+        154
+      ]
+    },
+    "js/_components/Login/Login.jsx": {
+      "expectCount": 4,
+      "actualCount": 0,
+      "undocumentLines": [
+        15,
+        28,
+        30,
+        39
+      ]
+    },
+    "js/_components/Login/LoginForm.jsx": {
+      "expectCount": 4,
+      "actualCount": 0,
+      "undocumentLines": [
+        14,
+        23,
+        25,
+        69
+      ]
+    },
+    "js/_components/Login/submit.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        9
+      ]
+    },
+    "js/_components/PrivateRoute.jsx": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        6
+      ]
+    },
+    "js/_constants/admin.constants.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        2
+      ]
+    },
+    "js/_constants/albums.constants.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        2
+      ]
+    },
+    "js/_constants/client.constants.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        2
+      ]
+    },
+    "js/_constants/content.constants.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        2
+      ]
+    },
+    "js/_constants/faces.constants.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        2
+      ]
+    },
+    "js/_constants/footer.constants.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        2
+      ]
+    },
+    "js/_constants/front.constants.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        2
+      ]
+    },
+    "js/_constants/header.constants.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        2
+      ]
+    },
+    "js/_constants/media.constants.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        2
+      ]
+    },
+    "js/_constants/trash.constants.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        2
+      ]
+    },
+    "js/_constants/user.constants.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        2
+      ]
+    },
+    "js/_constants/utils.constants.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        2
+      ]
+    },
+    "js/_helpers/auth-header.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        2
+      ]
+    },
+    "js/_helpers/config.js": {
+      "expectCount": 5,
+      "actualCount": 0,
+      "undocumentLines": [
+        2,
+        5,
+        8,
+        37,
+        85
+      ]
+    },
+    "js/_helpers/history.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        4
+      ]
+    },
+    "js/_helpers/store.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        7
+      ]
+    },
+    "js/_helpers/uploader.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        6,
+        8
+      ]
+    },
+    "js/_reducers/Admin/albums.reducer.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        4,
+        29
+      ]
+    },
+    "js/_reducers/Admin/faces.reducer.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        4,
+        12
+      ]
+    },
+    "js/_reducers/Admin/footer.reducer.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        4
+      ]
+    },
+    "js/_reducers/Admin/header.reducer.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        4
+      ]
+    },
+    "js/_reducers/Admin/trash.reducer.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        4,
+        15
+      ]
+    },
+    "js/_reducers/Admin/ui.reducer.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        4,
+        11
+      ]
+    },
+    "js/_reducers/Admin/users.reducer.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        4,
+        17
+      ]
+    },
+    "js/_reducers/Front/albums.reducer.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        4,
+        12
+      ]
+    },
+    "js/_reducers/Front/ui.reducer.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        4,
+        8
+      ]
+    },
+    "js/_reducers/auth.reducer.js": {
+      "expectCount": 3,
+      "actualCount": 0,
+      "undocumentLines": [
+        4,
+        5,
+        7
+      ]
+    },
+    "js/_reducers/client.reducer.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        4,
+        8
+      ]
+    },
+    "js/_reducers/index.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        20
+      ]
+    },
+    "js/_reducers/settings.reducer.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        4,
+        6
+      ]
+    },
+    "js/_services/Admin/albums.service.js": {
+      "expectCount": 12,
+      "actualCount": 0,
+      "undocumentLines": [
+        4,
+        13,
+        29,
+        39,
+        54,
+        69,
+        79,
+        95,
+        105,
+        115,
+        126,
+        135
+      ]
+    },
+    "js/_services/Admin/faces.service.js": {
+      "expectCount": 4,
+      "actualCount": 0,
+      "undocumentLines": [
+        4,
+        9,
+        18,
+        27
+      ]
+    },
+    "js/_services/Admin/media.service.js": {
+      "expectCount": 12,
+      "actualCount": 0,
+      "undocumentLines": [
+        4,
+        12,
+        22,
+        32,
+        42,
+        52,
+        62,
+        72,
+        82,
+        92,
+        102,
+        111
+      ]
+    },
+    "js/_services/Admin/trash.service.js": {
+      "expectCount": 5,
+      "actualCount": 0,
+      "undocumentLines": [
+        4,
+        10,
+        19,
+        28,
+        37
+      ]
+    },
+    "js/_services/Admin/user.service.js": {
+      "expectCount": 7,
+      "actualCount": 0,
+      "undocumentLines": [
+        4,
+        12,
+        21,
+        30,
+        40,
+        51,
+        60
+      ]
+    },
+    "js/_services/Front/albums.service.js": {
+      "expectCount": 3,
+      "actualCount": 0,
+      "undocumentLines": [
+        4,
+        8,
+        18
+      ]
+    },
+    "js/_services/Login/login.service.js": {
+      "expectCount": 3,
+      "actualCount": 0,
+      "undocumentLines": [
+        4,
+        9,
+        35
+      ]
+    },
+    "js/_services/location.service.js": {
+      "expectCount": 3,
+      "actualCount": 0,
+      "undocumentLines": [
+        4,
+        8,
+        32
+      ]
+    },
+    "js/_services/utils.service.js": {
+      "expectCount": 7,
+      "actualCount": 0,
+      "undocumentLines": [
+        4,
+        12,
+        20,
+        29,
+        39,
+        48,
+        58
+      ]
+    },
+    "js/index.jsx": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        15,
+        27
+      ]
+    },
+    "js/translations/adminTranslations.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        2
+      ]
+    },
+    "js/translations/frontTranslations.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        2
+      ]
+    },
+    "js/translations/loginTranslations.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        2
+      ]
+    }
+  }
+}
