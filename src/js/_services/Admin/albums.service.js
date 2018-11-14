@@ -25,7 +25,6 @@ function create(album) {
  * Album list services
  * calls getList, getListDates
  */
-
 function getList(start_date, end_date) {
   const requestOptions = {
     method: 'POST',

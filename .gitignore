@@ -4,8 +4,9 @@
 *.map
 *.log
 
-dist
+/dist
+/jsdoc
 
 node_modules
 
-webpack/s3-deploy-config.json
+/webpack/s3-deploy-config.json

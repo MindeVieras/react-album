@@ -18,10 +18,16 @@ import { history } from 'Helpers'
 import { clientActions, utilsActions } from 'Actions'
 
 /**
- * this is App.
+ * this is main App component
+ * @module App
+ * 
  */
 class App extends Component {
-
+  
+  /**
+   * constructor description
+   * @param {Object} props props to pass
+   */
   constructor(props) {
     super(props)
 
@@ -74,6 +80,12 @@ class App extends Component {
     let orientation = (width < height) ? 'portrait' : 'landscape'
     dispatch(clientActions.setScreen({ width, height, orientation }))
   }
+
+  /**   
+   * render DOM
+   * @private
+   * @return {Markup} return HTML
+   */
   render() {
 
     return (

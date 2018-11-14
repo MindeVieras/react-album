@@ -1,4 +1,11 @@
 
+/**
+ * Admin translations
+ * @type {object}
+ * 
+ * @todo support multi byte character.
+ * @todo cache calculation result.
+ */
 export const adminTranslations = {
   'lt': {
     'Edit album name': 'Redaguoti albumo pavadinimą',
