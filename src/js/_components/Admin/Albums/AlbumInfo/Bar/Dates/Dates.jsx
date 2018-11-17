@@ -81,7 +81,7 @@ class Dates extends Component {
 
         <Typography
           className={ classes.text }
-          variant="subtitle1"
+          variant="subtitle2"
         >
           { date }
         </Typography>

@@ -1,6 +1,6 @@
 {
   "name": "album-app",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React Album app",
   "main": "index.js",
   "scripts": {
