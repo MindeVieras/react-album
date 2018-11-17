@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 import { RingLoader } from 'react-spinners'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 
-import { IoCube, IoHome, IoLogOut } from 'react-icons/lib/io'
+import { IoCube, IoHome, IoLogOut } from 'react-icons/io'
 
 import { frontTranslations } from '../../translations/frontTranslations'
 

@@ -27,7 +27,7 @@ import { adminUiActions, albumsActions, utilsActions } from 'Actions'
 
 import 'react-datetime/css/react-datetime.css'
 // import 'react-select/dist/react-select.css'
-import 'cropperjs/dist/cropper.css'
+// import 'cropperjs/dist/cropper.css'
 import 'rc-slider/assets/index.css'
 import 'react-perfect-scrollbar/dist/css/styles.css'
 import '../../../scss/Admin/main.scss'

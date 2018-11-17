@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import ReactPlayer from 'react-player'
 
 import { Spinner } from 'Common'
-import { IoAlertCircled } from 'react-icons/lib/io'
+import { IoAlertCircled } from 'react-icons/io'
 
 class Thumbnail extends Component {
 

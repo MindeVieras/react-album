@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography'
 
 import grey from '@material-ui/core/colors/grey'
 
-import { IoTrashA } from 'react-icons/lib/io'
+import { IoTrashA } from 'react-icons/io'
 
 import { Spinner } from 'Common'
 
@@ -98,7 +98,7 @@ class TrashPage extends Component {
           <div className={ classes.flex }>
 
             <Typography
-              variant="headline"
+              variant="h5"
               gutterBottom
               className={ classes.subtitle }
             >
@@ -117,7 +117,7 @@ class TrashPage extends Component {
           <div className={ classes.flex }>
 
             <Typography
-              variant="headline"
+              variant="h5"
               gutterBottom
               className={ classes.subtitle }
             >

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import { withStyles } from '@material-ui/core/styles'
 
-import { IoVideocamera } from 'react-icons/lib/io'
+import { IoVideocamera } from 'react-icons/io'
 
 import { albumsActions } from 'Actions'
 

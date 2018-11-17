@@ -6,7 +6,7 @@ import uuidv4 from 'uuid/v4'
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu'
 
 import { ScaleLoader } from 'react-spinners'
-import { IoVideocamera } from 'react-icons/lib/io'
+import { IoVideocamera } from 'react-icons/io'
 
 import { Tip } from 'Common'
 

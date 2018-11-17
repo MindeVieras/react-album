@@ -16,7 +16,7 @@ const Title = ({ album_id, title }) => {
   else {
     return (
       <Typography
-        variant="title"
+        variant="h6"
         color="inherit"
         style={{ cursor: `pointer` }}
         onClick={ () => history.push('/admin') }

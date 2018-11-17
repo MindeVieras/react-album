@@ -144,7 +144,7 @@ class Media extends Component {
       uploaderContent = <div className={ classes.empty_text_wrapper }>
         <Typography
           className={ classes.empty_text }
-          variant="display2"
+          variant="h2"
         >
           <CloudUpload className={ classes.empty_text_icon } /> { t('Drop files here') }
         </Typography>

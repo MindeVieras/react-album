@@ -28,7 +28,8 @@ const styles = theme => ({
     position: `absolute`,
     right: 0,
     width: 32,
-    height: 32
+    height: 32,
+    padding: 0
   },
   edit_btn: {
     fontSize: 16,
@@ -61,7 +62,7 @@ class AlbumName extends Component {
     return (
       <Fragment>
         <Typography
-          variant="title"
+          variant="h6"
           color="inherit"
           className={ classes.title }
           onMouseOver={ () => this.setState({ showEditBtn: true }) }

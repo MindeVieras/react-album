@@ -38,7 +38,7 @@ class Error404 extends Component {
       <div className={ classes.error_wrapper }>
         <Typography
           className={ classes.text }
-          variant="display2"
+          variant="h2"
         >
           Not found { location.pathname }
         </Typography>

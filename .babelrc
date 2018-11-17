@@ -1,19 +1,6 @@
 {
   "presets": [
-    "env",
-    "react",
-    "stage-3"
-  ],
-  "plugins": [
-    "emotion"
-  ],
-  "env": {
-    "development": {
-      "presets": [
-        "env",
-        "react",
-        "stage-3"
-      ]
-    }
-  }
+    "@babel/preset-env",
+    "@babel/preset-react"
+  ]
 }

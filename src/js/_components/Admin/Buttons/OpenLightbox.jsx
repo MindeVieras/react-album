@@ -3,11 +3,11 @@ import  React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Lightbox from 'lightbox-react'
-import { IoPlay } from 'react-icons/lib/io'
+import { IoPlay } from 'react-icons/io'
 
 import LightboxVideo from '../Partials/Lightbox/LightboxVideo'
 
-import { albumsActions, footerActions } from 'Actions'
+// import { albumsActions, footerActions } from 'Actions'
 
 // const images = [
 //   '//placekitten.com/1500/500',

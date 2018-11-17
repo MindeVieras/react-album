@@ -39,7 +39,8 @@ const styles = theme => ({
     position: `absolute`,
     right: 0,
     width: 32,
-    height: 32
+    height: 32,
+    padding: 0
   },
   edit_btn: {
     fontSize: 16,
@@ -80,7 +81,7 @@ class Dates extends Component {
 
         <Typography
           className={ classes.text }
-          variant="subheading"
+          variant="subtitle1"
         >
           { date }
         </Typography>

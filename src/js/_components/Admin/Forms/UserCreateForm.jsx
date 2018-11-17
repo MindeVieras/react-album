@@ -3,7 +3,7 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import Popup from 'react-popup'
 
-import { IoIosCheckmark, IoCloseCircled } from 'react-icons/lib/io'
+import { IoIosCheckmark, IoCloseCircled } from 'react-icons/io'
 
 import Select from 'react-select'
 import Toggle from 'react-toggle'

@@ -36,7 +36,7 @@ function getLocationFromApi(cb) {
   }
   request
     .get('http://ip-api.com/json')
-    .end((err, res) => {
+    .then((err, res) => {
       if (res.status === 200 && res.body.status == 'success') {
         location.lat = res.body.lat
         location.lng = res.body.lon

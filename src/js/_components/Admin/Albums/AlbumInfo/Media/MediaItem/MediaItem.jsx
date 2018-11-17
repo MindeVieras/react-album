@@ -10,7 +10,7 @@ import Paper from '@material-ui/core/Paper'
 
 import blueGrey from '@material-ui/core/colors/blueGrey'
 
-import { IoCheckmarkCircled, IoBug } from 'react-icons/lib/io'
+import { IoCheckmarkCircled, IoBug } from 'react-icons/io'
 
 import Thumbnail from './Thumbnail'
 import ThumbnailSrv from './ThumbnailSrv'

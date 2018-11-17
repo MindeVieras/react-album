@@ -3,7 +3,7 @@ import  React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { IoTrashA } from 'react-icons/lib/io'
+import { IoTrashA } from 'react-icons/io'
 
 import { trashActions } from 'Actions'
 

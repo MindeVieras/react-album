@@ -3,7 +3,7 @@ import  React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { IoBackspace } from 'react-icons/lib/io'
+import { IoBackspace } from 'react-icons/io'
 import { RingLoader } from 'react-spinners'
 
 import { trashActions } from 'Actions'

@@ -6,7 +6,7 @@ import _ from 'lodash'
 import { connect } from 'react-redux'
 import moment from 'moment'
 import Datetime from 'react-datetime'
-import { IoRefresh } from 'react-icons/lib/io'
+import { IoRefresh } from 'react-icons/io'
 
 import { albumsActions } from 'Actions'
 

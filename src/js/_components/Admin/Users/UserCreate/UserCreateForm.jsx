@@ -113,7 +113,7 @@ class UserCreateForm extends Component {
             type="submit"
             loading={ submitting }
             text={ t(`Save`) }
-            variant="raised"
+            variant="contained"
             color="primary"
           />
           <IconButton

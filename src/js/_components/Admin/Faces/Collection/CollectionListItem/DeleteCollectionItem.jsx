@@ -88,14 +88,14 @@ class DeleteCollectionItem extends Component {
             <Button
               onClick={ () => this.handleClose(modal_id) }
               color="primary"
-              variant="raised"
+              variant="contained"
             >
               { t(`Cancel`) }
             </Button>
             <Button
               onClick={ () => this.handleDelete(id, modal_id) }
               color="secondary"
-              variant="raised"
+              variant="contained"
             >
               { t(`Delete`) }
             </Button>

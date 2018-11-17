@@ -1,6 +1,5 @@
 
 import { toastr } from 'react-redux-toastr'
-import Popup from 'react-popup'
 
 import { albumsConstants } from 'Constants'
 import { albumsService, mediaService, trashService } from 'Services'
@@ -127,7 +126,6 @@ function changeDate(payload) {
       .then(res => {
         if (res.ack == 'ok') {
           dispatch(change(payload))
-          Popup.close()
           toastr.success('Success', res.msg)
         } else {
           toastr.error('Error', res.msg)
@@ -257,9 +255,8 @@ function trashMedia(media_id) {
       })
   }
 
-  function remove(media_id) { return { type: albumsConstants.REMOVE_MEDIA, media_id } }
+  function remove(media_id) { return { type: albumsConstants.REMOVE_MEDIA_ONE, media_id } }
 }
-
 
 /*
  * Album Media meta actions
@@ -501,29 +498,12 @@ function moveMedia(media_id, album_id) {
       .then(res => {
         if (res.ack == 'ok') {
           dispatch(remove(media_id, album_id))
-          Popup.close()
           toastr.success('Success', res.msg)
         } else {
           toastr.error('Error', res.msg)
         }
       })
   }
-  function remove(media_id) { return { type: albumsConstants.REMOVE_MEDIA_ONE, media_id } }
-}
-
-function trashMedia(media_id) {
-  return dispatch => {
-    mediaService.putToTrash(media_id)
-      .then(res => {
-        if (res.ack == 'ok') {
-          dispatch(remove(media_id))
-          toastr.success('Success', res.msg)
-        } else if (res.ack == 'err') {
-          toastr.error('Error', res.msg)
-        }
-      })
-  }
-
   function remove(media_id) { return { type: albumsConstants.REMOVE_MEDIA_ONE, media_id } }
 }
 

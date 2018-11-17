@@ -34,8 +34,9 @@ const styles = theme => ({
     marginRight: theme.spacing.unit
   },
   close_btn: {
-    width: 28,
-    height: 28
+    width: theme.spacing.unit * 3.5,
+    height: theme.spacing.unit * 3.5,
+    padding: 0
   },
   close_icon: {
     fontSize: 20
@@ -112,7 +113,7 @@ class SimpleModal extends Component {
           {title &&
             <div className={ classes.title_wrapper }>
               <Typography
-                variant="title"
+                variant="h6"
                 id="modal-title"
               >
                 { title }

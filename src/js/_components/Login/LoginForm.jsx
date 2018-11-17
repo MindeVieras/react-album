@@ -47,7 +47,7 @@ class LoginForm extends Component {
           loading={ submitting }
           text={ t(`Login`) }
           fullWidth={ true }
-          variant="raised"
+          variant="contained"
           color="primary"
           className={ classes.btn_submit }
         />

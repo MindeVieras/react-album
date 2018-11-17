@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import HTML5Backend from 'react-dnd-html5-backend'
 import { DragDropContextProvider } from 'react-dnd'
-import Rnd from 'react-rnd'
+import { Rnd } from 'react-rnd'
 
 import AlbumsList from './AlbumsList'
 import AlbumInfo from './AlbumInfo'
@@ -14,6 +14,7 @@ import { utilsActions, albumsActions } from 'Actions'
 
 const styles = {
   rnd_wrapper: {
+    position: `relative`,
     display: `flex`,
     flexDirection: `column`,
     borderRight: `1px solid grey`
