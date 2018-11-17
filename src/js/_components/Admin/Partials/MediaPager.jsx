@@ -27,7 +27,8 @@ const styles = theme => ({
     width: theme.spacing.unit * 4,
     height: theme.spacing.unit * 4,
     marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit
+    marginRight: theme.spacing.unit,
+    padding: 0
   },
   page: {
     display: `flex`,
