@@ -1,32 +1,36 @@
 
-import { request } from 'superagent'
-
 export const locationService = {
   getCurrentLocation
 }
 
-function getCurrentLocation(cb) {
-  // Try HTML5 geolocation.
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(position => {
-      let loc = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-      }
-      cb(loc)
-    }, () => {
-      // If cant get current location
-      getLocationFromApi(loc => {
-        cb(loc)
-      })
+function getCurrentLocation() {
 
-    })
-  } else {
-    // Browser doesn't support Geolocation
-    getLocationFromApi(loc => {
-      cb(loc)
-    })
-  }
+  return new Promise((resolve, reject) => {
+    
+    // Try HTML5 geolocation.
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        let loc = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        }
+        resolve(loc)
+      }, err => {
+        // If cant get current location
+        console.warn(err.message)
+        getLocationFromApi(loc => {
+          resolve(loc)
+        })
+
+      })
+    }
+    else {
+      console.warn('Browser doesn\'t support Geolocation')
+      getLocationFromApi(loc => {
+        resolve(loc)
+      })
+    }
+  })
 }
 
 function getLocationFromApi(cb) {
@@ -34,13 +38,6 @@ function getLocationFromApi(cb) {
     lat: 0,
     lng: 0
   }
-  request
-    .get('http://ip-api.com/json')
-    .then((err, res) => {
-      if (res.status === 200 && res.body.status == 'success') {
-        location.lat = res.body.lat
-        location.lng = res.body.lon
-      }
-      cb(location)
-    })
+
+  cb(location)
 }

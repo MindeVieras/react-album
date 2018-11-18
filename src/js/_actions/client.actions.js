@@ -40,9 +40,10 @@ function setCurrentLocation() {
 
   return dispatch => {
 
-    locationService.getCurrentLocation(pos => {
-      dispatch(set(pos))
-    })
+    locationService.getCurrentLocation()
+      .then(pos => {
+        dispatch(set(pos))
+      })
   }
 
   function set(location) { return { type: clientConstants.SET_CURRENT_LOCATION, location } }
