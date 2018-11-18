@@ -16,28 +16,32 @@ function getCurrentLocation() {
         }
         resolve(loc)
       }, err => {
-        // If cant get current location
+        // If can't get current location
         console.warn(err.message)
-        getLocationFromApi(loc => {
-          resolve(loc)
-        })
+        getLocationFromApi()
+          .then(loc => {
+            resolve({lat: loc.latitude, lng: loc.longitude})
+          })
 
       })
     }
     else {
       console.warn('Browser doesn\'t support Geolocation')
-      getLocationFromApi(loc => {
-        resolve(loc)
-      })
+      getLocationFromApi()
+        .then(loc => {
+          resolve({lat: loc.latitude, lng: loc.longitude})
+        })
     }
   })
 }
 
-function getLocationFromApi(cb) {
-  let location = {
-    lat: 0,
-    lng: 0
-  }
+function getLocationFromApi() {
 
-  cb(location)
+  return fetch(`https://ipapi.co/json/`)
+    .then(response => {
+      if (!response.ok) {
+        return Promise.reject(response.statusText)
+      }
+      return response.json()
+    })
 }

@@ -51,7 +51,7 @@ class Media extends Component {
     super(props)
 
     const { bucket, access_key } = props
-
+    
     this.uploader = mediaUploader(bucket, access_key)
 
     const uploader = this.uploader
@@ -208,7 +208,7 @@ Media.contextTypes = {
 function mapStateToProps(state) {
   const { settings, admin_ui } = state
   return {
-    bucket: settings.app.s3_bucket,
+    bucket: settings.app.bucket,
     access_key: settings.app.access_key_id,
     isLightboxOpen: admin_ui.lightbox.isOpen
   }
