@@ -1,5 +1,5 @@
 
-import request from 'superagent'
+import { request } from 'superagent'
 
 export const locationService = {
   getCurrentLocation
