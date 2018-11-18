@@ -11,6 +11,7 @@ const Filename = ({ className, filename, width }) => {
       className={ className }
       style={{ width }}
       variant="body2"
+      component="div"
     >
       <Marquee leading={ 500 } loop={ true } trailing={ 500 } text={ filename } />
     </Typography>
