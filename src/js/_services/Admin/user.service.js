@@ -24,7 +24,7 @@ function getOne(username) {
     headers: authHeader()
   }
 
-  return fetch(`${baseServerUrl}/api/users/get-one/${username}`, requestOptions).then(handleResponse)
+  return fetch(`${baseServerUrl}/api/users/${username}`, requestOptions).then(handleResponse)
 }
 
 function create(user) {

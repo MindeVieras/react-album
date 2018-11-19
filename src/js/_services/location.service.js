@@ -1,11 +1,13 @@
 
+import { authHeader, baseServerUrl } from 'Helpers'
+
 export const locationService = {
   getCurrentLocation
 }
 
 function getCurrentLocation() {
 
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     
     // Try HTML5 geolocation.
     if (navigator.geolocation) {
@@ -16,28 +18,35 @@ function getCurrentLocation() {
         }
         resolve(loc)
       }, err => {
-        // If can't get current location
-        console.warn(err.message)
+        // If can't get navigator location
+        console.warn(`${err.message}, IP location used instead.`)
         getLocationFromApi()
           .then(loc => {
-            resolve({lat: loc.latitude, lng: loc.longitude})
+            const {lat, lng} = loc.data
+            resolve({lat, lng})
           })
 
       })
     }
     else {
-      console.warn('Browser doesn\'t support Geolocation')
+      console.warn(`Browser doesn't support Geolocation, IP location used instead.`)
       getLocationFromApi()
         .then(loc => {
-          resolve({lat: loc.latitude, lng: loc.longitude})
+          const {lat, lng} = loc.data
+          resolve({lat, lng})
         })
     }
   })
 }
 
 function getLocationFromApi() {
-
-  return fetch(`https://ipapi.co/json/`)
+  
+  const requestOptions = {
+    method: 'GET',
+    headers: authHeader()
+  }
+  
+  return fetch(`${baseServerUrl}/api/utils/ip-location`, requestOptions)
     .then(response => {
       if (!response.ok) {
         return Promise.reject(response.statusText)

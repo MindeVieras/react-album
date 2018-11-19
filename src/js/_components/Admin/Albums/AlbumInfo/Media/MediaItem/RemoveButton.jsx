@@ -22,7 +22,8 @@ const styles = theme => ({
     top: 0,
     right: 0,
     width: 28,
-    height: 28
+    height: 28,
+    padding: 0
   },
   closeIcon: {
     fontSize: 20,
