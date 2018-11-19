@@ -27,6 +27,7 @@
     "fscreen": "^1.0.2",
     "history": "^4.7.2",
     "moment": "^2.22.2",
+    "public-ip": "^2.4.0",
     "rc-slider": "^8.6.3",
     "react": "^16.6.3",
     "react-async-script-loader": "^0.3.0",

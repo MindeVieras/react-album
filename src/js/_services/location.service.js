@@ -1,4 +1,6 @@
 
+import publicIp from 'public-ip'
+
 import { authHeader, baseServerUrl } from 'Helpers'
 
 export const locationService = {
@@ -41,12 +43,15 @@ function getCurrentLocation() {
 
 function getLocationFromApi() {
   
-  const requestOptions = {
-    method: 'GET',
-    headers: authHeader()
-  }
-  
-  return fetch(`${baseServerUrl}/api/utils/ip-location`, requestOptions)
+  return publicIp.v4()
+    .then(ip => {
+      const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+      }
+      
+      return fetch(`${baseServerUrl}/api/utils/ip-location/${ip}`, requestOptions)
+    })
     .then(response => {
       if (!response.ok) {
         return Promise.reject(response.statusText)
