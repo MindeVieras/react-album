@@ -21,7 +21,7 @@ const styles = theme => ({
   flex: {
     display: `flex`,
     flex: 1,
-    overflow: `auto`
+    overflow: `hidden`
   }
 })
 

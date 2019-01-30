@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 import List from '@material-ui/core/List'
 
-import { Scrollbar, Spinner } from 'Common'
+import { Scrollbar, Spinner, StatusMessage } from 'Common'
 
 import CollectionListItem from './CollectionListItem'
 
@@ -27,10 +27,10 @@ const styles = theme => ({
 class Collection extends Component {
 
   componentDidMount(){
-    const { dispatch, collection: { items } } = this.props
+    const { dispatch, collection: { err, items } } = this.props
 
     // // load user from API only if none
-    if (items && items.length === 0)
+    if ((items && items.length === 0) || err )
       dispatch(facesActions.getCollection())
   }
 
@@ -46,7 +46,7 @@ class Collection extends Component {
         }
 
         {err &&
-          <div>{err}</div>
+          <StatusMessage message={ err } type="error" />
         }
 
         {items &&

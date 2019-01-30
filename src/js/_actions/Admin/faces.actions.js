@@ -15,10 +15,14 @@ function getCollection() {
 
     facesService.getCollection()
       .then(res => {
-        if (res.ack == 'ok')
+        // console.log(res)
+        if (res.status == 'success')
           dispatch(success(res.data))
-        else
-          dispatch(failure(res.msg))
+        
+        else if (res.status == 'error')
+          dispatch(failure(res.message))
+
+        return
       })
   }
 

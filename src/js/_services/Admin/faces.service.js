@@ -1,5 +1,5 @@
 
-import { authHeader, baseServerUrl } from 'Helpers'
+import { authHeader, baseServerUrl, handleResponse } from 'Helpers'
 
 export const facesService = {
   getCollection,
@@ -22,11 +22,4 @@ function deleteFace(id) {
   }
 
   return fetch(`${baseServerUrl}/api/faces/collection/${id}`, requestOptions).then(handleResponse)
-}
-
-function handleResponse(response) {
-  if (!response.ok) {
-    return Promise.reject(response.statusText)
-  }
-  return response.json()
 }
