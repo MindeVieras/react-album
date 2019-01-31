@@ -1,7 +1,7 @@
 
 import { toastr } from 'react-redux-toastr'
 
-import { albumsConstants } from 'Constants'
+import { albumsConstants, adminConstants } from 'Constants'
 import { albumsService, mediaService, trashService } from 'Services'
 
 export const albumsActions = {
@@ -109,7 +109,10 @@ function rename(payload) {
     albumsService.rename(payload)
       .then(res => {
         if (res.ack == 'ok') {
+          console.log(payload)
           dispatch(rename(payload))
+          const modal_id = `album_rename_${payload.album_id}`
+          dispatch(closeModal(modal_id))
           toastr.success('Success', res.msg)
         } else {
           toastr.error('Error', res.msg)
@@ -118,6 +121,7 @@ function rename(payload) {
   }
 
   function rename(payload) { return { type: albumsConstants.RENAME, payload } }
+  function closeModal(modal_id) { return { type: adminConstants.UI_MODAL_CLOSE, modal_id } }
 }
 
 function changeDate(payload) {

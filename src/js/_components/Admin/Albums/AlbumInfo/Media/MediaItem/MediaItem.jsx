@@ -208,14 +208,14 @@ class MediaItem extends Component {
                       className={ classes.statusIcon }
                     />
                   }
-                  {videos &&
+                  {/* {videos &&
                     <StatusGenerateVideosIcon
                       videos={ videos }
                       id={ id }
                       media_id={ media_id }
                       className={ classes.statusIcon }
                     />
-                  }
+                  } */}
                   {status === 'upload successful' &&
                     <div
                       className="icon success"

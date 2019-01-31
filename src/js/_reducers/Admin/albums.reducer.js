@@ -136,6 +136,7 @@ export function adminAlbums(state = initialState, action) {
     return {
       ...state,
       selected_album: {
+        ...state.selected_album,
         album: {
           ...state.selected_album.album,
           name: action.payload.name
