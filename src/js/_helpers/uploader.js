@@ -3,7 +3,7 @@ import FineUploaderS3 from 'fine-uploader-wrappers/s3'
 
 import { baseServerUrl } from 'Helpers'
 
-const allowedExtensions = ['jpeg', 'jpg', 'mp4']
+const allowedExtensions = ['jpeg', 'jpg']
 
 export function mediaUploader(bucket, access_key, allowed = allowedExtensions) {
 
