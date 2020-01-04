@@ -1,12 +1,38 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+// import I18n from 'redux-i18n'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import CssBaseline from '@material-ui/core/CssBaseline'
+
+import { store } from './helpers'
+import App from './App'
+import * as serviceWorker from './serviceWorker'
+
+const theme = createMuiTheme({
+  palette: {
+    type: 'dark',
+  },
+})
+
+/**
+ * Album APP
+ */
+const AlbumApp = () => (
+  <Provider store={store}>
+    <MuiThemeProvider theme={theme}>
+      <CssBaseline />
+      {/* <I18n translations={{}} useReducer={true} initialLang="en"> */}
+      <App />
+      {/* </I18n> */}
+    </MuiThemeProvider>
+  </Provider>
+)
+
+ReactDOM.render(<AlbumApp />, document.getElementById('root'))
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+serviceWorker.unregister()

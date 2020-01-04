@@ -1,26 +1,92 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+// import { setLanguage } from 'redux-i18n'
+import { Router, Switch, Route } from 'react-router-dom'
+// import locale from 'browser-locale'
+import WebFont from 'webfontloader'
 
-const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import PrivateRoute from './components/PrivateRoute'
+import Login from './components/Login'
+// import Front from './_components/Front'
+// import Admin from './_components/Admin'
+import Error404 from './components/404'
+
+import { history } from './helpers'
+import { setClientDimensions } from './actions'
+
+interface IAppProps {
+  // setClientDimensions: typeof setClientDimensions
+  setClientDimensions: Function
 }
 
-export default App;
+/**
+ * this is main App component
+ * @module App
+ *
+ */
+class App extends Component<IAppProps> {
+  /**
+   * constructor description
+   * @param {Object} props props to pass
+   */
+  constructor(props: IAppProps) {
+    super(props)
+
+    // Load all fonts
+    WebFont.load({
+      google: {
+        families: [
+          'Roboto:100,300,400,500,700,900',
+          // 'Dosis:300,400,500,600,700,800',
+          // 'Oxygen:300,400,700',
+          // 'Ruda:400,700,900',
+          // 'sans-serif'
+        ],
+      },
+    })
+
+    // Get App settings
+    // props.dispatch(utilsActions.getAppSettings())
+
+    // Set browser info
+    // let allowedLocales = ['en', 'lt', 'ru']
+    // let l = 'en'
+
+    // if (allowedLocales.includes(locale())) {
+    //   l = locale()
+    // }
+    // props.dispatch(setLanguage(l))
+
+    // Set initial client dimensions.
+    props.setClientDimensions()
+    // Update client dimensions on window resize.
+    window.addEventListener('resize', this.updateDimensions.bind(this))
+  }
+
+  // Update state with new dimensions.
+  updateDimensions() {
+    this.props.setClientDimensions()
+  }
+
+  /**
+   * Render DOM.
+   * @private
+   *
+   * @return {JSX.Element}
+   *   Jsx html element.
+   */
+  render() {
+    return (
+      <Router history={history}>
+        <Switch>
+          {/* <PrivateRoute exact path="/" component={Front} /> */}
+          {/* <PrivateRoute path="/admin" component={Admin} /> */}
+          <Route path="/login" component={Login} />
+          <PrivateRoute component={Error404} />
+        </Switch>
+      </Router>
+    )
+  }
+}
+
+export default connect(null, { setClientDimensions })(App)
