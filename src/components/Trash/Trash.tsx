@@ -3,9 +3,6 @@ import React from 'react'
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 
-import LoginForm from './LoginForm'
-import { authService } from '../../services'
-
 const styles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -14,7 +11,7 @@ const styles = makeStyles((theme: Theme) =>
       height: '100vh',
     },
     container: {
-      maxWidth: theme.spacing(45),
+      maxWidth: 360,
       padding: theme.spacing(3),
       margin: '0 auto',
     },
@@ -22,7 +19,7 @@ const styles = makeStyles((theme: Theme) =>
 )
 
 /**
- * Login page component.
+ * Trash page component.
  *
  * @param {Props} props
  *   Component props.
@@ -30,19 +27,14 @@ const styles = makeStyles((theme: Theme) =>
  * @returns {JSX.Element}
  *   Jsx html page.
  */
-const Login = (): JSX.Element => {
+const Trash = (): JSX.Element => {
   const classes = styles()
-
-  // Force user to logout before rendering a form.
-  authService.logout()
 
   return (
     <div className={classes.root}>
-      <Paper className={classes.container}>
-        <LoginForm />
-      </Paper>
+      <Paper className={classes.container}>Trash page!!!</Paper>
     </div>
   )
 }
 
-export default Login
+export default Trash

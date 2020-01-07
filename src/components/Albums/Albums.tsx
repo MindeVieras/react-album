@@ -11,7 +11,7 @@ const styles = makeStyles((theme: Theme) =>
       height: '100vh',
     },
     container: {
-      maxWidth: 360,
+      maxWidth: 780,
       padding: theme.spacing(3),
       margin: '0 auto',
     },
@@ -19,7 +19,7 @@ const styles = makeStyles((theme: Theme) =>
 )
 
 /**
- * Login page component.
+ * Albums page component.
  *
  * @param {Props} props
  *   Component props.
@@ -27,14 +27,14 @@ const styles = makeStyles((theme: Theme) =>
  * @returns {JSX.Element}
  *   Jsx html page.
  */
-const Front = (): JSX.Element => {
+const Albums = (): JSX.Element => {
   const classes = styles()
 
   return (
     <div className={classes.root}>
-      <Paper className={classes.container}>Front page content!!!</Paper>
+      <Paper className={classes.container}>Albums page</Paper>
     </div>
   )
 }
 
-export default Front
+export default Albums
