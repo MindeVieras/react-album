@@ -1,11 +1,7 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
-
-import LoginForm from './LoginForm'
-import { authService } from '../../services'
 
 const styles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,19 +27,14 @@ const styles = makeStyles((theme: Theme) =>
  * @returns {JSX.Element}
  *   Jsx html page.
  */
-const Login = (): JSX.Element => {
+const Front = (): JSX.Element => {
   const classes = styles()
-
-  // Force user to logout before rendering a form.
-  authService.logout()
 
   return (
     <div className={classes.root}>
-      <Paper className={classes.container}>
-        <LoginForm />
-      </Paper>
+      <Paper className={classes.container}>Front page content!!!</Paper>
     </div>
   )
 }
 
-export default connect()(Login)
+export default Front

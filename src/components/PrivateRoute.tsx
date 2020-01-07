@@ -1,8 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { Route, Redirect } from 'react-router-dom'
+import { Route, Redirect, RouteProps } from 'react-router-dom'
 
-const PrivateRoute = ({ component: Component, ...rest }: any) => (
+const PrivateRoute: React.SFC<RouteProps> = ({ component: Component, ...rest }: any) => (
   <Route
     {...rest}
     render={(props) =>
@@ -14,14 +13,5 @@ const PrivateRoute = ({ component: Component, ...rest }: any) => (
     }
   />
 )
-
-PrivateRoute.propTypes = {
-  component: PropTypes.any.isRequired,
-  location: PropTypes.object,
-}
-
-PrivateRoute.defaultProps = {
-  location: {},
-}
 
 export default PrivateRoute

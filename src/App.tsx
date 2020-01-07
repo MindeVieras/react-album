@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-// import { setLanguage } from 'redux-i18n'
 import { Router, Switch, Route } from 'react-router-dom'
-// import locale from 'browser-locale'
 import WebFont from 'webfontloader'
 
 import PrivateRoute from './components/PrivateRoute'
 import Login from './components/Login'
-// import Front from './_components/Front'
+import Front from './components/Front'
 // import Admin from './_components/Admin'
 import Error404 from './components/404'
 
@@ -45,18 +43,6 @@ class App extends Component<IAppProps> {
       },
     })
 
-    // Get App settings
-    // props.dispatch(utilsActions.getAppSettings())
-
-    // Set browser info
-    // let allowedLocales = ['en', 'lt', 'ru']
-    // let l = 'en'
-
-    // if (allowedLocales.includes(locale())) {
-    //   l = locale()
-    // }
-    // props.dispatch(setLanguage(l))
-
     // Set initial client dimensions.
     props.setClientDimensions()
     // Update client dimensions on window resize.
@@ -79,7 +65,7 @@ class App extends Component<IAppProps> {
     return (
       <Router history={history}>
         <Switch>
-          {/* <PrivateRoute exact path="/" component={Front} /> */}
+          <PrivateRoute exact path="/" component={Front} />
           {/* <PrivateRoute path="/admin" component={Admin} /> */}
           <Route path="/login" component={Login} />
           <PrivateRoute component={Error404} />

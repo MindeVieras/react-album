@@ -1,12 +1,11 @@
 import { combineReducers } from 'redux'
-// import { i18nState } from 'redux-i18n'
-// import { reducer as formReducer } from 'redux-form'
+import { reducer as formReducer } from 'redux-form'
 // import { reducer as toastrReducer } from 'react-redux-toastr'
 
 import { client } from './client.reducer'
 
-// import { BrowserOrientation } from '../enums'
 import { IScreenDimensions } from '../helpers'
+
 // import { settings } from './settings.reducer'
 // import { auth } from './auth.reducer'
 // import { adminUi } from './Admin/ui.reducer'
@@ -23,12 +22,10 @@ interface IStoreState {
   client: {
     browser: Bowser.Parser.ParsedResult
     dimensions: IScreenDimensions
-    // location?: {
-    //   lng: number
-    //   lat: number
-    // }
   }
-  // i18nState: any
+  form: {
+    login?: any
+  }
 }
 
 const rootReducer = combineReducers<IStoreState>({
@@ -42,10 +39,9 @@ const rootReducer = combineReducers<IStoreState>({
   // admin_albums: adminAlbums,
   // front_ui: frontUi,
   // front_albums: frontAlbums,
-  // form: formReducer,
+  form: formReducer,
   // toastr: toastrReducer,
   // trash,
-  // i18nState,
 })
 
 export default rootReducer
