@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Router, Switch, Route } from 'react-router-dom'
+import { setTranslations } from 'redux-i18n'
 import WebFont from 'webfontloader'
 
 import PrivateRoute from './components/PrivateRoute'
@@ -10,10 +11,11 @@ import Error404 from './components/404'
 
 import { history } from './helpers'
 import { setClientDimensions } from './actions'
+import { translations } from './translations'
 
 interface IAppProps {
-  // setClientDimensions: typeof setClientDimensions
   setClientDimensions: Function
+  setTranslations: typeof setTranslations
 }
 
 /**
@@ -42,6 +44,9 @@ class App extends Component<IAppProps> {
       },
     })
 
+    // Set translations - the asynchronous way.
+    props.setTranslations(translations)
+
     // Set initial client dimensions.
     props.setClientDimensions()
     // Update client dimensions on window resize.
@@ -64,7 +69,7 @@ class App extends Component<IAppProps> {
     return (
       <Router history={history}>
         <Switch>
-          <PrivateRoute component={Main} />
+          {/* <PrivateRoute component={Main} /> */}
           <Route exact path="/login" component={Login} />
           <PrivateRoute component={Error404} />
         </Switch>
@@ -73,4 +78,4 @@ class App extends Component<IAppProps> {
   }
 }
 
-export default connect(null, { setClientDimensions })(App)
+export default connect(null, { setClientDimensions, setTranslations })(App)

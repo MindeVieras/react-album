@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
+import { i18nState, ITranslations } from 'redux-i18n'
 // import { reducer as toastrReducer } from 'react-redux-toastr'
 
 import { client } from './client.reducer'
@@ -18,7 +19,7 @@ import { IScreenDimensions } from '../helpers'
 // import { frontUi } from './Front/ui.reducer'
 // import { frontAlbums } from './Front/albums.reducer'
 
-interface IStoreState {
+export interface IStoreState {
   client: {
     browser: Bowser.Parser.ParsedResult
     dimensions: IScreenDimensions
@@ -26,6 +27,7 @@ interface IStoreState {
   form: {
     login?: any
   }
+  i18nState: any
 }
 
 const rootReducer = combineReducers<IStoreState>({
@@ -42,6 +44,7 @@ const rootReducer = combineReducers<IStoreState>({
   form: formReducer,
   // toastr: toastrReducer,
   // trash,
+  i18nState,
 })
 
 export default rootReducer

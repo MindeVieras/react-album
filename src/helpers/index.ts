@@ -27,6 +27,33 @@ export const screenDimensions = (): IScreenDimensions => {
   return { width, height, size, orientation }
 }
 
+/**
+ * Gets browser language.
+ * Will fallback to 'en'.
+ *
+ * @returns {string}
+ *   Language code like: en, es, ru...
+ */
+export const browserLocale = (): string => {
+  let lang: string
+
+  if (window.navigator.languages && window.navigator.languages.length) {
+    // Latest versions of Chrome and Firefox set this correctly.
+    lang = window.navigator.languages[0]
+  } else if (window.navigator.userLanguage) {
+    // IE only.
+    lang = window.navigator.userLanguage
+  } else if (window.navigator.language) {
+    // Latest versions of Chrome, Firefox, and Safari set this correctly.
+    lang = window.navigator.language
+  } else {
+    // Fallback.
+    lang = 'en'
+  }
+
+  return lang
+}
+
 export * from './store'
 export * from './config'
 export * from './history'

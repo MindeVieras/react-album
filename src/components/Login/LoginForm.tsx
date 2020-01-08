@@ -1,5 +1,5 @@
 import React from 'react'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 import { Field, reduxForm, InjectedFormProps } from 'redux-form'
 import validator from 'validator'
 
@@ -15,13 +15,6 @@ export interface IFormLoginValues {
   password: string
 }
 
-// interface ILoginFormProps extends InjectedFormProps<IFormLoginValues> {
-//   classes: {
-//     btnSubmit: string
-//     authError: string
-//   }
-// }
-
 const styles = makeStyles((theme: Theme) =>
   createStyles({
     button: {
@@ -33,20 +26,20 @@ const styles = makeStyles((theme: Theme) =>
   }),
 )
 
-const LoginForm = (props: InjectedFormProps<IFormLoginValues>) => {
+const LoginForm = (props: InjectedFormProps<IFormLoginValues>, ctx: any) => {
   const classes = styles()
   const { handleSubmit, submitting, error } = props
-  // console.log(props)
+  const { t } = ctx
 
   return (
     <form onSubmit={handleSubmit(submit)}>
-      <Field name="username" component={TextInput} label="Username" />
-      <Field name="password" component={TextInput} label="Password" type="password" />
+      <Field name="username" component={TextInput} label={t('Username')} />
+      <Field name="password" component={TextInput} label={t('Password')} type="password" />
 
       <ButtonInput
         type="submit"
         loading={submitting}
-        text="Login"
+        text={t('Login')}
         fullWidth={true}
         // variant="contained"
         // color="primary"
@@ -55,7 +48,7 @@ const LoginForm = (props: InjectedFormProps<IFormLoginValues>) => {
 
       {error && (
         <Typography className={classes.error} align="center" color="error">
-          {error}
+          {t(error)}
         </Typography>
       )}
     </form>
@@ -84,6 +77,10 @@ const validate = (values: IFormLoginValues) => {
   }
 
   return errors
+}
+
+LoginForm.contextTypes = {
+  t: PropTypes.func.isRequired,
 }
 
 export default reduxForm<IFormLoginValues>({
