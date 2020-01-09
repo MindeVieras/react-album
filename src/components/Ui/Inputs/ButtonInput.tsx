@@ -1,42 +1,41 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
-import { withStyles, Theme, createStyles } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
+import { Theme, createStyles, makeStyles } from '@material-ui/core/styles'
+import Button, { ButtonProps } from '@material-ui/core/Button'
 
 import CircleSpinner from '../Spinners/CircleSpinner'
 
-const styles = (theme: Theme) =>
+interface IButtonInputProps extends ButtonProps {
+  text?: string | number
+  loading?: boolean
+  type?: 'submit' | 'button' | 'reset'
+}
+
+const styles = makeStyles((theme: Theme) =>
   createStyles({
-    btn_wrapper: {
+    btnWrapper: {
       position: 'relative',
     },
-  })
-
-const RenderButton = ({ classes, className, type, loading, text, ...otherProps }: any) => (
-  <div className={`${classes.btn_wrapper} ${className}`}>
-    <Button type={type} size="large" {...otherProps}>
-      {text}
-    </Button>
-
-    {loading && <CircleSpinner size={32} />}
-  </div>
+  }),
 )
 
-RenderButton.propTypes = {
-  classes: PropTypes.object.isRequired,
-  className: PropTypes.string,
-  type: PropTypes.string,
-  loading: PropTypes.bool,
-  text: PropTypes.string,
-}
+/**
+ * Button input component with loading state.
+ *
+ * @param {IButtonInputProps} props
+ */
+export const ButtonInput = (props: IButtonInputProps) => {
+  const classes = styles()
 
-RenderButton.defaultProps = {
-  className: '',
-  type: 'button',
-  loading: false,
-  text: 'Submit',
-  fullWidth: false,
-}
+  // Filter out 'loading' from IButtonInputProps.
+  const { loading, ...restButton } = props
 
-export const ButtonInput = withStyles(styles)(RenderButton)
+  return (
+    <div className={classes.btnWrapper}>
+      <Button variant="contained" type="submit" {...restButton}>
+        {props.text}
+      </Button>
+      {loading && <CircleSpinner size={32} />}
+    </div>
+  )
+}

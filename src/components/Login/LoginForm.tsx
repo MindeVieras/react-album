@@ -19,14 +19,12 @@ export interface IFormLoginValues {
 
 const styles = makeStyles((theme: Theme) =>
   createStyles({
-    button: {
+    error: {
       marginTop: theme.spacing(2),
     },
-    error: {
-      marginTop: theme.spacing(),
-    },
     captcha: {
-      marginTop: theme.spacing(),
+      marginTop: theme.spacing(2),
+      marginBottom: theme.spacing(2),
       display: 'flex',
       justifyContent: 'center',
     },
@@ -42,14 +40,17 @@ const LoginForm = (props: InjectedFormProps<IFormLoginValues>, ctx: any) => {
     <form onSubmit={handleSubmit(submit)}>
       <Field name="username" component={TextInput} label={t('Username')} />
       <Field name="password" component={TextInput} label={t('Password')} type="password" />
+
+      <div className={classes.captcha}>
+        <Field name="recaptcha" component={RecaptchaField} />
+      </div>
+
       <ButtonInput
-        type="submit"
         loading={submitting}
         text={t('Login')}
         fullWidth={true}
-        // variant="contained"
-        // color="primary"
-        className={classes.button}
+        color="primary"
+        size="large"
       />
 
       {error && (
@@ -57,10 +58,6 @@ const LoginForm = (props: InjectedFormProps<IFormLoginValues>, ctx: any) => {
           {t(error)}
         </Typography>
       )}
-
-      <div className={classes.captcha}>
-        <Field name="recaptcha" component={RecaptchaField} />
-      </div>
     </form>
   )
 }

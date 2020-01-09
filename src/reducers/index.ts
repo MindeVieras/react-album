@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
-import { i18nState, ITranslations } from 'redux-i18n'
+import { i18nState } from 'redux-i18n'
 // import { reducer as toastrReducer } from 'react-redux-toastr'
 
 import { client } from './client.reducer'

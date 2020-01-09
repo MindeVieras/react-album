@@ -12,14 +12,15 @@ import { history } from '../../helpers'
  */
 function submit(values: IFormLoginValues) {
   const { username, password, recaptcha } = values
+
+  // Handle recaptcha error before making a request to the API.
+  if (!recaptcha) {
+    // Throw submission error if recaptcha could not be verified.
+    throw new SubmissionError({ _error: 'Cannot validate reCAPTCHA' })
+  }
+
   return authService.login(username, password).then((res) => {
     const { status, message, errors } = res
-
-    // Handle recaptcha error.
-    if (!recaptcha) {
-      // Throw submission error if recaptcha could not be verified.
-      throw new SubmissionError({ _error: 'Cannot validate reCAPTCHA' })
-    }
 
     // Handle client errors.
     if (status === ServiceResponseStatus.clientError) {

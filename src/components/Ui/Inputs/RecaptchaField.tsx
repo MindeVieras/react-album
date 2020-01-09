@@ -6,11 +6,25 @@ import ReCAPTCHA from 'react-google-recaptcha'
 import { config } from '../../../helpers'
 import { IStoreState } from '../../../reducers'
 
+/**
+ * Recaptcha custom props.
+ */
 interface IRecaptchaFieldProps extends WrappedFieldProps {
   currentLanguage: string
 }
 
-const RecaptchaField = (field: IRecaptchaFieldProps) => {
+/**
+ * Google recaptcha component,
+ * used as the redux form field.
+ *
+ * @param {IRecaptchaFieldProps} field
+ *   Redux form field props
+ *   and custom 'currentLanguage' prop.
+ *
+ * @returns {JSX.Element}
+ *   Recaptcha component.
+ */
+const RecaptchaField = (field: IRecaptchaFieldProps): JSX.Element => {
   return (
     <ReCAPTCHA
       size="normal"
@@ -21,7 +35,13 @@ const RecaptchaField = (field: IRecaptchaFieldProps) => {
   )
 }
 
-const mapStateToProps = (state: IStoreState) => {
+/**
+ * Create props for the component from the redux store.
+ *
+ * @param {IStoreState} state
+ *   Global redux state.
+ */
+const mapStateToProps = (state: IStoreState): { currentLanguage: string } => {
   return {
     currentLanguage: state.i18nState.lang,
   }
