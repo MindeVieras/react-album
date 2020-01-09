@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { WrappedFieldProps } from 'redux-form'
 import ReCAPTCHA from 'react-google-recaptcha'
 
-import { recaptchaSiteKey } from '../../../helpers'
+import { config } from '../../../helpers'
 import { IStoreState } from '../../../reducers'
 
 interface IRecaptchaFieldProps extends WrappedFieldProps {
@@ -15,7 +15,7 @@ const RecaptchaField = (field: IRecaptchaFieldProps) => {
     <ReCAPTCHA
       size="normal"
       hl={field.currentLanguage}
-      sitekey={recaptchaSiteKey}
+      sitekey={config.recaptchaSiteKey}
       onChange={field.input.onChange}
     />
   )

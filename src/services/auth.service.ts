@@ -1,5 +1,5 @@
 import { IServiceResponse } from './types'
-import { baseServerUrl } from '../helpers'
+import { config } from '../helpers'
 
 export const authService = {
   login,
@@ -21,7 +21,7 @@ async function login(username: string, password: string) {
     body: JSON.stringify({ username, password }),
   }
 
-  const res = await fetch(`${baseServerUrl}/api/auth`, requestOptions)
+  const res = await fetch(`${config.baseServerUrl}/api/auth`, requestOptions)
   const resJson: IServiceResponse = await res.json()
   // Login successful if there's a jwt token in the response.
   if (resJson && resJson.data && resJson.data.token) {
