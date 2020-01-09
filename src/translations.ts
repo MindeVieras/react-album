@@ -17,6 +17,8 @@ export const translations: ITranslations = {
     'Invalid username or password': 'Neteisingas prisijungimo vardas arba slaptažodis',
     'Input validation error': 'Neteisingai užpildyta forma',
 
+    'Cannot validate reCAPTCHA': 'Nepatvirtinta reCAPTCHA',
+
     'Edit album name': 'Redaguoti albumo pavadinimą',
     'Edit album date': 'Keisti albumo datą',
     Save: 'Išsaugoti',
@@ -340,5 +342,7 @@ export const translations: ITranslations = {
     'Password is required': 'Необходим пароль',
     'Invalid username or password': 'неправильное имя пользователя или пароль',
     'Input validation error': 'Ошибка проверки ввода',
+
+    'Cannot validate reCAPTCHA': 'Не удается проверить reCAPTCHA',
   },
 }

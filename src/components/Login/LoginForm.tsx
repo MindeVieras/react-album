@@ -7,12 +7,14 @@ import { Theme, createStyles, makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
 import { TextInput, ButtonInput } from '../Ui'
+import RecaptchaField from '../Ui/Inputs/RecaptchaField'
 
 import submit from './submit'
 
 export interface IFormLoginValues {
   username: string
   password: string
+  recaptcha: string
 }
 
 const styles = makeStyles((theme: Theme) =>
@@ -22,6 +24,11 @@ const styles = makeStyles((theme: Theme) =>
     },
     error: {
       marginTop: theme.spacing(),
+    },
+    captcha: {
+      marginTop: theme.spacing(),
+      display: 'flex',
+      justifyContent: 'center',
     },
   }),
 )
@@ -35,7 +42,6 @@ const LoginForm = (props: InjectedFormProps<IFormLoginValues>, ctx: any) => {
     <form onSubmit={handleSubmit(submit)}>
       <Field name="username" component={TextInput} label={t('Username')} />
       <Field name="password" component={TextInput} label={t('Password')} type="password" />
-
       <ButtonInput
         type="submit"
         loading={submitting}
@@ -51,6 +57,10 @@ const LoginForm = (props: InjectedFormProps<IFormLoginValues>, ctx: any) => {
           {t(error)}
         </Typography>
       )}
+
+      <div className={classes.captcha}>
+        <Field name="recaptcha" component={RecaptchaField} />
+      </div>
     </form>
   )
 }

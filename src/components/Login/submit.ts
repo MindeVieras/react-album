@@ -11,13 +11,19 @@ import { history } from '../../helpers'
  *   Login form values.
  */
 function submit(values: IFormLoginValues) {
-  const { username, password } = values
+  const { username, password, recaptcha } = values
   return authService.login(username, password).then((res) => {
     const { status, message, errors } = res
 
+    // Handle recaptcha error.
+    if (!recaptcha) {
+      // Throw submission error if recaptcha could not be verified.
+      throw new SubmissionError({ _error: 'Cannot validate reCAPTCHA' })
+    }
+
     // Handle client errors.
     if (status === ServiceResponseStatus.clientError) {
-      // Trow submission errors to redux form fields.
+      // Throw submission errors to redux form fields.
       throw new SubmissionError({ _error: message, ...errors })
     }
 

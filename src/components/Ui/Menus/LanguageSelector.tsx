@@ -56,7 +56,7 @@ function LanguageSelector(props: ILanguageSelectorProps) {
   )
 }
 
-function mapStateToProps(state: IStoreState) {
+const mapStateToProps = (state: IStoreState) => {
   return {
     currentLanguage: state.i18nState.lang,
   }
