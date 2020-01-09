@@ -21,19 +21,15 @@ const styles = makeStyles((theme: Theme) =>
 
 /**
  * Button input component with loading state.
+ * Filter out 'loading' and 'text' props from IButtonInputProps.
  *
  * @param {IButtonInputProps} props
  */
-export const ButtonInput = (props: IButtonInputProps) => {
-  const classes = styles()
-
-  // Filter out 'loading' from IButtonInputProps.
-  const { loading, ...restButton } = props
-
+export const ButtonInput = ({ loading, text, ...buttonProps }: IButtonInputProps) => {
   return (
-    <div className={classes.btnWrapper}>
-      <Button variant="contained" type="submit" {...restButton}>
-        {props.text}
+    <div className={styles().btnWrapper}>
+      <Button variant="contained" type="submit" {...buttonProps}>
+        {text}
       </Button>
       {loading && <CircleSpinner size={32} />}
     </div>
