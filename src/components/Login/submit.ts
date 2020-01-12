@@ -1,8 +1,10 @@
+import { Dispatch } from 'redux'
 import { SubmissionError } from 'redux-form'
 
 import { IFormLoginValues } from './LoginForm'
 import { authService, ServiceResponseStatus } from '../../services'
 import { history } from '../../helpers'
+import { authSet, IActionAuthSet } from '../../actions'
 
 /**
  * Login form submit handler.
@@ -10,7 +12,7 @@ import { history } from '../../helpers'
  * @param {IFormLoginValues} values
  *   Login form values.
  */
-function submit(values: IFormLoginValues) {
+const submit = async (values: IFormLoginValues, dispatch: Dispatch<IActionAuthSet>) => {
   const { username, password, recaptcha } = values
 
   // Handle recaptcha error before making a request to the API.
@@ -19,20 +21,21 @@ function submit(values: IFormLoginValues) {
     throw new SubmissionError({ _error: 'Cannot validate reCAPTCHA' })
   }
 
-  return authService.login(username, password).then((res) => {
-    const { status, message, errors } = res
+  const { status, message, errors, data } = await authService.login(username, password)
 
-    // Handle client errors.
-    if (status === ServiceResponseStatus.clientError) {
-      // Throw submission errors to redux form fields.
-      throw new SubmissionError({ _error: message, ...errors })
-    }
+  // Handle client errors.
+  if (status === ServiceResponseStatus.clientError) {
+    // Throw submission errors to redux form fields.
+    throw new SubmissionError({ _error: message, ...errors })
+  }
 
-    // Handle success.
-    if (status === ServiceResponseStatus.success) {
-      history.push('/')
-    }
-  })
+  // Handle success.
+  if (status === ServiceResponseStatus.success && data) {
+    console.log(authSet(data))
+    // @ts-ignore
+    dispatch(authSet(data))
+    history.push('/')
+  }
 }
 
 export default submit

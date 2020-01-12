@@ -20,21 +20,21 @@ const styles = makeStyles((theme: Theme) =>
 )
 
 /**
- * Albums page component.
+ * Users page component.
  *
  * @returns {FunctionComponent}
- *   Functional 'Albums' component.
+ *   Functional 'Users' component.
  */
-const Albums: FunctionComponent = () => {
+const Users: FunctionComponent = () => {
   const classes = styles()
 
   return (
     <MainLayout>
       <div className={classes.root}>
-        <Paper className={classes.container}>Albums page</Paper>
+        <Paper className={classes.container}>Users page</Paper>
       </div>
     </MainLayout>
   )
 }
 
-export default Albums
+export default Users

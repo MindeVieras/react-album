@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FunctionComponent } from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import I18n from 'redux-i18n'
@@ -19,7 +19,7 @@ const theme = createMuiTheme({
 /**
  * Album APP
  */
-const AlbumApp = () => (
+const AlbumApp: FunctionComponent = () => (
   <Provider store={store}>
     <MuiThemeProvider theme={theme}>
       <CssBaseline />

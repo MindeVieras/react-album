@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { FunctionComponent } from 'react'
+import { connect } from 'react-redux'
 
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 
 import LoginForm from './LoginForm'
-import { authService } from '../../services'
+import { authClear } from '../../actions'
+
+interface ILoginProps {
+  authClear: Function
+}
 
 const styles = makeStyles((theme: Theme) =>
   createStyles({
@@ -30,11 +35,11 @@ const styles = makeStyles((theme: Theme) =>
  * @returns {JSX.Element}
  *   Jsx html page.
  */
-const Login = (): JSX.Element => {
+const Login: FunctionComponent<ILoginProps> = (props): JSX.Element => {
   const classes = styles()
 
   // Force user to logout before rendering a form.
-  authService.logout()
+  props.authClear()
 
   return (
     <div className={classes.root}>
@@ -45,4 +50,4 @@ const Login = (): JSX.Element => {
   )
 }
 
-export default Login
+export default connect(null, { authClear })(Login)

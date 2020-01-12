@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FunctionComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Field, reduxForm, InjectedFormProps } from 'redux-form'
 import validator from 'validator'
@@ -31,7 +31,7 @@ const styles = makeStyles((theme: Theme) =>
   }),
 )
 
-const LoginForm = (props: InjectedFormProps<IFormLoginValues>, ctx: any) => {
+const LoginForm: FunctionComponent<InjectedFormProps<IFormLoginValues>> = (props, ctx: any) => {
   const classes = styles()
   const { handleSubmit, submitting, error } = props
   const { t } = ctx

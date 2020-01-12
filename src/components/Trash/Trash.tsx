@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { FunctionComponent } from 'react'
 
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
+import MainLayout from '../MainLayout'
 
 const styles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,19 +22,18 @@ const styles = makeStyles((theme: Theme) =>
 /**
  * Trash page component.
  *
- * @param {Props} props
- *   Component props.
- *
- * @returns {JSX.Element}
- *   Jsx html page.
+ * @returns {FunctionComponent}
+ *   Functional 'Trash' component.
  */
-const Trash = (): JSX.Element => {
+const Trash: FunctionComponent = () => {
   const classes = styles()
 
   return (
-    <div className={classes.root}>
-      <Paper className={classes.container}>Trash page!!!</Paper>
-    </div>
+    <MainLayout>
+      <div className={classes.root}>
+        <Paper className={classes.container}>Trash page!!!</Paper>
+      </div>
+    </MainLayout>
   )
 }
 

@@ -6,7 +6,9 @@ import WebFont from 'webfontloader'
 
 import PrivateRoute from './components/PrivateRoute'
 import Login from './components/Login'
-import Main from './components/Main'
+import Albums from './components/Albums/Albums'
+import Users from './components/Users/Users'
+import Trash from './components/Trash/Trash'
 import Error404 from './components/404'
 
 import { history } from './helpers'
@@ -69,8 +71,10 @@ class App extends Component<IAppProps> {
     return (
       <Router history={history}>
         <Switch>
-          {/* <PrivateRoute component={Main} /> */}
-          <Route exact path="/login" component={Login} />
+          <PrivateRoute exact path="/" component={Albums} />
+          <PrivateRoute path="/users" component={Users} />
+          <PrivateRoute path="/trash" component={Trash} />
+          <Route path="/login" component={Login} />
           <PrivateRoute component={Error404} />
         </Switch>
       </Router>

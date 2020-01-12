@@ -16,7 +16,7 @@ interface ILanguageSelectorProps {
 
 const availableLanguages = ['en', 'ru', 'lt']
 
-function LanguageSelector(props: ILanguageSelectorProps) {
+const LanguageSelector = (props: ILanguageSelectorProps) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {

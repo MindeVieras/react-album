@@ -4,11 +4,12 @@ import { i18nState } from 'redux-i18n'
 // import { reducer as toastrReducer } from 'react-redux-toastr'
 
 import { client } from './client.reducer'
+import { auth } from './auth.reducer'
 
 import { IScreenDimensions } from '../helpers'
+import { IAuthResponseData } from '../services'
 
 // import { settings } from './settings.reducer'
-// import { auth } from './auth.reducer'
 // import { adminUi } from './Admin/ui.reducer'
 // import { users } from './Admin/users.reducer'
 // import { faces } from './Admin/faces.reducer'
@@ -24,6 +25,7 @@ export interface IStoreState {
     browser: Bowser.Parser.ParsedResult
     dimensions: IScreenDimensions
   }
+  auth: IAuthResponseData
   form: {
     login?: any
   }
@@ -32,8 +34,8 @@ export interface IStoreState {
 
 const rootReducer = combineReducers<IStoreState>({
   client,
+  auth,
   // settings,
-  // auth,
   // admin_ui: adminUi,
   // admin_header: header,
   // users,
