@@ -31,7 +31,6 @@ const submit = async (values: IFormLoginValues, dispatch: Dispatch<IActionAuthSe
 
   // Handle success.
   if (status === ServiceResponseStatus.success && data) {
-    console.log(authSet(data))
     // @ts-ignore
     dispatch(authSet(data))
     history.push('/')
