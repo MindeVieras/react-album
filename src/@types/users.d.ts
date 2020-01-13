@@ -32,3 +32,19 @@ enum UserRoles {
    */
   admin = 'admin',
 }
+
+interface IUserProps {
+  username: string
+  initials: string
+  role: UserRoles
+  status: UserStatus
+  createdBy?: string
+  lastLogin?: Date
+  updatedAt: Date
+  createdAt: Date
+  profile?: {
+    email?: string
+    displayName?: string
+    locale?: string
+  }
+}

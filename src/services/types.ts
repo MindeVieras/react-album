@@ -1,22 +1,39 @@
 /**
  * Response status values.
  */
-export enum ServiceResponseStatus {
+export enum ResponseStatus {
   success = 'SUCCESS',
   clientError = 'CLIENT_ERROR',
   serverError = 'SERVER_ERROR',
 }
 
 /**
- * API error middleware response interface.
+ * API response.
  */
-export interface IServiceResponse<T> {
-  status: ServiceResponseStatus
-  message: string
+export interface IResponse<T> {
+  status: ResponseStatus
+  message?: string
   data?: T
   errors?: { [name: string]: string }
   code?: number | string
   stack?: string
+}
+
+export interface IResponsePager {
+  total: number
+  limit: number
+  page: number
+  pages: number
+}
+
+export interface IResponsePaginatedData<T> extends IResponsePager {
+  docs: T[]
+}
+
+export interface IRequestGetListParams {
+  limit?: number
+  page?: number
+  sort?: string
 }
 
 /**

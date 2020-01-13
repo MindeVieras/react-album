@@ -54,6 +54,26 @@ export const browserLocale = (): string => {
   return lang
 }
 
+export interface IAuthHeader {
+  Authorization?: string
+}
+
+/**
+ * Builds authorization bearer token header.
+ */
+export const authHeader = (): IAuthHeader => {
+  // Get user form local
+  const user = localStorage.getItem('user')
+
+  if (user) {
+    const parsedUser: { token: string } = JSON.parse(user)
+    // Return authorization header with jwt token.
+    return { Authorization: `Bearer ${parsedUser.token}` }
+  } else {
+    return {}
+  }
+}
+
 export * from './store'
 export * from './config'
 export * from './history'

@@ -1,22 +1,22 @@
-import React, { PureComponent, Fragment } from 'react'
-import PropTypes from 'prop-types'
+import React, { Fragment } from 'react'
+// import PropTypes from 'prop-types'
 
-import { withStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
+// import { withStyles } from '@material-ui/core/styles'
+// import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
-import Divider from '@material-ui/core/Divider'
+// import Divider from '@material-ui/core/Divider'
 
 import MoreVertIcon from '@material-ui/icons/MoreVert'
-import AccountCircle from '@material-ui/icons/AccountCircle'
-import Dashboard from '@material-ui/icons/Dashboard'
-import Face from '@material-ui/icons/Face'
+// import AccountCircle from '@material-ui/icons/AccountCircle'
+// import Dashboard from '@material-ui/icons/Dashboard'
+// import Face from '@material-ui/icons/Face'
 import People from '@material-ui/icons/People'
 import Delete from '@material-ui/icons/Delete'
-import Home from '@material-ui/icons/Home'
+// import Home from '@material-ui/icons/Home'
 import PowerSettingsNew from '@material-ui/icons/PowerSettingsNew'
 
 // import { userConstants } from 'Constants'
@@ -41,10 +41,10 @@ const MainMenu = () => {
     setAnchorEl(null)
   }
 
-  const handleItemClick = (l: string) => {
-    // props.setLanguage(l)
-    setAnchorEl(null)
-  }
+  // const handleItemClick = (l: string) => {
+  //   // props.setLanguage(l)
+  //   setAnchorEl(null)
+  // }
 
   // constructor(props: any) {
   //   super(props)

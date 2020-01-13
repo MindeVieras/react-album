@@ -5,13 +5,14 @@ import { i18nState } from 'redux-i18n'
 
 import { client } from './client.reducer'
 import { auth } from './auth.reducer'
+import { users } from './users.reducer'
 
 import { IScreenDimensions } from '../helpers'
 import { IAuthResponseData } from '../services'
+import { IReducerSelected, IReducerList } from './types'
 
 // import { settings } from './settings.reducer'
 // import { adminUi } from './Admin/ui.reducer'
-// import { users } from './Admin/users.reducer'
 // import { faces } from './Admin/faces.reducer'
 // import { adminAlbums } from './Admin/albums.reducer'
 // import { header } from './Admin/header.reducer'
@@ -26,6 +27,10 @@ export interface IStoreState {
     dimensions: IScreenDimensions
   }
   auth: IAuthResponseData
+  users: {
+    selected: IReducerSelected<IUserProps>
+    list: IReducerList<IUserProps>
+  }
   form: {
     login?: any
   }
@@ -38,7 +43,7 @@ const rootReducer = combineReducers<IStoreState>({
   // settings,
   // admin_ui: adminUi,
   // admin_header: header,
-  // users,
+  users,
   // faces,
   // admin_albums: adminAlbums,
   // front_ui: frontUi,
@@ -50,3 +55,4 @@ const rootReducer = combineReducers<IStoreState>({
 })
 
 export default rootReducer
+export * from './types'

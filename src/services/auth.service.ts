@@ -1,4 +1,4 @@
-import { IServiceResponse, IAuthResponseData } from './types'
+import { IAuthResponseData, IResponse } from './types'
 import { config } from '../helpers'
 
 export const authService = {
@@ -22,7 +22,7 @@ async function login(username: string, password: string) {
   }
 
   const res = await fetch(`${config.baseServerUrl}/api/auth`, requestOptions)
-  const resJson: IServiceResponse<IAuthResponseData> = await res.json()
+  const resJson: IResponse<IAuthResponseData> = await res.json()
   // Login successful if there's a jwt token in the response.
   if (resJson && resJson.data && resJson.data.token) {
     // Store user details and jwt token in local storage
