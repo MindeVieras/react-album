@@ -34,6 +34,7 @@ enum UserRoles {
 }
 
 interface IUserProps {
+  id: string
   username: string
   initials: string
   role: UserRoles

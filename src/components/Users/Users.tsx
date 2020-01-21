@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import { withStyles } from '@material-ui/core'
-import { Theme, createStyles, useTheme } from '@material-ui/core/styles'
+import { Theme, createStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import TableContainer from '@material-ui/core/TableContainer'
 import Table from '@material-ui/core/Table'
@@ -21,11 +21,9 @@ import { usersGetList } from '../../actions'
 import MainLayout from '../MainLayout'
 import { IStoreState, IReducerList } from '../../reducers'
 import { IRequestGetListParams } from '../../services'
-// import UsersTable from './UsersTable'
 
 interface IUsersProps {
   usersGetList(params?: IRequestGetListParams): void
-  // usersGetList: typeof usersGetList
   users: IReducerList<IUserProps>
   classes: {
     root: string
@@ -79,13 +77,8 @@ class Users extends Component<IUsersProps> {
     })
   }
 
-  // const classes = styles()
-  // console.log(props)
   render() {
-    // const classes = styles()
     const { items, pager } = this.props.users
-    // const emptyRows = limit - Math.min(limit, total - page * limit)
-    // console.log(pager.page)
     return (
       <MainLayout>
         <TableContainer component={Paper}>
@@ -100,11 +93,6 @@ class Users extends Component<IUsersProps> {
                   <TableCell align="right">{item.role}</TableCell>
                 </TableRow>
               ))}
-              {/* {emptyRows > 0 && (
-                <TableRow style={{ height: 53 * emptyRows }}>
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )} */}
             </TableBody>
             {pager.total > 0 && (
               <TableFooter>
@@ -141,8 +129,6 @@ interface TablePaginationActionsProps {
 }
 
 function TablePaginationActions(props: TablePaginationActionsProps) {
-  // console.log(props)
-  // const classes = useStyles1()
   const { count, page, rowsPerPage, onChangePage } = props
 
   const handleFirstPageButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
