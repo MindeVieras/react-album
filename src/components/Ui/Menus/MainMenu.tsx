@@ -76,11 +76,11 @@ const MainMenu = () => {
       <IconButton
         // data-tip
         // data-for="tip_main_menu"
-        // aria-label="Menu"
+        aria-label="Main Menu"
         // aria-owns={anchorEl ? 'main-menu' : null}
-        // aria-haspopup="true"
+        aria-haspopup="true"
         onClick={handleClick}
-        // color="inherit"
+        color="inherit"
       >
         <MoreVertIcon />
       </IconButton>
