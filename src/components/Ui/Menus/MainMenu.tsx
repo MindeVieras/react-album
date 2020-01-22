@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import { Link } from 'react-router-dom'
 // import PropTypes from 'prop-types'
 
 // import { withStyles } from '@material-ui/core/styles'
@@ -12,7 +13,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 // import AccountCircle from '@material-ui/icons/AccountCircle'
-// import Dashboard from '@material-ui/icons/Dashboard'
+import Dashboard from '@material-ui/icons/Dashboard'
 // import Face from '@material-ui/icons/Face'
 import People from '@material-ui/icons/People'
 import Delete from '@material-ui/icons/Delete'
@@ -103,27 +104,27 @@ const MainMenu = () => {
             <Typography variant="caption">{user.email}</Typography>
           </div>
         </MenuItem>
-        <Divider />
-        <MenuItem onClick={() => this.handleMenuClick('/admin')}>
+        <Divider /> */}
+        <MenuItem component={Link} to="/">
           <ListItemIcon>
             <Dashboard />
           </ListItemIcon>
-          <ListItemText inset primary={t(`Albums`)} />
+          <ListItemText inset primary="Albums" />
         </MenuItem>
-        <MenuItem onClick={() => this.handleMenuClick('/admin/faces')}>
+        {/* <MenuItem onClick={() => this.handleMenuClick('/admin/faces')}>
           <ListItemIcon>
             <Face />
           </ListItemIcon>
           <ListItemText inset primary={t(`Faces`)} />
         </MenuItem> */}
-        <MenuItem onClick={() => handleMenuClick('/users')}>
+        <MenuItem component={Link} to="/users">
           <ListItemIcon>
             <People />
           </ListItemIcon>
           <ListItemText inset primary="Users" />
         </MenuItem>
         {/* {user.access_level === userConstants.USER_ACCESS_ADMIN && ( */}
-        <MenuItem onClick={() => handleMenuClick('/trash')}>
+        <MenuItem component={Link} to="/trash">
           <ListItemIcon>
             <Delete />
           </ListItemIcon>
@@ -136,7 +137,7 @@ const MainMenu = () => {
           </ListItemIcon>
           <ListItemText inset primary={t(`Front`)} />
         </MenuItem> */}
-        <MenuItem onClick={() => handleMenuClick('/login')}>
+        <MenuItem component={Link} to="/login">
           <ListItemIcon>
             <PowerSettingsNew />
           </ListItemIcon>
