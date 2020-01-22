@@ -16,11 +16,13 @@ import FirstPageIcon from '@material-ui/icons/FirstPage'
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft'
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight'
 import LastPageIcon from '@material-ui/icons/LastPage'
+import Avatar from '@material-ui/core/Avatar'
 
 import { usersGetList } from '../../actions'
 import MainLayout from '../MainLayout'
 import { IStoreState, IReducerList } from '../../reducers'
 import { IRequestGetListParams } from '../../services'
+import PageContent from '../PageContent'
 
 interface IUsersProps {
   usersGetList(params?: IRequestGetListParams): void
@@ -29,6 +31,7 @@ interface IUsersProps {
     root: string
     container: string
     table: string
+    tableAvatar: string
   }
 }
 
@@ -46,6 +49,10 @@ const styles = (theme: Theme) =>
     },
     table: {
       minWidth: 500,
+    },
+    tableAvatar: {
+      width: 1,
+      whiteSpace: 'nowrap',
     },
   })
 
@@ -66,14 +73,14 @@ class Users extends Component<IUsersProps> {
     // console.log(newPage)
     this.props.usersGetList({
       limit: this.props.users.pager.limit,
-      page: newPage,
+      offset: newPage,
     })
   }
 
   handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     this.props.usersGetList({
       limit: parseInt(event.target.value),
-      page: 1,
+      offset: 1,
     })
   }
 
@@ -81,41 +88,46 @@ class Users extends Component<IUsersProps> {
     const { items, pager } = this.props.users
     return (
       <MainLayout>
-        <TableContainer component={Paper}>
-          <Table className={this.props.classes.table} aria-label="users table">
-            <TableBody>
-              {items.map((item) => (
-                <TableRow key={item.username}>
-                  <TableCell component="th" scope="row">
-                    {item.username}
-                  </TableCell>
-                  <TableCell align="right">{item.initials}</TableCell>
-                  <TableCell align="right">{item.role}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-            {pager.total > 0 && (
-              <TableFooter>
-                <TableRow>
-                  <TablePagination
-                    rowsPerPageOptions={[5, 10, 25]}
-                    colSpan={3}
-                    count={pager.total}
-                    rowsPerPage={pager.limit}
-                    page={pager.page === pager.pages ? pager.page - 1 : pager.page}
-                    SelectProps={{
-                      inputProps: { 'aria-label': 'rows per page' },
-                      native: true,
-                    }}
-                    onChangePage={this.handleChangePage}
-                    onChangeRowsPerPage={this.handleChangeRowsPerPage}
-                    ActionsComponent={TablePaginationActions}
-                  />
-                </TableRow>
-              </TableFooter>
-            )}
-          </Table>
-        </TableContainer>
+        <PageContent>
+          <TableContainer component={Paper}>
+            <Table className={this.props.classes.table} aria-label="users table">
+              <TableBody>
+                {items.map((item) => (
+                  <TableRow key={item.username}>
+                    <TableCell className={this.props.classes.tableAvatar}>
+                      <Avatar>{item.initials}</Avatar>
+                    </TableCell>
+                    <TableCell component="th" scope="row">
+                      {item.username}
+                    </TableCell>
+                    <TableCell>{item.role}</TableCell>
+                    <TableCell align="right">Edit</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+              {pager.total > 0 && (
+                <TableFooter>
+                  <TableRow>
+                    <TablePagination
+                      rowsPerPageOptions={[5, 10, 25]}
+                      colSpan={3}
+                      count={pager.total}
+                      rowsPerPage={pager.limit}
+                      page={pager.offset}
+                      SelectProps={{
+                        inputProps: { 'aria-label': 'rows per page' },
+                        native: true,
+                      }}
+                      onChangePage={this.handleChangePage}
+                      onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                      ActionsComponent={TablePaginationActions}
+                    />
+                  </TableRow>
+                </TableFooter>
+              )}
+            </Table>
+          </TableContainer>
+        </PageContent>
       </MainLayout>
     )
   }

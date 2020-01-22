@@ -22,8 +22,7 @@ export interface IResponse<T> {
 export interface IResponsePager {
   total: number
   limit: number
-  page: number
-  pages: number
+  offset: number
 }
 
 export interface IResponsePaginatedData<T> extends IResponsePager {
@@ -32,7 +31,7 @@ export interface IResponsePaginatedData<T> extends IResponsePager {
 
 export interface IRequestGetListParams {
   limit?: number
-  page?: number
+  offset?: number
   sort?: string
 }
 
@@ -45,7 +44,6 @@ export interface IAuthResponseData {
   initials?: string
   role?: UserRoles
   status?: UserStatus
-  createdBy?: string
   lastLogin?: Date
   updatedAt?: Date
   createdAt?: Date

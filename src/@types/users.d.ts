@@ -39,7 +39,6 @@ interface IUserProps {
   initials: string
   role: UserRoles
   status: UserStatus
-  createdBy?: string
   lastLogin?: Date
   updatedAt: Date
   createdAt: Date

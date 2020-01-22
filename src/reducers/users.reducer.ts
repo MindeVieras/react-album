@@ -9,8 +9,7 @@ const initialState = {
     pager: {
       total: 0,
       limit: 10,
-      page: 1,
-      pages: 0,
+      offset: 0,
     },
   },
 }
