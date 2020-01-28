@@ -12,6 +12,7 @@ const initialState = {
     size: BrowserSize.xs,
     orientation: BrowserOrientation.landscape,
   },
+  fullScreen: false,
 }
 
 export const client = (state = initialState, action: Action) => {
@@ -20,6 +21,12 @@ export const client = (state = initialState, action: Action) => {
       return {
         ...state,
         dimensions: action.payload,
+      }
+
+    case ActionTypes.clientSetFullScreen:
+      return {
+        ...state,
+        fullScreen: action.payload,
       }
 
     default:

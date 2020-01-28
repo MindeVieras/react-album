@@ -1,4 +1,4 @@
-import { IActionClientSetDimensions } from './client.actions'
+import { ActionClientSetDimensions, ActionClientSetFullScreen } from './client.actions'
 import { IActionAuthSet, IActionAuthClear } from './auth.actions'
 import {
   IActionUsersGetListRequest,
@@ -9,8 +9,11 @@ import {
 
 export enum ActionTypes {
   clientSetDimensions,
+  clientSetFullScreen,
+
   authSet,
   authClear,
+
   usersGetListRequest,
   usersGetListSuccess,
   usersGetListFailure,
@@ -25,7 +28,8 @@ export enum ActionTypes {
 }
 
 export type Action =
-  | IActionClientSetDimensions
+  | ActionClientSetDimensions
+  | ActionClientSetFullScreen
   | IActionAuthSet
   | IActionAuthClear
   | IActionUsersGetListRequest

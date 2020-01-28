@@ -1,23 +1,57 @@
 import React, { FunctionComponent } from 'react'
+import { connect } from 'react-redux'
+import Fullscreen from 'react-full-screen'
 
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles'
 
 import { AppHeader } from './Ui'
+import { IStoreState } from '../reducers'
+
+/**
+ * Main layout props.
+ */
+interface IMainLayoutProps {
+  isFullScreen: boolean
+}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {},
+    root: {
+      '& .fullscreen-enabled': {
+        background: theme.palette.background.default,
+      },
+    },
   }),
 )
 
-const MainLayout: FunctionComponent = (props) => {
+/**
+ *
+ * Main Layout component.
+ *
+ * @param props
+ */
+const MainLayout: FunctionComponent<IMainLayoutProps> = (props) => {
   const classes = useStyles()
   return (
     <div className={classes.root}>
-      <AppHeader />
-      {props.children}
+      <Fullscreen enabled={props.isFullScreen}>
+        <AppHeader />
+        {props.children}
+      </Fullscreen>
     </div>
   )
 }
 
-export default MainLayout
+/**
+ * Create props for the component from the redux store.
+ *
+ * @param {IStoreState} state
+ *   Global redux state.
+ */
+const mapStateToProps = (state: IStoreState): { isFullScreen: boolean } => {
+  return {
+    isFullScreen: state.client.fullScreen,
+  }
+}
+
+export default connect(mapStateToProps)(MainLayout)

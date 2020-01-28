@@ -6,6 +6,7 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 
 import MainMenu from '../Menus/MainMenu'
+import { ButtonFullScreen } from '../ButtonFullScreen'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,6 +33,7 @@ export const AppHeader: FunctionComponent = () => {
           </Typography>
 
           <div className={classes.menus}>
+            <ButtonFullScreen />
             <MainMenu />
           </div>
         </Toolbar>

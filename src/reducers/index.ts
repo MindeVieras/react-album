@@ -25,6 +25,7 @@ export interface IStoreState {
   client: {
     browser: Bowser.Parser.ParsedResult
     dimensions: IScreenDimensions
+    fullScreen: boolean
   }
   auth: IAuthResponseData
   users: {
