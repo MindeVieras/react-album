@@ -24,7 +24,7 @@ interface IRecaptchaFieldProps extends WrappedFieldProps {
  * @returns {JSX.Element}
  *   Recaptcha component.
  */
-const RecaptchaField = (field: IRecaptchaFieldProps): JSX.Element => {
+const RecaptchaFieldComponent = (field: IRecaptchaFieldProps): JSX.Element => {
   return (
     <ReCAPTCHA
       size="normal"
@@ -47,4 +47,4 @@ const mapStateToProps = (state: IStoreState): { currentLanguage: string } => {
   }
 }
 
-export default connect(mapStateToProps)(RecaptchaField)
+export const RecaptchaField = connect(mapStateToProps)(RecaptchaFieldComponent)

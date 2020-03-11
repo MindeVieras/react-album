@@ -6,8 +6,7 @@ import validator from 'validator'
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
-import { TextInput, ButtonInput } from '../Ui'
-import RecaptchaField from '../Ui/Inputs/RecaptchaField'
+import { TextInput, ButtonInput, RecaptchaField } from '../Ui'
 
 import submit from './submit'
 
@@ -32,7 +31,7 @@ const styles = makeStyles((theme: Theme) =>
 )
 
 const LoginForm: FunctionComponent<InjectedFormProps<IFormLoginValues>> = (props, ctx: any) => {
-  const classes = styles()
+  const classes = styles({})
   const { handleSubmit, submitting, error } = props
   const { t } = ctx
 
