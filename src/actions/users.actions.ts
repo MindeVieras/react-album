@@ -2,7 +2,7 @@ import { Dispatch } from 'redux'
 
 import { ActionTypes } from './types'
 import { ResponseStatus, IResponsePaginatedData, IRequestGetListParams } from '../services'
-import { ApiService } from '../services'
+import { UsersService } from '../services'
 
 export interface IActionUsersGetListRequest {
   type: ActionTypes.usersGetListRequest
@@ -30,17 +30,23 @@ export interface IActionUsersClear {
  */
 export const usersGetList = (params?: IRequestGetListParams) => {
   return async (dispatch: Dispatch) => {
+    // Dispatch loading state.
     dispatch<IActionUsersGetListRequest>({
       type: ActionTypes.usersGetListRequest,
     })
-    const API = new ApiService(true)
-    const res = await API.getUsers(params)
 
+    // Get response from users service.
+    const $users = new UsersService()
+    const res = await $users.getList(params)
+
+    // Dispatch successful response.
     if (res.status === ResponseStatus.success && res.data) {
       dispatch<IActionUsersGetListSuccess>({
         type: ActionTypes.usersGetListSuccess,
         payload: res.data,
       })
+
+      // Dispatch unsuccessful response.
     } else if (res.status !== ResponseStatus.success && res.message) {
       dispatch<IActionUsersGetListFailure>({
         type: ActionTypes.usersGetListFailure,

@@ -1,11 +1,13 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
 import { config, authHeader } from '../helpers'
-import { IResponse, IResponsePaginatedData, IRequestGetListParams } from './types'
 
+/**
+ * Base ApiService class.
+ */
 export class ApiService {
-  private req: AxiosInstance
+  protected req: AxiosInstance
 
-  constructor(authed: boolean = false) {
+  constructor(authed: boolean) {
     const instanceConfig: AxiosRequestConfig = {
       baseURL: `${config.baseServerUrl}/api`,
     }
@@ -15,10 +17,5 @@ export class ApiService {
     this.req = axios.create(instanceConfig)
   }
 
-  public async getUsers(params?: IRequestGetListParams) {
-    const res = await this.req.get<IResponse<IResponsePaginatedData<IUserProps>>>('users', {
-      params,
-    })
-    return res.data
-  }
+  // isSuccess
 }
