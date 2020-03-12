@@ -2,6 +2,9 @@ import { ActionTypes, Action } from '../actions'
 import { IAuthResponseData } from '../services'
 
 let initialState = {} as IAuthResponseData
+/**
+ * Set initial auth state if user exists on local storage.
+ */
 const localUser = localStorage.getItem('user')
 if (localUser) {
   initialState = JSON.parse(localUser)
