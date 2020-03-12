@@ -22,7 +22,7 @@ import PowerSettingsNew from '@material-ui/icons/PowerSettingsNew'
 
 // import { userConstants } from 'Constants'
 // import { Tip } from 'Common'
-import { history } from '../../../helpers'
+// import { history } from '../../../helpers'
 
 // const styles = (theme: any) => ({
 //   accountMenuItem: {
@@ -62,10 +62,10 @@ const MainMenu = () => {
   //   this.setState({ anchorEl: event.currentTarget })
   // }
 
-  const handleMenuClick = (href: string) => {
-    setAnchorEl(null)
-    history.push(href)
-  }
+  // const handleMenuClick = (href: string) => {
+  //   setAnchorEl(null)
+  //   history.push(href)
+  // }
 
   // render() {
   // const { t } = this.context
