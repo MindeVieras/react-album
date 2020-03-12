@@ -27,7 +27,7 @@ const styles = makeStyles((theme: Theme) =>
  */
 export const ButtonInput = ({ loading, text, ...buttonProps }: IButtonInputProps) => {
   return (
-    <div className={styles().btnWrapper}>
+    <div className={styles({}).btnWrapper}>
       <Button variant="contained" type="submit" {...buttonProps}>
         {text}
       </Button>

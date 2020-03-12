@@ -26,7 +26,7 @@ const styles = makeStyles((theme: Theme) =>
  *   Functional 'Trash' component.
  */
 const Trash: FunctionComponent = () => {
-  const classes = styles()
+  const classes = styles({})
 
   return (
     <MainLayout>

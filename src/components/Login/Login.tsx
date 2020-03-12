@@ -36,7 +36,7 @@ const styles = makeStyles((theme: Theme) =>
  *   Jsx html page.
  */
 const Login: FunctionComponent<ILoginProps> = (props): JSX.Element => {
-  const classes = styles()
+  const classes = styles({})
 
   // Force user to logout before rendering a form.
   props.authClear()

@@ -26,7 +26,7 @@ const styles = makeStyles((theme: Theme) =>
  *   Functional 'Albums' component.
  */
 const Albums: FunctionComponent = () => {
-  const classes = styles()
+  const classes = styles({})
 
   return (
     <MainLayout>
