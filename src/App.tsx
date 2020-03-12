@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { Router, Switch, Route } from 'react-router-dom'
 import { setTranslations } from 'redux-i18n'
 import WebFont from 'webfontloader'
 
@@ -11,6 +11,7 @@ import Users from './components/Users/Users'
 import Trash from './components/Trash/Trash'
 import Error404 from './components/404'
 
+import { history } from './helpers'
 import { setClientDimensions } from './actions'
 import { translations } from './translations'
 
@@ -68,7 +69,7 @@ class App extends Component<IAppProps> {
    */
   render() {
     return (
-      <Router>
+      <Router history={history}>
         <Switch>
           <PrivateRoute exact path="/" component={Albums} />
           <PrivateRoute path="/users" component={Users} />
