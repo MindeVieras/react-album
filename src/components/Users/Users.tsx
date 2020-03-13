@@ -17,14 +17,16 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft'
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight'
 import LastPageIcon from '@material-ui/icons/LastPage'
 import Avatar from '@material-ui/core/Avatar'
+import Alert from '@material-ui/lab/Alert'
 
-import { usersGetList } from '../../actions'
+import { setAppTitle, usersGetList } from '../../actions'
 import MainLayout from '../MainLayout'
 import { IStoreState, IReducerList } from '../../reducers'
 import { IRequestGetListParams } from '../../services'
 import PageContent from '../PageContent'
 
 interface IUsersProps {
+  setAppTitle(title: string): void
   usersGetList(params?: IRequestGetListParams): void
   users: IReducerList<IUserProps>
   classes: {
@@ -59,6 +61,8 @@ const styles = (theme: Theme) =>
 /**
  * Users page component.
  *
+ * @route /users
+ *
  * @returns {FunctionComponent}
  *   Functional 'Users' component.
  */
@@ -66,6 +70,7 @@ class Users extends Component<IUsersProps> {
   constructor(props: IUsersProps) {
     super(props)
 
+    props.setAppTitle('Users')
     props.usersGetList({ limit: props.users.pager.limit })
   }
 
@@ -85,10 +90,11 @@ class Users extends Component<IUsersProps> {
   }
 
   render() {
-    const { items, pager } = this.props.users
+    const { items, pager, error } = this.props.users
     return (
       <MainLayout>
         <PageContent>
+          {error && <Alert severity="error">{error}</Alert>}
           <TableContainer component={Paper}>
             <Table className={this.props.classes.table} aria-label="users table">
               <TableBody>
@@ -201,4 +207,4 @@ const mapStateToProps = (state: IStoreState): { users: IReducerList<IUserProps> 
   }
 }
 
-export default connect(mapStateToProps, { usersGetList })(withStyles(styles)(Users))
+export default connect(mapStateToProps, { setAppTitle, usersGetList })(withStyles(styles)(Users))

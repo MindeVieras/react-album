@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Router, Switch, Route } from 'react-router-dom'
 import { setTranslations } from 'redux-i18n'
+import { Helmet } from 'react-helmet'
 import WebFont from 'webfontloader'
 
 import PrivateRoute from './components/PrivateRoute'
@@ -14,8 +15,11 @@ import Error404 from './components/404'
 import { history } from './helpers'
 import { setClientDimensions } from './actions'
 import { translations } from './translations'
+import { IStoreState } from './reducers'
 
 interface IAppProps {
+  appTitle?: string
+  appName: string
   setClientDimensions: Function
   setTranslations: typeof setTranslations
 }
@@ -27,22 +31,18 @@ interface IAppProps {
  */
 class App extends Component<IAppProps> {
   /**
-   * constructor description
-   * @param {Object} props props to pass
+   * Initialize the App.
+   *
+   * @param {IAppProps} props
+   *   Props to pass.
    */
   constructor(props: IAppProps) {
     super(props)
 
-    // Load all fonts
+    // Load all fonts.
     WebFont.load({
       google: {
-        families: [
-          'Roboto:100,300,400,500,700,900',
-          // 'Dosis:300,400,500,600,700,800',
-          // 'Oxygen:300,400,700',
-          // 'Ruda:400,700,900',
-          // 'sans-serif'
-        ],
+        families: ['Roboto:100,300,400,500,700,900'],
       },
     })
 
@@ -62,14 +62,22 @@ class App extends Component<IAppProps> {
 
   /**
    * Render DOM.
+   *
    * @private
    *
    * @return {JSX.Element}
    *   Jsx html element.
    */
   render() {
+    // Build page head title.
+    const { appTitle, appName } = this.props
+    let title = appTitle ? `${appTitle} | ${appName}` : appName
+
     return (
       <Router history={history}>
+        <Helmet>
+          <title>{title}</title>
+        </Helmet>
         <Switch>
           <PrivateRoute exact path="/" component={Albums} />
           <PrivateRoute path="/users" component={Users} />
@@ -82,4 +90,17 @@ class App extends Component<IAppProps> {
   }
 }
 
-export default connect(null, { setClientDimensions, setTranslations })(App)
+/**
+ * Create props for the component from the redux store.
+ *
+ * @param {IStoreState} state
+ *   Global redux state.
+ */
+const mapStateToProps = (state: IStoreState): { appTitle?: string; appName: string } => {
+  return {
+    appTitle: state.client.appTitle,
+    appName: state.client.appName,
+  }
+}
+
+export default connect(mapStateToProps, { setClientDimensions, setTranslations })(App)

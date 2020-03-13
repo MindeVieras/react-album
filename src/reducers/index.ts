@@ -23,6 +23,9 @@ import { IReducerSelected, IReducerList } from './types'
 
 export interface IStoreState {
   client: {
+    appTitle?: string
+    appName: string
+    appDescription: string
     browser: Bowser.Parser.ParsedResult
     dimensions: IScreenDimensions
     fullScreen: boolean

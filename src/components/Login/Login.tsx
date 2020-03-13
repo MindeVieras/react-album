@@ -1,11 +1,11 @@
 import React, { FunctionComponent } from 'react'
-import { connect } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
 
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 
 import LoginForm from './LoginForm'
-import { authClear } from '../../actions'
+import { setAppTitle, authClear } from '../../actions'
 
 interface ILoginProps {
   authClear: Function
@@ -29,6 +29,8 @@ const styles = makeStyles((theme: Theme) =>
 /**
  * Login page component.
  *
+ * @route /login
+ *
  * @param {Props} props
  *   Component props.
  *
@@ -37,6 +39,10 @@ const styles = makeStyles((theme: Theme) =>
  */
 const Login: FunctionComponent<ILoginProps> = (props): JSX.Element => {
   const classes = styles({})
+
+  // Set page title.
+  const dispatch = useDispatch()
+  dispatch(setAppTitle('Login'))
 
   // Force user to logout before rendering a form.
   props.authClear()

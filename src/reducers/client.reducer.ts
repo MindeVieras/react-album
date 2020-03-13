@@ -4,6 +4,8 @@ import { ActionTypes, Action } from '../actions'
 import { BrowserOrientation, BrowserSize } from '../enums'
 
 const initialState = {
+  appName: 'Album APP',
+  appDescription: 'Media Album APP',
   // It is safe to set initial browser user agent data here.
   browser: Bowser.parse(window.navigator.userAgent),
   dimensions: {
@@ -17,6 +19,12 @@ const initialState = {
 
 export const client = (state = initialState, action: Action) => {
   switch (action.type) {
+    case ActionTypes.clientSetAppTitle:
+      return {
+        ...state,
+        appTitle: action.payload,
+      }
+
     case ActionTypes.clientSetDimensions:
       return {
         ...state,

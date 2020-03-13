@@ -1,8 +1,10 @@
 import React, { FunctionComponent } from 'react'
+import { useDispatch } from 'react-redux'
 
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import MainLayout from '../MainLayout'
+import { setAppTitle } from '../../actions'
 
 const styles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,11 +24,15 @@ const styles = makeStyles((theme: Theme) =>
 /**
  * Albums page component.
  *
+ * @route /
+ *
  * @returns {FunctionComponent}
  *   Functional 'Albums' component.
  */
 const Albums: FunctionComponent = () => {
   const classes = styles({})
+  const dispatch = useDispatch()
+  dispatch(setAppTitle('Albums'))
 
   return (
     <MainLayout>

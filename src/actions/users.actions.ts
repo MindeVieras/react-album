@@ -40,14 +40,14 @@ export const usersGetList = (params?: IRequestGetListParams) => {
     const res = await $users.getList(params)
 
     // Dispatch successful response.
-    if (res.status === ResponseStatus.success && res.data) {
+    if ($users.isSuccess && res.data) {
       dispatch<IActionUsersGetListSuccess>({
         type: ActionTypes.usersGetListSuccess,
         payload: res.data,
       })
 
       // Dispatch unsuccessful response.
-    } else if (res.status !== ResponseStatus.success && res.message) {
+    } else if (!$users.isSuccess && res.message) {
       dispatch<IActionUsersGetListFailure>({
         type: ActionTypes.usersGetListFailure,
         payload: res.message,

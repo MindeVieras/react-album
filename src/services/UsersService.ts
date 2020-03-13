@@ -1,4 +1,4 @@
-import { IResponse, IResponsePaginatedData, IRequestGetListParams } from './types'
+import { IResponsePaginatedData, IRequestGetListParams } from './types'
 import { ApiService } from './ApiService'
 
 export class UsersService extends ApiService {
@@ -7,9 +7,9 @@ export class UsersService extends ApiService {
   }
 
   public async getList(params?: IRequestGetListParams) {
-    const res = await this.req.get<IResponse<IResponsePaginatedData<IUserProps>>>('users', {
+    const res = await this.get<IResponsePaginatedData<IUserProps>>('users', {
       params,
     })
-    return res.data
+    return res
   }
 }
