@@ -29,9 +29,18 @@ export class ApiService {
    * GET method.
    *
    * @param {string} url
+   *   Request url.
    * @param {AxiosRequestConfig} config
+   *   Request configuration.
+   *
+   * @returns {Promise<IResponse<T>>}
+   *   Generic response promise.
    */
   protected async get<T>(url: string, config?: AxiosRequestConfig): Promise<IResponse<T>> {
+    // Reset isSuccess to false.
+    this.isSuccess = true
+
+    // Get response with axios.
     const axiosResponse = await this.req.get<IResponse<T>>(url, config)
     const res = axiosResponse.data
 

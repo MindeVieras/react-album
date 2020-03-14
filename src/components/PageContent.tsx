@@ -6,7 +6,8 @@ import Container from '@material-ui/core/Container'
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      marginTop: theme.spacing(2),
+      marginTop: theme.spacing(10),
+      marginBottom: theme.spacing(1),
     },
   }),
 )
