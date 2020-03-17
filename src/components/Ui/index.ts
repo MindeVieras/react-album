@@ -1,4 +1,5 @@
 export * from './Inputs/TextInput'
+export * from './Inputs/SelectInput'
 export * from './Inputs/ButtonInput'
 export * from './Inputs/RecaptchaField'
 

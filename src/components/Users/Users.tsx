@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 
 import Alert from '@material-ui/lab/Alert'
@@ -11,6 +11,7 @@ import PageContent from '../PageContent'
 import UsersTable from './UsersTable'
 import UsersPagination from './UsersPagination'
 import UsersHeader from './UsersHeader'
+import { UsersAdd } from './UsersAdd'
 
 interface IUsersProps {
   setAppTitle(title: string): void
@@ -47,9 +48,17 @@ class Users extends Component<IUsersProps> {
       <MainLayout>
         <PageContent>
           <UsersHeader title={'Users'} pager={pager} />
-          {error && <Alert severity="error">{error}</Alert>}
-          <UsersTable items={items} />
-          <UsersPagination pager={pager} onChangePage={this.handleChangePage} />
+          {error ? (
+            <Alert severity="error">{error}</Alert>
+          ) : (
+            <Fragment>
+              <UsersTable items={items} />
+              {pager.total > pager.limit && (
+                <UsersPagination pager={pager} onChangePage={this.handleChangePage} />
+              )}
+              <UsersAdd />
+            </Fragment>
+          )}
         </PageContent>
       </MainLayout>
     )

@@ -29,7 +29,6 @@ const useStyles = makeStyles((theme: Theme) =>
 const UsersPagination: FunctionComponent<IUsersPaginationProps> = (props) => {
   const classes = useStyles()
   const { total, limit } = props.pager
-  console.log(props.pager)
   const totalPages = Math.ceil(total / limit)
 
   return (

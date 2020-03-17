@@ -38,7 +38,7 @@ export class ApiService {
    */
   protected async get<T>(url: string, config?: AxiosRequestConfig): Promise<IResponse<T>> {
     // Reset isSuccess to false.
-    this.isSuccess = true
+    this.isSuccess = false
 
     // Get response with axios.
     const axiosResponse = await this.req.get<IResponse<T>>(url, config)

@@ -42,7 +42,6 @@ const UsersHeader: FunctionComponent<IUsersHeaderProps> = (props) => {
   const classes = useStyles()
   const dispatch = useDispatch()
   const { total, limit } = props.pager
-  // const totalPages = Math.ceil(total / limit)
 
   const handleChangeRowsPerPage = (event: React.ChangeEvent<any>) => {
     const { value } = event.target
@@ -54,30 +53,33 @@ const UsersHeader: FunctionComponent<IUsersHeaderProps> = (props) => {
       }),
     )
   }
+
   return (
     <div className={classes.root}>
-      <Badge badgeContent={props.pager.total}>
+      <Badge badgeContent={props.pager.total} max={999999999}>
         <Typography variant="h4" gutterBottom={false}>
           {props.title}
         </Typography>
       </Badge>
-      <div>
-        <FormControl className={classes.formControl}>
-          <Select value={limit} onChange={handleChangeRowsPerPage}>
-            {options.map((option) => {
-              if (option <= total) {
-                return (
-                  <MenuItem key={option} value={option}>
-                    {option}
-                  </MenuItem>
-                )
-              }
-            })}
-            <MenuItem value={0}>All</MenuItem>
-          </Select>
-          <FormHelperText>Per page</FormHelperText>
-        </FormControl>
-      </div>
+      {total > limit && (
+        <div>
+          <FormControl className={classes.formControl}>
+            <Select value={limit} onChange={handleChangeRowsPerPage}>
+              {options.map((option) => {
+                if (option <= total) {
+                  return (
+                    <MenuItem key={option} value={option}>
+                      {option}
+                    </MenuItem>
+                  )
+                }
+              })}
+              <MenuItem value={0}>All</MenuItem>
+            </Select>
+            <FormHelperText>Per page</FormHelperText>
+          </FormControl>
+        </div>
+      )}
     </div>
   )
 }

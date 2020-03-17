@@ -9,6 +9,7 @@ import TableBody from '@material-ui/core/TableBody'
 import TableRow from '@material-ui/core/TableRow'
 import TableCell from '@material-ui/core/TableCell'
 import Avatar from '@material-ui/core/Avatar'
+import Fade from '@material-ui/core/Fade'
 
 interface IUsersTableProps {
   items?: IUserProps[]
@@ -49,16 +50,18 @@ const UsersTable: FunctionComponent<IUsersTableProps> = (props) => {
         <TableBody>
           {items &&
             items.map((item) => (
-              <TableRow key={item.username}>
-                <TableCell className={classes.tableAvatar}>
-                  <Avatar>{item.initials}</Avatar>
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  {item.username}
-                </TableCell>
-                <TableCell>{item.role}</TableCell>
-                <TableCell align="right">Edit</TableCell>
-              </TableRow>
+              <Fade in={true} timeout={500} key={item.username}>
+                <TableRow>
+                  <TableCell className={classes.tableAvatar}>
+                    <Avatar>{item.initials}</Avatar>
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    {item.username}
+                  </TableCell>
+                  <TableCell>{item.role}</TableCell>
+                  <TableCell align="right">Edit</TableCell>
+                </TableRow>
+              </Fade>
             ))}
         </TableBody>
       </Table>
