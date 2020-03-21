@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Redirect, RouteProps } from 'react-router-dom'
 
-const PrivateRoute: React.SFC<RouteProps> = ({ component: Component, ...rest }: any) => (
+export const PrivateRoute: React.SFC<RouteProps> = ({ component: Component, ...rest }: any) => (
   <Route
     {...rest}
     render={(props) =>
@@ -13,5 +13,3 @@ const PrivateRoute: React.SFC<RouteProps> = ({ component: Component, ...rest }: 
     }
   />
 )
-
-export default PrivateRoute

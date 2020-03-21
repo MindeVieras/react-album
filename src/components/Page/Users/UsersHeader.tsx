@@ -9,8 +9,8 @@ import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
 import Badge from '@material-ui/core/Badge'
 
-import { IResponsePager } from '../../services'
-import { usersGetList } from '../../actions'
+import { IResponsePager } from '../../../services'
+import { usersGetList } from '../../../actions'
 
 interface IUsersHeaderProps {
   title: string
@@ -73,6 +73,7 @@ const UsersHeader: FunctionComponent<IUsersHeaderProps> = (props) => {
                     </MenuItem>
                   )
                 }
+                return null
               })}
               <MenuItem value={0}>All</MenuItem>
             </Select>

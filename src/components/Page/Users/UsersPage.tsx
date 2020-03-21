@@ -3,11 +3,11 @@ import { connect } from 'react-redux'
 
 import Alert from '@material-ui/lab/Alert'
 
-import { setAppTitle, usersGetList } from '../../actions'
-import MainLayout from '../MainLayout'
-import { IStoreState, IReducerList } from '../../reducers'
-import { IRequestGetListParams } from '../../services'
-import PageContent from '../PageContent'
+import { setAppTitle, usersGetList } from '../../../actions'
+import MainLayout from '../../MainLayout'
+import { IStoreState, IReducerList } from '../../../reducers'
+import { IRequestGetListParams } from '../../../services'
+import { PageWrapper } from '../PageWrapper'
 import UsersTable from './UsersTable'
 import UsersPagination from './UsersPagination'
 import UsersHeader from './UsersHeader'
@@ -46,7 +46,7 @@ class Users extends Component<IUsersProps> {
     const { items, pager, error } = this.props.users
     return (
       <MainLayout>
-        <PageContent>
+        <PageWrapper>
           <UsersHeader title={'Users'} pager={pager} />
           {error ? (
             <Alert severity="error">{error}</Alert>
@@ -59,7 +59,7 @@ class Users extends Component<IUsersProps> {
               <UsersAdd />
             </Fragment>
           )}
-        </PageContent>
+        </PageWrapper>
       </MainLayout>
     )
   }

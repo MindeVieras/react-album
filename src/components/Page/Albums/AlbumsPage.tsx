@@ -1,10 +1,11 @@
-import React, { FunctionComponent } from 'react'
+import React, { useEffect, FunctionComponent } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
-import MainLayout from '../MainLayout'
-import { setAppTitle } from '../../actions'
+
+import MainLayout from '../../MainLayout'
+import { setAppTitle } from '../../../actions'
 
 const styles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,12 +28,16 @@ const styles = makeStyles((theme: Theme) =>
  * @route /
  *
  * @returns {FunctionComponent}
- *   Functional 'Albums' component.
+ *   Functional 'AlbumsPage' component.
  */
-const Albums: FunctionComponent = () => {
+export const AlbumsPage: FunctionComponent = () => {
   const classes = styles({})
   const dispatch = useDispatch()
-  dispatch(setAppTitle('Albums'))
+
+  useEffect(() => {
+    // Set app title for this page.
+    dispatch(setAppTitle('Albums'))
+  }, [dispatch])
 
   return (
     <MainLayout>
@@ -42,5 +47,3 @@ const Albums: FunctionComponent = () => {
     </MainLayout>
   )
 }
-
-export default Albums

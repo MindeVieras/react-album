@@ -5,12 +5,8 @@ import { setTranslations } from 'redux-i18n'
 import { Helmet } from 'react-helmet'
 import WebFont from 'webfontloader'
 
-import PrivateRoute from './components/PrivateRoute'
-import Login from './components/Login'
-import Albums from './components/Albums/Albums'
-import Users from './components/Users/Users'
-import Trash from './components/Trash/Trash'
-import Error404 from './components/404'
+import { PrivateRoute, LoginPage, AlbumsPage, TrashPage, Error404 } from './components'
+import UsersPage from './components/Page/Users/UsersPage'
 
 import { history } from './helpers'
 import { setClientDimensions } from './actions'
@@ -79,10 +75,10 @@ class App extends Component<IAppProps> {
           <title>{title}</title>
         </Helmet>
         <Switch>
-          <PrivateRoute exact path="/" component={Albums} />
-          <PrivateRoute path="/users" component={Users} />
-          <PrivateRoute path="/trash" component={Trash} />
-          <Route path="/login" component={Login} />
+          <PrivateRoute exact path="/" component={AlbumsPage} />
+          <PrivateRoute path="/users" component={UsersPage} />
+          <PrivateRoute path="/trash" component={TrashPage} />
+          <Route exact path="/login" component={LoginPage} />
           <PrivateRoute component={Error404} />
         </Switch>
       </Router>

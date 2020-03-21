@@ -1,16 +1,13 @@
-import React, { FunctionComponent } from 'react'
-import { connect, useDispatch } from 'react-redux'
+import React, { useEffect, FunctionComponent } from 'react'
+import { useDispatch } from 'react-redux'
 
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 
-import LoginForm from './LoginForm'
-import { setAppTitle, authClear } from '../../actions'
+import LoginForm from '../../Form/LoginForm'
+import { setAppTitle, authClear } from '../../../actions'
 
-interface ILoginProps {
-  authClear: Function
-}
-
+// Login page styles.
 const styles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -31,21 +28,19 @@ const styles = makeStyles((theme: Theme) =>
  *
  * @route /login
  *
- * @param {Props} props
- *   Component props.
- *
  * @returns {JSX.Element}
  *   Jsx html page.
  */
-const Login: FunctionComponent<ILoginProps> = (props): JSX.Element => {
+export const LoginPage: FunctionComponent = (): JSX.Element => {
   const classes = styles({})
-
-  // Set page title.
   const dispatch = useDispatch()
-  dispatch(setAppTitle('Login'))
 
-  // Force user to logout before rendering a form.
-  props.authClear()
+  useEffect(() => {
+    // Set page title.
+    dispatch(setAppTitle('Login'))
+    // Force user to logout before rendering a form.
+    dispatch(authClear())
+  }, [dispatch])
 
   return (
     <div className={classes.root}>
@@ -55,5 +50,3 @@ const Login: FunctionComponent<ILoginProps> = (props): JSX.Element => {
     </div>
   )
 }
-
-export default connect(null, { authClear })(Login)

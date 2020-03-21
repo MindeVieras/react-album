@@ -1,10 +1,11 @@
-import React, { FunctionComponent } from 'react'
+import React, { useEffect, FunctionComponent } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
-import MainLayout from '../MainLayout'
-import { setAppTitle } from '../../actions'
+
+import MainLayout from '../../MainLayout'
+import { setAppTitle } from '../../../actions'
 
 const styles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,14 +28,16 @@ const styles = makeStyles((theme: Theme) =>
  * @route /trash
  *
  * @returns {FunctionComponent}
- *   Functional 'Trash' component.
+ *   Functional 'TrashPage' component.
  */
-const Trash: FunctionComponent = () => {
+export const TrashPage: FunctionComponent = () => {
   const classes = styles({})
-
-  // Set app title for this page.
   const dispatch = useDispatch()
-  dispatch(setAppTitle('Trash'))
+
+  useEffect(() => {
+    // Set app title for this page.
+    dispatch(setAppTitle('Trash'))
+  }, [dispatch])
 
   return (
     <MainLayout>
@@ -44,5 +47,3 @@ const Trash: FunctionComponent = () => {
     </MainLayout>
   )
 }
-
-export default Trash

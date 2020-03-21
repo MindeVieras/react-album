@@ -12,9 +12,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 )
 
-const PageContent: FunctionComponent = (props) => {
+export const PageWrapper: FunctionComponent = (props) => {
   const classes = useStyles()
   return <Container className={classes.root}>{props.children}</Container>
 }
-
-export default PageContent

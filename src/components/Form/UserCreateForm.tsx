@@ -5,10 +5,14 @@ import validator from 'validator'
 
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
+import { Dispatch } from 'redux'
+// import { SubmissionError } from 'redux-form'
 
-import { TextInput, SelectInput, ButtonInput, RecaptchaField } from '../../Ui'
+// import { authService, ResponseStatus } from '../../services'
+// import { history } from '../../helpers'
+import { IActionAuthSet } from '../../actions'
 
-import submit from './submit'
+import { TextInput, SelectInput, ButtonInput } from '../Ui'
 
 export interface IFormUsersAddValues {
   username: string
@@ -77,6 +81,37 @@ const validate = (values: IFormUsersAddValues) => {
   }
 
   return errors
+}
+
+/**
+ * Login form submit handler.
+ *
+ * @param {IFormUsersAddValues} values
+ *   Login form values.
+ */
+const submit = async (values: IFormUsersAddValues, dispatch: Dispatch<IActionAuthSet>) => {
+  // const { username, password, recaptcha } = values
+  console.log(values)
+  // // Handle recaptcha error before making a request to the API.
+  // if (!recaptcha) {
+  //   // Throw submission error if recaptcha could not be verified.
+  //   throw new SubmissionError({ _error: 'Cannot validate reCAPTCHA' })
+  // }
+
+  // const { status, message, errors, data } = await authService.login(username, password)
+
+  // // Handle client errors.
+  // if (status === ResponseStatus.clientError) {
+  //   // Throw submission errors to redux form fields.
+  //   throw new SubmissionError({ _error: message, ...errors })
+  // }
+
+  // // Handle success.
+  // if (status === ResponseStatus.success && data) {
+  //   // @ts-ignore
+  //   dispatch(authSet(data))
+  //   history.push('/')
+  // }
 }
 
 UsersCreateForm.contextTypes = {
