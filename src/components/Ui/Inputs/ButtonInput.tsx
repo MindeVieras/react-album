@@ -15,6 +15,7 @@ const styles = makeStyles((theme: Theme) =>
   createStyles({
     btnWrapper: {
       position: 'relative',
+      margin: theme.spacing(2, 0),
     },
   }),
 )

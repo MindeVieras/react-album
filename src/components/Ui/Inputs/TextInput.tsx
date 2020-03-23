@@ -1,21 +1,45 @@
 import React from 'react'
 import { WrappedFieldProps } from 'redux-form'
 
+import { Theme, createStyles, makeStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
+
+import { UiComponentSize } from '../../../enums'
 
 interface ITextInputProps extends WrappedFieldProps {
   label?: string
   type?: string
+  size?: UiComponentSize
 }
 
-export const TextInput = (field: ITextInputProps) => {
+const styles = makeStyles((theme: Theme) =>
+  createStyles({
+    btnWrapper: {
+      position: 'relative',
+      margin: theme.spacing(2, 0),
+    },
+  }),
+)
+
+export const TextInput = ({ input, meta, size, ...field }: ITextInputProps) => {
+  const classes = styles({})
+  let className = classes.btnWrapper
+
+  // Mui size 'small' is default.
+  const MuiComponentSize = size === UiComponentSize.lg ? 'medium' : 'small'
+
   return (
     <TextField
       fullWidth={true}
       type="text"
-      error={field.meta.touched && field.meta.invalid}
-      helperText={field.meta.touched && field.meta.error}
-      {...field.input}
+      error={meta.touched && meta.invalid}
+      helperText={meta.touched && meta.error}
+      variant="outlined"
+      size={MuiComponentSize}
+      // color="primary"
+      // margin="normal"
+      inputProps={input}
+      className={className}
       {...field}
     />
   )

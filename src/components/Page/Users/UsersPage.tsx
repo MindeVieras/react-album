@@ -11,7 +11,7 @@ import { PageWrapper } from '../PageWrapper'
 import UsersTable from './UsersTable'
 import UsersPagination from './UsersPagination'
 import UsersHeader from './UsersHeader'
-import { UsersAdd } from './UsersAdd'
+import { UserCreate } from './UserCreate'
 
 interface IUsersProps {
   setAppTitle(title: string): void
@@ -56,7 +56,7 @@ class Users extends Component<IUsersProps> {
               {pager.total > pager.limit && (
                 <UsersPagination pager={pager} onChangePage={this.handleChangePage} />
               )}
-              <UsersAdd />
+              <UserCreate />
             </Fragment>
           )}
         </PageWrapper>

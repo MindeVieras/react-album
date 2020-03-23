@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux'
 
 import { ActionTypes } from './types'
-import { authService, IAuthResponseData } from '../services'
+import { AuthService, IAuthResponseData } from '../services'
 
 export interface IActionAuthSet {
   type: ActionTypes.authSet
@@ -29,13 +29,10 @@ export const authSet = (auth: IAuthResponseData) => {
 
 export const authClear = () => {
   // Call logout service to clear local storage.
-  authService.logout()
+  AuthService.logout()
   return (dispatch: Dispatch) => {
     dispatch<IActionAuthClear>({
       type: ActionTypes.authClear,
     })
-    // dispatch<IActionAuthClear>({
-    //   type: ActionTypes.authClear,
-    // })
   }
 }

@@ -10,14 +10,16 @@ interface ISelectInputProps extends WrappedFieldProps {
   label?: string
 }
 
-export const SelectInput = (field: ISelectInputProps, ctx: any) => {
+export const SelectInput = (props: ISelectInputProps) => {
+  // console.log(props)
   return (
     <FormControl>
-      {field.label && <InputLabel id="demo-simple-select-label">{field.label}</InputLabel>}
+      {props.label && <InputLabel id="demo-simple-select-label">{props.label}</InputLabel>}
       <Select
         labelId="demo-simple-select-label"
         id="demo-simple-select"
         value={10}
+        // {...props.input}
         // onChange={handleChange}
       >
         <MenuItem value={10}>Ten</MenuItem>

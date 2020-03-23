@@ -1,60 +1,67 @@
 import React, { FunctionComponent } from 'react'
-import PropTypes from 'prop-types'
 import { Field, reduxForm, InjectedFormProps } from 'redux-form'
 import validator from 'validator'
-
-import { Theme, createStyles, makeStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
 import { Dispatch } from 'redux'
+
+// import { Theme, createStyles, makeStyles } from '@material-ui/core/styles'
+// import Typography from '@material-ui/core/Typography'
+import Grid from '@material-ui/core/Grid'
+import Alert from '@material-ui/lab/Alert'
 // import { SubmissionError } from 'redux-form'
 
 // import { authService, ResponseStatus } from '../../services'
 // import { history } from '../../helpers'
 import { IActionAuthSet } from '../../actions'
 
-import { TextInput, SelectInput, ButtonInput } from '../Ui'
+import { TextInput, SelectInput } from '../Ui'
 
-export interface IFormUsersAddValues {
-  username: string
-  password: string
-  recaptcha: string
+export interface IFormUsersCreateValues {
+  readonly username?: string
+  readonly password?: string
+  readonly role?: UserRoles
 }
 
-const styles = makeStyles((theme: Theme) =>
-  createStyles({
-    error: {
-      marginTop: theme.spacing(2),
-    },
-  }),
-)
+// const styles = makeStyles((theme: Theme) =>
+//   createStyles({
+//     // error: {
+//     //   marginTop: theme.spacing(2),
+//     // },
+//   }),
+// )
 
-const UsersCreateForm: FunctionComponent<InjectedFormProps<IFormUsersAddValues>> = (
-  props,
-  ctx: any,
-) => {
-  const classes = styles({})
+const UsersCreateForm: FunctionComponent<InjectedFormProps<IFormUsersCreateValues>> = (props) => {
+  // const classes = styles({})
   const { handleSubmit, submitting, error } = props
-  const { t } = ctx
 
   return (
     <form onSubmit={handleSubmit(submit)}>
-      <Field name="username" component={TextInput} label={t('Username')} />
-      <Field name="password" component={TextInput} label={t('Password')} type="password" />
-      <Field name="role" component={SelectInput} label={t('Role')} />
+      {error && <Alert severity="error">{error}</Alert>}
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <Field size="lg" name="username" component={TextInput} label="Username" />
+        </Grid>
+        <Grid item xs={6}>
+          <Field name="password" component={TextInput} label="Password" type="password" />
+        </Grid>
+      </Grid>
 
-      <ButtonInput
-        loading={submitting}
-        text={t('Login')}
-        // fullWidth={true}
-        color="primary"
-        // size="large"
-      />
-
-      {error && (
-        <Typography className={classes.error} align="center" color="error">
-          {t(error)}
-        </Typography>
-      )}
+      {/* Profile fields */}
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <Field size="xs" name="profile.email" component={TextInput} label="Email" type="email" />
+        </Grid>
+        <Grid item xs={6}>
+          <Field name="profile.displayName" component={TextInput} label="Display name" />
+        </Grid>
+      </Grid>
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <Field name="profile.locale" component={SelectInput} label="Role" />
+        </Grid>
+        <Grid item xs={6}>
+          <Field name="role" component={SelectInput} label="Role" />
+        </Grid>
+      </Grid>
     </form>
   )
 }
@@ -62,10 +69,10 @@ const UsersCreateForm: FunctionComponent<InjectedFormProps<IFormUsersAddValues>>
 /**
  * Form validation function.
  *
- * @param {IFormUsersAddValues} values
+ * @param {IFormUsersCreateValues} values
  *   Form values to validate.
  */
-const validate = (values: IFormUsersAddValues) => {
+const validate = (values: IFormUsersCreateValues) => {
   const { username, password } = values
 
   const errors = {} as { [name: string]: string }
@@ -86,10 +93,10 @@ const validate = (values: IFormUsersAddValues) => {
 /**
  * Login form submit handler.
  *
- * @param {IFormUsersAddValues} values
+ * @param {IFormUsersCreateValues} values
  *   Login form values.
  */
-const submit = async (values: IFormUsersAddValues, dispatch: Dispatch<IActionAuthSet>) => {
+const submit = async (values: IFormUsersCreateValues, dispatch: Dispatch<IActionAuthSet>) => {
   // const { username, password, recaptcha } = values
   console.log(values)
   // // Handle recaptcha error before making a request to the API.
@@ -114,11 +121,8 @@ const submit = async (values: IFormUsersAddValues, dispatch: Dispatch<IActionAut
   // }
 }
 
-UsersCreateForm.contextTypes = {
-  t: PropTypes.func.isRequired,
-}
-
-export default reduxForm<IFormUsersAddValues>({
-  form: 'usersAdd',
+export default reduxForm<IFormUsersCreateValues>({
+  form: 'usersCreate',
   validate,
+  onSubmit: submit,
 })(UsersCreateForm)

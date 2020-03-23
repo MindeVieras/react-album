@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
+import Typography from '@material-ui/core/Typography'
 
 import LoginForm from '../../Form/LoginForm'
 import { setAppTitle, authClear } from '../../../actions'
@@ -45,6 +46,9 @@ export const LoginPage: FunctionComponent = (): JSX.Element => {
   return (
     <div className={classes.root}>
       <Paper className={classes.container}>
+        <Typography variant="h4" align="center">
+          Log in
+        </Typography>
         <LoginForm />
       </Paper>
     </div>
