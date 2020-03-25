@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Router, Switch, Route } from 'react-router-dom'
-import { setTranslations } from 'redux-i18n'
 import { Helmet } from 'react-helmet'
 import WebFont from 'webfontloader'
 
@@ -10,20 +9,18 @@ import UsersPage from './components/Page/Users/UsersPage'
 
 import { history } from './helpers'
 import { setClientDimensions } from './actions'
-import { translations } from './translations'
 import { IStoreState } from './reducers'
 
 interface IAppProps {
   appTitle?: string
   appName: string
   setClientDimensions: Function
-  setTranslations: typeof setTranslations
 }
 
 /**
- * this is main App component
- * @module App
+ * This is main App component.
  *
+ * @module App
  */
 class App extends Component<IAppProps> {
   /**
@@ -41,9 +38,6 @@ class App extends Component<IAppProps> {
         families: ['Roboto:100,300,400,500,700,900'],
       },
     })
-
-    // Set translations - the asynchronous way.
-    props.setTranslations(translations)
 
     // Set initial client dimensions.
     props.setClientDimensions()
@@ -99,4 +93,4 @@ const mapStateToProps = (state: IStoreState): { appTitle?: string; appName: stri
   }
 }
 
-export default connect(mapStateToProps, { setClientDimensions, setTranslations })(App)
+export default connect(mapStateToProps, { setClientDimensions })(App)

@@ -1,23 +1,21 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { setLanguage } from 'redux-i18n'
-import ISO6391 from 'iso-639-1'
+import React, { FunctionComponent } from 'react'
+import { useDispatch } from 'react-redux'
+import { setLocale } from 'react-redux-i18n'
 
 import Button from '@material-ui/core/Button'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 
-import { IStoreState } from '../../../reducers'
+import { Locale } from '../../../helpers'
 
-interface ILanguageSelectorProps {
-  currentLanguage: string
-  setLanguage: typeof setLanguage
-}
-
-const availableLanguages = ['en', 'ru', 'lt']
-
-const LanguageSelector = (props: ILanguageSelectorProps) => {
+export const LanguageSelector: FunctionComponent = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
+  const dispatch = useDispatch()
+
+  // Get available languages.
+  const availableLanguages = Locale.getAvailableLanguages()
+
+  const currentLanguage = Locale.getLocalLanguage()
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget)
@@ -28,14 +26,15 @@ const LanguageSelector = (props: ILanguageSelectorProps) => {
   }
 
   const handleItemClick = (l: string) => {
-    props.setLanguage(l)
+    Locale.setLocalLanguage(l)
+    dispatch(setLocale(l))
     setAnchorEl(null)
   }
 
   return (
     <div>
       <Button aria-controls="language-menu" aria-haspopup="true" onClick={handleClick}>
-        {props.currentLanguage}
+        {currentLanguage}
       </Button>
       <Menu
         id="language-menu"
@@ -46,8 +45,8 @@ const LanguageSelector = (props: ILanguageSelectorProps) => {
       >
         {availableLanguages.map((l) => {
           return (
-            <MenuItem key={l} onClick={() => handleItemClick(l)}>
-              {ISO6391.getNativeName(l)}
+            <MenuItem key={l.code} onClick={() => handleItemClick(l.code)}>
+              {l.nativeName}
             </MenuItem>
           )
         })}
@@ -55,11 +54,3 @@ const LanguageSelector = (props: ILanguageSelectorProps) => {
     </div>
   )
 }
-
-const mapStateToProps = (state: IStoreState) => {
-  return {
-    currentLanguage: state.i18nState.lang,
-  }
-}
-
-export default connect(mapStateToProps, { setLanguage })(LanguageSelector)

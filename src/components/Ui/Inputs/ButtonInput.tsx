@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles'
 import Button, { ButtonProps } from '@material-ui/core/Button'
@@ -6,7 +6,7 @@ import Button, { ButtonProps } from '@material-ui/core/Button'
 import CircleSpinner from '../Spinners/CircleSpinner'
 
 interface IButtonInputProps extends ButtonProps {
-  text?: string | number
+  text?: ReactNode | string
   loading?: boolean
   type?: 'submit' | 'button' | 'reset'
 }

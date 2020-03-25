@@ -1,6 +1,7 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, ReactNode } from 'react'
 import { Redirect } from 'react-router-dom'
 import { Field, reduxForm, InjectedFormProps } from 'redux-form'
+import { Translate } from 'react-redux-i18n'
 import validator from 'validator'
 
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles'
@@ -23,28 +24,41 @@ export interface IFormLoginValues {
   readonly recaptcha?: string
 }
 
+/**
+ * Login form styles.
+ */
 const styles = makeStyles((theme: Theme) =>
   createStyles({
-    error: {
-      marginTop: theme.spacing(2),
-    },
     captcha: {
-      marginTop: theme.spacing(2),
-      marginBottom: theme.spacing(2),
       display: 'flex',
       justifyContent: 'center',
     },
   }),
 )
 
+/**
+ * Login form component.
+ *
+ * @param {InjectedFormProps<IFormLoginValues>} props
+ *   Form props.
+ */
 const LoginForm: FunctionComponent<InjectedFormProps<IFormLoginValues>> = (props) => {
   const classes = styles({})
   const { handleSubmit, submitting, error, submitSucceeded } = props
 
   return (
     <form onSubmit={handleSubmit(submit)}>
-      <Field name="username" component={TextInput} label="Username" />
-      <Field name="password" component={TextInput} label="Password" type="password" />
+      <Field
+        name="username"
+        component={TextInput}
+        label={<Translate value="fields.username.label" />}
+      />
+      <Field
+        name="password"
+        component={TextInput}
+        label={<Translate value="fields.password.label" />}
+        type="password"
+      />
 
       {/* Do not render recaptcha field on dev environment. */}
       {!config.isDev && (
@@ -55,7 +69,7 @@ const LoginForm: FunctionComponent<InjectedFormProps<IFormLoginValues>> = (props
 
       <ButtonInput
         loading={submitting}
-        text="Login"
+        text={<Translate value="pages.login.submit" />}
         fullWidth={true}
         color="primary"
         size="large"
@@ -76,16 +90,16 @@ const LoginForm: FunctionComponent<InjectedFormProps<IFormLoginValues>> = (props
 const validate = (values: IFormLoginValues) => {
   const { username, password } = values
 
-  const errors = {} as { [name: string]: string }
+  const errors = {} as { [fieldName: string]: ReactNode }
 
   // Validate username.
   if (!username || validator.isEmpty(username)) {
-    errors.username = 'Username is required'
+    errors.username = <Translate value="fields.username.required" />
   }
 
   // Validate password.
   if (!password || validator.isEmpty(password)) {
-    errors.password = 'Password is required'
+    errors.password = <Translate value="fields.password.required" />
   }
 
   return errors
@@ -104,7 +118,7 @@ const submit = async (values: IFormLoginValues, dispatch: Dispatch<IActionAuthSe
   // Skip for dev environment.
   if (!recaptcha && !config.isDev) {
     // Throw submission error if recaptcha could not be verified.
-    throw new SubmissionError({ _error: 'Cannot validate reCAPTCHA' })
+    throw new SubmissionError({ _error: <Translate value="fields.recaptcha.invalid" /> })
   }
 
   if (username && password) {

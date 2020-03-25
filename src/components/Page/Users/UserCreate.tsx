@@ -90,7 +90,7 @@ export function UserCreate() {
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button variant="text" onClick={() => dispatch(submit('usersCreate'))} color="primary">
+          <Button variant="text" onClick={() => dispatch(submit('userCreate'))} color="primary">
             Create
           </Button>
         </DialogActions>

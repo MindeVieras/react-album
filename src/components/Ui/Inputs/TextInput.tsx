@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { WrappedFieldProps } from 'redux-form'
 
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles'
@@ -7,7 +7,7 @@ import TextField from '@material-ui/core/TextField'
 import { UiComponentSize } from '../../../enums'
 
 interface ITextInputProps extends WrappedFieldProps {
-  label?: string
+  label?: ReactNode | string
   type?: string
   size?: UiComponentSize
 }

@@ -1,5 +1,6 @@
 import React, { useEffect, FunctionComponent } from 'react'
 import { useDispatch } from 'react-redux'
+import { I18n, Translate } from 'react-redux-i18n'
 
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
@@ -7,6 +8,7 @@ import Typography from '@material-ui/core/Typography'
 
 import LoginForm from '../../Form/LoginForm'
 import { setAppTitle, authClear } from '../../../actions'
+import { LanguageSelector } from '../../Ui'
 
 // Login page styles.
 const styles = makeStyles((theme: Theme) =>
@@ -17,9 +19,14 @@ const styles = makeStyles((theme: Theme) =>
       height: '100vh',
     },
     container: {
-      maxWidth: theme.spacing(45),
+      maxWidth: theme.spacing(44),
       padding: theme.spacing(3),
       margin: '0 auto',
+    },
+    titleWrapper: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
     },
   }),
 )
@@ -38,7 +45,7 @@ export const LoginPage: FunctionComponent = (): JSX.Element => {
 
   useEffect(() => {
     // Set page title.
-    dispatch(setAppTitle('Login'))
+    dispatch(setAppTitle(I18n.t('pages.login.title')))
     // Force user to logout before rendering a form.
     dispatch(authClear())
   }, [dispatch])
@@ -46,9 +53,12 @@ export const LoginPage: FunctionComponent = (): JSX.Element => {
   return (
     <div className={classes.root}>
       <Paper className={classes.container}>
-        <Typography variant="h4" align="center">
-          Log in
-        </Typography>
+        <div className={classes.titleWrapper}>
+          <Typography variant="h5" align="center">
+            <Translate value="pages.login.title" />
+          </Typography>
+          <LanguageSelector />
+        </div>
         <LoginForm />
       </Paper>
     </div>

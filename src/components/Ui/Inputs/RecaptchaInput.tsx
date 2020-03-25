@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { WrappedFieldProps } from 'redux-form'
 import ReCAPTCHA from 'react-google-recaptcha'
 
-import { config } from '../../../helpers'
+import { config, Locale } from '../../../helpers'
 import { IStoreState } from '../../../reducers'
 
 /**
@@ -23,11 +23,11 @@ interface IRecaptchaFieldProps extends WrappedFieldProps {}
  *   Recaptcha component.
  */
 export const RecaptchaInput = (props: IRecaptchaFieldProps): JSX.Element => {
-  const currentLanguage = useSelector((state: IStoreState) => state.i18nState.lang)
+  const currentLocale = useSelector((state: IStoreState) => state.i18n.locale)
   return (
     <ReCAPTCHA
       size="normal"
-      hl={currentLanguage}
+      hl={Locale.getLanguageCodeFromLocaleCode(currentLocale)}
       sitekey={config.recaptchaSiteKey}
       onChange={props.input.onChange}
     />

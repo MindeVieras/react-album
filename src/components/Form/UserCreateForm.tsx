@@ -122,7 +122,7 @@ const submit = async (values: IFormUsersCreateValues, dispatch: Dispatch<IAction
 }
 
 export default reduxForm<IFormUsersCreateValues>({
-  form: 'usersCreate',
+  form: 'userCreate',
   validate,
   onSubmit: submit,
 })(UsersCreateForm)

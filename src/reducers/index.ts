@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
-import { i18nState } from 'redux-i18n'
+import { i18nReducer } from 'react-redux-i18n'
 // import { reducer as toastrReducer } from 'react-redux-toastr'
 
 import { client } from './client.reducer'
@@ -37,8 +37,9 @@ export interface IStoreState {
   }
   form: {
     login?: any
+    userCreate?: any
   }
-  i18nState: any
+  i18n: any
 }
 
 const rootReducer = combineReducers<IStoreState>({
@@ -55,7 +56,7 @@ const rootReducer = combineReducers<IStoreState>({
   form: formReducer,
   // toastr: toastrReducer,
   // trash,
-  i18nState,
+  i18n: i18nReducer,
 })
 
 export default rootReducer
