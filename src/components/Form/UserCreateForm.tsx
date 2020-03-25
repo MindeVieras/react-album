@@ -38,7 +38,7 @@ const UsersCreateForm: FunctionComponent<InjectedFormProps<IFormUsersCreateValue
       {error && <Alert severity="error">{error}</Alert>}
       <Grid container spacing={2}>
         <Grid item xs={6}>
-          <Field size="lg" name="username" component={TextInput} label="Username" />
+          <Field name="username" component={TextInput} label="Username" />
         </Grid>
         <Grid item xs={6}>
           <Field name="password" component={TextInput} label="Password" type="password" />

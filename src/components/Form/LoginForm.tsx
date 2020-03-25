@@ -130,7 +130,13 @@ const submit = async (values: IFormLoginValues, dispatch: Dispatch<IActionAuthSe
     if ($auth.isSuccess && data) {
       // @ts-ignore
       dispatch(authSet(data))
-      history.push('/')
+
+      // Redirect user to the path where it came from except from /login path.
+      let redirectPath = '/'
+      if (history.location.state) {
+        redirectPath = history.createHref(history.location.state.from)
+      }
+      history.push(redirectPath)
     } else if (!$auth.isSuccess && message) {
       // Throw submission errors to redux form fields.
       throw new SubmissionError({ _error: message, ...errors })

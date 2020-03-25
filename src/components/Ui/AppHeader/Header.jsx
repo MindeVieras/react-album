@@ -1,4 +1,3 @@
-
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -18,16 +17,16 @@ import MainMenu from './MainMenu'
 
 import { clientActions } from 'Actions'
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
-    backgroundColor: theme.palette.background.header
+    backgroundColor: theme.palette.background.header,
   },
   toolbar: {
     justifyContent: `space-between`,
   },
   menus: {
     display: `flex`,
-  }
+  },
 })
 
 class Header extends Component {
@@ -51,7 +50,6 @@ class Header extends Component {
   }
 
   render() {
-
     const { t } = this.context
     const { classes, user, title, full_screen, selected_album } = this.props
 
@@ -63,43 +61,42 @@ class Header extends Component {
     }
 
     return (
-      <AppBar position="static" className={ classes.root }>
-        <Toolbar className={ classes.toolbar }>
+      <AppBar position="static" className={classes.root}>
+        <Toolbar className={classes.toolbar}>
+          <Title title={headerTitle} album_id={album_id} />
 
-          <Title title={ headerTitle } album_id={ album_id } />
-
-          <div className={ classes.menus }>
-            {!full_screen &&
+          <div className={classes.menus}>
+            {!full_screen && (
               <Fragment>
                 <IconButton
                   data-tip
                   data-for="tip_go_fullscreen"
-                  onClick={ this.goFullscreen }
+                  onClick={this.goFullscreen}
                   color="inherit"
                 >
                   <Fullscreen />
                 </IconButton>
-                <Tip id="tip_go_fullscreen" effect="solid">{ t(`Go fullscreen mode`) }</Tip>
+                <Tip id="tip_go_fullscreen" effect="solid">
+                  {t(`Go fullscreen mode`)}
+                </Tip>
               </Fragment>
-            }
-            {full_screen &&
+            )}
+            {full_screen && (
               <Fragment>
                 <IconButton
                   data-tip
                   data-for="tip_exit_fullscreen"
-                  onClick={ this.goOutFullscreen }
+                  onClick={this.goOutFullscreen}
                   color="inherit"
                 >
                   <FullscreenExit />
                 </IconButton>
-                <Tip id="tip_exit_fullscreen">{ t(`Exit fullscreen mode`) }</Tip>
+                <Tip id="tip_exit_fullscreen">{t(`Exit fullscreen mode`)}</Tip>
               </Fragment>
-            }
+            )}
 
-            <MainMenu user={ user } />
-
+            <MainMenu user={user} />
           </div>
-
         </Toolbar>
       </AppBar>
     )
@@ -107,7 +104,7 @@ class Header extends Component {
 }
 
 Header.contextTypes = {
-  t: PropTypes.func
+  t: PropTypes.func,
 }
 
 Header.propTypes = {
@@ -116,12 +113,12 @@ Header.propTypes = {
   user: PropTypes.object.isRequired,
   full_screen: PropTypes.bool.isRequired,
   title: PropTypes.string,
-  selected_album: PropTypes.object
+  selected_album: PropTypes.object,
 }
 
 Header.defaultProps = {
   title: '',
-  selected_album: {}
+  selected_album: {},
 }
 
 function mapStateToProps(state) {
@@ -130,7 +127,7 @@ function mapStateToProps(state) {
     user: auth,
     title: admin_header.title,
     full_screen: client.full_screen,
-    selected_album: admin_albums.selected_album.album
+    selected_album: admin_albums.selected_album.album,
   }
 }
 

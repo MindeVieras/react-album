@@ -53,14 +53,14 @@ export function UserCreate() {
 
   const handleOpen = () => {
     setOpen(true)
-    history.push('users/+')
+    history.push('/users/+')
   }
 
   const isAddPath = history.location.pathname.split('/').includes('+')
 
   const handleClose = () => {
     setOpen(false)
-    history.goBack()
+    history.push('/users')
   }
 
   return (

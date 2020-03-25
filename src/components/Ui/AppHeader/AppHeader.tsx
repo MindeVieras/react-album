@@ -11,6 +11,7 @@ import useScrollTrigger from '@material-ui/core/useScrollTrigger'
 import MainMenu from '../Menus/MainMenu'
 import { ButtonFullScreen } from '../ButtonFullScreen'
 import { IStoreState } from '../../../reducers'
+import { LanguageSelector } from '../Menus/LanguageSelector'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -42,6 +43,7 @@ export const AppHeader: FunctionComponent = () => {
 
             <div className={classes.menus}>
               <ButtonFullScreen />
+              <LanguageSelector type="icon" />
               <MainMenu />
             </div>
           </Toolbar>
