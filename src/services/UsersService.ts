@@ -1,6 +1,6 @@
 import { IResponsePaginatedData, IRequestGetListParams } from './types'
 import { ApiService } from './ApiService'
-import { IFormUsersCreateValues } from '../components/Form/UserCreateForm'
+import { IFormUserAddValues } from '../components/Form/UserAddForm'
 
 /**
  * UsersService class.
@@ -35,8 +35,8 @@ export class UsersService extends ApiService {
    * @returns {Promise<IResponse<IUserProps>>}
    *   Response promise including paginated list of users.
    */
-  public async create(values: IFormUsersCreateValues) {
-    const res = await this.post<IFormUsersCreateValues, IUserProps>('users', values)
+  public async create(values: IFormUserAddValues) {
+    const res = await this.post<IFormUserAddValues, IUserProps>('users', values)
     return res
   }
 }

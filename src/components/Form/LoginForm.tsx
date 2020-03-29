@@ -1,16 +1,12 @@
 import React, { FunctionComponent, ReactNode } from 'react'
-import { Redirect } from 'react-router-dom'
-import { Field, reduxForm, InjectedFormProps } from 'redux-form'
-import { Translate } from 'react-redux-i18n'
-import validator from 'validator'
-
-import { Theme, createStyles, makeStyles } from '@material-ui/core/styles'
-import Alert from '@material-ui/lab/Alert'
-
-import { TextInput, ButtonInput, RecaptchaInput } from '../Ui'
 import { Dispatch } from 'redux'
-import { SubmissionError } from 'redux-form'
+import { Field, reduxForm, InjectedFormProps, SubmissionError } from 'redux-form'
+import { Translate, I18n } from 'react-redux-i18n'
+import validator from 'validator'
+import { Alert, Button, Form } from 'antd'
+import { UserOutlined, LockOutlined } from '@ant-design/icons'
 
+import { TextInput, RecaptchaInput } from '../Ui'
 import { AuthService } from '../../services'
 import { history, config } from '../../helpers'
 import { authSet, IActionAuthSet } from '../../actions'
@@ -25,59 +21,60 @@ export interface IFormLoginValues {
 }
 
 /**
- * Login form styles.
- */
-const styles = makeStyles((theme: Theme) =>
-  createStyles({
-    captcha: {
-      display: 'flex',
-      justifyContent: 'center',
-    },
-  }),
-)
-
-/**
  * Login form component.
  *
  * @param {InjectedFormProps<IFormLoginValues>} props
- *   Form props.
+ *   Login form props.
  */
 const LoginForm: FunctionComponent<InjectedFormProps<IFormLoginValues>> = (props) => {
-  const classes = styles({})
-  const { handleSubmit, submitting, error, submitSucceeded } = props
+  const { handleSubmit, submitting, error } = props
 
   return (
-    <form onSubmit={handleSubmit(submit)}>
+    <Form onFinish={handleSubmit(submit)}>
+      {/* Username field. */}
       <Field
         name="username"
         component={TextInput}
-        label={<Translate value="fields.username.label" />}
+        formItemProps={{
+          required: true,
+        }}
+        inputProps={{
+          size: 'large',
+          prefix: <UserOutlined />,
+          placeholder: I18n.t('fields.username.label'),
+        }}
       />
+
+      {/* Password field. */}
       <Field
         name="password"
         component={TextInput}
-        label={<Translate value="fields.password.label" />}
-        type="password"
+        formItemProps={{
+          required: true,
+        }}
+        inputProps={{
+          type: 'password',
+          size: 'large',
+          prefix: <LockOutlined />,
+          placeholder: I18n.t('fields.password.label'),
+        }}
       />
 
       {/* Do not render recaptcha field on dev environment. */}
       {!config.isDev && (
-        <div className={classes.captcha}>
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 20 }}>
           <Field name="recaptcha" component={RecaptchaInput} />
         </div>
       )}
 
-      <ButtonInput
-        loading={submitting}
-        text={<Translate value="pages.login.submit" />}
-        fullWidth={true}
-        color="primary"
-        size="large"
-      />
-      {submitSucceeded && <Redirect to="/" />}
+      {/* Login form submit button. */}
+      <Button type="primary" size="large" htmlType="submit" loading={submitting} block>
+        <Translate value="button.login" />
+      </Button>
 
-      {error && <Alert severity="error">{error}</Alert>}
-    </form>
+      {/* Show form validation error. */}
+      {error && <Alert style={{ marginTop: 16 }} message={error} type="error" showIcon />}
+    </Form>
   )
 }
 
@@ -114,6 +111,7 @@ const validate = (values: IFormLoginValues) => {
 const submit = async (values: IFormLoginValues, dispatch: Dispatch<IActionAuthSet>) => {
   const { username, password, recaptcha } = values
 
+  console.log(values)
   // Handle recaptcha error before making request to API.
   // Skip for dev environment.
   if (!recaptcha && !config.isDev) {
@@ -146,5 +144,5 @@ const submit = async (values: IFormLoginValues, dispatch: Dispatch<IActionAuthSe
 
 export default reduxForm<IFormLoginValues>({
   form: 'login',
-  validate,
+  // validate,
 })(LoginForm)

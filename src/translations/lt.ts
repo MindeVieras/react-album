@@ -1,6 +1,13 @@
 import { Dictionary } from './Dictionary'
 
 const lt: Dictionary = {
+  // Main menu.
+  mainMenu: {
+    albums: 'Albumai',
+    users: 'Vartotojai',
+    trash: 'Šiukšliadėžė',
+    logout: 'Atsijungti',
+  },
   // Redux form fields.
   fields: {
     username: {
@@ -14,12 +21,38 @@ const lt: Dictionary = {
     recaptcha: {
       invalid: 'Nepatvirtinta reCAPTCHA',
     },
+    email: {
+      label: 'Elektroninis paštas',
+      invalid: 'El. Pašto adresas neteisingas',
+    },
   },
   // Pages.
   pages: {
     login: {
       title: 'Prisijungti',
-      submit: 'Jungtis',
+    },
+    users: {
+      title: 'Vartotojai',
+    },
+  },
+  // Tooltips.
+  tooltip: {
+    changeLanguage: 'Pakeisti kalbą',
+    goFullScreen: 'Eiti per visą ekraną',
+    mainMenu: 'Meniu',
+    filterItemsPerPage: 'Elementų puslapyje',
+    userAdd: 'Pridėti naują vartotoją',
+  },
+  // Buttons.
+  button: {
+    login: 'Jungtis',
+    create: 'Sukurti',
+    cancel: 'Atšaukti',
+  },
+  // Modals.
+  modal: {
+    userAdd: {
+      title: 'Sukurkite naują vartotoją',
     },
   },
 }

@@ -37,7 +37,7 @@ export interface IStoreState {
   }
   form: {
     login?: any
-    userCreate?: any
+    userAdd?: any
   }
   i18n: any
 }

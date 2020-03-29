@@ -1,6 +1,13 @@
 import { Dictionary } from './Dictionary'
 
 const ru: Dictionary = {
+  // Main menu.
+  mainMenu: {
+    albums: 'Альбомы',
+    users: 'Пользователей',
+    trash: 'Корзина',
+    logout: 'Выйти',
+  },
   // Redux form fields.
   fields: {
     username: {
@@ -14,12 +21,38 @@ const ru: Dictionary = {
     recaptcha: {
       invalid: 'Не удается проверить reCAPTCHA',
     },
+    email: {
+      label: 'Электронная почта',
+      invalid: 'E-mail неверен',
+    },
   },
   // Pages.
   pages: {
     login: {
       title: 'Войти в систему',
-      submit: 'Войти',
+    },
+    users: {
+      title: 'Пользователей',
+    },
+  },
+  // Tooltips.
+  tooltip: {
+    changeLanguage: 'Изменение языка',
+    goFullScreen: 'Перейти на полный экран',
+    mainMenu: 'Меню',
+    filterItemsPerPage: 'Пункты на странице',
+    userAdd: 'Добавить нового пользователя',
+  },
+  // Buttons.
+  button: {
+    login: 'Войти',
+    create: 'Создайте',
+    cancel: 'Отмена',
+  },
+  // Modals.
+  modal: {
+    userAdd: {
+      title: 'Создать нового пользователя',
     },
   },
 }

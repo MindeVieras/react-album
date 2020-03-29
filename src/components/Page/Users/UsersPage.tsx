@@ -1,17 +1,14 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-
-import Alert from '@material-ui/lab/Alert'
+import { Translate } from 'react-redux-i18n'
+import { Alert, PageHeader, Tag, Pagination } from 'antd'
 
 import { setAppTitle, usersGetList } from '../../../actions'
-import MainLayout from '../../MainLayout'
 import { IStoreState, IReducerList } from '../../../reducers'
 import { IRequestGetListParams } from '../../../services'
 import { PageWrapper } from '../PageWrapper'
-import UsersTable from './UsersTable'
-import UsersPagination from './UsersPagination'
-import UsersHeader from './UsersHeader'
-import { UserCreate } from './UserCreate'
+import { UsersList } from './UsersList'
+import { UsersPageActions } from './UsersPageActions'
 
 interface IUsersProps {
   setAppTitle(title: string): void
@@ -27,7 +24,7 @@ interface IUsersProps {
  * @returns {FunctionComponent}
  *   Functional 'Users' component.
  */
-class Users extends Component<IUsersProps> {
+class UsersPage extends Component<IUsersProps> {
   constructor(props: IUsersProps) {
     super(props)
 
@@ -35,32 +32,46 @@ class Users extends Component<IUsersProps> {
     props.usersGetList({ limit: props.users.pager.limit })
   }
 
-  handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
+  handleChangePage = (page: number) => {
     this.props.usersGetList({
       limit: this.props.users.pager.limit,
-      offset: (newPage - 1) * this.props.users.pager.limit,
+      offset: (page - 1) * this.props.users.pager.limit,
     })
   }
 
   render() {
-    const { items, pager, error } = this.props.users
+    const { items, pager, error, loading } = this.props.users
     return (
-      <MainLayout>
-        <PageWrapper>
-          <UsersHeader title={'Users'} pager={pager} />
-          {error ? (
-            <Alert severity="error">{error}</Alert>
-          ) : (
-            <Fragment>
-              <UsersTable items={items} />
-              {pager.total > pager.limit && (
-                <UsersPagination pager={pager} onChangePage={this.handleChangePage} />
-              )}
-              <UserCreate />
-            </Fragment>
-          )}
-        </PageWrapper>
-      </MainLayout>
+      <PageWrapper>
+        <PageHeader
+          title={<Translate value="pages.users.title" />}
+          tags={[
+            <Tag key={1} color="geekblue">
+              {pager.total}
+            </Tag>,
+          ]}
+          extra={<UsersPageActions pager={pager} />}
+          style={{
+            paddingLeft: 0,
+            paddingRight: 0,
+          }}
+        />
+        {error ? (
+          <Alert type="error" message={error} banner />
+        ) : (
+          <Fragment>
+            <UsersList items={items} loading={loading} />
+            <Pagination
+              style={{ textAlign: 'center', marginTop: 16 }}
+              current={pager.offset / pager.limit + 1}
+              pageSize={pager.limit}
+              total={pager.total}
+              onChange={this.handleChangePage}
+              hideOnSinglePage={true}
+            />
+          </Fragment>
+        )}
+      </PageWrapper>
     )
   }
 }
@@ -77,4 +88,4 @@ const mapStateToProps = (state: IStoreState): { users: IReducerList<IUserProps> 
   }
 }
 
-export default connect(mapStateToProps, { setAppTitle, usersGetList })(Users)
+export default connect(mapStateToProps, { setAppTitle, usersGetList })(UsersPage)

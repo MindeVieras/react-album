@@ -13,7 +13,7 @@ interface ISelectInputProps extends WrappedFieldProps {
 export const SelectInput = (props: ISelectInputProps) => {
   // console.log(props)
   return (
-    <FormControl>
+    <FormControl variant="outlined" size="medium" fullWidth={true}>
       {props.label && <InputLabel id="demo-simple-select-label">{props.label}</InputLabel>}
       <Select
         labelId="demo-simple-select-label"

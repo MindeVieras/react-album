@@ -1,54 +1,37 @@
 import React, { FunctionComponent } from 'react'
 import { useSelector } from 'react-redux'
+import { Layout, Typography } from 'antd'
 
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import Slide from '@material-ui/core/Slide'
-import Typography from '@material-ui/core/Typography'
-import useScrollTrigger from '@material-ui/core/useScrollTrigger'
-
-import MainMenu from '../Menus/MainMenu'
-import { ButtonFullScreen } from '../ButtonFullScreen'
+import { MainMenu, LanguageSelector } from '../Menus'
+import { ButtonFullScreen } from './ButtonFullScreen'
 import { IStoreState } from '../../../reducers'
-import { LanguageSelector } from '../Menus/LanguageSelector'
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      flexGrow: 1,
-    },
-    menus: {
-      display: 'flex',
-    },
-    title: {
-      flexGrow: 1,
-    },
-  }),
-)
 
 export const AppHeader: FunctionComponent = () => {
   const appName = useSelector((state: IStoreState) => state.client.appName)
-  const classes = useStyles()
-  const trigger = useScrollTrigger()
 
   return (
-    <div className={classes.root}>
-      <Slide appear={false} direction="down" in={!trigger}>
-        <AppBar>
-          <Toolbar>
-            <Typography variant="h6" className={classes.title}>
-              {appName}
-            </Typography>
+    <Layout.Header
+      style={{
+        position: 'fixed',
+        zIndex: 1,
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        color: 'white',
+        paddingLeft: 24,
+        paddingRight: 24,
+      }}
+    >
+      <Typography.Title style={{ color: 'inherit', marginBottom: 0, fontWeight: 400 }} level={3}>
+        {appName}
+      </Typography.Title>
 
-            <div className={classes.menus}>
-              <ButtonFullScreen />
-              <LanguageSelector type="icon" />
-              <MainMenu />
-            </div>
-          </Toolbar>
-        </AppBar>
-      </Slide>
-    </div>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <ButtonFullScreen />
+        <LanguageSelector buttonProps={{ ghost: true }} />
+        <MainMenu />
+      </div>
+    </Layout.Header>
   )
 }

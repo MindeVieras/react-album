@@ -1,14 +1,14 @@
 import React, { useEffect, FunctionComponent } from 'react'
 import { useDispatch } from 'react-redux'
 import { I18n, Translate } from 'react-redux-i18n'
+import { Card, PageHeader } from 'antd'
 
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles'
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
 
-import LoginForm from '../../Form/LoginForm'
 import { setAppTitle, authClear } from '../../../actions'
+
 import { LanguageSelector } from '../../Ui'
+import LoginForm from '../../Form/LoginForm'
 
 // Login page styles.
 const styles = makeStyles((theme: Theme) =>
@@ -17,16 +17,6 @@ const styles = makeStyles((theme: Theme) =>
       padding: `10% ${theme.spacing()}px`,
       overflow: 'auto',
       height: '100vh',
-    },
-    container: {
-      maxWidth: theme.spacing(44),
-      padding: theme.spacing(3),
-      margin: '0 auto',
-    },
-    titleWrapper: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
     },
   }),
 )
@@ -52,15 +42,24 @@ export const LoginPage: FunctionComponent = (): JSX.Element => {
 
   return (
     <div className={classes.root}>
-      <Paper className={classes.container}>
-        <div className={classes.titleWrapper}>
-          <Typography variant="h5" align="center">
-            <Translate value="pages.login.title" />
-          </Typography>
-          <LanguageSelector />
-        </div>
+      <Card
+        style={{
+          maxWidth: 352,
+          margin: '0 auto',
+        }}
+        bodyStyle={{
+          paddingTop: 0,
+        }}
+      >
+        <PageHeader
+          onBack={() => null}
+          title={<Translate value="pages.login.title" />}
+          backIcon={false}
+          extra={<LanguageSelector />}
+          style={{ paddingLeft: 0, paddingRight: 0 }}
+        />
         <LoginForm />
-      </Paper>
+      </Card>
     </div>
   )
 }

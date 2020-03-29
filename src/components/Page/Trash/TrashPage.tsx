@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 
-import MainLayout from '../../MainLayout'
+import { PageWrapper } from '../PageWrapper'
 import { setAppTitle } from '../../../actions'
 
 const styles = makeStyles((theme: Theme) =>
@@ -40,10 +40,10 @@ export const TrashPage: FunctionComponent = () => {
   }, [dispatch])
 
   return (
-    <MainLayout>
+    <PageWrapper>
       <div className={classes.root}>
         <Paper className={classes.container}>Trash page!!!</Paper>
       </div>
-    </MainLayout>
+    </PageWrapper>
   )
 }

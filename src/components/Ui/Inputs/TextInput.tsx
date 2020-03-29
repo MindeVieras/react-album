@@ -1,46 +1,37 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 import { WrappedFieldProps } from 'redux-form'
+import Form, { FormItemProps } from 'antd/lib/form'
+import Input, { InputProps } from 'antd/lib/input'
 
-import { Theme, createStyles, makeStyles } from '@material-ui/core/styles'
-import TextField from '@material-ui/core/TextField'
-
-import { UiComponentSize } from '../../../enums'
-
+/**
+ * Text input props.
+ */
 interface ITextInputProps extends WrappedFieldProps {
-  label?: ReactNode | string
-  type?: string
-  size?: UiComponentSize
+  readonly formItemProps?: FormItemProps
+  readonly inputProps?: InputProps
 }
 
-const styles = makeStyles((theme: Theme) =>
-  createStyles({
-    btnWrapper: {
-      position: 'relative',
-      margin: theme.spacing(2, 0),
-    },
-  }),
-)
-
-export const TextInput = ({ input, meta, size, ...field }: ITextInputProps) => {
-  const classes = styles({})
-  let className = classes.btnWrapper
-
-  // Mui size 'small' is default.
-  const MuiComponentSize = size === UiComponentSize.lg ? 'medium' : 'small'
+export const TextInput = ({ input, meta, formItemProps, inputProps }: ITextInputProps) => {
+  console.log(meta)
+  // Check for a field validation error.
+  const hasError = meta.touched && meta.invalid
+  // Check field if type is 'password'.
+  const isPassword = inputProps?.type === 'password'
 
   return (
-    <TextField
-      fullWidth={true}
-      type="text"
-      error={meta.touched && meta.invalid}
-      helperText={meta.touched && meta.error}
-      variant="outlined"
-      size={MuiComponentSize}
-      // color="primary"
-      // margin="normal"
-      inputProps={input}
-      className={className}
-      {...field}
-    />
+    <Form.Item
+      validateStatus={hasError ? 'error' : 'success'}
+      hasFeedback={hasError}
+      help={hasError && meta.error}
+      {...formItemProps}
+    >
+      {/* Render password field if type is 'password'. */}
+      {isPassword ? (
+        <Input.Password {...input} {...inputProps} />
+      ) : (
+        // Otherwise render normal input field.
+        <Input {...input} {...inputProps} />
+      )}
+    </Form.Item>
   )
 }
