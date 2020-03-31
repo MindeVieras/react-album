@@ -25,6 +25,18 @@ const ru: Dictionary = {
       label: 'Электронная почта',
       invalid: 'E-mail неверен',
     },
+    displayName: {
+      label: 'Показать имя',
+    },
+    role: {
+      label: 'Роль',
+    },
+    locale: {
+      label: 'Место действия',
+    },
+    status: {
+      label: 'Статус',
+    },
   },
   // Pages.
   pages: {

@@ -24,7 +24,7 @@ export const MainMenu = () => {
 
   return (
     <Fragment>
-      <Tooltip title={<Translate value="tooltip.mainMenu" />}>
+      <Tooltip mouseEnterDelay={1} title={<Translate value="tooltip.mainMenu" />}>
         <Button
           type="link"
           shape="circle"

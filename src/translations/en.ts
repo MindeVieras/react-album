@@ -25,6 +25,18 @@ const en: Dictionary = {
       label: 'Email',
       invalid: 'Email is invalid',
     },
+    displayName: {
+      label: 'Display name',
+    },
+    role: {
+      label: 'Role',
+    },
+    locale: {
+      label: 'Locale',
+    },
+    status: {
+      label: 'Status',
+    },
   },
   // Pages.
   pages: {

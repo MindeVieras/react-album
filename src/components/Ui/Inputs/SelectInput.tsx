@@ -1,31 +1,55 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { WrappedFieldProps } from 'redux-form'
+import Form, { FormItemProps } from 'antd/lib/form'
+import Select, { SelectProps } from 'antd/lib/select'
 
-import InputLabel from '@material-ui/core/InputLabel'
-import MenuItem from '@material-ui/core/MenuItem'
-import FormControl from '@material-ui/core/FormControl'
-import Select from '@material-ui/core/Select'
-
-interface ISelectInputProps extends WrappedFieldProps {
-  label?: string
+interface SelectOption {
+  value: string
+  name: ReactNode
 }
 
-export const SelectInput = (props: ISelectInputProps) => {
-  // console.log(props)
+/**
+ * Select input props.
+ */
+interface ISelectInputProps extends WrappedFieldProps {
+  readonly options?: SelectOption[]
+  readonly formItemProps?: FormItemProps
+  readonly selectProps?: SelectProps<any>
+}
+
+export const SelectInput = ({
+  input,
+  meta,
+  options,
+  formItemProps,
+  selectProps,
+}: ISelectInputProps) => {
+  // Check for a field validation error.
+  const hasError = meta.touched && meta.invalid
+
+  console.log(options)
+
+  const selectOptions = options?.map((o) => {
+    return (
+      <Select.Option key={o.value} value={o.value}>
+        {o.name}
+      </Select.Option>
+    )
+  })
+
   return (
-    <FormControl variant="outlined" size="medium" fullWidth={true}>
-      {props.label && <InputLabel id="demo-simple-select-label">{props.label}</InputLabel>}
+    <Form.Item
+      validateStatus={hasError ? 'error' : 'success'}
+      hasFeedback={hasError}
+      help={hasError && meta.error}
+      {...formItemProps}
+    >
       <Select
-        labelId="demo-simple-select-label"
-        id="demo-simple-select"
-        value={10}
-        // {...props.input}
-        // onChange={handleChange}
+        //{...input}
+        {...selectProps}
       >
-        <MenuItem value={10}>Ten</MenuItem>
-        <MenuItem value={20}>Twenty</MenuItem>
-        <MenuItem value={30}>Thirty</MenuItem>
+        {selectOptions}
       </Select>
-    </FormControl>
+    </Form.Item>
   )
 }

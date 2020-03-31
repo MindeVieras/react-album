@@ -3,23 +3,10 @@ import { useDispatch } from 'react-redux'
 import { I18n, Translate } from 'react-redux-i18n'
 import { Card, PageHeader } from 'antd'
 
-import { Theme, createStyles, makeStyles } from '@material-ui/core/styles'
-
 import { setAppTitle, authClear } from '../../../actions'
 
 import { LanguageSelector } from '../../Ui'
 import LoginForm from '../../Form/LoginForm'
-
-// Login page styles.
-const styles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      padding: `10% ${theme.spacing()}px`,
-      overflow: 'auto',
-      height: '100vh',
-    },
-  }),
-)
 
 /**
  * Login page component.
@@ -30,7 +17,6 @@ const styles = makeStyles((theme: Theme) =>
  *   Jsx html page.
  */
 export const LoginPage: FunctionComponent = (): JSX.Element => {
-  const classes = styles({})
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -41,7 +27,13 @@ export const LoginPage: FunctionComponent = (): JSX.Element => {
   }, [dispatch])
 
   return (
-    <div className={classes.root}>
+    <div
+      style={{
+        padding: `10% 8px`,
+        overflow: 'auto',
+        height: '100vh',
+      }}
+    >
       <Card
         style={{
           maxWidth: 352,

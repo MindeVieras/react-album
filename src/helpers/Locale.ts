@@ -104,4 +104,13 @@ export class Locale {
       }
     })
   }
+
+  /**
+   * Gets complete list of languages.
+   *
+   * @returns
+   */
+  public static getAllLanguages = (): any => {
+    return ISO6391.getAllCodes()
+  }
 }

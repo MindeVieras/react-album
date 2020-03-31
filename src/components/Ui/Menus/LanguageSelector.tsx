@@ -43,7 +43,7 @@ export const LanguageSelector: FunctionComponent<ILanguageSelectorProps> = (prop
 
   return (
     <Dropdown overlay={menu} trigger={['click']}>
-      <Tooltip title={<Translate value="tooltip.changeLanguage" />}>
+      <Tooltip mouseEnterDelay={1} title={<Translate value="tooltip.changeLanguage" />}>
         <Button type="link" {...props.buttonProps}>
           {code.toUpperCase()}
         </Button>

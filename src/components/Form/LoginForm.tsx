@@ -111,7 +111,6 @@ const validate = (values: IFormLoginValues) => {
 const submit = async (values: IFormLoginValues, dispatch: Dispatch<IActionAuthSet>) => {
   const { username, password, recaptcha } = values
 
-  console.log(values)
   // Handle recaptcha error before making request to API.
   // Skip for dev environment.
   if (!recaptcha && !config.isDev) {
@@ -119,30 +118,28 @@ const submit = async (values: IFormLoginValues, dispatch: Dispatch<IActionAuthSe
     throw new SubmissionError({ _error: <Translate value="fields.recaptcha.invalid" /> })
   }
 
-  if (username && password) {
-    // Get response from auth login service.
-    const $auth = new AuthService()
-    const { message, errors, data } = await $auth.login({ username, password })
+  // Get response from auth login service.
+  const $auth = new AuthService()
+  const { message, errors, data } = await $auth.login({ username, password })
 
-    // Dispatch successful response.
-    if ($auth.isSuccess && data) {
-      // @ts-ignore
-      dispatch(authSet(data))
+  // Dispatch successful response.
+  if ($auth.isSuccess && data) {
+    // @ts-ignore
+    dispatch(authSet(data))
 
-      // Redirect user to the path where it came from except from /login path.
-      let redirectPath = '/'
-      if (history.location.state) {
-        redirectPath = history.createHref(history.location.state.from)
-      }
-      history.push(redirectPath)
-    } else if (!$auth.isSuccess && message) {
-      // Throw submission errors to redux form fields.
-      throw new SubmissionError({ _error: message, ...errors })
+    // Redirect user to the path where it came from except from /login path.
+    let redirectPath = '/'
+    if (history.location.state) {
+      redirectPath = history.createHref(history.location.state.from)
     }
+    history.push(redirectPath)
+  } else if (!$auth.isSuccess && message) {
+    // Throw submission errors to redux form fields.
+    throw new SubmissionError({ _error: message, ...errors })
   }
 }
 
 export default reduxForm<IFormLoginValues>({
   form: 'login',
-  // validate,
+  validate,
 })(LoginForm)

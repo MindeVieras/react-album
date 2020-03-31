@@ -29,7 +29,7 @@ export const ButtonFullScreen: FunctionComponent<IButtonFullScreenProps> = () =>
   }
 
   return (
-    <Tooltip title={<Translate value="tooltip.goFullScreen" />}>
+    <Tooltip mouseEnterDelay={1} title={<Translate value="tooltip.goFullScreen" />}>
       <Button
         type="link"
         onClick={handleClick}

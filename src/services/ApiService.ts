@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
-import { config, authHeader } from '../helpers'
+import { config, authHeader, Locale } from '../helpers'
 import { IResponse, ResponseStatus } from './types'
 
 /**
@@ -20,8 +20,15 @@ export class ApiService {
       },
     }
     if (authed) {
-      instanceConfig.headers = authHeader()
+      instanceConfig.headers = { ...instanceConfig.headers, ...authHeader() }
     }
+
+    // Add accept-language header.
+    instanceConfig.headers = {
+      ...instanceConfig.headers,
+      'Accept-Language': Locale.getLocalLanguage(),
+    }
+
     this.req = axios.create(instanceConfig)
   }
 

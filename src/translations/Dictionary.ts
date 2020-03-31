@@ -28,6 +28,18 @@ export type Dictionary = {
       label: string
       invalid: string
     }
+    displayName: {
+      label: string
+    }
+    role: {
+      label: string
+    }
+    locale: {
+      label: string
+    }
+    status: {
+      label: string
+    }
   }
   // Pages.
   pages: {

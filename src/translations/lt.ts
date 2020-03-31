@@ -25,6 +25,18 @@ const lt: Dictionary = {
       label: 'Elektroninis paštas',
       invalid: 'El. Pašto adresas neteisingas',
     },
+    displayName: {
+      label: 'Rodomasis vardas',
+    },
+    role: {
+      label: 'Vaidmuo',
+    },
+    locale: {
+      label: 'Lokalė',
+    },
+    status: {
+      label: 'Statusas',
+    },
   },
   // Pages.
   pages: {

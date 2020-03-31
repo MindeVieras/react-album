@@ -12,7 +12,6 @@ interface ITextInputProps extends WrappedFieldProps {
 }
 
 export const TextInput = ({ input, meta, formItemProps, inputProps }: ITextInputProps) => {
-  console.log(meta)
   // Check for a field validation error.
   const hasError = meta.touched && meta.invalid
   // Check field if type is 'password'.

@@ -2,31 +2,16 @@ import React, { FunctionComponent } from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
-import CssBaseline from '@material-ui/core/CssBaseline'
-
 import { store } from './helpers'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
-
-/**
- * Mui theme options.
- */
-const theme = createMuiTheme({
-  palette: {
-    type: 'light',
-  },
-})
 
 /**
  * Album APP.
  */
 const AlbumApp: FunctionComponent = () => (
   <Provider store={store}>
-    <MuiThemeProvider theme={theme}>
-      <CssBaseline />
-      <App />
-    </MuiThemeProvider>
+    <App />
   </Provider>
 )
 

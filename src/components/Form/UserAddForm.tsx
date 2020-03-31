@@ -1,17 +1,16 @@
 import React, { ReactNode, FunctionComponent } from 'react'
-import { Field, reduxForm, InjectedFormProps } from 'redux-form'
+import { Field, reduxForm, InjectedFormProps, SubmissionError } from 'redux-form'
 import { Translate, I18n } from 'react-redux-i18n'
 import validator from 'validator'
 import { Dispatch } from 'redux'
 import { Alert, Form, Col, Row } from 'antd'
 
-import Grid from '@material-ui/core/Grid'
-
 // import { authService, ResponseStatus } from '../../services'
-// import { history } from '../../helpers'
 import { IActionAuthSet } from '../../actions'
 
 import { TextInput, SelectInput } from '../Ui'
+import { UsersService } from '../../services'
+// import { Locale } from '../../helpers'
 
 /**
  * Add new user form values.
@@ -94,31 +93,45 @@ const UserAddForm: FunctionComponent<InjectedFormProps<IFormUserAddValues>> = (p
             name="profile.displayName"
             component={TextInput}
             formItemProps={{
-              label: 'Display name',
+              label: <Translate value="fields.displayName.label" />,
             }}
-            inputProps={
-              {
-                // size: 'large',
-                // placeholder: I18n.t('fields.password.label'),
-              }
-            }
+            inputProps={{
+              placeholder: I18n.t('fields.displayName.label'),
+            }}
           />
         </Col>
       </Row>
 
-      <Grid container spacing={2}>
-        <Grid item xs={6}>
-          <Field name="profile.locale" component={SelectInput} label="Role" />
-        </Grid>
-        <Grid item xs={6}>
-          <Field name="role" component={SelectInput} label="Role" />
-        </Grid>
-      </Grid>
+      <Row gutter={12}>
+        <Col span={12}>
+          {/* Role filed. */}
+          {/* <Field
+            name="role"
+            component={SelectInput}
+            formItemProps={{
+              label: <Translate value="fields.role.label" />,
+            }}
+          /> */}
+        </Col>
+        <Col span={12}>
+          {/* Locale field. */}
+          {/* <Field
+            name="profile.locale"
+            component={SelectInput}
+            formItemProps={{
+              label: <Translate value="fields.locale.label" />,
+            }}
+            selectProps={{
+              defaultValue: 'en',
+              // value: 'en',
+            }}
+            options={Locale.getAllLanguages()}
+          /> */}
+        </Col>
+      </Row>
     </Form>
   )
 }
-
-type FormErrors = { [fieldName: string]: ReactNode | FormErrors }
 
 /**
  * Form validation function.
@@ -142,7 +155,7 @@ const validate = (values: IFormUserAddValues) => {
     errors.password = <Translate value="fields.password.required" />
   }
 
-  // Validate email.
+  // Validate profile email.
   if (profile) {
     const { email } = profile
     if (email && !validator.isEmail(email)) {
@@ -163,30 +176,33 @@ const validate = (values: IFormUserAddValues) => {
 const submit = async (values: IFormUserAddValues, dispatch: Dispatch<IActionAuthSet>) => {
   // const { username, password, recaptcha } = values
   console.log(values)
-  // // Handle recaptcha error before making a request to the API.
-  // if (!recaptcha) {
-  //   // Throw submission error if recaptcha could not be verified.
-  //   throw new SubmissionError({ _error: 'Cannot validate reCAPTCHA' })
-  // }
 
-  // const { status, message, errors, data } = await authService.login(username, password)
+  // Get response from users service.
+  // const $users = new UsersService()
+  // const { message, errors, data } = await $users.create(values)
+  // const t = await $users.create(values)
+  // console.log($users.isSuccess)
+  // console.log(t)
 
-  // // Handle client errors.
-  // if (status === ResponseStatus.clientError) {
+  // // Dispatch successful response.
+  // if ($users.isSuccess && data) {
+  //   console.log(data)
+  //   // // @ts-ignore
+  //   // dispatch(authSet(data))
+  //   // // Redirect user to the path where it came from except from /login path.
+  //   // let redirectPath = '/'
+  //   // if (history.location.state) {
+  //   //   redirectPath = history.createHref(history.location.state.from)
+  //   // }
+  //   // history.push(redirectPath)
+  // } else if (!$users.isSuccess && message) {
   //   // Throw submission errors to redux form fields.
   //   throw new SubmissionError({ _error: message, ...errors })
-  // }
-
-  // // Handle success.
-  // if (status === ResponseStatus.success && data) {
-  //   // @ts-ignore
-  //   dispatch(authSet(data))
-  //   history.push('/')
   // }
 }
 
 export default reduxForm<IFormUserAddValues>({
   form: 'userAdd',
-  validate,
+  // validate,
   onSubmit: submit,
 })(UserAddForm)
