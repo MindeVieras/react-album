@@ -22,7 +22,7 @@ const MainLayout: FunctionComponent<IMainLayoutProps> = (props) => {
   const fsEnabled = useSelector((state: IStoreState) => state.client.fullScreen)
   return (
     <Fullscreen enabled={fsEnabled}>
-      <Layout style={{ background: 'none' }}>
+      <Layout style={{ height: '100vh' }}>
         <AppHeader />
         {props.children}
       </Layout>

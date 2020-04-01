@@ -1,8 +1,8 @@
 import React, { useEffect, FunctionComponent } from 'react'
 import { useDispatch } from 'react-redux'
 
-import MainLayout from '../../MainLayout'
 import { setAppTitle } from '../../../actions'
+import { PageWrapper } from '../PageWrapper'
 
 /**
  * Albums page component.
@@ -20,5 +20,5 @@ export const AlbumsPage: FunctionComponent = () => {
     dispatch(setAppTitle('Albums'))
   }, [dispatch])
 
-  return <MainLayout>Albums page</MainLayout>
+  return <PageWrapper sidebar={'asdada'}>Albums page</PageWrapper>
 }
