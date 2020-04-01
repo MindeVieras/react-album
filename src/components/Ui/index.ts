@@ -1,5 +1,6 @@
 export * from './Inputs/TextInput'
 export * from './Inputs/SelectInput'
+export * from './Inputs/SwitchInput'
 export * from './Inputs/RecaptchaInput'
 
 export * from './AppHeader/ButtonFullScreen'

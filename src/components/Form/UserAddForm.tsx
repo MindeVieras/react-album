@@ -3,14 +3,15 @@ import { Field, reduxForm, InjectedFormProps, SubmissionError } from 'redux-form
 import { Translate, I18n } from 'react-redux-i18n'
 import validator from 'validator'
 import { Dispatch } from 'redux'
-import { Alert, Form, Col, Row } from 'antd'
+import { Alert, Form, Col, Row, Switch } from 'antd'
 
 // import { authService, ResponseStatus } from '../../services'
 import { IActionAuthSet } from '../../actions'
 
-import { TextInput, SelectInput } from '../Ui'
+import { TextInput, SelectInput, SwitchInput } from '../Ui'
 import { UsersService } from '../../services'
-// import { Locale } from '../../helpers'
+import { Locale } from '../../helpers'
+import { UserRoles, UserStatus } from '../../enums'
 
 /**
  * Add new user form values.
@@ -19,10 +20,11 @@ export interface IFormUserAddValues {
   readonly username?: string
   readonly password?: string
   readonly role?: UserRoles
+  readonly status?: UserStatus
   readonly profile?: {
-    readonly displayName: string
-    readonly email: string
-    readonly locale: string
+    readonly displayName?: string
+    readonly email?: string
+    readonly locale?: string
   }
 }
 
@@ -34,12 +36,14 @@ export interface IFormUserAddValues {
  */
 const UserAddForm: FunctionComponent<InjectedFormProps<IFormUserAddValues>> = (props) => {
   const { handleSubmit, error } = props
-
+  const onChange = (checked: any) => {
+    console.log(`switch to ${checked}`)
+  }
   return (
     <Form onFinish={handleSubmit(submit)} layout="vertical">
       {/* Show form validation error. */}
       {error && <Alert style={{ marginBottom: 16 }} message={error} type="error" showIcon />}
-
+      <Switch defaultChecked onChange={onChange} />
       <Row gutter={12}>
         <Col span={12}>
           {/* Username filed. */}
@@ -105,28 +109,66 @@ const UserAddForm: FunctionComponent<InjectedFormProps<IFormUserAddValues>> = (p
       <Row gutter={12}>
         <Col span={12}>
           {/* Role filed. */}
-          {/* <Field
+          <Field
             name="role"
             component={SelectInput}
             formItemProps={{
               label: <Translate value="fields.role.label" />,
             }}
-          /> */}
+            selectProps={{
+              defaultValue: UserRoles.viewer,
+            }}
+            options={Object.values(UserRoles).map((role) => {
+              return {
+                value: role,
+                name: role.charAt(0).toUpperCase() + role.slice(1),
+              }
+            })}
+          />
         </Col>
         <Col span={12}>
           {/* Locale field. */}
-          {/* <Field
+          <Field
             name="profile.locale"
             component={SelectInput}
             formItemProps={{
               label: <Translate value="fields.locale.label" />,
             }}
             selectProps={{
-              defaultValue: 'en',
-              // value: 'en',
+              showSearch: true,
+              optionFilterProp: 'children',
+              defaultValue: Locale.getLocalLanguage(),
+              placeholder: I18n.t('fields.locale.label'),
             }}
-            options={Locale.getAllLanguages()}
-          /> */}
+            options={Locale.getAllLanguages().map((l) => {
+              return {
+                value: l.code,
+                name: `${l.name} (${l.nativeName})`,
+              }
+            })}
+          />
+        </Col>
+      </Row>
+
+      <Row gutter={12}>
+        <Col span={12}>
+          {/* Status filed. */}
+          <Field
+            name="status"
+            component={SwitchInput}
+            formItemProps={{
+              label: <Translate value="fields.status.label" />,
+            }}
+            switchProps={{
+              defaultChecked: true,
+              checkedChildren:
+                UserStatus.active.charAt(0).toUpperCase() + UserStatus.active.slice(1),
+              unCheckedChildren:
+                UserStatus.blocked.charAt(0).toUpperCase() + UserStatus.blocked.slice(1),
+            }}
+            checkedValue={UserStatus.active}
+            uncheckedValue={UserStatus.blocked}
+          />
         </Col>
       </Row>
     </Form>
@@ -204,5 +246,12 @@ const submit = async (values: IFormUserAddValues, dispatch: Dispatch<IActionAuth
 export default reduxForm<IFormUserAddValues>({
   form: 'userAdd',
   // validate,
+  initialValues: {
+    role: UserRoles.viewer,
+    status: UserStatus.active,
+    profile: {
+      locale: Locale.getLocalLanguage(),
+    },
+  },
   onSubmit: submit,
 })(UserAddForm)

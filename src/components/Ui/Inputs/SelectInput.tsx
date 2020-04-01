@@ -3,7 +3,10 @@ import { WrappedFieldProps } from 'redux-form'
 import Form, { FormItemProps } from 'antd/lib/form'
 import Select, { SelectProps } from 'antd/lib/select'
 
-interface SelectOption {
+/**
+ * Select option interface.
+ */
+interface ISelectOption {
   value: string
   name: ReactNode
 }
@@ -12,7 +15,7 @@ interface SelectOption {
  * Select input props.
  */
 interface ISelectInputProps extends WrappedFieldProps {
-  readonly options?: SelectOption[]
+  readonly options?: ISelectOption[]
   readonly formItemProps?: FormItemProps
   readonly selectProps?: SelectProps<any>
 }
@@ -26,8 +29,6 @@ export const SelectInput = ({
 }: ISelectInputProps) => {
   // Check for a field validation error.
   const hasError = meta.touched && meta.invalid
-
-  console.log(options)
 
   const selectOptions = options?.map((o) => {
     return (
@@ -44,10 +45,7 @@ export const SelectInput = ({
       help={hasError && meta.error}
       {...formItemProps}
     >
-      <Select
-        //{...input}
-        {...selectProps}
-      >
+      <Select onChange={input.onChange} {...selectProps}>
         {selectOptions}
       </Select>
     </Form.Item>

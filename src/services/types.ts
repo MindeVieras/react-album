@@ -1,3 +1,5 @@
+import { UserRoles, UserStatus } from '../enums'
+
 /**
  * Response status values.
  */

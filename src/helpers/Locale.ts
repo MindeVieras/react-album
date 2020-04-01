@@ -2,6 +2,12 @@ import ISO6391 from 'iso-639-1'
 
 import { translations } from '../translations'
 
+interface ILanguage {
+  code: string
+  name: string
+  nativeName: string
+}
+
 /**
  * Available language details.
  */
@@ -110,7 +116,13 @@ export class Locale {
    *
    * @returns
    */
-  public static getAllLanguages = (): any => {
-    return ISO6391.getAllCodes()
+  public static getAllLanguages = (): ILanguage[] => {
+    return ISO6391.getAllCodes().map((code) => {
+      return {
+        code,
+        name: ISO6391.getName(code),
+        nativeName: ISO6391.getNativeName(code),
+      }
+    })
   }
 }
