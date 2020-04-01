@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 
 import { IResponsePager } from '../../../services'
 import { usersGetList } from '../../../actions'
-import { UserAdd } from './UserAdd'
+import { UserAdd } from './UserActions/UserAdd'
 import { FilterItemsPerPage } from '../../Ui'
 
 interface IUsersPageActionsProps {

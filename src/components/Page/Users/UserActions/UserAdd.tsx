@@ -7,8 +7,8 @@ import { LocationDescriptorObject } from 'history'
 import { Button, Tooltip, Modal } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 
-import UsersCreateForm from '../../Form/UserAddForm'
-import { IStoreState } from '../../../reducers'
+import UsersCreateForm from '../../../Form/UserAddForm'
+import { IStoreState } from '../../../../reducers'
 
 export function UserAdd() {
   const history = useHistory()
