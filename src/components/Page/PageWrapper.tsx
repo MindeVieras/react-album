@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactNode } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Rnd } from 'react-rnd'
+import { Rnd, RndDragEvent, RndResizeCallback } from 'react-rnd'
 import { Layout } from 'antd'
 
 import MainLayout from '../MainLayout'
@@ -21,12 +21,12 @@ export const PageWrapper: FunctionComponent<IPageWrapperProps> = ({ sidebar, chi
   const windowSize = useSelector((state: IStoreState) => state.ui.dimensions)
   const sidebarWidth = useSelector((state: IStoreState) => state.ui.siderWidth)
 
-  const onSiderResize = (e: any, direction: any, ref: any, delta: any, position: any) => {
+  const onSiderResize: RndResizeCallback = (e, direction, ref) => {
     const width = ref.offsetWidth
     dispatch(setSiderWidth(width))
   }
 
-  const onSiderResizeEnd = (e: any, direction: any, ref: any, delta: any, position: any) => {
+  const onSiderResizeEnd: RndResizeCallback = (e, direction, ref) => {
     const width = ref.offsetWidth
     dispatch(setSiderWidth(width, true))
   }

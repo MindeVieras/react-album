@@ -31,7 +31,7 @@ export const AlbumsList: FunctionComponent<IAlbumListProps> = ({ width, height }
 
   const rowRenderer = ({ index, key, style }: ListRowProps) => {
     return (
-      <List.Item key={key} style={style}>
+      <List.Item key={key} style={{ ...style, left: '5%', width: '90%' }}>
         <List.Item.Meta title={items[index].name} />
       </List.Item>
     )
@@ -42,7 +42,7 @@ export const AlbumsList: FunctionComponent<IAlbumListProps> = ({ width, height }
         width={width}
         height={height}
         rowCount={items.length}
-        rowHeight={30}
+        rowHeight={40}
         rowRenderer={rowRenderer}
       />
     </List>

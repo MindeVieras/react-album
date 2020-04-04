@@ -1,10 +1,11 @@
 import React, { FunctionComponent, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { setLocale, Translate } from 'react-redux-i18n'
-import { Tooltip, Menu, Dropdown, Button } from 'antd'
+import { Menu, Dropdown, Button } from 'antd'
 import { ButtonProps } from 'antd/lib/button'
 
 import { Locale } from '../../../helpers'
+import { Tip } from '../Tip'
 
 interface ILanguageSelectorProps {
   buttonProps?: ButtonProps
@@ -43,11 +44,14 @@ export const LanguageSelector: FunctionComponent<ILanguageSelectorProps> = (prop
 
   return (
     <Dropdown overlay={menu} trigger={['click']}>
-      <Tooltip mouseEnterDelay={1} title={<Translate value="tooltip.changeLanguage" />}>
-        <Button type="link" {...props.buttonProps}>
+      <div>
+        <Button data-tip data-for="tip_change_language" type="link" {...props.buttonProps}>
           {code.toUpperCase()}
         </Button>
-      </Tooltip>
+        <Tip id="tip_change_language">
+          <Translate value="tooltip.changeLanguage" />
+        </Tip>
+      </div>
     </Dropdown>
   )
 }

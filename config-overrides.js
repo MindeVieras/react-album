@@ -12,6 +12,7 @@ module.exports = override(
       // '@primary-color': '#f48549',
       // '@link-color': '#e6a07c',
       // '@font-size-base': '18px',
+      '@layout-sider-background-light': '#fafafa',
     },
   }),
 )
