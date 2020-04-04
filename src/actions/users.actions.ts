@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux'
 
 import { ActionTypes } from './types'
-import { IResponsePaginatedData, IRequestGetListParams } from '../services'
+import { IResponsePaginatedData, IRequestGetListParams, IUserProps } from '../services'
 import { UsersService } from '../services'
 
 export interface IActionUsersGetListRequest {

@@ -5,9 +5,10 @@ import { Layout, Typography } from 'antd'
 import { MainMenu, LanguageSelector } from '../Menus'
 import { ButtonFullScreen } from './ButtonFullScreen'
 import { IStoreState } from '../../../reducers'
+import { UiSizes } from '../../../enums'
 
 export const AppHeader: FunctionComponent = () => {
-  const appName = useSelector((state: IStoreState) => state.client.appName)
+  const appName = useSelector((state: IStoreState) => state.ui.appName)
 
   return (
     <Layout.Header
@@ -21,6 +22,7 @@ export const AppHeader: FunctionComponent = () => {
         color: 'white',
         paddingLeft: 24,
         paddingRight: 24,
+        height: UiSizes.headerHeight,
       }}
     >
       <Typography.Title style={{ color: 'inherit', marginBottom: 0, fontWeight: 400 }} level={3}>

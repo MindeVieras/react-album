@@ -1,4 +1,5 @@
 export * from './types'
-export * from './client.actions'
+export * from './ui.actions'
 export * from './auth.actions'
 export * from './users.actions'
+export * from './albums.actions'

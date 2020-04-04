@@ -1,4 +1,5 @@
 import { ActionTypes, Action } from '../actions'
+import { IUserProps } from '../services'
 
 const initialState = {
   selected: {

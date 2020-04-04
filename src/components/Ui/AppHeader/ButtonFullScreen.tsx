@@ -19,7 +19,7 @@ interface IButtonFullScreenProps {}
  */
 export const ButtonFullScreen: FunctionComponent<IButtonFullScreenProps> = () => {
   const dispatch = useDispatch()
-  const isFullScreen = useSelector((state: IStoreState) => state.client.fullScreen)
+  const isFullScreen = useSelector((state: IStoreState) => state.ui.fullScreen)
 
   /**
    * Event on full screen button click.

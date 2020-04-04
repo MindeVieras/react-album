@@ -1,20 +1,28 @@
 import {
-  ActionClientSetAppTitle,
-  ActionClientSetDimensions,
-  ActionClientSetFullScreen,
-} from './client.actions'
+  ActionUiSetAppTitle,
+  ActionUiSetDimensions,
+  ActionUiSetFullScreen,
+  ActionUiSetSiderWidth,
+} from './ui.actions'
 import { IActionAuthSet, IActionAuthClear } from './auth.actions'
 import {
   IActionUsersGetListRequest,
-  IActionUsersClear,
   IActionUsersGetListSuccess,
   IActionUsersGetListFailure,
+  IActionUsersClear,
 } from './users.actions'
+import {
+  IActionAlbumsGetListRequest,
+  IActionAlbumsGetListSuccess,
+  IActionAlbumsGetListFailure,
+  IActionAlbumsClear,
+} from './albums.actions'
 
 export enum ActionTypes {
-  clientSetAppTitle,
-  clientSetDimensions,
-  clientSetFullScreen,
+  uiSetAppTitle,
+  uiSetDimensions,
+  uiSetFullScreen,
+  uiSetSiderWidth,
 
   authSet,
   authClear,
@@ -30,15 +38,25 @@ export enum ActionTypes {
   usersDeleteSuccess,
   usersDeleteFailure,
   usersClear,
+
+  albumsGetListRequest,
+  albumsGetListSuccess,
+  albumsGetListFailure,
+  albumsClear,
 }
 
 export type Action =
-  | ActionClientSetAppTitle
-  | ActionClientSetDimensions
-  | ActionClientSetFullScreen
+  | ActionUiSetAppTitle
+  | ActionUiSetDimensions
+  | ActionUiSetFullScreen
+  | ActionUiSetSiderWidth
   | IActionAuthSet
   | IActionAuthClear
   | IActionUsersGetListRequest
   | IActionUsersGetListSuccess
   | IActionUsersGetListFailure
   | IActionUsersClear
+  | IActionAlbumsGetListRequest
+  | IActionAlbumsGetListSuccess
+  | IActionAlbumsGetListFailure
+  | IActionAlbumsClear

@@ -19,7 +19,7 @@ interface IMainLayoutProps {}
  *   Main Layout props.
  */
 const MainLayout: FunctionComponent<IMainLayoutProps> = (props) => {
-  const fsEnabled = useSelector((state: IStoreState) => state.client.fullScreen)
+  const fsEnabled = useSelector((state: IStoreState) => state.ui.fullScreen)
   return (
     <Fullscreen enabled={fsEnabled}>
       <Layout style={{ height: '100vh' }}>

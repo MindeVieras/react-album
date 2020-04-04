@@ -8,13 +8,13 @@ import { PrivateRoute, LoginPage, AlbumsPage, TrashPage, Error404 } from './comp
 import UsersPage from './components/Page/Users/UsersPage'
 
 import { history } from './helpers'
-import { setClientDimensions } from './actions'
+import { setUiDimensions } from './actions'
 import { IStoreState } from './reducers'
 
 interface IAppProps {
   appTitle?: string
   appName: string
-  setClientDimensions: Function
+  setUiDimensions: Function
 }
 
 /**
@@ -39,15 +39,15 @@ class App extends Component<IAppProps> {
       },
     })
 
-    // Set initial client dimensions.
-    props.setClientDimensions()
-    // Update client dimensions on window resize.
+    // Set initial UI dimensions.
+    props.setUiDimensions()
+    // Update UI dimensions on window resize.
     window.addEventListener('resize', this.updateDimensions.bind(this))
   }
 
   // Update state with new dimensions.
   updateDimensions() {
-    this.props.setClientDimensions()
+    this.props.setUiDimensions()
   }
 
   /**
@@ -88,9 +88,9 @@ class App extends Component<IAppProps> {
  */
 const mapStateToProps = (state: IStoreState): { appTitle?: string; appName: string } => {
   return {
-    appTitle: state.client.appTitle,
-    appName: state.client.appName,
+    appTitle: state.ui.appTitle,
+    appName: state.ui.appName,
   }
 }
 
-export default connect(mapStateToProps, { setClientDimensions })(App)
+export default connect(mapStateToProps, { setUiDimensions })(App)

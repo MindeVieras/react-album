@@ -15,7 +15,7 @@ import { Tip } from 'Common'
 import Title from './Title'
 import MainMenu from './MainMenu'
 
-import { clientActions } from 'Actions'
+import { uiActions } from 'Actions'
 
 const styles = (theme) => ({
   root: {
@@ -39,13 +39,13 @@ class Header extends Component {
 
   goFullscreen() {
     const { dispatch } = this.props
-    dispatch(clientActions.setFullScreen(true))
+    dispatch(uiActions.setFullScreen(true))
     fscreen.requestFullscreen(document.body)
   }
 
   goOutFullscreen() {
     const { dispatch } = this.props
-    dispatch(clientActions.setFullScreen(false))
+    dispatch(uiActions.setFullScreen(false))
     fscreen.exitFullscreen()
   }
 

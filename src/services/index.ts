@@ -1,4 +1,5 @@
 export * from './ApiService'
 export * from './AuthService'
 export * from './UsersService'
+export * from './AlbumsService'
 export * from './types'

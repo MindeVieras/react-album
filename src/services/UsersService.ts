@@ -1,6 +1,23 @@
 import { IResponsePaginatedData, IRequestGetListParams } from './types'
 import { ApiService } from './ApiService'
 import { IFormUserAddValues } from '../components/Form/UserAddForm'
+import { UserRoles, UserStatus } from '../enums'
+
+export interface IUserProps {
+  id: string
+  username: string
+  initials: string
+  role: UserRoles
+  status: UserStatus
+  lastLogin?: Date
+  updatedAt: Date
+  createdAt: Date
+  profile?: {
+    email?: string
+    displayName?: string
+    locale?: string
+  }
+}
 
 /**
  * UsersService class.

@@ -1,6 +1,8 @@
 import React, { FunctionComponent } from 'react'
 import { List, Avatar } from 'antd'
 
+import { IUserProps } from '../../../services'
+
 interface IUsersListProps {
   items?: IUserProps[]
   loading?: boolean

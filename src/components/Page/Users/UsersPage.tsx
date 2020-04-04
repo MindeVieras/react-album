@@ -5,7 +5,7 @@ import { Alert, PageHeader, Tag, Pagination } from 'antd'
 
 import { setAppTitle, usersGetList } from '../../../actions'
 import { IStoreState, IReducerList } from '../../../reducers'
-import { IRequestGetListParams } from '../../../services'
+import { IRequestGetListParams, IUserProps } from '../../../services'
 import { PageWrapper } from '../PageWrapper'
 import { UsersList } from './UsersList'
 import { UsersPageActions } from './UsersPageActions'

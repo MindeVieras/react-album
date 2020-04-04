@@ -3,12 +3,13 @@ import { reducer as formReducer } from 'redux-form'
 import { i18nReducer } from 'react-redux-i18n'
 // import { reducer as toastrReducer } from 'react-redux-toastr'
 
-import { client } from './client.reducer'
+import { ui } from './ui.reducer'
 import { auth } from './auth.reducer'
 import { users } from './users.reducer'
+import { albums } from './albums.reducer'
 
 import { IScreenDimensions } from '../helpers'
-import { IAuthResponseData } from '../services'
+import { IAuthResponseData, IUserProps, IAlbumProps } from '../services'
 import { IReducerSelected, IReducerList } from './types'
 
 // import { settings } from './settings.reducer'
@@ -22,18 +23,23 @@ import { IReducerSelected, IReducerList } from './types'
 // import { frontAlbums } from './Front/albums.reducer'
 
 export interface IStoreState {
-  client: {
+  ui: {
     appTitle?: string
     appName: string
     appDescription: string
     browser: Bowser.Parser.ParsedResult
     dimensions: IScreenDimensions
     fullScreen: boolean
+    siderWidth: number
   }
   auth: IAuthResponseData
   users: {
     selected: IReducerSelected<IUserProps>
     list: IReducerList<IUserProps>
+  }
+  albums: {
+    selected: IReducerSelected<IAlbumProps>
+    list: IReducerList<IAlbumProps>
   }
   form: {
     login?: any
@@ -43,14 +49,14 @@ export interface IStoreState {
 }
 
 const rootReducer = combineReducers<IStoreState>({
-  client,
+  ui,
   auth,
   // settings,
   // admin_ui: adminUi,
   // admin_header: header,
   users,
   // faces,
-  // admin_albums: adminAlbums,
+  albums,
   // front_ui: frontUi,
   // front_albums: frontAlbums,
   form: formReducer,

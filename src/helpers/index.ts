@@ -1,28 +1,29 @@
-import { BrowserSize, BrowserOrientation } from '../enums'
+import { UiBrowserSize, UiBrowserOrientation } from '../enums'
 
 export interface IScreenDimensions {
   width: number
   height: number
-  size: BrowserSize
-  orientation: BrowserOrientation
+  size: UiBrowserSize
+  orientation: UiBrowserOrientation
 }
 
 export const screenDimensions = (): IScreenDimensions => {
   const width = window.innerWidth
   const height = window.innerHeight
-  let size = BrowserSize.xs
+  let size = UiBrowserSize.xs
   if (width > 500 && width <= 700) {
-    size = BrowserSize.sm
+    size = UiBrowserSize.sm
   } else if (width > 700 && width <= 1000) {
-    size = BrowserSize.md
+    size = UiBrowserSize.md
   } else if (width > 1000 && width <= 1280) {
-    size = BrowserSize.lg
+    size = UiBrowserSize.lg
   } else if (width > 1280 && width <= 1400) {
-    size = BrowserSize.xl
+    size = UiBrowserSize.xl
   } else if (width > 1400) {
-    size = BrowserSize.fs
+    size = UiBrowserSize.fs
   }
-  const orientation = width < height ? BrowserOrientation.portrait : BrowserOrientation.landscape
+  const orientation =
+    width < height ? UiBrowserOrientation.portrait : UiBrowserOrientation.landscape
 
   return { width, height, size, orientation }
 }
