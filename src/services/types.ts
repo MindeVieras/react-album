@@ -41,6 +41,7 @@ export interface IRequestGetListParams {
  * Auth response data.
  */
 export interface IAuthResponseData {
+  id?: string
   username?: string
   token?: string
   initials?: string
