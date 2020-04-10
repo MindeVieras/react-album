@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactNode } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Rnd, RndDragEvent, RndResizeCallback } from 'react-rnd'
+import { Rnd, RndResizeCallback } from 'react-rnd'
 import { Layout } from 'antd'
 
 import MainLayout from '../MainLayout'

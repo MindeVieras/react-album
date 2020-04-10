@@ -56,3 +56,10 @@ export interface IAuthResponseData {
     locale?: string
   }
 }
+
+export interface ICreatedBy {
+  readonly id: string
+  readonly username: string
+  readonly initials: string
+  readonly role: UserRoles
+}

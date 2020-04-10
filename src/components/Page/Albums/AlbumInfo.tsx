@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react'
+import { Empty, Spin } from 'antd'
 
 import { IAlbumSelectedProps } from '../../../reducers'
 
@@ -17,13 +18,15 @@ interface IAlbumInfoProps {
 export const AlbumInfo: FunctionComponent<IAlbumInfoProps> = ({ album }) => {
   if (album) {
     return (
-      <div>
-        <div>{album.id}</div>
-        <div>{album.name}</div>
-        <div>{album.createdAt}</div>
-        <div>{album.error}</div>
-      </div>
+      <Spin spinning={Boolean(album.loading)}>
+        <div>
+          <div>{album.id}</div>
+          <div>{album.name}</div>
+          <div>{album.createdAt}</div>
+          <div>{album.error}</div>
+        </div>
+      </Spin>
     )
   }
-  return <div>Album is not selected</div>
+  return <Empty />
 }

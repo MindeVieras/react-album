@@ -1,5 +1,5 @@
 import React, { ReactNode, FunctionComponent } from 'react'
-import { Field, reduxForm, InjectedFormProps, SubmissionError } from 'redux-form'
+import { Field, reduxForm, InjectedFormProps } from 'redux-form'
 import { Translate, I18n } from 'react-redux-i18n'
 import validator from 'validator'
 import { Dispatch } from 'redux'
@@ -9,7 +9,7 @@ import { Alert, Form, Col, Row, Switch } from 'antd'
 import { IActionAuthSet } from '../../actions'
 
 import { TextInput, SelectInput, SwitchInput } from '../Ui'
-import { UsersService } from '../../services'
+// import { UsersService } from '../../services'
 import { Locale } from '../../helpers'
 import { UserRoles, UserStatus } from '../../enums'
 
@@ -245,7 +245,7 @@ const submit = async (values: IFormUserAddValues, dispatch: Dispatch<IActionAuth
 
 export default reduxForm<IFormUserAddValues>({
   form: 'userAdd',
-  // validate,
+  validate,
   initialValues: {
     role: UserRoles.viewer,
     status: UserStatus.active,

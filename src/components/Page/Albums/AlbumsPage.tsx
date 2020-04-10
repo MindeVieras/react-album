@@ -19,14 +19,6 @@ import { UiSizes } from '../../../enums'
 export const AlbumsPage: FunctionComponent = () => {
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    // Get list of albums.
-    // Load only if no albums loaded yet.
-    if (!items.length) {
-      dispatch(albumsGetList({ limit: -1 }))
-    }
-  }, [dispatch])
-
   const windowSize = useSelector((state: IStoreState) => state.ui.dimensions)
   const sidebarWidth = useSelector((state: IStoreState) => state.ui.siderWidth)
   const { items, loading, error } = useSelector((state: IStoreState) => state.albums)
@@ -36,7 +28,12 @@ export const AlbumsPage: FunctionComponent = () => {
   useEffect(() => {
     // Set app title for this page.
     dispatch(setAppTitle('Albums'))
-  }, [dispatch])
+    // Get list of albums.
+    // Load only if no albums loaded yet.
+    if (!items.length) {
+      dispatch(albumsGetList({ limit: -1 }))
+    }
+  }, [dispatch, items])
 
   return (
     <PageWrapper

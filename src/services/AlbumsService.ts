@@ -1,4 +1,4 @@
-import { IResponsePaginatedData, IRequestGetListParams } from './types'
+import { IResponsePaginatedData, IRequestGetListParams, ICreatedBy } from './types'
 import { ApiService } from './ApiService'
 import { AlbumStatus } from '../enums'
 
@@ -9,6 +9,7 @@ export interface IAlbumProps {
   body?: string
   updatedAt: Date
   createdAt: Date
+  createdBy: ICreatedBy | string | null
   media?: string[]
 }
 

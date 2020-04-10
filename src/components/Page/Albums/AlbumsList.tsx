@@ -35,7 +35,7 @@ export const AlbumsList: FunctionComponent<IAlbumListProps> = ({
     // Select album.
     dispatch(albumsSelect(item.id))
 
-    // Load album only if not loaded.
+    // Load album only if not already loaded.
     if (!item.isLoaded) {
       dispatch(albumsGetOne(items[index].id))
     }

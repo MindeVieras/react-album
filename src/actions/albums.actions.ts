@@ -89,6 +89,9 @@ export const albumsGetList = (params?: IRequestGetListParams) => {
  *   Album document ID.
  */
 export const albumsSelect = (id: string) => {
+  // Save selected album id to local storage.
+  localStorage.setItem('selectedAlbum', JSON.stringify(id))
+
   return async (dispatch: Dispatch) => {
     // Dispatch album select state.
     dispatch<IActionAlbumsSelect>({
