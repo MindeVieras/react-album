@@ -9,6 +9,7 @@ export interface IAlbumProps {
   body?: string
   updatedAt: Date
   createdAt: Date
+  media?: string[]
 }
 
 /**
@@ -32,6 +33,20 @@ export class AlbumsService extends ApiService {
     const res = await this.get<IResponsePaginatedData<IAlbumProps>>('albums', {
       params,
     })
+    return res
+  }
+
+  /**
+   * Gets an album by id.
+   *
+   * @param {string} id
+   *   Album document ID.
+   *
+   * @returns {Promise<IResponse<IAlbumProps>>}
+   *   Response promise including album.
+   */
+  public async getOne(id: string) {
+    const res = await this.get<IAlbumProps>(`albums/${id}`)
     return res
   }
 }

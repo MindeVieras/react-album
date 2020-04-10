@@ -69,6 +69,7 @@ export const PageWrapper: FunctionComponent<IPageWrapperProps> = ({ sidebar, chi
             onResizeStop={onSiderResizeEnd}
             style={{
               borderRight: '2px solid grey',
+              overflow: 'hidden',
             }}
           >
             {sidebar}

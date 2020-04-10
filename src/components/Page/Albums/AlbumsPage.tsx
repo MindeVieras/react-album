@@ -1,9 +1,10 @@
 import React, { useEffect, FunctionComponent } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { setAppTitle } from '../../../actions'
 import { PageWrapper } from '../PageWrapper'
 import { AlbumsList } from './AlbumsList'
+import { AlbumInfo } from './AlbumInfo'
+import { setAppTitle, albumsGetList } from '../../../actions'
 import { IStoreState } from '../../../reducers'
 import { UiSizes } from '../../../enums'
 
@@ -18,8 +19,19 @@ import { UiSizes } from '../../../enums'
 export const AlbumsPage: FunctionComponent = () => {
   const dispatch = useDispatch()
 
+  useEffect(() => {
+    // Get list of albums.
+    // Load only if no albums loaded yet.
+    if (!items.length) {
+      dispatch(albumsGetList({ limit: -1 }))
+    }
+  }, [dispatch])
+
   const windowSize = useSelector((state: IStoreState) => state.ui.dimensions)
   const sidebarWidth = useSelector((state: IStoreState) => state.ui.siderWidth)
+  const { items, loading, error } = useSelector((state: IStoreState) => state.albums)
+
+  const selectedAlbum = items.filter((a) => a.selected)[0]
 
   useEffect(() => {
     // Set app title for this page.
@@ -29,10 +41,16 @@ export const AlbumsPage: FunctionComponent = () => {
   return (
     <PageWrapper
       sidebar={
-        <AlbumsList height={windowSize.height - UiSizes.headerHeight} width={sidebarWidth} />
+        <AlbumsList
+          height={windowSize.height - UiSizes.headerHeight}
+          width={sidebarWidth}
+          items={items}
+          loading={loading}
+          error={error}
+        />
       }
     >
-      Albums page
+      <AlbumInfo album={selectedAlbum} />
     </PageWrapper>
   )
 }

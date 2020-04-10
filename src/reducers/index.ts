@@ -9,7 +9,14 @@ import { albums } from './albums.reducer'
 
 import { IScreenDimensions } from '../helpers'
 import { IAuthResponseData, IUserProps, IAlbumProps } from '../services'
-import { IReducerSelected, IReducerList } from './types'
+import {
+  IReducerSelected,
+  IReducerList,
+  IReducerPaginatedList,
+  IReducerSelectedItem,
+} from './types'
+
+export interface IAlbumSelectedProps extends IReducerSelectedItem, IAlbumProps {}
 
 export interface IStoreState {
   ui: {
@@ -24,12 +31,9 @@ export interface IStoreState {
   auth: IAuthResponseData
   users: {
     selected: IReducerSelected<IUserProps>
-    list: IReducerList<IUserProps>
+    list: IReducerPaginatedList<IUserProps>
   }
-  albums: {
-    selected: IReducerSelected<IAlbumProps>
-    list: IReducerList<IAlbumProps>
-  }
+  albums: IReducerList<IAlbumSelectedProps>
   form: {
     login?: any
     userAdd?: any

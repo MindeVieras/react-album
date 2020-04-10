@@ -1,14 +1,17 @@
-import React, { useEffect, FunctionComponent } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { FunctionComponent } from 'react'
+import { useDispatch } from 'react-redux'
 import { List as VList, ListRowProps } from 'react-virtualized'
 import { List } from 'antd'
 
-import { albumsGetList } from '../../../actions'
-import { IStoreState } from '../../../reducers'
+import { albumsGetOne, albumsSelect } from '../../../actions'
+import { IAlbumSelectedProps } from '../../../reducers'
 
 interface IAlbumListProps {
   width: number
   height: number
+  items: IAlbumSelectedProps[]
+  loading?: boolean
+  error?: string
 }
 
 /**
@@ -17,21 +20,35 @@ interface IAlbumListProps {
  * @returns {FunctionComponent<IAlbumListProps>}
  *   Functional 'AlbumsList' component.
  */
-export const AlbumsList: FunctionComponent<IAlbumListProps> = ({ width, height }) => {
+export const AlbumsList: FunctionComponent<IAlbumListProps> = ({
+  width,
+  height,
+  items,
+  loading,
+  error,
+}) => {
   const dispatch = useDispatch()
-  const { items, loading, error, pager } = useSelector((state: IStoreState) => state.albums.list)
 
-  useEffect(() => {
-    // Get list of albums.
-    // Load only if no albums loaded yet.
-    if (!items.length) {
-      dispatch(albumsGetList({ limit: 250 }))
+  const handleItemClick = (index: number) => {
+    const item = items[index]
+
+    // Select album.
+    dispatch(albumsSelect(item.id))
+
+    // Load album only if not loaded.
+    if (!item.isLoaded) {
+      dispatch(albumsGetOne(items[index].id))
     }
-  }, [dispatch])
+  }
 
   const rowRenderer = ({ index, key, style }: ListRowProps) => {
     return (
-      <List.Item key={key} style={{ ...style, left: '5%', width: '90%' }}>
+      // Make list items as antd menu...
+      <List.Item
+        key={key}
+        style={{ ...style, left: '5%', width: '90%', cursor: 'pointer' }}
+        onClick={() => handleItemClick(index)}
+      >
         <List.Item.Meta title={items[index].name} />
       </List.Item>
     )

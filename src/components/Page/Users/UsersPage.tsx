@@ -4,7 +4,7 @@ import { Translate } from 'react-redux-i18n'
 import { Alert, PageHeader, Tag, Pagination } from 'antd'
 
 import { setAppTitle, usersGetList } from '../../../actions'
-import { IStoreState, IReducerList } from '../../../reducers'
+import { IStoreState, IReducerPaginatedList } from '../../../reducers'
 import { IRequestGetListParams, IUserProps } from '../../../services'
 import { PageWrapper } from '../PageWrapper'
 import { UsersList } from './UsersList'
@@ -13,7 +13,7 @@ import { UsersPageActions } from './UsersPageActions'
 interface IUsersProps {
   setAppTitle(title: string): void
   usersGetList(params?: IRequestGetListParams): void
-  users: IReducerList<IUserProps>
+  users: IReducerPaginatedList<IUserProps>
 }
 
 /**
@@ -82,7 +82,7 @@ class UsersPage extends Component<IUsersProps> {
  * @param {IStoreState} state
  *   Global redux state.
  */
-const mapStateToProps = (state: IStoreState): { users: IReducerList<IUserProps> } => {
+const mapStateToProps = (state: IStoreState): { users: IReducerPaginatedList<IUserProps> } => {
   return {
     users: state.users.list,
   }

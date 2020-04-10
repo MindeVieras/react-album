@@ -1,18 +1,8 @@
 import { ActionTypes, Action } from '../actions'
-import { IAlbumProps } from '../services'
+import { IAlbumSelectedProps } from '.'
 
-const initialState = {
-  selected: {
-    item: {} as IAlbumProps,
-  },
-  list: {
-    items: [] as IAlbumProps[],
-    pager: {
-      total: 0,
-      limit: 10,
-      offset: 0,
-    },
-  },
+const initialState: { items: IAlbumSelectedProps[] } = {
+  items: [],
 }
 
 export function albums(state = initialState, action: Action) {
@@ -20,28 +10,78 @@ export function albums(state = initialState, action: Action) {
     case ActionTypes.albumsGetListRequest:
       return {
         ...state,
-        list: {
-          ...state.list,
-          loading: true,
-        },
+        loading: true,
       }
     case ActionTypes.albumsGetListSuccess:
-      const { docs, ...pager } = action.payload
+      const { docs } = action.payload
       return {
-        ...state,
-        list: {
-          items: docs,
-          pager: pager,
-        },
+        items: docs,
       }
     case ActionTypes.albumsGetListFailure:
       return {
         ...state,
-        list: {
-          ...state.list,
-          loading: false,
-          error: action.payload,
-        },
+        loading: false,
+        error: action.payload,
+      }
+
+    case ActionTypes.albumsGetOneRequest:
+      return {
+        ...state,
+        items: state.items.map((a) => {
+          if (a.id === action.payload) {
+            const { ...aCopy } = a
+            return {
+              ...aCopy,
+              loading: true,
+            }
+          }
+          return a
+        }),
+      }
+    case ActionTypes.albumsGetOneSuccess:
+      return {
+        ...state,
+        items: state.items.map((a) => {
+          if (a.id === action.payload.id) {
+            const { loading, ...aCopy } = a
+            return {
+              ...aCopy,
+              ...action.payload.data,
+              isLoaded: true,
+            }
+          }
+          return a
+        }),
+      }
+    case ActionTypes.albumsGetOneFailure:
+      return {
+        ...state,
+        items: state.items.map((a) => {
+          if (a.id === action.payload.id) {
+            const { loading, ...aCopy } = a
+            return {
+              ...aCopy,
+              error: action.payload.message,
+            }
+          }
+          return a
+        }),
+      }
+
+    case ActionTypes.albumsSelect:
+      return {
+        ...state,
+        items: state.items.map((a) => {
+          if (a.id === action.payload) {
+            const { ...aCopy } = a
+            return {
+              ...aCopy,
+              selected: true,
+            }
+          }
+          delete a.selected
+          return a
+        }),
       }
 
     case ActionTypes.albumsClear:

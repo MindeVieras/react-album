@@ -15,6 +15,10 @@ import {
   IActionAlbumsGetListRequest,
   IActionAlbumsGetListSuccess,
   IActionAlbumsGetListFailure,
+  IActionAlbumsGetOneRequest,
+  IActionAlbumsGetOneSuccess,
+  IActionAlbumsGetOneFailure,
+  IActionAlbumsSelect,
   IActionAlbumsClear,
 } from './albums.actions'
 
@@ -42,6 +46,10 @@ export enum ActionTypes {
   albumsGetListRequest,
   albumsGetListSuccess,
   albumsGetListFailure,
+  albumsGetOneRequest,
+  albumsGetOneSuccess,
+  albumsGetOneFailure,
+  albumsSelect,
   albumsClear,
 }
 
@@ -59,4 +67,8 @@ export type Action =
   | IActionAlbumsGetListRequest
   | IActionAlbumsGetListSuccess
   | IActionAlbumsGetListFailure
+  | IActionAlbumsGetOneRequest
+  | IActionAlbumsGetOneSuccess
+  | IActionAlbumsGetOneFailure
+  | IActionAlbumsSelect
   | IActionAlbumsClear
