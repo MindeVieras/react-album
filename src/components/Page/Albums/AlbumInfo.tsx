@@ -23,7 +23,7 @@ export const AlbumInfo: FunctionComponent<IAlbumInfoProps> = ({ album }) => {
         <PageHeader title={album.name} style={{ paddingLeft: 0, paddingRight: 0 }} />
 
         <Spin spinning={Boolean(album.loading)}>
-          <AlbumMedia />
+          <AlbumMedia albumId={album.id} />
         </Spin>
       </div>
     )

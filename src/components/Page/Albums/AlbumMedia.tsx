@@ -48,7 +48,9 @@ import { OnStatusChange, OnComplete } from 'fine-uploader/lib/core'
 //   },
 // })
 
-interface IAlbumMediaProps {}
+interface IAlbumMediaProps {
+  albumId: string
+}
 
 class AlbumMedia extends Component<IAlbumMediaProps> {
   uploader: FineUploaderS3
@@ -67,15 +69,14 @@ class AlbumMedia extends Component<IAlbumMediaProps> {
     this._onStatusChange = (id, oldStatus, status) => {
       // Submitting files
       if (status === statusEnum.SUBMITTED) {
-        // const { entity, entity_id, status } = this.props
+        const { albumId } = this.props
         const { size, type } = uploader.methods.getFile(id)
 
-        // Set exptra filesize and mime type to S3 upload success
+        // Set additional params to S3 upload success.
         let s3params = {
           filesize: size,
           mime: type,
-          // entity,
-          // entity_id,
+          albumId,
           status,
         }
         uploader.methods.setUploadSuccessParams(s3params, id)
