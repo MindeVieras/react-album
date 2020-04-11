@@ -8,6 +8,7 @@ export * from './AppHeader/ButtonFullScreen'
 export * from './AppHeader/AppHeader'
 
 export * from './Tip'
+export * from './UploadMediaButton'
 
 export * from './Menus'
 export * from './Filters'

@@ -15,6 +15,8 @@
     "axios": "^0.19.2",
     "bowser": "^2.9.0",
     "customize-cra": "^0.9.1",
+    "fine-uploader": "^5.16.2",
+    "fine-uploader-wrappers": "^1.0.1",
     "iso-639-1": "^2.1.1",
     "less": "^3.11.1",
     "less-loader": "^5.0.0",
