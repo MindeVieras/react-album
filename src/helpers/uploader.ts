@@ -25,7 +25,6 @@ export function mediaUploader() {
         region: config.aws.region,
         bucket: config.aws.bucket,
         key: function (fileId) {
-          // console.log(this)
           // @ts-ignore
           let name = this.getName(fileId)
           let rand = Math.floor(Math.random() * 9999999 + 1)
@@ -39,7 +38,7 @@ export function mediaUploader() {
         customHeaders: authHeader(),
       },
       validation: {
-        allowedExtensions: ['jpeg', 'jpg'],
+        allowedExtensions: ['jpeg', 'jpg', 'mp4'],
         stopOnFirstInvalidFile: false,
       },
     },

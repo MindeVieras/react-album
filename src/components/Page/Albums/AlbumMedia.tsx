@@ -69,16 +69,11 @@ class AlbumMedia extends Component<IAlbumMediaProps> {
     this._onStatusChange = (id, oldStatus, status) => {
       // Submitting files
       if (status === statusEnum.SUBMITTED) {
-        const { albumId } = this.props
+        // const { albumId } = this.props
         const { size, type } = uploader.methods.getFile(id)
 
         // Set additional params to S3 upload success.
-        let s3params = {
-          filesize: size,
-          mime: type,
-          albumId,
-          status,
-        }
+        const s3params = { size, mime: type }
         uploader.methods.setUploadSuccessParams(s3params, id)
 
         // console.log(name)
