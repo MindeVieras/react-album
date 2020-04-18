@@ -5,6 +5,7 @@ import { mediaUploader } from '../../../helpers'
 import { UploadMediaButton } from '../../Ui'
 import FineUploaderS3 from 'fine-uploader-wrappers/s3'
 import { OnStatusChange, OnComplete } from 'fine-uploader/lib/core'
+import { IMediaProps } from '../../../services/MediaService'
 
 // import { withStyles } from '@material-ui/core/styles'
 // import Typography from '@material-ui/core/Typography'
@@ -50,6 +51,7 @@ import { OnStatusChange, OnComplete } from 'fine-uploader/lib/core'
 
 interface IAlbumMediaProps {
   albumId: string
+  media?: IMediaProps[]
 }
 
 class AlbumMedia extends Component<IAlbumMediaProps> {
@@ -123,7 +125,7 @@ class AlbumMedia extends Component<IAlbumMediaProps> {
   render() {
     // const { t } = this.context
     // const { classes, files, wrapper_width, wrapper_height, isLightboxOpen } = this.props
-
+    const { media } = this.props
     const uploader = this.uploader
 
     // // Remove/Add dropzone text and fileField if any visableFiles
@@ -150,6 +152,9 @@ class AlbumMedia extends Component<IAlbumMediaProps> {
     return (
       <div>
         Dropzone goes here
+        {media?.map((m) => (
+          <div key={m.id}>{m.name}</div>
+        ))}
         <UploadMediaButton uploader={uploader} />
       </div>
       //   {/* Dropzone with all uploaded files */}
