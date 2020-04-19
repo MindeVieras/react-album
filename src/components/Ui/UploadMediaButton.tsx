@@ -4,9 +4,7 @@ import FineUploaderS3 from 'fine-uploader-wrappers/s3'
 
 import { Tip } from './Tip'
 
-interface IUploadMediaButtonProps {
-  uploader: FineUploaderS3
-}
+interface IUploadMediaButtonProps {}
 
 export class UploadMediaButton extends Component<IUploadMediaButtonProps> {
   constructor(props: IUploadMediaButtonProps) {
@@ -23,8 +21,7 @@ export class UploadMediaButton extends Component<IUploadMediaButtonProps> {
   }
 
   onFilesSelected(e: any) {
-    const { uploader } = this.props
-    uploader.methods.addFiles(e.target)
+    window.uploader.methods.addFiles(e.target)
     this._resetInput()
   }
 

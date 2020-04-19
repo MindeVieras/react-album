@@ -1,18 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { mediaUploader } from '../../../helpers'
 import { UploadMediaButton } from '../../Ui'
-import FineUploaderS3 from 'fine-uploader-wrappers/s3'
-import { OnStatusChange, OnComplete } from 'fine-uploader/lib/core'
 import { IMediaProps } from '../../../services/MediaService'
-
-// import { withStyles } from '@material-ui/core/styles'
-// import Typography from '@material-ui/core/Typography'
-
-// import CloudUpload from '@material-ui/icons/CloudUpload'
-
-// import grey from '@material-ui/core/colors/grey'
 
 // import Dropzone from './Partials/Dropzone'
 // import TotalProgressBar from './Partials/TotalProgressBar'
@@ -55,78 +45,18 @@ interface IAlbumMediaProps {
 }
 
 class AlbumMedia extends Component<IAlbumMediaProps> {
-  uploader: FineUploaderS3
-  _onStatusChange: OnStatusChange
-  _onComplete: OnComplete
+  // uploader: FineUploaderS3
+  // _onStatusChange: OnStatusChange
+  // _onComplete: OnComplete
 
   constructor(props: IAlbumMediaProps) {
     super(props)
-
-    this.uploader = mediaUploader()
-    console.log(this.uploader)
-
-    const uploader = this.uploader
-    const statusEnum = uploader.qq.status
-
-    this._onStatusChange = (id, oldStatus, status) => {
-      // Submitting files
-      if (status === statusEnum.SUBMITTED) {
-        // const { albumId } = this.props
-        const { size, type } = uploader.methods.getFile(id)
-
-        // Set additional params to S3 upload success.
-        const s3params = { size, mime: type }
-        uploader.methods.setUploadSuccessParams(s3params, id)
-
-        // console.log(name)
-        // props.dispatch(albumsActions.submitMedia(id, status, false))
-        // Set media data
-        // const data = { filename: name, size, mime: type }
-        // props.dispatch(albumsActions.setMediaData(id, data))
-      }
-      // On server or Uploaded
-      else if (status === statusEnum.UPLOAD_SUCCESSFUL) {
-        // props.dispatch(albumsActions.setMediaPhase(id, status))
-      }
-    }
-
-    this._onComplete = (id, name, responseJSON, xhr) => {
-      console.log(responseJSON)
-      // const { dispatch } = this.props
-      // const { media_id, mime } = responseJSON.data
-      // dispatch(albumsActions.setMediaMediaId(id, media_id))
-      // dispatch(albumsActions.saveMediaMetadata(id, media_id))
-      // dispatch(albumsActions.saveRekognitionLabels(id, media_id))
-      // dispatch(albumsActions.saveRekognitionText(id, media_id))
-      // // // If IMAGE
-      // if (mime.includes('image')) {
-      //   dispatch(albumsActions.generateImageThumbs(id, media_id))
-      //   dispatch(albumsActions.saveRekognitionText(id, media_id))
-      // }
-      // // If VIDEO
-      // else if (mime.includes('video')) {
-      //   dispatch(albumsActions.generateVideos(id, media_id))
-      // }
-    }
-  }
-
-  componentDidMount() {
-    const uploader = this.uploader
-    uploader.on('statusChange', this._onStatusChange)
-    uploader.on('complete', this._onComplete)
-  }
-
-  componentWillUnmount() {
-    const uploader = this.uploader
-    uploader.off('statusChange', this._onStatusChange)
-    uploader.off('complete', this._onComplete)
   }
 
   render() {
     // const { t } = this.context
     // const { classes, files, wrapper_width, wrapper_height, isLightboxOpen } = this.props
     const { media } = this.props
-    const uploader = this.uploader
 
     // // Remove/Add dropzone text and fileField if any visableFiles
     // let uploaderContent = ''
@@ -155,7 +85,7 @@ class AlbumMedia extends Component<IAlbumMediaProps> {
         {media?.map((m) => (
           <div key={m.id}>{m.name}</div>
         ))}
-        <UploadMediaButton uploader={uploader} />
+        <UploadMediaButton />
       </div>
       //   {/* Dropzone with all uploaded files */}
       //   <Dropzone
