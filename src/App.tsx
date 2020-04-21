@@ -7,15 +7,20 @@ import WebFont from 'webfontloader'
 import { PrivateRoute, LoginPage, AlbumsPage, TrashPage, Error404 } from './components'
 import UsersPage from './components/Page/Users/UsersPage'
 
-import { history, mediaUploader } from './helpers'
+import { history, mediaUploader, Ui } from './helpers'
 import { setUiDimensions } from './actions'
-import { IStoreState } from './reducers'
+import { IStoreState, IAlbumSelectedProps } from './reducers'
 import { OnStatusChange, OnComplete } from 'fine-uploader/lib/core'
 
 interface IAppProps {
   appTitle?: string
   appName: string
   setUiDimensions: Function
+  selectedAlbum?: IAlbumSelectedProps
+}
+
+interface IAppState {
+  selectedAlbumId?: string
 }
 
 /**
@@ -23,7 +28,7 @@ interface IAppProps {
  *
  * @module App
  */
-class App extends Component<IAppProps> {
+class App extends Component<IAppProps, IAppState> {
   uploaderOnStatusChange: OnStatusChange
   uploaderOnComplete: OnComplete
 
@@ -43,6 +48,10 @@ class App extends Component<IAppProps> {
       },
     })
 
+    this.state = {
+      selectedAlbumId: Ui.getLocalSelectedAlbum(),
+    }
+
     // Set initial UI dimensions.
     props.setUiDimensions()
     // Update UI dimensions on window resize.
@@ -59,7 +68,7 @@ class App extends Component<IAppProps> {
         const { size, type } = window.uploader.methods.getFile(id)
 
         // Set additional params to S3 upload success.
-        const s3params = { size, mime: type }
+        const s3params = { size, mime: type, album: this.state.selectedAlbumId }
         window.uploader.methods.setUploadSuccessParams(s3params, id)
 
         // console.log(name)
@@ -109,6 +118,14 @@ class App extends Component<IAppProps> {
     window.uploader.off('complete', this.uploaderOnComplete)
   }
 
+  componentDidUpdate(prevProps: IAppProps) {
+    if (prevProps.selectedAlbum !== this.props.selectedAlbum) {
+      this.setState({
+        selectedAlbumId: this.props.selectedAlbum?.id,
+      })
+    }
+  }
+
   /**
    * Render DOM.
    *
@@ -145,10 +162,13 @@ class App extends Component<IAppProps> {
  * @param {IStoreState} state
  *   Global redux state.
  */
-const mapStateToProps = (state: IStoreState): { appTitle?: string; appName: string } => {
+const mapStateToProps = (
+  state: IStoreState,
+): { appTitle?: string; appName: string; selectedAlbum?: IAlbumSelectedProps } => {
   return {
     appTitle: state.ui.appTitle,
     appName: state.ui.appName,
+    selectedAlbum: state.albums.items.filter((a) => a.selected)[0],
   }
 }
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { FunctionComponent } from 'react'
 import { connect } from 'react-redux'
 
 import { UploadMediaButton } from '../../Ui'
@@ -44,61 +44,60 @@ interface IAlbumMediaProps {
   media?: IMediaProps[]
 }
 
-class AlbumMedia extends Component<IAlbumMediaProps> {
+const AlbumMedia: FunctionComponent<IAlbumMediaProps> = ({ albumId, media }) => {
   // uploader: FineUploaderS3
   // _onStatusChange: OnStatusChange
   // _onComplete: OnComplete
 
-  constructor(props: IAlbumMediaProps) {
-    super(props)
-  }
+  // constructor(props: IAlbumMediaProps) {
+  //   super(props)
+  // }
 
-  render() {
-    // const { t } = this.context
-    // const { classes, files, wrapper_width, wrapper_height, isLightboxOpen } = this.props
-    const { media } = this.props
+  // render() {
+  // const { t } = this.context
+  // const { classes, files, wrapper_width, wrapper_height, isLightboxOpen } = this.props
+  // const { media } = this.props
 
-    // // Remove/Add dropzone text and fileField if any visableFiles
-    // let uploaderContent = ''
+  // // Remove/Add dropzone text and fileField if any visableFiles
+  // let uploaderContent = ''
 
-    // if (files.length > 0)
-    //   uploaderContent = (
-    //     <MediaList
-    //       files={files}
-    //       uploader={uploader}
-    //       wrapper_width={wrapper_width}
-    //       wrapper_height={wrapper_height}
-    //     />
-    //   )
-    // else
-    //   uploaderContent = (
-    //     <div className={classes.empty_text_wrapper}>
-    //       <Typography className={classes.empty_text} variant="h2">
-    //         <CloudUpload className={classes.empty_text_icon} /> {t('Drop files here')}
-    //       </Typography>
-    //     </div>
-    //   )
-
-    return (
-      <div>
-        Dropzone goes here
-        {media?.map((m) => (
-          <div key={m.id}>{m.name}</div>
-        ))}
-        <UploadMediaButton />
-      </div>
-      //   {/* Dropzone with all uploaded files */}
-      //   <Dropzone
-      //     uploader={uploader}
-      //     multiple={true}
-      //     className={classes.dz_wrapper}
-      //     dropActiveClassName={classes.dz_wrapper_active}
-      //   >
-      //     {/* Media items */}
-      //     {uploaderContent}
-      //   </Dropzone>
-    )
-  }
+  // if (files.length > 0)
+  //   uploaderContent = (
+  //     <MediaList
+  //       files={files}
+  //       uploader={uploader}
+  //       wrapper_width={wrapper_width}
+  //       wrapper_height={wrapper_height}
+  //     />
+  //   )
+  // else
+  //   uploaderContent = (
+  //     <div className={classes.empty_text_wrapper}>
+  //       <Typography className={classes.empty_text} variant="h2">
+  //         <CloudUpload className={classes.empty_text_icon} /> {t('Drop files here')}
+  //       </Typography>
+  //     </div>
+  //   )
+  // console.log(albumId)
+  return (
+    <div>
+      Dropzone goes here
+      {media?.map((m) => (
+        <div key={m.id}>{m.name}</div>
+      ))}
+      <UploadMediaButton />
+    </div>
+    //   {/* Dropzone with all uploaded files */}
+    //   <Dropzone
+    //     uploader={uploader}
+    //     multiple={true}
+    //     className={classes.dz_wrapper}
+    //     dropActiveClassName={classes.dz_wrapper_active}
+    //   >
+    //     {/* Media items */}
+    //     {uploaderContent}
+    //   </Dropzone>
+  )
 }
 
 // Media.propTypes = {
