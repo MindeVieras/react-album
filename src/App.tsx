@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+// import { Dispatch } from 'redux'
 import { Router, Switch, Route } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
 import WebFont from 'webfontloader'
@@ -8,15 +9,17 @@ import { PrivateRoute, LoginPage, AlbumsPage, TrashPage, Error404 } from './comp
 import UsersPage from './components/Page/Users/UsersPage'
 
 import { history, mediaUploader, Ui } from './helpers'
-import { setUiDimensions } from './actions'
+import { setUiDimensions, mediaSubmit } from './actions'
 import { IStoreState, IAlbumSelectedProps } from './reducers'
 import { OnStatusChange, OnComplete } from 'fine-uploader/lib/core'
+import { IMediaSubmitProps } from './services'
 
 interface IAppProps {
   appTitle?: string
   appName: string
   setUiDimensions: Function
   selectedAlbum?: IAlbumSelectedProps
+  mediaSubmit: (data: IMediaSubmitProps) => void
 }
 
 interface IAppState {
@@ -64,18 +67,15 @@ class App extends Component<IAppProps, IAppState> {
     this.uploaderOnStatusChange = (id, oldStatus, status) => {
       // Submitting files
       if (status === statusEnum.SUBMITTED) {
-        // const { albumId } = this.props
-        const { size, type } = window.uploader.methods.getFile(id)
+        const { size, type, name } = window.uploader.methods.getFile(id) as File
 
         // Set additional params to S3 upload success.
         const s3params = { size, mime: type, album: this.state.selectedAlbumId }
         window.uploader.methods.setUploadSuccessParams(s3params, id)
 
-        // console.log(name)
-        // props.dispatch(albumsActions.submitMedia(id, status, false))
         // Set media data
-        // const data = { filename: name, size, mime: type }
-        // props.dispatch(albumsActions.setMediaData(id, data))
+        const data = { id, status, size, mime: type, name, album: this.state.selectedAlbumId }
+        props.mediaSubmit(data)
       }
       // On server or Uploaded
       else if (status === statusEnum.UPLOAD_SUCCESSFUL) {
@@ -172,4 +172,4 @@ const mapStateToProps = (
   }
 }
 
-export default connect(mapStateToProps, { setUiDimensions })(App)
+export default connect(mapStateToProps, { setUiDimensions, mediaSubmit })(App)

@@ -17,6 +17,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react",
+    "downlevelIteration": true,
     "typeRoots": ["src/@types", "./node_modules/@types"]
   },
   "include": ["node_modules/fine-uploader/**/*", "src"]

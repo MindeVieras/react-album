@@ -84,6 +84,21 @@ export function albums(state = initialState, action: Action) {
         }),
       }
 
+    case ActionTypes.mediaSubmit:
+      return {
+        ...state,
+        items: state.items.map((a) => {
+          if (a.id === action.payload.album) {
+            const { media, ...aCopy } = a
+            return {
+              ...aCopy,
+              media: [...media, action.payload],
+            }
+          }
+          return a
+        }),
+      }
+
     case ActionTypes.albumsClear:
       return initialState
 

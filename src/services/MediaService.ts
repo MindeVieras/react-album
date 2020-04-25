@@ -12,6 +12,7 @@ export interface IMediaProps {
   createdBy: ICreatedBy | string | null
   readonly updatedAt: Date
   readonly createdAt: Date
+  album?: string
   metadata: {
     width: number
     height: number
@@ -31,4 +32,13 @@ export interface IMediaProps {
       lon?: number
     }
   }
+}
+
+export interface IMediaSubmitProps {
+  id: number
+  status: string
+  name: IMediaProps['name']
+  size: IMediaProps['size']
+  mime: IMediaProps['mime']
+  album?: IMediaProps['album']
 }

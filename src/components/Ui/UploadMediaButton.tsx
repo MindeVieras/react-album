@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react'
 import { Button } from 'antd'
-import FineUploaderS3 from 'fine-uploader-wrappers/s3'
 
 import { Tip } from './Tip'
 

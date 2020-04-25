@@ -45,6 +45,7 @@ const rootReducer = combineReducers<IStoreState>({
   ui,
   auth,
   users,
+  // @ts-ignore
   albums,
   form: formReducer,
   i18n: i18nReducer,

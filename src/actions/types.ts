@@ -21,6 +21,7 @@ import {
   IActionAlbumsSelect,
   IActionAlbumsClear,
 } from './albums.actions'
+import { IActionMediaSubmit } from './media.actions'
 
 export enum ActionTypes {
   uiSetAppTitle,
@@ -51,6 +52,8 @@ export enum ActionTypes {
   albumsGetOneFailure,
   albumsSelect,
   albumsClear,
+
+  mediaSubmit,
 }
 
 export type Action =
@@ -72,3 +75,4 @@ export type Action =
   | IActionAlbumsGetOneFailure
   | IActionAlbumsSelect
   | IActionAlbumsClear
+  | IActionMediaSubmit
