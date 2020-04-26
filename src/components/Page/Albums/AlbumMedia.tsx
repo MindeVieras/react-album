@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react'
 import { connect } from 'react-redux'
 
-import { UploadMediaButton } from '../../Ui'
-import { IMediaProps } from '../../../services/MediaService'
+import { UploadMediaButton, MediaItem } from '../../Ui'
+import { IMediaProps, IMediaSubmitProps } from '../../../services/MediaService'
 
 // import Dropzone from './Partials/Dropzone'
 // import TotalProgressBar from './Partials/TotalProgressBar'
@@ -41,7 +41,7 @@ import { IMediaProps } from '../../../services/MediaService'
 
 interface IAlbumMediaProps {
   albumId: string
-  media?: IMediaProps[]
+  media?: (IMediaProps | IMediaSubmitProps)[]
 }
 
 const AlbumMedia: FunctionComponent<IAlbumMediaProps> = ({ albumId, media }) => {
@@ -83,7 +83,7 @@ const AlbumMedia: FunctionComponent<IAlbumMediaProps> = ({ albumId, media }) => 
     <div>
       Dropzone goes here
       {media?.map((m) => (
-        <div key={m.id}>{m.name}</div>
+        <MediaItem key={m.id} mediaItem={m} />
       ))}
       <UploadMediaButton />
     </div>

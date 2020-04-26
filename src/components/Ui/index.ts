@@ -10,5 +10,7 @@ export * from './AppHeader/AppHeader'
 export * from './Tip'
 export * from './UploadMediaButton'
 
+export * from './MediaItem'
+
 export * from './Menus'
 export * from './Filters'

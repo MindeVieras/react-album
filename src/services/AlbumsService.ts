@@ -11,7 +11,7 @@ export interface IAlbumProps {
   updatedAt: Date
   createdAt: Date
   createdBy: ICreatedBy | string | null
-  media?: IMediaProps[] & IMediaSubmitProps[]
+  media?: (IMediaProps | IMediaSubmitProps)[]
 }
 
 /**
