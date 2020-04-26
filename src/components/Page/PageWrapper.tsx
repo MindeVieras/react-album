@@ -79,9 +79,9 @@ export const PageWrapper: FunctionComponent<IPageWrapperProps> = ({ sidebar, chi
       <Layout.Content
         style={{
           backgroundColor: 'white',
-          paddingLeft: '24px',
-          paddingRight: '24px',
-          paddingBottom: '16px',
+          paddingLeft: sidebar ? 0 : '24px',
+          paddingRight: sidebar ? 0 : '24px',
+          paddingBottom: sidebar ? 0 : '16px',
           maxWidth: sidebar ? 'none' : 1024,
           width: '100%',
           marginTop: UiSizes.headerHeight,

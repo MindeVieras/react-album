@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react'
 
 import { IMediaProps, IMediaSubmitProps } from '../../../services'
 import Thumbnail from './Thumbnail'
+import { Filesize } from './Filesize'
 
 interface IMediaItemProps {
   mediaItem: IMediaProps | IMediaSubmitProps
@@ -14,6 +15,7 @@ export const MediaItem: FunctionComponent<IMediaItemProps> = ({ mediaItem }) => 
     return (
       <div>
         <img src={`data:${item.mime};base64,${item.metadata.icon}`} />
+        <Filesize size={item.size} />
       </div>
     )
   }
@@ -23,6 +25,7 @@ export const MediaItem: FunctionComponent<IMediaItemProps> = ({ mediaItem }) => 
   return (
     <div>
       <Thumbnail item={item} width={100} height={100} />
+      <Filesize size={item.size} />
     </div>
   )
 }
