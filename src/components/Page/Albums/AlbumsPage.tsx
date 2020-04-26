@@ -39,8 +39,8 @@ export const AlbumsPage: FunctionComponent = () => {
     <PageWrapper
       sidebar={
         <AlbumsList
-          height={windowSize.height - UiSizes.headerHeight}
           width={sidebarWidth}
+          height={windowSize.height - UiSizes.headerHeight}
           items={items}
           loading={loading}
           error={error}

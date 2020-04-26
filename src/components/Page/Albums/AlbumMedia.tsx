@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react'
 import { connect } from 'react-redux'
 
-import { UploadMediaButton, MediaItem } from '../../Ui'
+import { MediaItem } from '../../Ui'
 import { IMediaProps, IMediaSubmitProps } from '../../../services/MediaService'
 
 // import Dropzone from './Partials/Dropzone'
@@ -81,11 +81,9 @@ const AlbumMedia: FunctionComponent<IAlbumMediaProps> = ({ albumId, media }) => 
   // console.log(albumId)
   return (
     <div>
-      Dropzone goes here
       {media?.map((m) => (
         <MediaItem key={m.id} mediaItem={m} />
       ))}
-      <UploadMediaButton />
     </div>
     //   {/* Dropzone with all uploaded files */}
     //   <Dropzone
