@@ -21,7 +21,14 @@ import {
   IActionAlbumsSelect,
   IActionAlbumsClear,
 } from './albums.actions'
-import { IActionMediaSubmit } from './media.actions'
+import {
+  IActionMediaSubmit,
+  IActionMediaRemoveRequest,
+  IActionMediaRemoveSuccess,
+  IActionMediaRemoveFailure,
+  IActionMediaSetProgress,
+  IActionMediaCreate,
+} from './media.actions'
 
 export enum ActionTypes {
   uiSetAppTitle,
@@ -54,6 +61,11 @@ export enum ActionTypes {
   albumsClear,
 
   mediaSubmit,
+  mediaRemoveRequest,
+  mediaRemoveSuccess,
+  mediaRemoveFailure,
+  mediaSetProgress,
+  mediaCreate,
 }
 
 export type Action =
@@ -76,3 +88,8 @@ export type Action =
   | IActionAlbumsSelect
   | IActionAlbumsClear
   | IActionMediaSubmit
+  | IActionMediaRemoveRequest
+  | IActionMediaRemoveSuccess
+  | IActionMediaRemoveFailure
+  | IActionMediaSetProgress
+  | IActionMediaCreate

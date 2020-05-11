@@ -87,4 +87,34 @@ export class ApiService {
     }
     return res
   }
+
+  /**
+   * PATCH method.
+   *
+   * @param {string} url
+   *   Request url.
+   * @param {AxiosRequestConfig} config
+   *   Request configuration.
+   *
+   * @returns {Promise<IResponse<T>>}
+   *   Generic response promise.
+   */
+  protected async patch<T, R>(
+    url: string,
+    data: T,
+    config?: AxiosRequestConfig,
+  ): Promise<IResponse<R>> {
+    // Reset isSuccess to false.
+    this.isSuccess = false
+
+    // Get response with axios.
+    const axiosResponse = await this.req.patch<IResponse<R>>(url, data, config)
+    const res = axiosResponse.data
+
+    // Set successful response.
+    if (res.status === ResponseStatus.success) {
+      this.isSuccess = true
+    }
+    return res
+  }
 }

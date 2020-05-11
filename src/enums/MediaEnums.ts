@@ -37,3 +37,18 @@ export enum MediaType {
    */
   unknown = 'unknown',
 }
+
+/**
+ * Media submit status.
+ */
+export enum MediaSubmitStatus {
+  /**
+   * On file added.
+   */
+  added = 'added',
+
+  /**
+   * On uploading a file.
+   */
+  uploading = 'uploading',
+}

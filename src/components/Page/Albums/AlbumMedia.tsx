@@ -1,11 +1,11 @@
 import React, { FunctionComponent } from 'react'
 
 import { MediaItem } from '../../Ui'
-import { IMediaProps, IMediaSubmitProps } from '../../../services/MediaService'
+import { MediaItem as MediaItemType } from '../../../services/MediaService'
 
 interface IAlbumMediaProps {
   albumId: string
-  media?: (IMediaProps | IMediaSubmitProps)[]
+  media?: MediaItemType[]
 }
 
 export const AlbumMedia: FunctionComponent<IAlbumMediaProps> = ({ albumId, media }) => {

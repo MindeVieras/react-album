@@ -40,6 +40,7 @@ class Thumbnail extends Component<IThumbnailProps, IThumbnailState> {
     } = this.props
 
     if (mime.includes('image')) {
+      // @ts-ignore
       window.uploader.methods.drawThumbnail(id, this._canvas, Math.max(height, width)).then(
         () => {
           this.setState({

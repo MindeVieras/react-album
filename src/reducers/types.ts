@@ -1,20 +1,22 @@
 import { IResponsePager } from '../services'
 
+// General reducer loading/error state.
+export interface IReducerRequestState {
+  loading?: boolean
+  error?: string
+}
+
 /**
  * Generic reducer list.
  */
-export interface IReducerList<T> {
-  loading?: boolean
-  error?: string
+export interface IReducerList<T> extends IReducerRequestState {
   items: T[]
 }
 
 /**
  * Paginated reducer list.
  */
-export interface IReducerPaginatedList<T> {
-  loading?: boolean
-  error?: string
+export interface IReducerPaginatedList<T> extends IReducerRequestState {
   items: T[]
   pager: IResponsePager
 }
@@ -22,18 +24,14 @@ export interface IReducerPaginatedList<T> {
 /**
  * Generic reducer selected item.
  */
-export interface IReducerSelected<T> {
-  loading?: boolean
-  error?: string
+export interface IReducerSelected<T> extends IReducerRequestState {
   item: T
 }
 
 /**
  * Generic reducer selected item.
  */
-export interface IReducerSelectedItem {
+export interface IReducerSelectedItem extends IReducerRequestState {
   selected?: boolean
-  loading?: boolean
   isLoaded?: boolean
-  error?: string
 }

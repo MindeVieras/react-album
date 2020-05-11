@@ -1,7 +1,7 @@
-import FineUploaderS3 from 'fine-uploader-wrappers/s3'
+import { Uppy } from '@uppy/core'
 
 declare global {
   interface Window {
-    uploader: FineUploaderS3
+    uploader: Uppy
   }
 }

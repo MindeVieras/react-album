@@ -46,7 +46,7 @@ export class UsersService extends ApiService {
   /**
    * Create user.
    *
-   * @param {IFormUsersCreateValues} values
+   * @param {IFormUserAddValues} values
    *   Url parameters for requesting lists from API.
    *
    * @returns {Promise<IResponse<IUserProps>>}

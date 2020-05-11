@@ -1,60 +1,52 @@
-import React, { Component, Fragment } from 'react'
+import React, { FunctionComponent, Fragment, useRef } from 'react'
 import { Button } from 'antd'
 
 import { Tip } from './Tip'
 
-interface IUploadMediaButtonProps {}
+/**
+ * Upload media button input component.
+ *
+ * @returns {FunctionComponent<IUploadMediaButtonProps>}
+ *   Functional 'UploadMediaButton' component.
+ */
+export const UploadMediaButton: FunctionComponent = () => {
+  const inputRef = useRef<HTMLInputElement>(null)
 
-export class UploadMediaButton extends Component<IUploadMediaButtonProps> {
-  constructor(props: IUploadMediaButtonProps) {
-    super(props)
+  // Trigger hidden file input.
+  const handleClick = () => {
+    inputRef.current?.click()
+  }
 
-    this.state = {
-      key: newKey(),
+  // Hidden input on change event handler.
+  const onFilesSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { files } = e.target
+    if (files) {
+      // Add files to the uploader.
+      for (const key in files) {
+        if (files.hasOwnProperty(key)) {
+          const file = files[key]
+          window.uploader.addFile({ data: file, name: file.name, type: file.type })
+        }
+      }
     }
   }
 
-  handleClick() {
-    // @ts-ignore
-    this.refs.fileUploader.click()
-  }
+  return (
+    <Fragment>
+      <Button data-tip data-for="tip_upload_media" onClick={handleClick} aria-label="upload">
+        Upload
+      </Button>
+      <Tip id="tip_upload_media">Upload media</Tip>
 
-  onFilesSelected(e: any) {
-    window.uploader.methods.addFiles(e.target)
-    this._resetInput()
-  }
-
-  render() {
-    return (
-      <Fragment>
-        <Button
-          data-tip
-          data-for="tip_upload_media"
-          onClick={() => this.handleClick()}
-          aria-label="upload"
-        >
-          Upload
-        </Button>
-        <Tip id="tip_upload_media">Upload media</Tip>
-
-        <input
-          multiple={true}
-          ref="fileUploader"
-          className="uploader-file-input"
-          // @ts-ignore
-          key={this.state.key}
-          onChange={(e) => this.onFilesSelected(e)}
-          style={{ display: 'none' }}
-          name="file"
-          type="file"
-        />
-      </Fragment>
-    )
-  }
-
-  _resetInput() {
-    this.setState({ key: newKey() })
-  }
+      <input
+        multiple={true}
+        ref={inputRef}
+        className="uploader-file-input"
+        onChange={onFilesSelected}
+        style={{ display: 'none' }}
+        name="media"
+        type="file"
+      />
+    </Fragment>
+  )
 }
-
-const newKey = () => Date.now()

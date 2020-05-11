@@ -1,18 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-// import { Dispatch } from 'redux'
 import { Router, Switch, Route } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
 import WebFont from 'webfontloader'
+import Uppy, { UppyFile } from '@uppy/core'
+import AwsS3Multipart from '@uppy/aws-s3-multipart'
 
 import { PrivateRoute, LoginPage, AlbumsPage, TrashPage, Error404 } from './components'
 import UsersPage from './components/Page/Users/UsersPage'
 
-import { history, mediaUploader, Ui } from './helpers'
-import { setUiDimensions, mediaSubmit } from './actions'
+import { history, Ui, config } from './helpers'
+import { setUiDimensions, mediaSubmit, mediaSetProgress, mediaCreate } from './actions'
 import { IStoreState, IAlbumSelectedProps } from './reducers'
-import { OnStatusChange, OnComplete } from 'fine-uploader/lib/core'
-import { IMediaSubmitProps } from './services'
+import { IMediaSubmitProps, MediaItem, IMediaCreateValues } from './services'
+import { MediaSubmitStatus } from './enums'
 
 interface IAppProps {
   appTitle?: string
@@ -20,10 +21,25 @@ interface IAppProps {
   setUiDimensions: Function
   selectedAlbum?: IAlbumSelectedProps
   mediaSubmit: (data: IMediaSubmitProps) => void
+  mediaSetProgress: (id: MediaItem['id'], progress: number) => void
+  mediaCreate: (id: IMediaSubmitProps['id'], values: IMediaCreateValues) => void
 }
 
 interface IAppState {
   selectedAlbumId?: string
+}
+
+interface IProgress {
+  bytesTotal: number
+  bytesUploaded: number
+}
+
+interface IMediaFileMeta {
+  album?: IMediaSubmitProps['album']
+}
+
+interface IMediaUploadResponse {
+  uploadURL: string
 }
 
 /**
@@ -32,8 +48,10 @@ interface IAppState {
  * @module App
  */
 class App extends Component<IAppProps, IAppState> {
-  uploaderOnStatusChange: OnStatusChange
-  uploaderOnComplete: OnComplete
+  updateDimensions: () => void
+  uploaderOnFileAdded: (file: UppyFile) => void
+  uploaderOnUploadProgress: (file: UppyFile, progress: IProgress) => void
+  uploaderOnUploadSuccess: (file: UppyFile<IMediaFileMeta>, response: IMediaUploadResponse) => void
 
   /**
    * Initialize the App.
@@ -57,65 +75,98 @@ class App extends Component<IAppProps, IAppState> {
 
     // Set initial UI dimensions.
     props.setUiDimensions()
-    // Update UI dimensions on window resize.
-    window.addEventListener('resize', this.updateDimensions.bind(this))
+
+    // Update state with new dimensions.
+    this.updateDimensions = () => {
+      props.setUiDimensions()
+    }
 
     // Set media uploader as global window object.
-    window.uploader = mediaUploader()
-    const statusEnum = window.uploader.qq.status
+    window.uploader = Uppy({
+      autoProceed: true,
+    })
 
-    this.uploaderOnStatusChange = (id, oldStatus, status) => {
-      // Submitting files
-      if (status === statusEnum.SUBMITTED) {
-        const { size, type, name } = window.uploader.methods.getFile(id) as File
+    window.uploader.use(AwsS3Multipart, {
+      limit: 4,
+      companionUrl: `${config.baseServerUrl}/api/uploader`,
+    })
 
-        // Set additional params to S3 upload success.
-        const s3params = { size, mime: type, album: this.state.selectedAlbumId }
-        window.uploader.methods.setUploadSuccessParams(s3params, id)
-
-        // Set media data
-        const data = { id, status, size, mime: type, name, album: this.state.selectedAlbumId }
+    /**
+     * Fired each time a file is added.
+     *
+     * @param {UppyFile} file
+     *   Uppy file object.
+     */
+    this.uploaderOnFileAdded = (file) => {
+      const { id, size, type, name } = file
+      if (type) {
+        // Set media data.
+        const data: IMediaSubmitProps = {
+          isUppy: true,
+          id,
+          status: MediaSubmitStatus.added,
+          size,
+          mime: type,
+          name,
+          progress: 0,
+          album: this.state.selectedAlbumId,
+        }
+        // Submit item to the redux state.
         props.mediaSubmit(data)
       }
-      // On server or Uploaded
-      else if (status === statusEnum.UPLOAD_SUCCESSFUL) {
-        // props.dispatch(albumsActions.setMediaPhase(id, status))
-      }
     }
 
-    this.uploaderOnComplete = (id, name, responseJSON, xhr) => {
-      console.log(responseJSON)
-      // const { dispatch } = this.props
-      // const { media_id, mime } = responseJSON.data
-      // dispatch(albumsActions.setMediaMediaId(id, media_id))
-      // dispatch(albumsActions.saveMediaMetadata(id, media_id))
-      // dispatch(albumsActions.saveRekognitionLabels(id, media_id))
-      // dispatch(albumsActions.saveRekognitionText(id, media_id))
-      // // // If IMAGE
-      // if (mime.includes('image')) {
-      //   dispatch(albumsActions.generateImageThumbs(id, media_id))
-      //   dispatch(albumsActions.saveRekognitionText(id, media_id))
-      // }
-      // // If VIDEO
-      // else if (mime.includes('video')) {
-      //   dispatch(albumsActions.generateVideos(id, media_id))
-      // }
+    /**
+     * Fired each time file upload progress is available.
+     *
+     * @param {UppyFile} file
+     *   Uppy file object.
+     */
+    this.uploaderOnUploadProgress = (file, progress) => {
+      const { bytesTotal, bytesUploaded } = progress
+      const percentage = (bytesUploaded / bytesTotal) * 100
+      props.mediaSetProgress(file.id, percentage)
     }
-  }
 
-  // Update state with new dimensions.
-  updateDimensions() {
-    this.props.setUiDimensions()
+    /**
+     * Fired each time a single upload is completed.
+     *
+     * @param {UppyFile} file
+     *   Uppy file object.
+     * @param {IMediaUploadResponse} response
+     *   Upload response object including 'uploadUrl' property.
+     */
+    this.uploaderOnUploadSuccess = (file, response) => {
+      const parsedUrl = new URL(response.uploadURL)
+      const key = decodeURIComponent(parsedUrl.pathname.split('/')[2])
+      props.mediaCreate(file.id, {
+        key,
+        name: file.name,
+        size: file.size,
+        mime: file.type!,
+        album: file.meta.album,
+      })
+    }
   }
 
   componentDidMount() {
-    window.uploader.on('statusChange', this.uploaderOnStatusChange)
-    window.uploader.on('complete', this.uploaderOnComplete)
+    // Update UI dimensions on window resize.
+    window.addEventListener('resize', this.updateDimensions)
+
+    // Uppy file uploader events
+    window.uploader.on('file-added', this.uploaderOnFileAdded)
+    window.uploader.on('upload-progress', this.uploaderOnUploadProgress)
+    window.uploader.on('upload-success', this.uploaderOnUploadSuccess)
   }
 
+  // Remove events on exit.
   componentWillUnmount() {
-    window.uploader.off('statusChange', this.uploaderOnStatusChange)
-    window.uploader.off('complete', this.uploaderOnComplete)
+    window.removeEventListener('resize', this.updateDimensions)
+
+    window.uploader.off('file-added', this.uploaderOnFileAdded)
+    window.uploader.off('upload-progress', this.uploaderOnUploadProgress)
+    window.uploader.off('upload-success', this.uploaderOnUploadSuccess)
+    window.uploader.close()
   }
 
   componentDidUpdate(prevProps: IAppProps) {
@@ -138,7 +189,6 @@ class App extends Component<IAppProps, IAppState> {
     // Build page head title.
     const { appTitle, appName } = this.props
     let title = appTitle ? `${appTitle} | ${appName}` : appName
-
     return (
       <Router history={history}>
         <Helmet>
@@ -172,4 +222,9 @@ const mapStateToProps = (
   }
 }
 
-export default connect(mapStateToProps, { setUiDimensions, mediaSubmit })(App)
+export default connect(mapStateToProps, {
+  setUiDimensions,
+  mediaSubmit,
+  mediaSetProgress,
+  mediaCreate,
+})(App)

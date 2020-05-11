@@ -1,5 +1,6 @@
 import { ActionTypes, Action } from '../actions'
 import { IAlbumSelectedProps } from '.'
+import { IMediaSubmitProps } from '../services'
 
 const initialState: { items: IAlbumSelectedProps[] } = {
   items: [],
@@ -96,6 +97,92 @@ export function albums(state = initialState, action: Action) {
             }
           }
           return a
+        }),
+      }
+
+    case ActionTypes.mediaRemoveRequest:
+      return {
+        ...state,
+        items: state.items.map((a) => {
+          return {
+            ...a,
+            media: a.media?.map((m) => {
+              if (m.id === action.payload) {
+                return {
+                  ...m,
+                  loading: true,
+                }
+              }
+              return m
+            }),
+          }
+        }),
+      }
+
+    case ActionTypes.mediaRemoveSuccess:
+      return {
+        ...state,
+        items: state.items.map((a) => {
+          return {
+            ...a,
+            media: a.media?.filter((m) => m.id !== action.payload),
+          }
+        }),
+      }
+
+    case ActionTypes.mediaRemoveFailure:
+      return {
+        ...state,
+        items: state.items.map((a) => {
+          return {
+            ...a,
+            media: a.media?.map((m) => {
+              if (m.id === action.payload.id) {
+                return {
+                  ...m,
+                  loading: false,
+                  error: action.payload.message,
+                }
+              }
+              return m
+            }),
+          }
+        }),
+      }
+
+    case ActionTypes.mediaSetProgress:
+      return {
+        ...state,
+        items: state.items.map((a) => {
+          return {
+            ...a,
+            media: a.media?.map((m) => {
+              if (m.isUppy && m.id === action.payload.id) {
+                const { progress, ...mCopy } = m as IMediaSubmitProps
+                return {
+                  ...mCopy,
+                  progress: action.payload.progress,
+                }
+              }
+              return m
+            }),
+          }
+        }),
+      }
+
+    case ActionTypes.mediaCreate:
+      return {
+        ...state,
+        items: state.items.map((a) => {
+          return {
+            ...a,
+            media: a.media?.map((m) => {
+              if (m.isUppy && m.id === action.payload.id) {
+                return action.payload.item
+              }
+              return m
+            }),
+          }
         }),
       }
 
