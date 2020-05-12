@@ -5,6 +5,11 @@ import { IReducerRequestState } from '../reducers'
 
 export type MediaItem = IMediaProps | IMediaSubmitProps
 
+interface IMediaUrl {
+  url: string
+  expires: number
+}
+
 export interface IMediaProps extends IReducerRequestState {
   isUppy?: boolean
   readonly id: string
@@ -37,6 +42,9 @@ export interface IMediaProps extends IReducerRequestState {
       lat?: number
       lon?: number
     }
+  }
+  urls: {
+    original: IMediaUrl
   }
 }
 
