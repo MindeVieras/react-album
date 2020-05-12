@@ -6,6 +6,14 @@ const initialState: { items: IAlbumSelectedProps[] } = {
   items: [],
 }
 
+/**
+ * Get selected album id from local storage.
+ */
+let selectedAlbum = localStorage.getItem('selectedAlbum')
+if (selectedAlbum) {
+  selectedAlbum = JSON.parse(selectedAlbum)
+}
+
 export function albums(state = initialState, action: Action) {
   switch (action.type) {
     case ActionTypes.albumsGetListRequest:
@@ -16,7 +24,16 @@ export function albums(state = initialState, action: Action) {
     case ActionTypes.albumsGetListSuccess:
       const { docs } = action.payload
       return {
-        items: docs,
+        items: docs.map((a) => {
+          // Make sure to set selected album from local storage.
+          if (a.id === selectedAlbum) {
+            return {
+              ...a,
+              selected: true,
+            }
+          }
+          return a
+        }),
       }
     case ActionTypes.albumsGetListFailure:
       return {

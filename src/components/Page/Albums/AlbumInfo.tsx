@@ -1,7 +1,9 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { Empty, PageHeader, Spin } from 'antd'
 
 import { IAlbumSelectedProps } from '../../../reducers'
+import { albumsGetOne } from '../../../actions'
 import { AlbumMedia } from './AlbumMedia'
 import { UploadMediaButton } from '../../Ui'
 
@@ -18,16 +20,25 @@ interface IAlbumInfoProps {
  *   Functional 'AlbumsInfo' component.
  */
 export const AlbumInfo: FunctionComponent<IAlbumInfoProps> = ({ album }) => {
+  const dispatch = useDispatch()
+
+  const albumId = album?.id
+  const albumLoaded = album?.isLoaded
+
+  useEffect(() => {
+    // Load album only if not already loaded.
+    if (albumId && !albumLoaded) {
+      dispatch(albumsGetOne(albumId))
+    }
+  }, [albumId, albumLoaded, dispatch])
+
   if (album) {
     return (
-      <div>
+      <Spin spinning={Boolean(album.loading)} size="large">
         <PageHeader title={album.name} extra={<UploadMediaButton />} />
-
-        <Spin spinning={Boolean(album.loading)}>
-          <AlbumMedia media={album.media} albumId={album.id} />
-        </Spin>
-      </div>
+        <AlbumMedia media={album.media} albumId={album.id} />
+      </Spin>
     )
   }
-  return <Empty />
+  return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="No album selected" />
 }
