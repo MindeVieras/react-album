@@ -9,20 +9,20 @@ import {
   IMediaCreateValues,
 } from '../services'
 
-export interface IActionMediaSubmit {
+export type ActionMediaSubmit = {
   type: ActionTypes.mediaSubmit
   payload: IMediaSubmitProps
 }
 
-export interface IActionMediaRemoveRequest {
+export type ActionMediaRemoveRequest = {
   type: ActionTypes.mediaRemoveRequest
   payload: IMediaProps['id']
 }
-export interface IActionMediaRemoveSuccess {
+export type ActionMediaRemoveSuccess = {
   type: ActionTypes.mediaRemoveSuccess
   payload: MediaItem['id']
 }
-export interface IActionMediaRemoveFailure {
+export type ActionMediaRemoveFailure = {
   type: ActionTypes.mediaRemoveFailure
   payload: {
     id: IMediaProps['id']
@@ -30,14 +30,14 @@ export interface IActionMediaRemoveFailure {
   }
 }
 
-export interface IActionMediaSetProgress {
+export type ActionMediaSetProgress = {
   type: ActionTypes.mediaSetProgress
   payload: {
     id: MediaItem['id']
     progress: number
   }
 }
-export interface IActionMediaCreate {
+export type ActionMediaCreate = {
   type: ActionTypes.mediaCreate
   payload: {
     id: IMediaSubmitProps['id']
@@ -57,7 +57,7 @@ export const mediaSubmit = (data: IMediaSubmitProps) => {
     window.uploader.setFileMeta(data.id, { album: data.album })
 
     // Dispatch media submit state.
-    dispatch<IActionMediaSubmit>({
+    dispatch<ActionMediaSubmit>({
       type: ActionTypes.mediaSubmit,
       payload: data,
     })
@@ -77,14 +77,14 @@ export const mediaRemove = (id: MediaItem['id'], isUppy?: boolean) => {
     // For uUppy uploads just remove item from the state.
     if (isUppy) {
       // Dispatch media remove state.
-      dispatch<IActionMediaRemoveSuccess>({
+      dispatch<ActionMediaRemoveSuccess>({
         type: ActionTypes.mediaRemoveSuccess,
         payload: id,
       })
       // For media already saved on the server - use media service to trash media item.
     } else {
       // Dispatch loading state.
-      dispatch<IActionMediaRemoveRequest>({
+      dispatch<ActionMediaRemoveRequest>({
         type: ActionTypes.mediaRemoveRequest,
         payload: id,
       })
@@ -95,14 +95,14 @@ export const mediaRemove = (id: MediaItem['id'], isUppy?: boolean) => {
 
       // Dispatch successful response.
       if ($media.isSuccess && data) {
-        dispatch<IActionMediaRemoveSuccess>({
+        dispatch<ActionMediaRemoveSuccess>({
           type: ActionTypes.mediaRemoveSuccess,
           payload: id,
         })
 
         // Dispatch unsuccessful response.
       } else if (!$media.isSuccess && message) {
-        dispatch<IActionMediaRemoveFailure>({
+        dispatch<ActionMediaRemoveFailure>({
           type: ActionTypes.mediaRemoveFailure,
           payload: { id, message },
         })
@@ -122,7 +122,7 @@ export const mediaRemove = (id: MediaItem['id'], isUppy?: boolean) => {
 export const mediaSetProgress = (id: MediaItem['id'], progress: number) => {
   return (dispatch: Dispatch) => {
     // Dispatch media progress state.
-    dispatch<IActionMediaSetProgress>({
+    dispatch<ActionMediaSetProgress>({
       type: ActionTypes.mediaSetProgress,
       payload: { id, progress },
     })
@@ -145,7 +145,7 @@ export const mediaCreate = (id: IMediaSubmitProps['id'], values: IMediaCreateVal
 
     // Dispatch successful response.
     if ($media.isSuccess && data) {
-      dispatch<IActionMediaCreate>({
+      dispatch<ActionMediaCreate>({
         type: ActionTypes.mediaCreate,
         payload: {
           id,

@@ -4,21 +4,21 @@ import { ActionTypes } from './types'
 import { IResponsePaginatedData, IRequestGetListParams, IUserProps } from '../services'
 import { UsersService } from '../services'
 
-export interface IActionUsersGetListRequest {
+export type ActionUsersGetListRequest = {
   type: ActionTypes.usersGetListRequest
 }
 
-export interface IActionUsersGetListSuccess {
+export type ActionUsersGetListSuccess = {
   type: ActionTypes.usersGetListSuccess
   payload: IResponsePaginatedData<IUserProps>
 }
 
-export interface IActionUsersGetListFailure {
+export type ActionUsersGetListFailure = {
   type: ActionTypes.usersGetListFailure
   payload: string
 }
 
-export interface IActionUsersClear {
+export type ActionUsersClear = {
   type: ActionTypes.usersClear
 }
 
@@ -31,7 +31,7 @@ export interface IActionUsersClear {
 export const usersGetList = (params?: IRequestGetListParams) => {
   return async (dispatch: Dispatch) => {
     // Dispatch loading state.
-    dispatch<IActionUsersGetListRequest>({
+    dispatch<ActionUsersGetListRequest>({
       type: ActionTypes.usersGetListRequest,
     })
 
@@ -41,14 +41,14 @@ export const usersGetList = (params?: IRequestGetListParams) => {
 
     // Dispatch successful response.
     if ($users.isSuccess && data) {
-      dispatch<IActionUsersGetListSuccess>({
+      dispatch<ActionUsersGetListSuccess>({
         type: ActionTypes.usersGetListSuccess,
         payload: data,
       })
 
       // Dispatch unsuccessful response.
     } else if (!$users.isSuccess && message) {
-      dispatch<IActionUsersGetListFailure>({
+      dispatch<ActionUsersGetListFailure>({
         type: ActionTypes.usersGetListFailure,
         payload: message,
       })

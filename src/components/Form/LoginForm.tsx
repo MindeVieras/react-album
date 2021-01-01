@@ -9,7 +9,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { TextInput, RecaptchaInput } from '../Ui'
 import { AuthService } from '../../services'
 import { history, config } from '../../helpers'
-import { authSet, IActionAuthSet } from '../../actions'
+import { authSet, ActionAuthSet } from '../../actions'
 
 /**
  * Login form values.
@@ -108,7 +108,7 @@ const validate = (values: IFormLoginValues) => {
  * @param {IFormLoginValues} values
  *   Login form values.
  */
-const submit = async (values: IFormLoginValues, dispatch: Dispatch<IActionAuthSet>) => {
+const submit = async (values: IFormLoginValues, dispatch: Dispatch<ActionAuthSet>) => {
   const { username, password, recaptcha } = values
 
   // Handle recaptcha error before making request to API.

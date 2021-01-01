@@ -2,15 +2,15 @@ import { Dispatch } from 'redux'
 
 import { ActionTypes } from './types'
 import { AuthService, IAuthResponseData } from '../services'
-import { IActionAlbumsClear } from './albums.actions'
-import { IActionUsersClear } from './users.actions'
+import { ActionAlbumsClear } from './albums.actions'
+import { ActionUsersClear } from './users.actions'
 
-export interface IActionAuthSet {
+export type ActionAuthSet = {
   type: ActionTypes.authSet
   payload: IAuthResponseData
 }
 
-export interface IActionAuthClear {
+export type ActionAuthClear = {
   type: ActionTypes.authClear
 }
 
@@ -22,7 +22,7 @@ export interface IActionAuthClear {
  */
 export const authSet = (auth: IAuthResponseData) => {
   return (dispatch: Dispatch) => {
-    dispatch<IActionAuthSet>({
+    dispatch<ActionAuthSet>({
       type: ActionTypes.authSet,
       payload: auth,
     })
@@ -34,13 +34,13 @@ export const authClear = () => {
   AuthService.logout()
   // Clear the state.
   return (dispatch: Dispatch) => {
-    dispatch<IActionAuthClear>({
+    dispatch<ActionAuthClear>({
       type: ActionTypes.authClear,
     })
-    dispatch<IActionUsersClear>({
+    dispatch<ActionUsersClear>({
       type: ActionTypes.usersClear,
     })
-    dispatch<IActionAlbumsClear>({
+    dispatch<ActionAlbumsClear>({
       type: ActionTypes.albumsClear,
     })
   }

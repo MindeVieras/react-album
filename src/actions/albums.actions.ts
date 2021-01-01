@@ -4,26 +4,26 @@ import { ActionTypes } from './types'
 import { IResponsePaginatedData, IRequestGetListParams, IAlbumProps } from '../services'
 import { AlbumsService } from '../services'
 
-export interface IActionAlbumsGetListRequest {
+export type ActionAlbumsGetListRequest = {
   type: ActionTypes.albumsGetListRequest
 }
 
-export interface IActionAlbumsGetListSuccess {
+export type ActionAlbumsGetListSuccess = {
   type: ActionTypes.albumsGetListSuccess
   payload: IResponsePaginatedData<IAlbumProps>
 }
 
-export interface IActionAlbumsGetListFailure {
+export type ActionAlbumsGetListFailure = {
   type: ActionTypes.albumsGetListFailure
   payload: string
 }
 
-export interface IActionAlbumsGetOneRequest {
+export type ActionAlbumsGetOneRequest = {
   type: ActionTypes.albumsGetOneRequest
   payload: string
 }
 
-export interface IActionAlbumsGetOneSuccess {
+export type ActionAlbumsGetOneSuccess = {
   type: ActionTypes.albumsGetOneSuccess
   payload: {
     id: string
@@ -31,7 +31,7 @@ export interface IActionAlbumsGetOneSuccess {
   }
 }
 
-export interface IActionAlbumsGetOneFailure {
+export type ActionAlbumsGetOneFailure = {
   type: ActionTypes.albumsGetOneFailure
   payload: {
     id: string
@@ -39,12 +39,12 @@ export interface IActionAlbumsGetOneFailure {
   }
 }
 
-export interface IActionAlbumsSelect {
+export type ActionAlbumsSelect = {
   type: ActionTypes.albumsSelect
   payload: string
 }
 
-export interface IActionAlbumsClear {
+export type ActionAlbumsClear = {
   type: ActionTypes.albumsClear
 }
 
@@ -57,7 +57,7 @@ export interface IActionAlbumsClear {
 export const albumsGetList = (params?: IRequestGetListParams) => {
   return async (dispatch: Dispatch) => {
     // Dispatch loading state.
-    dispatch<IActionAlbumsGetListRequest>({
+    dispatch<ActionAlbumsGetListRequest>({
       type: ActionTypes.albumsGetListRequest,
     })
 
@@ -67,14 +67,14 @@ export const albumsGetList = (params?: IRequestGetListParams) => {
 
     // Dispatch successful response.
     if ($albums.isSuccess && data) {
-      dispatch<IActionAlbumsGetListSuccess>({
+      dispatch<ActionAlbumsGetListSuccess>({
         type: ActionTypes.albumsGetListSuccess,
         payload: data,
       })
 
       // Dispatch unsuccessful response.
     } else if (!$albums.isSuccess && message) {
-      dispatch<IActionAlbumsGetListFailure>({
+      dispatch<ActionAlbumsGetListFailure>({
         type: ActionTypes.albumsGetListFailure,
         payload: message,
       })
@@ -94,7 +94,7 @@ export const albumsSelect = (id: string) => {
 
   return (dispatch: Dispatch) => {
     // Dispatch album select state.
-    dispatch<IActionAlbumsSelect>({
+    dispatch<ActionAlbumsSelect>({
       type: ActionTypes.albumsSelect,
       payload: id,
     })
@@ -110,7 +110,7 @@ export const albumsSelect = (id: string) => {
 export const albumsGetOne = (id: string) => {
   return async (dispatch: Dispatch) => {
     // Dispatch loading state.
-    dispatch<IActionAlbumsGetOneRequest>({
+    dispatch<ActionAlbumsGetOneRequest>({
       type: ActionTypes.albumsGetOneRequest,
       payload: id,
     })
@@ -121,14 +121,14 @@ export const albumsGetOne = (id: string) => {
 
     // Dispatch successful response.
     if ($albums.isSuccess && data) {
-      dispatch<IActionAlbumsGetOneSuccess>({
+      dispatch<ActionAlbumsGetOneSuccess>({
         type: ActionTypes.albumsGetOneSuccess,
         payload: { id, data },
       })
 
       // Dispatch unsuccessful response.
     } else if (!$albums.isSuccess && message) {
-      dispatch<IActionAlbumsGetOneFailure>({
+      dispatch<ActionAlbumsGetOneFailure>({
         type: ActionTypes.albumsGetOneFailure,
         payload: { id, message },
       })

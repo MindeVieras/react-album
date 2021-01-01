@@ -6,7 +6,7 @@ import { Dispatch } from 'redux'
 import { Alert, Form, Col, Row, Switch } from 'antd'
 
 // import { authService, ResponseStatus } from '../../services'
-import { IActionAuthSet } from '../../actions'
+import { ActionAuthSet } from '../../actions'
 
 import { TextInput, SelectInput, SwitchInput } from '../Ui'
 // import { UsersService } from '../../services'
@@ -215,7 +215,7 @@ const validate = (values: IFormUserAddValues) => {
  * @param {IFormUserAddValues} values
  *   Login form values.
  */
-const submit = async (values: IFormUserAddValues, dispatch: Dispatch<IActionAuthSet>) => {
+const submit = async (values: IFormUserAddValues, dispatch: Dispatch<ActionAuthSet>) => {
   // const { username, password, recaptcha } = values
   console.log(values)
 
