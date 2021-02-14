@@ -4,7 +4,7 @@
 export const config = {
   env: process.env.NODE_ENV,
   isDev: process.env.NODE_ENV === 'development',
-  baseServerUrl: process.env.REACT_APP_BASE_URL!,
+  baseServerUrl: process.env.REACT_APP_API_SERVER!,
   recaptchaSiteKey: process.env.REACT_APP_RECAPTCHA_SITE_KEY!,
   aws: {
     region: process.env.REACT_APP_AWS_REGION!,
