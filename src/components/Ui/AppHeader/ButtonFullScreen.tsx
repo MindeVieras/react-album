@@ -10,7 +10,7 @@ import { setFullScreen } from '../../../actions'
 /**
  * Full screen button props.
  */
-interface IButtonFullScreenProps {}
+interface IButtonFullScreenProps { }
 
 /**
  * Full Screen Button component.
@@ -35,7 +35,6 @@ export const ButtonFullScreen: FunctionComponent<IButtonFullScreenProps> = () =>
         onClick={handleClick}
         shape="circle"
         size="large"
-        ghost={true}
         icon={isFullScreen ? <FullscreenExitOutlined /> : <FullscreenOutlined />}
       />
     </Tooltip>

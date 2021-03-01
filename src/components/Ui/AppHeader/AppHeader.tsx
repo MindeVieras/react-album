@@ -31,7 +31,7 @@ export const AppHeader: FunctionComponent = () => {
 
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <ButtonFullScreen />
-        <LanguageSelector buttonProps={{ ghost: true }} />
+        <LanguageSelector />
         <MainMenu />
       </div>
     </Layout.Header>

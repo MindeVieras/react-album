@@ -29,7 +29,6 @@ export const MainMenu = () => {
           type="link"
           shape="circle"
           size="large"
-          ghost={true}
           onClick={handleClick}
           icon={<MenuOutlined />}
         />
