@@ -60,9 +60,9 @@ const LoginForm: FunctionComponent<InjectedFormProps<IFormLoginValues>> = (props
         }}
       />
 
-      {/* Do not render recaptcha field on dev environment. */}
+      {/* Do not render recaptcha field in dev environment. */}
       {!config.isDev && (
-        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 20 }}>
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 20, height: 78 }}>
           <Field name="recaptcha" component={RecaptchaInput} />
         </div>
       )}

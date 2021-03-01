@@ -9,7 +9,7 @@ import { IStoreState } from '../../../reducers'
 /**
  * Recaptcha component props.
  */
-interface IRecaptchaFieldProps extends WrappedFieldProps {}
+interface IRecaptchaFieldProps extends WrappedFieldProps { }
 
 /**
  * Google recaptcha component,
