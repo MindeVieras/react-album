@@ -110,7 +110,7 @@ export function albums(state = initialState, action: Action) {
             const { media, ...aCopy } = a
             return {
               ...aCopy,
-              media: [...media, action.payload],
+              media: [...media ?? [], action.payload],
             }
           }
           return a
