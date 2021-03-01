@@ -129,8 +129,8 @@ const submit = async (values: IFormLoginValues, dispatch: Dispatch<ActionAuthSet
 
     // Redirect user to the path where it came from except from /login path.
     let redirectPath = '/'
-    if (history.location.state) {
-      redirectPath = history.createHref(history.location.state.from)
+    if (window.history.state.state && window.history.state.state.from) {
+      redirectPath = history.createHref(window.history.state.state.from)
     }
     history.push(redirectPath)
   } else if (!$auth.isSuccess && message) {
