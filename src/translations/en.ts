@@ -55,6 +55,7 @@ const en: Dictionary = {
     filterItemsPerPage: 'Items per page',
     userAdd: 'Add new user',
     userEdit: 'Edit user',
+    userDelete: 'Delete user',
   },
   // Buttons.
   button: {
@@ -69,6 +70,12 @@ const en: Dictionary = {
     },
     userEdit: {
       title: 'Edit \'%{username}\'',
+    },
+    userDelete: {
+      title: 'Are you sure delete \'%{username}\'?',
+      content: 'This action cannot be undone!',
+      ok: 'Yes',
+      cancel: 'No',
     },
   },
 }

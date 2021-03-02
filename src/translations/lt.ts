@@ -55,6 +55,7 @@ const lt: Dictionary = {
     filterItemsPerPage: 'Elementų puslapyje',
     userAdd: 'Pridėti naują vartotoją',
     userEdit: 'Redaguoti vartotoją',
+    userDelete: 'Pašalinti vartotoją',
   },
   // Buttons.
   button: {
@@ -69,6 +70,12 @@ const lt: Dictionary = {
     },
     userEdit: {
       title: 'Radaguoti \'%{username}\'',
+    },
+    userDelete: {
+      title: 'Ar tikrai norite ištrinti \'%{username}\'?',
+      content: 'Šio veiksmo nebus galima anuliuoti!',
+      ok: 'Taip',
+      cancel: 'Ne',
     },
   },
 }

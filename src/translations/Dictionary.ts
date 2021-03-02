@@ -58,6 +58,7 @@ export type Dictionary = {
     filterItemsPerPage: string
     userAdd: string
     userEdit: string
+    userDelete: string
   }
   // Buttons.
   button: {
@@ -72,6 +73,12 @@ export type Dictionary = {
     }
     userEdit: {
       title: string
+    }
+    userDelete: {
+      title: string
+      content: string
+      ok: string
+      cancel: string
     }
   }
 } & SubTranslationObject

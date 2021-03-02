@@ -55,6 +55,7 @@ const ru: Dictionary = {
     filterItemsPerPage: 'Пункты на странице',
     userAdd: 'Добавить нового пользователя',
     userEdit: 'Редактировать пользователя',
+    userDelete: 'Удалить пользователя',
   },
   // Buttons.
   button: {
@@ -69,6 +70,12 @@ const ru: Dictionary = {
     },
     userEdit: {
       title: 'Редактировать \'%{username}\'',
+    },
+    userDelete: {
+      title: 'Вы уверены, что удалите \'%{username}\'?',
+      content: 'Это действие не может быть отменено!',
+      ok: 'Да',
+      cancel: 'Нет',
     },
   },
 }

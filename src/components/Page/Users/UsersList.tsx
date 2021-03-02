@@ -3,6 +3,7 @@ import { List, Avatar } from 'antd'
 
 import { IUserProps } from '../../../services'
 import { UserEdit } from './UserActions/UserEdit'
+import { UserDelete } from './UserActions/UserDelete'
 
 interface IUsersListProps {
   items?: IUserProps[]
@@ -26,7 +27,8 @@ export const UsersList: FunctionComponent<IUsersListProps> = (props) => {
         const { profile } = item
         return (
           <List.Item actions={[
-            <UserEdit user={item} />
+            <UserEdit user={item} />,
+            <UserDelete user={item} />
           ]}>
             <List.Item.Meta
               avatar={<Avatar>{item.initials}</Avatar>}
