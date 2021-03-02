@@ -57,6 +57,7 @@ export type Dictionary = {
     mainMenu: string
     filterItemsPerPage: string
     userAdd: string
+    userEdit: string
   }
   // Buttons.
   button: {
@@ -67,6 +68,9 @@ export type Dictionary = {
   // Modals.
   modal: {
     userAdd: {
+      title: string
+    }
+    userEdit: {
       title: string
     }
   }

@@ -54,6 +54,7 @@ const en: Dictionary = {
     mainMenu: 'Menu',
     filterItemsPerPage: 'Items per page',
     userAdd: 'Add new user',
+    userEdit: 'Edit user',
   },
   // Buttons.
   button: {
@@ -65,6 +66,9 @@ const en: Dictionary = {
   modal: {
     userAdd: {
       title: 'Create a new user',
+    },
+    userEdit: {
+      title: 'Edit \'%{username}\'',
     },
   },
 }

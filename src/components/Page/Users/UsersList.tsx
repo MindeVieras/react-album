@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react'
 import { List, Avatar } from 'antd'
 
 import { IUserProps } from '../../../services'
+import { UserEdit } from './UserActions/UserEdit'
 
 interface IUsersListProps {
   items?: IUserProps[]
@@ -24,7 +25,9 @@ export const UsersList: FunctionComponent<IUsersListProps> = (props) => {
       renderItem={(item) => {
         const { profile } = item
         return (
-          <List.Item actions={['Edit']}>
+          <List.Item actions={[
+            <UserEdit user={item} />
+          ]}>
             <List.Item.Meta
               avatar={<Avatar>{item.initials}</Avatar>}
               title={item.username}

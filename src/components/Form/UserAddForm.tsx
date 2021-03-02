@@ -3,7 +3,7 @@ import { Field, reduxForm, InjectedFormProps } from 'redux-form'
 import { Translate, I18n } from 'react-redux-i18n'
 import validator from 'validator'
 import { Dispatch } from 'redux'
-import { Alert, Form, Col, Row, Switch } from 'antd'
+import { Alert, Form, Col, Row } from 'antd'
 
 // import { authService, ResponseStatus } from '../../services'
 import { ActionAuthSet } from '../../actions'
@@ -36,14 +36,10 @@ export interface IFormUserAddValues {
  */
 const UserAddForm: FunctionComponent<InjectedFormProps<IFormUserAddValues>> = (props) => {
   const { handleSubmit, error } = props
-  const onChange = (checked: any) => {
-    console.log(`switch to ${checked}`)
-  }
   return (
     <Form onFinish={handleSubmit(submit)} layout="vertical">
       {/* Show form validation error. */}
       {error && <Alert style={{ marginBottom: 16 }} message={error} type="error" showIcon />}
-      <Switch defaultChecked onChange={onChange} />
       <Row gutter={12}>
         <Col span={12}>
           {/* Username filed. */}

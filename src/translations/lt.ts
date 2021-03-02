@@ -54,6 +54,7 @@ const lt: Dictionary = {
     mainMenu: 'Meniu',
     filterItemsPerPage: 'Elementų puslapyje',
     userAdd: 'Pridėti naują vartotoją',
+    userEdit: 'Redaguoti vartotoją',
   },
   // Buttons.
   button: {
@@ -65,6 +66,9 @@ const lt: Dictionary = {
   modal: {
     userAdd: {
       title: 'Sukurkite naują vartotoją',
+    },
+    userEdit: {
+      title: 'Radaguoti \'%{username}\'',
     },
   },
 }

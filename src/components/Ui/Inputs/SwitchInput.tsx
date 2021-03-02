@@ -1,7 +1,8 @@
 import React from 'react'
 import { WrappedFieldProps } from 'redux-form'
+import { Switch } from 'antd'
 import Form, { FormItemProps } from 'antd/lib/form'
-import Switch, { SwitchProps } from 'antd/lib/switch'
+import { SwitchProps } from 'antd/lib/switch'
 
 /**
  * Switch input props.

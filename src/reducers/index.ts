@@ -16,7 +16,7 @@ import {
   IReducerSelectedItem,
 } from './types'
 
-export interface IAlbumSelectedProps extends IReducerSelectedItem, IAlbumProps {}
+export interface IAlbumSelectedProps extends IReducerSelectedItem, IAlbumProps { }
 
 export interface IStoreState {
   ui: {

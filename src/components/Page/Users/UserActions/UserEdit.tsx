@@ -1,16 +1,21 @@
-import React, { useState } from 'react'
+import React, { FunctionComponent, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { submit } from 'redux-form'
 import { useHistory } from 'react-router-dom'
 import { Translate } from 'react-redux-i18n'
 import { LocationDescriptorObject } from 'history'
-import { Button, Tooltip, Modal } from 'antd'
-import { PlusOutlined } from '@ant-design/icons'
+import { Tooltip, Modal } from 'antd'
+import { EditTwoTone } from '@ant-design/icons'
 
 import UsersCreateForm from '../../../Form/UserAddForm'
 import { IStoreState } from '../../../../reducers'
+import { IUserProps } from '../../../../services'
 
-export function UserAdd() {
+interface IUserEditProps {
+  user: IUserProps
+}
+
+export const UserEdit: FunctionComponent<IUserEditProps> = ({ user }) => {
   const history = useHistory()
   const dispatch = useDispatch()
   const userAddForm = useSelector((state: IStoreState) => state.form.userAdd)
@@ -18,17 +23,18 @@ export function UserAdd() {
   // Modal open/close state.
   const [open, setOpen] = useState(false)
 
-  // Determine if current location hash id #add.
-  const isAddPath = history.location.hash === '#add'
+  // Determine if current location hash id #edit and search param is user id.
+  const isEditPath = history.location.hash === '#edit' && history.location.search === `?${user.id}`
 
   /**
-   * Set location path hash to #add.
+   * Set location path hash to #edit.
    */
   const handleOpen = () => {
     setOpen(true)
     const openLocation: LocationDescriptorObject = {
       pathname: history.location.pathname,
-      hash: '#add',
+      search: user.id,
+      hash: '#edit',
     }
     history.push(history.createHref(openLocation))
   }
@@ -43,12 +49,12 @@ export function UserAdd() {
 
   return (
     <div>
-      <Tooltip title={<Translate value="tooltip.userAdd" />} placement="bottom">
-        <Button type="primary" shape="circle" icon={<PlusOutlined />} onClick={handleOpen} />
+      <Tooltip title={<Translate value="tooltip.userEdit" />} placement="bottom">
+        <EditTwoTone onClick={handleOpen} style={{ fontSize: 18 }} />
       </Tooltip>
       <Modal
-        visible={open || isAddPath}
-        title={<Translate value="modal.userAdd.title" />}
+        visible={open || isEditPath}
+        title={<Translate value="modal.userEdit.title" username={user.username} />}
         cancelText={<Translate value="button.cancel" />}
         onCancel={handleClose}
         okText={<Translate value="button.create" />}

@@ -54,6 +54,7 @@ const ru: Dictionary = {
     mainMenu: 'Меню',
     filterItemsPerPage: 'Пункты на странице',
     userAdd: 'Добавить нового пользователя',
+    userEdit: 'Редактировать пользователя',
   },
   // Buttons.
   button: {
@@ -65,6 +66,9 @@ const ru: Dictionary = {
   modal: {
     userAdd: {
       title: 'Создать нового пользователя',
+    },
+    userEdit: {
+      title: 'Редактировать \'%{username}\'',
     },
   },
 }
