@@ -59,18 +59,19 @@ class UsersPage extends Component<IUsersProps> {
         {error ? (
           <Alert type="error" message={error} banner />
         ) : (
-          <Fragment>
-            <UsersList items={items} loading={loading} />
-            <Pagination
-              style={{ textAlign: 'center', marginTop: 16 }}
-              current={pager.offset / pager.limit + 1}
-              pageSize={pager.limit}
-              total={pager.total}
-              onChange={this.handleChangePage}
-              hideOnSinglePage={true}
-            />
-          </Fragment>
-        )}
+            <Fragment>
+              <UsersList items={items} loading={loading} />
+              <Pagination
+                style={{ textAlign: 'center', marginTop: 16 }}
+                current={pager.offset / pager.limit + 1}
+                pageSize={pager.limit}
+                total={pager.total}
+                onChange={this.handleChangePage}
+                hideOnSinglePage={true}
+                showSizeChanger={false}
+              />
+            </Fragment>
+          )}
       </PageWrapper>
     )
   }
