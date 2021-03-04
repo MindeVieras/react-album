@@ -1,15 +1,15 @@
 import React, { ReactNode, FunctionComponent } from 'react'
-import { Field, reduxForm, InjectedFormProps, SubmissionError } from 'redux-form'
+import { Field, reduxForm, InjectedFormProps } from 'redux-form'
 import { Translate, I18n } from 'react-redux-i18n'
 import validator from 'validator'
 import { Dispatch } from 'redux'
 import { Alert, Form, Col, Row } from 'antd'
 
 // import { authService, ResponseStatus } from '../../services'
-import { ActionUsersCreateSuccess, usersCreate } from '../../actions'
+import { ActionAuthSet } from '../../actions'
 
 import { TextInput, SelectInput, SwitchInput } from '../Ui'
-import { UsersService } from '../../services'
+// import { UsersService } from '../../services'
 import { Locale } from '../../helpers'
 import { UserRoles, UserStatus } from '../../enums'
 
@@ -211,29 +211,36 @@ const validate = (values: IFormUserAddValues) => {
  * @param {IFormUserAddValues} values
  *   Login form values.
  */
-const submit = async (values: IFormUserAddValues, dispatch: Dispatch<ActionUsersCreateSuccess>) => {
-  // Get response from users service.
-  const $users = new UsersService()
-  const { message, errors, data } = await $users.create(values)
+const submit = async (values: IFormUserAddValues, dispatch: Dispatch<ActionAuthSet>) => {
+  // const { username, password, recaptcha } = values
+  console.log(values)
 
-  // Dispatch successful response.
-  if ($users.isSuccess && data) {
-    // @ts-ignore
-    dispatch(usersCreate(data))
-    // // Redirect user to the path where it came from except from /login path.
-    // let redirectPath = '/'
-    // if (history.location.state) {
-    //   redirectPath = history.createHref(history.location.state.from)
-    // }
-    // history.push(redirectPath)
-  } else if (!$users.isSuccess && message) {
-    // Throw submission errors to redux form fields.
-    throw new SubmissionError({ _error: message, ...errors })
-  }
+  // Get response from users service.
+  // const $users = new UsersService()
+  // const { message, errors, data } = await $users.create(values)
+  // const t = await $users.create(values)
+  // console.log($users.isSuccess)
+  // console.log(t)
+
+  // // Dispatch successful response.
+  // if ($users.isSuccess && data) {
+  //   console.log(data)
+  //   // // @ts-ignore
+  //   // dispatch(authSet(data))
+  //   // // Redirect user to the path where it came from except from /login path.
+  //   // let redirectPath = '/'
+  //   // if (history.location.state) {
+  //   //   redirectPath = history.createHref(history.location.state.from)
+  //   // }
+  //   // history.push(redirectPath)
+  // } else if (!$users.isSuccess && message) {
+  //   // Throw submission errors to redux form fields.
+  //   throw new SubmissionError({ _error: message, ...errors })
+  // }
 }
 
 export default reduxForm<IFormUserAddValues>({
-  form: 'userAdd',
+  form: 'userEdit',
   validate,
   initialValues: {
     role: UserRoles.viewer,

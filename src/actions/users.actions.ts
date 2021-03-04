@@ -18,6 +18,11 @@ export type ActionUsersGetListFailure = {
   payload: string
 }
 
+export type ActionUsersCreateSuccess = {
+  type: ActionTypes.usersCreateSuccess
+  payload: IUserProps
+}
+
 export type ActionUsersClear = {
   type: ActionTypes.usersClear
 }
@@ -56,13 +61,21 @@ export const usersGetList = (params?: IRequestGetListParams) => {
   }
 }
 
-// function create(user) {
-//   return dispatch => {
-//     dispatch(success(user))
-//   }
+/**
+ * Create user action.
+ *
+ * @param {IUserProps} user
+ *   User to add to the state.
+ */
+export const usersCreate = (user: IUserProps) => {
+  return (dispatch: Dispatch) => {
+    dispatch<ActionUsersCreateSuccess>({
+      type: ActionTypes.usersCreateSuccess,
+      payload: user,
+    })
+  }
 
-//   function success(user) { return { type: userConstants.CREATE_SUCCESS, user } }
-// }
+}
 
 // function getOne(username) {
 //   return dispatch => {

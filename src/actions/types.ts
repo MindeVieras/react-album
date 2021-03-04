@@ -9,6 +9,7 @@ import {
   ActionUsersGetListRequest,
   ActionUsersGetListSuccess,
   ActionUsersGetListFailure,
+  ActionUsersCreateSuccess,
   ActionUsersClear,
 } from './users.actions'
 import {
@@ -78,6 +79,7 @@ export type Action =
   | ActionUsersGetListRequest
   | ActionUsersGetListSuccess
   | ActionUsersGetListFailure
+  | ActionUsersCreateSuccess
   | ActionUsersClear
   | ActionAlbumsGetListRequest
   | ActionAlbumsGetListSuccess

@@ -7,7 +7,7 @@ import { LocationDescriptorObject } from 'history'
 import { Tooltip, Modal } from 'antd'
 import { EditTwoTone } from '@ant-design/icons'
 
-import UsersCreateForm from '../../../Form/UserAddForm'
+import UserEditForm from '../../../Form/UserEditForm'
 import { IStoreState } from '../../../../reducers'
 import { IUserProps } from '../../../../services'
 
@@ -62,7 +62,7 @@ export const UserEdit: FunctionComponent<IUserEditProps> = ({ user }) => {
         onOk={() => dispatch(submit('userAdd'))}
         width={640}
       >
-        <UsersCreateForm />
+        <UserEditForm />
       </Modal>
     </div>
   )

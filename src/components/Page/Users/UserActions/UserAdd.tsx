@@ -7,7 +7,7 @@ import { LocationDescriptorObject } from 'history'
 import { Button, Tooltip, Modal } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 
-import UsersCreateForm from '../../../Form/UserAddForm'
+import UserCreateForm from '../../../Form/UserAddForm'
 import { IStoreState } from '../../../../reducers'
 
 export function UserAdd() {
@@ -56,7 +56,7 @@ export function UserAdd() {
         onOk={() => dispatch(submit('userAdd'))}
         width={640}
       >
-        <UsersCreateForm />
+        <UserCreateForm />
       </Modal>
     </div>
   )

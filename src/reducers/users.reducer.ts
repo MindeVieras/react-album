@@ -65,14 +65,15 @@ export function users(state = initialState, action: Action) {
     //     },
     //   }
 
-    // case ActionTypes.usersCreateSuccess:
-    //   return {
-    //     ...state,
-    //     list: {
-    //       ...state.list,
-    //       items: [...state.list.items, action.user],
-    //     },
-    //   }
+    case ActionTypes.usersCreateSuccess:
+      console.log(action)
+      return {
+        ...state,
+        list: {
+          ...state.list,
+          items: [...state.list.items, action.payload],
+        },
+      }
 
     // case ActionTypes.usersDeleteRequest:
     //   // add 'deleting:true' property to user being deleted
