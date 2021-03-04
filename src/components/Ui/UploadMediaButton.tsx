@@ -36,7 +36,8 @@ export const UploadMediaButton: FunctionComponent = () => {
       <Button data-tip data-for="tip_upload_media" onClick={handleClick} aria-label="upload">
         Upload
       </Button>
-      <Tip id="tip_upload_media">Upload media</Tip>
+      {/* <Tip id="tip_upload_media">Upload media</Tip> */}
+      {/* <Tip>Upload media</Tip> */}
 
       <input
         multiple={true}

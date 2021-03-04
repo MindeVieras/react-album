@@ -4,12 +4,13 @@ import { submit } from 'redux-form'
 import { useHistory } from 'react-router-dom'
 import { Translate } from 'react-redux-i18n'
 import { LocationDescriptorObject } from 'history'
-import { Tooltip, Modal } from 'antd'
+import { Modal } from 'antd'
 import { EditTwoTone } from '@ant-design/icons'
 
 import UserEditForm from '../../../Form/UserEditForm'
 import { IStoreState } from '../../../../reducers'
 import { IUserProps } from '../../../../services'
+import { Tip } from '../../../Ui'
 
 interface IUserEditProps {
   user: IUserProps
@@ -49,9 +50,9 @@ export const UserEdit: FunctionComponent<IUserEditProps> = ({ user }) => {
 
   return (
     <div>
-      <Tooltip title={<Translate value="tooltip.userEdit" />} placement="bottom">
+      <Tip content={<Translate value="tooltip.userEdit" />}>
         <EditTwoTone onClick={handleOpen} style={{ fontSize: 18 }} />
-      </Tooltip>
+      </Tip>
       <Modal
         visible={open || isEditPath}
         title={<Translate value="modal.userEdit.title" username={user.username} />}

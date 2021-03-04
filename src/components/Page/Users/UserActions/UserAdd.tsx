@@ -4,11 +4,12 @@ import { submit } from 'redux-form'
 import { useHistory } from 'react-router-dom'
 import { Translate } from 'react-redux-i18n'
 import { LocationDescriptorObject } from 'history'
-import { Button, Tooltip, Modal } from 'antd'
+import { Button, Modal } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 
 import UserCreateForm from '../../../Form/UserAddForm'
 import { IStoreState } from '../../../../reducers'
+import { Tip } from '../../../Ui'
 
 export function UserAdd() {
   const history = useHistory()
@@ -43,9 +44,9 @@ export function UserAdd() {
 
   return (
     <div>
-      <Tooltip title={<Translate value="tooltip.userAdd" />} placement="bottom">
+      <Tip content={<Translate value="tooltip.userAdd" />}>
         <Button type="primary" shape="circle" icon={<PlusOutlined />} onClick={handleOpen} />
-      </Tooltip>
+      </Tip>
       <Modal
         visible={open || isAddPath}
         title={<Translate value="modal.userAdd.title" />}

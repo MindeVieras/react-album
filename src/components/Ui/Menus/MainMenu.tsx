@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { Translate } from 'react-redux-i18n'
-import { Button, Drawer, Tooltip, Menu } from 'antd'
+import { Button, Drawer, Menu } from 'antd'
 import {
   MenuOutlined,
   TeamOutlined,
@@ -9,6 +9,8 @@ import {
   LogoutOutlined,
   PictureOutlined,
 } from '@ant-design/icons'
+
+import { Tip } from '../Tip'
 
 export const MainMenu = () => {
   const { location } = useHistory()
@@ -24,7 +26,7 @@ export const MainMenu = () => {
 
   return (
     <Fragment>
-      <Tooltip mouseEnterDelay={1} title={<Translate value="tooltip.mainMenu" />}>
+      <Tip content={<Translate value="tooltip.mainMenu" />}>
         <Button
           type="link"
           shape="circle"
@@ -32,7 +34,7 @@ export const MainMenu = () => {
           onClick={handleClick}
           icon={<MenuOutlined />}
         />
-      </Tooltip>
+      </Tip>
       <Drawer
         title="User Name!"
         placement="right"

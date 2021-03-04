@@ -39,26 +39,27 @@ export const MediaItemRemove: FunctionComponent<IMediaItemRemoveProps> = ({
       icon={<QuestionCircleOutlined style={{ color: 'red' }} />}
     >
       <div>
-        <Button
-          type="primary"
-          shape="circle"
-          icon={<CloseOutlined />}
-          size="small"
-          disabled={loading}
-          style={{
-            position: 'absolute',
-            right: -8,
-            top: -8,
-            width: 18,
-            height: 18,
-            minWidth: 18,
-            fontSize: 10,
-            zIndex: 1,
-          }}
-          data-tip
-          data-for={`tip_remove_media_${id}`}
-        />
-        <Tip id={`tip_remove_media_${id}`}>Remove</Tip>
+        {/* <Tip id={`tip_remove_media_${id}`}>Remove</Tip> */}
+        <Tip content="remove">
+          <Button
+            type="primary"
+            shape="circle"
+            icon={<CloseOutlined />}
+            size="small"
+            disabled={loading}
+            style={{
+              position: 'absolute',
+              right: -8,
+              top: -8,
+              width: 18,
+              height: 18,
+              minWidth: 18,
+              fontSize: 10,
+              zIndex: 1,
+            }}
+            data-tip
+            data-for={`tip_remove_media_${id}`}
+          /></Tip>
       </div>
     </Popconfirm>
   )

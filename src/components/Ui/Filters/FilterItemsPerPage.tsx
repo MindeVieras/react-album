@@ -1,6 +1,8 @@
 import React, { FunctionComponent, Fragment } from 'react'
 import { Translate } from 'react-redux-i18n'
-import { Select, Tooltip } from 'antd'
+import { Select } from 'antd'
+
+import { Tip } from '../Tip'
 
 interface IFilterItemsPerPageProps {
   total: number
@@ -19,7 +21,7 @@ export const FilterItemsPerPage: FunctionComponent<IFilterItemsPerPageProps> = (
   return (
     <Fragment>
       {total > limit && (
-        <Tooltip title={<Translate value="tooltip.filterItemsPerPage" />}>
+        <Tip content={<Translate value="tooltip.filterItemsPerPage" />}>
           <Select defaultValue={limit} style={{ width: 68 }} onChange={onChange}>
             {options.map((option) => {
               if (option <= total) {
@@ -33,7 +35,7 @@ export const FilterItemsPerPage: FunctionComponent<IFilterItemsPerPageProps> = (
             })}
             <Select.Option value={-1}>All</Select.Option>
           </Select>
-        </Tooltip>
+        </Tip>
       )}
     </Fragment>
   )

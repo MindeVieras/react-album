@@ -1,25 +1,25 @@
 import React, { FunctionComponent, ReactNode } from 'react'
-import ReactTooltip, { Effect } from 'react-tooltip'
+import { useSelector } from 'react-redux'
+import Tooltip, { AbstractTooltipProps } from 'antd/lib/tooltip'
+
+import { IStoreState } from '../../reducers'
 
 /**
  * Tip props.
  */
-interface ITipProps {
-  children: ReactNode
-  id: string
-  effect?: Effect
-  delayShow?: number
+interface ITipProps extends AbstractTooltipProps {
+  content: ReactNode
 }
 
-export const Tip: FunctionComponent<ITipProps> = ({
-  children,
-  effect = 'solid',
-  delayShow = 750,
-  ...otherProps
-}) => {
+export const Tip: FunctionComponent<ITipProps> = ({ content, children, ...otherProps }) => {
+  // Show tooltip only for desktop devices.
+  const { type } = useSelector((state: IStoreState) => state.ui.browser.platform)
+  const visibleProp = type === 'desktop' ? {} : {
+    visible: false
+  }
   return (
-    <ReactTooltip effect={effect} delayShow={delayShow} {...otherProps}>
+    <Tooltip title={content} {...visibleProp} {...otherProps}>
       {children}
-    </ReactTooltip>
+    </Tooltip>
   )
 }

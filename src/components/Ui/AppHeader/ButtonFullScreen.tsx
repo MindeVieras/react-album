@@ -1,11 +1,12 @@
 import React, { FunctionComponent } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Translate } from 'react-redux-i18n'
-import { Button, Tooltip } from 'antd'
+import { Button } from 'antd'
 import { FullscreenOutlined, FullscreenExitOutlined } from '@ant-design/icons'
 
 import { IStoreState } from '../../../reducers'
 import { setFullScreen } from '../../../actions'
+import { Tip } from '../Tip'
 
 /**
  * Full screen button props.
@@ -29,7 +30,7 @@ export const ButtonFullScreen: FunctionComponent<IButtonFullScreenProps> = () =>
   }
 
   return (
-    <Tooltip mouseEnterDelay={1} title={<Translate value="tooltip.goFullScreen" />}>
+    <Tip content={<Translate value="tooltip.goFullScreen" />}>
       <Button
         type="link"
         onClick={handleClick}
@@ -37,6 +38,6 @@ export const ButtonFullScreen: FunctionComponent<IButtonFullScreenProps> = () =>
         size="large"
         icon={isFullScreen ? <FullscreenExitOutlined /> : <FullscreenOutlined />}
       />
-    </Tooltip>
+    </Tip>
   )
 }

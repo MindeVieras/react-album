@@ -1,9 +1,10 @@
 import React, { FunctionComponent } from 'react'
 import { Translate } from 'react-redux-i18n'
-import { Tooltip, Modal } from 'antd'
+import { Modal } from 'antd'
 import { DeleteTwoTone } from '@ant-design/icons'
 
 import { IUserProps } from '../../../../services'
+import { Tip } from '../../../Ui'
 
 interface IUserDeleteProps {
   user: IUserProps
@@ -29,10 +30,8 @@ export const UserDelete: FunctionComponent<IUserDeleteProps> = ({ user }) => {
   }
 
   return (
-    <div>
-      <Tooltip title={<Translate value="tooltip.userDelete" />} placement="bottom">
-        <DeleteTwoTone twoToneColor="red" onClick={showDeleteConfirm} style={{ fontSize: 18 }} />
-      </Tooltip>
-    </div>
+    <Tip content={<Translate value="tooltip.userDelete" />}>
+      <DeleteTwoTone twoToneColor="red" onClick={showDeleteConfirm} style={{ fontSize: 18 }} />
+    </Tip>
   )
 }
