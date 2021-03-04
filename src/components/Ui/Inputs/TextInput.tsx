@@ -26,11 +26,11 @@ export const TextInput = ({ input, meta, formItemProps, inputProps }: ITextInput
     >
       {/* Render password field if type is 'password'. */}
       {isPassword ? (
-        <Input.Password {...input} {...inputProps} />
+        <Input.Password autoComplete="new-password" {...input} {...inputProps} />
       ) : (
-        // Otherwise render normal input field.
-        <Input {...input} {...inputProps} />
-      )}
+          // Otherwise render normal input field.
+          <Input {...input} {...inputProps} />
+        )}
     </Form.Item>
   )
 }
