@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { submit } from 'redux-form'
+import { submit, reset } from 'redux-form'
 import { useHistory } from 'react-router-dom'
 import { Translate } from 'react-redux-i18n'
 import { LocationDescriptorObject } from 'history'
@@ -19,7 +19,7 @@ interface IUserEditProps {
 export const UserEdit: FunctionComponent<IUserEditProps> = ({ user }) => {
   const history = useHistory()
   const dispatch = useDispatch()
-  const userAddForm = useSelector((state: IStoreState) => state.form.userAdd)
+  const userEditForm = useSelector((state: IStoreState) => state.form.userEdit)
 
   // Modal open/close state.
   const [open, setOpen] = useState(false)
@@ -45,6 +45,7 @@ export const UserEdit: FunctionComponent<IUserEditProps> = ({ user }) => {
    */
   const handleClose = () => {
     setOpen(false)
+    dispatch(reset('userEdit'))
     history.push(history.location.pathname)
   }
 
@@ -59,8 +60,8 @@ export const UserEdit: FunctionComponent<IUserEditProps> = ({ user }) => {
         cancelText={<Translate value="button.cancel" />}
         onCancel={handleClose}
         okText={<Translate value="button.create" />}
-        okButtonProps={{ loading: userAddForm && userAddForm.submitting }}
-        onOk={() => dispatch(submit('userAdd'))}
+        okButtonProps={{ loading: userEditForm && userEditForm.submitting }}
+        onOk={() => dispatch(submit('userEdit'))}
         width={640}
       >
         <UserEditForm />

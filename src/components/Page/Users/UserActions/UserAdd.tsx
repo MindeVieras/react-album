@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { submit } from 'redux-form'
+import { submit, reset } from 'redux-form'
 import { useHistory } from 'react-router-dom'
 import { Translate } from 'react-redux-i18n'
 import { LocationDescriptorObject } from 'history'
@@ -39,6 +39,7 @@ export function UserAdd() {
    */
   const handleClose = () => {
     setOpen(false)
+    dispatch(reset('userAdd'))
     history.push(history.location.pathname)
   }
 
