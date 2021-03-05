@@ -44,9 +44,6 @@ export class ApiService {
    *   Generic response promise.
    */
   protected async get<T>(url: string, config?: AxiosRequestConfig): Promise<IResponse<T>> {
-    // Reset isSuccess to false.
-    this.isSuccess = false
-
     // Get response with axios.
     const axiosResponse = await this.req.get<IResponse<T>>(url, config)
     const res = axiosResponse.data
@@ -74,9 +71,6 @@ export class ApiService {
     data: T,
     config?: AxiosRequestConfig,
   ): Promise<IResponse<R>> {
-    // Reset isSuccess to false.
-    this.isSuccess = false
-
     // Get response with axios.
     const axiosResponse = await this.req.post<IResponse<R>>(url, data, config)
     const res = axiosResponse.data
@@ -104,9 +98,6 @@ export class ApiService {
     data: T,
     config?: AxiosRequestConfig,
   ): Promise<IResponse<R>> {
-    // Reset isSuccess to false.
-    this.isSuccess = false
-
     // Get response with axios.
     const axiosResponse = await this.req.patch<IResponse<R>>(url, data, config)
     const res = axiosResponse.data
@@ -116,5 +107,27 @@ export class ApiService {
       this.isSuccess = true
     }
     return res
+  }
+
+  /**
+   * DELETE method.
+   *
+   * @param {string} url
+   *   Request url.
+   *
+   * @returns {Promise<void>}
+   *   Promise that returns nothing.
+   */
+  protected async delete<T>(
+    url: string,
+    data: T,
+  ): Promise<void> {
+    // Get response with axios.
+    const axiosResponse = await this.req.delete<void>(url, { data })
+
+    // Set successful response ir response status is 204.
+    if (axiosResponse.status === 204) {
+      this.isSuccess = true
+    }
   }
 }

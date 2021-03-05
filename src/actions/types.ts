@@ -10,6 +10,10 @@ import {
   ActionUsersGetListSuccess,
   ActionUsersGetListFailure,
   ActionUsersCreateSuccess,
+  ActionUsersDeleteRequest,
+  ActionUsersDeleteSuccess,
+  ActionUsersDeleteFailure,
+  ActionUsersAddListItem,
   ActionUsersClear,
 } from './users.actions'
 import {
@@ -50,6 +54,7 @@ export enum ActionTypes {
   usersDeleteRequest = '@@album-app/users/DELETE_REQUEST',
   usersDeleteSuccess = '@@album-app/users/DELETE_SUCCESS',
   usersDeleteFailure = '@@album-app/users/DELETE_FAILURE',
+  usersAddListItem = '@@album-app/users/ADD_LIST_ITEM',
   usersClear = '@@album-app/users/CLEAR',
 
   albumsGetListRequest = '@@album-app/albums/GET_LIST_REQUEST',
@@ -80,6 +85,10 @@ export type Action =
   | ActionUsersGetListSuccess
   | ActionUsersGetListFailure
   | ActionUsersCreateSuccess
+  | ActionUsersDeleteRequest
+  | ActionUsersDeleteSuccess
+  | ActionUsersDeleteFailure
+  | ActionUsersAddListItem
   | ActionUsersClear
   | ActionAlbumsGetListRequest
   | ActionAlbumsGetListSuccess

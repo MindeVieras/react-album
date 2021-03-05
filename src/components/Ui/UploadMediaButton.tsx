@@ -1,7 +1,7 @@
 import React, { FunctionComponent, Fragment, useRef } from 'react'
 import { Button } from 'antd'
 
-import { Tip } from './Tip'
+// import { Tip } from './Tip'
 
 /**
  * Upload media button input component.

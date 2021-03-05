@@ -44,6 +44,15 @@ export function users(state = initialState, action: Action) {
         },
       }
 
+    case ActionTypes.usersAddListItem:
+      return {
+        ...state,
+        list: {
+          ...state.list,
+          items: [...state.list.items, action.payload],
+        },
+      }
+
     // case ActionTypes.usersGetOneRequest:
     //   return {
     //     ...state,
@@ -66,33 +75,42 @@ export function users(state = initialState, action: Action) {
     //   }
 
     case ActionTypes.usersCreateSuccess:
-      console.log(action)
+      return {
+        ...state,
+        list: {
+          items: [action.payload, ...state.list.items.splice(0, state.list.pager.limit - 1)],
+          pager: {
+            ...state.list.pager,
+            offset: 0,
+            total: state.list.pager.total + 1
+          }
+        },
+      }
+
+    case ActionTypes.usersDeleteRequest:
       return {
         ...state,
         list: {
           ...state.list,
-          items: [...state.list.items, action.payload],
+          items: state.list.items.map((user) => {
+            if (action.payload.includes(user.id)) {
+              return { ...user, loading: true }
+            }
+            return user
+          }),
         },
       }
-
-    // case ActionTypes.usersDeleteRequest:
-    //   // add 'deleting:true' property to user being deleted
-    //   return {
-    //     ...state,
-    //     list: {
-    //       items: state.list.items.map((user) =>
-    //         user.id === action.id ? { ...user, deleting: true } : user,
-    //       ),
-    //     },
-    //   }
-    // case ActionTypes.usersDeleteSuccess:
-    //   // remove deleted user from state
-    //   return {
-    //     ...state,
-    //     list: {
-    //       items: state.list.items.filter((user) => user.id !== action.id),
-    //     },
-    //   }
+    case ActionTypes.usersDeleteSuccess:
+      return {
+        ...state,
+        list: {
+          items: state.list.items.filter(item => !action.payload.includes(item.id)),
+          pager: {
+            ...state.list.pager,
+            total: state.list.pager.total - 1
+          }
+        },
+      }
     // case ActionTypes.usersDeleteFailure:
     //   // remove 'deleting:true' property and add 'deleteError:[error]' property to user
     //   return {

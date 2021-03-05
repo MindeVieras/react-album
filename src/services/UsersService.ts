@@ -2,8 +2,9 @@ import { IResponsePaginatedData, IRequestGetListParams } from './types'
 import { ApiService } from './ApiService'
 import { IFormUserAddValues } from '../components/Form/UserAddForm'
 import { UserRoles, UserStatus } from '../enums'
+import { IReducerRequestState } from '../reducers'
 
-export interface IUserProps {
+export interface IUserProps extends IReducerRequestState {
   id: string
   username: string
   initials: string
@@ -55,5 +56,18 @@ export class UsersService extends ApiService {
   public async create(values: IFormUserAddValues) {
     const res = await this.post<IFormUserAddValues, IUserProps>('users', values)
     return res
+  }
+
+  /**
+   * Delete/removes user.
+   *
+   * @param {string[]} ids
+   *   Url parameters for requesting lists from API.
+   *
+   * @returns {Promise<void>}
+   *   Response promise including paginated list of users.
+   */
+  public async remove(ids: string[]) {
+    await this.delete<string[]>('users', ids)
   }
 }

@@ -6,7 +6,7 @@ import { Dispatch } from 'redux'
 import { Alert, Form, Col, Row } from 'antd'
 
 // import { authService, ResponseStatus } from '../../services'
-import { ActionUsersCreateSuccess, usersCreate } from '../../actions'
+import { ActionUsersCreateSuccess, userCreate } from '../../actions'
 
 import { TextInput, SelectInput, SwitchInput } from '../Ui'
 import { UsersService } from '../../services'
@@ -219,7 +219,7 @@ const submit = async (values: IFormUserAddValues, dispatch: Dispatch<ActionUsers
   // Dispatch successful response.
   if ($users.isSuccess && data) {
     // @ts-ignore
-    dispatch(usersCreate(data))
+    dispatch(userCreate(data))
     // // Redirect user to the path where it came from except from /login path.
     // let redirectPath = '/'
     // if (history.location.state) {

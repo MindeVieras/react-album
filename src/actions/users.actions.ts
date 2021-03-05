@@ -1,5 +1,6 @@
 import { Dispatch } from 'redux'
 
+import { store } from '../helpers'
 import { ActionTypes } from './types'
 import { IResponsePaginatedData, IRequestGetListParams, IUserProps } from '../services'
 import { UsersService } from '../services'
@@ -23,6 +24,26 @@ export type ActionUsersCreateSuccess = {
   payload: IUserProps
 }
 
+export type ActionUsersDeleteRequest = {
+  type: ActionTypes.usersDeleteRequest
+  payload: IUserProps['id'][]
+}
+
+export type ActionUsersDeleteSuccess = {
+  type: ActionTypes.usersDeleteSuccess
+  payload: IUserProps['id'][]
+}
+
+export type ActionUsersDeleteFailure = {
+  type: ActionTypes.usersDeleteFailure
+  payload: IUserProps['id'][]
+}
+
+export type ActionUsersAddListItem = {
+  type: ActionTypes.usersAddListItem
+  payload: IUserProps
+}
+
 export type ActionUsersClear = {
   type: ActionTypes.usersClear
 }
@@ -42,7 +63,7 @@ export const usersGetList = (params?: IRequestGetListParams) => {
 
     // Get response from users service.
     const $users = new UsersService()
-    const { data, message } = await $users.getList(params)
+    const { data, message } = await $users.getList({ ...params, sort: '-createdAt' })
 
     // Dispatch successful response.
     if ($users.isSuccess && data) {
@@ -67,14 +88,62 @@ export const usersGetList = (params?: IRequestGetListParams) => {
  * @param {IUserProps} user
  *   User to add to the state.
  */
-export const usersCreate = (user: IUserProps) => {
+export const userCreate = (user: IUserProps) => {
   return (dispatch: Dispatch) => {
     dispatch<ActionUsersCreateSuccess>({
       type: ActionTypes.usersCreateSuccess,
       payload: user,
     })
   }
+}
 
+/**
+ * Users delete action.
+ *
+ * @param {IUserProps['id'][]} ids
+ *   Array of user ids.
+ */
+export const usersDelete = (ids: IUserProps['id'][]) => {
+  return async (dispatch: Dispatch) => {
+    // Dispatch loading state.
+    dispatch<ActionUsersDeleteRequest>({
+      type: ActionTypes.usersDeleteRequest,
+      payload: ids
+    })
+
+    // Get response from users service.
+    const $users = new UsersService()
+    await $users.remove(ids)
+
+    // Dispatch unsuccessful response.
+    if (!$users.isSuccess) {
+      dispatch<ActionUsersDeleteFailure>({
+        type: ActionTypes.usersDeleteFailure,
+        payload: ids,
+      })
+    }
+    // Dispatch successful response.
+    else {
+      const pager = store.getState().users.list.pager
+      const nextUserData = await $users.getList({
+        limit: 1,
+        offset: (pager.limit + pager.offset) - 1,
+        sort: '-createdAt',
+      })
+      const nextUser = nextUserData.data?.docs[0]
+      if (nextUser) {
+        dispatch<ActionUsersAddListItem>({
+          type: ActionTypes.usersAddListItem,
+          payload: nextUser,
+        })
+      }
+      dispatch<ActionUsersDeleteSuccess>({
+        type: ActionTypes.usersDeleteSuccess,
+        payload: ids,
+      })
+    }
+
+  }
 }
 
 // function getOne(username) {
@@ -96,23 +165,3 @@ export const usersCreate = (user: IUserProps) => {
 //   function failure(err) { return { type: userConstants.GETONE_FAILURE, err } }
 // }
 
-// // prefixed function name with underscore because delete is a reserved word in javascript
-// function _delete(id) {
-//   return dispatch => {
-//     dispatch(request(id))
-
-//     userService.delete(id)
-//       .then(res => {
-//         if (res.ack == 'ok') {
-//           dispatch(success(id))
-//         } else {
-//           dispatch(failure(id, res.msg))
-//           toastr.error('Error', res.msg, { timeOut: 3000 })
-//         }
-//       })
-//   }
-
-//   function request(id) { return { type: userConstants.DELETE_REQUEST, id } }
-//   function success(id) { return { type: userConstants.DELETE_SUCCESS, id } }
-//   function failure(id, err) { return { type: userConstants.DELETE_FAILURE, id, err } }
-// }
