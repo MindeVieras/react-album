@@ -18,7 +18,7 @@ export const Tip: FunctionComponent<ITipProps> = ({ content, children, ...otherP
     visible: false
   }
   return (
-    <Tooltip title={content} {...visibleProp} {...otherProps}>
+    <Tooltip title={content} mouseEnterDelay={1} {...visibleProp} {...otherProps}>
       {children}
     </Tooltip>
   )

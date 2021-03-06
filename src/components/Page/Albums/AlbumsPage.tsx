@@ -1,5 +1,6 @@
 import React, { useEffect, FunctionComponent } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { I18n } from 'react-redux-i18n'
 
 import { PageWrapper } from '../PageWrapper'
 import { AlbumsList } from './AlbumsList'
@@ -27,7 +28,7 @@ export const AlbumsPage: FunctionComponent = () => {
 
   useEffect(() => {
     // Set app title for this page.
-    dispatch(setAppTitle('Albums'))
+    dispatch(setAppTitle(I18n.t('pages.albums.title')))
     // Get list of albums.
     // Load only if no albums loaded yet.
     if (!items.length) {

@@ -1,7 +1,8 @@
 import React, { useState, Fragment } from 'react'
+import { useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import { Translate } from 'react-redux-i18n'
-import { Button, Drawer, Menu } from 'antd'
+import { Avatar, Button, Drawer, Menu } from 'antd'
 import {
   MenuOutlined,
   TeamOutlined,
@@ -11,8 +12,10 @@ import {
 } from '@ant-design/icons'
 
 import { Tip } from '../Tip'
+import { IStoreState } from '../../../reducers'
 
 export const MainMenu = () => {
+  const authedUser = useSelector((state: IStoreState) => state.auth)
   const { location } = useHistory()
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 
@@ -23,6 +26,8 @@ export const MainMenu = () => {
   const handleClose = () => {
     setAnchorEl(null)
   }
+
+  const menuTitle = <><Avatar style={{ marginRight: 10 }}>{authedUser.initials}</Avatar>{authedUser.username}</>
 
   return (
     <Fragment>
@@ -38,7 +43,7 @@ export const MainMenu = () => {
         />
       </Tip>
       <Drawer
-        title="User Name!"
+        title={menuTitle}
         placement="right"
         closable={true}
         onClose={handleClose}

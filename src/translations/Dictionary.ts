@@ -46,7 +46,13 @@ export type Dictionary = {
     login: {
       title: string
     }
+    albums: {
+      title: string
+    }
     users: {
+      title: string
+    }
+    trash: {
       title: string
     }
   }

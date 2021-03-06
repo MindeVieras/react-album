@@ -43,8 +43,14 @@ const ru: Dictionary = {
     login: {
       title: 'Войти в систему',
     },
+    albums: {
+      title: 'Альбомы',
+    },
     users: {
       title: 'Пользователей',
+    },
+    trash: {
+      title: 'Корзина',
     },
   },
   // Tooltips.

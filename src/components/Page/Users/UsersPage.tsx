@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import { Translate } from 'react-redux-i18n'
+import { Translate, I18n } from 'react-redux-i18n'
 import { Alert, PageHeader, Tag, Pagination } from 'antd'
 
 import { setAppTitle, usersGetList } from '../../../actions'
@@ -28,7 +28,7 @@ class UsersPage extends Component<IUsersProps> {
   constructor(props: IUsersProps) {
     super(props)
 
-    props.setAppTitle('Users')
+    props.setAppTitle(I18n.t('pages.users.title'))
     props.usersGetList({ limit: props.users.pager.limit })
   }
 

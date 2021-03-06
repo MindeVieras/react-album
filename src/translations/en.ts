@@ -43,8 +43,14 @@ const en: Dictionary = {
     login: {
       title: 'Login',
     },
+    albums: {
+      title: 'Albums',
+    },
     users: {
       title: 'Users',
+    },
+    trash: {
+      title: 'Trash',
     },
   },
   // Tooltips.

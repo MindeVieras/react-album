@@ -43,8 +43,14 @@ const lt: Dictionary = {
     login: {
       title: 'Prisijungti',
     },
+    albums: {
+      title: 'Albumai',
+    },
     users: {
       title: 'Vartotojai',
+    },
+    trash: {
+      title: 'Šiukšliadėžė',
     },
   },
   // Tooltips.

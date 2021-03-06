@@ -1,5 +1,6 @@
 import React, { useEffect, FunctionComponent } from 'react'
 import { useDispatch } from 'react-redux'
+import { I18n } from 'react-redux-i18n'
 
 import { PageWrapper } from '../PageWrapper'
 import { setAppTitle } from '../../../actions'
@@ -17,7 +18,7 @@ export const TrashPage: FunctionComponent = () => {
 
   useEffect(() => {
     // Set app title for this page.
-    dispatch(setAppTitle('Trash'))
+    dispatch(setAppTitle(I18n.t('pages.trash.title')))
   }, [dispatch])
 
   return <PageWrapper>Trash page!!!</PageWrapper>
