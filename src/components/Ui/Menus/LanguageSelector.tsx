@@ -44,14 +44,15 @@ export const LanguageSelector: FunctionComponent<ILanguageSelectorProps> = (prop
 
   return (
     <Dropdown overlay={menu} trigger={['click']}>
-      <div>
-        <Tip content={<Translate value="tooltip.changeLanguage" />}>
-          <Button data-tip data-for="tip_change_language" type="link" {...props.buttonProps}>
-            {code.toUpperCase()}
-          </Button>
-        </Tip>
-
-      </div>
+      <Tip content={<Translate value="tooltip.changeLanguage" />}>
+        <Button
+          type="link"
+          style={{ color: 'inherit', fontSize: 'inherit' }}
+          {...props.buttonProps}
+        >
+          {code.toUpperCase()}
+        </Button>
+      </Tip>
     </Dropdown>
   )
 }

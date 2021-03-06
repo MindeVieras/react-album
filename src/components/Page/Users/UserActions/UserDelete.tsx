@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { Translate } from 'react-redux-i18n'
 import { Modal } from 'antd'
 import { DeleteTwoTone } from '@ant-design/icons'
+import { red } from '@ant-design/colors'
 
 import { IUserProps } from '../../../../services'
 import { usersDelete } from '../../../../actions'
@@ -35,7 +36,7 @@ export const UserDelete: FunctionComponent<IUserDeleteProps> = ({ user }) => {
 
   return (
     <Tip content={<Translate value="tooltip.userDelete" />}>
-      <DeleteTwoTone twoToneColor="red" onClick={showDeleteConfirm} style={{ fontSize: 18 }} />
+      <DeleteTwoTone twoToneColor={red.primary} onClick={showDeleteConfirm} style={{ fontSize: 18 }} />
     </Tip>
   )
 }

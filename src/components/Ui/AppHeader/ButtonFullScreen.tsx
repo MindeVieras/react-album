@@ -30,14 +30,16 @@ export const ButtonFullScreen: FunctionComponent<IButtonFullScreenProps> = () =>
   }
 
   return (
-    <Tip content={<Translate value="tooltip.goFullScreen" />}>
+    <Tip content={< Translate value="tooltip.goFullScreen" />}>
       <Button
         type="link"
         onClick={handleClick}
-        shape="circle"
-        size="large"
+        style={{
+          color: 'inherit',
+          fontSize: 'inherit'
+        }}
         icon={isFullScreen ? <FullscreenExitOutlined /> : <FullscreenOutlined />}
       />
-    </Tip>
+    </Tip >
   )
 }

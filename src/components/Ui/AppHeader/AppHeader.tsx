@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react'
 import { useSelector } from 'react-redux'
 import { Layout, Typography } from 'antd'
+import { blue } from '@ant-design/colors'
 
 import { MainMenu, LanguageSelector } from '../Menus'
 import { ButtonFullScreen } from './ButtonFullScreen'
@@ -29,7 +30,7 @@ export const AppHeader: FunctionComponent = () => {
         {appName}
       </Typography.Title>
 
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+      <div style={{ display: 'flex', alignItems: 'center', color: blue[0], fontSize: 16 }}>
         <ButtonFullScreen />
         <LanguageSelector />
         <MainMenu />

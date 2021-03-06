@@ -29,9 +29,11 @@ export const MainMenu = () => {
       <Tip content={<Translate value="tooltip.mainMenu" />}>
         <Button
           type="link"
-          shape="circle"
-          size="large"
           onClick={handleClick}
+          style={{
+            color: 'inherit',
+            fontSize: 'inherit'
+          }}
           icon={<MenuOutlined />}
         />
       </Tip>
